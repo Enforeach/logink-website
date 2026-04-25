@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from 'react'
 import { useInView, useMotionValue, useTransform, animate, motion } from 'framer-motion'
+import { TrendingUp, Clock, BarChart3, type LucideIcon } from 'lucide-react'
 
 type StatItem = {
-  icon: string
+  Icon: LucideIcon
   value: string
   label: string
   context: string
@@ -16,7 +17,7 @@ type StatItem = {
 
 const STATS: StatItem[] = [
   {
-    icon: '📈',
+    Icon: TrendingUp,
     value: '150+',
     label: 'Articles / Month',
     context: 'Maximum production capacity with specialist writers.',
@@ -26,14 +27,14 @@ const STATS: StatItem[] = [
     counterSuffix: '+',
   },
   {
-    icon: '⏱️',
+    Icon: Clock,
     value: '3–6mo',
     label: 'Time to Rank',
     context: 'Typical page-one timeline for competitive keywords.',
     isCounter: false,
   },
   {
-    icon: '📊',
+    Icon: BarChart3,
     value: '2.5×',
     label: 'Traffic Lift',
     context: 'Average across clients at 6 months of consistent execution.',
@@ -69,7 +70,9 @@ function AnimatedNumber({ target, decimals, suffix }: { target: number; decimals
 function StatCard({ stat }: { stat: StatItem }) {
   return (
     <div className="group flex flex-col items-center text-center p-7 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10 hover:-translate-y-1 transition-all duration-300">
-      <div className="text-3xl mb-4">{stat.icon}</div>
+      <div className="mb-4 p-2.5 rounded-xl inline-flex" style={{ background: 'rgba(124,58,237,0.12)' }}>
+        <stat.Icon size={22} strokeWidth={1.5} className="text-violet-400" />
+      </div>
       <div
         className="text-5xl font-extrabold mb-2 leading-none"
         style={{

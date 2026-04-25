@@ -114,7 +114,7 @@ export const SEO_FEATURES_TABS = [
   {
     id: 'research',
     label: 'Research & Data',
-    icon: '🔍',
+    icon: 'Search',
     features: [
       {
         title: 'Keyword Research (Bahasa Indonesia)',
@@ -141,7 +141,7 @@ export const SEO_FEATURES_TABS = [
   {
     id: 'onpage',
     label: 'On-Page SEO',
-    icon: '🔧',
+    icon: 'Settings2',
     features: [
       {
         title: 'Meta, Heading & Content Structure',
@@ -168,7 +168,7 @@ export const SEO_FEATURES_TABS = [
   {
     id: 'content',
     label: 'Content',
-    icon: '✍️',
+    icon: 'PenLine',
     features: [
       {
         title: 'SEO Articles',
@@ -191,7 +191,7 @@ export const SEO_FEATURES_TABS = [
   {
     id: 'reporting',
     label: 'Reporting',
-    icon: '📊',
+    icon: 'BarChart3',
     features: [
       {
         title: 'Monthly Performance Report',

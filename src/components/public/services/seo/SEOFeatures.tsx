@@ -2,10 +2,17 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { icons, LucideProps } from 'lucide-react'
 import { SEO_FEATURES_TABS } from './data'
 
 type Tab = typeof SEO_FEATURES_TABS[number]
 type Feature = Tab['features'][number]
+
+function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
+  const Icon = icons[name as keyof typeof icons]
+  if (!Icon) return null
+  return <Icon {...props} />
+}
 
 const TAB_BADGE_COLORS: Record<string, string> = {
   'Growth+': 'rgba(124,58,237,0.15)',
@@ -40,7 +47,7 @@ export function SEOFeatures() {
               className="relative flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors flex-shrink-0"
               style={{ color: activeTab === i ? '#7C3AED' : 'var(--text-muted)' }}
             >
-              <span>{t.icon}</span>
+              <LucideIcon name={t.icon} size={14} strokeWidth={1.5} />
               <span>{t.label}</span>
               {activeTab === i && (
                 <motion.div

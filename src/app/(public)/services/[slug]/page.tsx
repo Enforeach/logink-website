@@ -6,6 +6,13 @@ import { buildMetadata, breadcrumbSchema, faqSchema } from '@/lib/seo'
 import { PricingTierCard } from '@/components/public/PricingTier'
 import { Accordion } from '@/components/ui/Accordion'
 import { CTASection } from '@/components/public/home/CTASection'
+import { icons, LucideProps } from 'lucide-react'
+
+function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
+  const Icon = icons[name as keyof typeof icons]
+  if (!Icon) return null
+  return <Icon {...props} />
+}
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -20,12 +27,12 @@ const SERVICES = {
     featuresVariant: 'list' as const,
     processVariant: 'horizontal' as const,
     features: [
-      { icon: '🎯', title: 'Keyword Research & Strategy', desc: 'In-depth analysis to find the exact queries your customers are typing right now.' },
-      { icon: '✍️', title: 'Long-form Content Production', desc: 'Up to 150+ SEO-optimised articles/month by specialist writers.' },
-      { icon: '🔧', title: 'Technical SEO Audit', desc: 'Fix crawlability, page speed, schema markup, and Core Web Vitals.' },
-      { icon: '📊', title: 'Looker Studio Reporting', desc: 'Live dashboards for rankings, traffic, and conversions — always on.' },
-      { icon: '🔗', title: 'Internal Linking Architecture', desc: 'Strategic links between pages to pass authority and guide user flows.' },
-      { icon: '📍', title: 'Local SEO', desc: 'Dominate "near me" searches and Google Business map packs.' },
+      { icon: 'Crosshair', title: 'Keyword Research & Strategy', desc: 'In-depth analysis to find the exact queries your customers are typing right now.' },
+      { icon: 'PenLine', title: 'Long-form Content Production', desc: 'Up to 150+ SEO-optimised articles/month by specialist writers.' },
+      { icon: 'Wrench', title: 'Technical SEO Audit', desc: 'Fix crawlability, page speed, schema markup, and Core Web Vitals.' },
+      { icon: 'BarChart3', title: 'Looker Studio Reporting', desc: 'Live dashboards for rankings, traffic, and conversions — always on.' },
+      { icon: 'Link2', title: 'Internal Linking Architecture', desc: 'Strategic links between pages to pass authority and guide user flows.' },
+      { icon: 'MapPin', title: 'Local SEO', desc: 'Dominate "near me" searches and Google Business map packs.' },
     ],
     process: [
       { step: '01', title: 'Keyword Audit', desc: 'Map current rankings, competitor gaps, and top opportunities.', duration: 'Week 1' },
@@ -56,12 +63,12 @@ const SERVICES = {
     featuresVariant: 'emoji-cards' as const,
     processVariant: 'vertical' as const,
     features: [
-      { icon: '📱', title: 'Multi-Platform Management', desc: 'Instagram, TikTok, Facebook & LinkedIn from one integrated strategy.' },
-      { icon: '🎨', title: 'Custom Visual Design', desc: 'Every post built to your brand guide — zero stock templates.' },
-      { icon: '💬', title: 'Community Management', desc: 'Comments and DMs responded to during business hours.' },
-      { icon: '📅', title: 'Content Calendar', desc: 'Monthly calendar reviewed and approved before anything goes live.' },
-      { icon: '📈', title: 'Growth Strategy', desc: 'Hashtag research, collaborations, and engagement campaigns.' },
-      { icon: '📊', title: 'Monthly Analytics', desc: 'Reach, impressions, follower growth, and engagement tracked.' },
+      { icon: 'Smartphone', title: 'Multi-Platform Management', desc: 'Instagram, TikTok, Facebook & LinkedIn from one integrated strategy.' },
+      { icon: 'Palette', title: 'Custom Visual Design', desc: 'Every post built to your brand guide — zero stock templates.' },
+      { icon: 'MessageCircle', title: 'Community Management', desc: 'Comments and DMs responded to during business hours.' },
+      { icon: 'CalendarDays', title: 'Content Calendar', desc: 'Monthly calendar reviewed and approved before anything goes live.' },
+      { icon: 'TrendingUp', title: 'Growth Strategy', desc: 'Hashtag research, collaborations, and engagement campaigns.' },
+      { icon: 'BarChart3', title: 'Monthly Analytics', desc: 'Reach, impressions, follower growth, and engagement tracked.' },
     ],
     process: [
       { step: '01', title: 'Brand Onboarding', desc: 'We learn your tone, audience, competitors, and visual identity.', duration: 'Week 1' },
@@ -90,12 +97,12 @@ const SERVICES = {
     featuresVariant: 'numbered' as const,
     processVariant: 'funnel' as const,
     features: [
-      { icon: '🔍', title: 'Google Ads (Search + Display)', desc: "Capture high-intent buyers the moment they're searching." },
-      { icon: '📘', title: 'Meta Ads', desc: 'Interests, lookalikes, and retargeting on Facebook & Instagram.' },
-      { icon: '🎵', title: 'TikTok Ads', desc: 'Native-format video ads designed for conversion.' },
-      { icon: '🛒', title: 'Marketplace Ads', desc: 'Tokopedia, Shopee, and Lazada for e-commerce brands.' },
-      { icon: '🎯', title: 'Full-Funnel Strategy', desc: 'TOFU, MOFU, BOFU — every stage of the customer journey covered.' },
-      { icon: '📊', title: 'Weekly Reports', desc: 'ROAS, CPC, CTR tracked weekly with optimisation notes.' },
+      { icon: 'Search', title: 'Google Ads (Search + Display)', desc: "Capture high-intent buyers the moment they're searching." },
+      { icon: 'Megaphone', title: 'Meta Ads', desc: 'Interests, lookalikes, and retargeting on Facebook & Instagram.' },
+      { icon: 'Music', title: 'TikTok Ads', desc: 'Native-format video ads designed for conversion.' },
+      { icon: 'ShoppingCart', title: 'Marketplace Ads', desc: 'Tokopedia, Shopee, and Lazada for e-commerce brands.' },
+      { icon: 'Crosshair', title: 'Full-Funnel Strategy', desc: 'TOFU, MOFU, BOFU — every stage of the customer journey covered.' },
+      { icon: 'BarChart3', title: 'Weekly Reports', desc: 'ROAS, CPC, CTR tracked weekly with optimisation notes.' },
     ],
     process: [
       { step: '01', title: 'Account Audit', desc: 'Full review of existing accounts, wasted spend, and audience data.', duration: 'Week 1' },
@@ -126,12 +133,12 @@ const SERVICES = {
     featuresVariant: 'bento' as const,
     processVariant: 'flow' as const,
     features: [
-      { icon: '🎨', title: 'Brand Identity Design', desc: 'Logo, colour palette, typography, and brand guide.' },
-      { icon: '📸', title: 'Photo & Video Production', desc: 'Shoot and post-production for product, corporate, and campaign content.' },
-      { icon: '🎬', title: 'Reels & Short-form Video', desc: 'Vertical video for TikTok, Reels, and Shorts — edited for retention.' },
-      { icon: '🖼️', title: 'Social Media Graphics', desc: 'Feed posts, stories, and carousels — all original, all on-brand.' },
-      { icon: '📄', title: 'Copywriting', desc: 'Headlines, captions, ad copy, and landing page text that converts.' },
-      { icon: '🖥️', title: 'Marketing Collateral', desc: 'Brochures, decks, banners, and event materials.' },
+      { icon: 'Palette', title: 'Brand Identity Design', desc: 'Logo, colour palette, typography, and brand guide.' },
+      { icon: 'Camera', title: 'Photo & Video Production', desc: 'Shoot and post-production for product, corporate, and campaign content.' },
+      { icon: 'Film', title: 'Reels & Short-form Video', desc: 'Vertical video for TikTok, Reels, and Shorts — edited for retention.' },
+      { icon: 'Image', title: 'Social Media Graphics', desc: 'Feed posts, stories, and carousels — all original, all on-brand.' },
+      { icon: 'FileText', title: 'Copywriting', desc: 'Headlines, captions, ad copy, and landing page text that converts.' },
+      { icon: 'Monitor', title: 'Marketing Collateral', desc: 'Brochures, decks, banners, and event materials.' },
     ],
     process: [
       { step: '01', title: 'Creative Brief', desc: 'Align on objectives, audience, tone, and deliverables.', duration: 'Day 1–2' },
@@ -161,12 +168,12 @@ const SERVICES = {
     featuresVariant: 'checklist' as const,
     processVariant: 'gantt' as const,
     features: [
-      { icon: '⚡', title: 'Performance-First Build', desc: 'Core Web Vitals optimised — fast load, smooth interaction, zero layout shifts.' },
-      { icon: '📱', title: 'Mobile-First Responsive', desc: '100% responsive across all devices, built mobile-first from day one.' },
-      { icon: '🔍', title: 'SEO-Ready Architecture', desc: 'Clean URLs, meta tags, schema markup, and sitemap at launch.' },
-      { icon: '🛒', title: 'E-Commerce Integration', desc: 'Shopify, WooCommerce, or custom cart with fully integrated checkout.' },
-      { icon: '🔌', title: 'CRM & Analytics Setup', desc: 'GA4, Meta Pixel, WhatsApp chat, and CRM wired in on day one.' },
-      { icon: '🛡️', title: 'SSL & Security', desc: 'HTTPS, regular backups, and maintenance packages available.' },
+      { icon: 'Zap', title: 'Performance-First Build', desc: 'Core Web Vitals optimised — fast load, smooth interaction, zero layout shifts.' },
+      { icon: 'Smartphone', title: 'Mobile-First Responsive', desc: '100% responsive across all devices, built mobile-first from day one.' },
+      { icon: 'Search', title: 'SEO-Ready Architecture', desc: 'Clean URLs, meta tags, schema markup, and sitemap at launch.' },
+      { icon: 'ShoppingCart', title: 'E-Commerce Integration', desc: 'Shopify, WooCommerce, or custom cart with fully integrated checkout.' },
+      { icon: 'Plug', title: 'CRM & Analytics Setup', desc: 'GA4, Meta Pixel, WhatsApp chat, and CRM wired in on day one.' },
+      { icon: 'ShieldCheck', title: 'SSL & Security', desc: 'HTTPS, regular backups, and maintenance packages available.' },
     ],
     process: [
       { step: '01', title: 'Discovery & Scope', desc: 'Goals, sitemap, references, and platform confirmed.', duration: '2–3 days' },
@@ -248,17 +255,17 @@ function SeoHeroVisual() {
 
 function SocialHeroVisual() {
   const platforms = [
-    { name: 'Instagram', icon: '📸', valueColor: '#E4405F', followers: '12.4K', growth: '+284 this month' },
-    { name: 'TikTok', icon: '🎵', valueColor: '#ffffff', followers: '8.7K', growth: '+610 this month' },
-    { name: 'Facebook', icon: '👍', valueColor: '#1877F2', followers: '5.2K', growth: '+128 this month' },
-    { name: 'LinkedIn', icon: '💼', valueColor: '#0A66C2', followers: '2.1K', growth: '+89 this month' },
+    { name: 'Instagram', icon: 'Camera', valueColor: '#E4405F', followers: '12.4K', growth: '+284 this month' },
+    { name: 'TikTok', icon: 'Music', valueColor: '#ffffff', followers: '8.7K', growth: '+610 this month' },
+    { name: 'Facebook', icon: 'ThumbsUp', valueColor: '#1877F2', followers: '5.2K', growth: '+128 this month' },
+    { name: 'LinkedIn', icon: 'Briefcase', valueColor: '#0A66C2', followers: '2.1K', growth: '+89 this month' },
   ]
   return (
     <div className="grid grid-cols-2 gap-3">
       {platforms.map((p) => (
         <div key={p.name} className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-elevated)] p-4 hover:border-[var(--border-hover)] transition-colors">
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-xl">{p.icon}</span>
+            <LucideIcon name={p.icon} size={18} strokeWidth={1.5} style={{ color: p.valueColor }} />
             <span className="text-sm font-semibold text-[var(--text-primary)]">{p.name}</span>
           </div>
           <div className="text-2xl font-extrabold" style={{ color: p.valueColor }}>{p.followers}</div>
@@ -387,9 +394,9 @@ function FeaturesSection({ features, variant, color, rgb }: {
         {features.map((f, i) => (
           <div key={i} className="flex gap-4 p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-[var(--border-hover)] transition-colors"
             style={{ borderLeft: `3px solid ${color}` }}>
-            <div className="flex-shrink-0 h-10 w-10 rounded-xl flex items-center justify-center text-xl"
+            <div className="flex-shrink-0 h-10 w-10 rounded-xl flex items-center justify-center"
               style={{ background: `rgba(${rgb},0.1)` }}>
-              {f.icon}
+              <LucideIcon name={f.icon} size={20} strokeWidth={1.5} style={{ color }} />
             </div>
             <div>
               <h3 className="font-semibold text-[var(--text-primary)] mb-1">{f.title}</h3>
@@ -407,7 +414,9 @@ function FeaturesSection({ features, variant, color, rgb }: {
         {features.map((f, i) => (
           <div key={i} className="p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] text-center hover:border-[var(--border-hover)] transition-colors group"
             style={{ background: `rgba(${rgb},${0.03 + (i % 3) * 0.02})` }}>
-            <div className="text-3xl mb-3">{f.icon}</div>
+            <div className="mb-3 flex justify-center">
+              <LucideIcon name={f.icon} size={28} strokeWidth={1.5} style={{ color }} />
+            </div>
             <h3 className="font-semibold text-[var(--text-primary)] mb-2 text-sm">{f.title}</h3>
             <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{f.desc}</p>
           </div>
@@ -426,7 +435,7 @@ function FeaturesSection({ features, variant, color, rgb }: {
               <span className="text-2xl font-black leading-none" style={{ color, opacity: 0.25 }}>
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span className="text-2xl">{f.icon}</span>
+              <LucideIcon name={f.icon} size={22} strokeWidth={1.5} style={{ color }} />
             </div>
             <h3 className="font-semibold text-[var(--text-primary)] mb-2">{f.title}</h3>
             <p className="text-sm text-[var(--text-secondary)]">{f.desc}</p>
@@ -444,7 +453,9 @@ function FeaturesSection({ features, variant, color, rgb }: {
           return (
             <div key={i} className={`p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-[var(--border-hover)] transition-colors ${isWide ? 'md:col-span-2' : ''}`}
               style={{ background: `rgba(${rgb},${0.04 + (i % 2) * 0.03})` }}>
-              <div className="text-3xl mb-3">{f.icon}</div>
+              <div className="mb-3">
+                <LucideIcon name={f.icon} size={28} strokeWidth={1.5} style={{ color }} />
+              </div>
               <h3 className="font-bold text-[var(--text-primary)] mb-2">{f.title}</h3>
               <p className="text-sm text-[var(--text-secondary)]">{f.desc}</p>
             </div>
@@ -467,7 +478,7 @@ function FeaturesSection({ features, variant, color, rgb }: {
           </div>
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-sm">{f.icon}</span>
+              <LucideIcon name={f.icon} size={14} strokeWidth={1.5} style={{ color }} />
               <h3 className="font-semibold text-[var(--text-primary)] text-sm">{f.title}</h3>
             </div>
             <p className="text-xs text-[var(--text-secondary)]">{f.desc}</p>
