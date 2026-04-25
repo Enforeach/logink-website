@@ -1,16 +1,20 @@
 'use client'
 
 import Link from 'next/link'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 
 interface TopbarProps {
   unreadCount?: number
+  user?: {
+    name?: string | null
+    email?: string | null
+    image?: string | null
+    role?: string | null
+  }
 }
 
-export function Topbar({ unreadCount = 0 }: TopbarProps) {
-  const { data: session } = useSession()
-
+export function Topbar({ unreadCount = 0, user }: TopbarProps) {
   return (
     <header className="h-14 border-b border-[var(--border-default)] bg-[var(--bg-surface)] flex items-center justify-between px-4 gap-4">
       {/* Search */}
@@ -43,14 +47,14 @@ export function Topbar({ unreadCount = 0 }: TopbarProps) {
         {/* User menu */}
         <div className="flex items-center gap-2 pl-3 border-l border-[var(--border-default)]">
           <div className="text-right hidden sm:block">
-            <div className="text-xs font-semibold text-[var(--text-primary)]">{session?.user?.name || 'Admin'}</div>
-            <div className="text-[10px] text-[var(--text-muted)] capitalize">{session?.user?.role?.toLowerCase() || 'editor'}</div>
+            <div className="text-xs font-semibold text-[var(--text-primary)]">{user?.name || 'Admin'}</div>
+            <div className="text-[10px] text-[var(--text-muted)] capitalize">{user?.role?.toLowerCase() || 'editor'}</div>
           </div>
-          {session?.user?.image ? (
-            <Image src={session.user.image} alt="Avatar" width={32} height={32} className="rounded-full border border-[var(--border-default)]" />
+          {user?.image ? (
+            <Image src={user.image} alt="Avatar" width={32} height={32} className="rounded-full border border-[var(--border-default)]" />
           ) : (
             <div className="h-8 w-8 rounded-full gradient-bg flex items-center justify-center text-white text-xs font-bold">
-              {session?.user?.name?.[0] || 'A'}
+              {user?.name?.[0] || 'A'}
             </div>
           )}
           <button
