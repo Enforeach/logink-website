@@ -17,7 +17,7 @@ export default function AdminLoginPage() {
     setLoading(true)
     setError('')
     try {
-      const res = await signIn('nodemailer', { email, redirect: false, callbackUrl: '/admin' })
+      const res = await signIn('resend', { email, redirect: false, callbackUrl: '/admin' })
       if (res?.error) setError('Login failed. Please check your email.')
       else setSent(true)
     } catch {
