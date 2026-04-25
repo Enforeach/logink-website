@@ -1,0 +1,316 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── AUTH & USERS ───
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(EDITOR)
+  posts         Post[]
+  caseStudies   CaseStudy[]
+  activities    ActivityLog[]
+  accounts      Account[]
+  sessions      Session[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  @@unique([identifier, token])
+}
+
+// ─── BLOG / POSTS ───
+
+model Post {
+  id              String     @id @default(cuid())
+  titleId         String
+  titleEn         String?
+  slug            String     @unique
+  excerptId       String?    @db.Text
+  excerptEn       String?    @db.Text
+  bodyId          String     @db.Text
+  bodyEn          String?    @db.Text
+  featuredImage   String?
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  readingTime     Int?
+  status          PostStatus @default(DRAFT)
+  authorId        String
+  author          User       @relation(fields: [authorId], references: [id])
+  categoryId      String?
+  category        Category?  @relation(fields: [categoryId], references: [id])
+  tags            PostTag[]
+  versions        PostVersion[]
+  publishedAt     DateTime?
+  scheduledAt     DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([slug])
+  @@index([categoryId])
+}
+
+enum PostStatus {
+  DRAFT
+  REVIEW
+  SCHEDULED
+  PUBLISHED
+  ARCHIVED
+}
+
+model PostVersion {
+  id        String   @id @default(cuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  titleId   String
+  bodyId    String   @db.Text
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  nameId    String
+  nameEn    String?
+  slug      String   @unique
+  sortOrder Int      @default(0)
+  posts     Post[]
+  createdAt DateTime @default(now())
+}
+
+model Tag {
+  id    String    @id @default(cuid())
+  name  String    @unique
+  slug  String    @unique
+  posts PostTag[]
+}
+
+model PostTag {
+  postId String
+  tagId  String
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  @@id([postId, tagId])
+}
+
+// ─── SERVICES ───
+
+model Service {
+  id              String        @id @default(cuid())
+  name            String
+  slug            String        @unique
+  descriptionId   String        @db.Text
+  descriptionEn   String?       @db.Text
+  shortDescId     String?
+  shortDescEn     String?
+  icon            String?
+  color           String
+  funnelPosition  String?
+  sortOrder       Int           @default(0)
+  seoSchema       Json?
+  metaTitle       String?
+  metaDescription String?
+  pricingTiers    PricingTier[]
+  addOns          ServiceAddOn[]
+  caseStudies     CaseStudy[]
+  isActive        Boolean       @default(true)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model PricingTier {
+  id         String  @id @default(cuid())
+  serviceId  String
+  service    Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  tierName   String
+  priceLabel String
+  priceValue Int?
+  features   Json
+  isPopular  Boolean @default(false)
+  sortOrder  Int     @default(0)
+}
+
+model ServiceAddOn {
+  id          String  @id @default(cuid())
+  serviceId   String
+  service     Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  priceLabel  String?
+  isActive    Boolean @default(true)
+}
+
+// ─── CASE STUDIES / PORTFOLIO ───
+
+model CaseStudy {
+  id           String         @id @default(cuid())
+  title        String
+  slug         String         @unique
+  clientName   String
+  clientLogo   String?
+  industry     String
+  challenge    String         @db.Text
+  strategy     String         @db.Text
+  results      String         @db.Text
+  thumbnail    String?
+  serviceId    String?
+  service      Service?       @relation(fields: [serviceId], references: [id])
+  authorId     String?
+  author       User?          @relation(fields: [authorId], references: [id])
+  metrics      CaseMetric[]
+  testimonial  Testimonial?
+  status       PostStatus     @default(DRAFT)
+  publishedAt  DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model CaseMetric {
+  id           String    @id @default(cuid())
+  caseStudyId  String
+  caseStudy    CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+  metricLabel  String
+  beforeValue  String
+  afterValue   String
+  sortOrder    Int       @default(0)
+}
+
+model Testimonial {
+  id            String    @id @default(cuid())
+  caseStudyId   String?   @unique
+  caseStudy     CaseStudy? @relation(fields: [caseStudyId], references: [id])
+  clientName    String
+  clientTitle   String
+  clientPhoto   String?
+  quote         String    @db.Text
+  companyName   String
+  isHighlighted Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+}
+
+// ─── FLEXIBLE PAGES ───
+
+model Page {
+  id              String        @id @default(cuid())
+  title           String
+  slug            String        @unique
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  status          PostStatus    @default(DRAFT)
+  sections        PageSection[]
+  updatedAt       DateTime      @updatedAt
+  createdAt       DateTime      @default(now())
+}
+
+model PageSection {
+  id           String  @id @default(cuid())
+  pageId       String
+  page         Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  sectionType  String
+  content      Json
+  sortOrder    Int     @default(0)
+  isVisible    Boolean @default(true)
+}
+
+// ─── MEDIA LIBRARY ───
+
+model Media {
+  id         String   @id @default(cuid())
+  filename   String
+  url        String
+  altText    String?
+  mimeType   String
+  fileSize   Int
+  width      Int?
+  height     Int?
+  folder     String   @default("general")
+  uploadedAt DateTime @default(now())
+}
+
+// ─── SITE SETTINGS ───
+
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value Json
+}
+
+// ─── ACTIVITY LOG ───
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  action      String
+  entityType  String
+  entityId    String
+  entityTitle String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([userId])
+}
+
+// ─── CONTACT SUBMISSIONS ───
+
+model ContactSubmission {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  company     String?
+  phone       String?
+  services    Json?
+  budgetRange String?
+  timeline    String?
+  message     String   @db.Text
+  source      String?
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
