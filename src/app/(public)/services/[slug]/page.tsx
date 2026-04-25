@@ -4,62 +4,645 @@ import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import { buildMetadata, breadcrumbSchema, faqSchema } from '@/lib/seo'
 import { PricingTierCard } from '@/components/public/PricingTier'
-import { CTASection } from '@/components/public/CTASection'
-import { Badge } from '@/components/ui/Badge'
 import { Accordion } from '@/components/ui/Accordion'
+import { CTASection } from '@/components/public/home/CTASection'
 
-interface Props {
-  params: Promise<{ slug: string }>
+interface Props { params: Promise<{ slug: string }> }
+
+// ─── STATIC DATA ──────────────────────────────────────────────────────────────
+
+const SERVICES = {
+  'seo-content-marketing': {
+    name: 'SEO & Content Marketing',
+    tagline: 'Rank Higher. Reach Further. Convert Better.',
+    description: 'We build organic search presence that compounds month over month. From keyword strategy to 150+ articles per month, every piece is crafted to capture high-intent traffic and turn it into revenue.',
+    color: '#7C3AED', rgb: '124,58,237',
+    featuresVariant: 'list' as const,
+    processVariant: 'horizontal' as const,
+    features: [
+      { icon: '🎯', title: 'Keyword Research & Strategy', desc: 'In-depth analysis to find the exact queries your customers are typing right now.' },
+      { icon: '✍️', title: 'Long-form Content Production', desc: 'Up to 150+ SEO-optimised articles/month by specialist writers.' },
+      { icon: '🔧', title: 'Technical SEO Audit', desc: 'Fix crawlability, page speed, schema markup, and Core Web Vitals.' },
+      { icon: '📊', title: 'Looker Studio Reporting', desc: 'Live dashboards for rankings, traffic, and conversions — always on.' },
+      { icon: '🔗', title: 'Internal Linking Architecture', desc: 'Strategic links between pages to pass authority and guide user flows.' },
+      { icon: '📍', title: 'Local SEO', desc: 'Dominate "near me" searches and Google Business map packs.' },
+    ],
+    process: [
+      { step: '01', title: 'Keyword Audit', desc: 'Map current rankings, competitor gaps, and top opportunities.', duration: 'Week 1' },
+      { step: '02', title: 'Content Strategy', desc: 'Topical cluster map and editorial calendar built for your funnel.', duration: 'Week 2' },
+      { step: '03', title: 'Technical Fixes', desc: 'Engineers resolve crawl errors, speed, and structured data.', duration: 'Week 2–3' },
+      { step: '04', title: 'Content Production', desc: 'Writers produce and publish optimised articles continuously.', duration: 'Ongoing' },
+      { step: '05', title: 'Report & Iterate', desc: "Monthly strategy reviews to double down on what's working.", duration: 'Monthly' },
+    ],
+    stats: [
+      { value: '150+', label: 'Articles / Month', desc: 'Maximum production capacity' },
+      { value: '3–6mo', label: 'Time to Rank', desc: 'Typical page-one timeline' },
+      { value: '2.5×', label: 'Traffic Lift', desc: 'Avg. across clients at 6 months' },
+    ],
+    faqs: [
+      { question: 'How long does it take to see SEO results?', answer: 'SEO typically takes 3–6 months to show significant results. However, we usually see traffic improvements within the first 4–8 weeks.' },
+      { question: 'What language are articles written in?', answer: 'We write in the language your audience uses — Indonesian, English, or both — fully optimised for your keywords.' },
+      { question: 'Can we choose article topics?', answer: 'Absolutely. We conduct keyword research and discuss relevant topics with you every month.' },
+      { question: 'How is progress reported?', answer: 'Monthly Looker Studio reports covering keyword rankings, traffic, and conversions — accessible anytime.' },
+      { question: 'Is backlink building included?', answer: 'Off-page SEO and link building are available as an add-on from IDR 5M/month.' },
+    ],
+    crossSells: ['paid-advertising', 'website-landing-page'],
+  },
+  'social-media-management': {
+    name: 'Social Media Management',
+    tagline: 'Content That Connects. Presence That Converts.',
+    description: 'We take social media completely off your plate — strategy, content creation, scheduling, and community management across Instagram, TikTok, Facebook, and LinkedIn.',
+    color: '#DB2777', rgb: '219,39,119',
+    featuresVariant: 'emoji-cards' as const,
+    processVariant: 'vertical' as const,
+    features: [
+      { icon: '📱', title: 'Multi-Platform Management', desc: 'Instagram, TikTok, Facebook & LinkedIn from one integrated strategy.' },
+      { icon: '🎨', title: 'Custom Visual Design', desc: 'Every post built to your brand guide — zero stock templates.' },
+      { icon: '💬', title: 'Community Management', desc: 'Comments and DMs responded to during business hours.' },
+      { icon: '📅', title: 'Content Calendar', desc: 'Monthly calendar reviewed and approved before anything goes live.' },
+      { icon: '📈', title: 'Growth Strategy', desc: 'Hashtag research, collaborations, and engagement campaigns.' },
+      { icon: '📊', title: 'Monthly Analytics', desc: 'Reach, impressions, follower growth, and engagement tracked.' },
+    ],
+    process: [
+      { step: '01', title: 'Brand Onboarding', desc: 'We learn your tone, audience, competitors, and visual identity.', duration: 'Week 1' },
+      { step: '02', title: 'Strategy & Pillars', desc: 'Define content pillars, platform focus, and posting cadence.', duration: 'Week 1–2' },
+      { step: '03', title: 'Content Production', desc: 'Design, copy, and captions created for the full month.', duration: 'Week 2–3' },
+      { step: '04', title: 'Approval & Scheduling', desc: 'You review the calendar and approve before we schedule.', duration: 'Week 3–4' },
+    ],
+    stats: [
+      { value: '4', label: 'Platforms', desc: 'Instagram, TikTok, Facebook, LinkedIn' },
+      { value: '30+', label: 'Posts / Month', desc: 'Consistent presence, zero blank days' },
+      { value: '100%', label: 'Original Content', desc: 'Custom-built for your brand' },
+    ],
+    faqs: [
+      { question: 'Which platforms do you manage?', answer: 'Instagram, TikTok, Facebook, and LinkedIn. We can focus on one or multiple based on your audience.' },
+      { question: 'Is community management included?', answer: 'Yes — comment and DM responses during business hours are included in all packages.' },
+      { question: 'Who creates the visual content?', answer: 'Our creative team designs everything to your brand guidelines. You simply approve before publishing.' },
+      { question: 'How many posts per month?', answer: 'Post frequency is tailored to your budget and goals, discussed during onboarding.' },
+    ],
+    crossSells: ['creative-services', 'paid-advertising'],
+  },
+  'paid-advertising': {
+    name: 'Paid Advertising',
+    tagline: 'Every Rupiah Invested. Maximum Return Delivered.',
+    description: 'Data-driven paid campaigns across Google, Meta, TikTok, and Marketplace platforms. We target the right audience at the right moment — and optimise relentlessly until ROAS hits 2–4×.',
+    color: '#D97706', rgb: '217,119,6',
+    featuresVariant: 'numbered' as const,
+    processVariant: 'funnel' as const,
+    features: [
+      { icon: '🔍', title: 'Google Ads (Search + Display)', desc: "Capture high-intent buyers the moment they're searching." },
+      { icon: '📘', title: 'Meta Ads', desc: 'Interests, lookalikes, and retargeting on Facebook & Instagram.' },
+      { icon: '🎵', title: 'TikTok Ads', desc: 'Native-format video ads designed for conversion.' },
+      { icon: '🛒', title: 'Marketplace Ads', desc: 'Tokopedia, Shopee, and Lazada for e-commerce brands.' },
+      { icon: '🎯', title: 'Full-Funnel Strategy', desc: 'TOFU, MOFU, BOFU — every stage of the customer journey covered.' },
+      { icon: '📊', title: 'Weekly Reports', desc: 'ROAS, CPC, CTR tracked weekly with optimisation notes.' },
+    ],
+    process: [
+      { step: '01', title: 'Account Audit', desc: 'Full review of existing accounts, wasted spend, and audience data.', duration: 'Week 1' },
+      { step: '02', title: 'Funnel Mapping', desc: 'Campaign objectives defined at each stage — awareness to conversion.', duration: 'Week 1' },
+      { step: '03', title: 'Creative Production', desc: 'Ad copy and visuals built for each platform and segment.', duration: 'Week 1–2' },
+      { step: '04', title: 'Campaign Launch', desc: 'Live with controlled budgets for initial data gathering.', duration: 'Week 2' },
+      { step: '05', title: 'Optimisation Loops', desc: 'Weekly bid adjustments, audience pruning, and creative refreshes.', duration: 'Weekly' },
+    ],
+    stats: [
+      { value: '2–4×', label: 'Average ROAS', desc: 'Return on ad spend across clients' },
+      { value: '−35%', label: 'Avg. CPA Drop', desc: 'After first 90 days of optimisation' },
+      { value: '5', label: 'Ad Platforms', desc: 'Google, Meta, TikTok, Tokopedia, Shopee' },
+    ],
+    faqs: [
+      { question: 'Which ad platforms do you manage?', answer: 'Google Ads (Search, Display, Shopping), Meta Ads (Facebook & Instagram), TikTok Ads, and Marketplace Ads.' },
+      { question: 'What is the minimum ad budget?', answer: 'Ad spend is separate from our fee. We recommend IDR 3–5M/month minimum for meaningful results.' },
+      { question: 'What is ROAS and how do you measure it?', answer: "ROAS is the revenue generated per IDR spent on ads. We track via GA4 and each platform's native reporting." },
+      { question: 'Will I have access to my own ad accounts?', answer: 'Yes, 100%. We manage within your own accounts — full access retained at all times.' },
+      { question: 'How long until ads go live?', answer: 'Typically 1–2 weeks from kickoff, including audit, strategy, and creative production.' },
+    ],
+    crossSells: ['seo-content-marketing', 'creative-services'],
+  },
+  'creative-services': {
+    name: 'Creative Services',
+    tagline: 'Bold Visuals. Clear Stories. Brands That Stick.',
+    description: 'From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset built for your audience — never from a template library.',
+    color: '#F59E0B', rgb: '245,158,11',
+    featuresVariant: 'bento' as const,
+    processVariant: 'flow' as const,
+    features: [
+      { icon: '🎨', title: 'Brand Identity Design', desc: 'Logo, colour palette, typography, and brand guide.' },
+      { icon: '📸', title: 'Photo & Video Production', desc: 'Shoot and post-production for product, corporate, and campaign content.' },
+      { icon: '🎬', title: 'Reels & Short-form Video', desc: 'Vertical video for TikTok, Reels, and Shorts — edited for retention.' },
+      { icon: '🖼️', title: 'Social Media Graphics', desc: 'Feed posts, stories, and carousels — all original, all on-brand.' },
+      { icon: '📄', title: 'Copywriting', desc: 'Headlines, captions, ad copy, and landing page text that converts.' },
+      { icon: '🖥️', title: 'Marketing Collateral', desc: 'Brochures, decks, banners, and event materials.' },
+    ],
+    process: [
+      { step: '01', title: 'Creative Brief', desc: 'Align on objectives, audience, tone, and deliverables.', duration: 'Day 1–2' },
+      { step: '02', title: 'Concept & Moodboard', desc: 'Initial concepts and direction presented for your approval.', duration: 'Day 3–5' },
+      { step: '03', title: 'Production', desc: 'Full execution of approved concept — shoot, design, or animate.', duration: 'Week 1–2' },
+      { step: '04', title: 'Review & Refine', desc: '2 rounds of revisions, fast turnaround.', duration: 'Day 1–3' },
+      { step: '05', title: 'Final Delivery', desc: 'All formats delivered — web, print, social — ready to deploy.', duration: 'Day 1' },
+    ],
+    stats: [
+      { value: '500+', label: 'Assets / Month', desc: 'Total production across all clients' },
+      { value: '2', label: 'Revision Rounds', desc: 'Included in every deliverable' },
+      { value: '3–5d', label: 'Avg. Turnaround', desc: 'For standard graphic deliverables' },
+    ],
+    faqs: [
+      { question: 'What formats can you produce?', answer: 'Social posts (feed, story, reels), banner ads, video (1:1, 9:16, 16:9), infographics, landing page copy, and more.' },
+      { question: 'How long does production take?', answer: 'Graphic design: 3–5 business days. Video with shooting: 1–2 weeks depending on complexity.' },
+      { question: 'Are revisions included?', answer: 'Yes — 2 rounds per deliverable. Additional revisions available at a separate fee.' },
+      { question: 'Do you shoot outside Jakarta?', answer: 'Our team covers Jakarta and surroundings. Out-of-city shoots available with additional travel costs.' },
+    ],
+    crossSells: ['social-media-management', 'website-landing-page'],
+  },
+  'website-landing-page': {
+    name: 'Website & Landing Page',
+    tagline: 'Convert Visitors Into Customers. Built to Perform.',
+    description: 'We design and build high-performance websites and landing pages — fast, mobile-first, and wired for conversion. From company profiles to full e-commerce stores.',
+    color: '#06B6D4', rgb: '6,182,212',
+    featuresVariant: 'checklist' as const,
+    processVariant: 'gantt' as const,
+    features: [
+      { icon: '⚡', title: 'Performance-First Build', desc: 'Core Web Vitals optimised — fast load, smooth interaction, zero layout shifts.' },
+      { icon: '📱', title: 'Mobile-First Responsive', desc: '100% responsive across all devices, built mobile-first from day one.' },
+      { icon: '🔍', title: 'SEO-Ready Architecture', desc: 'Clean URLs, meta tags, schema markup, and sitemap at launch.' },
+      { icon: '🛒', title: 'E-Commerce Integration', desc: 'Shopify, WooCommerce, or custom cart with fully integrated checkout.' },
+      { icon: '🔌', title: 'CRM & Analytics Setup', desc: 'GA4, Meta Pixel, WhatsApp chat, and CRM wired in on day one.' },
+      { icon: '🛡️', title: 'SSL & Security', desc: 'HTTPS, regular backups, and maintenance packages available.' },
+    ],
+    process: [
+      { step: '01', title: 'Discovery & Scope', desc: 'Goals, sitemap, references, and platform confirmed.', duration: '2–3 days' },
+      { step: '02', title: 'Wireframe & Design', desc: 'Full Figma prototype — desktop and mobile — for your approval.', duration: '5–7 days' },
+      { step: '03', title: 'Development', desc: 'Clean, fast code with all integrations and CMS configured.', duration: '7–21 days' },
+      { step: '04', title: 'QA & Testing', desc: 'Cross-browser testing, speed audit, and form validation.', duration: '2–3 days' },
+      { step: '05', title: 'Launch & Handover', desc: 'Go live, training session, and documentation delivered.', duration: '1 day' },
+    ],
+    stats: [
+      { value: '<2s', label: 'Target Load Time', desc: 'Performance-first standard' },
+      { value: '100%', label: 'Mobile Responsive', desc: 'Every project, every device' },
+      { value: '1–8wk', label: 'Time to Launch', desc: 'Landing page to full e-commerce' },
+    ],
+    faqs: [
+      { question: 'How long does a website take to build?', answer: 'Landing pages: 1–2 weeks. Company profiles: 3–4 weeks. E-commerce: 4–8 weeks.' },
+      { question: 'Which platforms do you use?', answer: 'WordPress, custom Next.js, Shopify, or WooCommerce — depends on your requirements.' },
+      { question: 'Is hosting and domain included?', answer: 'Not included, but we assist with setup and recommend the right providers.' },
+      { question: 'Are websites mobile-responsive?', answer: 'Yes — 100% mobile-first and fully responsive, on every project.' },
+      { question: 'Is training included?', answer: 'Yes — training session and documentation for your team after launch.' },
+    ],
+    crossSells: ['seo-content-marketing', 'paid-advertising'],
+  },
+} as const
+
+const SERVICE_META: Record<string, { name: string; color: string }> = {
+  'seo-content-marketing': { name: 'SEO & Content Marketing', color: '#7C3AED' },
+  'social-media-management': { name: 'Social Media Management', color: '#DB2777' },
+  'paid-advertising': { name: 'Paid Advertising', color: '#D97706' },
+  'creative-services': { name: 'Creative Services', color: '#F59E0B' },
+  'website-landing-page': { name: 'Website & Landing Page', color: '#06B6D4' },
 }
 
-const SERVICE_FAQS: Record<string, { question: string; answer: string }[]> = {
-  'seo-content-marketing': [
-    { question: 'How long does it take to see SEO results?', answer: 'SEO typically takes 3–6 months to show significant results. However, we usually see traffic improvements within the first 4–8 weeks.' },
-    { question: 'What language are articles written in?', answer: 'We write articles in the language your target audience uses — Indonesian, English, or both — fully optimised for your target keywords.' },
-    { question: 'Can we choose article topics?', answer: 'Absolutely. We conduct keyword research and discuss relevant topics aligned with your business every month.' },
-    { question: 'How is progress reported?', answer: 'We deliver monthly reports via Looker Studio, accessible anytime, covering keyword rankings, traffic, and conversions.' },
-    { question: 'Is backlink building included?', answer: 'Off-page SEO and link building are available as an add-on starting from IDR 5M/month.' },
-  ],
-  'social-media-management': [
-    { question: 'Which platforms do you manage?', answer: 'Instagram, TikTok, Facebook, and LinkedIn. We can focus on one or multiple platforms based on your target audience.' },
-    { question: 'Is community management included (comments/DMs)?', answer: 'Yes, our packages include community management — comment and DM responses during business hours.' },
-    { question: 'Who creates the visual content?', answer: 'Our creative team designs everything according to your brand guidelines. You simply approve before publishing.' },
-    { question: 'How many posts per month?', answer: 'Post frequency is tailored to your needs and budget. We discuss the optimal cadence during onboarding.' },
-  ],
-  'paid-advertising': [
-    { question: 'Which ad platforms do you manage?', answer: 'Google Ads (Search, Display, Shopping), Meta Ads (Facebook & Instagram), TikTok Ads, and Marketplace Ads (Tokopedia, Shopee, Lazada).' },
-    { question: 'What is the minimum ad budget?', answer: 'Ad spend is separate from our management fee. We recommend a minimum of IDR 3–5M/month for optimal results.' },
-    { question: 'What is ROAS and how do you measure it?', answer: 'ROAS (Return on Ad Spend) is the revenue generated per IDR spent on ads. We track it via Google Analytics 4 and each platform\'s native reporting.' },
-    { question: 'Will I have access to my own ad accounts?', answer: 'Yes, 100%. We manage within your own accounts — not ours. You retain full access at all times.' },
-    { question: 'How long until ads go live?', answer: 'Typically 1–2 weeks for initial setup and launch, including audit, strategy, and creative production.' },
-  ],
-  'creative-services': [
-    { question: 'What formats can you produce?', answer: 'Social media posts (feed, story, reels), banner ads, video (1:1, 9:16, 16:9), infographics, landing page copy, and more.' },
-    { question: 'How long does production take?', answer: 'Graphic design is typically 3–5 business days. Video production with shooting takes 1–2 weeks depending on complexity.' },
-    { question: 'Are revisions included?', answer: 'Yes, each deliverable includes 2 rounds of revisions. Additional revisions are available at a separate fee.' },
-    { question: 'Do you shoot outside Jakarta?', answer: 'Our team serves Jakarta and surroundings. Out-of-city shoots are available with additional travel costs.' },
-  ],
-  'website-landing-page': [
-    { question: 'How long does a website take to build?', answer: 'Landing pages: 1–2 weeks. Company profiles: 3–4 weeks. E-commerce: 4–8 weeks depending on complexity.' },
-    { question: 'Which platforms do you use?', answer: 'Depends on your needs — WordPress, custom Next.js, Shopify, or WooCommerce for e-commerce.' },
-    { question: 'Is hosting and domain included?', answer: 'Not included, but we assist with setup and recommend the right providers. Maintenance & hosting are available as an add-on.' },
-    { question: 'Are websites mobile-responsive?', answer: 'Yes, everything we build is 100% mobile-first and fully responsive across all devices.' },
-    { question: 'Is training included for managing the site?', answer: 'Yes, we provide a training session and documentation for your team after the site launches.' },
-  ],
+type SvcKey = keyof typeof SERVICES
+type Svc = typeof SERVICES[SvcKey]
+
+// ─── HERO VISUALS ─────────────────────────────────────────────────────────────
+
+function SeoHeroVisual() {
+  const rows = [
+    { kw: 'jasa digital marketing jakarta', rank: '#1', change: '+5' },
+    { kw: 'agency social media indonesia', rank: '#2', change: '+7' },
+    { kw: 'google ads management jakarta', rank: '#3', change: '+11' },
+    { kw: 'content marketing seo murah', rank: '#4', change: '+14' },
+  ]
+  return (
+    <div className="relative">
+      <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-elevated)] overflow-hidden shadow-2xl">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border-default)] bg-[var(--bg-surface)]">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-400/60" />
+          <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/60" />
+          <span className="h-2.5 w-2.5 rounded-full bg-green-400/60" />
+          <span className="ml-2 text-xs text-[var(--text-muted)] font-mono">keyword-tracker.csv</span>
+        </div>
+        <div className="p-3">
+          <div className="grid grid-cols-[1fr_52px_56px] px-3 py-1.5 text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-widest">
+            <span>Keyword</span><span className="text-center">Rank</span><span className="text-right">Δ</span>
+          </div>
+          {rows.map((r, i) => (
+            <div key={i} className="grid grid-cols-[1fr_52px_56px] px-3 py-2.5 rounded-lg items-center"
+              style={{ background: i % 2 === 0 ? 'rgba(124,58,237,0.05)' : 'transparent' }}>
+              <span className="text-xs text-[var(--text-secondary)] truncate">{r.kw}</span>
+              <span className="text-center text-sm font-bold text-violet-400">{r.rank}</span>
+              <span className="text-right text-xs font-semibold text-emerald-400">↑ {r.change}</span>
+            </div>
+          ))}
+        </div>
+        <div className="px-4 py-2.5 border-t border-[var(--border-default)] flex justify-between text-xs">
+          <span className="text-[var(--text-muted)]">Updated today</span>
+          <span className="text-emerald-400 font-semibold">All positions improving ↑</span>
+        </div>
+      </div>
+      <div className="absolute -top-3 -right-3 px-3 py-1.5 rounded-xl text-xs font-bold text-white shadow-lg"
+        style={{ background: 'linear-gradient(135deg,#7C3AED,#DB2777)' }}>
+        Page #1 ✓
+      </div>
+    </div>
+  )
 }
 
-async function getService(slug: string) {
+function SocialHeroVisual() {
+  const platforms = [
+    { name: 'Instagram', icon: '📸', valueColor: '#E4405F', followers: '12.4K', growth: '+284 this month' },
+    { name: 'TikTok', icon: '🎵', valueColor: '#ffffff', followers: '8.7K', growth: '+610 this month' },
+    { name: 'Facebook', icon: '👍', valueColor: '#1877F2', followers: '5.2K', growth: '+128 this month' },
+    { name: 'LinkedIn', icon: '💼', valueColor: '#0A66C2', followers: '2.1K', growth: '+89 this month' },
+  ]
+  return (
+    <div className="grid grid-cols-2 gap-3">
+      {platforms.map((p) => (
+        <div key={p.name} className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-elevated)] p-4 hover:border-[var(--border-hover)] transition-colors">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-xl">{p.icon}</span>
+            <span className="text-sm font-semibold text-[var(--text-primary)]">{p.name}</span>
+          </div>
+          <div className="text-2xl font-extrabold" style={{ color: p.valueColor }}>{p.followers}</div>
+          <div className="text-[11px] text-emerald-400 mt-1">{p.growth}</div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function AdsHeroVisual() {
+  const stages = [
+    { label: 'Awareness', value: '250,000', unit: 'reach', indent: 0 },
+    { label: 'Consideration', value: '18,500', unit: 'clicks', indent: 6 },
+    { label: 'Intent', value: '4,200', unit: 'leads', indent: 14 },
+    { label: 'Conversion', value: '840', unit: 'sales', indent: 22 },
+  ]
+  return (
+    <div className="space-y-2">
+      <div className="text-xs text-[var(--text-muted)] uppercase tracking-widest mb-4 font-semibold">Campaign Funnel — Live</div>
+      {stages.map((s, i) => (
+        <div key={i} className="rounded-xl px-4 py-3 flex items-center justify-between"
+          style={{
+            background: `rgba(217,119,6,${0.22 - i * 0.04})`,
+            border: '1px solid rgba(217,119,6,0.2)',
+            marginLeft: `${s.indent}%`,
+          }}>
+          <span className="text-sm font-semibold text-[var(--text-primary)]">{s.label}</span>
+          <div className="text-right">
+            <div className="text-sm font-bold text-amber-400">{s.value}</div>
+            <div className="text-[10px] text-[var(--text-muted)]">{s.unit}</div>
+          </div>
+        </div>
+      ))}
+      <div className="text-right text-sm font-bold text-amber-400 pt-2 pr-2">ROAS: 3.2× ↑</div>
+    </div>
+  )
+}
+
+function CreativeHeroVisual() {
+  return (
+    <div className="space-y-2">
+      <div className="grid grid-cols-3 gap-2">
+        <div className="col-span-2 rounded-2xl flex items-center justify-center text-5xl"
+          style={{ background: 'linear-gradient(135deg,rgba(245,158,11,0.25),rgba(249,115,22,0.2))', height: '130px' }}>
+          🎨
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex-1 rounded-2xl" style={{ background: 'rgba(219,39,119,0.2)', minHeight: '60px' }} />
+          <div className="flex-1 rounded-2xl flex items-center justify-center text-2xl"
+            style={{ background: 'rgba(124,58,237,0.2)', minHeight: '60px' }}>🎬</div>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-2">
+        <div className="rounded-2xl flex items-center justify-center text-2xl"
+          style={{ background: 'rgba(6,182,212,0.15)', height: '80px' }}>📸</div>
+        <div className="col-span-2 rounded-2xl px-4 flex items-center gap-3"
+          style={{ background: 'rgba(245,158,11,0.1)', height: '80px' }}>
+          {['#F59E0B', '#DB2777', '#7C3AED', '#06B6D4', '#10B981'].map((c) => (
+            <div key={c} className="h-9 w-9 rounded-full border-2 border-white/20 flex-shrink-0" style={{ background: c }} />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function WebHeroVisual() {
+  return (
+    <div className="rounded-2xl border border-[var(--border-default)] overflow-hidden bg-[var(--bg-elevated)] shadow-2xl">
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-[var(--border-default)] bg-[var(--bg-surface)]">
+        <div className="flex gap-1.5">
+          <span className="h-3 w-3 rounded-full bg-red-400/70" />
+          <span className="h-3 w-3 rounded-full bg-yellow-400/70" />
+          <span className="h-3 w-3 rounded-full bg-green-400/70" />
+        </div>
+        <div className="flex-1 bg-[var(--bg-primary)] rounded-md px-3 py-1 text-xs text-[var(--text-muted)] flex items-center gap-2">
+          <span className="text-cyan-400">🔒</span> yourbrand.com
+        </div>
+      </div>
+      <div className="p-4 space-y-3">
+        <div className="flex items-center gap-3 pb-3 border-b border-[var(--border-default)]">
+          <div className="h-4 w-14 rounded" style={{ background: 'rgba(6,182,212,0.3)' }} />
+          {[1, 2, 3].map((i) => <div key={i} className="h-3 w-10 rounded bg-[var(--bg-surface)]" />)}
+          <div className="ml-auto h-7 w-20 rounded-lg" style={{ background: 'linear-gradient(135deg,#06B6D4,#7C3AED)' }} />
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-2">
+            <div className="h-5 w-full rounded bg-[var(--bg-surface)]" />
+            <div className="h-5 w-4/5 rounded bg-[var(--bg-surface)]" />
+            <div className="h-3 w-full rounded bg-[var(--bg-surface)]/60 mt-3" />
+            <div className="h-3 w-5/6 rounded bg-[var(--bg-surface)]/60" />
+            <div className="h-8 w-28 rounded-lg mt-3" style={{ background: 'rgba(6,182,212,0.3)' }} />
+          </div>
+          <div className="rounded-xl flex items-center justify-center text-3xl"
+            style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.2)' }}>
+            ⚡
+          </div>
+        </div>
+        <div className="flex gap-2 pt-2 border-t border-[var(--border-default)]">
+          {[{ label: 'Perf', score: 98, color: '#10B981' }, { label: 'SEO', score: 100, color: '#06B6D4' }, { label: 'A11y', score: 95, color: '#A78BFA' }].map((m) => (
+            <div key={m.label} className="flex-1 text-center">
+              <div className="text-sm font-bold" style={{ color: m.color }}>{m.score}</div>
+              <div className="text-[10px] text-[var(--text-muted)]">{m.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── FEATURES SECTION ─────────────────────────────────────────────────────────
+
+type Feature = { icon: string; title: string; desc: string }
+
+function FeaturesSection({ features, variant, color, rgb }: {
+  features: readonly Feature[]
+  variant: Svc['featuresVariant']
+  color: string
+  rgb: string
+}) {
+  if (variant === 'list') {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {features.map((f, i) => (
+          <div key={i} className="flex gap-4 p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-[var(--border-hover)] transition-colors"
+            style={{ borderLeft: `3px solid ${color}` }}>
+            <div className="flex-shrink-0 h-10 w-10 rounded-xl flex items-center justify-center text-xl"
+              style={{ background: `rgba(${rgb},0.1)` }}>
+              {f.icon}
+            </div>
+            <div>
+              <h3 className="font-semibold text-[var(--text-primary)] mb-1">{f.title}</h3>
+              <p className="text-sm text-[var(--text-secondary)]">{f.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  if (variant === 'emoji-cards') {
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {features.map((f, i) => (
+          <div key={i} className="p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] text-center hover:border-[var(--border-hover)] transition-colors group"
+            style={{ background: `rgba(${rgb},${0.03 + (i % 3) * 0.02})` }}>
+            <div className="text-3xl mb-3">{f.icon}</div>
+            <h3 className="font-semibold text-[var(--text-primary)] mb-2 text-sm">{f.title}</h3>
+            <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  if (variant === 'numbered') {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {features.map((f, i) => (
+          <div key={i} className="p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-[var(--border-hover)] transition-all hover:shadow-lg"
+            style={{ ['--shadow-color' as string]: color }}>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-2xl font-black leading-none" style={{ color, opacity: 0.25 }}>
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span className="text-2xl">{f.icon}</span>
+            </div>
+            <h3 className="font-semibold text-[var(--text-primary)] mb-2">{f.title}</h3>
+            <p className="text-sm text-[var(--text-secondary)]">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  if (variant === 'bento') {
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {features.map((f, i) => {
+          const isWide = i === 0 || i === 5
+          return (
+            <div key={i} className={`p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-[var(--border-hover)] transition-colors ${isWide ? 'md:col-span-2' : ''}`}
+              style={{ background: `rgba(${rgb},${0.04 + (i % 2) * 0.03})` }}>
+              <div className="text-3xl mb-3">{f.icon}</div>
+              <h3 className="font-bold text-[var(--text-primary)] mb-2">{f.title}</h3>
+              <p className="text-sm text-[var(--text-secondary)]">{f.desc}</p>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  // checklist
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      {features.map((f, i) => (
+        <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-[var(--border-hover)] transition-colors">
+          <div className="flex-shrink-0 h-6 w-6 rounded-full flex items-center justify-center mt-0.5"
+            style={{ background: color }}>
+            <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-sm">{f.icon}</span>
+              <h3 className="font-semibold text-[var(--text-primary)] text-sm">{f.title}</h3>
+            </div>
+            <p className="text-xs text-[var(--text-secondary)]">{f.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ─── PROCESS SECTION ──────────────────────────────────────────────────────────
+
+type Step = { step: string; title: string; desc: string; duration: string }
+
+function ProcessSection({ steps, variant, color, rgb }: {
+  steps: readonly Step[]
+  variant: Svc['processVariant']
+  color: string
+  rgb: string
+}) {
+  if (variant === 'horizontal') {
+    return (
+      <div className="relative">
+        <div className="hidden lg:block absolute top-10 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(to right, transparent 5%, ${color}40 20%, ${color}40 80%, transparent 95%)` }} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {steps.map((s, i) => (
+            <div key={i} className="relative flex flex-col items-center text-center">
+              <div className="h-10 w-10 rounded-2xl flex items-center justify-center text-sm font-black text-white mb-4 relative z-10"
+                style={{ background: `linear-gradient(135deg,${color},#DB2777)` }}>
+                {s.step}
+              </div>
+              <div className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-2"
+                style={{ color: `rgba(${rgb},0.7)` }}>
+                {s.duration}
+              </div>
+              <h3 className="font-bold text-[var(--text-primary)] mb-2">{s.title}</h3>
+              <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'vertical') {
+    return (
+      <div className="max-w-xl mx-auto space-y-0">
+        {steps.map((s, i) => (
+          <div key={i} className="flex gap-5">
+            <div className="flex flex-col items-center">
+              <div className="h-10 w-10 rounded-2xl flex items-center justify-center text-sm font-black text-white flex-shrink-0"
+                style={{ background: `linear-gradient(135deg,${color},#7C3AED)` }}>
+                {s.step}
+              </div>
+              {i < steps.length - 1 && (
+                <div className="w-px flex-1 my-2" style={{ background: `rgba(${rgb},0.25)`, minHeight: '40px' }} />
+              )}
+            </div>
+            <div className="pb-8">
+              <div className="flex items-center gap-3 mb-1">
+                <h3 className="font-bold text-[var(--text-primary)]">{s.title}</h3>
+                <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: `rgba(${rgb},0.12)`, color }}>
+                  {s.duration}
+                </span>
+              </div>
+              <p className="text-sm text-[var(--text-secondary)]">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  if (variant === 'funnel') {
+    return (
+      <div className="max-w-2xl mx-auto space-y-3">
+        {steps.map((s, i) => (
+          <div key={i} className="rounded-2xl p-5 border"
+            style={{
+              background: `rgba(${rgb},${0.07 - i * 0.01})`,
+              borderColor: `rgba(${rgb},0.2)`,
+              marginLeft: `${i * 3}%`,
+              marginRight: `${i * 3}%`,
+            }}>
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="text-lg font-black" style={{ color }}>{s.step}</span>
+                <div>
+                  <h3 className="font-bold text-[var(--text-primary)]">{s.title}</h3>
+                  <p className="text-sm text-[var(--text-secondary)] mt-1">{s.desc}</p>
+                </div>
+              </div>
+              <span className="text-xs flex-shrink-0 px-2 py-1 rounded-lg font-semibold"
+                style={{ background: `rgba(${rgb},0.15)`, color }}>
+                {s.duration}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  if (variant === 'flow') {
+    return (
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 overflow-x-auto pb-2">
+        {steps.map((s, i) => (
+          <div key={i} className="flex items-center gap-3 flex-shrink-0">
+            <div className="flex flex-col items-center text-center" style={{ minWidth: '140px' }}>
+              <div className="h-12 w-12 rounded-full flex items-center justify-center text-sm font-black text-white mb-3 border-4"
+                style={{ background: `rgba(${rgb},0.15)`, borderColor: color, color }}>
+                {s.step}
+              </div>
+              <div className="text-xs font-semibold mb-1" style={{ color }}>{s.duration}</div>
+              <h3 className="font-bold text-[var(--text-primary)] text-sm mb-1">{s.title}</h3>
+              <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{s.desc}</p>
+            </div>
+            {i < steps.length - 1 && (
+              <div className="hidden md:block flex-shrink-0" style={{ color: `rgba(${rgb},0.4)`, fontSize: '24px' }}>→</div>
+            )}
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  // gantt
+  const maxDays = 21
+  const parseBarWidth = (duration: string): number => {
+    if (duration.includes('21')) return 100
+    if (duration.includes('7')) return 38
+    if (duration.includes('5')) return 30
+    if (duration.includes('2–3')) return 14
+    return 8
+  }
+  return (
+    <div className="space-y-3 max-w-2xl mx-auto">
+      <div className="flex gap-2 mb-6 text-xs text-[var(--text-muted)]">
+        <div className="w-40 flex-shrink-0" />
+        <div className="flex-1 flex justify-between">
+          <span>Day 1</span><span>Week 1</span><span>Week 2</span><span>Week 3+</span>
+        </div>
+      </div>
+      {steps.map((s, i) => (
+        <div key={i} className="flex items-center gap-3">
+          <div className="w-40 flex-shrink-0">
+            <div className="text-sm font-semibold text-[var(--text-primary)]">{s.title}</div>
+            <div className="text-xs" style={{ color }}>{s.duration}</div>
+          </div>
+          <div className="flex-1 h-8 rounded-lg bg-[var(--bg-surface)] relative overflow-hidden">
+            <div className="absolute inset-y-0 left-0 rounded-lg flex items-center px-3"
+              style={{
+                width: `${parseBarWidth(s.duration)}%`,
+                background: `linear-gradient(90deg, rgba(${rgb},0.6), rgba(${rgb},0.3))`,
+                minWidth: '40px',
+              }}>
+              <span className="text-xs font-semibold text-white truncate">{s.step}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ─── DB HELPER ────────────────────────────────────────────────────────────────
+
+async function getDbService(slug: string) {
   try {
     return await prisma.service.findUnique({
       where: { slug },
       include: {
         pricingTiers: { orderBy: { sortOrder: 'asc' } },
         addOns: { where: { isActive: true } },
-        caseStudies: {
-          where: { status: 'PUBLISHED' },
-          take: 1,
-          include: { metrics: { orderBy: { sortOrder: 'asc' }, take: 3 } },
-        },
       },
     })
   } catch {
@@ -67,127 +650,179 @@ async function getService(slug: string) {
   }
 }
 
+// ─── STATIC PARAMS ────────────────────────────────────────────────────────────
+
+export async function generateStaticParams() {
+  return Object.keys(SERVICES).map((slug) => ({ slug }))
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const service = await getService(slug)
-  if (!service) return {}
+  const svc = SERVICES[slug as SvcKey]
+  if (!svc) return {}
   return buildMetadata({
-    title: service.metaTitle || service.name,
-    description: service.metaDescription || `${service.name} — ${service.shortDescId || service.descriptionId.slice(0, 120)}`,
+    title: `${svc.name} — Logink Digital Marketing Jakarta`,
+    description: svc.description.slice(0, 155),
     path: `/services/${slug}`,
   })
 }
 
-const HOW_WE_WORK = [
-  { step: '01', title: 'Discovery', desc: 'Deep audit of your current digital presence and goals.' },
-  { step: '02', title: 'Strategy', desc: 'We design a roadmap tailored to your objectives and budget.' },
-  { step: '03', title: 'Execution', desc: 'Consistent implementation by our specialist team.' },
-  { step: '04', title: 'Reporting', desc: 'Transparent monthly reports via Looker Studio.' },
-]
+// ─── PAGE ─────────────────────────────────────────────────────────────────────
 
 export default async function ServiceDetailPage({ params }: Props) {
   const { slug } = await params
-  const service = await getService(slug)
+  const svc = SERVICES[slug as SvcKey]
+  if (!svc) notFound()
 
-  if (!service) {
-    // Return placeholder for seeded services
-    const KNOWN_SLUGS = ['seo-content-marketing', 'social-media-management', 'paid-advertising', 'creative-services', 'website-landing-page']
-    if (!KNOWN_SLUGS.includes(slug)) notFound()
-  }
+  const dbService = await getDbService(slug)
 
-  const faqs = SERVICE_FAQS[slug] || []
   const breadcrumbs = [
     { name: 'Home', url: 'https://logink.id' },
     { name: 'Services', url: 'https://logink.id/services' },
-    { name: service?.name || slug, url: `https://logink.id/services/${slug}` },
+    { name: svc.name, url: `https://logink.id/services/${slug}` },
   ]
 
-  const serviceColor = service?.color || '#7C3AED'
-  const serviceName = service?.name || slug.replace(/-/g, ' ')
+  const HeroVisual =
+    slug === 'seo-content-marketing' ? SeoHeroVisual :
+    slug === 'social-media-management' ? SocialHeroVisual :
+    slug === 'paid-advertising' ? AdsHeroVisual :
+    slug === 'creative-services' ? CreativeHeroVisual :
+    WebHeroVisual
+
+  const sectionBg = (i: number) =>
+    i % 2 === 0 ? 'bg-[var(--bg-primary)]' : 'bg-[var(--bg-surface)]'
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([breadcrumbSchema(breadcrumbs), ...(faqs.length ? [faqSchema(faqs)] : [])]),
-        }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify([
+          breadcrumbSchema(breadcrumbs),
+          ...(svc.faqs.length ? [faqSchema([...svc.faqs])] : []),
+        ]),
+      }} />
 
-      {/* Hero */}
-      <section className="pt-32 pb-16 px-4 mesh-gradient">
-        <div className="max-w-4xl mx-auto">
-          <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-8">
+      {/* ── HERO ── */}
+      <section className="relative min-h-[80vh] flex items-center overflow-hidden px-4 pt-24 pb-20">
+        <div className="absolute inset-0 animated-mesh opacity-80" />
+        <div className="absolute inset-0 dot-grid opacity-40" />
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full blur-3xl"
+            style={{ background: `radial-gradient(circle, rgba(${svc.rgb},0.2) 0%, transparent 70%)` }} />
+          <div className="absolute bottom-1/4 right-1/4 h-80 w-80 rounded-full blur-3xl"
+            style={{ background: `radial-gradient(circle, rgba(${svc.rgb},0.12) 0%, transparent 70%)` }} />
+        </div>
+
+        <div className="relative max-w-6xl mx-auto w-full z-10">
+          <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-10">
             <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Home</Link>
             <span>/</span>
             <Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Services</Link>
             <span>/</span>
-            <span className="text-[var(--text-primary)]">{serviceName}</span>
+            <span className="text-[var(--text-secondary)]">{svc.name}</span>
           </nav>
 
-          <div className="flex items-center gap-3 mb-4">
-            {service?.funnelPosition && (
-              <Badge variant="violet" size="md">{service.funnelPosition}</Badge>
-            )}
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] mb-4">
-            {serviceName}
-          </h1>
-          {service?.shortDescId && (
-            <p className="text-lg text-[var(--text-secondary)] mb-8">{service.shortDescId}</p>
-          )}
-          <div className="flex flex-wrap gap-4">
-            <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl gradient-bg text-white font-semibold text-sm hover:scale-[1.02] transition-all">
-              Start Free Consultation
-            </Link>
-            <Link href="#pricing" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] transition-all">
-              View Pricing
-            </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold mb-6"
+                style={{ borderColor: `rgba(${svc.rgb},0.3)`, background: `rgba(${svc.rgb},0.08)`, color: svc.color }}>
+                <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: svc.color }} />
+                Digital Marketing Service
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] mb-4 leading-tight tracking-tight">
+                {svc.tagline.split('. ').map((part, i, arr) => (
+                  <span key={i}>
+                    {i === 0 ? part : <><br /><span style={{ color: svc.color }}>{part}</span></>}
+                    {i < arr.length - 1 ? '.' : ''}
+                  </span>
+                ))}
+              </h1>
+              <p className="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed max-w-lg">{svc.description}</p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm hover:scale-[1.02] hover:shadow-xl transition-all duration-200"
+                  style={{ background: `linear-gradient(135deg,${svc.color},#DB2777)` }}>
+                  Start Free Consultation
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+                <Link href="#pricing"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] transition-all duration-200">
+                  See Pricing
+                </Link>
+              </div>
+            </div>
+            <div className="w-full max-w-md mx-auto lg:max-w-none">
+              <HeroVisual />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Description */}
-      {service?.descriptionId && (
-        <section className="py-16 px-4 bg-[var(--bg-surface)]">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">About This Service</h2>
-            <p className="text-[var(--text-secondary)] leading-relaxed text-lg">{service.descriptionId}</p>
+      {/* ── STATS ── */}
+      <section className="py-16 px-4" style={{ background: `rgba(${svc.rgb},0.06)`, borderTop: `1px solid rgba(${svc.rgb},0.15)`, borderBottom: `1px solid rgba(${svc.rgb},0.15)` }}>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 gap-8 text-center">
+            {svc.stats.map((s, i) => (
+              <div key={i}>
+                <div className="text-3xl sm:text-4xl font-extrabold mb-1" style={{ color: svc.color }}>{s.value}</div>
+                <div className="text-sm font-semibold text-[var(--text-primary)] mb-1">{s.label}</div>
+                <div className="text-xs text-[var(--text-muted)]">{s.desc}</div>
+              </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* Pricing */}
-      {service?.pricingTiers && service.pricingTiers.length > 0 && (
-        <section id="pricing" className="py-20 px-4 bg-[var(--bg-primary)]">
+      {/* ── FEATURES ── */}
+      <section className={`py-20 px-4 ${sectionBg(0)}`}>
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-12">
+            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>What You Get</div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Everything included.</h2>
+            <p className="text-[var(--text-secondary)] mt-3 max-w-xl">No hidden extras. Every deliverable your brand needs to grow, under one roof.</p>
+          </div>
+          <FeaturesSection features={svc.features} variant={svc.featuresVariant} color={svc.color} rgb={svc.rgb} />
+        </div>
+      </section>
+
+      {/* ── PROCESS ── */}
+      <section className={`py-20 px-4 ${sectionBg(1)}`}>
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-12 text-center">
+            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>How It Works</div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">From kickoff to results.</h2>
+            <p className="text-[var(--text-secondary)] mt-3">A clear, repeatable process so you always know what happens next.</p>
+          </div>
+          <ProcessSection steps={svc.process} variant={svc.processVariant} color={svc.color} rgb={svc.rgb} />
+        </div>
+      </section>
+
+      {/* ── PRICING (DB) ── */}
+      {dbService?.pricingTiers && dbService.pricingTiers.length > 0 && (
+        <section id="pricing" className={`py-20 px-4 ${sectionBg(0)}`}>
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-2">Pricing</h2>
-              <p className="text-[var(--text-secondary)]">Choose the plan that fits your business needs.</p>
+              <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>Pricing</div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Choose your plan.</h2>
+              <p className="text-[var(--text-secondary)] mt-3">Transparent, no-surprise pricing built around your goals.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {service.pricingTiers.map((tier) => (
+              {dbService.pricingTiers.map((tier) => (
                 <PricingTierCard
                   key={tier.id}
-                  tier={{
-                    ...tier,
-                    features: Array.isArray(tier.features) ? tier.features as string[] : [],
-                  }}
+                  tier={{ ...tier, features: Array.isArray(tier.features) ? tier.features as string[] : [] }}
                   serviceSlug={slug}
-                  color={serviceColor}
+                  color={svc.color}
                 />
               ))}
             </div>
-            {service.addOns.length > 0 && (
+            {dbService.addOns.length > 0 && (
               <div className="mt-8">
-                <h3 className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-4">Available Add-ons</h3>
+                <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-4">Available Add-ons</h3>
                 <div className="flex flex-wrap gap-2">
-                  {service.addOns.map((addon) => (
-                    <span
-                      key={addon.id}
-                      className="px-4 py-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] text-sm text-[var(--text-secondary)]"
-                    >
+                  {dbService.addOns.map((addon) => (
+                    <span key={addon.id} className="px-4 py-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] text-sm text-[var(--text-secondary)]">
                       {addon.name}
                       {addon.priceLabel && <span className="ml-2 text-xs text-[var(--text-muted)]">({addon.priceLabel})</span>}
                     </span>
@@ -199,63 +834,40 @@ export default async function ServiceDetailPage({ params }: Props) {
         </section>
       )}
 
-      {/* How We Work */}
-      <section className="py-20 px-4 bg-[var(--bg-surface)]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-2">How We Work</h2>
+      {/* ── FAQ ── */}
+      <section className={`py-20 px-4 ${sectionBg(dbService?.pricingTiers?.length ? 1 : 0)}`}>
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>FAQ</div>
+            <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Common questions.</h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {HOW_WE_WORK.map((step, i) => (
-              <div key={i} className="relative text-center">
-                <div
-                  className="h-14 w-14 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl font-extrabold text-white"
-                  style={{ background: `linear-gradient(135deg, ${serviceColor}, #DB2777)` }}
-                >
-                  {step.step}
-                </div>
-                <h3 className="font-bold text-[var(--text-primary)] mb-2">{step.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)]">{step.desc}</p>
-              </div>
-            ))}
-          </div>
+          <Accordion items={[...svc.faqs]} />
         </div>
       </section>
 
-      {/* FAQ */}
-      {faqs.length > 0 && (
-        <section className="py-20 px-4 bg-[var(--bg-primary)]">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-2">FAQ</h2>
-              <p className="text-[var(--text-secondary)]">Frequently asked questions about {serviceName}.</p>
-            </div>
-            <Accordion items={faqs} />
-          </div>
-        </section>
-      )}
-
-      {/* Cross-sell */}
+      {/* ── CROSS-SELL ── */}
       <section className="py-16 px-4 bg-[var(--bg-surface)]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Works Best With</h2>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-xl font-bold text-[var(--text-primary)]">Pairs well with</h2>
+            <p className="text-sm text-[var(--text-muted)] mt-2">Combine services for compounding results.</p>
+          </div>
           <div className="flex flex-wrap gap-4 justify-center">
-            {[
-              { slug: 'seo-content-marketing', name: 'SEO & Content Marketing', color: '#7C3AED' },
-              { slug: 'social-media-management', name: 'Social Media Management', color: '#DB2777' },
-              { slug: 'paid-advertising', name: 'Paid Advertising', color: '#D97706' },
-              { slug: 'creative-services', name: 'Creative Services', color: '#F59E0B' },
-              { slug: 'website-landing-page', name: 'Website & Landing Page', color: '#A78BFA' },
-            ].filter((s) => s.slug !== slug).slice(0, 2).map((svc) => (
-              <Link
-                key={svc.slug}
-                href={`/services/${svc.slug}`}
-                className="flex items-center gap-3 px-5 py-3 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] hover:border-[var(--border-hover)] transition-all text-sm font-medium text-[var(--text-primary)]"
-              >
-                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: svc.color }} />
-                {svc.name}
-              </Link>
-            ))}
+            {svc.crossSells.map((cs) => {
+              const meta = SERVICE_META[cs]
+              if (!meta) return null
+              return (
+                <Link key={cs} href={`/services/${cs}`}
+                  className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-primary)] hover:border-[var(--border-hover)] hover:bg-[var(--bg-elevated)] transition-all text-sm font-semibold text-[var(--text-primary)] group">
+                  <span className="h-2.5 w-2.5 rounded-full flex-shrink-0 group-hover:scale-125 transition-transform"
+                    style={{ backgroundColor: meta.color }} />
+                  {meta.name}
+                  <svg className="h-3.5 w-3.5 text-[var(--text-muted)] group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
