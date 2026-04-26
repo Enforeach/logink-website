@@ -68,7 +68,7 @@ export default async function AdminDashboardPage() {
         <div className="flex flex-wrap gap-3">
           {[
             { href: '/admin/posts/new', label: '+ New Post' },
-            { href: '/admin/case-studies', label: '+ New Case Study' },
+            { href: '/admin/case-studies/new', label: '+ New Case Study' },
             { href: '/admin/submissions', label: 'View Submissions' },
             { href: '/admin/media', label: 'Media Library' },
           ].map((action) => (

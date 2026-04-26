@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { DataTable } from '@/components/ui/DataTable'
 import { Badge } from '@/components/ui/Badge'
 import { formatDate } from '@/lib/utils'
@@ -61,6 +62,15 @@ export function SubmissionsTable({ submissions }: { submissions: Submission[] })
           header: 'Date',
           render: (row) => formatDate(new Date(row.createdAt)),
           className: 'hidden md:table-cell',
+        },
+        {
+          key: 'actions',
+          header: '',
+          render: (row) => (
+            <Link href={`/admin/submissions/${row.id}`} className="text-brand-violet hover:text-brand-pink text-sm font-medium transition-colors">
+              View
+            </Link>
+          ),
         },
       ]}
       emptyMessage="No submissions yet."
