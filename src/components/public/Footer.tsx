@@ -15,7 +15,6 @@ const COMPANY_LINKS = [
   { href: '/about', label: 'About Us' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },
-  { href: '/pricing', label: 'Pricing' },
   { href: '/contact', label: 'Contact' },
 ]
 
