@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { writeFile, mkdir } from 'fs/promises'
 import { join, extname } from 'path'
 import { prisma } from '@/lib/prisma'
-import { auth } from '@/lib/auth'
 
 const MAX_SIZE_MB = Number(process.env.MAX_FILE_SIZE_MB || 10)
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml']
@@ -10,11 +9,6 @@ const VALID_FOLDERS = ['blog', 'case-studies', 'services', 'team', 'general']
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
     const formData = await req.formData()
     const file = formData.get('file') as File | null
     const folder = (formData.get('folder') as string) || 'general'

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { auth } from '@/lib/auth'
 
 export async function GET() {
   try {
@@ -16,8 +15,6 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     const body = await req.json()
     const { title, slug, clientName, clientLogo, industry, challenge, strategy, results, thumbnail, status, metrics } = body
@@ -34,7 +31,7 @@ export async function POST(req: NextRequest) {
         results,
         thumbnail,
         status: status || 'DRAFT',
-        authorId: session.user.id,
+        authorId: (await prisma.user.findFirst({ select: { id: true } }))?.id ?? undefined,
         publishedAt: status === 'PUBLISHED' ? new Date() : null,
         metrics: metrics?.length
           ? { create: metrics.map((m: any, i: number) => ({ metricLabel: m.metricLabel, beforeValue: m.beforeValue, afterValue: m.afterValue, sortOrder: i })) }
