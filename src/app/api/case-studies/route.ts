@@ -31,7 +31,12 @@ export async function POST(req: NextRequest) {
         results,
         thumbnail,
         status: status || 'DRAFT',
-        authorId: (await prisma.user.findFirst({ select: { id: true } }))?.id ?? undefined,
+        authorId: (await prisma.user.upsert({
+          where: { email: 'system@logink.id' },
+          update: {},
+          create: { name: 'System', email: 'system@logink.id', role: 'ADMIN' },
+          select: { id: true },
+        })).id,
         publishedAt: status === 'PUBLISHED' ? new Date() : null,
         metrics: metrics?.length
           ? { create: metrics.map((m: any, i: number) => ({ metricLabel: m.metricLabel, beforeValue: m.beforeValue, afterValue: m.afterValue, sortOrder: i })) }

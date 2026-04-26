@@ -1,11 +1,10 @@
+export const dynamic = 'force-dynamic'
+
 import Link from 'next/link'
-import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { formatDate } from '@/lib/utils'
 
 export default async function AdminDashboardPage() {
-  const session = await auth()
-
   let stats = { posts: 0, caseStudies: 0, submissions: 0, media: 0 }
   let recentActivity: {
     id: string
@@ -42,13 +41,10 @@ export default async function AdminDashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">
-          Welcome back, {session?.user?.name?.split(' ')[0] || 'Admin'} 👋
-        </h1>
+        <h1 className="text-2xl font-bold text-[var(--text-primary)]">Welcome back, Admin</h1>
         <p className="text-[var(--text-secondary)] mt-1">Here&apos;s what&apos;s happening with your website.</p>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {QUICK_STATS.map((stat) => (
           <Link
@@ -62,7 +58,6 @@ export default async function AdminDashboardPage() {
         ))}
       </div>
 
-      {/* Quick actions */}
       <div>
         <h2 className="text-lg font-bold text-[var(--text-primary)] mb-4">Quick Actions</h2>
         <div className="flex flex-wrap gap-3">
@@ -83,7 +78,6 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Recent Activity */}
       <div>
         <h2 className="text-lg font-bold text-[var(--text-primary)] mb-4">Recent Activity</h2>
         {recentActivity.length > 0 ? (

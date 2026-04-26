@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { prisma } from '@/lib/prisma'
 import { Button } from '@/components/ui/Button'
 import { PostsTable } from '@/components/admin/PostsTable'

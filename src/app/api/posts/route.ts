@@ -35,7 +35,12 @@ export async function POST(req: NextRequest) {
         metaTitle,
         metaDescription,
         status: status || 'DRAFT',
-        authorId: (await prisma.user.findFirst({ select: { id: true } }))?.id ?? 'system',
+        authorId: (await prisma.user.upsert({
+          where: { email: 'system@logink.id' },
+          update: {},
+          create: { name: 'System', email: 'system@logink.id', role: 'ADMIN' },
+          select: { id: true },
+        })).id,
         categoryId: categoryId || null,
         readingTime,
         publishedAt: status === 'PUBLISHED' ? new Date() : null,
