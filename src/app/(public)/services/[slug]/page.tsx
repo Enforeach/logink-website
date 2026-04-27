@@ -18,7 +18,7 @@ interface Props { params: Promise<{ slug: string }> }
 
 // ─── STATIC DATA ──────────────────────────────────────────────────────────────
 
-const SERVICES = {
+export const SERVICES = {
   'seo-content-marketing': {
     name: 'SEO & Content Marketing',
     tagline: 'Rank Higher. Reach Further. Convert Better.',
@@ -197,6 +197,214 @@ const SERVICES = {
     crossSells: ['seo-content-marketing', 'paid-advertising'],
   },
 } as const
+
+// ─── ID TRANSLATIONS ──────────────────────────────────────────────────────────
+
+const SERVICES_ID = {
+  'seo-content-marketing': {
+    tagline: 'Peringkat Lebih Tinggi. Jangkauan Lebih Luas. Konversi Lebih Baik.',
+    description: 'Kami membangun kehadiran pencarian organik yang terus bertumbuh dari bulan ke bulan. Dari strategi keyword hingga 150+ artikel per bulan, setiap konten dibuat untuk menangkap traffic berniat tinggi dan mengubahnya menjadi pendapatan.',
+    features: [
+      { icon: 'Crosshair', title: 'Riset Keyword & Strategi', desc: 'Analisis mendalam untuk menemukan kata kunci yang tepat-tepat diketik calon pelangganmu saat ini.' },
+      { icon: 'PenLine', title: 'Produksi Konten Panjang', desc: 'Hingga 150+ artikel SEO per bulan oleh penulis spesialis.' },
+      { icon: 'Wrench', title: 'Audit Technical SEO', desc: 'Perbaiki crawlability, kecepatan halaman, schema markup, dan Core Web Vitals.' },
+      { icon: 'BarChart3', title: 'Laporan Looker Studio', desc: 'Dashboard live untuk ranking, traffic, dan konversi — selalu aktif.' },
+      { icon: 'Link2', title: 'Arsitektur Internal Linking', desc: 'Link strategis antar halaman untuk meneruskan otoritas dan memandu alur pengguna.' },
+      { icon: 'MapPin', title: 'Local SEO', desc: 'Dominasi pencarian "dekat sini" dan Google Business map pack.' },
+    ],
+    process: [
+      { step: '01', title: 'Audit Keyword', desc: 'Pemetaan ranking saat ini, celah kompetitor, dan peluang terbaik.', duration: 'Minggu 1' },
+      { step: '02', title: 'Strategi Konten', desc: 'Peta topical cluster dan kalender editorial untuk funnelmu.', duration: 'Minggu 2' },
+      { step: '03', title: 'Perbaikan Teknis', desc: 'Engineer menyelesaikan crawl error, kecepatan, dan structured data.', duration: 'Minggu 2–3' },
+      { step: '04', title: 'Produksi Konten', desc: 'Penulis memproduksi dan menerbitkan artikel teroptimasi secara berkelanjutan.', duration: 'Berkelanjutan' },
+      { step: '05', title: 'Laporan & Iterasi', desc: 'Review strategi bulanan untuk memaksimalkan yang sudah berhasil.', duration: 'Bulanan' },
+    ],
+    stats: [
+      { value: '150+', label: 'Artikel / Bulan', desc: 'Kapasitas produksi maksimal' },
+      { value: '3–6 bln', label: 'Waktu Ranking', desc: 'Timeline rata-rata masuk halaman 1' },
+      { value: '2.5×', label: 'Peningkatan Traffic', desc: 'Rata-rata di klien setelah 6 bulan' },
+    ],
+    faqs: [
+      { question: 'Berapa lama untuk melihat hasil SEO?', answer: 'SEO biasanya butuh 3–6 bulan untuk menunjukkan hasil signifikan. Namun, peningkatan traffic biasanya mulai terlihat dalam 4–8 minggu pertama.' },
+      { question: 'Dalam bahasa apa artikel ditulis?', answer: 'Kami menulis dalam bahasa yang digunakan audiensmu — Indonesia, Inggris, atau keduanya — sepenuhnya dioptimasi untuk keywordmu.' },
+      { question: 'Bisakah kami memilih topik artikel?', answer: 'Tentu. Kami melakukan riset keyword dan mendiskusikan topik yang relevan bersamamu setiap bulan.' },
+      { question: 'Bagaimana progres dilaporkan?', answer: 'Laporan Looker Studio bulanan mencakup ranking keyword, traffic, dan konversi — bisa diakses kapan saja.' },
+      { question: 'Apakah backlink building termasuk?', answer: 'Off-page SEO dan link building tersedia sebagai add-on mulai dari IDR 5 Juta/bulan.' },
+    ],
+  },
+  'social-media-management': {
+    tagline: 'Konten yang Terhubung. Kehadiran yang Mengonversi.',
+    description: 'Kami mengurus media sosialmu sepenuhnya — strategi, pembuatan konten, penjadwalan, dan community management di Instagram, TikTok, Facebook, dan LinkedIn.',
+    features: [
+      { icon: 'Smartphone', title: 'Manajemen Multi-Platform', desc: 'Instagram, TikTok, Facebook & LinkedIn dalam satu strategi terintegrasi.' },
+      { icon: 'Palette', title: 'Desain Visual Kustom', desc: 'Setiap postingan dibangun sesuai brand guide — tanpa template stok.' },
+      { icon: 'MessageCircle', title: 'Community Management', desc: 'Komentar dan DM direspons selama jam kerja.' },
+      { icon: 'CalendarDays', title: 'Kalender Konten', desc: 'Kalender bulanan direview dan disetujui sebelum tayang.' },
+      { icon: 'TrendingUp', title: 'Strategi Pertumbuhan', desc: 'Riset hashtag, kolaborasi, dan kampanye engagement.' },
+      { icon: 'BarChart3', title: 'Analitik Bulanan', desc: 'Jangkauan, impresi, pertumbuhan follower, dan engagement terpantau.' },
+    ],
+    process: [
+      { step: '01', title: 'Brand Onboarding', desc: 'Kami mempelajari tone, audiens, kompetitor, dan identitas visual kamu.', duration: 'Minggu 1' },
+      { step: '02', title: 'Strategi & Pilar', desc: 'Tentukan pilar konten, fokus platform, dan jadwal posting.', duration: 'Minggu 1–2' },
+      { step: '03', title: 'Produksi Konten', desc: 'Desain, copy, dan caption dibuat untuk satu bulan penuh.', duration: 'Minggu 2–3' },
+      { step: '04', title: 'Persetujuan & Penjadwalan', desc: 'Kamu review kalender dan setujui sebelum kami jadwalkan.', duration: 'Minggu 3–4' },
+    ],
+    stats: [
+      { value: '4', label: 'Platform', desc: 'Instagram, TikTok, Facebook, LinkedIn' },
+      { value: '30+', label: 'Postingan / Bulan', desc: 'Kehadiran konsisten, tanpa hari kosong' },
+      { value: '100%', label: 'Konten Orisinal', desc: 'Dibuat khusus untuk brand kamu' },
+    ],
+    faqs: [
+      { question: 'Platform mana yang kamu kelola?', answer: 'Instagram, TikTok, Facebook, dan LinkedIn. Kami bisa fokus ke satu atau beberapa sesuai audiensmu.' },
+      { question: 'Apakah community management termasuk?', answer: 'Ya — respons komentar dan DM selama jam kerja termasuk dalam semua paket.' },
+      { question: 'Siapa yang membuat konten visual?', answer: 'Tim kreatif kami mendesain semua sesuai brand guideline. Kamu tinggal menyetujui sebelum dipublish.' },
+      { question: 'Berapa banyak postingan per bulan?', answer: 'Frekuensi posting disesuaikan dengan budget dan tujuanmu, didiskusikan saat onboarding.' },
+    ],
+  },
+  'paid-advertising': {
+    tagline: 'Setiap Rupiah yang Diinvestasikan. Imbal Hasil Maksimal.',
+    description: 'Kampanye berbasis data di Google, Meta, TikTok, dan platform Marketplace. Kami menarget audiens yang tepat di momen yang tepat — dan terus mengoptimasi hingga ROAS mencapai 2–4×.',
+    features: [
+      { icon: 'Search', title: 'Google Ads (Search + Display)', desc: 'Tangkap pembeli berniat tinggi saat mereka sedang mencari.' },
+      { icon: 'Megaphone', title: 'Meta Ads', desc: 'Interests, lookalike, dan retargeting di Facebook & Instagram.' },
+      { icon: 'Music', title: 'TikTok Ads', desc: 'Iklan video format native yang dirancang untuk konversi.' },
+      { icon: 'ShoppingCart', title: 'Marketplace Ads', desc: 'Tokopedia, Shopee, dan Lazada untuk brand e-commerce.' },
+      { icon: 'Crosshair', title: 'Strategi Full-Funnel', desc: 'TOFU, MOFU, BOFU — semua tahapan perjalanan pelanggan tercakup.' },
+      { icon: 'BarChart3', title: 'Laporan Mingguan', desc: 'ROAS, CPC, CTR dipantau mingguan dengan catatan optimasi.' },
+    ],
+    process: [
+      { step: '01', title: 'Audit Akun', desc: 'Review menyeluruh akun yang ada, pengeluaran tidak efisien, dan data audiens.', duration: 'Minggu 1' },
+      { step: '02', title: 'Pemetaan Funnel', desc: 'Tujuan kampanye ditentukan di setiap tahap — dari awareness hingga konversi.', duration: 'Minggu 1' },
+      { step: '03', title: 'Produksi Kreatif', desc: 'Ad copy dan visual dibuat untuk setiap platform dan segmen.', duration: 'Minggu 1–2' },
+      { step: '04', title: 'Peluncuran Kampanye', desc: 'Live dengan budget terkontrol untuk pengumpulan data awal.', duration: 'Minggu 2' },
+      { step: '05', title: 'Siklus Optimasi', desc: 'Penyesuaian bid mingguan, pemangkasan audiens, dan pembaruan kreatif.', duration: 'Mingguan' },
+    ],
+    stats: [
+      { value: '2–4×', label: 'Rata-rata ROAS', desc: 'Return on ad spend di seluruh klien' },
+      { value: '−35%', label: 'Penurunan CPA Rata-rata', desc: 'Setelah 90 hari pertama optimasi' },
+      { value: '5', label: 'Platform Iklan', desc: 'Google, Meta, TikTok, Tokopedia, Shopee' },
+    ],
+    faqs: [
+      { question: 'Platform iklan mana yang kamu kelola?', answer: 'Google Ads (Search, Display, Shopping), Meta Ads (Facebook & Instagram), TikTok Ads, dan Marketplace Ads.' },
+      { question: 'Berapa budget iklan minimum?', answer: 'Budget iklan terpisah dari fee kami. Kami rekomendasikan minimal IDR 3–5 Juta/bulan untuk hasil yang berarti.' },
+      { question: 'Apa itu ROAS dan bagaimana mengukurnya?', answer: 'ROAS adalah pendapatan yang dihasilkan per rupiah yang diinvestasikan dalam iklan. Kami melacaknya melalui GA4 dan laporan native setiap platform.' },
+      { question: 'Apakah saya memiliki akses ke akun iklan sendiri?', answer: 'Ya, 100%. Kami mengelola di dalam akunmu sendiri — akses penuh tetap ada di tanganmu setiap saat.' },
+      { question: 'Berapa lama hingga iklan live?', answer: 'Biasanya 1–2 minggu dari kickoff, termasuk audit, strategi, dan produksi kreatif.' },
+    ],
+  },
+  'creative-services': {
+    tagline: 'Visual yang Berani. Cerita yang Jelas. Brand yang Diingat.',
+    description: 'Dari identitas brand hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu — bukan dari template.',
+    features: [
+      { icon: 'Palette', title: 'Desain Identitas Brand', desc: 'Logo, palet warna, tipografi, dan brand guide.' },
+      { icon: 'Camera', title: 'Produksi Foto & Video', desc: 'Syuting dan post-production untuk konten produk, korporat, dan kampanye.' },
+      { icon: 'Film', title: 'Reels & Video Pendek', desc: 'Video vertikal untuk TikTok, Reels, dan Shorts — diedit untuk retensi.' },
+      { icon: 'Image', title: 'Grafis Media Sosial', desc: 'Feed post, stories, dan carousel — semua orisinal, semua sesuai brand.' },
+      { icon: 'FileText', title: 'Copywriting', desc: 'Headline, caption, ad copy, dan teks landing page yang mengonversi.' },
+      { icon: 'Monitor', title: 'Materi Marketing', desc: 'Brosur, deck, banner, dan materi event.' },
+    ],
+    process: [
+      { step: '01', title: 'Brief Kreatif', desc: 'Selaraskan tujuan, audiens, tone, dan deliverable.', duration: 'Hari 1–2' },
+      { step: '02', title: 'Konsep & Moodboard', desc: 'Konsep awal dan arahan dipresentasikan untuk persetujuanmu.', duration: 'Hari 3–5' },
+      { step: '03', title: 'Produksi', desc: 'Eksekusi penuh konsep yang disetujui — syuting, desain, atau animasi.', duration: 'Minggu 1–2' },
+      { step: '04', title: 'Review & Revisi', desc: '2 putaran revisi, turnaround cepat.', duration: 'Hari 1–3' },
+      { step: '05', title: 'Pengiriman Final', desc: 'Semua format dikirimkan — web, print, sosial — siap deploy.', duration: 'Hari 1' },
+    ],
+    stats: [
+      { value: '500+', label: 'Aset / Bulan', desc: 'Total produksi di seluruh klien' },
+      { value: '2', label: 'Putaran Revisi', desc: 'Termasuk di setiap deliverable' },
+      { value: '3–5 hr', label: 'Turnaround Rata-rata', desc: 'Untuk deliverable grafis standar' },
+    ],
+    faqs: [
+      { question: 'Format apa saja yang bisa diproduksi?', answer: 'Postingan sosial (feed, story, reels), banner iklan, video (1:1, 9:16, 16:9), infografis, teks landing page, dan lainnya.' },
+      { question: 'Berapa lama proses produksi?', answer: 'Desain grafis: 3–5 hari kerja. Video dengan syuting: 1–2 minggu tergantung kompleksitas.' },
+      { question: 'Apakah revisi termasuk?', answer: 'Ya — 2 putaran per deliverable. Revisi tambahan tersedia dengan biaya terpisah.' },
+      { question: 'Apakah syuting di luar Jakarta bisa?', answer: 'Tim kami mencakup Jakarta dan sekitarnya. Syuting luar kota tersedia dengan biaya perjalanan tambahan.' },
+    ],
+  },
+  'website-landing-page': {
+    tagline: 'Ubah Pengunjung Menjadi Pelanggan. Dibangun untuk Performa.',
+    description: 'Kami merancang dan membangun website serta landing page berperforma tinggi — cepat, mobile-first, dan disiapkan untuk konversi. Dari company profile hingga toko e-commerce lengkap.',
+    features: [
+      { icon: 'Zap', title: 'Performa Terdepan', desc: 'Core Web Vitals dioptimasi — loading cepat, interaksi mulus, tanpa layout shift.' },
+      { icon: 'Smartphone', title: 'Responsif Mobile-First', desc: '100% responsif di semua perangkat, dibangun mobile-first dari awal.' },
+      { icon: 'Search', title: 'Arsitektur Siap SEO', desc: 'URL bersih, meta tag, schema markup, dan sitemap tersedia saat launch.' },
+      { icon: 'ShoppingCart', title: 'Integrasi E-Commerce', desc: 'Shopify, WooCommerce, atau cart kustom dengan checkout yang terintegrasi penuh.' },
+      { icon: 'Plug', title: 'Setup CRM & Analitik', desc: 'GA4, Meta Pixel, chat WhatsApp, dan CRM terpasang sejak hari pertama.' },
+      { icon: 'ShieldCheck', title: 'SSL & Keamanan', desc: 'HTTPS, backup rutin, dan paket maintenance tersedia.' },
+    ],
+    process: [
+      { step: '01', title: 'Discovery & Scope', desc: 'Tujuan, sitemap, referensi, dan platform dikonfirmasi.', duration: '2–3 hari' },
+      { step: '02', title: 'Wireframe & Desain', desc: 'Prototipe Figma lengkap — desktop dan mobile — untuk persetujuanmu.', duration: '5–7 hari' },
+      { step: '03', title: 'Development', desc: 'Kode bersih dan cepat dengan semua integrasi dan CMS terkonfigurasi.', duration: '7–21 hari' },
+      { step: '04', title: 'QA & Testing', desc: 'Pengujian lintas browser, audit kecepatan, dan validasi form.', duration: '2–3 hari' },
+      { step: '05', title: 'Launch & Handover', desc: 'Go live, sesi pelatihan, dan dokumentasi diserahkan.', duration: '1 hari' },
+    ],
+    stats: [
+      { value: '<2 dtk', label: 'Target Waktu Load', desc: 'Standar performa terdepan' },
+      { value: '100%', label: 'Responsif Mobile', desc: 'Setiap proyek, semua perangkat' },
+      { value: '1–8 mggu', label: 'Waktu hingga Launch', desc: 'Dari landing page hingga e-commerce penuh' },
+    ],
+    faqs: [
+      { question: 'Berapa lama membangun website?', answer: 'Landing page: 1–2 minggu. Company profile: 3–4 minggu. E-commerce: 4–8 minggu.' },
+      { question: 'Platform apa yang digunakan?', answer: 'WordPress, Next.js kustom, Shopify, atau WooCommerce — tergantung kebutuhanmu.' },
+      { question: 'Apakah hosting dan domain termasuk?', answer: 'Tidak termasuk, tetapi kami membantu setup dan merekomendasikan provider yang tepat.' },
+      { question: 'Apakah website responsif mobile?', answer: 'Ya — 100% mobile-first dan sepenuhnya responsif, di setiap proyek.' },
+      { question: 'Apakah pelatihan termasuk?', answer: 'Ya — sesi pelatihan dan dokumentasi untuk tim kamu setelah launch.' },
+    ],
+  },
+}
+
+// ─── UI COPY ──────────────────────────────────────────────────────────────────
+
+const UI_COPY = {
+  id: {
+    badge: 'Layanan Digital Marketing',
+    ctaPrimary: 'Mulai Konsultasi Gratis',
+    ctaSecondary: 'Lihat Harga',
+    featuresLabel: 'Apa yang Kamu Dapat',
+    featuresHeadline: 'Semua sudah termasuk.',
+    featuresDesc: 'Tidak ada biaya tersembunyi. Semua yang dibutuhkan brand kamu untuk berkembang, dalam satu atap.',
+    processLabel: 'Cara Kerjanya',
+    processHeadline: 'Dari kickoff hingga hasil.',
+    processDesc: 'Proses yang jelas dan terstruktur agar kamu selalu tahu langkah selanjutnya.',
+    pricingLabel: 'Harga',
+    pricingHeadline: 'Pilih paket yang sesuai.',
+    pricingDesc: 'Harga transparan, tanpa kejutan, disesuaikan dengan tujuanmu.',
+    faqLabel: 'FAQ',
+    faqHeadline: 'Pertanyaan yang sering ditanyakan.',
+    addOnsLabel: 'Add-on Tersedia',
+    crossSellHeadline: 'Cocok dikombinasikan dengan',
+    crossSellDesc: 'Gabungkan layanan untuk hasil yang saling menguatkan.',
+    breadcrumbHome: 'Beranda',
+    breadcrumbServices: 'Layanan',
+    contactPath: '/contact',
+    servicesBasePath: '/services',
+  },
+  en: {
+    badge: 'Digital Marketing Service',
+    ctaPrimary: 'Start Free Consultation',
+    ctaSecondary: 'See Pricing',
+    featuresLabel: 'What You Get',
+    featuresHeadline: 'Everything included.',
+    featuresDesc: 'No hidden extras. Every deliverable your brand needs to grow, under one roof.',
+    processLabel: 'How It Works',
+    processHeadline: 'From kickoff to results.',
+    processDesc: 'A clear, repeatable process so you always know what happens next.',
+    pricingLabel: 'Pricing',
+    pricingHeadline: 'Choose your plan.',
+    pricingDesc: 'Transparent, no-surprise pricing built around your goals.',
+    faqLabel: 'FAQ',
+    faqHeadline: 'Common questions.',
+    addOnsLabel: 'Available Add-ons',
+    crossSellHeadline: 'Pairs well with',
+    crossSellDesc: 'Combine services for compounding results.',
+    breadcrumbHome: 'Home',
+    breadcrumbServices: 'Services',
+    contactPath: '/en/contact',
+    servicesBasePath: '/en/services',
+  },
+}
 
 const SERVICE_META: Record<string, { name: string; color: string }> = {
   'seo-content-marketing': { name: 'SEO & Content Marketing', color: '#7C3AED' },
@@ -670,27 +878,29 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const svc = SERVICES[slug as SvcKey]
+  const svcId = SERVICES_ID[slug as SvcKey]
   if (!svc) return {}
   return buildMetadata({
     title: `${svc.name} — Logink Digital Marketing Jakarta`,
-    description: svc.description.slice(0, 155),
+    description: (svcId?.description ?? svc.description).slice(0, 155),
     path: `/services/${slug}`,
   })
 }
 
-// ─── PAGE ─────────────────────────────────────────────────────────────────────
+// ─── SHARED CONTENT COMPONENT ─────────────────────────────────────────────────
 
-export default async function ServiceDetailPage({ params }: Props) {
-  const { slug } = await params
+export async function ServiceDetailContent({ slug, locale = 'id' }: { slug: string; locale?: 'id' | 'en' }) {
   const svc = SERVICES[slug as SvcKey]
   if (!svc) notFound()
 
+  const svcCopy = locale === 'id' ? SERVICES_ID[slug as SvcKey] : svc
+  const ui = UI_COPY[locale]
   const dbService = await getDbService(slug)
 
   const breadcrumbs = [
-    { name: 'Home', url: 'https://logink.id' },
-    { name: 'Services', url: 'https://logink.id/services' },
-    { name: svc.name, url: `https://logink.id/services/${slug}` },
+    { name: ui.breadcrumbHome, url: 'https://logink.id' },
+    { name: ui.breadcrumbServices, url: `https://logink.id${ui.servicesBasePath}` },
+    { name: svc.name, url: `https://logink.id${ui.servicesBasePath}/${slug}` },
   ]
 
   const HeroVisual =
@@ -708,7 +918,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{
         __html: JSON.stringify([
           breadcrumbSchema(breadcrumbs),
-          ...(svc.faqs.length ? [faqSchema([...svc.faqs])] : []),
+          ...(svcCopy.faqs.length ? [faqSchema([...svcCopy.faqs])] : []),
         ]),
       }} />
 
@@ -725,9 +935,9 @@ export default async function ServiceDetailPage({ params }: Props) {
 
         <div className="relative max-w-6xl mx-auto w-full z-10">
           <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-10">
-            <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Home</Link>
+            <Link href={locale === 'en' ? '/en' : '/'} className="hover:text-[var(--text-primary)] transition-colors">{ui.breadcrumbHome}</Link>
             <span>/</span>
-            <Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Services</Link>
+            <Link href={ui.servicesBasePath} className="hover:text-[var(--text-primary)] transition-colors">{ui.breadcrumbServices}</Link>
             <span>/</span>
             <span className="text-[var(--text-secondary)]">{svc.name}</span>
           </nav>
@@ -737,29 +947,29 @@ export default async function ServiceDetailPage({ params }: Props) {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold mb-6"
                 style={{ borderColor: `rgba(${svc.rgb},0.3)`, background: `rgba(${svc.rgb},0.08)`, color: svc.color }}>
                 <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: svc.color }} />
-                Digital Marketing Service
+                {ui.badge}
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] mb-4 leading-tight tracking-tight">
-                {svc.tagline.split('. ').map((part, i, arr) => (
+                {svcCopy.tagline.split('. ').map((part, i, arr) => (
                   <span key={i}>
                     {i === 0 ? part : <><br /><span style={{ color: svc.color }}>{part}</span></>}
                     {i < arr.length - 1 ? '.' : ''}
                   </span>
                 ))}
               </h1>
-              <p className="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed max-w-lg">{svc.description}</p>
+              <p className="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed max-w-lg">{svcCopy.description}</p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/contact"
+                <Link href={ui.contactPath}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm hover:scale-[1.02] hover:shadow-xl transition-all duration-200"
                   style={{ background: `linear-gradient(135deg,${svc.color},#DB2777)` }}>
-                  Start Free Consultation
+                  {ui.ctaPrimary}
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link href="#pricing"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] transition-all duration-200">
-                  See Pricing
+                  {ui.ctaSecondary}
                 </Link>
               </div>
             </div>
@@ -774,7 +984,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       <section className="py-16 px-4" style={{ background: `rgba(${svc.rgb},0.06)`, borderTop: `1px solid rgba(${svc.rgb},0.15)`, borderBottom: `1px solid rgba(${svc.rgb},0.15)` }}>
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-3 gap-8 text-center">
-            {svc.stats.map((s, i) => (
+            {svcCopy.stats.map((s, i) => (
               <div key={i}>
                 <div className="text-3xl sm:text-4xl font-extrabold mb-1" style={{ color: svc.color }}>{s.value}</div>
                 <div className="text-sm font-semibold text-[var(--text-primary)] mb-1">{s.label}</div>
@@ -789,11 +999,11 @@ export default async function ServiceDetailPage({ params }: Props) {
       <section className={`py-20 px-4 ${sectionBg(0)}`}>
         <div className="max-w-5xl mx-auto">
           <div className="mb-12">
-            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>What You Get</div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Everything included.</h2>
-            <p className="text-[var(--text-secondary)] mt-3 max-w-xl">No hidden extras. Every deliverable your brand needs to grow, under one roof.</p>
+            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>{ui.featuresLabel}</div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{ui.featuresHeadline}</h2>
+            <p className="text-[var(--text-secondary)] mt-3 max-w-xl">{ui.featuresDesc}</p>
           </div>
-          <FeaturesSection features={svc.features} variant={svc.featuresVariant} color={svc.color} rgb={svc.rgb} />
+          <FeaturesSection features={svcCopy.features} variant={svc.featuresVariant} color={svc.color} rgb={svc.rgb} />
         </div>
       </section>
 
@@ -801,11 +1011,11 @@ export default async function ServiceDetailPage({ params }: Props) {
       <section className={`py-20 px-4 ${sectionBg(1)}`}>
         <div className="max-w-5xl mx-auto">
           <div className="mb-12 text-center">
-            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>How It Works</div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">From kickoff to results.</h2>
-            <p className="text-[var(--text-secondary)] mt-3">A clear, repeatable process so you always know what happens next.</p>
+            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>{ui.processLabel}</div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{ui.processHeadline}</h2>
+            <p className="text-[var(--text-secondary)] mt-3">{ui.processDesc}</p>
           </div>
-          <ProcessSection steps={svc.process} variant={svc.processVariant} color={svc.color} rgb={svc.rgb} />
+          <ProcessSection steps={svcCopy.process} variant={svc.processVariant} color={svc.color} rgb={svc.rgb} />
         </div>
       </section>
 
@@ -814,9 +1024,9 @@ export default async function ServiceDetailPage({ params }: Props) {
         <section id="pricing" className={`py-20 px-4 ${sectionBg(0)}`}>
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
-              <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>Pricing</div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Choose your plan.</h2>
-              <p className="text-[var(--text-secondary)] mt-3">Transparent, no-surprise pricing built around your goals.</p>
+              <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>{ui.pricingLabel}</div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{ui.pricingHeadline}</h2>
+              <p className="text-[var(--text-secondary)] mt-3">{ui.pricingDesc}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {dbService.pricingTiers.map((tier) => (
@@ -830,7 +1040,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
             {dbService.addOns.length > 0 && (
               <div className="mt-8">
-                <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-4">Available Add-ons</h3>
+                <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-4">{ui.addOnsLabel}</h3>
                 <div className="flex flex-wrap gap-2">
                   {dbService.addOns.map((addon) => (
                     <span key={addon.id} className="px-4 py-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] text-sm text-[var(--text-secondary)]">
@@ -849,10 +1059,10 @@ export default async function ServiceDetailPage({ params }: Props) {
       <section className={`py-20 px-4 ${sectionBg(dbService?.pricingTiers?.length ? 1 : 0)}`}>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
-            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>FAQ</div>
-            <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Common questions.</h2>
+            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: svc.color }}>{ui.faqLabel}</div>
+            <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">{ui.faqHeadline}</h2>
           </div>
-          <Accordion items={[...svc.faqs]} />
+          <Accordion items={[...svcCopy.faqs]} />
         </div>
       </section>
 
@@ -860,15 +1070,15 @@ export default async function ServiceDetailPage({ params }: Props) {
       <section className="py-16 px-4 bg-[var(--bg-surface)]">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="text-xl font-bold text-[var(--text-primary)]">Pairs well with</h2>
-            <p className="text-sm text-[var(--text-muted)] mt-2">Combine services for compounding results.</p>
+            <h2 className="text-xl font-bold text-[var(--text-primary)]">{ui.crossSellHeadline}</h2>
+            <p className="text-sm text-[var(--text-muted)] mt-2">{ui.crossSellDesc}</p>
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
             {svc.crossSells.map((cs) => {
               const meta = SERVICE_META[cs]
               if (!meta) return null
               return (
-                <Link key={cs} href={`/services/${cs}`}
+                <Link key={cs} href={`${ui.servicesBasePath}/${cs}`}
                   className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-primary)] hover:border-[var(--border-hover)] hover:bg-[var(--bg-elevated)] transition-all text-sm font-semibold text-[var(--text-primary)] group">
                   <span className="h-2.5 w-2.5 rounded-full flex-shrink-0 group-hover:scale-125 transition-transform"
                     style={{ backgroundColor: meta.color }} />
@@ -883,7 +1093,14 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
       </section>
 
-      <CTASection />
+      <CTASection locale={locale} />
     </>
   )
+}
+
+// ─── PAGE ─────────────────────────────────────────────────────────────────────
+
+export default async function ServiceDetailPage({ params }: Props) {
+  const { slug } = await params
+  return <ServiceDetailContent slug={slug} locale="id" />
 }
