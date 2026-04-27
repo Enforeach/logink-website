@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { icons, LucideProps } from 'lucide-react'
-import { SOCIAL_CONTENT_PILLARS } from './data'
+import { SOCIAL_CONTENT_PILLARS, SOCIAL_CONTENT_PILLARS_EN } from './data'
 
 function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
   const Icon = icons[name as keyof typeof icons]
@@ -48,25 +48,32 @@ function ProgressBar() {
   )
 }
 
-export function SocialPillars() {
+const PILLARS_COPY = {
+  id: { eyebrow: 'Pendekatan Kami', heading: 'Setiap post punya tujuan.', sub: 'Strategi konten kami dibangun di atas tiga pilar yang menggerakkan followers dari awareness ke aksi nyata.' },
+  en: { eyebrow: 'Our Approach', heading: 'Every post has a purpose.', sub: 'Our content strategy is built on three pillars that move followers from awareness to real action.' },
+}
+
+export function SocialPillars({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.2 })
+  const pillars = locale === 'en' ? SOCIAL_CONTENT_PILLARS_EN : SOCIAL_CONTENT_PILLARS
+  const c = PILLARS_COPY[locale]
 
   return (
     <section className="py-20 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Pendekatan Kami</div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">{c.eyebrow}</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
-            Setiap post punya tujuan.
+            {c.heading}
           </h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            Strategi konten kami dibangun di atas tiga pilar yang menggerakkan followers dari awareness ke aksi nyata.
+            {c.sub}
           </p>
         </div>
 
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {SOCIAL_CONTENT_PILLARS.map((pillar, i) => (
+          {pillars.map((pillar, i) => (
             <motion.div
               key={pillar.name}
               initial={{ opacity: 0, scale: 0.95, y: 20 }}

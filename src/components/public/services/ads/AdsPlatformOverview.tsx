@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ADS_PLATFORMS } from './data'
+import { ADS_PLATFORMS, ADS_PLATFORMS_EN } from './data'
 
 type Platform = typeof ADS_PLATFORMS[number]
 
@@ -44,27 +44,46 @@ function PlatformIcon({ id, color }: { id: string; color: string }) {
   )
 }
 
-export function AdsPlatformOverview() {
+const PLATFORM_COPY = {
+  id: {
+    eyebrow: 'Tempat Iklanmu Berjalan',
+    heading: 'Lima platform. Satu strategi terpadu.',
+    sub: 'Kami tidak hanya jalankan iklan di satu platform dan berharap. Kami bangun kampanye lintas platform di mana Google menangkap intent, Meta membangun awareness, TikTok mendorong discovery, dan Marketplace mengkonversi pembeli.',
+    availableIn: 'Tersedia di',
+    seePricing: 'Lihat harga →',
+  },
+  en: {
+    eyebrow: 'Where Your Ads Run',
+    heading: 'Five platforms. One unified strategy.',
+    sub: "We don't just run ads on one platform and hope for the best. We build cross-platform campaigns where Google captures intent, Meta builds awareness, TikTok drives discovery, and Marketplaces convert buyers.",
+    availableIn: 'Available in',
+    seePricing: 'See pricing →',
+  },
+}
+
+export function AdsPlatformOverview({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const [active, setActive] = useState(0)
-  const platform = ADS_PLATFORMS[active]
+  const platforms = locale === 'en' ? ADS_PLATFORMS_EN : ADS_PLATFORMS
+  const platform = (platforms as typeof ADS_PLATFORMS)[active]
+  const c = PLATFORM_COPY[locale]
 
   return (
     <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-5xl mx-auto">
 
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Tempat Iklanmu Berjalan</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">{c.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Lima platform. Satu strategi terpadu.
+            {c.heading}
           </h2>
           <p className="text-[var(--text-secondary)] max-w-xl mx-auto text-sm leading-relaxed">
-            Kami tidak hanya jalankan iklan di satu platform dan berharap. Kami bangun kampanye lintas platform di mana Google menangkap intent, Meta membangun awareness, TikTok mendorong discovery, dan Marketplace mengkonversi pembeli.
+            {c.sub}
           </p>
         </div>
 
         {/* Tab bar */}
         <div className="flex gap-1 p-1 rounded-xl bg-white/5 border border-white/10 mb-8 overflow-x-auto">
-          {ADS_PLATFORMS.map((p, i) => (
+          {(platforms as typeof ADS_PLATFORMS).map((p, i) => (
             <button
               key={p.id}
               onClick={() => setActive(i)}
@@ -134,7 +153,7 @@ export function AdsPlatformOverview() {
               {/* Right — tier availability */}
               <div className="lg:col-span-2 flex flex-col justify-between gap-6">
                 <div className="rounded-xl border border-white/10 bg-white/3 p-5 space-y-3">
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Tersedia di</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">{c.availableIn}</p>
                   <div className="flex flex-wrap gap-2">
                     <TierBadge available={platform.tiers.entry} name="Entry" />
                     <TierBadge available={platform.tiers.growth} name="Growth" />
@@ -152,7 +171,7 @@ export function AdsPlatformOverview() {
                   className="text-center px-4 py-2.5 rounded-xl text-sm font-semibold border transition-all"
                   style={{ borderColor: `rgba(${platform.accentRgb},0.35)`, color: platform.accentColor }}
                 >
-                  Lihat harga →
+                  {c.seePricing}
                 </a>
               </div>
 

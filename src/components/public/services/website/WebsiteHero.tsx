@@ -41,7 +41,29 @@ function PageSpeedRing({ score }: { score: number }) {
   )
 }
 
-export function WebsiteHero() {
+const HERO_COPY = {
+  id: {
+    pills: ['Load time di bawah 2 detik', 'Responsif mobile-first', 'GA4 + pixel tracking termasuk'],
+    title1: 'Ubah Pengunjung Jadi Pelanggan.',
+    title2: 'Dibangun untuk Perform.',
+    desc: 'Kami desain dan bangun website serta landing page berperforma tinggi — cepat, mobile-first, dan dirancang untuk konversi. Dari landing page kampanye hingga toko e-commerce penuh, setiap site dibangun untuk load di bawah 2 detik, ranking di Google, dan mengubah traffic menjadi revenue.',
+    ctaPrimary: 'Mulai Konsultasi Gratis →',
+    ctaHref: '/contact?service=website-landing-page',
+    ctaSecondary: 'Lihat Harga',
+  },
+  en: {
+    pills: ['Load time under 2 seconds', 'Mobile-first responsive', 'GA4 + pixel tracking included'],
+    title1: 'Turn Visitors Into Customers.',
+    title2: 'Built to Perform.',
+    desc: 'We design and build high-performance websites and landing pages — fast, mobile-first, and engineered for conversion. From campaign landing pages to full e-commerce stores, every site is built to load in under 2 seconds, rank on Google, and turn traffic into revenue.',
+    ctaPrimary: 'Start Free Consultation →',
+    ctaHref: '/en/contact?service=website-landing-page',
+    ctaSecondary: 'See Pricing',
+  },
+}
+
+export function WebsiteHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const c = HERO_COPY[locale]
   const browserControls = useAnimation()
   const innerControls = useAnimation()
 
@@ -86,16 +108,16 @@ export function WebsiteHero() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] leading-tight mb-5">
-            Ubah Pengunjung Jadi Pelanggan.{' '}
-            <span className="gradient-text">Dibangun untuk Perform.</span>
+            {c.title1}{' '}
+            <span className="gradient-text">{c.title2}</span>
           </h1>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed mb-8 max-w-lg">
-            Kami desain dan bangun website serta landing page berperforma tinggi — cepat, mobile-first, dan dirancang untuk konversi. Dari landing page kampanye hingga toko e-commerce penuh, setiap site dibangun untuk load di bawah 2 detik, ranking di Google, dan mengubah traffic menjadi revenue.
+            {c.desc}
           </p>
 
           <div className="flex flex-wrap gap-3 mb-8">
-            {['Load time di bawah 2 detik', 'Responsif mobile-first', 'GA4 + pixel tracking termasuk'].map((pill) => (
+            {c.pills.map((pill) => (
               <span key={pill} className="inline-flex items-center gap-1.5 text-xs text-[#10B981] font-medium">
                 <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -107,16 +129,16 @@ export function WebsiteHero() {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/contact?service=website-landing-page"
+              href={c.ctaHref}
               className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white gradient-bg shadow-lg transition-transform hover:scale-105"
             >
-              Mulai Konsultasi Gratis →
+              {c.ctaPrimary}
             </Link>
             <a
               href="#pricing"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:border-white/40"
             >
-              Lihat Harga
+              {c.ctaSecondary}
             </a>
           </div>
         </motion.div>

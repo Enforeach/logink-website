@@ -102,17 +102,23 @@ const CATEGORIES = [
 
 const ITEMS = [...CATEGORIES, ...CATEGORIES]
 
-export function CreativeShowcase() {
+const SHOWCASE_COPY = {
+  id: { eyebrow: 'Karya Kami', heading: 'Apa yang kami buat.', portfolio: 'Lihat portfolio lengkap →', href: '/portfolio' },
+  en: { eyebrow: 'Our Work', heading: 'What we make.', portfolio: 'See full portfolio →', href: '/en/portfolio' },
+}
+
+export function CreativeShowcase({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const c = SHOWCASE_COPY[locale]
   return (
     <section className="py-20 overflow-hidden" style={{ background: '#0A0716' }}>
       <div className="max-w-6xl mx-auto px-4 mb-10">
-        <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Karya Kami</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">{c.eyebrow}</p>
         <div className="flex items-end justify-between">
           <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">
-            Apa yang kami buat.
+            {c.heading}
           </h2>
-          <Link href="/portfolio" className="text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors">
-            Lihat portfolio lengkap →
+          <Link href={c.href} className="text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors">
+            {c.portfolio}
           </Link>
         </div>
       </div>

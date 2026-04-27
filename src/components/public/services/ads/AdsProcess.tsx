@@ -2,11 +2,18 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ADS_PROCESS } from './data'
+import { ADS_PROCESS, ADS_PROCESS_EN } from './data'
 
-export function AdsProcess() {
+const PROCESS_COPY = {
+  id: { eyebrow: 'Cara Kerjanya', heading: 'Dari kickoff hingga hasil nyata.', sub: 'Proses yang jelas dan berulang supaya kamu selalu tahu apa yang terjadi berikutnya.', ongoing: 'Berkelanjutan' },
+  en: { eyebrow: 'How It Works', heading: 'From kickoff to real results.', sub: 'A clear, repeatable process so you always know what happens next.', ongoing: 'Ongoing' },
+}
+
+export function AdsProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const steps = locale === 'en' ? ADS_PROCESS_EN : ADS_PROCESS
+  const c = PROCESS_COPY[locale]
 
   return (
     <section
@@ -17,17 +24,17 @@ export function AdsProcess() {
       <div className="max-w-4xl mx-auto">
 
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Cara Kerjanya</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">{c.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Dari kickoff hingga hasil nyata.
+            {c.heading}
           </h2>
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-sm">
-            Proses yang jelas dan berulang supaya kamu selalu tahu apa yang terjadi berikutnya.
+            {c.sub}
           </p>
         </div>
 
         <div className="space-y-4">
-          {ADS_PROCESS.map((step, i) => (
+          {(steps as typeof ADS_PROCESS).map((step, i) => (
             <motion.div
               key={step.step}
               initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
@@ -70,7 +77,7 @@ export function AdsProcess() {
                 {'isOngoing' in step && step.isOngoing && (
                   <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full"
                     style={{ background: 'rgba(16,185,129,0.15)', color: '#10B981', border: '1px solid rgba(16,185,129,0.3)' }}>
-                    Berkelanjutan
+                    {c.ongoing}
                   </span>
                 )}
               </div>

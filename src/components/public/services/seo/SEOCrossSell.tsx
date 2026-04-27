@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
-const CROSS_SELLS = [
+const CROSS_SELLS_ID = [
   {
     slug: 'paid-advertising',
     name: 'Paid Advertising',
@@ -23,23 +23,49 @@ const CROSS_SELLS = [
   },
 ]
 
-export function SEOCrossSell() {
+const CROSS_SELLS_EN = [
+  {
+    slug: 'paid-advertising',
+    name: 'Paid Advertising',
+    color: '#D97706',
+    description:
+      'Retarget your organic visitors with precision ads. Users who found you via search but didn\'t convert get a second touchpoint on Meta and Google Display.',
+    startingFrom: 'Starting from Rp 6 Juta/mo',
+  },
+  {
+    slug: 'website-landing-page',
+    name: 'Website & Landing Page',
+    color: '#A78BFA',
+    description:
+      'A fast, conversion-optimized website is the foundation of SEO. If your site is slow or poorly structured, no amount of content will save your rankings.',
+    startingFrom: 'Starting from Rp 10 Juta',
+  },
+]
+
+const CROSSSELL_COPY = {
+  id: { eyebrow: 'Perkuat Hasilmu', heading: 'Cocok dikombinasikan dengan', sub: 'SEO membawa trafficnya — layanan ini mengubahnya jadi revenue.', learnMore: 'Selengkapnya', basePath: '/services' },
+  en: { eyebrow: 'Amplify Your Results', heading: 'Pairs well with', sub: 'SEO brings the traffic — these services turn it into revenue.', learnMore: 'Learn more', basePath: '/en/services' },
+}
+
+export function SEOCrossSell({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const items = locale === 'en' ? CROSS_SELLS_EN : CROSS_SELLS_ID
+  const c = CROSSSELL_COPY[locale]
 
   return (
     <section className="py-16 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-4xl mx-auto" ref={ref}>
         <div className="mb-8">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-2">Perkuat Hasilmu</div>
-          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">Cocok dikombinasikan dengan</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-2">{c.eyebrow}</div>
+          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
           <p className="text-sm text-[var(--text-secondary)] mt-2">
-            SEO membawa trafficnya — layanan ini mengubahnya jadi revenue.
+            {c.sub}
           </p>
         </div>
 
         <div className="space-y-4">
-          {CROSS_SELLS.map((svc, i) => (
+          {items.map((svc, i) => (
             <motion.div
               key={svc.slug}
               initial={{ opacity: 0, x: -24 }}
@@ -57,11 +83,11 @@ export function SEOCrossSell() {
                 <span className="text-xs font-semibold" style={{ color: svc.color }}>{svc.startingFrom}</span>
               </div>
               <Link
-                href={`/services/${svc.slug}`}
+                href={`${c.basePath}/${svc.slug}`}
                 className="flex-shrink-0 text-sm font-semibold transition-colors hover:opacity-80 flex items-center gap-1"
                 style={{ color: svc.color }}
               >
-                Learn more
+                {c.learnMore}
                 <svg className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

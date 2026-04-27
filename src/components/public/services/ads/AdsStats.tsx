@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react'
 import { useInView } from 'framer-motion'
-import { ADS_STATS } from './data'
+import { ADS_STATS, ADS_STATS_EN } from './data'
 
 function StatCard({ stat, inView }: { stat: typeof ADS_STATS[number]; inView: boolean }) {
   return (
@@ -14,9 +14,10 @@ function StatCard({ stat, inView }: { stat: typeof ADS_STATS[number]; inView: bo
   )
 }
 
-export function AdsStats() {
+export function AdsStats({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const stats = locale === 'en' ? ADS_STATS_EN : ADS_STATS
 
   return (
     <section
@@ -25,7 +26,7 @@ export function AdsStats() {
       style={{ background: 'linear-gradient(180deg, #0A0716 0%, #0D091C 50%, #0A0716 100%)' }}
     >
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
-        {ADS_STATS.map((stat) => (
+        {(stats as typeof ADS_STATS).map((stat) => (
           <StatCard key={stat.label} stat={stat} inView={inView} />
         ))}
       </div>

@@ -2,10 +2,17 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CREATIVE_FAQS } from './data'
+import { CREATIVE_FAQS, CREATIVE_FAQS_EN } from './data'
 
-export function CreativeFAQ() {
+const FAQ_COPY = {
+  id: { heading: 'Pertanyaan yang sering ditanyakan.' },
+  en: { heading: 'Frequently asked questions.' },
+}
+
+export function CreativeFAQ({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const [open, setOpen] = useState<number | null>(null)
+  const faqs = locale === 'en' ? CREATIVE_FAQS_EN : CREATIVE_FAQS
+  const c = FAQ_COPY[locale]
 
   return (
     <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
@@ -13,12 +20,12 @@ export function CreativeFAQ() {
         <div className="text-center mb-12">
           <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">FAQ</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
-            Pertanyaan yang sering ditanyakan.
+            {c.heading}
           </h2>
         </div>
 
         <div className="space-y-2">
-          {CREATIVE_FAQS.map((faq, i) => (
+          {(faqs as typeof CREATIVE_FAQS).map((faq, i) => (
             <div key={i} className="rounded-xl border border-white/10 bg-[var(--bg-surface)] overflow-hidden">
               <button
                 onClick={() => setOpen(open === i ? null : i)}

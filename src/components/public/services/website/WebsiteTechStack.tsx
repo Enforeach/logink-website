@@ -4,20 +4,34 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { WEBSITE_TECH_STACK } from './data'
 
-export function WebsiteTechStack() {
+const TECHSTACK_COPY = {
+  id: {
+    eyebrow: 'Tech Stack Kami',
+    heading: 'Kami pilih tool terbaik untuk proyekmu.',
+    sub: 'Tidak terpaku pada satu platform — kami rekomendasikan berdasarkan skala, budget, dan tujuan jangka panjangmu.',
+  },
+  en: {
+    eyebrow: 'Our Tech Stack',
+    heading: 'We choose the best tool for your project.',
+    sub: "Not locked to one platform — we recommend based on scale, budget, and your long-term goals.",
+  },
+}
+
+export function WebsiteTechStack({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const c = TECHSTACK_COPY[locale]
 
   return (
     <section ref={ref} className="py-24 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Tech Stack Kami</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">{c.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-3">
-            Kami pilih tool terbaik untuk proyekmu.
+            {c.heading}
           </h2>
           <p className="text-sm text-[var(--text-muted)] max-w-xl mx-auto leading-relaxed">
-            Tidak terpaku pada satu platform — kami rekomendasikan berdasarkan skala, budget, dan tujuan jangka panjangmu.
+            {c.sub}
           </p>
         </div>
 

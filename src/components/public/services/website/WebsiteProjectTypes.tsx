@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { WEBSITE_PROJECT_TYPES } from './data'
+import { WEBSITE_PROJECT_TYPES, WEBSITE_PROJECT_TYPES_EN } from './data'
 
 function LandingPageMockup({ accent }: { accent: string }) {
   return (
@@ -86,18 +86,45 @@ const MOCKUP_MAP: Record<string, (accent: string) => React.ReactElement> = {
   'e-commerce': (a) => <EcommerceMockup accent={a} />,
 }
 
-export function WebsiteProjectTypes() {
+const PROJECTTYPES_COPY = {
+  id: {
+    eyebrow: 'Apa yang Kami Bangun',
+    heading1: 'Tiga tipe proyek web.',
+    heading2: 'Satu standar kualitas.',
+    pricingLabel: 'All projects',
+    pricingNote: 'Scope dan harga final diberikan setelah Discovery call gratis.',
+    bestFor: 'Cocok untuk:',
+    ctaLabel: 'Dapatkan Penawaran Kustom →',
+    ctaHref: '/contact?service=website-landing-page',
+    ctaNote: 'Ceritakan proyekmu dan kami akan kirim scope serta proposal detail dalam 48 jam.',
+  },
+  en: {
+    eyebrow: 'What We Build',
+    heading1: 'Three web project types.',
+    heading2: 'One quality standard.',
+    pricingLabel: 'All projects',
+    pricingNote: 'Final scope and pricing provided after a free Discovery call.',
+    bestFor: 'Best for:',
+    ctaLabel: 'Get a Custom Quote →',
+    ctaHref: '/en/contact?service=website-landing-page',
+    ctaNote: "Tell us about your project and we'll send a detailed scope and proposal within 48 hours.",
+  },
+}
+
+export function WebsiteProjectTypes({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const projectTypes = locale === 'en' ? WEBSITE_PROJECT_TYPES_EN : WEBSITE_PROJECT_TYPES
+  const c = PROJECTTYPES_COPY[locale]
 
   return (
     <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-4">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Apa yang Kami Bangun</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">{c.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Tiga tipe proyek web.{' '}
-            <span className="gradient-text">Satu standar kualitas.</span>
+            {c.heading1}{' '}
+            <span className="gradient-text">{c.heading2}</span>
           </h2>
         </div>
 
@@ -106,17 +133,17 @@ export function WebsiteProjectTypes() {
           <div className="inline-flex flex-col items-center rounded-2xl border px-6 py-4 text-center"
             style={{ borderColor: 'rgba(6,182,212,0.3)', background: 'rgba(6,182,212,0.05)' }}>
             <span className="text-sm font-bold text-[var(--text-primary)]">
-              All projects <span className="gradient-text">starting from Rp 10 Juta</span>
+              {c.pricingLabel} <span className="gradient-text">starting from Rp 10 Juta</span>
             </span>
             <span className="text-xs text-[var(--text-muted)] mt-1">
-              Scope dan harga final diberikan setelah Discovery call gratis.
+              {c.pricingNote}
             </span>
           </div>
         </div>
 
         {/* Project type cards */}
         <div className="space-y-6">
-          {WEBSITE_PROJECT_TYPES.map((pt, i) => (
+          {(projectTypes as typeof WEBSITE_PROJECT_TYPES).map((pt, i) => (
             <motion.div
               key={pt.id}
               initial={{ opacity: 0, y: 32 }}
@@ -158,7 +185,7 @@ export function WebsiteProjectTypes() {
                   </div>
 
                   <div className="text-xs text-[var(--text-muted)]">
-                    <span className="font-semibold text-[var(--text-secondary)]">Cocok untuk:</span>{' '}
+                    <span className="font-semibold text-[var(--text-secondary)]">{c.bestFor}</span>{' '}
                     {pt.bestFor}
                   </div>
                 </div>
@@ -176,13 +203,13 @@ export function WebsiteProjectTypes() {
         {/* CTA */}
         <div className="mt-12 text-center">
           <Link
-            href="/contact?service=website-landing-page"
+            href={c.ctaHref}
             className="inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-bold text-white gradient-bg shadow-lg transition-transform hover:scale-105"
           >
-            Dapatkan Penawaran Kustom →
+            {c.ctaLabel}
           </Link>
           <p className="mt-3 text-xs text-[var(--text-muted)]">
-            Ceritakan proyekmu dan kami akan kirim scope serta proposal detail dalam 48 jam.
+            {c.ctaNote}
           </p>
         </div>
       </div>

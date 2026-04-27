@@ -3,8 +3,35 @@
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { SEO_PRICING_TIERS, SEO_ADDONS } from './data'
+import { SEO_PRICING_TIERS, SEO_PRICING_TIERS_EN, SEO_ADDONS, SEO_ADDONS_EN } from './data'
 import { SEOPricingTable } from './SEOPricingTable'
+
+const PRICING_COPY = {
+  id: {
+    popular: 'Paling Populer',
+    eyebrow: 'Pricing',
+    heading: 'Pilih paket yang sesuai dengan tahap pertumbuhanmu.',
+    sub: 'Semua paket mencakup akses GA4 penuh dan laporan bulanan. Tanpa kontrak lock-in.',
+    addonsTitle: 'Add-on Tersedia',
+    addonBadge: 'Opsional',
+    addonCta: 'Tambah ke kuota →',
+    addonHref: '/contact?service=seo-content-marketing&addon=true',
+    tierCtaHref: (id: string) => `/contact?service=seo-content-marketing&tier=${id}`,
+    tierCta: 'Mulai Konsultasi Gratis →',
+  },
+  en: {
+    popular: 'Most Popular',
+    eyebrow: 'Pricing',
+    heading: 'Choose the plan that fits your growth stage.',
+    sub: 'All plans include full GA4 access and monthly reports. No lock-in contracts.',
+    addonsTitle: 'Optional Add-ons',
+    addonBadge: 'Optional',
+    addonCta: 'Add to scope →',
+    addonHref: '/en/contact?service=seo-content-marketing&addon=true',
+    tierCtaHref: (id: string) => `/en/contact?service=seo-content-marketing&tier=${id}`,
+    tierCta: 'Start Free Consultation →',
+  },
+}
 
 function CheckIcon({ color }: { color: string }) {
   return (
@@ -14,7 +41,7 @@ function CheckIcon({ color }: { color: string }) {
   )
 }
 
-function TierCard({ tier, index }: { tier: typeof SEO_PRICING_TIERS[number]; index: number }) {
+function TierCard({ tier, index, copy }: { tier: typeof SEO_PRICING_TIERS[number]; index: number; copy: typeof PRICING_COPY['id'] }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
 
@@ -49,7 +76,7 @@ function TierCard({ tier, index }: { tier: typeof SEO_PRICING_TIERS[number]; ind
               {isGrowth && (
                 <span className="text-xs font-bold px-2.5 py-0.5 rounded-full text-white"
                   style={{ background: 'linear-gradient(135deg,#7C3AED,#DB2777)' }}>
-                  Paling Populer
+                  {copy.popular}
                 </span>
               )}
               {isFull && (
@@ -80,7 +107,7 @@ function TierCard({ tier, index }: { tier: typeof SEO_PRICING_TIERS[number]; ind
         {/* Features */}
         <ul className="space-y-3 flex-1 mb-8">
           {tier.features.map((f, i) => {
-            const isEverything = typeof f === 'string' && f.startsWith('Everything')
+            const isEverything = typeof f === 'string' && (f.startsWith('Everything') || f.startsWith('Semua'))
             return (
               <li key={i} className={`flex items-start gap-3 text-sm ${isEverything ? 'text-[var(--text-muted)] italic' : 'text-[var(--text-secondary)]'}`}>
                 <CheckIcon color={isGrowth ? '#A78BFA' : isFull ? '#F59E0B' : '#10B981'} />
@@ -92,21 +119,24 @@ function TierCard({ tier, index }: { tier: typeof SEO_PRICING_TIERS[number]; ind
 
         {/* CTA */}
         <Link
-          href={`/contact?service=seo-content-marketing&tier=${tier.id}`}
+          href={copy.tierCtaHref(tier.id)}
           className={`w-full text-center py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-[1.02] ${
             isGrowth
               ? 'gradient-bg text-white hover:shadow-xl hover:shadow-violet-500/25'
               : 'border border-[var(--border-hover)] text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]'
           }`}
         >
-          Mulai Konsultasi Gratis →
+          {copy.tierCta}
         </Link>
       </div>
     </motion.div>
   )
 }
 
-export function SEOPricing() {
+export function SEOPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const copy = PRICING_COPY[locale]
+  const tiers = locale === 'en' ? SEO_PRICING_TIERS_EN : SEO_PRICING_TIERS
+  const addons = locale === 'en' ? SEO_ADDONS_EN : SEO_ADDONS
   return (
     <section
       id="pricing"
@@ -115,42 +145,42 @@ export function SEOPricing() {
     >
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">Pricing</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Pilih paket yang sesuai dengan tahap pertumbuhanmu.</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">{copy.eyebrow}</div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{copy.heading}</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-lg mx-auto">
-            Semua paket mencakup akses GA4 penuh dan laporan bulanan. Tanpa kontrak lock-in.
+            {copy.sub}
           </p>
         </div>
 
         {/* Tier cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-          {SEO_PRICING_TIERS.map((tier, i) => (
-            <TierCard key={tier.id} tier={tier} index={i} />
+          {(tiers as typeof SEO_PRICING_TIERS).map((tier, i) => (
+            <TierCard key={tier.id} tier={tier} index={i} copy={copy} />
           ))}
         </div>
 
         {/* Comparison table */}
-        <SEOPricingTable />
+        <SEOPricingTable locale={locale} />
 
         {/* Add-ons */}
         <div className="mt-12">
-          <h3 className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-5">Add-on Tersedia</h3>
+          <h3 className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-5">{copy.addonsTitle}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {SEO_ADDONS.map((addon, i) => (
+            {(addons as typeof SEO_ADDONS).map((addon, i) => (
               <div key={i} className="flex items-start justify-between gap-4 p-5 rounded-xl border border-dashed border-[var(--border-hover)] bg-[var(--bg-surface)] hover:border-violet-500/30 transition-colors">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5">
                     <h4 className="font-semibold text-[var(--text-primary)] text-sm">{addon.name}</h4>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full font-semibold text-[var(--text-muted)] border border-[var(--border-default)]">Opsional</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full font-semibold text-[var(--text-muted)] border border-[var(--border-default)]">{copy.addonBadge}</span>
                   </div>
                   <p className="text-xs text-[var(--text-secondary)] mb-2">{addon.description}</p>
                   <p className="text-xs font-semibold text-violet-400">{addon.price}</p>
                 </div>
                 <Link
-                  href="/contact?service=seo-content-marketing&addon=true"
+                  href={copy.addonHref}
                   className="text-xs font-semibold text-violet-400 hover:text-violet-300 flex-shrink-0 mt-1 transition-colors"
                 >
-                  Tambah ke kuota →
+                  {copy.addonCta}
                 </Link>
               </div>
             ))}

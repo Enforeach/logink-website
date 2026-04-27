@@ -2,19 +2,26 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { CREATIVE_PROCESS } from './data'
+import { CREATIVE_PROCESS, CREATIVE_PROCESS_EN } from './data'
 
-export function CreativeProcess() {
+const PROCESS_COPY = {
+  id: { eyebrow: 'Cara Kami Berkreasi', heading: 'Dari brief hingga brilian.', deliverable: 'Deliverable' },
+  en: { eyebrow: 'How We Create', heading: 'From brief to brilliant.', deliverable: 'Deliverable' },
+}
+
+export function CreativeProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const steps = locale === 'en' ? CREATIVE_PROCESS_EN : CREATIVE_PROCESS
+  const c = PROCESS_COPY[locale]
 
   return (
     <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Cara Kami Berkreasi</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">{c.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Dari brief hingga brilian.
+            {c.heading}
           </h2>
         </div>
 
@@ -25,7 +32,7 @@ export function CreativeProcess() {
             style={{ background: 'linear-gradient(180deg, #7C3AED, #D97706, #A78BFA)' }} />
 
           <div className="space-y-10">
-            {CREATIVE_PROCESS.map((step, i) => {
+            {(steps as typeof CREATIVE_PROCESS).map((step, i) => {
               const isLeft = step.side === 'left'
               const isCenter = step.side === 'center'
 
@@ -69,7 +76,7 @@ export function CreativeProcess() {
                       <svg className="h-3 w-3" viewBox="0 0 20 20" fill={step.accentColor}>
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Deliverable: {step.deliverable}</span>
+                      <span>{c.deliverable}: {step.deliverable}</span>
                     </div>
                   </motion.div>
                 </div>
@@ -80,7 +87,7 @@ export function CreativeProcess() {
 
         {/* Mobile: stacked */}
         <div className="md:hidden space-y-4">
-          {CREATIVE_PROCESS.map((step, i) => (
+          {(steps as typeof CREATIVE_PROCESS).map((step, i) => (
             <motion.div
               key={step.step}
               initial={{ opacity: 0, y: 16 }}

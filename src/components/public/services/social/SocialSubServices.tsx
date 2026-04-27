@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ChevronDown, Check } from 'lucide-react'
-import { SOCIAL_MODULES } from './data'
+import { SOCIAL_MODULES, SOCIAL_MODULES_EN } from './data'
 
 const PLATFORM_COLORS: Record<string, string> = {
   Instagram: '#E4405F',
@@ -14,7 +14,7 @@ const PLATFORM_COLORS: Record<string, string> = {
 
 type Module = typeof SOCIAL_MODULES[number]
 
-function ModuleCard({ mod, index }: { mod: Module; index: number }) {
+function ModuleCard({ mod, index, locale = 'id' }: { mod: Module; index: number; locale?: 'id' | 'en' }) {
   const [expanded, setExpanded] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.15 })
@@ -69,7 +69,7 @@ function ModuleCard({ mod, index }: { mod: Module; index: number }) {
           className="flex items-center gap-2 text-sm font-semibold transition-colors"
           style={{ color: mod.accentColor }}
         >
-          <span>{expanded ? 'Tutup ▲' : 'Lihat detail ▼'}</span>
+          <span>{expanded ? (locale === 'en' ? 'Close ▲' : 'Tutup ▲') : (locale === 'en' ? 'See details ▼' : 'Lihat detail ▼')}</span>
         </button>
       </div>
 
@@ -106,23 +106,30 @@ function ModuleCard({ mod, index }: { mod: Module; index: number }) {
   )
 }
 
-export function SocialSubServices() {
+const SUB_COPY = {
+  id: { eyebrow: 'Apa yang Kamu Dapat', heading: 'Tiga mesin, satu strategi.', sub: 'Pilih satu, dua, atau ketiganya — setiap modul dirancang untuk berdiri sendiri atau digabungkan.' },
+  en: { eyebrow: 'What You Get', heading: 'Three engines, one strategy.', sub: 'Choose one, two, or all three — every module is designed to work standalone or combined.' },
+}
+
+export function SocialSubServices({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const modules = locale === 'en' ? SOCIAL_MODULES_EN : SOCIAL_MODULES
+  const c = SUB_COPY[locale]
   return (
     <section className="py-20 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Apa yang Kamu Dapat</div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">{c.eyebrow}</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
-            Tiga mesin, satu strategi.
+            {c.heading}
           </h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            Pilih satu, dua, atau ketiganya — setiap modul dirancang untuk berdiri sendiri atau digabungkan.
+            {c.sub}
           </p>
         </div>
 
         <div className="space-y-4">
-          {SOCIAL_MODULES.map((mod, i) => (
-            <ModuleCard key={mod.id} mod={mod} index={i} />
+          {(modules as typeof SOCIAL_MODULES).map((mod, i) => (
+            <ModuleCard key={mod.id} mod={mod} index={i} locale={locale} />
           ))}
         </div>
       </div>

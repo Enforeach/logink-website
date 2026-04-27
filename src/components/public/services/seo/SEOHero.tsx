@@ -3,11 +3,52 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
-const TRUST_PILLS = [
-  '✓ Penulis native Bahasa Indonesia',
-  '✓ Transparansi GA4 penuh',
-  '✓ Tanpa kontrak lock-in',
-]
+const COPY = {
+  id: {
+    trustPills: [
+      '✓ Penulis native Bahasa Indonesia',
+      '✓ Transparansi GA4 penuh',
+      '✓ Tanpa kontrak lock-in',
+    ],
+    home: 'Beranda',
+    services: 'Layanan',
+    homeHref: '/',
+    servicesHref: '/services',
+    title1: 'Ranking Lebih Tinggi.',
+    title2: 'Jangkauan Lebih Luas.',
+    title3: 'Konversi Lebih Baik.',
+    desc: 'Kami bangun kehadiran organic search yang terus berkompon setiap bulan. Dari strategi keyword hingga 150+ artikel per bulan, setiap konten dirancang untuk menangkap traffic high-intent dan mengubahnya jadi revenue.',
+    descHighlight: 'Tidak ada vanity metric. Tidak ada template daur ulang. Hanya pertumbuhan sistematis.',
+    ctaPrimary: 'Mulai Konsultasi Gratis',
+    ctaHref: '/contact?service=seo-content-marketing',
+    ctaSecondary: 'Lihat Harga',
+    updatedToday: 'Diperbarui hari ini · Google.co.id',
+    allImproving: 'Semua naik ↑',
+    changeLabel: 'Δ Naik',
+  },
+  en: {
+    trustPills: [
+      '✓ Bahasa Indonesia native writers',
+      '✓ Full GA4 transparency',
+      '✓ No lock-in contracts',
+    ],
+    home: 'Home',
+    services: 'Services',
+    homeHref: '/en',
+    servicesHref: '/en/services',
+    title1: 'Rank Higher.',
+    title2: 'Reach Further.',
+    title3: 'Convert Better.',
+    desc: 'We build organic search presence that compounds month over month. From keyword strategy to 150+ articles per month, every piece is crafted to capture high-intent traffic and turn it into revenue.',
+    descHighlight: 'No vanity metrics. No recycled templates. Just systematic growth.',
+    ctaPrimary: 'Start Free Consultation',
+    ctaHref: '/en/contact?service=seo-content-marketing',
+    ctaSecondary: 'See Pricing',
+    updatedToday: 'Updated today · Google.co.id',
+    allImproving: 'All improving ↑',
+    changeLabel: 'Δ Change',
+  },
+}
 
 const KEYWORD_ROWS = [
   { kw: 'jasa digital marketing jakarta', rank: '#1', change: '+5' },
@@ -16,7 +57,8 @@ const KEYWORD_ROWS = [
   { kw: 'content marketing seo murah', rank: '#4', change: '+14' },
 ]
 
-export function SEOHero() {
+export function SEOHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const c = COPY[locale]
   return (
     <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16">
       <div className="absolute inset-0 animated-mesh opacity-80" />
@@ -30,9 +72,9 @@ export function SEOHero() {
 
       <div className="relative max-w-6xl mx-auto w-full z-10">
         <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-10">
-          <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Beranda</Link>
+          <Link href={c.homeHref} className="hover:text-[var(--text-primary)] transition-colors">{c.home}</Link>
           <span>/</span>
-          <Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Layanan</Link>
+          <Link href={c.servicesHref} className="hover:text-[var(--text-primary)] transition-colors">{c.services}</Link>
           <span>/</span>
           <span className="text-[var(--text-secondary)]">SEO & Content Marketing</span>
         </nav>
@@ -56,9 +98,9 @@ export function SEOHero() {
               transition={{ duration: 0.55, delay: 0.15 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] leading-tight tracking-tight mb-5"
             >
-              Ranking Lebih Tinggi.{' '}
-              <span className="gradient-text">Jangkauan Lebih Luas.</span>{' '}
-              Konversi Lebih Baik.
+              {c.title1}{' '}
+              <span className="gradient-text">{c.title2}</span>{' '}
+              {c.title3}
             </motion.h1>
 
             <motion.p
@@ -67,8 +109,8 @@ export function SEOHero() {
               transition={{ duration: 0.55, delay: 0.3 }}
               className="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed max-w-lg"
             >
-              Kami bangun kehadiran organic search yang terus berkompon setiap bulan. Dari strategi keyword hingga 150+ artikel per bulan, setiap konten dirancang untuk menangkap traffic high-intent dan mengubahnya jadi revenue.{' '}
-              <span className="text-[var(--text-primary)] font-medium">Tidak ada vanity metric. Tidak ada template daur ulang. Hanya pertumbuhan sistematis.</span>
+              {c.desc}{' '}
+              <span className="text-[var(--text-primary)] font-medium">{c.descHighlight}</span>
             </motion.p>
 
             <motion.div
@@ -78,10 +120,10 @@ export function SEOHero() {
               className="flex flex-wrap gap-3 mb-6"
             >
               <Link
-                href="/contact?service=seo-content-marketing"
+                href={c.ctaHref}
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl gradient-bg text-white font-semibold text-sm hover:scale-[1.03] hover:shadow-xl hover:shadow-violet-500/25 transition-all duration-200"
               >
-                Mulai Konsultasi Gratis
+                {c.ctaPrimary}
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -90,7 +132,7 @@ export function SEOHero() {
                 href="#pricing"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] transition-all duration-200"
               >
-                Lihat Harga
+                {c.ctaSecondary}
               </Link>
             </motion.div>
 
@@ -100,7 +142,7 @@ export function SEOHero() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="flex flex-wrap gap-3"
             >
-              {TRUST_PILLS.map((pill) => (
+              {c.trustPills.map((pill) => (
                 <span key={pill} className="text-xs text-[var(--text-secondary)] px-3 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-surface)]">
                   {pill}
                 </span>
@@ -135,7 +177,7 @@ export function SEOHero() {
                   <div className="grid grid-cols-[1fr_52px_60px] px-3 py-1.5 text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-widest">
                     <span>Keyword</span>
                     <span className="text-center">Rank</span>
-                    <span className="text-right">Δ Naik</span>
+                    <span className="text-right">{c.changeLabel}</span>
                   </div>
                   {KEYWORD_ROWS.map((r, i) => (
                     <div
@@ -150,8 +192,8 @@ export function SEOHero() {
                   ))}
                 </div>
                 <div className="px-4 py-2.5 border-t border-[var(--border-default)] flex justify-between text-xs">
-                  <span className="text-[var(--text-muted)]">Diperbarui hari ini · Google.co.id</span>
-                  <span className="text-emerald-400 font-semibold">Semua naik ↑</span>
+                  <span className="text-[var(--text-muted)]">{c.updatedToday}</span>
+                  <span className="text-emerald-400 font-semibold">{c.allImproving}</span>
                 </div>
               </div>
 

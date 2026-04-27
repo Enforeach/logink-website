@@ -3,11 +3,24 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
-const TRUST_PILLS = [
-  '✓ Konten 100% original',
-  '✓ Native Bahasa Indonesia',
-  '✓ Kalender konten bulanan',
-]
+const HERO_COPY = {
+  id: {
+    trustPills: ['✓ Konten 100% original', '✓ Native Bahasa Indonesia', '✓ Kalender konten bulanan'],
+    home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/services',
+    title1: 'Konten yang Nyambung.', title2: 'Kehadiran yang Konversi.',
+    desc: 'Kami urus semua urusan social media-mu — strategi, pembuatan konten, penjadwalan, community management, dan laporan performa di Instagram, TikTok, Facebook, dan LinkedIn.',
+    descHighlight: 'Kamu fokus bisnis. Kami bikin brandmu nggak bisa di-skip.',
+    ctaPrimary: 'Mulai Konsultasi Gratis', ctaHref: '/contact?service=social-media-management', ctaSecondary: 'Lihat Harga',
+  },
+  en: {
+    trustPills: ['✓ 100% original content', '✓ Bahasa Indonesia native', '✓ Monthly content calendar'],
+    home: 'Home', services: 'Services', homeHref: '/en', servicesHref: '/en/services',
+    title1: 'Content That Connects.', title2: 'Presence That Converts.',
+    desc: 'We take social media completely off your plate — strategy, content creation, scheduling, community management, and performance reporting across Instagram, TikTok, Facebook, and LinkedIn.',
+    descHighlight: 'You focus on your business. We make your brand impossible to scroll past.',
+    ctaPrimary: 'Start Free Consultation', ctaHref: '/en/contact?service=social-media-management', ctaSecondary: 'See Pricing',
+  },
+}
 
 const POSTS = [
   {
@@ -38,7 +51,8 @@ const POSTS = [
   },
 ]
 
-export function SocialHero() {
+export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const c = HERO_COPY[locale]
   return (
     <section
       className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16"
@@ -59,9 +73,9 @@ export function SocialHero() {
 
       <div className="relative max-w-6xl mx-auto w-full z-10">
         <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-10">
-          <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Beranda</Link>
+          <Link href={c.homeHref} className="hover:text-[var(--text-primary)] transition-colors">{c.home}</Link>
           <span>/</span>
-          <Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Layanan</Link>
+          <Link href={c.servicesHref} className="hover:text-[var(--text-primary)] transition-colors">{c.services}</Link>
           <span>/</span>
           <span className="text-[var(--text-secondary)]">Social Media Management</span>
         </nav>
@@ -86,7 +100,7 @@ export function SocialHero() {
               transition={{ duration: 0.55, delay: 0.15 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] leading-tight tracking-tight mb-5"
             >
-              Konten yang Nyambung.{' '}
+              {c.title1}{' '}
               <span
                 style={{
                   background: 'linear-gradient(135deg,#DB2777,#7C3AED)',
@@ -95,7 +109,7 @@ export function SocialHero() {
                   backgroundClip: 'text',
                 }}
               >
-                Kehadiran yang Konversi.
+                {c.title2}
               </span>
             </motion.h1>
 
@@ -105,9 +119,9 @@ export function SocialHero() {
               transition={{ duration: 0.55, delay: 0.3 }}
               className="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed max-w-lg"
             >
-              Kami urus semua urusan social media-mu — strategi, pembuatan konten, penjadwalan, community management, dan laporan performa di Instagram, TikTok, Facebook, dan LinkedIn.{' '}
+              {c.desc}{' '}
               <span className="text-[var(--text-primary)] font-medium">
-                Kamu fokus bisnis. Kami bikin brandmu nggak bisa di-skip.
+                {c.descHighlight}
               </span>
             </motion.p>
 
@@ -118,14 +132,14 @@ export function SocialHero() {
               className="flex flex-wrap gap-3 mb-6"
             >
               <Link
-                href="/contact?service=social-media-management"
+                href={c.ctaHref}
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-white font-semibold text-sm hover:scale-[1.03] hover:shadow-xl transition-all duration-200"
                 style={{
                   background: 'linear-gradient(135deg,#DB2777,#7C3AED)',
                   boxShadow: '0 4px 24px rgba(219,39,119,0.25)',
                 }}
               >
-                Mulai Konsultasi Gratis
+                {c.ctaPrimary}
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -134,7 +148,7 @@ export function SocialHero() {
                 href="#pricing"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] transition-all duration-200"
               >
-                Lihat Harga
+                {c.ctaSecondary}
               </Link>
             </motion.div>
 
@@ -144,7 +158,7 @@ export function SocialHero() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="flex flex-wrap gap-3"
             >
-              {TRUST_PILLS.map((pill) => (
+              {c.trustPills.map((pill) => (
                 <span
                   key={pill}
                   className="text-xs text-[var(--text-secondary)] px-3 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-surface)]"

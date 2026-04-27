@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { SEO_FAQS } from './data'
+import { SEO_FAQS, SEO_FAQS_EN } from './data'
 
 function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false)
@@ -44,18 +44,25 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   )
 }
 
-export function SEOFAQ() {
+const FAQ_COPY = {
+  id: { heading: 'Pertanyaan yang sering ditanyakan.', sub: 'Jawaban langsung — tanpa basa-basi.' },
+  en: { heading: 'Frequently asked questions.', sub: 'Straight answers — no filler.' },
+}
+
+export function SEOFAQ({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const faqs = locale === 'en' ? SEO_FAQS_EN : SEO_FAQS
+  const c = FAQ_COPY[locale]
   return (
     <section className="py-20 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-3xl mx-auto">
         <div className="mb-10">
           <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">FAQ</div>
-          <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Pertanyaan yang sering ditanyakan.</h2>
-          <p className="text-[var(--text-secondary)] mt-2 text-sm">Jawaban langsung — tanpa basa-basi.</p>
+          <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
+          <p className="text-[var(--text-secondary)] mt-2 text-sm">{c.sub}</p>
         </div>
 
         <div className="space-y-3">
-          {SEO_FAQS.map((faq, i) => (
+          {faqs.map((faq, i) => (
             <FAQItem key={i} q={faq.question} a={faq.answer} index={i} />
           ))}
         </div>

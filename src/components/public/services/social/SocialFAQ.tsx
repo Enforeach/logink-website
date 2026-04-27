@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus } from 'lucide-react'
-import { SOCIAL_FAQS } from './data'
+import { SOCIAL_FAQS, SOCIAL_FAQS_EN } from './data'
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
@@ -44,20 +44,27 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   )
 }
 
-export function SocialFAQ() {
+const FAQ_COPY = {
+  id: { heading: 'Pertanyaan yang sering ditanyakan.', sub: 'Semua yang perlu kamu tahu sebelum mulai.' },
+  en: { heading: 'Frequently asked questions.', sub: 'Everything you need to know before getting started.' },
+}
+
+export function SocialFAQ({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const faqs = locale === 'en' ? SOCIAL_FAQS_EN : SOCIAL_FAQS
+  const c = FAQ_COPY[locale]
   return (
     <section className="py-20 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-3xl mx-auto">
         <div className="mb-10">
           <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">FAQ</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Pertanyaan yang sering ditanyakan.</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
           <p className="text-[var(--text-secondary)] mt-3">
-            Semua yang perlu kamu tahu sebelum mulai.
+            {c.sub}
           </p>
         </div>
 
         <div className="space-y-3">
-          {SOCIAL_FAQS.map((faq) => (
+          {faqs.map((faq) => (
             <FAQItem key={faq.question} q={faq.question} a={faq.answer} />
           ))}
         </div>

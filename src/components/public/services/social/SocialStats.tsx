@@ -13,7 +13,7 @@ type StatItem = {
   context: string
 }
 
-const STATS: StatItem[] = [
+const STATS_ID: StatItem[] = [
   {
     Icon: LayoutGrid,
     value: 4,
@@ -37,6 +37,30 @@ const STATS: StatItem[] = [
   },
 ]
 
+const STATS_EN: StatItem[] = [
+  {
+    Icon: LayoutGrid,
+    value: 4,
+    suffix: '',
+    label: 'Platforms Covered',
+    context: 'Instagram, TikTok, Facebook, LinkedIn — managed as one integrated strategy.',
+  },
+  {
+    Icon: FileText,
+    value: 30,
+    suffix: '+',
+    label: 'Posts / Month',
+    context: 'Consistent presence, zero missed days. Content produced and approved before it goes live.',
+  },
+  {
+    Icon: Star,
+    value: 100,
+    suffix: '%',
+    label: 'Original Content',
+    context: 'Custom-designed for your brand. No stock templates, no recycled graphics.',
+  },
+]
+
 function AnimatedNumber({ target, suffix }: { target: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.5 })
@@ -57,7 +81,8 @@ function AnimatedNumber({ target, suffix }: { target: number; suffix: string }) 
   )
 }
 
-export function SocialStats() {
+export function SocialStats({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const STATS = locale === 'en' ? STATS_EN : STATS_ID
   return (
     <section
       className="py-16 px-4 relative"

@@ -2,12 +2,31 @@
 
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { WEBSITE_PROCESS } from './data'
+import { WEBSITE_PROCESS, WEBSITE_PROCESS_EN } from './data'
 
-export function WebsiteProcess() {
+const PROCESS_COPY = {
+  id: {
+    eyebrow: 'Cara Kami Bekerja',
+    heading: 'Dari brief hingga launch.',
+    sub: '5 fase, transparansi penuh. Kamu selalu tahu di mana posisi proyekmu.',
+    day1: 'Hari 1-3',
+    week: 'Mgg',
+  },
+  en: {
+    eyebrow: 'How We Work',
+    heading: 'From brief to launch.',
+    sub: '5 phases, full transparency. You always know where your project stands.',
+    day1: 'Day 1-3',
+    week: 'Wk',
+  },
+}
+
+export function WebsiteProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [activePhase, setActivePhase] = useState<number | null>(null)
+  const processSteps = locale === 'en' ? WEBSITE_PROCESS_EN : WEBSITE_PROCESS
+  const c = PROCESS_COPY[locale]
 
   const totalWeeks = 8
 
@@ -15,12 +34,12 @@ export function WebsiteProcess() {
     <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#06B6D4] mb-3">Cara Kami Bekerja</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#06B6D4] mb-3">{c.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Dari brief hingga launch.
+            {c.heading}
           </h2>
           <p className="text-sm text-[var(--text-muted)]">
-            5 fase, transparansi penuh. Kamu selalu tahu di mana posisi proyekmu.
+            {c.sub}
           </p>
         </div>
 
@@ -30,14 +49,14 @@ export function WebsiteProcess() {
           <div className="flex mb-3 pl-48">
             {Array.from({ length: totalWeeks }, (_, i) => (
               <div key={i} className="flex-1 text-center text-[10px] text-[var(--text-muted)]">
-                {i === 0 ? 'Hari 1-3' : `Mgg ${i}`}
+                {i === 0 ? c.day1 : `${c.week} ${i}`}
               </div>
             ))}
           </div>
 
           {/* Phase rows */}
           <div className="space-y-3">
-            {WEBSITE_PROCESS.map((phase, i) => {
+            {(processSteps as typeof WEBSITE_PROCESS).map((phase, i) => {
               const isActive = activePhase === phase.phase
               const barLeft = (phase.barStart / 100) * 100
               const barWidth = ((phase.barEnd - phase.barStart) / 100) * 100
@@ -102,7 +121,7 @@ export function WebsiteProcess() {
 
           {/* Expanded description */}
           {activePhase !== null && (() => {
-            const phase = WEBSITE_PROCESS.find(p => p.phase === activePhase)!
+            const phase = (processSteps as typeof WEBSITE_PROCESS).find(p => p.phase === activePhase)!
             return (
               <motion.div
                 key={activePhase}
@@ -120,7 +139,7 @@ export function WebsiteProcess() {
 
         {/* Mobile: vertical stacked */}
         <div className="md:hidden space-y-3">
-          {WEBSITE_PROCESS.map((phase, i) => (
+          {(processSteps as typeof WEBSITE_PROCESS).map((phase, i) => (
             <motion.div
               key={phase.phase}
               initial={{ opacity: 0, y: 16 }}

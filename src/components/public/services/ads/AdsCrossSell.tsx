@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-const CARDS = [
+const CARDS_ID = [
   {
     href: '/services/seo-content-marketing',
     accent: '#7C3AED',
@@ -25,9 +25,37 @@ const CARDS = [
   },
 ] as const
 
-export function AdsCrossSell() {
+const CARDS_EN = [
+  {
+    href: '/en/services/seo-content-marketing',
+    accent: '#7C3AED',
+    accentRgb: '124,58,237',
+    title: 'SEO & Content Marketing',
+    description:
+      'Capture compounding organic traffic while your ads drive quick wins. SEO + Ads together means you dominate both paid and organic — competitors see you everywhere.',
+    pricing: 'Starting from Rp 6M/mo',
+  },
+  {
+    href: '/en/services/creative-services',
+    accent: '#F59E0B',
+    accentRgb: '245,158,11',
+    title: 'Creative Services',
+    description:
+      'High-performing ads need scroll-stopping creative. Our design and video team produces ad assets that don\'t look like ads — from Meta carousels to native TikTok videos.',
+    pricing: 'Priced per project',
+  },
+] as const
+
+const CROSSSELL_COPY = {
+  id: { eyebrow: 'Cocok dikombinasikan dengan', heading: 'Perkuat hasilmu.', learnMore: 'Pelajari lebih lanjut →' },
+  en: { eyebrow: 'Pairs well with', heading: 'Amplify your results.', learnMore: 'Learn more →' },
+}
+
+export function AdsCrossSell({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+  const cards = locale === 'en' ? CARDS_EN : CARDS_ID
+  const c = CROSSSELL_COPY[locale]
 
   return (
     <section
@@ -37,14 +65,14 @@ export function AdsCrossSell() {
     >
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Cocok dikombinasikan dengan</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">{c.eyebrow}</p>
           <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">
-            Perkuat hasilmu.
+            {c.heading}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {CARDS.map((card, i) => (
+          {(cards as typeof CARDS_ID).map((card, i) => (
             <motion.div
               key={card.title}
               initial={{ opacity: 0, x: -24 }}
@@ -61,7 +89,7 @@ export function AdsCrossSell() {
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[var(--text-muted)]">{card.pricing}</span>
                   <span className="text-sm font-semibold group-hover:translate-x-1 transition-transform" style={{ color: card.accent }}>
-                    Pelajari lebih lanjut →
+                    {c.learnMore}
                   </span>
                 </div>
               </Link>

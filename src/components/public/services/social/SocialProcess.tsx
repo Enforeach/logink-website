@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { icons, LucideProps } from 'lucide-react'
-import { SOCIAL_PROCESS } from './data'
+import { SOCIAL_PROCESS, SOCIAL_PROCESS_EN } from './data'
 
 function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
   const Icon = icons[name as keyof typeof icons]
@@ -62,15 +62,22 @@ function ProcessCard({ step, index }: { step: typeof SOCIAL_PROCESS[number]; ind
   )
 }
 
-export function SocialProcess() {
+const PROC_COPY = {
+  id: { eyebrow: 'Cara Kerjanya', heading: 'Dari kickoff hingga hasil nyata.', sub: 'Proses onboarding yang jelas supaya kamu tahu persis apa yang terjadi — dan kapan konten tayang.', repeatNote: 'Lalu siklus bulanan berulang. Setiap bulan membangun bulan sebelumnya — kami analisis apa yang berhasil, sempurnakan strategi, dan produksi konten berikutnya.' },
+  en: { eyebrow: 'How It Works', heading: 'From kickoff to real results.', sub: 'A clear onboarding process so you know exactly what happens — and when content goes live.', repeatNote: 'Then the monthly cycle repeats. Each month builds on the last — we analyze what worked, refine the strategy, and produce the next round of content.' },
+}
+
+export function SocialProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const steps = locale === 'en' ? SOCIAL_PROCESS_EN : SOCIAL_PROCESS
+  const c = PROC_COPY[locale]
   return (
     <section className="py-20 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-5xl mx-auto">
         <div className="mb-10">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Cara Kerjanya</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Dari kickoff hingga hasil nyata.</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">{c.eyebrow}</div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            Proses onboarding yang jelas supaya kamu tahu persis apa yang terjadi — dan kapan konten tayang.
+            {c.sub}
           </p>
         </div>
 
@@ -79,7 +86,7 @@ export function SocialProcess() {
           className="flex gap-4 overflow-x-auto pb-4 md:grid md:grid-cols-4 md:overflow-visible md:pb-0"
           style={{ scrollSnapType: 'x mandatory' }}
         >
-          {SOCIAL_PROCESS.map((step, i) => (
+          {(steps as typeof SOCIAL_PROCESS).map((step, i) => (
             <ProcessCard key={step.step} step={step} index={i} />
           ))}
         </div>
@@ -88,7 +95,7 @@ export function SocialProcess() {
         <div className="mt-8 flex items-center gap-3">
           <div className="h-px flex-1 bg-[var(--border-default)]" />
           <p className="text-xs text-[var(--text-muted)] text-center max-w-sm px-4">
-            Lalu siklus bulanan berulang. Setiap bulan membangun bulan sebelumnya — kami analisis apa yang berhasil, sempurnakan strategi, dan produksi konten berikutnya.
+            {c.repeatNote}
           </p>
           <div className="h-px flex-1 bg-[var(--border-default)]" />
         </div>

@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
-const SERVICES = [
+const SERVICES_ID = [
   {
     title: 'Creative Services',
     color: '#F59E0B',
@@ -21,27 +21,55 @@ const SERVICES = [
     rgb: '217,119,6',
     description:
       'Amplifikasi konten organik terbaikmu dengan kampanye berbayar tertarget. Retarget followers yang engaged, jangkau lookalike audience, dan dorong konversi dengan Meta Ads dan TikTok Ads.',
-    price: 'Mulai dari Rp 6 Juta/bln',
+    price: 'Starting from Rp 6M/mo',
     href: '/services/paid-advertising',
   },
 ]
 
-export function SocialCrossSell() {
+const SERVICES_EN = [
+  {
+    title: 'Creative Services',
+    color: '#F59E0B',
+    rgb: '245,158,11',
+    description:
+      'Need custom video production, brand photography, or motion graphics? Our Creative Services team produces visual assets that make your social content stand out from the crowd.',
+    price: 'Priced per project',
+    href: '/en/services/creative-services',
+  },
+  {
+    title: 'Paid Advertising',
+    color: '#D97706',
+    rgb: '217,119,6',
+    description:
+      'Amplify your best organic content with targeted paid campaigns. Retarget engaged followers, reach lookalike audiences, and drive conversions with Meta Ads and TikTok Ads.',
+    price: 'Starting from Rp 6M/mo',
+    href: '/en/services/paid-advertising',
+  },
+]
+
+const CROSSSELL_COPY = {
+  id: { eyebrow: 'Cocok dikombinasikan dengan', heading: 'Lebih banyak cara untuk tumbuh.', learnMore: 'Pelajari lebih lanjut' },
+  en: { eyebrow: 'Pairs well with', heading: 'More ways to grow.', learnMore: 'Learn more' },
+}
+
+export function SocialCrossSell({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.2 })
+  const services = locale === 'en' ? SERVICES_EN : SERVICES_ID
+  const c = CROSSSELL_COPY[locale]
 
   return (
     <section className="py-20 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-4xl mx-auto" ref={ref}>
         <div className="mb-10">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Cocok dikombinasikan dengan</div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">{c.eyebrow}</div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)]">
-            Lebih banyak cara untuk tumbuh.
+            {c.heading}
           </h2>
         </div>
 
         <div className="space-y-4">
-          {SERVICES.map((svc, i) => (
+          {services.map((svc, i) => (
             <motion.div
               key={svc.title}
               initial={{ opacity: 0, x: -24 }}
@@ -67,7 +95,7 @@ export function SocialCrossSell() {
                 className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
                 style={{ color: svc.color }}
               >
-                Pelajari lebih lanjut
+                {c.learnMore}
                 <ArrowRight size={14} />
               </Link>
             </motion.div>

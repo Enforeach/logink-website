@@ -13,11 +13,26 @@ const FUNNEL = [
 
 const RATES = ['8.25% CTR', '25.5% CVR', '20% Close']
 
-const TRUST_PILLS = [
-  '✓ Rata-rata ROAS 2-4×',
-  '✓ Akses akun penuh',
-  '✓ Laporan optimasi mingguan',
-]
+const HERO_COPY = {
+  id: {
+    trustPills: ['✓ Rata-rata ROAS 2-4×', '✓ Akses akun penuh', '✓ Laporan optimasi mingguan'],
+    home: 'Beranda', homeHref: '/', services: 'Layanan', servicesHref: '/services',
+    title1: 'Setiap Rupiah Terinvestasi.', title2: 'Return Maksimal Terwujud.',
+    desc: 'Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami bidik audiens yang tepat di momen yang tepat — dan optimalkan tanpa henti sampai ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, tanpa kontrak lock-in jangka panjang.',
+    ctaPrimary: 'Mulai Konsultasi Gratis →', ctaHref: '/contact?service=paid-advertising',
+    ctaSecondary: 'Lihat Harga',
+    roasDay: 'di hari ke-90',
+  },
+  en: {
+    trustPills: ['✓ Average ROAS 2–4×', '✓ Full account access', '✓ Weekly optimization reports'],
+    home: 'Home', homeHref: '/en', services: 'Services', servicesHref: '/en/services',
+    title1: 'Every Rupiah Invested.', title2: 'Maximum Return Realized.',
+    desc: 'Data-driven campaigns on Google, Meta, TikTok, and Indonesian marketplaces. We target the right audience at the right moment — and optimize relentlessly until ROAS hits 2–4×. No wasted budget, no guesswork, no long-term lock-in contracts.',
+    ctaPrimary: 'Start Free Consultation →', ctaHref: '/en/contact?service=paid-advertising',
+    ctaSecondary: 'See Pricing',
+    roasDay: 'by day 90',
+  },
+}
 
 function AnimatedBar({ bar, index, inView }: { bar: typeof FUNNEL[0]; index: number; inView: boolean }) {
   const [showRate, setShowRate] = useState(false)
@@ -72,11 +87,12 @@ function AnimatedBar({ bar, index, inView }: { bar: typeof FUNNEL[0]; index: num
   )
 }
 
-export function AdsHero() {
+export function AdsHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const funnelRef = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
   const funnelInView = useInView(funnelRef, { once: true, margin: '-50px' })
+  const c = HERO_COPY[locale]
 
   return (
     <section
@@ -109,16 +125,16 @@ export function AdsHero() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
-            Setiap Rupiah Terinvestasi.{' '}
-            <span className="gradient-text">Return Maksimal Terwujud.</span>
+            {c.title1}{' '}
+            <span className="gradient-text">{c.title2}</span>
           </h1>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed max-w-md">
-            Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami bidik audiens yang tepat di momen yang tepat — dan optimalkan tanpa henti sampai ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, tanpa kontrak lock-in jangka panjang.
+            {c.desc}
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {TRUST_PILLS.map((pill) => (
+            {c.trustPills.map((pill) => (
               <span key={pill} className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[var(--text-secondary)]">
                 {pill}
               </span>
@@ -127,16 +143,16 @@ export function AdsHero() {
 
           <div className="flex gap-3 flex-wrap">
             <Link
-              href="/contact?service=paid-advertising"
+              href={c.ctaHref}
               className="gradient-bg px-6 py-3 rounded-xl font-semibold text-white text-sm hover:scale-[1.02] hover:shadow-lg hover:shadow-amber-500/20 transition-all"
             >
-              Mulai Konsultasi Gratis →
+              {c.ctaPrimary}
             </Link>
             <a
               href="#pricing"
               className="px-6 py-3 rounded-xl font-semibold text-sm border border-white/15 text-[var(--text-secondary)] hover:border-white/30 hover:text-[var(--text-primary)] transition-all"
             >
-              Lihat Harga
+              {c.ctaSecondary}
             </a>
           </div>
         </motion.div>
@@ -187,7 +203,7 @@ export function AdsHero() {
                 </svg>
                 ROAS: 3.2×+
               </motion.div>
-              <span className="text-xs text-[var(--text-muted)]">di hari ke-90</span>
+              <span className="text-xs text-[var(--text-muted)]">{c.roasDay}</span>
             </motion.div>
           </motion.div>
         </motion.div>

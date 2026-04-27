@@ -2,9 +2,9 @@
 
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { CREATIVE_MODULES } from './data'
+import { CREATIVE_MODULES, CREATIVE_MODULES_EN } from './data'
 
-function ModuleCard({ mod, index, inView }: { mod: typeof CREATIVE_MODULES[number]; index: number; inView: boolean }) {
+function ModuleCard({ mod, index, inView, locale = 'id' }: { mod: typeof CREATIVE_MODULES[number]; index: number; inView: boolean; locale?: 'id' | 'en' }) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -43,7 +43,7 @@ function ModuleCard({ mod, index, inView }: { mod: typeof CREATIVE_MODULES[numbe
           className="flex items-center gap-1 text-xs font-semibold transition-colors"
           style={{ color: mod.accentColor }}
         >
-          {open ? 'Tutup ▲' : 'Lihat detail ▼'}
+          {open ? (locale === 'en' ? 'Close ▲' : 'Tutup ▲') : (locale === 'en' ? 'See details ▼' : 'Lihat detail ▼')}
         </button>
       </div>
 
@@ -83,26 +83,33 @@ function ModuleCard({ mod, index, inView }: { mod: typeof CREATIVE_MODULES[numbe
   )
 }
 
-export function CreativeCatalog() {
+const CATALOG_COPY = {
+  id: { eyebrow: 'Apa yang Kami Buat', heading: 'Tiga studio, satu tim kreatif.', sub: 'Setiap deliverable dibuat kustom untuk brandmu — tidak ada template, tidak ada stock, tidak ada jalan pintas.' },
+  en: { eyebrow: 'What We Make', heading: 'Three studios, one creative team.', sub: 'Every deliverable is custom-made for your brand — no templates, no stock, no shortcuts.' },
+}
+
+export function CreativeCatalog({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const modules = locale === 'en' ? CREATIVE_MODULES_EN : CREATIVE_MODULES
+  const c = CATALOG_COPY[locale]
 
   return (
     <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Apa yang Kami Buat</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">{c.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Tiga studio, satu tim kreatif.
+            {c.heading}
           </h2>
           <p className="text-[var(--text-secondary)] max-w-xl mx-auto text-sm leading-relaxed">
-            Setiap deliverable dibuat kustom untuk brandmu — tidak ada template, tidak ada stock, tidak ada jalan pintas.
+            {c.sub}
           </p>
         </div>
 
         <div className="space-y-4">
-          {CREATIVE_MODULES.map((mod, i) => (
-            <ModuleCard key={mod.id} mod={mod} index={i} inView={inView} />
+          {(modules as typeof CREATIVE_MODULES).map((mod, i) => (
+            <ModuleCard key={mod.id} mod={mod} index={i} inView={inView} locale={locale} />
           ))}
         </div>
       </div>

@@ -15,7 +15,7 @@ type StatItem = {
   counterSuffix?: string
 }
 
-const STATS: StatItem[] = [
+const STATS_ID: StatItem[] = [
   {
     Icon: TrendingUp,
     value: '150+',
@@ -38,6 +38,36 @@ const STATS: StatItem[] = [
     value: '2.5×',
     label: 'Peningkatan Traffic',
     context: 'Rata-rata di semua klien pada 6 bulan eksekusi konsisten.',
+    isCounter: true,
+    counterTarget: 2.5,
+    counterDecimals: 1,
+    counterSuffix: '×',
+  },
+]
+
+const STATS_EN: StatItem[] = [
+  {
+    Icon: TrendingUp,
+    value: '150+',
+    label: 'Articles / Month',
+    context: 'Maximum production capacity with specialist writers.',
+    isCounter: true,
+    counterTarget: 150,
+    counterDecimals: 0,
+    counterSuffix: '+',
+  },
+  {
+    Icon: Clock,
+    value: '3–6mo',
+    label: 'Time to Rank',
+    context: 'Typical page-one timeline for competitive keywords.',
+    isCounter: false,
+  },
+  {
+    Icon: BarChart3,
+    value: '2.5×',
+    label: 'Traffic Lift',
+    context: 'Average across clients at 6 months of consistent execution.',
     isCounter: true,
     counterTarget: 2.5,
     counterDecimals: 1,
@@ -99,7 +129,8 @@ function StatCard({ stat }: { stat: StatItem }) {
   )
 }
 
-export function SEOStats() {
+export function SEOStats({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const STATS = locale === 'en' ? STATS_EN : STATS_ID
   return (
     <section className="py-16 px-4" style={{ background: '#0A0716' }}>
       <div className="max-w-4xl mx-auto">

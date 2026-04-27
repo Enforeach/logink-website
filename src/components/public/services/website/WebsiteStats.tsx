@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'framer-motion'
-import { WEBSITE_STATS } from './data'
+import { WEBSITE_STATS, WEBSITE_STATS_EN } from './data'
 
 function Counter({ target }: { target: number }) {
   const [val, setVal] = useState(0)
@@ -24,14 +24,15 @@ function Counter({ target }: { target: number }) {
   return <span ref={ref}>{val}</span>
 }
 
-export function WebsiteStats() {
+export function WebsiteStats({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const stats = locale === 'en' ? WEBSITE_STATS_EN : WEBSITE_STATS
   return (
     <section
       className="py-16 px-4 border-y border-white/10"
       style={{ background: 'linear-gradient(180deg, #0A0716 0%, #0D091C 50%, #0A0716 100%)' }}
     >
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
-        {WEBSITE_STATS.map((stat) => (
+        {(stats as typeof WEBSITE_STATS).map((stat) => (
           <div key={stat.label} className="flex flex-col gap-2 px-8 py-6">
             <div className="text-4xl font-extrabold gradient-text">
               {stat.animate ? (

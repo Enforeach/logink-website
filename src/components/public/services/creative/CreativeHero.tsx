@@ -74,10 +74,34 @@ const CARDS = [
 
 const PILLS = ['IG Feed 1:1','Story 9:16','TikTok 9:16','Banner 16:9','Brand Guide']
 
-export function CreativeHero() {
+const HERO_COPY = {
+  id: {
+    trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi termasuk', '✓ Format multi-platform'],
+    title1: 'Visual yang Berani.',
+    title2: 'Cerita yang Jelas.\nBrand yang Tak Terlupakan.',
+    desc: 'Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu — tidak pernah dari library template. Desain yang tidak hanya terlihat bagus, tapi juga perform.',
+    ctaPrimary: 'Mulai Konsultasi Gratis →',
+    ctaHref: '/contact?service=creative-services',
+    ctaSecondary: 'Lihat Karya Kami',
+    ctaSecondaryHref: '/portfolio',
+  },
+  en: {
+    trustPills: ['✓ 100% custom design', '✓ 2 revision rounds included', '✓ Multi-platform formats'],
+    title1: 'Bold Visuals.',
+    title2: 'Clear Stories.\nUnforgettable Brands.',
+    desc: 'From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset is made for your audience — never from a template library. Design that not only looks great, but also performs.',
+    ctaPrimary: 'Start Free Consultation →',
+    ctaHref: '/en/contact?service=creative-services',
+    ctaSecondary: 'See Our Work',
+    ctaSecondaryHref: '/en/portfolio',
+  },
+}
+
+export function CreativeHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [active, setActive] = useState(0)
+  const c = HERO_COPY[locale]
 
   useEffect(() => {
     if (!inView) return
@@ -115,26 +139,28 @@ export function CreativeHero() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
-            Visual yang Berani.{' '}
-            <span className="gradient-text">Cerita yang Jelas.<br />Brand yang Tak Terlupakan.</span>
+            {c.title1}{' '}
+            <span className="gradient-text">{c.title2.split('\n').map((line, i) => (
+              <span key={i}>{line}{i < c.title2.split('\n').length - 1 && <br />}</span>
+            ))}</span>
           </h1>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed max-w-md">
-            Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu — tidak pernah dari library template. Desain yang tidak hanya terlihat bagus, tapi juga perform.
+            {c.desc}
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {['✓ Desain 100% kustom','✓ 2 putaran revisi termasuk','✓ Format multi-platform'].map(p => (
+            {c.trustPills.map(p => (
               <span key={p} className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[var(--text-secondary)]">{p}</span>
             ))}
           </div>
 
           <div className="flex gap-3 flex-wrap">
-            <Link href="/contact?service=creative-services" className="gradient-bg px-6 py-3 rounded-xl font-semibold text-white text-sm hover:scale-[1.02] hover:shadow-lg hover:shadow-amber-500/20 transition-all">
-              Mulai Konsultasi Gratis →
+            <Link href={c.ctaHref} className="gradient-bg px-6 py-3 rounded-xl font-semibold text-white text-sm hover:scale-[1.02] hover:shadow-lg hover:shadow-amber-500/20 transition-all">
+              {c.ctaPrimary}
             </Link>
-            <Link href="/portfolio" className="px-6 py-3 rounded-xl font-semibold text-sm border border-white/15 text-[var(--text-secondary)] hover:border-white/30 hover:text-[var(--text-primary)] transition-all">
-              Lihat Karya Kami
+            <Link href={c.ctaSecondaryHref} className="px-6 py-3 rounded-xl font-semibold text-sm border border-white/15 text-[var(--text-secondary)] hover:border-white/30 hover:text-[var(--text-primary)] transition-all">
+              {c.ctaSecondary}
             </Link>
           </div>
         </motion.div>

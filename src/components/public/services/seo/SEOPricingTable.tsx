@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { SEO_COMPARISON_TABLE } from './data'
+import { SEO_COMPARISON_TABLE, SEO_COMPARISON_TABLE_EN } from './data'
 
 type CellValue = boolean | string
 
@@ -26,8 +26,13 @@ function Cell({ value, isHighest }: { value: CellValue; isHighest?: boolean }) {
   )
 }
 
-export function SEOPricingTable() {
+export function SEOPricingTable({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const [open, setOpen] = useState(false)
+  const table = locale === 'en' ? SEO_COMPARISON_TABLE_EN : SEO_COMPARISON_TABLE
+  const toggleLabel = locale === 'en'
+    ? (open ? 'Hide feature comparison' : 'Compare all features')
+    : (open ? 'Sembunyikan perbandingan fitur' : 'Bandingkan semua fitur')
+  const featureLabel = locale === 'en' ? 'Feature' : 'Fitur'
 
   return (
     <div className="mt-10">
@@ -36,7 +41,7 @@ export function SEOPricingTable() {
           onClick={() => setOpen((o) => !o)}
           className="inline-flex items-center gap-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
         >
-          {open ? 'Sembunyikan perbandingan fitur' : 'Bandingkan semua fitur'}
+          {toggleLabel}
           <motion.svg
             animate={{ rotate: open ? 180 : 0 }}
             transition={{ duration: 0.2 }}
@@ -63,14 +68,14 @@ export function SEOPricingTable() {
               <table className="w-full min-w-[560px]">
                 <thead>
                   <tr className="border-b border-[var(--border-default)]" style={{ background: 'rgba(124,58,237,0.05)' }}>
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider w-1/2">Fitur</th>
+                    <th className="text-left px-5 py-3 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider w-1/2">{featureLabel}</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-violet-400 uppercase tracking-wider">Entry</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-violet-400 uppercase tracking-wider">Growth</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-amber-400 uppercase tracking-wider">Full</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {SEO_COMPARISON_TABLE.categories.map((cat, ci) => (
+                  {table.categories.map((cat, ci) => (
                     <>
                       <tr key={`cat-${ci}`}>
                         <td

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { icons, LucideProps } from 'lucide-react'
-import { SEO_FEATURES_TABS } from './data'
+import { SEO_FEATURES_TABS, SEO_FEATURES_TABS_EN } from './data'
 
 type Tab = typeof SEO_FEATURES_TABS[number]
 type Feature = Tab['features'][number]
@@ -23,24 +23,31 @@ const TAB_BADGE_TEXT: Record<string, string> = {
   'Full only': '#FCD34D',
 }
 
-export function SEOFeatures() {
+const COPY = {
+  id: { eyebrow: 'Apa yang Kamu Dapat', heading: 'Semua sudah termasuk.', sub: 'Tidak ada biaya tersembunyi. Semua deliverable yang dibutuhkan brandmu untuk tumbuh, dalam satu atap.' },
+  en: { eyebrow: 'What You Get', heading: 'Everything included.', sub: 'No hidden extras. Every deliverable your brand needs to grow, under one roof.' },
+}
+
+export function SEOFeatures({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const [activeTab, setActiveTab] = useState(0)
-  const tab = SEO_FEATURES_TABS[activeTab]
+  const TABS = locale === 'en' ? SEO_FEATURES_TABS_EN : SEO_FEATURES_TABS
+  const tab = TABS[activeTab]
+  const c = COPY[locale]
 
   return (
     <section className="py-20 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">Apa yang Kamu Dapat</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Semua sudah termasuk.</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">{c.eyebrow}</div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            Tidak ada biaya tersembunyi. Semua deliverable yang dibutuhkan brandmu untuk tumbuh, dalam satu atap.
+            {c.sub}
           </p>
         </div>
 
         {/* Tab bar */}
         <div className="flex gap-1 border-b border-[var(--border-default)] mb-8 overflow-x-auto pb-0 scrollbar-none">
-          {SEO_FEATURES_TABS.map((t, i) => (
+          {TABS.map((t, i) => (
             <button
               key={t.id}
               onClick={() => setActiveTab(i)}

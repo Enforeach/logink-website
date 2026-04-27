@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { CREATIVE_DELIVERABLES, CREATIVE_ADDONS, CREATIVE_ENGAGEMENT_TYPES } from './data'
+import { CREATIVE_DELIVERABLES, CREATIVE_ADDONS, CREATIVE_ADDONS_EN, CREATIVE_ENGAGEMENT_TYPES, CREATIVE_ENGAGEMENT_TYPES_EN } from './data'
 
 function Checkbox({
   checked,
@@ -42,9 +42,43 @@ function Checkbox({
   )
 }
 
-export function CreativePricing() {
+const PRICING_COPY = {
+  id: {
+    heading: 'Setiap proyek unik. Begitu juga harganya.',
+    sub: 'Pekerjaan kreatif tidak muat dalam kotak yang baku. Kasih tahu apa yang kamu butuhkan, dan kami bangun scope serta penawaran kustom dalam 24 jam.',
+    whatNeed: 'Apa yang kamu butuhkan?',
+    addonsLabel: 'Add-on Tersedia',
+    engagementLabel: 'Tipe Engagement',
+    briefLabel: 'Brief kreatifmu',
+    noSelect: 'Pilih deliverable di atas untuk membangun brief kreatifmu',
+    ctaQuote: 'Dapatkan Penawaran Kustom →',
+    ctaWa: 'Chat di WhatsApp',
+    waPrefix: 'Halo Logink! Saya tertarik dengan Creative Services:\n',
+    waType: 'Tipe',
+    contactBase: '/contact',
+  },
+  en: {
+    heading: 'Every project is unique. So is the price.',
+    sub: 'Creative work doesn\'t fit in a standard box. Tell us what you need, and we\'ll build a custom scope and quote within 24 hours.',
+    whatNeed: 'What do you need?',
+    addonsLabel: 'Available Add-ons',
+    engagementLabel: 'Engagement Type',
+    briefLabel: 'Your creative brief',
+    noSelect: 'Select deliverables above to build your creative brief',
+    ctaQuote: 'Get a Custom Quote →',
+    ctaWa: 'Chat on WhatsApp',
+    waPrefix: 'Hi Logink! I\'m interested in Creative Services:\n',
+    waType: 'Type',
+    contactBase: '/en/contact',
+  },
+}
+
+export function CreativePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const copy = PRICING_COPY[locale]
+  const addonsData = locale === 'en' ? CREATIVE_ADDONS_EN : CREATIVE_ADDONS
+  const engagementData = locale === 'en' ? CREATIVE_ENGAGEMENT_TYPES_EN : CREATIVE_ENGAGEMENT_TYPES
 
   const [selected, setSelected] = useState<Record<string, boolean>>({})
   const [addons, setAddons] = useState<Record<string, boolean>>({})
@@ -56,17 +90,17 @@ export function CreativePricing() {
   const selectedDesign = CREATIVE_DELIVERABLES.design.items.filter(i => selected[i.id]).map(i => i.name.split(' (')[0])
   const selectedVideo = CREATIVE_DELIVERABLES.video.items.filter(i => selected[i.id]).map(i => i.name.split(' (')[0])
   const selectedCopy = CREATIVE_DELIVERABLES.copy.items.filter(i => selected[i.id]).map(i => i.name.split(' (')[0])
-  const selectedAddons = CREATIVE_ADDONS.filter(a => addons[a.id]).map(a => a.name.split(' & ')[0])
+  const selectedAddons = (addonsData as typeof CREATIVE_ADDONS).filter(a => addons[a.id]).map(a => a.name.split(' & ')[0])
 
   const hasAny = selectedDesign.length + selectedVideo.length + selectedCopy.length + selectedAddons.length > 0
 
   const whatsappMsg = encodeURIComponent(
-    `Halo Logink! Saya tertarik dengan Creative Services:\n` +
+    `${copy.waPrefix}` +
     (selectedDesign.length ? `Design: ${selectedDesign.join(', ')}\n` : '') +
     (selectedVideo.length ? `Video: ${selectedVideo.join(', ')}\n` : '') +
     (selectedCopy.length ? `Copy: ${selectedCopy.join(', ')}\n` : '') +
     (selectedAddons.length ? `Add-ons: ${selectedAddons.join(', ')}\n` : '') +
-    (engagement ? `Tipe: ${CREATIVE_ENGAGEMENT_TYPES.find(e => e.id === engagement)?.name}` : '')
+    (engagement ? `${copy.waType}: ${(engagementData as typeof CREATIVE_ENGAGEMENT_TYPES).find(e => e.id === engagement)?.name}` : '')
   )
 
   const quoteParams = new URLSearchParams({
@@ -92,10 +126,10 @@ export function CreativePricing() {
         <div className="text-center mb-14">
           <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Pricing</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Setiap proyek unik. Begitu juga harganya.
+            {copy.heading}
           </h2>
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-sm leading-relaxed">
-            Pekerjaan kreatif tidak muat dalam kotak yang baku. Kasih tahu apa yang kamu butuhkan, dan kami bangun scope serta penawaran kustom dalam 24 jam.
+            {copy.sub}
           </p>
         </div>
 
@@ -103,7 +137,7 @@ export function CreativePricing() {
 
           {/* Deliverable categories */}
           <div>
-            <p className="text-sm font-bold text-[var(--text-primary)] mb-6">Apa yang kamu butuhkan?</p>
+            <p className="text-sm font-bold text-[var(--text-primary)] mb-6">{copy.whatNeed}</p>
             <div className="space-y-8">
               {categories.map((cat, ci) => (
                 <motion.div
@@ -142,9 +176,9 @@ export function CreativePricing() {
 
           {/* Add-ons */}
           <div className="border-t border-white/10 pt-6">
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">Add-on Tersedia</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">{copy.addonsLabel}</p>
             <div className="space-y-2">
-              {CREATIVE_ADDONS.map(addon => (
+              {(addonsData as typeof CREATIVE_ADDONS).map(addon => (
                 <label key={addon.id} className="flex items-start gap-3 cursor-pointer group py-1.5">
                   <Checkbox
                     checked={!!addons[addon.id]}
@@ -162,9 +196,9 @@ export function CreativePricing() {
 
           {/* Engagement type */}
           <div className="border-t border-white/10 pt-6">
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">Tipe Engagement</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">{copy.engagementLabel}</p>
             <div className="space-y-2">
-              {CREATIVE_ENGAGEMENT_TYPES.map(type => (
+              {(engagementData as typeof CREATIVE_ENGAGEMENT_TYPES).map(type => (
                 <label key={type.id} className="flex items-start gap-3 cursor-pointer group py-1.5">
                   <button
                     onClick={() => setEngagement(type.id)}
@@ -209,7 +243,7 @@ export function CreativePricing() {
               >
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-base">📋</span>
-                  <span className="text-sm font-bold text-[var(--text-primary)]">Brief kreatifmu</span>
+                  <span className="text-sm font-bold text-[var(--text-primary)]">{copy.briefLabel}</span>
                 </div>
 
                 <div className="space-y-1.5 text-sm">
@@ -231,17 +265,17 @@ export function CreativePricing() {
                   )}
                   {engagement && (
                     <div className="pt-1 border-t border-white/10 text-[var(--text-muted)] text-xs">
-                      Tipe: {CREATIVE_ENGAGEMENT_TYPES.find(e => e.id === engagement)?.name}
+                      {copy.waType}: {(engagementData as typeof CREATIVE_ENGAGEMENT_TYPES).find(e => e.id === engagement)?.name}
                     </div>
                   )}
                 </div>
 
                 <div className="flex gap-3 flex-wrap pt-2">
                   <a
-                    href={`/contact?${quoteParams}`}
+                    href={`${copy.contactBase}?${quoteParams}`}
                     className="gradient-bg px-5 py-2.5 rounded-xl text-sm font-semibold text-white hover:scale-[1.02] transition-all"
                   >
-                    Dapatkan Penawaran Kustom →
+                    {copy.ctaQuote}
                   </a>
                   <a
                     href={`https://wa.me/6281234567890?text=${whatsappMsg}`}
@@ -254,7 +288,7 @@ export function CreativePricing() {
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                       <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.112 1.528 5.836L.057 23.986l6.304-1.651A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.273-1.535l-.378-.225-3.922 1.028 1.047-3.818-.246-.392A9.818 9.818 0 1112 21.818z"/>
                     </svg>
-                    Chat di WhatsApp
+                    {copy.ctaWa}
                   </a>
                 </div>
               </motion.div>
@@ -263,7 +297,7 @@ export function CreativePricing() {
 
           {!hasAny && (
             <p className="text-center text-sm text-[var(--text-muted)] py-2">
-              Pilih deliverable di atas untuk membangun brief kreatifmu
+              {copy.noSelect}
             </p>
           )}
         </div>

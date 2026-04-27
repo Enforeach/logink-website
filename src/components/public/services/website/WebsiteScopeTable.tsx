@@ -4,10 +4,16 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { WEBSITE_COMPARISON_TABLE } from './data'
 
-const COLUMNS = [
+const COLUMNS_ID = [
   { key: 'landing' as const, label: 'Landing Page', accentColor: '#06B6D4', bestFor: 'Kampanye & lead gen' },
   { key: 'profile' as const, label: 'Company Profile', accentColor: '#7C3AED', bestFor: 'Kehadiran brand' },
   { key: 'ecommerce' as const, label: 'E-Commerce', accentColor: '#10B981', bestFor: 'Toko online' },
+]
+
+const COLUMNS_EN = [
+  { key: 'landing' as const, label: 'Landing Page', accentColor: '#06B6D4', bestFor: 'Campaigns & lead gen' },
+  { key: 'profile' as const, label: 'Company Profile', accentColor: '#7C3AED', bestFor: 'Brand presence' },
+  { key: 'ecommerce' as const, label: 'E-Commerce', accentColor: '#10B981', bestFor: 'Online store' },
 ]
 
 function CheckIcon({ color }: { color: string }) {
@@ -18,9 +24,11 @@ function CheckIcon({ color }: { color: string }) {
   )
 }
 
-export function WebsiteScopeTable() {
+export function WebsiteScopeTable({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+  const columns = locale === 'en' ? COLUMNS_EN : COLUMNS_ID
+  const featureLabel = locale === 'en' ? 'Feature' : 'Fitur'
 
   return (
     <div ref={ref} className="overflow-x-auto rounded-2xl border border-white/10">
@@ -28,9 +36,9 @@ export function WebsiteScopeTable() {
         <thead>
           <tr className="border-b border-white/10 bg-white/5">
             <th className="text-left px-5 py-4 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] w-1/2">
-              Fitur
+              {featureLabel}
             </th>
-            {COLUMNS.map((col) => (
+            {columns.map((col) => (
               <th key={col.key} className="px-4 py-4 text-center w-[16.6%]">
                 <div className="font-bold text-sm" style={{ color: col.accentColor }}>{col.label}</div>
                 <div className="text-[10px] text-[var(--text-muted)] font-normal mt-0.5">{col.bestFor}</div>
@@ -58,7 +66,7 @@ export function WebsiteScopeTable() {
                   style={{ background: fi % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)' }}
                 >
                   <td className="px-5 py-3 text-sm text-[var(--text-secondary)]">{feat.name}</td>
-                  {COLUMNS.map((col) => (
+                  {columns.map((col) => (
                     <td key={col.key} className="px-4 py-3 text-center">
                       {feat[col.key] ? (
                         <CheckIcon color="#10B981" />

@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { SEO_PROCESS_STEPS } from './data'
+import { SEO_PROCESS_STEPS, SEO_PROCESS_STEPS_EN } from './data'
 
 function StepVisual({ step }: { step: number }) {
   if (step === 1) {
@@ -87,17 +87,24 @@ function StepVisual({ step }: { step: number }) {
   )
 }
 
-export function SEOProcess() {
+const PROCESS_COPY = {
+  id: { eyebrow: 'Cara Kerjanya', heading: 'Dari kickoff hingga hasil nyata.', sub: 'Proses yang jelas dan berulang agar kamu selalu tahu apa yang terjadi selanjutnya.' },
+  en: { eyebrow: 'How It Works', heading: 'From kickoff to real results.', sub: 'A clear, repeatable process so you always know what happens next.' },
+}
+
+export function SEOProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const lineRef = useRef<HTMLDivElement>(null)
+  const steps = locale === 'en' ? SEO_PROCESS_STEPS_EN : SEO_PROCESS_STEPS
+  const c = PROCESS_COPY[locale]
 
   return (
     <section className="py-20 px-4 bg-[var(--bg-primary)] overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">Cara Kerjanya</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Dari kickoff hingga hasil nyata.</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">{c.eyebrow}</div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-lg mx-auto">
-            Proses yang jelas dan berulang agar kamu selalu tahu apa yang terjadi selanjutnya.
+            {c.sub}
           </p>
         </div>
 
@@ -110,7 +117,7 @@ export function SEOProcess() {
           />
 
           <div className="space-y-16">
-            {SEO_PROCESS_STEPS.map((step, i) => {
+            {(steps as typeof SEO_PROCESS_STEPS).map((step, i) => {
               const isLeft = step.align === 'left'
               return (
                 <StepRow key={i} step={step} index={i} isLeft={isLeft} stepNum={i + 1} />
