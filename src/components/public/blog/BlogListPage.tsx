@@ -35,9 +35,9 @@ export async function BlogListPage({ locale }: { locale: Locale }) {
       orderBy: { publishedAt: 'desc' },
       take: 12,
       select: {
-        id: true, title: true, titleEn: true, slug: true, slugEn: true,
-        excerpt: true, excerptEn: true, featuredImage: true,
-        publishedAt: true, readingTime: true,
+        id: true, titleId: true, titleEn: true, slug: true, slugEn: true,
+        excerptId: true, excerptEn: true, featuredImage: true,
+        publishedAt: true, readingTime: true, status: true, createdAt: true,
         author: { select: { name: true, image: true } },
         category: { select: { nameId: true, nameEn: true, slug: true } },
       },
