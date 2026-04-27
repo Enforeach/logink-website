@@ -27,7 +27,13 @@ export default async function BlogCategoryPage({ params }: Props) {
         where: { status: 'PUBLISHED', categoryId: category.id },
         orderBy: { publishedAt: 'desc' },
         take: 12,
-        include: { author: { select: { name: true, image: true } }, category: { select: { nameId: true, nameEn: true, slug: true } } },
+        select: {
+          id: true, title: true, titleEn: true, slug: true, slugEn: true,
+          excerpt: true, excerptEn: true, featuredImage: true,
+          publishedAt: true, readingTime: true,
+          author: { select: { name: true, image: true } },
+          category: { select: { nameId: true, nameEn: true, slug: true } },
+        },
       })
     }
   } catch {}

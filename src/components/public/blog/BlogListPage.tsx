@@ -34,7 +34,10 @@ export async function BlogListPage({ locale }: { locale: Locale }) {
       where,
       orderBy: { publishedAt: 'desc' },
       take: 12,
-      include: {
+      select: {
+        id: true, title: true, titleEn: true, slug: true, slugEn: true,
+        excerpt: true, excerptEn: true, featuredImage: true,
+        publishedAt: true, readingTime: true,
         author: { select: { name: true, image: true } },
         category: { select: { nameId: true, nameEn: true, slug: true } },
       },
