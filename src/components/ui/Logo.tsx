@@ -28,9 +28,9 @@ export function LogoMark({ size = 32, className }: LogoMarkProps) {
     >
       <defs>
         <linearGradient id={GRAD_ID_MARK} x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#DB2777" />
-          <stop offset="45%" stopColor="#E879A0" />
-          <stop offset="100%" stopColor="#F97316" />
+          <stop offset="0%" stopColor="#F72585" />
+          <stop offset="50%" stopColor="#E040FB" />
+          <stop offset="100%" stopColor="#FF6D00" />
         </linearGradient>
       </defs>
       <path
@@ -53,7 +53,7 @@ export function LogoFull({ size = 32, theme = 'dark', className, suffix }: LogoF
   const svgH = size
 
   const logColor = theme === 'dark' ? '#FFFFFF' : '#0A0118'
-  const inkColor = '#7C3AED'
+  const inkColor = '#A855F7'
   const textY = size * 0.82
 
   return (
@@ -69,9 +69,9 @@ export function LogoFull({ size = 32, theme = 'dark', className, suffix }: LogoF
     >
       <defs>
         <linearGradient id={GRAD_ID_FULL} x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#DB2777" />
-          <stop offset="45%" stopColor="#E879A0" />
-          <stop offset="100%" stopColor="#F97316" />
+          <stop offset="0%" stopColor="#F72585" />
+          <stop offset="50%" stopColor="#E040FB" />
+          <stop offset="100%" stopColor="#FF6D00" />
         </linearGradient>
       </defs>
 
