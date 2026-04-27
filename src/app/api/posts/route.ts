@@ -18,9 +18,19 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-
     const body = await req.json()
-    const { titleId, titleEn, slug, excerptId, excerptEn, bodyId, bodyEn, featuredImage, metaTitle, metaDescription, status, categoryId, readingTime } = body
+    const {
+      titleId, titleEn, slug, excerptId, excerptEn, bodyId, bodyEn,
+      featuredImage, featuredImageAlt, metaTitle, metaDescription, ogImage,
+      focusKeyword, status, categoryId, readingTime, wordCount, tagIds,
+    } = body
+
+    const authorId = (await prisma.user.upsert({
+      where: { email: 'system@logink.id' },
+      update: {},
+      create: { name: 'System', email: 'system@logink.id', role: 'ADMIN' },
+      select: { id: true },
+    })).id
 
     const post = await prisma.post.create({
       data: {
@@ -32,24 +42,27 @@ export async function POST(req: NextRequest) {
         bodyId: bodyId || '',
         bodyEn,
         featuredImage,
+        featuredImageAlt,
         metaTitle,
         metaDescription,
+        ogImage,
+        focusKeyword,
         status: status || 'DRAFT',
-        authorId: (await prisma.user.upsert({
-          where: { email: 'system@logink.id' },
-          update: {},
-          create: { name: 'System', email: 'system@logink.id', role: 'ADMIN' },
-          select: { id: true },
-        })).id,
+        authorId,
         categoryId: categoryId || null,
         readingTime,
+        wordCount,
         publishedAt: status === 'PUBLISHED' ? new Date() : null,
+        tags: tagIds?.length ? {
+          create: tagIds.map((tagId: string) => ({ tagId })),
+        } : undefined,
       },
     })
 
     return NextResponse.json(post, { status: 201 })
   } catch (err: any) {
     if (err?.code === 'P2002') return NextResponse.json({ error: 'Slug already exists' }, { status: 409 })
+    console.error(err)
     return NextResponse.json({ error: 'Failed to create post' }, { status: 500 })
   }
 }

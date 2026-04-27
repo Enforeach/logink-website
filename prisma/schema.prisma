@@ -75,10 +75,13 @@ model Post {
   bodyId          String     @db.Text
   bodyEn          String?    @db.Text
   featuredImage   String?
+  featuredImageAlt String?
   metaTitle       String?
   metaDescription String?
   ogImage         String?
+  focusKeyword    String?
   readingTime     Int?
+  wordCount       Int?
   status          PostStatus @default(DRAFT)
   authorId        String
   author          User       @relation(fields: [authorId], references: [id])
@@ -313,4 +316,79 @@ model ContactSubmission {
   source      String?
   isRead      Boolean  @default(false)
   createdAt   DateTime @default(now())
+}
+
+// ─── CTA WIDGETS ───
+
+model CtaWidget {
+  id                   String       @id @default(cuid())
+  name                 String
+  templateType         CtaTemplate
+  heading              String?
+  subheading           String?
+  buttonText           String?
+  buttonUrl            String
+  secondaryButtonText  String?
+  secondaryButtonUrl   String?
+  backgroundImage      String?
+  backgroundColor      String?
+  textColor            String?
+  cssClass             String?
+  gaEventCategory      String?
+  gaEventLabel         String?
+  dataAttributes       Json?
+  placement            CtaPlacement
+  paragraphIndex       Int?
+  targetingType        CtaTargeting @default(ALL_POSTS)
+  targetPostIds        String[]
+  targetTagIds         String[]
+  targetCategoryIds    String[]
+  isActive             Boolean      @default(true)
+  startDate            DateTime?
+  endDate              DateTime?
+  showOnMobile         Boolean      @default(true)
+  showOnDesktop        Boolean      @default(true)
+  maxImpressions       Int?
+  dismissible          Boolean      @default(true)
+  dismissDuration      Int          @default(7)
+  displayTrigger       String?
+  displayDelay         Int?
+  scrollDepthThreshold Float?
+  countdownLabel       String?
+  imagePosition        String?
+  emoji                String?
+  sponsoredLabel       Boolean      @default(false)
+  impressionCount      Int          @default(0)
+  clickCount           Int          @default(0)
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+}
+
+enum CtaTemplate {
+  HERO_BANNER
+  SERVICE_CARD
+  INLINE_CALLOUT
+  CUSTOM_IMAGE
+  MINIMAL_STRIP
+  FLOATING_NOTIFICATION
+  SPLIT_VISUAL
+  COUNTER_URGENCY
+}
+
+enum CtaPlacement {
+  INLINE
+  ABOVE_FOLD
+  BELOW_ARTICLE
+  SIDEBAR
+  STICKY_BOTTOM
+  BETWEEN_PARAGRAPHS
+  AFTER_TOC
+}
+
+enum CtaTargeting {
+  ALL_POSTS
+  SPECIFIC_POSTS
+  BY_TAG
+  BY_CATEGORY
+  EXCLUDE_POSTS
 }

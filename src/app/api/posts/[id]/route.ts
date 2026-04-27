@@ -6,7 +6,11 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     const { id } = await params
     const post = await prisma.post.findUnique({
       where: { id },
-      include: { author: { select: { name: true } }, category: true },
+      include: {
+        author: { select: { name: true } },
+        category: true,
+        tags: { include: { tag: true } },
+      },
     })
     if (!post) return NextResponse.json({ error: 'Not found' }, { status: 404 })
     return NextResponse.json(post)
@@ -17,12 +21,15 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-
     const { id } = await params
     const body = await req.json()
-    const { titleId, titleEn, slug, excerptId, excerptEn, bodyId, bodyEn, featuredImage, metaTitle, metaDescription, status, categoryId, readingTime } = body
+    const {
+      titleId, titleEn, slug, excerptId, excerptEn, bodyId, bodyEn,
+      featuredImage, featuredImageAlt, metaTitle, metaDescription, ogImage,
+      focusKeyword, status, categoryId, readingTime, wordCount, tagIds,
+    } = body
 
-    const existing = await prisma.post.findUnique({ where: { id }, select: { status: true } })
+    const existing = await prisma.post.findUnique({ where: { id }, select: { status: true, publishedAt: true } })
     const wasPublished = existing?.status === 'PUBLISHED'
     const isNowPublished = status === 'PUBLISHED'
 
@@ -37,12 +44,20 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         bodyId: bodyId || '',
         bodyEn,
         featuredImage,
+        featuredImageAlt,
         metaTitle,
         metaDescription,
+        ogImage,
+        focusKeyword,
         status,
         categoryId: categoryId || null,
         readingTime,
-        publishedAt: isNowPublished && !wasPublished ? new Date() : undefined,
+        wordCount,
+        publishedAt: isNowPublished && !wasPublished ? new Date() : (existing?.publishedAt ?? undefined),
+        tags: tagIds !== undefined ? {
+          deleteMany: {},
+          create: tagIds.map((tagId: string) => ({ tagId })),
+        } : undefined,
       },
     })
 
@@ -55,7 +70,6 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
 
 export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-
     const { id } = await params
     await prisma.post.delete({ where: { id } })
     return NextResponse.json({ ok: true })
