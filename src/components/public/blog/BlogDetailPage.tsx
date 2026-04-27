@@ -5,11 +5,13 @@ import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 import { buildMetadata } from '@/lib/seo'
 import { formatDate } from '@/lib/utils'
-import { ReadingProgress } from './ReadingProgress'
+import dynamic from 'next/dynamic'
 import { TableOfContents } from './TableOfContents'
-import { ShareBar } from './ShareBar'
 import { AuthorBio } from './AuthorBio'
 import { CtaRenderer } from '@/components/public/cta/CtaRenderer'
+
+const ReadingProgress = dynamic(() => import('./ReadingProgress').then(m => ({ default: m.ReadingProgress })), { ssr: false })
+const ShareBar = dynamic(() => import('./ShareBar').then(m => ({ default: m.ShareBar })), { ssr: false })
 import { filterCtasForPost, extractHeadings, injectHeadingIds, type CtaWidgetRow } from '@/lib/cta'
 import { resolvePostContent } from '@/lib/i18n/content'
 import { type Locale, t, localePath } from '@/lib/i18n'

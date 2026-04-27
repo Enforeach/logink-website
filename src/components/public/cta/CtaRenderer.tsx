@@ -1,13 +1,15 @@
 'use client'
 import { useEffect } from 'react'
-import { CtaHeroBanner } from './CtaHeroBanner'
-import { CtaServiceCard } from './CtaServiceCard'
-import { CtaInlineCallout } from './CtaInlineCallout'
-import { CtaCustomImage } from './CtaCustomImage'
-import { CtaMinimalStrip } from './CtaMinimalStrip'
-import { CtaFloatingNotification } from './CtaFloatingNotification'
-import { CtaSplitVisual } from './CtaSplitVisual'
-import { CtaCounterUrgency } from './CtaCounterUrgency'
+import dynamic from 'next/dynamic'
+
+const CtaHeroBanner = dynamic(() => import('./CtaHeroBanner').then(m => ({ default: m.CtaHeroBanner })))
+const CtaServiceCard = dynamic(() => import('./CtaServiceCard').then(m => ({ default: m.CtaServiceCard })))
+const CtaInlineCallout = dynamic(() => import('./CtaInlineCallout').then(m => ({ default: m.CtaInlineCallout })))
+const CtaCustomImage = dynamic(() => import('./CtaCustomImage').then(m => ({ default: m.CtaCustomImage })))
+const CtaMinimalStrip = dynamic(() => import('./CtaMinimalStrip').then(m => ({ default: m.CtaMinimalStrip })))
+const CtaFloatingNotification = dynamic(() => import('./CtaFloatingNotification').then(m => ({ default: m.CtaFloatingNotification })))
+const CtaSplitVisual = dynamic(() => import('./CtaSplitVisual').then(m => ({ default: m.CtaSplitVisual })))
+const CtaCounterUrgency = dynamic(() => import('./CtaCounterUrgency').then(m => ({ default: m.CtaCounterUrgency })))
 
 export interface CtaWidgetData {
   id: string
