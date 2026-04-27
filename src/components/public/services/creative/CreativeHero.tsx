@@ -115,26 +115,26 @@ export function CreativeHero() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
-            Bold Visuals.{' '}
-            <span className="gradient-text">Clear Stories.<br />Brands That Stick.</span>
+            Visual yang Berani.{' '}
+            <span className="gradient-text">Cerita yang Jelas.<br />Brand yang Tak Terlupakan.</span>
           </h1>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed max-w-md">
-            From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset built for your audience — never from a template library. Design that doesn't just look good, but performs.
+            Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu — tidak pernah dari library template. Desain yang tidak hanya terlihat bagus, tapi juga perform.
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {['✓ 100% custom design','✓ 2 revision rounds included','✓ Multi-platform formats'].map(p => (
+            {['✓ Desain 100% kustom','✓ 2 putaran revisi termasuk','✓ Format multi-platform'].map(p => (
               <span key={p} className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[var(--text-secondary)]">{p}</span>
             ))}
           </div>
 
           <div className="flex gap-3 flex-wrap">
             <Link href="/contact?service=creative-services" className="gradient-bg px-6 py-3 rounded-xl font-semibold text-white text-sm hover:scale-[1.02] hover:shadow-lg hover:shadow-amber-500/20 transition-all">
-              Start Free Consultation →
+              Mulai Konsultasi Gratis →
             </Link>
             <Link href="/portfolio" className="px-6 py-3 rounded-xl font-semibold text-sm border border-white/15 text-[var(--text-secondary)] hover:border-white/30 hover:text-[var(--text-primary)] transition-all">
-              See Our Work
+              Lihat Karya Kami
             </Link>
           </div>
         </motion.div>

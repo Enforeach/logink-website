@@ -50,8 +50,8 @@ export function SEOFAQ() {
       <div className="max-w-3xl mx-auto">
         <div className="mb-10">
           <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">FAQ</div>
-          <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Common questions.</h2>
-          <p className="text-[var(--text-secondary)] mt-2 text-sm">Straight answers — no agency speak.</p>
+          <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Pertanyaan yang sering ditanyakan.</h2>
+          <p className="text-[var(--text-secondary)] mt-2 text-sm">Jawaban langsung — tanpa basa-basi.</p>
         </div>
 
         <div className="space-y-3">

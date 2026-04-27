@@ -18,22 +18,22 @@ const STATS: StatItem[] = [
     Icon: LayoutGrid,
     value: 4,
     suffix: '',
-    label: 'Platforms Covered',
-    context: 'Instagram, TikTok, Facebook, LinkedIn — managed as one integrated strategy.',
+    label: 'Platform Dicakup',
+    context: 'Instagram, TikTok, Facebook, LinkedIn — dikelola sebagai satu strategi terpadu.',
   },
   {
     Icon: FileText,
     value: 30,
     suffix: '+',
-    label: 'Posts / Month',
-    context: 'Consistent presence, zero missed days. Content produced and approved before it goes live.',
+    label: 'Post / Bulan',
+    context: 'Kehadiran konsisten, nol hari terlewat. Konten diproduksi dan disetujui sebelum tayang.',
   },
   {
     Icon: Star,
     value: 100,
     suffix: '%',
-    label: 'Original Content',
-    context: 'Custom-designed for your brand. No stock templates, no recycled graphics.',
+    label: 'Konten Original',
+    context: 'Didesain khusus untuk brandmu. Tidak ada template stock, tidak ada grafis daur ulang.',
   },
 ]
 

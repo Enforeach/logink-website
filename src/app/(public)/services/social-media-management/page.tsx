@@ -14,13 +14,13 @@ import { SOCIAL_FAQS } from '@/components/public/services/social/data'
 export const metadata: Metadata = buildMetadata({
   title: 'Social Media Management | Logink',
   description:
-    'Social media strategy, content creation, and community management for Indonesian brands. Instagram, TikTok, Facebook & LinkedIn. 100% original content.',
+    'Strategi social media, pembuatan konten, dan community management untuk brand Indonesia. Instagram, TikTok, Facebook & LinkedIn. 100% konten original.',
   path: '/services/social-media-management',
 })
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://logink.id' },
-  { name: 'Services', url: 'https://logink.id/services' },
+  { name: 'Beranda', url: 'https://logink.id' },
+  { name: 'Layanan', url: 'https://logink.id/services' },
   { name: 'Social Media Management', url: 'https://logink.id/services/social-media-management' },
 ]
 

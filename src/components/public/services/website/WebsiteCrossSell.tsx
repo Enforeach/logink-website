@@ -10,16 +10,16 @@ const CARDS = [
     accent: '#7C3AED',
     title: 'SEO & Content Marketing',
     description:
-      "A beautiful website without traffic is a billboard in the desert. Our SEO team drives organic visitors to your new site with keyword-optimized content and technical SEO — so your investment starts generating returns from month one.",
-    pricing: 'Starting from Rp 6 Juta/mo',
+      'Website yang indah tanpa traffic seperti billboard di gurun. Tim SEO kami mendatangkan pengunjung organik ke sitemu yang baru dengan konten teroptimasi keyword dan technical SEO — supaya investasimu mulai menghasilkan return dari bulan pertama.',
+    pricing: 'Mulai dari Rp 6 Juta/bln',
   },
   {
     href: '/services/paid-advertising',
     accent: '#D97706',
     title: 'Paid Advertising',
     description:
-      'Drive immediate traffic to your new landing page or e-commerce store with targeted Google and Meta campaigns. We handle the ads, you handle the orders.',
-    pricing: 'Starting from Rp 6 Juta/mo',
+      'Datangkan traffic instan ke landing page atau toko e-commerce barumu dengan kampanye Google dan Meta yang tertarget. Kami urus iklannya, kamu urus pesanannya.',
+    pricing: 'Mulai dari Rp 6 Juta/bln',
   },
 ] as const
 
@@ -31,8 +31,8 @@ export function WebsiteCrossSell() {
     <section ref={ref} className="py-20 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Pairs Well With</p>
-          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">Amplify your website.</h2>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Cocok dikombinasikan dengan</p>
+          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">Perkuat websitemu.</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {CARDS.map((card, i) => (
@@ -52,7 +52,7 @@ export function WebsiteCrossSell() {
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[var(--text-muted)]">{card.pricing}</span>
                   <span className="text-sm font-semibold group-hover:translate-x-1 transition-transform" style={{ color: card.accent }}>
-                    Learn more →
+                    Pelajari lebih lanjut →
                   </span>
                 </div>
               </Link>

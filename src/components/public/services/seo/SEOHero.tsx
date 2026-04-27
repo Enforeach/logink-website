@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 const TRUST_PILLS = [
-  '✓ Bahasa Indonesia native writers',
-  '✓ Full GA4 transparency',
-  '✓ No lock-in contracts',
+  '✓ Penulis native Bahasa Indonesia',
+  '✓ Transparansi GA4 penuh',
+  '✓ Tanpa kontrak lock-in',
 ]
 
 const KEYWORD_ROWS = [
@@ -30,9 +30,9 @@ export function SEOHero() {
 
       <div className="relative max-w-6xl mx-auto w-full z-10">
         <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-10">
-          <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Home</Link>
+          <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Beranda</Link>
           <span>/</span>
-          <Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Services</Link>
+          <Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Layanan</Link>
           <span>/</span>
           <span className="text-[var(--text-secondary)]">SEO & Content Marketing</span>
         </nav>
@@ -56,9 +56,9 @@ export function SEOHero() {
               transition={{ duration: 0.55, delay: 0.15 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] leading-tight tracking-tight mb-5"
             >
-              Rank Higher.{' '}
-              <span className="gradient-text">Reach Further.</span>{' '}
-              Convert Better.
+              Ranking Lebih Tinggi.{' '}
+              <span className="gradient-text">Jangkauan Lebih Luas.</span>{' '}
+              Konversi Lebih Baik.
             </motion.h1>
 
             <motion.p
@@ -67,8 +67,8 @@ export function SEOHero() {
               transition={{ duration: 0.55, delay: 0.3 }}
               className="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed max-w-lg"
             >
-              We build organic search presence that compounds month over month. From keyword strategy to 150+ articles per month, every piece is crafted to capture high-intent traffic and turn it into revenue.{' '}
-              <span className="text-[var(--text-primary)] font-medium">No vanity metrics. No recycled templates. Just systematic growth.</span>
+              Kami bangun kehadiran organic search yang terus berkompon setiap bulan. Dari strategi keyword hingga 150+ artikel per bulan, setiap konten dirancang untuk menangkap traffic high-intent dan mengubahnya jadi revenue.{' '}
+              <span className="text-[var(--text-primary)] font-medium">Tidak ada vanity metric. Tidak ada template daur ulang. Hanya pertumbuhan sistematis.</span>
             </motion.p>
 
             <motion.div
@@ -81,7 +81,7 @@ export function SEOHero() {
                 href="/contact?service=seo-content-marketing"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl gradient-bg text-white font-semibold text-sm hover:scale-[1.03] hover:shadow-xl hover:shadow-violet-500/25 transition-all duration-200"
               >
-                Start Free Consultation
+                Mulai Konsultasi Gratis
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -90,7 +90,7 @@ export function SEOHero() {
                 href="#pricing"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] transition-all duration-200"
               >
-                See Pricing
+                Lihat Harga
               </Link>
             </motion.div>
 
@@ -135,7 +135,7 @@ export function SEOHero() {
                   <div className="grid grid-cols-[1fr_52px_60px] px-3 py-1.5 text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-widest">
                     <span>Keyword</span>
                     <span className="text-center">Rank</span>
-                    <span className="text-right">Δ Change</span>
+                    <span className="text-right">Δ Naik</span>
                   </div>
                   {KEYWORD_ROWS.map((r, i) => (
                     <div
@@ -150,8 +150,8 @@ export function SEOHero() {
                   ))}
                 </div>
                 <div className="px-4 py-2.5 border-t border-[var(--border-default)] flex justify-between text-xs">
-                  <span className="text-[var(--text-muted)]">Updated today · Google.co.id</span>
-                  <span className="text-emerald-400 font-semibold">All improving ↑</span>
+                  <span className="text-[var(--text-muted)]">Diperbarui hari ini · Google.co.id</span>
+                  <span className="text-emerald-400 font-semibold">Semua naik ↑</span>
                 </div>
               </div>
 

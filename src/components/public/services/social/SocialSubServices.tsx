@@ -69,7 +69,7 @@ function ModuleCard({ mod, index }: { mod: Module; index: number }) {
           className="flex items-center gap-2 text-sm font-semibold transition-colors"
           style={{ color: mod.accentColor }}
         >
-          <span>{expanded ? 'Less ▲' : 'See details ▼'}</span>
+          <span>{expanded ? 'Tutup ▲' : 'Lihat detail ▼'}</span>
         </button>
       </div>
 
@@ -111,12 +111,12 @@ export function SocialSubServices() {
     <section className="py-20 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">What You Get</div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Apa yang Kamu Dapat</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
-            Three engines, one strategy.
+            Tiga mesin, satu strategi.
           </h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            Pick one, two, or all three — each module is designed to work independently or compound together.
+            Pilih satu, dua, atau ketiganya — setiap modul dirancang untuk berdiri sendiri atau digabungkan.
           </p>
         </div>
 

@@ -8,8 +8,8 @@ function StepVisual({ step }: { step: number }) {
   if (step === 1) {
     return (
       <div className="rounded-xl border border-violet-500/20 bg-violet-500/5 p-3 mt-3 w-full max-w-[200px]">
-        <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Keyword difficulty</div>
-        {[{ w: '85%', color: '#EF4444', label: 'High' }, { w: '55%', color: '#F59E0B', label: 'Med' }, { w: '30%', color: '#10B981', label: 'Low' }].map((b, i) => (
+        <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Kesulitan keyword</div>
+        {[{ w: '85%', color: '#EF4444', label: 'Tinggi' }, { w: '55%', color: '#F59E0B', label: 'Sedang' }, { w: '30%', color: '#10B981', label: 'Rendah' }].map((b, i) => (
           <div key={i} className="flex items-center gap-2 mb-1.5">
             <div className="h-2 rounded-full" style={{ width: b.w, background: b.color, opacity: 0.7 }} />
             <span className="text-[10px] text-[var(--text-muted)]">{b.label}</span>
@@ -23,7 +23,7 @@ function StepVisual({ step }: { step: number }) {
       <div className="rounded-xl border border-pink-500/20 bg-pink-500/5 p-3 mt-3 w-full max-w-[200px]">
         <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Topic cluster</div>
         <div className="flex flex-col gap-1">
-          <div className="h-5 rounded px-2 flex items-center text-[10px] font-semibold text-pink-400" style={{ background: 'rgba(219,39,119,0.15)' }}>Pillar page</div>
+          <div className="h-5 rounded px-2 flex items-center text-[10px] font-semibold text-pink-400" style={{ background: 'rgba(219,39,119,0.15)' }}>Halaman pilar</div>
           {['Cluster A', 'Cluster B', 'Cluster C'].map((c) => (
             <div key={c} className="ml-3 h-4 rounded px-2 flex items-center text-[9px] text-[var(--text-muted)]" style={{ background: 'rgba(219,39,119,0.07)' }}>
               └ {c}
@@ -36,8 +36,8 @@ function StepVisual({ step }: { step: number }) {
   if (step === 3) {
     return (
       <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3 mt-3 w-full max-w-[200px]">
-        <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Tech audit</div>
-        {['Crawl errors fixed', 'Page speed +40%', 'Schema deployed'].map((item, i) => (
+        <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Audit teknikal</div>
+        {['Crawl error diperbaiki', 'Page speed +40%', 'Schema diterapkan'].map((item, i) => (
           <div key={i} className="flex items-center gap-2 mb-1.5 text-[10px]">
             <svg className="h-3 w-3 flex-shrink-0" viewBox="0 0 20 20" fill="#10B981">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -51,9 +51,9 @@ function StepVisual({ step }: { step: number }) {
   if (step === 4) {
     return (
       <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-3 mt-3 w-full max-w-[200px]">
-        <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">This month</div>
+        <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Bulan ini</div>
         <div className="space-y-1.5">
-          {['Article: SEO basics...', 'Article: Google Ads...', 'Article: Meta Ads...'].map((a, i) => (
+          {['Artikel: Dasar SEO...', 'Artikel: Google Ads...', 'Artikel: Meta Ads...'].map((a, i) => (
             <div key={i} className="flex items-center justify-between text-[10px]">
               <span className="text-[var(--text-secondary)] truncate mr-2">{a}</span>
               <span className="text-emerald-400 flex-shrink-0 font-semibold">Live</span>
@@ -66,7 +66,7 @@ function StepVisual({ step }: { step: number }) {
   // step 5 — chart
   return (
     <div className="rounded-xl border border-violet-400/20 bg-violet-400/5 p-3 mt-3 w-full max-w-[200px]">
-      <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Traffic trend</div>
+      <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Tren traffic</div>
       <svg viewBox="0 0 140 50" className="w-full h-10">
         <polyline
           points="0,45 25,38 50,30 75,22 100,12 125,6 140,3"
@@ -94,10 +94,10 @@ export function SEOProcess() {
     <section className="py-20 px-4 bg-[var(--bg-primary)] overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">How It Works</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">From kickoff to results.</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">Cara Kerjanya</div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Dari kickoff hingga hasil nyata.</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-lg mx-auto">
-            A clear, repeatable process so you always know what happens next.
+            Proses yang jelas dan berulang agar kamu selalu tahu apa yang terjadi selanjutnya.
           </p>
         </div>
 

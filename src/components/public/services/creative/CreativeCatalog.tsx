@@ -43,7 +43,7 @@ function ModuleCard({ mod, index, inView }: { mod: typeof CREATIVE_MODULES[numbe
           className="flex items-center gap-1 text-xs font-semibold transition-colors"
           style={{ color: mod.accentColor }}
         >
-          {open ? 'Less ▲' : 'See details ▼'}
+          {open ? 'Tutup ▲' : 'Lihat detail ▼'}
         </button>
       </div>
 
@@ -91,12 +91,12 @@ export function CreativeCatalog() {
     <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">What We Create</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Apa yang Kami Buat</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Three studios, one creative team.
+            Tiga studio, satu tim kreatif.
           </h2>
           <p className="text-[var(--text-secondary)] max-w-xl mx-auto text-sm leading-relaxed">
-            Every deliverable is custom-built for your brand — no templates, no stock, no shortcuts.
+            Setiap deliverable dibuat kustom untuk brandmu — tidak ada template, tidak ada stock, tidak ada jalan pintas.
           </p>
         </div>
 

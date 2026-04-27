@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const CATEGORIES = [
   {
-    label: 'Social Media Graphics',
+    label: 'Grafis Social Media',
     accent: 'linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)',
     preview: (
       <div className="flex flex-col gap-2 p-4 h-full">
@@ -16,7 +16,7 @@ const CATEGORIES = [
     ),
   },
   {
-    label: 'Brand Identity',
+    label: 'Identitas Brand',
     accent: 'linear-gradient(135deg,#1a0533,#2d1060)',
     preview: (
       <div className="flex flex-col gap-3 p-4 h-full justify-center">
@@ -31,7 +31,7 @@ const CATEGORIES = [
     ),
   },
   {
-    label: 'Video Production',
+    label: 'Produksi Video',
     accent: 'linear-gradient(135deg,#D97706,#F59E0B)',
     preview: (
       <div className="flex flex-col h-full">
@@ -84,7 +84,7 @@ const CATEGORIES = [
     ),
   },
   {
-    label: 'Print & Collateral',
+    label: 'Cetak & Kolateral',
     accent: 'linear-gradient(135deg,#0c4a2d,#14532d)',
     preview: (
       <div className="flex gap-2 p-4 h-full items-center justify-center">
@@ -106,13 +106,13 @@ export function CreativeShowcase() {
   return (
     <section className="py-20 overflow-hidden" style={{ background: '#0A0716' }}>
       <div className="max-w-6xl mx-auto px-4 mb-10">
-        <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Our Craft</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Karya Kami</p>
         <div className="flex items-end justify-between">
           <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">
-            What we make.
+            Apa yang kami buat.
           </h2>
           <Link href="/portfolio" className="text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors">
-            View full portfolio →
+            Lihat portfolio lengkap →
           </Link>
         </div>
       </div>

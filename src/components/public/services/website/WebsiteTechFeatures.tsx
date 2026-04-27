@@ -43,7 +43,7 @@ function PageSpeedGauge({ target }: { target: number }) {
           <text x="50" y="52" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#10B981">{val}</text>
         </svg>
       </div>
-      <span className="text-[10px] text-[var(--text-muted)] mt-1">PageSpeed Score</span>
+      <span className="text-[10px] text-[var(--text-muted)] mt-1">Skor PageSpeed</span>
     </div>
   )
 }
@@ -60,12 +60,12 @@ export function WebsiteTechFeatures() {
     >
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Built With</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Dibangun Dengan</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-3">
-            Every site we build meets these standards.
+            Setiap site yang kami bangun memenuhi standar ini.
           </h2>
           <p className="text-sm text-[var(--text-muted)]">
-            Not optional extras — these are our baseline for every project.
+            Bukan fitur tambahan opsional — ini adalah baseline kami untuk setiap proyek.
           </p>
         </div>
 
@@ -83,9 +83,9 @@ export function WebsiteTechFeatures() {
               style={{ background: 'radial-gradient(ellipse at top right, rgba(6,182,212,0.07) 0%, transparent 70%)' }} />
             <div className="flex flex-col sm:flex-row gap-6 items-start">
               <div className="flex-1">
-                <h3 className="font-extrabold text-[var(--text-primary)] text-lg mb-2">Performance-First Build</h3>
+                <h3 className="font-extrabold text-[var(--text-primary)] text-lg mb-2">Build Prioritaskan Performa</h3>
                 <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  Every site ships with under 2-second load times. Code-split bundles, lazy-loaded images, optimized fonts, and CDN delivery. We don't just build — we build fast. Your PageSpeed score will be 90+ or we fix it for free.
+                  Setiap site dikirim dengan load time di bawah 2 detik. Bundle code-split, gambar lazy-loaded, font teroptimasi, dan pengiriman via CDN. Kami tidak hanya membangun — kami membangun dengan cepat. Skor PageSpeed-mu akan 90+ atau kami perbaiki gratis.
                 </p>
               </div>
               <div className="shrink-0">
@@ -104,9 +104,9 @@ export function WebsiteTechFeatures() {
           >
             <div className="absolute right-2 top-2 text-5xl font-black pointer-events-none select-none"
               style={{ color: '#7C3AED', opacity: 0.05 }}>70%</div>
-            <h3 className="font-extrabold text-[var(--text-primary)] mb-2">Mobile-First Responsive</h3>
+            <h3 className="font-extrabold text-[var(--text-primary)] mb-2">Responsif Mobile-First</h3>
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-              Designed for mobile screens first, then scaled up. Over 70% of Indonesian web traffic is mobile — your site looks perfect on every device, every orientation.
+              Didesain untuk layar mobile dulu, baru diperluas. Lebih dari 70% traffic web Indonesia berasal dari mobile — sitemu terlihat sempurna di setiap perangkat dan orientasi.
             </p>
           </motion.div>
         </div>

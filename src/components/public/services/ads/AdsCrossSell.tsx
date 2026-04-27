@@ -11,8 +11,8 @@ const CARDS = [
     accentRgb: '124,58,237',
     title: 'SEO & Content Marketing',
     description:
-      'Capture organic traffic that compounds while your ads drive immediate results. SEO + Ads together means you dominate both paid and organic — your competitors see you everywhere.',
-    pricing: 'Starting from Rp 6 Juta/mo',
+      'Tangkap traffic organik yang terus berkembang sementara iklanmu mendatangkan hasil cepat. SEO + Ads bersama artinya kamu mendominasi paid dan organic — kompetitor melihatmu di mana-mana.',
+    pricing: 'Mulai dari Rp 6 Juta/bln',
   },
   {
     href: '/services/creative-services',
@@ -20,8 +20,8 @@ const CARDS = [
     accentRgb: '245,158,11',
     title: 'Creative Services',
     description:
-      'High-performing ads need scroll-stopping creative. Our design and video team produces ad assets that don\'t look like ads — from Meta carousels to TikTok native videos.',
-    pricing: 'Project-based pricing',
+      'Iklan yang perform butuh kreativitas yang bikin berhenti scroll. Tim desain dan video kami memproduksi aset iklan yang tidak terlihat seperti iklan — dari Meta carousel hingga video native TikTok.',
+    pricing: 'Harga per proyek',
   },
 ] as const
 
@@ -37,9 +37,9 @@ export function AdsCrossSell() {
     >
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Pairs Well With</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Cocok dikombinasikan dengan</p>
           <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">
-            Amplify your results.
+            Perkuat hasilmu.
           </h2>
         </div>
 
@@ -61,7 +61,7 @@ export function AdsCrossSell() {
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[var(--text-muted)]">{card.pricing}</span>
                   <span className="text-sm font-semibold group-hover:translate-x-1 transition-transform" style={{ color: card.accent }}>
-                    Learn more →
+                    Pelajari lebih lanjut →
                   </span>
                 </div>
               </Link>

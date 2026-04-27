@@ -67,10 +67,10 @@ export function SocialProcess() {
     <section className="py-20 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-5xl mx-auto">
         <div className="mb-10">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">How It Works</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">From kickoff to results.</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Cara Kerjanya</div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Dari kickoff hingga hasil nyata.</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            A clear onboarding process so you know exactly what happens when — and when content goes live.
+            Proses onboarding yang jelas supaya kamu tahu persis apa yang terjadi — dan kapan konten tayang.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export function SocialProcess() {
         <div className="mt-8 flex items-center gap-3">
           <div className="h-px flex-1 bg-[var(--border-default)]" />
           <p className="text-xs text-[var(--text-muted)] text-center max-w-sm px-4">
-            Then the monthly cycle repeats. Each month builds on the last — we analyze what worked, refine the strategy, and produce the next round of content.
+            Lalu siklus bulanan berulang. Setiap bulan membangun bulan sebelumnya — kami analisis apa yang berhasil, sempurnakan strategi, dan produksi konten berikutnya.
           </p>
           <div className="h-px flex-1 bg-[var(--border-default)]" />
         </div>

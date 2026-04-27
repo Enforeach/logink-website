@@ -11,8 +11,8 @@ const SERVICES = [
     color: '#F59E0B',
     rgb: '245,158,11',
     description:
-      'Need custom video production, brand photography, or motion graphics? Our Creative Services team produces the visual assets that make your social content stand out from the scroll.',
-    price: 'Project-based pricing',
+      'Butuh produksi video kustom, foto brand, atau motion graphics? Tim Creative Services kami memproduksi aset visual yang membuat konten sosialmu beda dari yang lain.',
+    price: 'Harga per proyek',
     href: '/services/creative-services',
   },
   {
@@ -20,8 +20,8 @@ const SERVICES = [
     color: '#D97706',
     rgb: '217,119,6',
     description:
-      'Amplify your best organic content with targeted paid campaigns. Retarget engaged followers, reach lookalike audiences, and drive conversions with Meta Ads and TikTok Ads.',
-    price: 'Starting from Rp 6 Juta/mo',
+      'Amplifikasi konten organik terbaikmu dengan kampanye berbayar tertarget. Retarget followers yang engaged, jangkau lookalike audience, dan dorong konversi dengan Meta Ads dan TikTok Ads.',
+    price: 'Mulai dari Rp 6 Juta/bln',
     href: '/services/paid-advertising',
   },
 ]
@@ -34,9 +34,9 @@ export function SocialCrossSell() {
     <section className="py-20 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-4xl mx-auto" ref={ref}>
         <div className="mb-10">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Pairs Well With</div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Cocok dikombinasikan dengan</div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)]">
-            More ways to grow your brand.
+            Lebih banyak cara untuk tumbuh.
           </h2>
         </div>
 
@@ -67,7 +67,7 @@ export function SocialCrossSell() {
                 className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
                 style={{ color: svc.color }}
               >
-                Learn more
+                Pelajari lebih lanjut
                 <ArrowRight size={14} />
               </Link>
             </motion.div>

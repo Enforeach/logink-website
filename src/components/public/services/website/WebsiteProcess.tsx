@@ -15,12 +15,12 @@ export function WebsiteProcess() {
     <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#06B6D4] mb-3">How We Work</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#06B6D4] mb-3">Cara Kami Bekerja</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            From brief to launch.
+            Dari brief hingga launch.
           </h2>
           <p className="text-sm text-[var(--text-muted)]">
-            5 phases, full transparency. You'll always know where your project stands.
+            5 fase, transparansi penuh. Kamu selalu tahu di mana posisi proyekmu.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export function WebsiteProcess() {
           <div className="flex mb-3 pl-48">
             {Array.from({ length: totalWeeks }, (_, i) => (
               <div key={i} className="flex-1 text-center text-[10px] text-[var(--text-muted)]">
-                {i === 0 ? 'Day 1-3' : `Wk ${i}`}
+                {i === 0 ? 'Hari 1-3' : `Mgg ${i}`}
               </div>
             ))}
           </div>

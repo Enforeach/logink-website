@@ -13,7 +13,7 @@ export function CreativeFAQ() {
         <div className="text-center mb-12">
           <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">FAQ</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
-            Questions answered.
+            Pertanyaan yang sering ditanyakan.
           </h2>
         </div>
 

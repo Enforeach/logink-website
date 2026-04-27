@@ -12,9 +12,9 @@ export function CreativeProcess() {
     <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">How We Create</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Cara Kami Berkreasi</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            From brief to brilliant.
+            Dari brief hingga brilian.
           </h2>
         </div>
 

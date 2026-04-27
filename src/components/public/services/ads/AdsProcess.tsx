@@ -17,12 +17,12 @@ export function AdsProcess() {
       <div className="max-w-4xl mx-auto">
 
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">How It Works</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Cara Kerjanya</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            From kickoff to results.
+            Dari kickoff hingga hasil nyata.
           </h2>
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-sm">
-            A clear, repeatable process so you always know what happens next.
+            Proses yang jelas dan berulang supaya kamu selalu tahu apa yang terjadi berikutnya.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export function AdsProcess() {
                 {'isOngoing' in step && step.isOngoing && (
                   <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full"
                     style={{ background: 'rgba(16,185,129,0.15)', color: '#10B981', border: '1px solid rgba(16,185,129,0.3)' }}>
-                    Ongoing
+                    Berkelanjutan
                   </span>
                 )}
               </div>

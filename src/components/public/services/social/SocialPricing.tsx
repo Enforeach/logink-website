@@ -154,10 +154,10 @@ export function SocialPricing() {
         <div className="mb-12">
           <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Pricing</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
-            Build your social media package.
+            Bangun paket social media-mu sendiri.
           </h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            Every brand is different. Select the modules you need, tell us your volume, and we'll send you a custom proposal within 24 hours.
+            Setiap brand berbeda. Pilih modul yang kamu butuhkan, kasih tahu volume-nya, dan kami kirim proposal kustom dalam 24 jam.
           </p>
         </div>
 
@@ -196,10 +196,10 @@ export function SocialPricing() {
                     </div>
                   </div>
                   <p className="text-sm text-[var(--text-secondary)] mb-3">
-                    Content planning, design, posting, and community management across Instagram, TikTok, and Facebook.
+                    Perencanaan konten, desain, posting, dan community management di Instagram, TikTok, dan Facebook.
                   </p>
                   <div className="flex flex-wrap gap-1.5">
-                    {['Content Plan', 'Visual Design', 'Captions', 'Community Mgmt', 'Monthly Report'].map((tag) => (
+                    {['Rencana Konten', 'Desain Visual', 'Caption', 'Community Mgmt', 'Laporan Bulanan'].map((tag) => (
                       <span key={tag} className="px-2 py-0.5 rounded-full text-[10px] border border-[var(--border-default)] text-[var(--text-muted)]">
                         {tag}
                       </span>
@@ -221,7 +221,7 @@ export function SocialPricing() {
                     <div className="mt-5 pt-5 border-t border-[var(--border-default)] pl-9 space-y-4">
                       {/* Platform toggles */}
                       <div>
-                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Active platforms</div>
+                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Platform aktif</div>
                         <div className="flex gap-2 flex-wrap">
                           {[
                             { key: 'instagram', label: 'Instagram', color: PLATFORM_COLORS.Instagram },
@@ -249,7 +249,7 @@ export function SocialPricing() {
 
                       {/* Posts/month */}
                       <div>
-                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Posts per month (per platform)</div>
+                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Post per bulan (per platform)</div>
                         <SegmentedControl
                           options={[8, 12, 16, 20, 'Custom']}
                           value={org.postsPerMonth}
@@ -257,7 +257,7 @@ export function SocialPricing() {
                           accentColor={ORGANIC_ACCENT}
                         />
                         <p className="text-[11px] text-[var(--text-muted)] mt-1.5">
-                          Recommended: 12–20 posts per platform for consistent visibility
+                          Rekomendasi: 12–20 post per platform untuk visibilitas yang konsisten
                         </p>
                       </div>
                     </div>
@@ -296,10 +296,10 @@ export function SocialPricing() {
                     </span>
                   </div>
                   <p className="text-sm text-[var(--text-secondary)] mb-3">
-                    Dedicated TikTok content creation with local trend research, video production, and algorithm optimization.
+                    Pembuatan konten TikTok khusus dengan riset tren lokal, produksi video, dan optimasi algoritma.
                   </p>
                   <div className="flex flex-wrap gap-1.5">
-                    {['Trend Research', 'Video Production', 'Hook Optimization', 'Hashtag Strategy', 'Analytics'].map((tag) => (
+                    {['Riset Tren', 'Produksi Video', 'Optimasi Hook', 'Strategi Hashtag', 'Analytics'].map((tag) => (
                       <span key={tag} className="px-2 py-0.5 rounded-full text-[10px] border border-[var(--border-default)] text-[var(--text-muted)]">
                         {tag}
                       </span>
@@ -319,7 +319,7 @@ export function SocialPricing() {
                   >
                     <div className="mt-5 pt-5 border-t border-[var(--border-default)] pl-9 space-y-4">
                       <div>
-                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Videos per month</div>
+                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Video per bulan</div>
                         <SegmentedControl
                           options={[4, 8, 12, 'Custom']}
                           value={tiktok.videosPerMonth}
@@ -327,7 +327,7 @@ export function SocialPricing() {
                           accentColor={TIKTOK_ACCENT}
                         />
                         <p className="text-[11px] text-[var(--text-muted)] mt-1.5">
-                          Includes concept, scripting, shooting (Jakarta), editing, and optimization
+                          Sudah termasuk konsep, skrip, syuting (Jakarta), editing, dan optimasi
                         </p>
                       </div>
                     </div>
@@ -366,10 +366,10 @@ export function SocialPricing() {
                     </span>
                   </div>
                   <p className="text-sm text-[var(--text-secondary)] mb-3">
-                    Company page optimization, thought leadership content, and connection strategy for B2B brands.
+                    Optimasi halaman perusahaan, konten thought leadership, dan strategi koneksi untuk brand B2B.
                   </p>
                   <div className="flex flex-wrap gap-1.5">
-                    {['Page Optimization', 'Thought Leadership', 'Engagement Strategy', 'Analytics'].map((tag) => (
+                    {['Optimasi Halaman', 'Thought Leadership', 'Strategi Engagement', 'Analytics'].map((tag) => (
                       <span key={tag} className="px-2 py-0.5 rounded-full text-[10px] border border-[var(--border-default)] text-[var(--text-muted)]">
                         {tag}
                       </span>
@@ -389,7 +389,7 @@ export function SocialPricing() {
                   >
                     <div className="mt-5 pt-5 border-t border-[var(--border-default)] pl-9 space-y-4">
                       <div>
-                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Posts per month</div>
+                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Post per bulan</div>
                         <SegmentedControl
                           options={[4, 8, 12, 'Custom']}
                           value={linkedin.postsPerMonth}
@@ -398,7 +398,7 @@ export function SocialPricing() {
                         />
                       </div>
                       <div>
-                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Profiles managed</div>
+                        <div className="text-xs font-semibold text-[var(--text-secondary)] mb-2">Profil yang dikelola</div>
                         <SegmentedControl
                           options={[1, 2, 3, 'Custom']}
                           value={linkedin.profilesManaged}
@@ -406,7 +406,7 @@ export function SocialPricing() {
                           accentColor={LINKEDIN_ACCENT}
                         />
                         <p className="text-[11px] text-[var(--text-muted)] mt-1.5">
-                          Company page + executive profiles — each gets tailored content
+                          Halaman perusahaan + profil eksekutif — masing-masing dapat konten yang disesuaikan
                         </p>
                       </div>
                     </div>
@@ -424,7 +424,7 @@ export function SocialPricing() {
             className="rounded-xl border border-dashed border-[var(--border-default)] bg-[var(--bg-surface)] p-5"
           >
             <div className="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)] mb-4">
-              Optional Add-ons
+              Add-on Tersedia
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {SOCIAL_ADDONS.map((addon) => {
@@ -480,27 +480,27 @@ export function SocialPricing() {
               }}
             >
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-sm font-bold text-[var(--text-primary)]">📋 Your package summary</span>
+                <span className="text-sm font-bold text-[var(--text-primary)]">📋 Ringkasan paketmu</span>
               </div>
 
               <ul className="space-y-2 mb-4">
                 {org.selected && (
                   <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
                     <Check size={14} className="text-pink-400 flex-shrink-0" />
-                    Organic Social ({selectedPlatforms.length > 0 ? selectedPlatforms.join(' + ') : 'no platforms selected'},{' '}
-                    {org.postsPerMonth} posts/mo per platform)
+                    Organic Social ({selectedPlatforms.length > 0 ? selectedPlatforms.join(' + ') : 'belum ada platform dipilih'},{' '}
+                    {org.postsPerMonth} post/bln per platform)
                   </li>
                 )}
                 {tiktok.selected && (
                   <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
                     <Check size={14} className="text-pink-400 flex-shrink-0" />
-                    TikTok Strategy ({tiktok.videosPerMonth} videos/mo)
+                    TikTok Strategy ({tiktok.videosPerMonth} video/bln)
                   </li>
                 )}
                 {linkedin.selected && (
                   <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
                     <Check size={14} className="text-pink-400 flex-shrink-0" />
-                    LinkedIn Management ({linkedin.postsPerMonth} posts/mo, {linkedin.profilesManaged} profiles)
+                    LinkedIn Management ({linkedin.postsPerMonth} post/bln, {linkedin.profilesManaged} profil)
                   </li>
                 )}
                 {addons.influencerMarketing && (
@@ -518,8 +518,8 @@ export function SocialPricing() {
               </ul>
 
               <div className="text-xs text-[var(--text-muted)] mb-5 leading-relaxed">
-                <span className="font-semibold text-[var(--text-secondary)]">Pricing: Custom</span> — based on your selections above.
-                We'll review your requirements and send a detailed proposal with pricing within 24 hours. No commitment required.
+                <span className="font-semibold text-[var(--text-secondary)]">Harga: Kustom</span> — berdasarkan pilihan di atas.
+                Kami akan review kebutuhanmu dan kirim proposal lengkap dalam 24 jam. Tanpa komitmen.
               </div>
 
               <div className="flex flex-wrap gap-3">
@@ -528,7 +528,7 @@ export function SocialPricing() {
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm hover:scale-[1.02] transition-all duration-200"
                   style={{ background: 'linear-gradient(135deg,#DB2777,#7C3AED)' }}
                 >
-                  Get Your Custom Quote →
+                  Dapatkan Penawaran Kustom →
                 </Link>
                 <a
                   href={`https://wa.me/628119401714?text=${waMessage}`}
@@ -540,7 +540,7 @@ export function SocialPricing() {
                   <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                   </svg>
-                  Chat on WhatsApp
+                  Chat di WhatsApp
                 </a>
               </div>
             </motion.div>
@@ -549,7 +549,7 @@ export function SocialPricing() {
 
         {!anySelected && (
           <div className="mt-5 rounded-xl border border-dashed border-[var(--border-default)] p-5 text-center">
-            <p className="text-sm text-[var(--text-muted)]">Select at least one module above to build your package.</p>
+            <p className="text-sm text-[var(--text-muted)]">Pilih minimal satu modul di atas untuk membangun paketmu.</p>
           </div>
         )}
       </div>

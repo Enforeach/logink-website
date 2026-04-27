@@ -5,9 +5,9 @@ import { motion, useInView } from 'framer-motion'
 import { WEBSITE_COMPARISON_TABLE } from './data'
 
 const COLUMNS = [
-  { key: 'landing' as const, label: 'Landing Page', accentColor: '#06B6D4', bestFor: 'Campaigns & lead gen' },
-  { key: 'profile' as const, label: 'Company Profile', accentColor: '#7C3AED', bestFor: 'Brand presence' },
-  { key: 'ecommerce' as const, label: 'E-Commerce', accentColor: '#10B981', bestFor: 'Online stores' },
+  { key: 'landing' as const, label: 'Landing Page', accentColor: '#06B6D4', bestFor: 'Kampanye & lead gen' },
+  { key: 'profile' as const, label: 'Company Profile', accentColor: '#7C3AED', bestFor: 'Kehadiran brand' },
+  { key: 'ecommerce' as const, label: 'E-Commerce', accentColor: '#10B981', bestFor: 'Toko online' },
 ]
 
 function CheckIcon({ color }: { color: string }) {
@@ -28,7 +28,7 @@ export function WebsiteScopeTable() {
         <thead>
           <tr className="border-b border-white/10 bg-white/5">
             <th className="text-left px-5 py-4 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] w-1/2">
-              Feature
+              Fitur
             </th>
             {COLUMNS.map((col) => (
               <th key={col.key} className="px-4 py-4 text-center w-[16.6%]">

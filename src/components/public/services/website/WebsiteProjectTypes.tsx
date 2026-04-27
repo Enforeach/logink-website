@@ -94,10 +94,10 @@ export function WebsiteProjectTypes() {
     <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-4">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">What We Build</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Apa yang Kami Bangun</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Three types of web projects.{' '}
-            <span className="gradient-text">One standard of quality.</span>
+            Tiga tipe proyek web.{' '}
+            <span className="gradient-text">Satu standar kualitas.</span>
           </h2>
         </div>
 
@@ -109,7 +109,7 @@ export function WebsiteProjectTypes() {
               All projects <span className="gradient-text">starting from Rp 10 Juta</span>
             </span>
             <span className="text-xs text-[var(--text-muted)] mt-1">
-              Final scope and pricing provided after a free Discovery call.
+              Scope dan harga final diberikan setelah Discovery call gratis.
             </span>
           </div>
         </div>
@@ -158,7 +158,7 @@ export function WebsiteProjectTypes() {
                   </div>
 
                   <div className="text-xs text-[var(--text-muted)]">
-                    <span className="font-semibold text-[var(--text-secondary)]">Best for:</span>{' '}
+                    <span className="font-semibold text-[var(--text-secondary)]">Cocok untuk:</span>{' '}
                     {pt.bestFor}
                   </div>
                 </div>
@@ -179,10 +179,10 @@ export function WebsiteProjectTypes() {
             href="/contact?service=website-landing-page"
             className="inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-bold text-white gradient-bg shadow-lg transition-transform hover:scale-105"
           >
-            Get a Custom Quote →
+            Dapatkan Penawaran Kustom →
           </Link>
           <p className="mt-3 text-xs text-[var(--text-muted)]">
-            Tell us about your project and we'll send a detailed scope and proposal within 48 hours.
+            Ceritakan proyekmu dan kami akan kirim scope serta proposal detail dalam 48 jam.
           </p>
         </div>
       </div>

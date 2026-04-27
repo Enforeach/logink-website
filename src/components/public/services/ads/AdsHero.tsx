@@ -14,9 +14,9 @@ const FUNNEL = [
 const RATES = ['8.25% CTR', '25.5% CVR', '20% Close']
 
 const TRUST_PILLS = [
-  '✓ 2-4× average ROAS',
-  '✓ Full account access',
-  '✓ Weekly optimization reports',
+  '✓ Rata-rata ROAS 2-4×',
+  '✓ Akses akun penuh',
+  '✓ Laporan optimasi mingguan',
 ]
 
 function AnimatedBar({ bar, index, inView }: { bar: typeof FUNNEL[0]; index: number; inView: boolean }) {
@@ -109,12 +109,12 @@ export function AdsHero() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
-            Every Rupiah Invested.{' '}
-            <span className="gradient-text">Maximum Return Delivered.</span>
+            Setiap Rupiah Terinvestasi.{' '}
+            <span className="gradient-text">Return Maksimal Terwujud.</span>
           </h1>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed max-w-md">
-            Data-driven paid campaigns across Google, Meta, TikTok, and Indonesian marketplace platforms. We target the right audience at the right moment — and optimize relentlessly until ROAS hits 2–4×. No wasted spend, no guesswork, no long-term lock-in contracts.
+            Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami bidik audiens yang tepat di momen yang tepat — dan optimalkan tanpa henti sampai ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, tanpa kontrak lock-in jangka panjang.
           </p>
 
           <div className="flex flex-wrap gap-2">
@@ -130,13 +130,13 @@ export function AdsHero() {
               href="/contact?service=paid-advertising"
               className="gradient-bg px-6 py-3 rounded-xl font-semibold text-white text-sm hover:scale-[1.02] hover:shadow-lg hover:shadow-amber-500/20 transition-all"
             >
-              Start Free Consultation →
+              Mulai Konsultasi Gratis →
             </Link>
             <a
               href="#pricing"
               className="px-6 py-3 rounded-xl font-semibold text-sm border border-white/15 text-[var(--text-secondary)] hover:border-white/30 hover:text-[var(--text-primary)] transition-all"
             >
-              See Pricing
+              Lihat Harga
             </a>
           </div>
         </motion.div>
@@ -187,7 +187,7 @@ export function AdsHero() {
                 </svg>
                 ROAS: 3.2×+
               </motion.div>
-              <span className="text-xs text-[var(--text-muted)]">at 90-day mark</span>
+              <span className="text-xs text-[var(--text-muted)]">di hari ke-90</span>
             </motion.div>
           </motion.div>
         </motion.div>

@@ -22,10 +22,10 @@ export function AdsPricing() {
         <div className="text-center mb-14">
           <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Pricing</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Choose your plan.
+            Pilih paketmu.
           </h2>
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-sm">
-            Transparent, no-surprise pricing. All plans include full account access and weekly optimization.
+            Harga transparan, tanpa kejutan. Semua paket mencakup akses akun penuh dan optimasi mingguan.
           </p>
         </div>
 
@@ -47,7 +47,7 @@ export function AdsPricing() {
               {tier.isPopular && (
                 <div className="text-center py-2 text-xs font-bold uppercase tracking-widest text-amber-900"
                   style={{ background: 'linear-gradient(90deg,#D97706,#F59E0B)' }}>
-                  ★ Most Popular
+                  ★ Paling Populer
                 </div>
               )}
 
@@ -56,12 +56,12 @@ export function AdsPricing() {
                 <div>
                   <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-1">{tier.name}</div>
                   <div className="text-3xl font-extrabold text-[var(--text-primary)]">{tier.price}</div>
-                  <div className="text-xs text-[var(--text-muted)]">{tier.period} — management fee</div>
+                  <div className="text-xs text-[var(--text-muted)]">{tier.period} — biaya manajemen</div>
                   <div className="mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold"
                     style={{ background: 'rgba(217,119,6,0.12)', color: '#D97706', border: '1px solid rgba(217,119,6,0.25)' }}>
                     {tier.platformCoverage}
                   </div>
-                  <p className="text-[11px] text-[var(--text-muted)] mt-1">Best for: {tier.bestFor}</p>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-1">Cocok untuk: {tier.bestFor}</p>
                 </div>
 
                 {/* Features */}
@@ -87,7 +87,7 @@ export function AdsPricing() {
 
                 {/* Ad spend note */}
                 <div className="text-[11px] text-[var(--text-muted)] border-t border-white/10 pt-3">
-                  Recommended ad spend: <span className="text-amber-400 font-semibold">{tier.recommendedAdSpend}</span>
+                  Rekomendasi budget iklan: <span className="text-amber-400 font-semibold">{tier.recommendedAdSpend}</span>
                 </div>
 
                 {/* CTA */}
@@ -99,7 +99,7 @@ export function AdsPricing() {
                       : 'border border-white/15 text-[var(--text-secondary)] hover:border-white/30 hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  Get Started
+                  Mulai Sekarang
                 </Link>
               </div>
             </motion.div>
@@ -107,7 +107,7 @@ export function AdsPricing() {
         </div>
 
         <p className="text-center text-xs text-[var(--text-muted)] mb-10">
-          Management fee only — ad spend budget is paid directly to Google, Meta, TikTok, and marketplace platforms.
+          Biaya manajemen saja — budget iklan dibayarkan langsung ke Google, Meta, TikTok, dan platform marketplace.
         </p>
 
         {/* Comparison table */}
@@ -115,7 +115,7 @@ export function AdsPricing() {
 
         {/* Add-ons */}
         <div className="mt-14">
-          <h3 className="text-lg font-bold text-[var(--text-primary)] text-center mb-6">Add-ons</h3>
+          <h3 className="text-lg font-bold text-[var(--text-primary)] text-center mb-6">Add-on Tersedia</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {ADS_ADDONS.map((addon, i) => (
               <motion.div
@@ -147,20 +147,20 @@ export function AdsPricing() {
           <div className="flex items-start gap-3">
             <span className="text-xl">💡</span>
             <div>
-              <h4 className="font-bold text-[var(--text-primary)] mb-2">About Ad Spend</h4>
+              <h4 className="font-bold text-[var(--text-primary)] mb-2">Tentang Budget Iklan</h4>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-3">
-                The prices above are management fees — what you pay Logink to strategize, set up, optimize, and report on your campaigns. Ad spend (the budget paid to Google, Meta, TikTok, etc.) is separate and goes directly to the platforms. You control the budget. We recommend:
+                Harga di atas adalah biaya manajemen — yang kamu bayar ke Logink untuk strategi, setup, optimasi, dan pelaporan kampanye. Budget iklan (yang dibayarkan ke Google, Meta, TikTok, dll.) terpisah dan langsung ke platform. Kamu yang kontrol budgetnya. Rekomendasi kami:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
                 {ADS_PRICING_TIERS.map((t) => (
                   <div key={t.name} className="rounded-lg bg-white/5 px-3 py-2">
                     <div className="font-semibold text-amber-400">{t.name}</div>
-                    <div className="text-[var(--text-muted)] text-xs">{t.recommendedAdSpend} ad spend</div>
+                    <div className="text-[var(--text-muted)] text-xs">{t.recommendedAdSpend} budget iklan</div>
                   </div>
                 ))}
               </div>
               <p className="text-xs text-[var(--text-muted)] mt-3">
-                You'll always have full access to your ad accounts and can see exactly where every rupiah goes.
+                Kamu selalu punya akses penuh ke akun iklanmu dan bisa melihat persis ke mana setiap rupiahmu pergi.
               </p>
             </div>
           </div>

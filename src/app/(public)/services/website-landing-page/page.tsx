@@ -15,13 +15,13 @@ import { WEBSITE_FAQS } from '@/components/public/services/website/data'
 export const metadata: Metadata = buildMetadata({
   title: 'Website & Landing Page | Logink - Digital Marketing Agency',
   description:
-    'High-performance websites and landing pages for Indonesian brands. CRO-focused design, mobile-first, under 2s load time. Starting from Rp 10 Juta.',
+    'Website dan landing page berperforma tinggi untuk brand Indonesia. Desain fokus CRO, mobile-first, waktu muat di bawah 2 detik. Mulai dari Rp 10 Juta.',
   path: '/services/website-landing-page',
 })
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://logink.id' },
-  { name: 'Services', url: 'https://logink.id/services' },
+  { name: 'Beranda', url: 'https://logink.id' },
+  { name: 'Layanan', url: 'https://logink.id/services' },
   { name: 'Website & Landing Page', url: 'https://logink.id/services/website-landing-page' },
 ]
 

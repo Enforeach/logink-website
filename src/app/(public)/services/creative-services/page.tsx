@@ -14,13 +14,13 @@ import { CREATIVE_FAQS } from '@/components/public/services/creative/data'
 export const metadata: Metadata = buildMetadata({
   title: 'Creative Services | Logink - Digital Marketing Agency',
   description:
-    'Custom graphic design, video production, and copywriting for Indonesian brands. Brand identity, social media content, ad creative, and more. 100% original, no templates.',
+    'Desain grafis, produksi video, dan copywriting kustom untuk brand Indonesia. Brand identity, konten social media, ad creative, dan lainnya. 100% original, tanpa template.',
   path: '/services/creative-services',
 })
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://logink.id' },
-  { name: 'Services', url: 'https://logink.id/services' },
+  { name: 'Beranda', url: 'https://logink.id' },
+  { name: 'Layanan', url: 'https://logink.id/services' },
   { name: 'Creative Services', url: 'https://logink.id/services/creative-services' },
 ]
 

@@ -13,13 +13,13 @@ import { ADS_FAQS } from '@/components/public/services/ads/data'
 export const metadata: Metadata = buildMetadata({
   title: 'Paid Advertising | Logink - Digital Marketing Agency',
   description:
-    'Data-driven paid campaigns across Google, Meta, TikTok, and Indonesian marketplaces. 2-4× ROAS. Transparent reporting, full account access. Starting from Rp 6 Juta/month.',
+    'Iklan berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. ROAS 2-4×. Laporan transparan, akses akun penuh. Mulai dari Rp 6 Juta/bulan.',
   path: '/services/paid-advertising',
 })
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://logink.id' },
-  { name: 'Services', url: 'https://logink.id/services' },
+  { name: 'Beranda', url: 'https://logink.id' },
+  { name: 'Layanan', url: 'https://logink.id/services' },
   { name: 'Paid Advertising', url: 'https://logink.id/services/paid-advertising' },
 ]
 

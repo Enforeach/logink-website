@@ -31,10 +31,10 @@ export function SEOFeatures() {
     <section className="py-20 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">What You Get</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Everything included.</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">Apa yang Kamu Dapat</div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Semua sudah termasuk.</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            No hidden extras. Every deliverable your brand needs to grow, under one roof.
+            Tidak ada biaya tersembunyi. Semua deliverable yang dibutuhkan brandmu untuk tumbuh, dalam satu atap.
           </p>
         </div>
 

@@ -86,16 +86,16 @@ export function WebsiteHero() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] leading-tight mb-5">
-            Convert Visitors Into Customers.{' '}
-            <span className="gradient-text">Built to Perform.</span>
+            Ubah Pengunjung Jadi Pelanggan.{' '}
+            <span className="gradient-text">Dibangun untuk Perform.</span>
           </h1>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed mb-8 max-w-lg">
-            We design and build high-performance websites and landing pages — fast, mobile-first, and wired for conversion. From campaign landing pages to full e-commerce stores, every site is built to load in under 2 seconds, rank on Google, and turn traffic into revenue.
+            Kami desain dan bangun website serta landing page berperforma tinggi — cepat, mobile-first, dan dirancang untuk konversi. Dari landing page kampanye hingga toko e-commerce penuh, setiap site dibangun untuk load di bawah 2 detik, ranking di Google, dan mengubah traffic menjadi revenue.
           </p>
 
           <div className="flex flex-wrap gap-3 mb-8">
-            {['Under 2s load time', 'Mobile-first responsive', 'GA4 + pixel tracking included'].map((pill) => (
+            {['Load time di bawah 2 detik', 'Responsif mobile-first', 'GA4 + pixel tracking termasuk'].map((pill) => (
               <span key={pill} className="inline-flex items-center gap-1.5 text-xs text-[#10B981] font-medium">
                 <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -110,13 +110,13 @@ export function WebsiteHero() {
               href="/contact?service=website-landing-page"
               className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white gradient-bg shadow-lg transition-transform hover:scale-105"
             >
-              Start Free Consultation →
+              Mulai Konsultasi Gratis →
             </Link>
             <a
               href="#pricing"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:border-white/40"
             >
-              See Pricing
+              Lihat Harga
             </a>
           </div>
         </motion.div>

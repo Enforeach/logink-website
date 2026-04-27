@@ -56,12 +56,12 @@ export function SocialPillars() {
     <section className="py-20 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Our Approach</div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Pendekatan Kami</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
-            Every post serves a purpose.
+            Setiap post punya tujuan.
           </h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
-            Our content strategy is built on three pillars that move followers from awareness to action.
+            Strategi konten kami dibangun di atas tiga pilar yang menggerakkan followers dari awareness ke aksi nyata.
           </p>
         </div>
 
@@ -120,7 +120,7 @@ export function SocialPillars() {
               >
                 {pillar.percentage}%
                 <span className="text-sm font-normal ml-1" style={{ WebkitTextFillColor: 'var(--text-muted)' }}>
-                  of content mix
+                  dari mix konten
                 </span>
               </div>
             </motion.div>

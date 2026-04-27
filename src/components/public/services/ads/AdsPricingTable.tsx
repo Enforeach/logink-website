@@ -27,7 +27,7 @@ export function AdsPricingTable() {
           onClick={() => setOpen((o) => !o)}
           className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors"
         >
-          {open ? 'Hide feature comparison' : 'Compare all features'}
+          {open ? 'Sembunyikan perbandingan fitur' : 'Bandingkan semua fitur'}
           <motion.svg
             animate={{ rotate: open ? 180 : 0 }}
             transition={{ duration: 0.2 }}
@@ -54,7 +54,7 @@ export function AdsPricingTable() {
               <table className="w-full min-w-[520px]">
                 <thead>
                   <tr className="border-b border-white/10" style={{ background: 'rgba(217,119,6,0.05)' }}>
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider w-1/2">Feature</th>
+                    <th className="text-left px-5 py-3 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider w-1/2">Fitur</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-amber-400 uppercase tracking-wider">Entry</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-amber-400 uppercase tracking-wider">Growth</th>
                     <th className="px-4 py-3 text-center text-xs font-semibold text-amber-300 uppercase tracking-wider">Full</th>

@@ -10,16 +10,16 @@ const CROSS_SELLS = [
     name: 'Paid Advertising',
     color: '#D97706',
     description:
-      "Retarget your organic visitors with precision ads. Users who found you via search and didn't convert get a second touchpoint on Meta and Google Display.",
-    startingFrom: 'Starting from Rp 6 Juta/mo',
+      'Retarget pengunjung organikmu dengan iklan presisi. Pengguna yang menemukanmu via search tapi belum konversi mendapat touchpoint kedua di Meta dan Google Display.',
+    startingFrom: 'Mulai dari Rp 6 Juta/bln',
   },
   {
     slug: 'website-landing-page',
     name: 'Website & Landing Page',
     color: '#A78BFA',
     description:
-      'A fast, conversion-optimized website is the foundation of SEO. If your site is slow or poorly structured, no amount of content will save your rankings.',
-    startingFrom: 'Starting from Rp 10 Juta',
+      'Website yang cepat dan dioptimasi untuk konversi adalah fondasi SEO. Kalau situsmu lambat atau strukturnya buruk, tidak ada konten yang bisa menyelamatkan rankingmu.',
+    startingFrom: 'Mulai dari Rp 10 Juta',
   },
 ]
 
@@ -31,10 +31,10 @@ export function SEOCrossSell() {
     <section className="py-16 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-4xl mx-auto" ref={ref}>
         <div className="mb-8">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-2">Compound Your Results</div>
-          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">Pairs well with</h2>
+          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-2">Perkuat Hasilmu</div>
+          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">Cocok dikombinasikan dengan</h2>
           <p className="text-sm text-[var(--text-secondary)] mt-2">
-            SEO gets you the traffic — these turn it into revenue.
+            SEO membawa trafficnya — layanan ini mengubahnya jadi revenue.
           </p>
         </div>
 

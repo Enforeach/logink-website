@@ -9,15 +9,15 @@ const CARDS = [
     href: '/services/social-media-management',
     accent: '#DB2777',
     title: 'Social Media Management',
-    description: "Great content needs great distribution. Our Social Media team handles strategy, scheduling, and community management — so the creative assets we build actually reach the right audience at the right time.",
-    pricing: 'Custom pricing',
+    description: 'Konten bagus butuh distribusi yang bagus. Tim Social Media kami menangani strategi, penjadwalan, dan community management — supaya aset kreatif yang kami buat benar-benar menjangkau audiens yang tepat di waktu yang tepat.',
+    pricing: 'Harga kustom',
   },
   {
     href: '/services/website-landing-page',
     accent: '#A78BFA',
     title: 'Website & Landing Page',
-    description: 'Need a home for your brand? Our web team builds conversion-optimized websites and landing pages that showcase the visual identity we create.',
-    pricing: 'Starting from Rp 10 Juta',
+    description: 'Butuh rumah untuk brandmu? Tim web kami membangun website dan landing page yang dioptimasi untuk konversi dan menampilkan identitas visual yang kami buat.',
+    pricing: 'Mulai dari Rp 10 Juta',
   },
 ] as const
 
@@ -29,8 +29,8 @@ export function CreativeCrossSell() {
     <section ref={ref} className="py-20 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Pairs Well With</p>
-          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">Amplify your creative.</h2>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Cocok dikombinasikan dengan</p>
+          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">Perkuat kreativitasmu.</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {CARDS.map((card, i) => (
@@ -50,7 +50,7 @@ export function CreativeCrossSell() {
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[var(--text-muted)]">{card.pricing}</span>
                   <span className="text-sm font-semibold group-hover:translate-x-1 transition-transform" style={{ color: card.accent }}>
-                    Learn more →
+                    Pelajari lebih lanjut →
                   </span>
                 </div>
               </Link>

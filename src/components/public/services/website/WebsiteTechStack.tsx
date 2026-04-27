@@ -12,12 +12,12 @@ export function WebsiteTechStack() {
     <section ref={ref} className="py-24 px-4" style={{ background: '#0C0818' }}>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Our Tech Stack</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Tech Stack Kami</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-3">
-            We choose the best tool for your project.
+            Kami pilih tool terbaik untuk proyekmu.
           </h2>
           <p className="text-sm text-[var(--text-muted)] max-w-xl mx-auto leading-relaxed">
-            Not locked into one platform — we recommend based on your scale, budget, and long-term goals.
+            Tidak terpaku pada satu platform — kami rekomendasikan berdasarkan skala, budget, dan tujuan jangka panjangmu.
           </p>
         </div>
 

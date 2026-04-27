@@ -13,13 +13,13 @@ import { SEO_FAQS } from '@/components/public/services/seo/data'
 export const metadata: Metadata = buildMetadata({
   title: 'SEO & Content Marketing | Logink - Digital Marketing Agency',
   description:
-    'Organic search growth for Indonesian brands. Keyword research, SEO articles in Bahasa Indonesia, technical optimization, and transparent reporting. Starting from Rp 6 Juta/month.',
+    'Pertumbuhan organic search untuk brand Indonesia. Riset keyword, artikel SEO dalam Bahasa Indonesia, optimasi teknikal, dan laporan transparan. Mulai dari Rp 6 Juta/bulan.',
   path: '/services/seo-content-marketing',
 })
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://logink.id' },
-  { name: 'Services', url: 'https://logink.id/services' },
+  { name: 'Beranda', url: 'https://logink.id' },
+  { name: 'Layanan', url: 'https://logink.id/services' },
   { name: 'SEO & Content Marketing', url: 'https://logink.id/services/seo-content-marketing' },
 ]
 

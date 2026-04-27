@@ -50,9 +50,9 @@ export function SocialFAQ() {
       <div className="max-w-3xl mx-auto">
         <div className="mb-10">
           <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">FAQ</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Common questions.</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Pertanyaan yang sering ditanyakan.</h2>
           <p className="text-[var(--text-secondary)] mt-3">
-            Everything you need to know before getting started.
+            Semua yang perlu kamu tahu sebelum mulai.
           </p>
         </div>
 

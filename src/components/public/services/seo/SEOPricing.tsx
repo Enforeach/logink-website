@@ -49,7 +49,7 @@ function TierCard({ tier, index }: { tier: typeof SEO_PRICING_TIERS[number]; ind
               {isGrowth && (
                 <span className="text-xs font-bold px-2.5 py-0.5 rounded-full text-white"
                   style={{ background: 'linear-gradient(135deg,#7C3AED,#DB2777)' }}>
-                  Most Popular
+                  Paling Populer
                 </span>
               )}
               {isFull && (
@@ -99,7 +99,7 @@ function TierCard({ tier, index }: { tier: typeof SEO_PRICING_TIERS[number]; ind
               : 'border border-[var(--border-hover)] text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]'
           }`}
         >
-          Start Free Consultation →
+          Mulai Konsultasi Gratis →
         </Link>
       </div>
     </motion.div>
@@ -116,9 +116,9 @@ export function SEOPricing() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">Pricing</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Pick the plan that fits your growth stage.</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">Pilih paket yang sesuai dengan tahap pertumbuhanmu.</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-lg mx-auto">
-            All plans include full GA4 access and monthly reporting. No lock-in contracts.
+            Semua paket mencakup akses GA4 penuh dan laporan bulanan. Tanpa kontrak lock-in.
           </p>
         </div>
 
@@ -134,14 +134,14 @@ export function SEOPricing() {
 
         {/* Add-ons */}
         <div className="mt-12">
-          <h3 className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-5">Optional Add-ons</h3>
+          <h3 className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-5">Add-on Tersedia</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {SEO_ADDONS.map((addon, i) => (
               <div key={i} className="flex items-start justify-between gap-4 p-5 rounded-xl border border-dashed border-[var(--border-hover)] bg-[var(--bg-surface)] hover:border-violet-500/30 transition-colors">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5">
                     <h4 className="font-semibold text-[var(--text-primary)] text-sm">{addon.name}</h4>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full font-semibold text-[var(--text-muted)] border border-[var(--border-default)]">Optional</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full font-semibold text-[var(--text-muted)] border border-[var(--border-default)]">Opsional</span>
                   </div>
                   <p className="text-xs text-[var(--text-secondary)] mb-2">{addon.description}</p>
                   <p className="text-xs font-semibold text-violet-400">{addon.price}</p>
@@ -150,7 +150,7 @@ export function SEOPricing() {
                   href="/contact?service=seo-content-marketing&addon=true"
                   className="text-xs font-semibold text-violet-400 hover:text-violet-300 flex-shrink-0 mt-1 transition-colors"
                 >
-                  Add to quote →
+                  Tambah ke kuota →
                 </Link>
               </div>
             ))}

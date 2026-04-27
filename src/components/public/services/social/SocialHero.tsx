@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 const TRUST_PILLS = [
-  '✓ 100% original content',
-  '✓ Bahasa Indonesia native',
-  '✓ Monthly content calendar',
+  '✓ Konten 100% original',
+  '✓ Native Bahasa Indonesia',
+  '✓ Kalender konten bulanan',
 ]
 
 const POSTS = [
@@ -59,9 +59,9 @@ export function SocialHero() {
 
       <div className="relative max-w-6xl mx-auto w-full z-10">
         <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-10">
-          <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Home</Link>
+          <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Beranda</Link>
           <span>/</span>
-          <Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Services</Link>
+          <Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Layanan</Link>
           <span>/</span>
           <span className="text-[var(--text-secondary)]">Social Media Management</span>
         </nav>
@@ -86,7 +86,7 @@ export function SocialHero() {
               transition={{ duration: 0.55, delay: 0.15 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] leading-tight tracking-tight mb-5"
             >
-              Content That Connects.{' '}
+              Konten yang Nyambung.{' '}
               <span
                 style={{
                   background: 'linear-gradient(135deg,#DB2777,#7C3AED)',
@@ -95,7 +95,7 @@ export function SocialHero() {
                   backgroundClip: 'text',
                 }}
               >
-                Presence That Converts.
+                Kehadiran yang Konversi.
               </span>
             </motion.h1>
 
@@ -105,9 +105,9 @@ export function SocialHero() {
               transition={{ duration: 0.55, delay: 0.3 }}
               className="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed max-w-lg"
             >
-              We take social media completely off your plate — strategy, content creation, scheduling, community management, and performance reporting across Instagram, TikTok, Facebook, and LinkedIn.{' '}
+              Kami urus semua urusan social media-mu — strategi, pembuatan konten, penjadwalan, community management, dan laporan performa di Instagram, TikTok, Facebook, dan LinkedIn.{' '}
               <span className="text-[var(--text-primary)] font-medium">
-                You focus on your business. We make your brand impossible to scroll past.
+                Kamu fokus bisnis. Kami bikin brandmu nggak bisa di-skip.
               </span>
             </motion.p>
 
@@ -125,7 +125,7 @@ export function SocialHero() {
                   boxShadow: '0 4px 24px rgba(219,39,119,0.25)',
                 }}
               >
-                Start Free Consultation
+                Mulai Konsultasi Gratis
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -134,7 +134,7 @@ export function SocialHero() {
                 href="#pricing"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] transition-all duration-200"
               >
-                See Pricing
+                Lihat Harga
               </Link>
             </motion.div>
 

@@ -53,12 +53,12 @@ export function AdsPlatformOverview() {
       <div className="max-w-5xl mx-auto">
 
         <div className="text-center mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Where Your Ads Run</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Tempat Iklanmu Berjalan</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-            Five platforms. One integrated strategy.
+            Lima platform. Satu strategi terpadu.
           </h2>
           <p className="text-[var(--text-secondary)] max-w-xl mx-auto text-sm leading-relaxed">
-            We don't just run ads on one platform and hope. We build cross-platform campaigns where Google captures intent, Meta builds awareness, TikTok drives discovery, and Marketplace converts shoppers.
+            Kami tidak hanya jalankan iklan di satu platform dan berharap. Kami bangun kampanye lintas platform di mana Google menangkap intent, Meta membangun awareness, TikTok mendorong discovery, dan Marketplace mengkonversi pembeli.
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export function AdsPlatformOverview() {
               {/* Right — tier availability */}
               <div className="lg:col-span-2 flex flex-col justify-between gap-6">
                 <div className="rounded-xl border border-white/10 bg-white/3 p-5 space-y-3">
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Available in</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Tersedia di</p>
                   <div className="flex flex-wrap gap-2">
                     <TierBadge available={platform.tiers.entry} name="Entry" />
                     <TierBadge available={platform.tiers.growth} name="Growth" />
@@ -152,7 +152,7 @@ export function AdsPlatformOverview() {
                   className="text-center px-4 py-2.5 rounded-xl text-sm font-semibold border transition-all"
                   style={{ borderColor: `rgba(${platform.accentRgb},0.35)`, color: platform.accentColor }}
                 >
-                  View pricing →
+                  Lihat harga →
                 </a>
               </div>
 
