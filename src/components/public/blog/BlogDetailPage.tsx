@@ -10,8 +10,8 @@ import { TableOfContents } from './TableOfContents'
 import { AuthorBio } from './AuthorBio'
 import { CtaRenderer } from '@/components/public/cta/CtaRenderer'
 
-const ReadingProgress = dynamic(() => import('./ReadingProgress').then(m => ({ default: m.ReadingProgress })), { ssr: false })
-const ShareBar = dynamic(() => import('./ShareBar').then(m => ({ default: m.ShareBar })), { ssr: false })
+const ReadingProgress = dynamic(() => import('./ReadingProgress').then(m => ({ default: m.ReadingProgress })))
+const ShareBar = dynamic(() => import('./ShareBar').then(m => ({ default: m.ShareBar })))
 import { filterCtasForPost, extractHeadings, injectHeadingIds, type CtaWidgetRow } from '@/lib/cta'
 import { resolvePostContent } from '@/lib/i18n/content'
 import { type Locale, t, localePath } from '@/lib/i18n'
