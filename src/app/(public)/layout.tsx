@@ -6,9 +6,9 @@ import { ToastProvider } from '@/components/ui/Toast'
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <ToastProvider>
-      <Navbar />
+      <Navbar locale="id" />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer locale="id" />
       <WhatsAppButton />
     </ToastProvider>
   )

@@ -24,6 +24,7 @@ interface PostEditorProps {
     excerptId?: string | null
     excerptEn?: string | null
     bodyId: string
+    bodyEn?: string | null
     featuredImage?: string | null
     featuredImageAlt?: string | null
     metaTitle?: string | null
@@ -66,11 +67,9 @@ export function PostEditor({ post }: PostEditorProps) {
   const isEdit = !!post
 
   const [titleId, setTitleId] = useState(post?.titleId || '')
-  const [titleEn, setTitleEn] = useState(post?.titleEn || '')
   const [slug, setSlug] = useState(post?.slug || '')
   const [slugTouched, setSlugTouched] = useState(isEdit)
   const [excerptId, setExcerptId] = useState(post?.excerptId || '')
-  const [excerptEn, setExcerptEn] = useState(post?.excerptEn || '')
   const [featuredImage, setFeaturedImage] = useState(post?.featuredImage || '')
   const [featuredImageAlt, setFeaturedImageAlt] = useState(post?.featuredImageAlt || '')
   const [metaTitle, setMetaTitle] = useState(post?.metaTitle || '')
@@ -94,6 +93,13 @@ export function PostEditor({ post }: PostEditorProps) {
   const [linkNofollow, setLinkNofollow] = useState(false)
   const [linkNewTab, setLinkNewTab] = useState(true)
   const [activePanel, setActivePanel] = useState<'publish' | 'seo' | 'featured' | 'tags'>('publish')
+  const [activeLang, setActiveLang] = useState<'id' | 'en'>('id')
+  const [titleEn2, setTitleEn2] = useState(post?.titleEn || '')
+  const [slugEn, setSlugEn] = useState((post as any)?.slugEn || '')
+  const [slugEnTouched, setSlugEnTouched] = useState(isEdit)
+  const [excerptEn2, setExcerptEn2] = useState(post?.excerptEn || '')
+  const [metaTitleEn, setMetaTitleEn] = useState((post as any)?.metaTitleEn || '')
+  const [metaDescriptionEn, setMetaDescriptionEn] = useState((post as any)?.metaDescriptionEn || '')
   const [showImageModal, setShowImageModal] = useState(false)
   const [imageMode, setImageMode] = useState<'upload' | 'url'>('upload')
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -112,6 +118,10 @@ export function PostEditor({ post }: PostEditorProps) {
   useEffect(() => {
     if (!slugTouched && titleId) setSlug(slugify(titleId))
   }, [titleId, slugTouched])
+
+  useEffect(() => {
+    if (!slugEnTouched && titleEn2) setSlugEn(slugify(titleEn2))
+  }, [titleEn2, slugEnTouched])
 
   const editor = useEditor({
     extensions: [
@@ -132,6 +142,22 @@ export function PostEditor({ post }: PostEditorProps) {
       const words = text.trim() ? text.trim().split(/\s+/).length : 0
       setWordCount(words)
       setReadingTime(Math.max(1, Math.ceil(words / 200)))
+    },
+  })
+
+  const editorEn = useEditor({
+    extensions: [
+      StarterKit,
+      TiptapImage,
+      TiptapLink.configure({ openOnClick: false }),
+      Underline,
+      Placeholder.configure({ placeholder: 'Write English content here…' }),
+    ],
+    content: post?.bodyEn || '',
+    editorProps: {
+      attributes: {
+        class: 'prose prose-invert max-w-none min-h-[420px] focus:outline-none px-5 py-4 text-sm text-[var(--text-primary)]',
+      },
     },
   })
 
@@ -160,15 +186,19 @@ export function PostEditor({ post }: PostEditorProps) {
 
     const body = {
       titleId: titleId.trim(),
-      titleEn: titleEn.trim() || null,
+      titleEn: titleEn2.trim() || null,
       slug: slug.trim(),
+      slugEn: slugEn.trim() || null,
       excerptId: excerptId.trim() || null,
-      excerptEn: excerptEn.trim() || null,
+      excerptEn: excerptEn2.trim() || null,
       bodyId: editor?.getHTML() || '',
+      bodyEn: editorEn?.getHTML() !== '<p></p>' ? editorEn?.getHTML() || null : null,
       featuredImage: featuredImage.trim() || null,
       featuredImageAlt: featuredImageAlt.trim() || null,
       metaTitle: metaTitle.trim() || null,
       metaDescription: metaDescription.trim() || null,
+      metaTitleEn: metaTitleEn.trim() || null,
+      metaDescriptionEn: metaDescriptionEn.trim() || null,
       ogImage: ogImage.trim() || null,
       focusKeyword: focusKeyword.trim() || null,
       status: overrideStatus || status,
@@ -191,16 +221,16 @@ export function PostEditor({ post }: PostEditorProps) {
     } finally {
       setSaving(false)
     }
-  }, [titleId, titleEn, slug, excerptId, excerptEn, featuredImage, featuredImageAlt, metaTitle, metaDescription, ogImage, focusKeyword, status, categoryId, editor, isEdit, post, router, readingTime, wordCount, selectedTagIds])
+  }, [titleId, titleEn2, slug, slugEn, excerptId, excerptEn2, featuredImage, featuredImageAlt, metaTitle, metaDescription, metaTitleEn, metaDescriptionEn, ogImage, focusKeyword, status, categoryId, editor, editorEn, isEdit, post, router, readingTime, wordCount, selectedTagIds])
 
   const insertLink = () => {
     if (!linkUrl) return
-    editor?.chain().focus().extendMarkRange('link').setLink({
+    activeEditor?.chain().focus().extendMarkRange('link').setLink({
       href: linkUrl,
       target: linkNewTab ? '_blank' : null,
       rel: [linkNofollow ? 'nofollow' : '', linkNewTab ? 'noopener noreferrer' : ''].filter(Boolean).join(' ') || null,
     }).run()
-    if (linkText) editor?.chain().focus().insertContent(linkText).run()
+    if (linkText) activeEditor?.chain().focus().insertContent(linkText).run()
     setShowLinkModal(false)
     setLinkUrl(''); setLinkText(''); setLinkNofollow(false); setLinkNewTab(true)
   }
@@ -236,7 +266,7 @@ export function PostEditor({ post }: PostEditorProps) {
       } else if (imageMode === 'url' && imageUrl.trim()) {
         src = imageUrl.trim()
       } else return
-      editor?.chain().focus().setImage({ src, alt: imageAlt } as any).run()
+      activeEditor?.chain().focus().setImage({ src, alt: imageAlt } as any).run()
       setShowImageModal(false)
     } catch (e: any) {
       setError(e.message || 'Image upload failed')
@@ -259,6 +289,8 @@ export function PostEditor({ post }: PostEditorProps) {
       if (featuredInputRef.current) featuredInputRef.current.value = ''
     }
   }
+
+  const activeEditor = activeLang === 'id' ? editor : editorEn
 
   const toggleTag = (tagId: string) => {
     setSelectedTagIds(prev => prev.includes(tagId) ? prev.filter(id => id !== tagId) : [...prev, tagId])
@@ -286,63 +318,85 @@ export function PostEditor({ post }: PostEditorProps) {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         {/* Main editor */}
         <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Post title (Bahasa Indonesia)"
-            value={titleId}
-            onChange={e => setTitleId(e.target.value)}
-            className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-2xl font-bold text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-brand-violet focus:outline-none"
-          />
-          <input
-            type="text"
-            placeholder="Post title (English) — optional"
-            value={titleEn}
-            onChange={e => setTitleEn(e.target.value)}
-            className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-brand-violet focus:outline-none"
-          />
-
-          {/* Slug */}
-          <div className="flex items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-2.5">
-            <span className="text-xs text-[var(--text-muted)] shrink-0">/blog/</span>
-            <input
-              type="text"
-              value={slug}
-              onChange={e => { setSlug(e.target.value); setSlugTouched(true) }}
-              className="flex-1 bg-transparent text-sm text-[var(--text-primary)] focus:outline-none"
-            />
+          {/* Language tabs */}
+          <div className="flex rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] overflow-hidden">
+            <button
+              type="button"
+              onClick={() => setActiveLang('id')}
+              className={`flex-1 py-2.5 text-xs font-semibold flex items-center justify-center gap-2 transition-colors ${activeLang === 'id' ? 'bg-brand-violet/10 text-brand-violet' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}
+            >
+              🇮🇩 Bahasa Indonesia
+              <span className="h-1.5 w-1.5 rounded-full bg-green-400" title="Required" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveLang('en')}
+              className={`flex-1 py-2.5 text-xs font-semibold flex items-center justify-center gap-2 transition-colors ${activeLang === 'en' ? 'bg-brand-violet/10 text-brand-violet' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}
+            >
+              🇬🇧 English
+              <span className={`h-1.5 w-1.5 rounded-full ${titleEn2 && editorEn?.getText().trim() ? 'bg-green-400' : 'bg-[var(--border-hover)]'}`} title={titleEn2 ? 'Has English content' : 'Optional'} />
+            </button>
           </div>
 
-          {/* Excerpt */}
-          <textarea
-            placeholder="Short excerpt (Bahasa Indonesia)…"
-            value={excerptId}
-            onChange={e => setExcerptId(e.target.value)}
-            rows={2}
-            className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-brand-violet focus:outline-none resize-none"
-          />
+          {/* ID fields */}
+          {activeLang === 'id' && (
+            <>
+              <input
+                type="text"
+                placeholder="Judul artikel (Bahasa Indonesia) *"
+                value={titleId}
+                onChange={e => setTitleId(e.target.value)}
+                className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-2xl font-bold text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-brand-violet focus:outline-none"
+              />
+              <div className="flex items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-2.5">
+                <span className="text-xs text-[var(--text-muted)] shrink-0">/blog/</span>
+                <input type="text" value={slug} onChange={e => { setSlug(e.target.value); setSlugTouched(true) }} className="flex-1 bg-transparent text-sm text-[var(--text-primary)] focus:outline-none" />
+              </div>
+              <textarea placeholder="Ringkasan singkat (Bahasa Indonesia)…" value={excerptId} onChange={e => setExcerptId(e.target.value)} rows={2} className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-brand-violet focus:outline-none resize-none" />
+            </>
+          )}
+
+          {/* EN fields */}
+          {activeLang === 'en' && (
+            <>
+              <input
+                type="text"
+                placeholder="Article title (English) — optional"
+                value={titleEn2}
+                onChange={e => setTitleEn2(e.target.value)}
+                className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-2xl font-bold text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-brand-violet focus:outline-none"
+              />
+              <div className="flex items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-2.5">
+                <span className="text-xs text-[var(--text-muted)] shrink-0">/en/blog/</span>
+                <input type="text" value={slugEn} onChange={e => { setSlugEn(e.target.value); setSlugEnTouched(true) }} placeholder="english-slug" className="flex-1 bg-transparent text-sm text-[var(--text-primary)] focus:outline-none" />
+              </div>
+              <textarea placeholder="Short excerpt (English)…" value={excerptEn2} onChange={e => setExcerptEn2(e.target.value)} rows={2} className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-brand-violet focus:outline-none resize-none" />
+            </>
+          )}
 
           {/* Editor */}
           <div>
             {/* Toolbar Row 1 */}
+            {/* Active editor is `editor` for ID, `editorEn` for EN */}
             <div className="flex flex-wrap gap-1 rounded-t-xl border border-b-0 border-[var(--border-default)] bg-[var(--bg-elevated)] px-3 py-2">
-              <ToolbarBtn label="B" title="Bold (Ctrl+B)" active={editor?.isActive('bold')} onClick={() => editor?.chain().focus().toggleBold().run()} />
-              <ToolbarBtn label="I" title="Italic (Ctrl+I)" active={editor?.isActive('italic')} onClick={() => editor?.chain().focus().toggleItalic().run()} />
-              <ToolbarBtn label="U" title="Underline (Ctrl+U)" active={editor?.isActive('underline')} onClick={() => editor?.chain().focus().toggleUnderline().run()} />
-              <ToolbarBtn label="S" title="Strikethrough" active={editor?.isActive('strike')} onClick={() => editor?.chain().focus().toggleStrike().run()} />
+              <ToolbarBtn label="B" title="Bold (Ctrl+B)" active={activeEditor?.isActive('bold')} onClick={() => activeEditor?.chain().focus().toggleBold().run()} />
+              <ToolbarBtn label="I" title="Italic (Ctrl+I)" active={activeEditor?.isActive('italic')} onClick={() => activeEditor?.chain().focus().toggleItalic().run()} />
+              <ToolbarBtn label="U" title="Underline (Ctrl+U)" active={activeEditor?.isActive('underline')} onClick={() => activeEditor?.chain().focus().toggleUnderline().run()} />
+              <ToolbarBtn label="S" title="Strikethrough" active={activeEditor?.isActive('strike')} onClick={() => activeEditor?.chain().focus().toggleStrike().run()} />
               <span className="w-px h-6 bg-[var(--border-default)] mx-1 self-center" />
-              <ToolbarBtn label="H2" active={editor?.isActive('heading', { level: 2 })} onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} />
-              <ToolbarBtn label="H3" active={editor?.isActive('heading', { level: 3 })} onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} />
-              <ToolbarBtn label="H4" active={editor?.isActive('heading', { level: 4 })} onClick={() => editor?.chain().focus().toggleHeading({ level: 4 }).run()} />
+              <ToolbarBtn label="H2" active={activeEditor?.isActive('heading', { level: 2 })} onClick={() => activeEditor?.chain().focus().toggleHeading({ level: 2 }).run()} />
+              <ToolbarBtn label="H3" active={activeEditor?.isActive('heading', { level: 3 })} onClick={() => activeEditor?.chain().focus().toggleHeading({ level: 3 }).run()} />
+              <ToolbarBtn label="H4" active={activeEditor?.isActive('heading', { level: 4 })} onClick={() => activeEditor?.chain().focus().toggleHeading({ level: 4 }).run()} />
               <span className="w-px h-6 bg-[var(--border-default)] mx-1 self-center" />
-              <ToolbarBtn label="UL" active={editor?.isActive('bulletList')} onClick={() => editor?.chain().focus().toggleBulletList().run()} />
-              <ToolbarBtn label="OL" active={editor?.isActive('orderedList')} onClick={() => editor?.chain().focus().toggleOrderedList().run()} />
+              <ToolbarBtn label="UL" active={activeEditor?.isActive('bulletList')} onClick={() => activeEditor?.chain().focus().toggleBulletList().run()} />
+              <ToolbarBtn label="OL" active={activeEditor?.isActive('orderedList')} onClick={() => activeEditor?.chain().focus().toggleOrderedList().run()} />
               <span className="w-px h-6 bg-[var(--border-default)] mx-1 self-center" />
-              <ToolbarBtn label='""' title="Blockquote" active={editor?.isActive('blockquote')} onClick={() => editor?.chain().focus().toggleBlockquote().run()} />
-              <ToolbarBtn label="</>" title="Code block" active={editor?.isActive('codeBlock')} onClick={() => editor?.chain().focus().toggleCodeBlock().run()} />
+              <ToolbarBtn label='""' title="Blockquote" active={activeEditor?.isActive('blockquote')} onClick={() => activeEditor?.chain().focus().toggleBlockquote().run()} />
+              <ToolbarBtn label="</>" title="Code block" active={activeEditor?.isActive('codeBlock')} onClick={() => activeEditor?.chain().focus().toggleCodeBlock().run()} />
               <span className="w-px h-6 bg-[var(--border-default)] mx-1 self-center" />
-              <ToolbarBtn label="⎯" title="Horizontal rule" active={false} onClick={() => editor?.chain().focus().setHorizontalRule().run()} />
-              <ToolbarBtn label="↩" title="Undo" active={false} onClick={() => editor?.chain().focus().undo().run()} />
-              <ToolbarBtn label="↪" title="Redo" active={false} onClick={() => editor?.chain().focus().redo().run()} />
+              <ToolbarBtn label="⎯" title="Horizontal rule" active={false} onClick={() => activeEditor?.chain().focus().setHorizontalRule().run()} />
+              <ToolbarBtn label="↩" title="Undo" active={false} onClick={() => activeEditor?.chain().focus().undo().run()} />
+              <ToolbarBtn label="↪" title="Redo" active={false} onClick={() => activeEditor?.chain().focus().redo().run()} />
             </div>
 
             {/* Toolbar Row 2 */}
@@ -374,7 +428,12 @@ export function PostEditor({ post }: PostEditorProps) {
             </div>
 
             <div className="rounded-b-xl border border-[var(--border-default)] bg-[var(--bg-surface)] min-h-[420px]">
-              <EditorContent editor={editor} />
+              <div style={{ display: activeLang === 'id' ? 'block' : 'none' }}>
+                <EditorContent editor={editor} />
+              </div>
+              <div style={{ display: activeLang === 'en' ? 'block' : 'none' }}>
+                <EditorContent editor={editorEn} />
+              </div>
             </div>
 
             {/* Word count bar */}
@@ -422,10 +481,6 @@ export function PostEditor({ post }: PostEditorProps) {
                   {categories.map(c => <option key={c.id} value={c.id}>{c.nameId}</option>)}
                 </select>
               </div>
-              <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Excerpt (English, optional)</label>
-                <textarea value={excerptEn} onChange={e => setExcerptEn(e.target.value)} rows={2} placeholder="English excerpt…" className={inputCls + ' resize-none'} />
-              </div>
               <Button fullWidth onClick={() => handleSave()} loading={saving} size="sm">
                 {isEdit ? 'Update Post' : 'Save Post'}
               </Button>
@@ -435,46 +490,70 @@ export function PostEditor({ post }: PostEditorProps) {
           {/* SEO panel */}
           {activePanel === 'seo' && (
             <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">SEO</h3>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">SEO — {activeLang === 'id' ? '🇮🇩 ID' : '🇬🇧 EN'}</h3>
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Focus Keyword</label>
                 <input type="text" placeholder="e.g. SEO Jakarta" value={focusKeyword} onChange={e => setFocusKeyword(e.target.value)} className={inputCls} />
               </div>
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs text-[var(--text-secondary)]">Meta Title</label>
-                  <span className={`text-[10px] ${metaTitle.length > 60 ? 'text-red-400' : metaTitle.length >= 50 ? 'text-green-400' : 'text-[var(--text-muted)]'}`}>
-                    {metaTitle.length}/60
-                  </span>
-                </div>
-                <input type="text" placeholder="Meta title (50-60 chars)" value={metaTitle} onChange={e => setMetaTitle(e.target.value)} className={inputCls} />
-              </div>
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs text-[var(--text-secondary)]">Meta Description</label>
-                  <span className={`text-[10px] ${metaDescription.length > 155 ? 'text-red-400' : metaDescription.length >= 150 ? 'text-green-400' : 'text-[var(--text-muted)]'}`}>
-                    {metaDescription.length}/155
-                  </span>
-                </div>
-                <textarea value={metaDescription} onChange={e => setMetaDescription(e.target.value)} rows={3} placeholder="Meta description (150-155 chars)" className={inputCls + ' resize-none'} />
-              </div>
-              <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">OG Image URL (optional)</label>
-                <input type="text" placeholder="/uploads/blog/og.webp" value={ogImage} onChange={e => setOgImage(e.target.value)} className={inputCls} />
-              </div>
 
-              {/* SERP preview */}
-              <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">SERP Preview</label>
-                <SerpPreview
-                  title={metaTitle || titleId}
-                  slug={slug}
-                  description={metaDescription || excerptId}
-                />
-              </div>
+              {activeLang === 'id' ? (
+                <>
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-xs text-[var(--text-secondary)]">Meta Title</label>
+                      <span className={`text-[10px] ${metaTitle.length > 60 ? 'text-red-400' : metaTitle.length >= 50 ? 'text-green-400' : 'text-[var(--text-muted)]'}`}>
+                        {metaTitle.length}/60
+                      </span>
+                    </div>
+                    <input type="text" placeholder="Meta title (50-60 chars)" value={metaTitle} onChange={e => setMetaTitle(e.target.value)} className={inputCls} />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-xs text-[var(--text-secondary)]">Meta Description</label>
+                      <span className={`text-[10px] ${metaDescription.length > 155 ? 'text-red-400' : metaDescription.length >= 150 ? 'text-green-400' : 'text-[var(--text-muted)]'}`}>
+                        {metaDescription.length}/155
+                      </span>
+                    </div>
+                    <textarea value={metaDescription} onChange={e => setMetaDescription(e.target.value)} rows={3} placeholder="Meta description (150-155 chars)" className={inputCls + ' resize-none'} />
+                  </div>
+                  <div>
+                    <label className="text-xs text-[var(--text-secondary)] mb-1 block">OG Image URL (optional)</label>
+                    <input type="text" placeholder="/uploads/blog/og.webp" value={ogImage} onChange={e => setOgImage(e.target.value)} className={inputCls} />
+                  </div>
+                  <div>
+                    <label className="text-xs text-[var(--text-secondary)] mb-1 block">SERP Preview</label>
+                    <SerpPreview title={metaTitle || titleId} slug={slug} description={metaDescription || excerptId} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-xs text-[var(--text-secondary)]">Meta Title (EN)</label>
+                      <span className={`text-[10px] ${metaTitleEn.length > 60 ? 'text-red-400' : metaTitleEn.length >= 50 ? 'text-green-400' : 'text-[var(--text-muted)]'}`}>
+                        {metaTitleEn.length}/60
+                      </span>
+                    </div>
+                    <input type="text" placeholder="Meta title in English (50-60 chars)" value={metaTitleEn} onChange={e => setMetaTitleEn(e.target.value)} className={inputCls} />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-xs text-[var(--text-secondary)]">Meta Description (EN)</label>
+                      <span className={`text-[10px] ${metaDescriptionEn.length > 155 ? 'text-red-400' : metaDescriptionEn.length >= 150 ? 'text-green-400' : 'text-[var(--text-muted)]'}`}>
+                        {metaDescriptionEn.length}/155
+                      </span>
+                    </div>
+                    <textarea value={metaDescriptionEn} onChange={e => setMetaDescriptionEn(e.target.value)} rows={3} placeholder="Meta description in English (150-155 chars)" className={inputCls + ' resize-none'} />
+                  </div>
+                  <div>
+                    <label className="text-xs text-[var(--text-secondary)] mb-1 block">SERP Preview (EN)</label>
+                    <SerpPreview title={metaTitleEn || titleEn2} slug={slugEn || slug} description={metaDescriptionEn || excerptEn2} />
+                  </div>
+                </>
+              )}
 
-              {/* SEO checklist */}
-              {seoChecks.length > 0 && (
+              {/* SEO checklist (ID only) */}
+              {activeLang === 'id' && seoChecks.length > 0 && (
                 <div>
                   <label className="text-xs text-[var(--text-secondary)] mb-2 block">SEO Checklist</label>
                   <div className="space-y-1">
@@ -685,8 +764,8 @@ export function PostEditor({ post }: PostEditorProps) {
       {showInternalLinkPicker && (
         <InternalLinkPicker
           onInsert={(url, text) => {
-            editor?.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
-            editor?.chain().focus().insertContent(text).run()
+            activeEditor?.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+            activeEditor?.chain().focus().insertContent(text).run()
             setShowInternalLinkPicker(false)
           }}
           onClose={() => setShowInternalLinkPicker(false)}

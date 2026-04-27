@@ -20,8 +20,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const {
-      titleId, titleEn, slug, excerptId, excerptEn, bodyId, bodyEn,
-      featuredImage, featuredImageAlt, metaTitle, metaDescription, ogImage,
+      titleId, titleEn, slug, slugEn, excerptId, excerptEn, bodyId, bodyEn,
+      featuredImage, featuredImageAlt, metaTitle, metaDescription, metaTitleEn, metaDescriptionEn, ogImage,
       focusKeyword, status, categoryId, readingTime, wordCount, tagIds,
     } = body
 
@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
         titleId,
         titleEn,
         slug,
+        slugEn,
         excerptId,
         excerptEn,
         bodyId: bodyId || '',
@@ -45,6 +46,8 @@ export async function POST(req: NextRequest) {
         featuredImageAlt,
         metaTitle,
         metaDescription,
+        metaTitleEn,
+        metaDescriptionEn,
         ogImage,
         focusKeyword,
         status: status || 'DRAFT',

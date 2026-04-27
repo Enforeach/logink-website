@@ -74,11 +74,14 @@ model Post {
   excerptEn       String?    @db.Text
   bodyId          String     @db.Text
   bodyEn          String?    @db.Text
-  featuredImage   String?
-  featuredImageAlt String?
-  metaTitle       String?
-  metaDescription String?
-  ogImage         String?
+  featuredImage      String?
+  featuredImageAlt   String?
+  metaTitle          String?
+  metaDescription    String?
+  metaTitleEn        String?
+  metaDescriptionEn  String?
+  slugEn             String?  @unique
+  ogImage            String?
   focusKeyword    String?
   readingTime     Int?
   wordCount       Int?

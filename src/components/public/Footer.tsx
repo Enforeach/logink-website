@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { SITE, WHATSAPP_URL } from '@/lib/constants'
+import { type Locale, t, localePath } from '@/lib/i18n'
 
 const SERVICE_LINKS = [
   { href: '/services/seo-content-marketing', label: 'SEO & Content Marketing' },
@@ -26,7 +27,9 @@ const BLOG_CATEGORIES = [
   { href: '/blog/category/web-dev', label: 'Web Development' },
 ]
 
-export function Footer() {
+interface FooterProps { locale?: Locale }
+
+export function Footer({ locale = 'id' }: FooterProps) {
   return (
     <footer className="relative" style={{ background: '#080512' }}>
       {/* Gradient top border */}
@@ -42,7 +45,7 @@ export function Footer() {
               <span className="text-xl font-bold gradient-text">Logink</span>
             </Link>
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
-              360° digital marketing agency built to help Indonesian brands dominate online.
+              {t(locale, 'footer.description')}
             </p>
             <div className="flex gap-3">
               <a
@@ -72,11 +75,11 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-wider mb-4">Services</h3>
+            <h3 className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-wider mb-4">{t(locale, 'footer.servicesTitle')}</h3>
             <ul className="space-y-2.5">
               {SERVICE_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-[var(--text-secondary)] hover:text-brand-violet transition-colors">
+                  <Link href={localePath(link.href, locale)} className="text-sm text-[var(--text-secondary)] hover:text-brand-violet transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -86,11 +89,11 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-wider mb-4">Company</h3>
+            <h3 className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-wider mb-4">{t(locale, 'footer.companyTitle')}</h3>
             <ul className="space-y-2.5">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-[var(--text-secondary)] hover:text-brand-violet transition-colors">
+                  <Link href={localePath(link.href, locale)} className="text-sm text-[var(--text-secondary)] hover:text-brand-violet transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -100,7 +103,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-wider mb-4">Contact</h3>
+            <h3 className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-wider mb-4">{t(locale, 'footer.contactTitle')}</h3>
             <ul className="space-y-2.5">
               <li>
                 <a href={`mailto:${SITE.email}`} className="text-sm text-[var(--text-secondary)] hover:text-brand-violet transition-colors flex items-center gap-2">
@@ -127,7 +130,7 @@ export function Footer() {
               </li>
             </ul>
             <div className="mt-4">
-              <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">Resources</h4>
+              <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">{t(locale, 'footer.resourcesTitle')}</h4>
               <ul className="space-y-2">
                 {BLOG_CATEGORIES.slice(0, 3).map((cat) => (
                   <li key={cat.href}>
@@ -143,10 +146,10 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-[var(--border-default)] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-[var(--text-muted)]">© 2026 Logink. All rights reserved.</p>
+          <p className="text-sm text-[var(--text-muted)]">© 2026 Logink. {t(locale, 'common.allRightsReserved')}</p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">{t(locale, 'common.privacyPolicy')}</Link>
+            <Link href="/terms" className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">{t(locale, 'common.termsOfService')}</Link>
           </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

@@ -4,18 +4,22 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 import { NAV_LINKS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { type Locale, t, localePath } from '@/lib/i18n'
 
-const SERVICE_LINKS = [
-  { href: '/services/seo-content-marketing', label: 'SEO & Content Marketing', color: '#7C3AED' },
-  { href: '/services/social-media-management', label: 'Social Media Management', color: '#DB2777' },
-  { href: '/services/paid-advertising', label: 'Paid Advertising', color: '#D97706' },
-  { href: '/services/creative-services', label: 'Creative Services', color: '#F59E0B' },
-  { href: '/services/website-landing-page', label: 'Website & Landing Page', color: '#A78BFA' },
+const SERVICE_SLUGS = [
+  { slug: 'seo-content-marketing', key: 'seo', color: '#7C3AED' },
+  { slug: 'social-media-management', key: 'social', color: '#DB2777' },
+  { slug: 'paid-advertising', key: 'ads', color: '#D97706' },
+  { slug: 'creative-services', key: 'creative', color: '#F59E0B' },
+  { slug: 'website-landing-page', key: 'website', color: '#A78BFA' },
 ]
 
-export function Navbar() {
+interface NavbarProps { locale?: Locale }
+
+export function Navbar({ locale = 'id' }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
@@ -60,12 +64,12 @@ export function Navbar() {
                   onMouseEnter={() => setServicesOpen(true)}
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1',
-                    pathname?.startsWith('/services')
+                    pathname?.startsWith('/services') || pathname?.startsWith('/en/services')
                       ? 'text-brand-violet'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   )}
                 >
-                  Services
+                  {t(locale, 'nav.services')}
                   <svg className={cn('h-4 w-4 transition-transform', servicesOpen && 'rotate-180')} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -73,20 +77,20 @@ export function Navbar() {
                 {servicesOpen && (
                   <div className="absolute top-full left-0 mt-1 w-72 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-2xl backdrop-blur-xl p-2">
                     <Link
-                      href="/services"
+                      href={localePath('/services', locale)}
                       className="block px-3 py-2 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-colors mb-1 font-medium"
                     >
-                      All Services →
+                      {t(locale, 'nav.allServices')}
                     </Link>
                     <div className="border-t border-[var(--border-default)] pt-1">
-                      {SERVICE_LINKS.map((svc) => (
+                      {SERVICE_SLUGS.map((svc) => (
                         <Link
-                          key={svc.href}
-                          href={svc.href}
+                          key={svc.slug}
+                          href={localePath(`/services/${svc.slug}`, locale)}
                           className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-colors"
                         >
                           <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: svc.color }} />
-                          {svc.label}
+                          {t(locale, `services.${svc.key}.name`)}
                         </Link>
                       ))}
                     </div>
@@ -94,26 +98,31 @@ export function Navbar() {
                 )}
               </div>
 
-              {NAV_LINKS.filter((l) => l.href !== '/services').map((link) => (
+              {([
+                { href: '/portfolio', key: 'portfolio' },
+                { href: '/blog', key: 'blog' },
+                { href: '/about', key: 'about' },
+              ] as const).map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={localePath(link.href, locale)}
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-                    pathname === link.href
+                    (pathname === link.href || pathname === `/en${link.href}`)
                       ? 'text-brand-violet'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   )}
                 >
-                  {link.label}
+                  {t(locale, `nav.${link.key}`)}
                 </Link>
               ))}
             </nav>
 
             {/* Right side */}
             <div className="flex items-center gap-3">
-              <Link href="/contact" className="hidden lg:block">
-                <Button size="sm">Get a Quote</Button>
+              <LanguageSwitcher locale={locale} />
+              <Link href={localePath('/contact', locale)} className="hidden lg:block">
+                <Button size="sm">{t(locale, 'nav.getQuote')}</Button>
               </Link>
               {/* Mobile hamburger */}
               <button
@@ -137,30 +146,35 @@ export function Navbar() {
       {menuOpen && (
         <div className="fixed inset-0 z-30 pt-16 bg-[var(--bg-primary)]/95 backdrop-blur-xl lg:hidden">
           <nav className="max-w-7xl mx-auto px-4 pt-6 flex flex-col gap-2">
-            <Link href="/services" className="px-4 py-3 rounded-xl text-[var(--text-primary)] font-medium hover:bg-[var(--bg-elevated)] transition-colors">
-              Services
+            <Link href={localePath('/services', locale)} className="px-4 py-3 rounded-xl text-[var(--text-primary)] font-medium hover:bg-[var(--bg-elevated)] transition-colors">
+              {t(locale, 'nav.services')}
             </Link>
-            {SERVICE_LINKS.map((svc) => (
+            {SERVICE_SLUGS.map((svc) => (
               <Link
-                key={svc.href}
-                href={svc.href}
+                key={svc.slug}
+                href={localePath(`/services/${svc.slug}`, locale)}
                 className="px-8 py-2.5 rounded-xl text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-colors flex items-center gap-3"
               >
                 <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: svc.color }} />
-                {svc.label}
+                {t(locale, `services.${svc.key}.name`)}
               </Link>
             ))}
-            {NAV_LINKS.filter((l) => l.href !== '/services').map((link) => (
+            {([
+              { href: '/portfolio', key: 'portfolio' },
+              { href: '/blog', key: 'blog' },
+              { href: '/about', key: 'about' },
+            ] as const).map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={localePath(link.href, locale)}
                 className="px-4 py-3 rounded-xl text-[var(--text-primary)] font-medium hover:bg-[var(--bg-elevated)] transition-colors"
               >
-                {link.label}
+                {t(locale, `nav.${link.key}`)}
               </Link>
             ))}
             <div className="pt-4 flex flex-col gap-3">
-              <Button href="/contact" fullWidth>Get a Free Quote</Button>
+              <LanguageSwitcher locale={locale} />
+              <Button href={localePath('/contact', locale)} fullWidth>{t(locale, 'nav.getQuote')}</Button>
             </div>
           </nav>
         </div>

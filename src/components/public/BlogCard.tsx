@@ -2,15 +2,22 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { PostData } from '@/types'
 import { formatDate } from '@/lib/utils'
+import { type Locale, localePath } from '@/lib/i18n'
 
 interface BlogCardProps {
-  post: PostData
+  post: PostData & { titleEn?: string | null; excerptEn?: string | null; slugEn?: string | null; category?: { nameId: string; nameEn?: string | null; slug: string } | null }
+  locale?: Locale
 }
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, locale = 'id' }: BlogCardProps) {
+  const title = (locale === 'en' && post.titleEn) ? post.titleEn : post.titleId
+  const excerpt = (locale === 'en' && post.excerptEn) ? post.excerptEn : post.excerptId
+  const slug = (locale === 'en' && post.slugEn) ? post.slugEn : post.slug
+  const categoryName = (locale === 'en' && post.category?.nameEn) ? post.category.nameEn : post.category?.nameId
+
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={localePath(`/blog/${slug}`, locale)}
       className="group flex flex-col rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] overflow-hidden hover:border-[var(--border-hover)] hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
     >
       {/* Thumbnail */}
@@ -32,7 +39,7 @@ export function BlogCard({ post }: BlogCardProps) {
         )}
         {post.category && (
           <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-violet/90 text-white backdrop-blur-sm">
-            {post.category.nameId}
+            {categoryName}
           </div>
         )}
       </div>
@@ -40,11 +47,11 @@ export function BlogCard({ post }: BlogCardProps) {
       {/* Content */}
       <div className="flex flex-col flex-1 p-5">
         <h3 className="font-bold text-[var(--text-primary)] mb-2 line-clamp-2 group-hover:text-brand-violet transition-colors">
-          {post.titleId}
+          {title}
         </h3>
-        {post.excerptId && (
+        {excerpt && (
           <p className="text-sm text-[var(--text-secondary)] line-clamp-2 flex-1 mb-4">
-            {post.excerptId}
+            {excerpt}
           </p>
         )}
         <div className="flex items-center justify-between text-xs text-[var(--text-muted)] mt-auto pt-4 border-t border-[var(--border-default)]">

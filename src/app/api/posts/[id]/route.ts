@@ -24,8 +24,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     const { id } = await params
     const body = await req.json()
     const {
-      titleId, titleEn, slug, excerptId, excerptEn, bodyId, bodyEn,
-      featuredImage, featuredImageAlt, metaTitle, metaDescription, ogImage,
+      titleId, titleEn, slug, slugEn, excerptId, excerptEn, bodyId, bodyEn,
+      featuredImage, featuredImageAlt, metaTitle, metaDescription, metaTitleEn, metaDescriptionEn, ogImage,
       focusKeyword, status, categoryId, readingTime, wordCount, tagIds,
     } = body
 
@@ -39,6 +39,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         titleId,
         titleEn,
         slug,
+        slugEn,
         excerptId,
         excerptEn,
         bodyId: bodyId || '',
@@ -47,6 +48,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         featuredImageAlt,
         metaTitle,
         metaDescription,
+        metaTitleEn,
+        metaDescriptionEn,
         ogImage,
         focusKeyword,
         status,
