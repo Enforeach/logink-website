@@ -94,6 +94,15 @@ export function PostEditor({ post }: PostEditorProps) {
   const [linkNofollow, setLinkNofollow] = useState(false)
   const [linkNewTab, setLinkNewTab] = useState(true)
   const [activePanel, setActivePanel] = useState<'publish' | 'seo' | 'featured' | 'tags'>('publish')
+  const [showImageModal, setShowImageModal] = useState(false)
+  const [imageMode, setImageMode] = useState<'upload' | 'url'>('upload')
+  const [imageFile, setImageFile] = useState<File | null>(null)
+  const [imageFilePreview, setImageFilePreview] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
+  const [imageAlt, setImageAlt] = useState('')
+  const [imageUploading, setImageUploading] = useState(false)
+  const [featuredUploading, setFeaturedUploading] = useState(false)
+  const featuredInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     fetch('/api/categories').then(r => r.json()).then(setCategories).catch(() => {})
@@ -194,6 +203,61 @@ export function PostEditor({ post }: PostEditorProps) {
     if (linkText) editor?.chain().focus().insertContent(linkText).run()
     setShowLinkModal(false)
     setLinkUrl(''); setLinkText(''); setLinkNofollow(false); setLinkNewTab(true)
+  }
+
+  const uploadFile = async (file: File, folder = 'blog'): Promise<string> => {
+    const fd = new FormData()
+    fd.append('file', file)
+    fd.append('folder', folder)
+    const res = await fetch('/api/media/upload', { method: 'POST', body: fd })
+    if (!res.ok) { const d = await res.json(); throw new Error(d.error || 'Upload failed') }
+    const data = await res.json()
+    return data.url
+  }
+
+  const openImageModal = () => {
+    setImageFile(null); setImageFilePreview(''); setImageUrl(''); setImageAlt('')
+    setImageMode('upload'); setShowImageModal(true)
+  }
+
+  const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setImageFile(file)
+    setImageFilePreview(URL.createObjectURL(file))
+  }
+
+  const insertImage = async () => {
+    setImageUploading(true)
+    try {
+      let src = ''
+      if (imageMode === 'upload' && imageFile) {
+        src = await uploadFile(imageFile)
+      } else if (imageMode === 'url' && imageUrl.trim()) {
+        src = imageUrl.trim()
+      } else return
+      editor?.chain().focus().setImage({ src, alt: imageAlt } as any).run()
+      setShowImageModal(false)
+    } catch (e: any) {
+      setError(e.message || 'Image upload failed')
+    } finally {
+      setImageUploading(false)
+    }
+  }
+
+  const handleFeaturedUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setFeaturedUploading(true)
+    try {
+      const url = await uploadFile(file)
+      setFeaturedImage(url)
+    } catch (e: any) {
+      setError(e.message || 'Featured image upload failed')
+    } finally {
+      setFeaturedUploading(false)
+      if (featuredInputRef.current) featuredInputRef.current.value = ''
+    }
   }
 
   const toggleTag = (tagId: string) => {
@@ -301,11 +365,7 @@ export function PostEditor({ post }: PostEditorProps) {
               </button>
               <button
                 type="button"
-                onMouseDown={e => {
-                  e.preventDefault()
-                  const url = prompt('Image URL:')
-                  if (url) editor?.chain().focus().setImage({ src: url }).run()
-                }}
+                onMouseDown={e => { e.preventDefault(); openImageModal() }}
                 className="px-2 py-1 rounded text-xs text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors"
                 title="Insert image"
               >
@@ -434,11 +494,30 @@ export function PostEditor({ post }: PostEditorProps) {
           {activePanel === 'featured' && (
             <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 space-y-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Featured Image</h3>
+
+              {/* Upload button */}
+              <input ref={featuredInputRef} type="file" accept="image/*" className="hidden" onChange={handleFeaturedUpload} />
+              <button
+                type="button"
+                onClick={() => featuredInputRef.current?.click()}
+                disabled={featuredUploading}
+                className="w-full flex items-center justify-center gap-2 rounded-lg border border-dashed border-[var(--border-hover)] bg-[var(--bg-elevated)] px-3 py-3 text-xs text-[var(--text-secondary)] hover:border-brand-violet hover:text-brand-violet transition-colors disabled:opacity-50"
+              >
+                {featuredUploading ? '⏳ Uploading…' : '⬆ Upload image'}
+              </button>
+
+              <div className="flex items-center gap-2 text-[10px] text-[var(--text-muted)]">
+                <span className="flex-1 h-px bg-[var(--border-default)]" />
+                or paste URL
+                <span className="flex-1 h-px bg-[var(--border-default)]" />
+              </div>
+
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Image URL or /uploads/…</label>
                 <input type="text" placeholder="/uploads/blog/hero.webp" value={featuredImage} onChange={e => setFeaturedImage(e.target.value)} className={inputCls} />
               </div>
+
               {featuredImage && <img src={featuredImage} alt="" className="w-full rounded-lg object-cover aspect-video" />}
+
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Alt Text <span className="text-red-400">*</span></label>
                 <input type="text" placeholder="Describe the image for SEO…" value={featuredImageAlt} onChange={e => setFeaturedImageAlt(e.target.value)} className={inputCls} />
@@ -515,6 +594,87 @@ export function PostEditor({ post }: PostEditorProps) {
               <div className="flex justify-end gap-2 pt-1">
                 <Button variant="ghost" onClick={() => setShowLinkModal(false)} size="sm">Cancel</Button>
                 <Button onClick={insertLink} size="sm">Insert</Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Image upload modal */}
+      {showImageModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowImageModal(false)}>
+          <div className="w-full max-w-md rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-5 shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-bold text-[var(--text-primary)]">Insert Image</h3>
+              <button onClick={() => setShowImageModal(false)} className="text-[var(--text-muted)] text-lg">✕</button>
+            </div>
+
+            {/* Mode tabs */}
+            <div className="flex rounded-lg border border-[var(--border-default)] overflow-hidden mb-4">
+              {(['upload', 'url'] as const).map(m => (
+                <button
+                  key={m}
+                  type="button"
+                  onClick={() => setImageMode(m)}
+                  className={`flex-1 py-1.5 text-xs font-semibold transition-colors ${imageMode === m ? 'bg-brand-violet/10 text-brand-violet' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}
+                >
+                  {m === 'upload' ? '⬆ Upload file' : '🔗 Paste URL'}
+                </button>
+              ))}
+            </div>
+
+            <div className="space-y-3">
+              {imageMode === 'upload' ? (
+                <div>
+                  <label
+                    className="flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[var(--border-hover)] bg-[var(--bg-elevated)] px-4 py-8 cursor-pointer hover:border-brand-violet transition-colors"
+                  >
+                    {imageFilePreview ? (
+                      <img src={imageFilePreview} alt="" className="max-h-40 rounded-lg object-contain" />
+                    ) : (
+                      <>
+                        <span className="text-2xl">🖼</span>
+                        <span className="text-xs text-[var(--text-muted)]">Click to choose image (JPEG, PNG, WebP, GIF)</span>
+                      </>
+                    )}
+                    <input type="file" accept="image/*" className="hidden" onChange={handleImageFileChange} />
+                  </label>
+                  {imageFile && (
+                    <p className="text-[10px] text-[var(--text-muted)] mt-1 truncate">{imageFile.name} · {(imageFile.size / 1024).toFixed(0)} KB</p>
+                  )}
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  placeholder="https://… or /uploads/blog/image.webp"
+                  value={imageUrl}
+                  onChange={e => setImageUrl(e.target.value)}
+                  className={inputCls}
+                  autoFocus
+                />
+              )}
+
+              <div>
+                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Alt text <span className="text-red-400">*</span></label>
+                <input
+                  type="text"
+                  placeholder="Describe the image…"
+                  value={imageAlt}
+                  onChange={e => setImageAlt(e.target.value)}
+                  className={inputCls}
+                />
+              </div>
+
+              <div className="flex justify-end gap-2 pt-1">
+                <Button variant="ghost" onClick={() => setShowImageModal(false)} size="sm">Cancel</Button>
+                <Button
+                  onClick={insertImage}
+                  loading={imageUploading}
+                  disabled={(imageMode === 'upload' && !imageFile) || (imageMode === 'url' && !imageUrl.trim())}
+                  size="sm"
+                >
+                  Insert
+                </Button>
               </div>
             </div>
           </div>
