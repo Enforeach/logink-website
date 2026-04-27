@@ -29,15 +29,15 @@ export default async function EnHomePage() {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection locale="en" />
       <LogoMarquee />
-      <ProblemSolutionSection />
-      <ServicesSection />
-      <StatsSection />
-      <HowWeWorkSection />
+      <ProblemSolutionSection locale="en" />
+      <ServicesSection locale="en" />
+      <StatsSection locale="en" />
+      <HowWeWorkSection locale="en" />
       <CaseStudyTeaser caseStudy={caseStudy} />
       <TestimonialsSection testimonials={testimonials} />
-      <CTASection />
+      <CTASection locale="en" />
     </>
   )
 }

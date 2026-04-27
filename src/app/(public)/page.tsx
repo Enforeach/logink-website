@@ -61,15 +61,15 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify([orgSchema, bizSchema]) }}
       />
 
-      <HeroSection />
+      <HeroSection locale="id" />
       <LogoMarquee />
-      <ProblemSolutionSection />
-      <ServicesSection services={services as any} />
-      <HowWeWorkSection />
-      <StatsSection />
+      <ProblemSolutionSection locale="id" />
+      <ServicesSection services={services as any} locale="id" />
+      <HowWeWorkSection locale="id" />
+      <StatsSection locale="id" />
       <CaseStudyTeaser caseStudy={featuredCaseStudy as any} />
       <TestimonialsSection testimonials={testimonials} />
-      <CTASection />
+      <CTASection locale="id" />
     </>
   )
 }

@@ -5,8 +5,8 @@ import { SITE, WHATSAPP_URL } from '@/lib/constants'
 import { prisma } from '@/lib/prisma'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contact Us',
-  description: 'Free consultation with the Logink team. We\'re ready to help your brand grow digitally.',
+  title: 'Hubungi Kami',
+  description: 'Konsultasi gratis bersama tim Logink. Kami siap membantu brand kamu tumbuh secara digital.',
   path: '/contact',
 })
 
@@ -23,11 +23,11 @@ export default async function ContactPage() {
   return (
     <>
       <section className="pt-32 pb-16 px-4 mesh-gradient text-center">
-        <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-sm font-medium mb-6">Contact</span>
+        <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-sm font-medium mb-6">Kontak</span>
         <h1 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] mb-4">
-          Let&apos;s Work <span className="gradient-text">Together</span>
+          Ayo Kerja <span className="gradient-text">Bersama</span>
         </h1>
-        <p className="text-[var(--text-secondary)] max-w-md mx-auto">Tell us about your business. We'll respond within 24 hours.</p>
+        <p className="text-[var(--text-secondary)] max-w-md mx-auto">Ceritakan bisnis kamu. Kami akan merespons dalam 24 jam.</p>
       </section>
 
       <section className="py-20 px-4 bg-[var(--bg-primary)]">
@@ -35,10 +35,10 @@ export default async function ContactPage() {
           {/* Form */}
           <ContactForm services={services} />
 
-          {/* Contact info */}
+          {/* Info kontak */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Or Reach Us Directly</h2>
+              <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Atau Hubungi Kami Langsung</h2>
               <div className="space-y-4">
                 <a
                   href={WHATSAPP_URL}
@@ -53,7 +53,7 @@ export default async function ContactPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-[var(--text-primary)]">WhatsApp</div>
-                    <div className="text-sm text-[var(--text-secondary)]">Response in minutes</div>
+                    <div className="text-sm text-[var(--text-secondary)]">Respons dalam hitungan menit</div>
                   </div>
                 </a>
                 <a
@@ -67,7 +67,7 @@ export default async function ContactPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-[var(--text-primary)]">{SITE.email}</div>
-                    <div className="text-sm text-[var(--text-secondary)]">Response within 24 hours</div>
+                    <div className="text-sm text-[var(--text-secondary)]">Respons dalam 24 jam</div>
                   </div>
                 </a>
                 <div className="flex items-center gap-4 p-4 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)]">
@@ -85,13 +85,13 @@ export default async function ContactPage() {
             </div>
 
             <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-6">
-              <h3 className="font-bold text-[var(--text-primary)] mb-4">What Happens Next?</h3>
+              <h3 className="font-bold text-[var(--text-primary)] mb-4">Selanjutnya Apa?</h3>
               <ol className="space-y-3">
                 {[
-                  'We review your brief within 24 hours',
-                  'Schedule a free 30-minute discovery call',
-                  'We prepare a custom proposal',
-                  'Onboarding & kickoff within 1 week',
+                  'Kami review brief kamu dalam 24 jam',
+                  'Jadwalkan sesi discovery gratis selama 30 menit',
+                  'Kami siapkan proposal yang disesuaikan',
+                  'Onboarding & kickoff dalam 1 minggu',
                 ].map((step, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
                     <span className="h-6 w-6 rounded-full gradient-bg text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">

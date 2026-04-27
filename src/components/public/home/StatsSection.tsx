@@ -7,18 +7,19 @@ interface StatConfig {
   prefix?: string
   target: number
   suffix: string
-  label: string
+  labelId: string
+  labelEn: string
   color: string
 }
 
 const STATS: StatConfig[] = [
-  { prefix: '2–', target: 4, suffix: 'x', label: 'Average ROAS', color: '#7C3AED' },
-  { target: 150, suffix: '+', label: 'Articles Per Month', color: '#DB2777' },
-  { target: 5, suffix: '', label: 'Integrated Services', color: '#D97706' },
-  { target: 100, suffix: '%', label: 'Transparent Reporting', color: '#F59E0B' },
+  { prefix: '2–', target: 4, suffix: 'x', labelId: 'Rata-rata ROAS', labelEn: 'Average ROAS', color: '#7C3AED' },
+  { target: 150, suffix: '+', labelId: 'Artikel per Bulan', labelEn: 'Articles Per Month', color: '#DB2777' },
+  { target: 5, suffix: '', labelId: 'Layanan Terintegrasi', labelEn: 'Integrated Services', color: '#D97706' },
+  { target: 100, suffix: '%', labelId: 'Pelaporan Transparan', labelEn: 'Transparent Reporting', color: '#F59E0B' },
 ]
 
-function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
+function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number; locale: 'id' | 'en' }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.5 })
   const count = useMotionValue(0)
@@ -57,12 +58,14 @@ function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
       </div>
 
       {/* Label */}
-      <div className="text-xs uppercase tracking-widest text-[var(--text-muted)]">{stat.label}</div>
+      <div className="text-xs uppercase tracking-widest text-[var(--text-muted)]">
+        {locale === 'id' ? stat.labelId : stat.labelEn}
+      </div>
     </motion.div>
   )
 }
 
-export function StatsSection() {
+export function StatsSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   return (
     <section className="px-4 py-4" style={{ background: '#0A0716' }}>
       {/* Gradient top border */}
@@ -72,14 +75,14 @@ export function StatsSection() {
         {/* Mobile: 2x2 grid */}
         <div className="grid grid-cols-2 lg:hidden gap-4">
           {STATS.map((s, i) => (
-            <AnimatedStat key={s.label} stat={s} index={i} />
+            <AnimatedStat key={s.labelEn} stat={s} index={i} locale={locale} />
           ))}
         </div>
 
         {/* Desktop: row with dividers */}
         <div className="hidden lg:flex items-stretch divide-x divide-[var(--border-default)]">
           {STATS.map((s, i) => (
-            <AnimatedStat key={s.label} stat={s} index={i} />
+            <AnimatedStat key={s.labelEn} stat={s} index={i} locale={locale} />
           ))}
         </div>
       </div>

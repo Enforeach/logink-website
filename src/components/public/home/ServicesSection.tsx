@@ -24,7 +24,12 @@ const FALLBACK: Service[] = [
 
 /* ─── Individual card variants ─── */
 
-function SEOCard({ svc }: { svc: Service }) {
+function SEOCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
+  const features = locale === 'id'
+    ? ['Riset Kata Kunci', '30 Artikel/bln', 'Looker Studio']
+    : ['Keyword Research', 'Up to 30 Articles/mo', 'Looker Studio']
+  const startingFrom = locale === 'id' ? 'Mulai dari' : 'Starting from'
+  const perMonth = locale === 'id' ? '/bln' : '/mo'
   return (
     <div className="flex flex-col sm:flex-row h-full gap-6">
       <div className="flex-1">
@@ -36,14 +41,14 @@ function SEOCard({ svc }: { svc: Service }) {
         <h3 className="font-bold text-[var(--text-primary)] mb-1 text-lg">{svc.name}</h3>
         <p className="text-sm text-[var(--text-secondary)] mb-3">{svc.shortDescId}</p>
         <div className="flex flex-wrap gap-1.5 mb-4">
-          {['Keyword Research', 'Up to 30 Articles/mo', 'Looker Studio'].map((f) => (
+          {features.map((f) => (
             <span key={f} className="text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-default)] text-[var(--text-muted)]">{f}</span>
           ))}
         </div>
         {svc.pricingTiers?.[0] && (
-          <p className="text-xs text-[var(--text-muted)] mb-3">Starting from <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}/mo</span></p>
+          <p className="text-xs text-[var(--text-muted)] mb-3">{startingFrom} <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}{perMonth}</span></p>
         )}
-        <LearnMore href={`/services/${svc.slug}`} color={svc.color} />
+        <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
       </div>
       {/* Mini ascending line chart */}
       <div className="flex-shrink-0 flex items-center">
@@ -64,7 +69,8 @@ function SEOCard({ svc }: { svc: Service }) {
   )
 }
 
-function SocialCard({ svc }: { svc: Service }) {
+function SocialCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
+  const pillars = locale === 'id' ? ['Edukasi', 'Hiburan', 'Konversi'] : ['Educate', 'Entertain', 'Convert']
   return (
     <div className="h-full flex flex-col" style={{ background: `radial-gradient(circle at top center, ${svc.color}0d 0%, transparent 60%)` }}>
       <div className="h-12 w-12 rounded-xl mb-4 flex items-center justify-center" style={{ background: `${svc.color}18`, color: svc.color }}>
@@ -75,23 +81,24 @@ function SocialCard({ svc }: { svc: Service }) {
       <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
       <div className="flex flex-wrap gap-2 mb-4">
-        {['Educate', 'Entertain', 'Convert'].map((p) => (
+        {pillars.map((p) => (
           <span key={p} className="text-xs px-3 py-1 rounded-full font-medium" style={{ background: `${svc.color}18`, color: svc.color }}>
             {p}
           </span>
         ))}
       </div>
-      <LearnMore href={`/services/${svc.slug}`} color={svc.color} />
+      <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
 }
 
-function PaidAdsCard({ svc }: { svc: Service }) {
+function PaidAdsCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
+  const roasLabel = locale === 'id' ? 'Rata-rata ROAS dalam 3 bulan' : 'Typical ROAS in 3 months'
   return (
     <div className="h-full flex flex-col">
       <div className="mb-4">
         <div className="text-5xl font-extrabold gradient-text leading-none">2–4x</div>
-        <div className="text-xs text-[var(--text-muted)] mt-1 uppercase tracking-wide">Typical ROAS in 3 months</div>
+        <div className="text-xs text-[var(--text-muted)] mt-1 uppercase tracking-wide">{roasLabel}</div>
       </div>
       <div className="h-px bg-[var(--border-default)] mb-4" />
       <div className="h-12 w-12 rounded-xl mb-3 flex items-center justify-center" style={{ background: `${svc.color}18`, color: svc.color }}>
@@ -101,12 +108,12 @@ function PaidAdsCard({ svc }: { svc: Service }) {
       </div>
       <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
-      <LearnMore href={`/services/${svc.slug}`} color={svc.color} />
+      <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
 }
 
-function CreativeCard({ svc }: { svc: Service }) {
+function CreativeCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
   const colors = ['#7C3AED', '#DB2777', '#D97706']
   return (
     <div className="h-full flex flex-col">
@@ -132,12 +139,12 @@ function CreativeCard({ svc }: { svc: Service }) {
       </div>
       <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
-      <LearnMore href={`/services/${svc.slug}`} color={svc.color} />
+      <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
 }
 
-function WebsiteCard({ svc }: { svc: Service }) {
+function WebsiteCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
   return (
     <div className="h-full flex flex-col">
       {/* Browser chrome mockup */}
@@ -158,21 +165,21 @@ function WebsiteCard({ svc }: { svc: Service }) {
       <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-2 flex-1">{svc.shortDescId}</p>
       {svc.pricingTiers?.[0] && (
-        <p className="text-xs text-[var(--text-muted)] mb-3">Starting from <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}</span></p>
+        <p className="text-xs text-[var(--text-muted)] mb-3">{locale === 'id' ? 'Mulai dari' : 'Starting from'} <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}</span></p>
       )}
-      <LearnMore href={`/services/${svc.slug}`} color={svc.color} />
+      <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
 }
 
-function LearnMore({ href, color }: { href: string; color: string }) {
+function LearnMore({ href, color, label }: { href: string; color: string; label: string }) {
   return (
     <Link
       href={href}
       className="inline-flex items-center gap-1 text-xs font-semibold mt-auto transition-colors group"
       style={{ color }}
     >
-      Learn more
+      {label}
       <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
       </svg>
@@ -185,11 +192,13 @@ function BentoCard({
   colSpan,
   animVariant,
   index,
+  locale,
 }: {
   svc: Service
   colSpan: string
   animVariant: 'slideLeft' | 'scaleUp'
   index: number
+  locale: 'id' | 'en'
 }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
@@ -211,17 +220,23 @@ function BentoCard({
       }}
       whileHover={{ boxShadow: `0 8px 30px ${svc.color}20` }}
     >
-      {svc.slug === 'seo-content-marketing' && <SEOCard svc={svc} />}
-      {svc.slug === 'social-media-management' && <SocialCard svc={svc} />}
-      {svc.slug === 'paid-advertising' && <PaidAdsCard svc={svc} />}
-      {svc.slug === 'creative-services' && <CreativeCard svc={svc} />}
-      {svc.slug === 'website-landing-page' && <WebsiteCard svc={svc} />}
+      {svc.slug === 'seo-content-marketing' && <SEOCard svc={svc} locale={locale} />}
+      {svc.slug === 'social-media-management' && <SocialCard svc={svc} locale={locale} />}
+      {svc.slug === 'paid-advertising' && <PaidAdsCard svc={svc} locale={locale} />}
+      {svc.slug === 'creative-services' && <CreativeCard svc={svc} locale={locale} />}
+      {svc.slug === 'website-landing-page' && <WebsiteCard svc={svc} locale={locale} />}
     </motion.div>
   )
 }
 
-export function ServicesSection({ services = [] }: { services?: Service[] }) {
+const SECTION_COPY = {
+  id: { badge: 'Layanan Kami', headline: 'Apa yang Kami', headlineGradient: 'Kerjakan', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem — bukan vendor-vendor yang berjalan terpisah.', viewAll: 'Lihat semua layanan' },
+  en: { badge: 'Our Services', headline: 'What We', headlineGradient: 'Do', desc: 'Five integrated services working as one system — not siloed vendors.', viewAll: 'View all services' },
+}
+
+export function ServicesSection({ services = [], locale = 'id' }: { services?: Service[]; locale?: 'id' | 'en' }) {
   const display = services.length > 0 ? services : FALLBACK
+  const sc = SECTION_COPY[locale]
 
   const seo = display.find((s) => s.slug === 'seo-content-marketing')
   const social = display.find((s) => s.slug === 'social-media-management')
@@ -244,39 +259,39 @@ export function ServicesSection({ services = [] }: { services?: Service[] }) {
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-4">
-            Our Services
+            {sc.badge}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-3">
-            What We <span className="gradient-text">Do</span>
+            {sc.headline} <span className="gradient-text">{sc.headlineGradient}</span>
           </h2>
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto">
-            Five integrated services working as one system — not siloed vendors.
+            {sc.desc}
           </p>
         </motion.div>
 
         {/* Bento grid — desktop */}
         <div className="hidden sm:grid grid-cols-3 gap-5">
-          {seo && <BentoCard svc={seo} colSpan="col-span-2" animVariant="slideLeft" index={0} />}
-          {social && <BentoCard svc={social} colSpan="col-span-1" animVariant="scaleUp" index={1} />}
-          {paid && <BentoCard svc={paid} colSpan="col-span-1" animVariant="scaleUp" index={2} />}
-          {creative && <BentoCard svc={creative} colSpan="col-span-1" animVariant="scaleUp" index={3} />}
-          {website && <BentoCard svc={website} colSpan="col-span-1" animVariant="scaleUp" index={4} />}
+          {seo && <BentoCard svc={seo} colSpan="col-span-2" animVariant="slideLeft" index={0} locale={locale} />}
+          {social && <BentoCard svc={social} colSpan="col-span-1" animVariant="scaleUp" index={1} locale={locale} />}
+          {paid && <BentoCard svc={paid} colSpan="col-span-1" animVariant="scaleUp" index={2} locale={locale} />}
+          {creative && <BentoCard svc={creative} colSpan="col-span-1" animVariant="scaleUp" index={3} locale={locale} />}
+          {website && <BentoCard svc={website} colSpan="col-span-1" animVariant="scaleUp" index={4} locale={locale} />}
         </div>
 
         {/* Mobile: single column */}
         <div className="flex flex-col gap-4 sm:hidden">
           {display.map((svc, i) => (
-            <BentoCard key={svc.id} svc={svc} colSpan="" animVariant="scaleUp" index={i} />
+            <BentoCard key={svc.id} svc={svc} colSpan="" animVariant="scaleUp" index={i} locale={locale} />
           ))}
         </div>
 
         {/* View all */}
         <div className="text-center mt-10">
           <Link
-            href="/services"
+            href={locale === 'id' ? '/services' : '/en/services'}
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-violet hover:text-brand-pink transition-colors group"
           >
-            View all services
+            {sc.viewAll}
             <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

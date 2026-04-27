@@ -3,7 +3,46 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-const STEPS = [
+interface Step {
+  num: string
+  title: string
+  days: string
+  desc: string
+  color: string
+}
+
+const STEPS_ID: Step[] = [
+  {
+    num: '01',
+    title: 'Discovery',
+    days: 'Hari 1–3',
+    desc: 'Kami audit kehadiran digital kamu saat ini, analisis kompetitor, dan identifikasi quick wins. Kamu dapat gambaran jelas tentang posisi brand sekarang dan peluang yang bisa diambil.',
+    color: '#7C3AED',
+  },
+  {
+    num: '02',
+    title: 'Strategi',
+    days: 'Hari 4–7',
+    desc: 'Kami susun roadmap 90 hari yang disesuaikan untuk semua channel — SEO, social, iklan, kreatif — dengan KPI spesifik yang terhubung ke target pendapatan kamu. Bukan vanity metrics.',
+    color: '#DB2777',
+  },
+  {
+    num: '03',
+    title: 'Eksekusi',
+    days: 'Hari 8–30',
+    desc: 'Konten go live. Iklan diluncurkan. Optimasi SEO bergulir. Tim terintegrasi kami bekerja paralel, bukan berurutan — tidak ada yang jadi bottleneck.',
+    color: '#D97706',
+  },
+  {
+    num: '04',
+    title: 'Optimalkan & Skalakan',
+    days: 'Berkelanjutan',
+    desc: 'Review performa bulanan bersama tim dedikasi kamu. Kami perkuat apa yang berhasil, potong yang tidak, dan terus kompoundkan hasilnya.',
+    color: '#F59E0B',
+  },
+]
+
+const STEPS_EN: Step[] = [
   {
     num: '01',
     title: 'Discovery',
@@ -34,7 +73,24 @@ const STEPS = [
   },
 ]
 
-export function HowWeWorkSection() {
+const COPY = {
+  id: {
+    badge: 'Proses Kami',
+    headline: 'Dari Panggilan Pertama ke Hasil Pertama dalam',
+    headlineGradient: '30 Hari',
+    body: 'Kami tidak percaya dengan onboarding yang bertele-tele atau strategi deck yang ujung-ujungnya cuma jadi pajangan. Proses kami dirancang untuk kecepatan — karena kompetitor kamu tidak sedang menunggu.',
+  },
+  en: {
+    badge: 'Our Process',
+    headline: 'From First Call to First Results in',
+    headlineGradient: '30 Days',
+    body: "We don't believe in lengthy onboarding or endless strategy decks that sit in a drawer. Our process is built for speed — because your competitors aren't waiting.",
+  },
+}
+
+export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const c = COPY[locale]
+  const steps = locale === 'id' ? STEPS_ID : STEPS_EN
   const leftRef = useRef(null)
   const leftInView = useInView(leftRef, { once: true, amount: 0.3 })
 
@@ -60,14 +116,14 @@ export function HowWeWorkSection() {
             className="lg:w-[35%] lg:sticky lg:top-28 flex-shrink-0"
           >
             <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-6">
-              Our Process
+              {c.badge}
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-5 leading-tight">
-              From First Call to First Results in{' '}
-              <span className="gradient-text">30 Days</span>
+              {c.headline}{' '}
+              <span className="gradient-text">{c.headlineGradient}</span>
             </h2>
             <p className="text-[var(--text-secondary)] leading-relaxed text-base">
-              We don't believe in lengthy onboarding or endless strategy decks that sit in a drawer. Our process is built for speed — because your competitors aren't waiting.
+              {c.body}
             </p>
           </motion.div>
 
@@ -88,7 +144,7 @@ export function HowWeWorkSection() {
 
                 {/* Step cards */}
                 <div className="grid grid-cols-4 gap-4 relative">
-                  {STEPS.map((step, i) => (
+                  {steps.map((step, i) => (
                     <motion.div
                       key={step.num}
                       initial={{ opacity: 0, y: 20 }}
@@ -120,7 +176,7 @@ export function HowWeWorkSection() {
             {/* Mobile: vertical timeline */}
             <div className="lg:hidden flex flex-col gap-6 relative">
               <div className="absolute left-[1.375rem] top-0 bottom-0 w-px bg-[var(--border-default)]" />
-              {STEPS.map((step, i) => (
+              {steps.map((step, i) => (
                 <motion.div
                   key={step.num}
                   initial={{ opacity: 0, x: 20 }}
