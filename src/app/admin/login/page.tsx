@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { LogoMark } from '@/components/ui/Logo'
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('')
@@ -30,8 +31,8 @@ export default function AdminLoginPage() {
     <div className="min-h-screen mesh-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="h-12 w-12 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-4">
-            <span className="text-white font-extrabold text-lg">L</span>
+          <div className="flex justify-center mb-4">
+            <LogoMark size={52} />
           </div>
           <h1 className="text-2xl font-bold text-[var(--text-primary)]">Logink CMS</h1>
           <p className="text-sm text-[var(--text-secondary)] mt-1">Sign in to your account</p>

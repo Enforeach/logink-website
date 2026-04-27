@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { SITE, WHATSAPP_URL } from '@/lib/constants'
+import { LogoMark } from '@/components/ui/Logo'
 
 const COPY = {
   id: {
@@ -51,9 +52,9 @@ export function CTASection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 max-w-4xl mx-auto text-center"
       >
-        {/* Logo icon */}
-        <div className="h-12 w-12 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-8 shadow-xl shadow-brand-violet/30">
-          <span className="text-white font-extrabold text-lg">L</span>
+        {/* Logo mark */}
+        <div className="flex justify-center mb-8">
+          <LogoMark size={52} />
         </div>
 
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] mb-6 leading-tight">

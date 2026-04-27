@@ -8,6 +8,7 @@ import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 import { NAV_LINKS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { type Locale, t, localePath } from '@/lib/i18n'
+import { LogoFull } from '@/components/ui/Logo'
 
 const SERVICE_SLUGS = [
   { slug: 'seo-content-marketing', key: 'seo', color: '#7C3AED' },
@@ -49,11 +50,8 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between gap-8">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-              <div className="h-8 w-8 rounded-lg gradient-bg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">L</span>
-              </div>
-              <span className="text-xl font-bold gradient-text">Logink</span>
+            <Link href="/" className="flex items-center flex-shrink-0">
+              <LogoFull size={30} theme="dark" />
             </Link>
 
             {/* Desktop Nav */}

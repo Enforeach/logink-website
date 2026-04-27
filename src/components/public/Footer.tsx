@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { SITE, WHATSAPP_URL } from '@/lib/constants'
 import { type Locale, t, localePath } from '@/lib/i18n'
+import { LogoFull } from '@/components/ui/Logo'
 
 const SERVICE_LINKS = [
   { href: '/services/seo-content-marketing', label: 'SEO & Content Marketing' },
@@ -38,11 +39,8 @@ export function Footer({ locale = 'id' }: FooterProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="h-8 w-8 rounded-lg gradient-bg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">L</span>
-              </div>
-              <span className="text-xl font-bold gradient-text">Logink</span>
+            <Link href="/" className="inline-flex mb-4">
+              <LogoFull size={30} theme="dark" />
             </Link>
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
               {t(locale, 'footer.description')}
