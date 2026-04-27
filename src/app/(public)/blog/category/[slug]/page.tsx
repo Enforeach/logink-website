@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogCategoryPage({ params }: Props) {
   const { slug } = await params
   let category = null
-  let posts: ReturnType<typeof prisma.post.findMany> extends Promise<infer T> ? T : never = []
+  let posts: any[] = []
   try {
     category = await prisma.category.findUnique({ where: { slug } })
     if (category) {
