@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
-import { join, extname } from 'path'
+import { put } from '@vercel/blob'
+import { extname } from 'path'
 import { prisma } from '@/lib/prisma'
 
 const MAX_SIZE_MB = Number(process.env.MAX_FILE_SIZE_MB || 10)
@@ -24,36 +24,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid folder' }, { status: 400 })
     }
 
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-
     const timestamp = Date.now()
     const ext = extname(file.name) || '.jpg'
     const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '-').toLowerCase()
     const filename = `${timestamp}-${safeName}`
-    const uploadDir = join(process.cwd(), 'public', 'uploads', folder)
+    const pathname = `uploads/${folder}/${filename}`
 
-    await mkdir(uploadDir, { recursive: true })
-    await writeFile(join(uploadDir, filename), buffer)
-
-    const url = `/uploads/${folder}/${filename}`
-
-    let width: number | undefined
-    let height: number | undefined
+    const blob = await put(pathname, file, {
+      access: 'public',
+      contentType: file.type,
+    })
 
     const media = await prisma.media.create({
       data: {
         filename,
-        url,
+        url: blob.url,
         mimeType: file.type,
         fileSize: file.size,
         folder,
-        width,
-        height,
       },
     })
 
-    return NextResponse.json({ id: media.id, url, filename })
+    return NextResponse.json({ id: media.id, url: blob.url, filename })
   } catch (err) {
     console.error('Upload error:', err)
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 })
