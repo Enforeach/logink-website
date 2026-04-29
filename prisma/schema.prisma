@@ -161,10 +161,11 @@ model Service {
   seoSchema       Json?
   metaTitle       String?
   metaDescription String?
-  pricingTiers    PricingTier[]
-  addOns          ServiceAddOn[]
-  caseStudies     CaseStudy[]
-  isActive        Boolean       @default(true)
+  pricingTiers      PricingTier[]
+  addOns            ServiceAddOn[]
+  caseStudies       CaseStudy[]
+  caseStudyServices CaseStudyService[]
+  isActive          Boolean       @default(true)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 }
@@ -193,27 +194,103 @@ model ServiceAddOn {
 
 // ─── CASE STUDIES / PORTFOLIO ───
 
+model Industry {
+  id          String      @id @default(cuid())
+  nameId      String
+  nameEn      String?
+  slug        String      @unique
+  accentColor String?
+  caseStudies CaseStudy[]
+  createdAt   DateTime    @default(now())
+}
+
 model CaseStudy {
-  id           String         @id @default(cuid())
-  title        String
-  slug         String         @unique
-  clientName   String
-  clientLogo   String?
-  industry     String
-  challenge    String         @db.Text
-  strategy     String         @db.Text
-  results      String         @db.Text
-  thumbnail    String?
-  serviceId    String?
-  service      Service?       @relation(fields: [serviceId], references: [id])
-  authorId     String?
-  author       User?          @relation(fields: [authorId], references: [id])
-  metrics      CaseMetric[]
-  testimonial  Testimonial?
-  status       PostStatus     @default(DRAFT)
-  publishedAt  DateTime?
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id              String              @id @default(cuid())
+  // Legacy fields (keep for backward compat)
+  title           String
+  industry        String
+  challenge       String              @db.Text
+  strategy        String              @db.Text
+  results         String              @db.Text
+  thumbnail       String?
+  serviceId       String?
+  service         Service?            @relation(fields: [serviceId], references: [id])
+  // Multilingual fields (new)
+  titleId         String?
+  titleEn         String?
+  subtitleId      String?
+  subtitleEn      String?
+  summaryId       String?             @db.Text
+  summaryEn       String?             @db.Text
+  slugEn          String?             @unique
+  seoTitleId      String?
+  seoTitleEn      String?
+  seoDescId       String?
+  seoDescEn       String?
+  ogImage         String?
+  featuredImage   String?
+  durationLabel   String?
+  clientWebsite   String?
+  featured        Boolean             @default(false)
+  industryId      String?
+  industryRel     Industry?           @relation(fields: [industryId], references: [id])
+  // Relations
+  slug            String              @unique
+  clientName      String
+  clientLogo      String?
+  authorId        String?
+  author          User?               @relation(fields: [authorId], references: [id])
+  metrics         CaseMetric[]
+  testimonial     Testimonial?
+  blocks          CaseStudyBlock[]
+  caseStudyServices CaseStudyService[]
+  status          PostStatus          @default(DRAFT)
+  publishedAt     DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
+
+model CaseStudyBlock {
+  id          String    @id @default(cuid())
+  caseStudyId String
+  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+  blockType   BlockType
+  sortOrder   Int       @default(0)
+  isVisible   Boolean   @default(true)
+  data        Json
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([caseStudyId, sortOrder])
+}
+
+model CaseStudyService {
+  caseStudyId String
+  serviceId   String
+  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+  service     Service   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([caseStudyId, serviceId])
+}
+
+enum BlockType {
+  HERO
+  OVERVIEW
+  CLIENT_SNAPSHOT
+  NARRATIVE
+  METRIC_GRID
+  TIMELINE
+  CHART
+  BEFORE_AFTER
+  GALLERY
+  VIDEO
+  QUOTE
+  SERVICES_USED
+  RELATED_CASES
+  CTA
+  LEAD_FORM
+  FAQ
+  RICH_TEXT
 }
 
 model CaseMetric {

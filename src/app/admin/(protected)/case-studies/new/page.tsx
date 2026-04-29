@@ -1,5 +1,5 @@
-import { CaseStudyForm } from '@/components/admin/CaseStudyForm'
+import { CaseStudyEditor } from '@/components/admin/CaseStudyEditor'
 
 export default function NewCaseStudyPage() {
-  return <CaseStudyForm caseStudy={null} />
+  return <CaseStudyEditor caseStudy={null} />
 }
