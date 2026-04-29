@@ -10,6 +10,7 @@ import { StatsSection } from '@/components/public/home/StatsSection'
 import { CaseStudyTeaser } from '@/components/public/home/CaseStudyTeaser'
 import { TestimonialsSection } from '@/components/public/home/TestimonialsSection'
 import { CTASection } from '@/components/public/home/CTASection'
+import LeadProfiler from '@/components/public/LeadProfiler'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Logink - 360° Digital Marketing Agency Jakarta',
@@ -62,6 +63,7 @@ export default async function HomePage() {
       />
 
       <HeroSection locale="id" />
+      <LeadProfiler />
       <LogoMarquee />
       <ProblemSolutionSection locale="id" />
       <ServicesSection services={services as any} locale="id" />
