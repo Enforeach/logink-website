@@ -31,7 +31,7 @@ export default async function EnHomePage() {
   return (
     <>
       <HeroSection locale="en" />
-      <LeadProfiler />
+      <LeadProfiler locale="en" />
       <LogoMarquee />
       <ProblemSolutionSection locale="en" />
       <ServicesSection locale="en" />
