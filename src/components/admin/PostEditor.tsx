@@ -43,7 +43,7 @@ function SerpPreview({ title, slug, description }: { title: string; slug: string
   return (
     <div className="rounded-lg border border-[var(--border-default)] bg-white dark:bg-[#0F0A1E] p-3 text-xs mt-2">
       <div className="text-[#1a0dab] dark:text-blue-400 font-medium truncate">{title || 'Page Title'}</div>
-      <div className="text-[#006621] dark:text-green-400 text-[11px] mt-0.5">logink.id › blog › {slug || 'post-slug'}</div>
+      <div className="text-[#006621] dark:text-green-400 text-[11px] mt-0.5">logink.co › blog › {slug || 'post-slug'}</div>
       <div className="text-[#545454] dark:text-[var(--text-muted)] mt-0.5 leading-relaxed line-clamp-2">{description || 'Meta description will appear here…'}</div>
     </div>
   )

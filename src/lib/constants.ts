@@ -22,10 +22,10 @@ export const SITE = {
   name: 'Logink',
   tagline: 'Connected Creativity',
   description: '360° Digital Marketing Agency — Jakarta, Indonesia',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://logink.id',
-  email: 'hello@logink.id',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://logink.co',
+  email: 'hello@logink.co',
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6281234567890',
-  instagram: 'https://instagram.com/logink.id',
+  instagram: 'https://instagram.com/logink.co',
   address: 'Jakarta, Indonesia',
 } as const
 

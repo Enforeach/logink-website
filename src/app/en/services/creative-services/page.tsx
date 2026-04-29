@@ -19,9 +19,9 @@ export const metadata: Metadata = buildMetadata({
 })
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://logink.id/en' },
-  { name: 'Services', url: 'https://logink.id/en/services' },
-  { name: 'Creative Services', url: 'https://logink.id/en/services/creative-services' },
+  { name: 'Home', url: 'https://logink.co/en' },
+  { name: 'Services', url: 'https://logink.co/en/services' },
+  { name: 'Creative Services', url: 'https://logink.co/en/services/creative-services' },
 ]
 
 export default function CreativeServicesEnPage() {

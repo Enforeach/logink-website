@@ -57,7 +57,7 @@ export default function AdminLoginPage() {
                 label="Email"
                 id="email"
                 type="email"
-                placeholder="admin@logink.id"
+                placeholder="admin@logink.co"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 error={error}

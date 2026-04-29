@@ -898,9 +898,9 @@ export async function ServiceDetailContent({ slug, locale = 'id' }: { slug: stri
   const dbService = await getDbService(slug)
 
   const breadcrumbs = [
-    { name: ui.breadcrumbHome, url: 'https://logink.id' },
-    { name: ui.breadcrumbServices, url: `https://logink.id${ui.servicesBasePath}` },
-    { name: svc.name, url: `https://logink.id${ui.servicesBasePath}/${slug}` },
+    { name: ui.breadcrumbHome, url: 'https://logink.co' },
+    { name: ui.breadcrumbServices, url: `https://logink.co${ui.servicesBasePath}` },
+    { name: svc.name, url: `https://logink.co${ui.servicesBasePath}/${slug}` },
   ]
 
   const HeroVisual =

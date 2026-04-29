@@ -19,9 +19,9 @@ export const metadata: Metadata = buildMetadata({
 })
 
 const breadcrumbs = [
-  { name: 'Beranda', url: 'https://logink.id' },
-  { name: 'Layanan', url: 'https://logink.id/services' },
-  { name: 'Social Media Management', url: 'https://logink.id/services/social-media-management' },
+  { name: 'Beranda', url: 'https://logink.co' },
+  { name: 'Layanan', url: 'https://logink.co/services' },
+  { name: 'Social Media Management', url: 'https://logink.co/services/social-media-management' },
 ]
 
 export default function SocialMediaPage() {

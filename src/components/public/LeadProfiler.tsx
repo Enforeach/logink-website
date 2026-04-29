@@ -602,7 +602,7 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
           </div>
           <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
             <div style={{ fontSize: 12, fontFamily: 'monospace', color: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '3px 12px', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-              <span style={{ fontSize: 11 }}>🔒</span> logink.id/profiler
+              <span style={{ fontSize: 11 }}>🔒</span> logink.co/profiler
             </div>
           </div>
           {service && phase === 'questions' && (

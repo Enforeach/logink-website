@@ -26,9 +26,9 @@ export async function POST(req: NextRequest) {
     } = body
 
     const authorId = (await prisma.user.upsert({
-      where: { email: 'system@logink.id' },
+      where: { email: 'system@logink.co' },
       update: {},
-      create: { name: 'System', email: 'system@logink.id', role: 'ADMIN' },
+      create: { name: 'System', email: 'system@logink.co', role: 'ADMIN' },
       select: { id: true },
     })).id
 

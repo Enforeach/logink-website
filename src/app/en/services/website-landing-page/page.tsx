@@ -20,9 +20,9 @@ export const metadata: Metadata = buildMetadata({
 })
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://logink.id/en' },
-  { name: 'Services', url: 'https://logink.id/en/services' },
-  { name: 'Website & Landing Page', url: 'https://logink.id/en/services/website-landing-page' },
+  { name: 'Home', url: 'https://logink.co/en' },
+  { name: 'Services', url: 'https://logink.co/en/services' },
+  { name: 'Website & Landing Page', url: 'https://logink.co/en/services/website-landing-page' },
 ]
 
 export default function WebsiteLandingPageEnPage() {
