@@ -196,7 +196,7 @@ export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], 
       </div>
 
       {/* Sticky sub-nav */}
-      <div className="sticky top-0 z-40 bg-[var(--bg-primary)]/95 backdrop-blur border-b border-[var(--border-default)]">
+      <div className="sticky top-16 z-30 bg-[var(--bg-primary)]/95 backdrop-blur border-b border-[var(--border-default)]">
         <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-12">
           <nav className="flex gap-5 overflow-x-auto scrollbar-hide" aria-label="In-page navigation">
             {navSections.map(s => (
