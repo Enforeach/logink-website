@@ -261,7 +261,7 @@ export default function TermsPage() {
           {/* Intro */}
           <div className="mb-10 p-6 rounded-2xl bg-brand-violet/5 border border-brand-violet/10">
             <p className="text-[var(--text-secondary)] leading-relaxed">
-              Dokumen ini merupakan perjanjian yang mengikat secara hukum antara Anda (klien) dan <strong className="text-[var(--text-primary)]">PT Logink Digital Indonesia</strong>, beroperasi di bawah nama <strong className="text-[var(--text-primary)]">Logink</strong>, yang beralamat di Jakarta, Indonesia. Harap baca syarat ini dengan seksama sebelum menggunakan layanan kami.
+              Dokumen ini merupakan perjanjian yang mengikat secara hukum antara Anda (klien) dan <strong className="text-[var(--text-primary)]">Logink</strong>, yang beralamat di Jakarta, Indonesia. Harap baca syarat ini dengan seksama sebelum menggunakan layanan kami.
             </p>
           </div>
 
