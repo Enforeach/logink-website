@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
@@ -24,7 +24,16 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pathname = usePathname()
+
+  const openServices = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    setServicesOpen(true)
+  }
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setServicesOpen(false), 150)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -57,9 +66,8 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-1">
               {/* Services dropdown */}
-              <div className="relative" onMouseLeave={() => setServicesOpen(false)}>
+              <div className="relative" onMouseEnter={openServices} onMouseLeave={scheduleClose}>
                 <button
-                  onMouseEnter={() => setServicesOpen(true)}
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1',
                     pathname?.startsWith('/services') || pathname?.startsWith('/en/services')
@@ -73,7 +81,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
                   </svg>
                 </button>
                 {servicesOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-72 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-2xl backdrop-blur-xl p-2">
+                  <div className="absolute top-full left-0 w-72 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-2xl backdrop-blur-xl p-2" style={{ marginTop: 0, paddingTop: '4px' }}>
                     <Link
                       href={localePath('/services', locale)}
                       className="block px-3 py-2 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-colors mb-1 font-medium"
