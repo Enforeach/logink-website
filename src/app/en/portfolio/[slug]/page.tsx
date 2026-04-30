@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { CaseStudyPage, generateCaseStudyMetadata } from '@/components/public/case-study/CaseStudyDetailPage'
+import { CaseStudyPage, generateCaseStudyMetadata } from '@/components/public/case-study/CaseStudyServerPage'
 
 interface Props { params: Promise<{ slug: string }> }
 
