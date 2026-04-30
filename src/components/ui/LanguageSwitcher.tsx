@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 import { type Locale } from '@/lib/i18n'
 
 interface Props {
@@ -28,20 +29,40 @@ export function LanguageSwitcher({ locale, alternateSlug }: Props) {
   }
 
   const alternatePath = getAlternatePath()
-  const alternateLabel = locale === 'id' ? 'EN' : 'ID'
+
+  const idPath = locale === 'en' ? alternatePath : pathname
+  const enPath = locale === 'id' ? alternatePath : pathname
 
   return (
-    <Link
-      href={alternatePath}
-      hrefLang={locale === 'id' ? 'en' : 'id'}
-      title={locale === 'id' ? 'View in English' : 'Lihat dalam Bahasa Indonesia'}
-      className="flex items-center gap-1.5 h-7 px-2.5 rounded-full border border-[var(--border-default)] text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] transition-all"
-    >
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-      </svg>
-      {alternateLabel}
-    </Link>
+    <div className="flex items-center rounded-lg border border-[var(--border-default)] bg-[var(--bg-elevated)] p-0.5">
+      <Link
+        href={idPath}
+        hrefLang="id"
+        title="Lihat dalam Bahasa Indonesia"
+        className={cn(
+          'flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150',
+          locale === 'id'
+            ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm'
+            : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
+        )}
+      >
+        <span className="text-[11px] leading-none">🇮🇩</span>
+        ID
+      </Link>
+      <Link
+        href={enPath}
+        hrefLang="en"
+        title="View in English"
+        className={cn(
+          'flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150',
+          locale === 'en'
+            ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm'
+            : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
+        )}
+      >
+        <span className="text-[11px] leading-none">🇬🇧</span>
+        EN
+      </Link>
+    </div>
   )
 }
