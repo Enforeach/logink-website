@@ -15,12 +15,16 @@ interface LogoFullProps {
 const GRAD_ID_MARK = 'logink-mark-grad'
 const GRAD_ID_FULL = 'logink-full-grad'
 
+// Smooth S-loop mark: open upper-right arc sweeping down into inner S-return
+const MARK_PATH = 'M 16,46 C 4,44 -1,28 10,18 C 21,8 48,4 64,16 C 78,28 78,46 62,52 C 46,58 26,52 26,38 C 26,24 44,18 58,28'
+
 export function LogoMark({ size = 32, className }: LogoMarkProps) {
   return (
     <svg
       width={size}
       height={Math.round(size * 0.72)}
       viewBox="0 0 80 58"
+      overflow="visible"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -29,12 +33,11 @@ export function LogoMark({ size = 32, className }: LogoMarkProps) {
       <defs>
         <linearGradient id={GRAD_ID_MARK} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#F72585" />
-          <stop offset="50%" stopColor="#E040FB" />
           <stop offset="100%" stopColor="#FF6D00" />
         </linearGradient>
       </defs>
       <path
-        d="M 14,44 C 5,38 4,22 16,12 C 28,2 52,4 64,18 C 74,30 70,46 56,50 C 44,54 32,46 36,34 C 40,24 56,24 58,38"
+        d={MARK_PATH}
         stroke={`url(#${GRAD_ID_MARK})`}
         strokeWidth="14"
         strokeLinecap="round"
@@ -45,7 +48,6 @@ export function LogoMark({ size = 32, className }: LogoMarkProps) {
 }
 
 export function LogoFull({ size = 32, theme = 'dark', className, suffix }: LogoFullProps) {
-  const textH = size
   const markW = Math.round(size * 1.38)
   const gap = Math.round(size * 0.28)
   const fontSize = Math.round(size * 0.88)
@@ -61,6 +63,7 @@ export function LogoFull({ size = 32, theme = 'dark', className, suffix }: LogoF
       width={svgW}
       height={svgH}
       viewBox={`0 0 ${svgW} ${svgH}`}
+      overflow="visible"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -70,7 +73,6 @@ export function LogoFull({ size = 32, theme = 'dark', className, suffix }: LogoF
       <defs>
         <linearGradient id={GRAD_ID_FULL} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#F72585" />
-          <stop offset="50%" stopColor="#E040FB" />
           <stop offset="100%" stopColor="#FF6D00" />
         </linearGradient>
       </defs>
@@ -78,7 +80,7 @@ export function LogoFull({ size = 32, theme = 'dark', className, suffix }: LogoF
       {/* Mark */}
       <g transform={`scale(${size / 58})`}>
         <path
-          d="M 14,44 C 5,38 4,22 16,12 C 28,2 52,4 64,18 C 74,30 70,46 56,50 C 44,54 32,46 36,34 C 40,24 56,24 58,38"
+          d={MARK_PATH}
           stroke={`url(#${GRAD_ID_FULL})`}
           strokeWidth="14"
           strokeLinecap="round"
