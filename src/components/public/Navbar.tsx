@@ -89,10 +89,13 @@ const SERVICE_GROUPS = [
 
 interface NavbarProps { locale?: Locale }
 
+const BANNER_KEY = 'logink-banner-v1-dismissed'
+
 export function Navbar({ locale = 'id' }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [bannerVisible, setBannerVisible] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pathname = usePathname()
 
@@ -103,6 +106,15 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
   const scheduleClose = () => {
     closeTimer.current = setTimeout(() => setServicesOpen(false), 200)
   }
+
+  const dismissBanner = () => {
+    setBannerVisible(false)
+    sessionStorage.setItem(BANNER_KEY, '1')
+  }
+
+  useEffect(() => {
+    if (!sessionStorage.getItem(BANNER_KEY)) setBannerVisible(true)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -128,6 +140,45 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
             : 'bg-transparent'
         )}
       >
+        {/* Announcement Bar */}
+        {bannerVisible && (
+          <div className="bg-[#0F0A1E] border-b border-white/10 relative flex items-center justify-center px-10 py-2">
+            {/* Subtle gradient accents */}
+            <div className="absolute left-0 top-0 h-full w-40 pointer-events-none"
+              style={{ background: 'linear-gradient(to right, rgba(124,58,237,0.25), transparent)' }} />
+            <div className="absolute right-0 top-0 h-full w-40 pointer-events-none"
+              style={{ background: 'linear-gradient(to left, rgba(219,39,119,0.15), transparent)' }} />
+
+            <Link
+              href={localePath('/contact', locale)}
+              className="relative flex items-center gap-2.5 group"
+            >
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] flex-shrink-0">✦</span>
+              <span className="text-white/70 text-xs">
+                {locale === 'en'
+                  ? 'Get a free digital marketing consultation for your business.'
+                  : 'Dapatkan konsultasi digital marketing gratis untuk bisnis Anda.'}
+              </span>
+              <span className="text-white text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                {locale === 'en' ? 'Contact us' : 'Hubungi kami'}
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </Link>
+
+            <button
+              onClick={dismissBanner}
+              aria-label="Dismiss"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center rounded-md text-white/40 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        )}
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between gap-8">
 
