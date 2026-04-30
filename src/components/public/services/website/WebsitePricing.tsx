@@ -40,7 +40,7 @@ export function WebsitePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const copy = PRICING_COPY[locale]
   const addons = locale === 'en' ? WEBSITE_ADDONS_EN : WEBSITE_ADDONS
-  const WA_LINK = `https://wa.me/6281234567890?text=${encodeURIComponent(copy.waMessage)}`
+  const WA_LINK = `https://wa.me/6287782495916?text=${encodeURIComponent(copy.waMessage)}`
 
   return (
     <section

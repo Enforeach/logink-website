@@ -531,7 +531,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                   {locale === 'en' ? 'Get Custom Quote →' : 'Dapatkan Penawaran Kustom →'}
                 </Link>
                 <a
-                  href={`https://wa.me/628119401714?text=${waMessage}`}
+                  href={`https://wa.me/6287782495916?text=${waMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white hover:scale-[1.02] transition-all duration-200"
