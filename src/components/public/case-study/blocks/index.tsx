@@ -90,30 +90,32 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 // ─── 1. HERO ───
-export function HeroBlockRenderer({ data, locale, clientName, clientLogo, durationLabel, services }: {
+export function HeroBlockRenderer({ data, locale, clientName, clientLogo, durationLabel, services, featuredImage }: {
   data: HeroBlockData; locale: Locale; clientName: string; clientLogo?: string | null; durationLabel?: string | null
   services?: Array<{ name: string; color: string }>
+  featuredImage?: string | null
 }) {
   const metrics = data.metrics || []
+  const bgImage = data.mediaUrl || featuredImage || null
   return (
     <div className="relative overflow-hidden">
-      {data.mediaUrl && (
+      {bgImage && (
         <div className="absolute inset-0">
-          <Image src={data.mediaUrl} alt={data.mediaAlt || clientName} fill className="object-cover" priority />
+          <Image src={bgImage} alt={data.mediaAlt || clientName} fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0F0A1E]/60 via-[#0F0A1E]/40 to-[#0F0A1E]/80" />
         </div>
       )}
-      <div className={`relative max-w-5xl mx-auto px-4 ${data.mediaUrl ? 'pt-40 pb-20 text-white' : 'pt-12 pb-10'}`}>
+      <div className={`relative max-w-5xl mx-auto px-4 ${bgImage ? 'pt-40 pb-20 text-white' : 'pt-12 pb-10'}`}>
         {t(data as unknown as Record<string, unknown>, 'eyebrowId', locale) && (
           <div className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/30 bg-brand-violet/10 text-brand-violet text-sm font-medium mb-6">
             {t(data as unknown as Record<string, unknown>, 'eyebrowId', locale)}
           </div>
         )}
-        <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4 ${data.mediaUrl ? 'text-white' : 'text-[var(--text-primary)]'}`}>
+        <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4 ${bgImage ? 'text-white' : 'text-[var(--text-primary)]'}`}>
           {t(data as unknown as Record<string, unknown>, 'headingId', locale)}
         </h1>
         {t(data as unknown as Record<string, unknown>, 'subheadingId', locale) && (
-          <p className={`text-lg sm:text-xl mb-8 ${data.mediaUrl ? 'text-white/80' : 'text-[var(--text-secondary)]'}`}>
+          <p className={`text-lg sm:text-xl mb-8 ${bgImage ? 'text-white/80' : 'text-[var(--text-secondary)]'}`}>
             {t(data as unknown as Record<string, unknown>, 'subheadingId', locale)}
           </p>
         )}
@@ -124,8 +126,8 @@ export function HeroBlockRenderer({ data, locale, clientName, clientLogo, durati
               <Image src={clientLogo} alt={clientName} fill className="object-contain p-1" />
             </div>
           )}
-          <span className={`text-sm font-medium ${data.mediaUrl ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{clientName}</span>
-          {durationLabel && <span className={`text-sm px-3 py-1 rounded-full bg-white/10 ${data.mediaUrl ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{durationLabel}</span>}
+          <span className={`text-sm font-medium ${bgImage ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{clientName}</span>
+          {durationLabel && <span className={`text-sm px-3 py-1 rounded-full bg-white/10 ${bgImage ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{durationLabel}</span>}
           {services?.map(s => (
             <span key={s.name} className="text-xs px-3 py-1 rounded-full font-medium text-white" style={{ backgroundColor: s.color }}>{s.name}</span>
           ))}
@@ -145,7 +147,7 @@ export function HeroBlockRenderer({ data, locale, clientName, clientLogo, durati
                     <div className="flex items-center gap-1.5 mt-1">
                       {m.deltaDirection === 'up' && <span className="text-emerald-400 text-sm">↑</span>}
                       {m.deltaDirection === 'down' && <span className="text-red-400 text-sm">↓</span>}
-                      <span className={`text-sm ${data.mediaUrl ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{t(m as unknown as Record<string, unknown>, 'labelId', locale)}</span>
+                      <span className={`text-sm ${bgImage ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{t(m as unknown as Record<string, unknown>, 'labelId', locale)}</span>
                     </div>
                   </div>
                 </Reveal>
@@ -286,57 +288,216 @@ export function MetricGridBlockRenderer({ data, locale }: { data: MetricGridBloc
   )
 }
 
-// ─── 6. TIMELINE ───
+// ─── 6. TIMELINE — sticky scroll-driven process ───
 export function TimelineBlockRenderer({ data, locale }: { data: TimelineBlockData; locale: Locale }) {
-  const [active, setActive] = useState<number | null>(null)
   const title = t(data as unknown as Record<string, unknown>, 'titleId', locale)
   const milestones = data.milestones || []
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [spineProgress, setSpineProgress] = useState(0)
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  // Drive spine fill + active step from scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = sectionRef.current
+      if (!section || stepRefs.current.length === 0) return
+
+      const viewportMid = window.innerHeight * 0.45
+
+      let closest = 0
+      let closestDist = Infinity
+      stepRefs.current.forEach((el, i) => {
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        const dist = Math.abs(rect.top + rect.height / 2 - viewportMid)
+        if (dist < closestDist) { closestDist = dist; closest = i }
+      })
+      setActiveIndex(closest)
+
+      // Spine fill: 0→1 across the full section scroll range
+      const sRect = section.getBoundingClientRect()
+      const total = sRect.height - window.innerHeight
+      const scrolled = Math.max(0, -sRect.top)
+      setSpineProgress(total > 0 ? Math.min(1, scrolled / total) : 0)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [milestones.length])
+
+  const PHASE_COLORS = [
+    { bg: 'bg-violet-500/10', border: 'border-violet-500/30', dot: 'bg-violet-500', text: 'text-violet-400', glow: 'shadow-violet-500/30' },
+    { bg: 'bg-pink-500/10',   border: 'border-pink-500/30',   dot: 'bg-pink-500',   text: 'text-pink-400',   glow: 'shadow-pink-500/30' },
+    { bg: 'bg-orange-500/10', border: 'border-orange-500/30', dot: 'bg-orange-500', text: 'text-orange-400', glow: 'shadow-orange-500/30' },
+    { bg: 'bg-emerald-500/10',border: 'border-emerald-500/30',dot: 'bg-emerald-500',text: 'text-emerald-400',glow: 'shadow-emerald-500/30' },
+    { bg: 'bg-cyan-500/10',   border: 'border-cyan-500/30',   dot: 'bg-cyan-500',   text: 'text-cyan-400',   glow: 'shadow-cyan-500/30' },
+    { bg: 'bg-amber-500/10',  border: 'border-amber-500/30',  dot: 'bg-amber-500',  text: 'text-amber-400',  glow: 'shadow-amber-500/30' },
+  ]
+
   return (
-    <Reveal>
-      <div className="max-w-4xl mx-auto">
-        {title && <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-8">{title}</h2>}
-        {/* Desktop horizontal */}
-        <div className="hidden sm:block relative">
-          <div className="absolute top-4 left-0 right-0 h-0.5 bg-[var(--border-default)]" />
-          <div className="flex gap-0 overflow-x-auto pb-4">
+    <div ref={sectionRef} className="max-w-5xl mx-auto">
+      {/* Section header */}
+      <Reveal>
+        <div className="mb-16 text-center">
+          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-widest mb-4">
+            {locale === 'en' ? 'Project Journey' : 'Perjalanan Proyek'}
+          </span>
+          {title && <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{title}</h2>}
+        </div>
+      </Reveal>
+
+      {/* Desktop: two-column spine layout */}
+      <div className="hidden md:flex gap-0">
+        {/* Left: sticky step index panel */}
+        <div className="w-56 flex-shrink-0 relative">
+          <div className="sticky top-28 pr-6">
+            <div className="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)] mb-4">
+              {locale === 'en' ? 'Phase' : 'Fase'}
+            </div>
+            <div className="space-y-3">
+              {milestones.map((m, i) => {
+                const mTitle = locale === 'en' ? (m.titleEn || m.titleId) : m.titleId
+                const c = PHASE_COLORS[i % PHASE_COLORS.length]
+                const isActive = activeIndex === i
+                const isPast = i < activeIndex
+                return (
+                  <button
+                    key={i}
+                    onClick={() => stepRefs.current[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+                    className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-300 ${isActive ? `${c.bg} ${c.border} border` : 'border border-transparent hover:bg-[var(--bg-elevated)]'}`}
+                  >
+                    <div className={`w-2 h-2 rounded-full flex-shrink-0 transition-all duration-300 ${isActive ? c.dot : isPast ? 'bg-[var(--text-muted)]' : 'bg-[var(--border-default)]'}`} />
+                    <span className={`text-xs font-medium line-clamp-1 transition-colors duration-300 ${isActive ? c.text : isPast ? 'text-[var(--text-muted)]' : 'text-[var(--text-muted)]'}`}>
+                      {mTitle}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+            {/* Spine progress bar */}
+            <div className="mt-6 relative h-1 rounded-full bg-[var(--border-default)] overflow-hidden">
+              <div
+                className="absolute inset-y-0 left-0 rounded-full transition-all duration-150"
+                style={{ width: `${spineProgress * 100}%`, background: 'linear-gradient(90deg, #A8138F, #F88438)' }}
+              />
+            </div>
+            <div className="mt-2 text-xs text-[var(--text-muted)]">
+              {Math.round(spineProgress * 100)}% {locale === 'en' ? 'complete' : 'selesai'}
+            </div>
+          </div>
+        </div>
+
+        {/* Right: scrolling step cards */}
+        <div className="flex-1 relative pl-8 border-l border-[var(--border-default)]">
+          {/* Animated spine fill */}
+          <div
+            className="absolute left-0 top-0 w-px origin-top transition-all duration-150"
+            style={{ height: `${spineProgress * 100}%`, background: 'linear-gradient(180deg, #A8138F, #F88438)' }}
+          />
+
+          <div className="space-y-6">
             {milestones.map((m, i) => {
               const mTitle = locale === 'en' ? (m.titleEn || m.titleId) : m.titleId
               const mDesc = locale === 'en' ? (m.descriptionEn || m.descriptionId) : m.descriptionId
+              const c = PHASE_COLORS[i % PHASE_COLORS.length]
+              const isActive = activeIndex === i
+              const isPast = i < activeIndex
+
               return (
-                <div key={i} className="flex-1 min-w-[140px] text-center relative cursor-pointer" onClick={() => setActive(active === i ? null : i)}>
-                  <div className={`w-4 h-4 rounded-full mx-auto relative z-10 border-2 transition-all ${active === i ? 'bg-brand-violet border-brand-violet scale-125' : 'bg-[var(--bg-surface)] border-brand-violet/50 hover:border-brand-violet'}`} />
-                  <div className="mt-3">
-                    <div className="text-xs text-brand-violet font-medium">{m.date}</div>
-                    <div className="text-xs font-semibold text-[var(--text-primary)] mt-1">{mTitle}</div>
+                <div
+                  key={i}
+                  ref={el => { stepRefs.current[i] = el }}
+                  className={`relative pl-10 py-8 pr-6 rounded-2xl border transition-all duration-500 ${
+                    isActive
+                      ? `${c.bg} ${c.border} shadow-xl ${c.glow}`
+                      : isPast
+                      ? 'border-[var(--border-default)] bg-[var(--bg-surface)] opacity-60'
+                      : 'border-[var(--border-default)] bg-[var(--bg-surface)] opacity-40'
+                  }`}
+                >
+                  {/* Step dot on spine */}
+                  <div className={`absolute -left-[43px] top-10 w-5 h-5 rounded-full border-2 border-[var(--bg-primary)] flex items-center justify-center transition-all duration-500 ${isActive ? `${c.dot} scale-125 shadow-lg ${c.glow}` : isPast ? 'bg-[var(--text-muted)]' : 'bg-[var(--border-default)]'}`}>
+                    {isPast && (
+                      <svg className="w-2.5 h-2.5 text-white" viewBox="0 0 12 12" fill="currentColor">
+                        <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    )}
                   </div>
-                  {active === i && mDesc && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-xl p-3 text-xs text-[var(--text-secondary)] z-20 shadow-lg text-left">
+
+                  {/* Step number badge + date */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold text-white ${c.dot}`}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    {m.date && (
+                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${c.bg} ${c.text} border ${c.border}`}>
+                        {m.date}
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 ${isActive ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
+                    {mTitle}
+                  </h3>
+                  {mDesc && (
+                    <p className={`text-sm leading-relaxed transition-colors duration-300 ${isActive ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'}`}>
                       {mDesc}
-                    </div>
+                    </p>
+                  )}
+
+                  {/* Active glow accent */}
+                  {isActive && (
+                    <div className={`absolute inset-0 rounded-2xl pointer-events-none ${c.bg} opacity-30`} />
                   )}
                 </div>
               )
             })}
           </div>
         </div>
-        {/* Mobile vertical */}
-        <div className="sm:hidden space-y-0">
+      </div>
+
+      {/* Mobile: full vertical stack */}
+      <div className="md:hidden relative pl-6">
+        {/* Spine line */}
+        <div className="absolute left-2 top-2 bottom-2 w-px bg-[var(--border-default)]" />
+        <div
+          className="absolute left-2 top-2 w-px origin-top transition-all duration-150"
+          style={{ height: `${spineProgress * 100}%`, background: 'linear-gradient(180deg, #A8138F, #F88438)' }}
+        />
+
+        <div className="space-y-4">
           {milestones.map((m, i) => {
             const mTitle = locale === 'en' ? (m.titleEn || m.titleId) : m.titleId
             const mDesc = locale === 'en' ? (m.descriptionEn || m.descriptionId) : m.descriptionId
+            const c = PHASE_COLORS[i % PHASE_COLORS.length]
+            const isActive = activeIndex === i
+            const isPast = i < activeIndex
+
             return (
-              <div key={i} className="relative pl-8 pb-6">
-                <div className="absolute left-2 top-1.5 w-3 h-3 rounded-full bg-brand-violet" />
-                {i < milestones.length - 1 && <div className="absolute left-[13px] top-4 bottom-0 w-0.5 bg-brand-violet/20" />}
-                <div className="text-xs text-brand-violet font-medium">{m.date}</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)] mt-0.5">{mTitle}</div>
-                {mDesc && <p className="text-sm text-[var(--text-secondary)] mt-1">{mDesc}</p>}
+              <div
+                key={i}
+                ref={el => { if (!stepRefs.current[i]) stepRefs.current[i] = el }}
+                className={`relative p-5 rounded-2xl border transition-all duration-500 ${isActive ? `${c.bg} ${c.border}` : 'border-[var(--border-default)] bg-[var(--bg-surface)]'}`}
+              >
+                {/* Spine dot */}
+                <div className={`absolute -left-[22px] top-6 w-4 h-4 rounded-full border-2 border-[var(--bg-primary)] transition-all duration-500 ${isActive ? `${c.dot} scale-125` : isPast ? 'bg-[var(--text-muted)]' : 'bg-[var(--border-default)]'}`} />
+
+                <div className="flex items-center gap-2 mb-3">
+                  <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-white ${c.dot}`}>
+                    {i + 1}
+                  </span>
+                  {m.date && <span className={`text-xs font-semibold ${c.text}`}>{m.date}</span>}
+                </div>
+                <h3 className="text-base font-bold text-[var(--text-primary)] mb-2">{mTitle}</h3>
+                {mDesc && <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{mDesc}</p>}
               </div>
             )
           })}
         </div>
       </div>
-    </Reveal>
+    </div>
   )
 }
 

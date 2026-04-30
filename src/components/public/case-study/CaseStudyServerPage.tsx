@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import { unstable_cache } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { buildMetadata } from '@/lib/seo'
 import { CaseStudyDetailPage } from './CaseStudyDetailPage'
@@ -7,7 +8,8 @@ import type { CaseStudyFull } from '@/types/case-study'
 
 type Locale = 'id' | 'en'
 
-async function getCaseStudy(slug: string, locale: Locale) {
+const getCaseStudy = unstable_cache(
+  async (slug: string, locale: Locale) => {
   try {
     return await prisma.caseStudy.findFirst({
       where: {
@@ -26,7 +28,10 @@ async function getCaseStudy(slug: string, locale: Locale) {
       },
     })
   } catch { return null }
-}
+  },
+  ['case-study'],
+  { revalidate: 3600, tags: ['case-study'] }
+)
 
 async function getRelated(cs: NonNullable<Awaited<ReturnType<typeof getCaseStudy>>>, limit = 3) {
   try {

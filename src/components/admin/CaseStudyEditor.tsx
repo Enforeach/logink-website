@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { slugify } from '@/lib/utils'
 import { BlockEditor, BLOCK_LABELS, BLOCK_DEFAULTS } from './case-study-blocks/BlockEditors'
+import { ImageUploader } from './ImageUploader'
 import type { BlockType } from '@/types/case-study'
 
 interface BlockItem {
@@ -276,16 +277,24 @@ export function CaseStudyEditor({ caseStudy }: CaseStudyEditorProps) {
                 <input value={durationLabel} onChange={e => setDurationLabel(e.target.value)} placeholder="9 months" className={inputCls} />
               </div>
               <div>
-                <label className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-1.5 block">Client Logo URL</label>
-                <input value={clientLogo} onChange={e => setClientLogo(e.target.value)} placeholder="/uploads/..." className={inputCls} />
+                <ImageUploader
+                  label="Client Logo"
+                  value={clientLogo}
+                  onChange={setClientLogo}
+                  folder="case-studies"
+                />
               </div>
               <div>
                 <label className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-1.5 block">Client Website</label>
                 <input value={clientWebsite} onChange={e => setClientWebsite(e.target.value)} placeholder="https://..." className={inputCls} />
               </div>
               <div>
-                <label className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-1.5 block">Featured Image URL</label>
-                <input value={featuredImage} onChange={e => setFeaturedImage(e.target.value)} placeholder="/uploads/..." className={inputCls} />
+                <ImageUploader
+                  label="Featured Image (Hero)"
+                  value={featuredImage}
+                  onChange={setFeaturedImage}
+                  folder="case-studies"
+                />
               </div>
             </div>
             <div>

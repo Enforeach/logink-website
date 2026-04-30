@@ -146,8 +146,8 @@ export function Footer({ locale = 'id' }: FooterProps) {
         <div className="mt-12 pt-6 border-t border-[var(--border-default)] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-[var(--text-muted)]">© 2026 Logink. {t(locale, 'common.allRightsReserved')}</p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">{t(locale, 'common.privacyPolicy')}</Link>
-            <Link href="/terms" className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">{t(locale, 'common.termsOfService')}</Link>
+            <Link href={locale === 'en' ? '/en/privacy' : '/privacy'} className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">{t(locale, 'common.privacyPolicy')}</Link>
+            <Link href={locale === 'en' ? '/en/terms' : '/terms'} className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">{t(locale, 'common.termsOfService')}</Link>
           </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

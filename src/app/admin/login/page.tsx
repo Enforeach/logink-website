@@ -19,7 +19,7 @@ export default function AdminLoginPage() {
     setError('')
     try {
       const res = await signIn('resend', { email, redirect: false, callbackUrl: '/admin' })
-      if (res?.error) setError('Login failed. Please check your email.')
+      if (res?.error) setError(`Login failed: ${res.error}`)
       else setSent(true)
     } catch {
       setError('Something went wrong. Please try again.')

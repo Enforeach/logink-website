@@ -68,7 +68,17 @@ interface Props {
 export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], allServices = [] }: Props) {
   const [activeSection, setActiveSection] = useState('')
   const [showMobileBar, setShowMobileBar] = useState(false)
+  const [headerHeight, setHeaderHeight] = useState(64)
   const heroRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const header = document.querySelector('header')
+    if (!header) return
+    setHeaderHeight(header.offsetHeight)
+    const ro = new ResizeObserver(() => setHeaderHeight(header.offsetHeight))
+    ro.observe(header)
+    return () => ro.disconnect()
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -153,39 +163,45 @@ export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], 
                 clientLogo={cs.clientLogo}
                 durationLabel={cs.durationLabel}
                 services={allServicesUsed}
+                featuredImage={cs.featuredImage}
               />
             </Section>
           ))
         ) : (
           // Legacy header fallback
-          <section className="px-4 py-12 mesh-gradient">
-            <div className="max-w-4xl mx-auto">
+          <section className="relative px-4 py-16 overflow-hidden">
+            {cs.featuredImage && (
+              <div className="absolute inset-0">
+                <Image src={cs.featuredImage} alt={title || cs.clientName} fill className="object-cover" priority />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0F0A1E]/70 via-[#0F0A1E]/50 to-[#0F0A1E]/90" />
+              </div>
+            )}
+            <div className={`relative max-w-4xl mx-auto ${cs.featuredImage ? 'pt-20 pb-10' : 'pt-10 pb-4 mesh-gradient rounded-2xl px-8'}`}>
               {industryName && (
                 <div className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/30 bg-brand-violet/10 text-brand-violet text-sm font-medium mb-5">
                   {industryName}
                 </div>
               )}
-              <h1 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] mb-4 leading-tight">{title}</h1>
-              {subtitle && <p className="text-xl text-[var(--text-secondary)] mb-6">{subtitle}</p>}
+              <h1 className={`text-4xl sm:text-5xl font-extrabold mb-4 leading-tight ${cs.featuredImage ? 'text-white' : 'text-[var(--text-primary)]'}`}>{title}</h1>
+              {subtitle && <p className={`text-xl mb-6 ${cs.featuredImage ? 'text-white/80' : 'text-[var(--text-secondary)]'}`}>{subtitle}</p>}
               <div className="flex flex-wrap items-center gap-3">
                 {cs.clientLogo && (
-                  <div className="h-10 w-24 relative">
-                    <Image src={cs.clientLogo} alt={cs.clientName} fill className="object-contain" />
+                  <div className="h-10 w-24 relative bg-white/10 rounded-lg overflow-hidden">
+                    <Image src={cs.clientLogo} alt={cs.clientName} fill className="object-contain p-1" />
                   </div>
                 )}
-                <span className="text-[var(--text-secondary)]">{cs.clientName}</span>
-                {cs.durationLabel && <span className="text-sm px-3 py-1 rounded-full bg-[var(--bg-surface)] border border-[var(--border-default)] text-[var(--text-secondary)]">{cs.durationLabel}</span>}
+                <span className={cs.featuredImage ? 'text-white/70 text-sm' : 'text-[var(--text-secondary)]'}>{cs.clientName}</span>
+                {cs.durationLabel && <span className={`text-sm px-3 py-1 rounded-full border ${cs.featuredImage ? 'bg-white/10 border-white/20 text-white/70' : 'bg-[var(--bg-surface)] border-[var(--border-default)] text-[var(--text-secondary)]'}`}>{cs.durationLabel}</span>}
                 {allServicesUsed.map(s => (
                   <span key={s.id} className="text-xs px-3 py-1 rounded-full font-medium text-white" style={{ backgroundColor: s.color }}>{s.name}</span>
                 ))}
               </div>
-              {/* Legacy metrics as counters */}
               {cs.metrics.length > 0 && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-10 pt-8 border-t border-[var(--border-default)]">
+                <div className={`grid grid-cols-2 sm:grid-cols-3 gap-4 mt-10 pt-8 border-t ${cs.featuredImage ? 'border-white/20' : 'border-[var(--border-default)]'}`}>
                   {cs.metrics.slice(0, 3).map((m, i) => (
                     <div key={i} className="text-center">
                       <div className="text-3xl font-extrabold gradient-text">{m.afterValue}</div>
-                      <div className="text-sm text-[var(--text-secondary)] mt-1">{m.metricLabel}</div>
+                      <div className={`text-sm mt-1 ${cs.featuredImage ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{m.metricLabel}</div>
                     </div>
                   ))}
                 </div>
@@ -195,8 +211,8 @@ export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], 
         )}
       </div>
 
-      {/* Sticky sub-nav */}
-      <div className="sticky top-16 z-30 bg-[var(--bg-primary)]/95 backdrop-blur border-b border-[var(--border-default)]">
+      {/* Sticky sub-nav — offset matches the full header height (navbar + optional announcement bar) */}
+      <div className="sticky z-30 bg-[var(--bg-primary)]/95 backdrop-blur border-b border-[var(--border-default)]" style={{ top: headerHeight }}>
         <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-12">
           <nav className="flex gap-5 overflow-x-auto scrollbar-hide" aria-label="In-page navigation">
             {navSections.map(s => (

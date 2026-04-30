@@ -17,9 +17,9 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
     >
       {/* Thumbnail */}
       <div className="aspect-[16/10] bg-[var(--bg-elevated)] relative overflow-hidden">
-        {caseStudy.thumbnail ? (
+        {(caseStudy.featuredImage || caseStudy.thumbnail) ? (
           <Image
-            src={caseStudy.thumbnail}
+            src={(caseStudy.featuredImage || caseStudy.thumbnail)!}
             alt={caseStudy.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"

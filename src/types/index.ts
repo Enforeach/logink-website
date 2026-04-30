@@ -74,6 +74,7 @@ export interface CaseStudyData {
   clientLogo?: string | null
   industry: string
   thumbnail?: string | null
+  featuredImage?: string | null
   status: PostStatus
   publishedAt?: Date | null
   service?: { name: string; slug: string; color: string } | null
