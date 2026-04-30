@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { put } from '@vercel/blob'
 import { extname } from 'path'
+import { requireAuth } from '@/lib/api-auth'
 import { prisma } from '@/lib/prisma'
 
 const MAX_SIZE_MB = Number(process.env.MAX_FILE_SIZE_MB || 10)
@@ -8,6 +9,8 @@ const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'im
 const VALID_FOLDERS = ['blog', 'case-studies', 'services', 'team', 'general']
 
 export async function POST(req: NextRequest) {
+  const authResult = await requireAuth()
+  if (!authResult.authorized) return authResult.response
   try {
     const formData = await req.formData()
     const file = formData.get('file') as File | null

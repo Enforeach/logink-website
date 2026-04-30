@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireAuth } from '@/lib/api-auth'
 import { prisma } from '@/lib/prisma'
 
 export async function GET() {
+  const authResult = await requireAuth()
+  if (!authResult.authorized) return authResult.response
   try {
     const pages = await prisma.page.findMany({ orderBy: { updatedAt: 'desc' } })
     return NextResponse.json(pages)
@@ -11,6 +14,8 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const authResult = await requireAuth()
+  if (!authResult.authorized) return authResult.response
   try {
 
     const { title, slug, metaTitle, metaDescription, status } = await req.json()

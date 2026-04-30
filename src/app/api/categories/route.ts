@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { requireAuth } from '@/lib/api-auth'
 import { prisma } from '@/lib/prisma'
 
 export async function GET() {
@@ -11,6 +12,8 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const authResult = await requireAuth()
+  if (!authResult.authorized) return authResult.response
   try {
     const { nameId, nameEn, slug, sortOrder } = await req.json()
     const category = await prisma.category.create({ data: { nameId, nameEn, slug, sortOrder: sortOrder ?? 0 } })

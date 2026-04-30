@@ -1,27 +1,31 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { auth } from '@/lib/auth'
+import { NextResponse } from 'next/server'
 
-export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+export default auth((req) => {
+  const { pathname } = req.nextUrl
 
-  if (
-    pathname.startsWith('/api/') ||
-    pathname.startsWith('/admin/') ||
-    pathname.startsWith('/_next/') ||
-    pathname.startsWith('/uploads/') ||
-    pathname.startsWith('/images/') ||
-    pathname.match(/\.(ico|png|jpg|jpeg|svg|webp|xml|txt|json|woff|woff2)$/)
-  ) {
-    return NextResponse.next()
+  // Protect all admin routes except the public auth pages
+  const isAdminRoute = pathname.startsWith('/admin')
+  const isPublicAdminPage =
+    pathname.startsWith('/admin/login') || pathname.startsWith('/admin/verify')
+
+  if (isAdminRoute && !isPublicAdminPage && !req.auth) {
+    const loginUrl = new URL('/admin/login', req.url)
+    loginUrl.searchParams.set('callbackUrl', pathname)
+    return NextResponse.redirect(loginUrl)
   }
 
-  const response = NextResponse.next()
+  // Inject locale header for public routes
+  if (!isAdminRoute && !pathname.startsWith('/api') && !pathname.startsWith('/_next')) {
+    const response = NextResponse.next()
+    const hasEnLocale = pathname.startsWith('/en/') || pathname === '/en'
+    response.headers.set('x-locale', hasEnLocale ? 'en' : 'id')
+    return response
+  }
 
-  const hasEnLocale = pathname.startsWith('/en/') || pathname === '/en'
-  response.headers.set('x-locale', hasEnLocale ? 'en' : 'id')
-
-  return response
-}
+  return NextResponse.next()
+})
 
 export const config = {
-  matcher: ['/((?!_next|api|admin|uploads|images).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)'],
 }
