@@ -4,57 +4,96 @@ import { SITE } from '@/lib/constants'
 
 const BASE = SITE.url.replace(/\/$/, '')
 
-const STATIC_PAGES = [
-  { path: '/', priority: 1.0, changeFreq: 'weekly' as const },
-  { path: '/blog', priority: 0.9, changeFreq: 'daily' as const },
-  { path: '/layanan', priority: 0.8, changeFreq: 'monthly' as const },
-  { path: '/portfolio', priority: 0.7, changeFreq: 'monthly' as const },
-  { path: '/about', priority: 0.6, changeFreq: 'monthly' as const },
-  { path: '/contact', priority: 0.6, changeFreq: 'monthly' as const },
+type Freq = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
+
+function entry(
+  idPath: string,
+  enPath: string,
+  priority: number,
+  changeFreq: Freq,
+  lastModified: Date = new Date(),
+): MetadataRoute.Sitemap {
+  const idUrl = `${BASE}${idPath}`
+  const enUrl = `${BASE}${enPath}`
+  const alternates = {
+    languages: {
+      'id': idUrl,
+      'en': enUrl,
+      'x-default': idUrl,
+    },
+  }
+  return [
+    { url: idUrl, lastModified, changeFrequency: changeFreq, priority, alternates },
+    { url: enUrl, lastModified, changeFrequency: changeFreq, priority: priority * 0.9, alternates },
+  ]
+}
+
+// Static page pairs [idPath, enPath, priority, changeFreq]
+const STATIC_PAIRS: [string, string, number, Freq][] = [
+  ['/', '/en', 1.0, 'weekly'],
+  ['/about', '/en/about', 0.6, 'monthly'],
+  ['/contact', '/en/contact', 0.6, 'monthly'],
+  ['/portfolio', '/en/portfolio', 0.75, 'weekly'],
+  ['/blog', '/en/blog', 0.9, 'daily'],
+  ['/privacy', '/en/privacy', 0.3, 'yearly'],
+  ['/terms', '/en/terms', 0.3, 'yearly'],
+  // Services overview
+  ['/layanan', '/en/services', 0.85, 'monthly'],
+  // Individual service pages
+  ['/layanan/jasa-seo-profesional', '/en/services/seo-content-marketing', 0.9, 'monthly'],
+  ['/layanan/sosial-media-manajemen', '/en/services/social-media-management', 0.9, 'monthly'],
+  ['/layanan/paid-ads', '/en/services/paid-advertising', 0.9, 'monthly'],
+  ['/layanan/website-development', '/en/services/website-landing-page', 0.9, 'monthly'],
+  ['/layanan/kreatif', '/en/services/creative-services', 0.9, 'monthly'],
 ]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await prisma.post.findMany({
-    where: { status: 'PUBLISHED' },
-    select: { slug: true, slugEn: true, updatedAt: true },
-    orderBy: { updatedAt: 'desc' },
-  })
+  const [posts, caseStudies] = await Promise.all([
+    prisma.post.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { slug: true, slugEn: true, updatedAt: true },
+      orderBy: { updatedAt: 'desc' },
+    }),
+    prisma.caseStudy.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { slug: true, slugEn: true, updatedAt: true },
+      orderBy: { updatedAt: 'desc' },
+    }),
+  ])
 
-  const staticEntries: MetadataRoute.Sitemap = STATIC_PAGES.flatMap(({ path, priority, changeFreq }) => {
-    const idEntry = {
-      url: `${BASE}${path}`,
-      lastModified: new Date(),
-      changeFrequency: changeFreq,
-      priority,
-    }
-    const enEntry = {
-      url: `${BASE}/en${path === '/' ? '' : path}`,
-      lastModified: new Date(),
-      changeFrequency: changeFreq,
-      priority: priority * 0.9,
-    }
-    return [idEntry, enEntry]
-  })
+  const staticEntries = STATIC_PAIRS.flatMap(([id, en, priority, freq]) =>
+    entry(id, en, priority, freq)
+  )
 
   const blogEntries: MetadataRoute.Sitemap = posts.flatMap(post => {
+    const idUrl = `${BASE}/blog/${post.slug}`
+    const enUrl = post.slugEn ? `${BASE}/en/blog/${post.slugEn}` : null
+    const alternates = enUrl
+      ? { languages: { 'id': idUrl, 'en': enUrl, 'x-default': idUrl } }
+      : { languages: { 'id': idUrl, 'x-default': idUrl } }
     const entries: MetadataRoute.Sitemap = [
-      {
-        url: `${BASE}/blog/${post.slug}`,
-        lastModified: post.updatedAt,
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
+      { url: idUrl, lastModified: post.updatedAt, changeFrequency: 'weekly', priority: 0.7, alternates },
     ]
-    if (post.slugEn) {
-      entries.push({
-        url: `${BASE}/en/blog/${post.slugEn}`,
-        lastModified: post.updatedAt,
-        changeFrequency: 'weekly',
-        priority: 0.65,
-      })
+    if (enUrl) {
+      entries.push({ url: enUrl, lastModified: post.updatedAt, changeFrequency: 'weekly', priority: 0.65, alternates })
     }
     return entries
   })
 
-  return [...staticEntries, ...blogEntries]
+  const caseStudyEntries: MetadataRoute.Sitemap = caseStudies.flatMap(cs => {
+    const idUrl = `${BASE}/portfolio/${cs.slug}`
+    const enUrl = cs.slugEn ? `${BASE}/en/portfolio/${cs.slugEn}` : null
+    const alternates = enUrl
+      ? { languages: { 'id': idUrl, 'en': enUrl, 'x-default': idUrl } }
+      : { languages: { 'id': idUrl, 'x-default': idUrl } }
+    const entries: MetadataRoute.Sitemap = [
+      { url: idUrl, lastModified: cs.updatedAt, changeFrequency: 'monthly', priority: 0.7, alternates },
+    ]
+    if (enUrl) {
+      entries.push({ url: enUrl, lastModified: cs.updatedAt, changeFrequency: 'monthly', priority: 0.65, alternates })
+    }
+    return entries
+  })
+
+  return [...staticEntries, ...blogEntries, ...caseStudyEntries]
 }
