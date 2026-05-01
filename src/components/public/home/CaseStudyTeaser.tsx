@@ -22,19 +22,6 @@ interface CaseStudy {
   service?: { name: string; color: string } | null
 }
 
-const PLACEHOLDER: CaseStudy = {
-  id: 'placeholder',
-  title: 'E-Commerce Brand Growth',
-  slug: '#',
-  clientName: 'Leading Indonesian F&B Brand',
-  industry: 'Food & Beverage',
-  metrics: [
-    { metricLabel: 'Organic Traffic', beforeValue: '1,200/mo', afterValue: '5,400/mo', numericAfter: 5400, suffix: '/mo' },
-    { metricLabel: 'ROAS', beforeValue: '1.2x', afterValue: '4.1x', numericAfter: 4 },
-    { metricLabel: 'Conversion Rate', beforeValue: '2.1%', afterValue: '8.7%', numericAfter: 87 },
-  ],
-  service: { name: 'SEO & Paid Ads', color: '#7C3AED' },
-}
 
 function MetricCounter({ metric, index, isInView }: { metric: Metric; index: number; isInView: boolean }) {
   const count = useMotionValue(0)
@@ -79,8 +66,10 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.25 })
 
-  const cs = caseStudy ?? PLACEHOLDER
-  const isPlaceholder = !caseStudy
+  if (!caseStudy) return null
+
+  const cs = caseStudy
+  const isPlaceholder = false
 
   return (
     <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
@@ -158,19 +147,15 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
 
           {/* Footer */}
           <div className="flex items-center justify-between flex-wrap gap-4">
-            {isPlaceholder ? (
-              <p className="text-xs text-[var(--text-muted)] italic">Sample data. Add real case studies via CMS.</p>
-            ) : (
-              <Link
-                href={`/portfolio/${cs.slug}`}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-violet hover:text-brand-pink transition-colors group"
-              >
-                View full case study
-                <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            )}
+            <Link
+              href={`/portfolio/${cs.slug}`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-violet hover:text-brand-pink transition-colors group"
+            >
+              View full case study
+              <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </motion.div>
 
