@@ -76,6 +76,7 @@ const PILLS = ['IG Feed 1:1','Story 9:16','TikTok 9:16','Banner 16:9','Brand Gui
 
 const HERO_COPY = {
   id: {
+    badge: 'Jasa Desain Kreatif Jakarta — Branding, Konten Visual & Produksi Video',
     trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi termasuk', '✓ Format multi-platform'],
     title1: 'Visual yang Berani.',
     title2: 'Cerita yang Jelas.\nBrand yang Tak Terlupakan.',
@@ -86,6 +87,7 @@ const HERO_COPY = {
     ctaSecondaryHref: '/portfolio',
   },
   en: {
+    badge: 'Creative Design Services Jakarta — Branding, Visual Content & Video Production',
     trustPills: ['✓ 100% custom design', '✓ 2 revision rounds included', '✓ Multi-platform formats'],
     title1: 'Bold Visuals.',
     title2: 'Clear Stories.\nUnforgettable Brands.',
@@ -133,17 +135,17 @@ export function CreativeHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col gap-6"
         >
-          <div className="inline-flex items-center gap-2 w-fit px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10">
+          <h1 className="inline-flex items-center gap-2 w-fit px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10">
             <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-            <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">Creative Services</span>
-          </div>
+            <span className="text-xs font-semibold text-amber-400">{c.badge}</span>
+          </h1>
 
-          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
+          <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
             {c.title1}{' '}
             <span className="gradient-text">{c.title2.split('\n').map((line, i) => (
               <span key={i}>{line}{i < c.title2.split('\n').length - 1 && <br />}</span>
             ))}</span>
-          </h1>
+          </h2>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed max-w-md">
             {c.desc}

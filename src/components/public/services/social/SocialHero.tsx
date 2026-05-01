@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 
 const HERO_COPY = {
   id: {
+    badge: 'Jasa Social Media Marketing Jakarta — Konten Viral, Followers & Engagement Bertumbuh',
     trustPills: ['✓ Konten 100% original', '✓ Native Bahasa Indonesia', '✓ Kalender konten bulanan'],
     home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/layanan',
     title1: 'Konten yang Nyambung.', title2: 'Kehadiran yang Konversi.',
@@ -13,6 +14,7 @@ const HERO_COPY = {
     ctaPrimary: 'Mulai Konsultasi Gratis', ctaHref: '/contact?service=social-media-management', ctaSecondary: 'Lihat Harga',
   },
   en: {
+    badge: 'Social Media Management Jakarta — Viral Content, Growing Followers & Engagement',
     trustPills: ['✓ 100% original content', '✓ Bahasa Indonesia native', '✓ Monthly content calendar'],
     home: 'Home', services: 'Services', homeHref: '/en', servicesHref: '/en/services',
     title1: 'Content That Connects.', title2: 'Presence That Converts.',
@@ -83,7 +85,7 @@ export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           {/* Left */}
           <div>
-            <motion.div
+            <motion.h1
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -91,10 +93,10 @@ export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
               style={{ background: 'rgba(219,39,119,0.08)' }}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-pink-400 animate-pulse" />
-              Social Media Management
-            </motion.div>
+              {c.badge}
+            </motion.h1>
 
-            <motion.h1
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.15 }}
@@ -111,7 +113,7 @@ export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
               >
                 {c.title2}
               </span>
-            </motion.h1>
+            </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

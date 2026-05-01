@@ -43,6 +43,7 @@ function PageSpeedRing({ score }: { score: number }) {
 
 const HERO_COPY = {
   id: {
+    badge: 'Jasa Website & Landing Page Jakarta — Cepat, Mobile-First, Konversi Tinggi',
     pills: ['Load time di bawah 2 detik', 'Responsif mobile-first', 'GA4 + pixel tracking termasuk'],
     title1: 'Ubah Pengunjung Jadi Pelanggan.',
     title2: 'Dibangun untuk Perform.',
@@ -52,6 +53,7 @@ const HERO_COPY = {
     ctaSecondary: 'Lihat Harga',
   },
   en: {
+    badge: 'Website & Landing Page Development Jakarta — Fast, Mobile-First, High Conversion',
     pills: ['Load time under 2 seconds', 'Mobile-first responsive', 'GA4 + pixel tracking included'],
     title1: 'Turn Visitors Into Customers.',
     title2: 'Built to Perform.',
@@ -102,15 +104,15 @@ export function WebsiteHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#06B6D4]/30 bg-[#06B6D4]/10 px-3 py-1 mb-6">
+          <h1 className="inline-flex items-center gap-2 rounded-full border border-[#06B6D4]/30 bg-[#06B6D4]/10 px-3 py-1 mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-[#06B6D4]" />
-            <span className="text-xs font-semibold text-[#06B6D4]">Website & Landing Page</span>
-          </div>
+            <span className="text-xs font-semibold text-[#06B6D4]">{c.badge}</span>
+          </h1>
 
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] leading-tight mb-5">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] leading-tight mb-5">
             {c.title1}{' '}
             <span className="gradient-text">{c.title2}</span>
-          </h1>
+          </h2>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed mb-8 max-w-lg">
             {c.desc}

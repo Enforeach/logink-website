@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 
 const COPY = {
   id: {
+    badge: 'Jasa SEO Profesional Jakarta — Ranking #1 Google, Traffic Organik Berkembang',
     trustPills: [
       '✓ Penulis native Bahasa Indonesia',
       '✓ Transparansi GA4 penuh',
@@ -27,6 +28,7 @@ const COPY = {
     changeLabel: 'Δ Naik',
   },
   en: {
+    badge: 'Professional SEO Services Jakarta — Rank #1 on Google, Grow Organic Traffic',
     trustPills: [
       '✓ Bahasa Indonesia native writers',
       '✓ Full GA4 transparency',
@@ -82,17 +84,17 @@ export function SEOHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           {/* Left: text */}
           <div>
-            <motion.div
+            <motion.h1
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/8 text-xs font-semibold text-violet-400 mb-6"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
-              Jasa SEO Profesional Jakarta — Ranking #1 Google, Traffic Organik Berkembang
-            </motion.div>
+              {c.badge}
+            </motion.h1>
 
-            <motion.h1
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.15 }}
@@ -101,7 +103,7 @@ export function SEOHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
               {c.title1}{' '}
               <span className="gradient-text">{c.title2}</span>{' '}
               {c.title3}
-            </motion.h1>
+            </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

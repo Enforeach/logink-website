@@ -15,6 +15,7 @@ const RATES = ['8.25% CTR', '25.5% CVR', '20% Close']
 
 const HERO_COPY = {
   id: {
+    badge: 'Jasa Iklan Digital Jakarta — Google Ads & Meta Ads, ROAS 2–4× Terbukti',
     trustPills: ['✓ Rata-rata ROAS 2-4×', '✓ Akses akun penuh', '✓ Laporan optimasi mingguan'],
     home: 'Beranda', homeHref: '/', services: 'Layanan', servicesHref: '/layanan',
     title1: 'Setiap Rupiah Terinvestasi.', title2: 'Return Maksimal Terwujud.',
@@ -24,6 +25,7 @@ const HERO_COPY = {
     roasDay: 'di hari ke-90',
   },
   en: {
+    badge: 'Digital Advertising Jakarta — Google & Meta Ads, Proven 2–4× ROAS',
     trustPills: ['✓ Average ROAS 2–4×', '✓ Full account access', '✓ Weekly optimization reports'],
     home: 'Home', homeHref: '/en', services: 'Services', servicesHref: '/en/services',
     title1: 'Every Rupiah Invested.', title2: 'Maximum Return Realized.',
@@ -119,15 +121,15 @@ export function AdsHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col gap-6"
         >
-          <div className="inline-flex items-center gap-2 w-fit px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10">
+          <h1 className="inline-flex items-center gap-2 w-fit px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10">
             <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">Paid Advertising</span>
-          </div>
+            <span className="text-xs font-semibold text-amber-400">{c.badge}</span>
+          </h1>
 
-          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
+          <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
             {c.title1}{' '}
             <span className="gradient-text">{c.title2}</span>
-          </h1>
+          </h2>
 
           <p className="text-base text-[var(--text-secondary)] leading-relaxed max-w-md">
             {c.desc}
