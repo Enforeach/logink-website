@@ -20,7 +20,7 @@ export function buildMetadata({
   const image = ogImage || `${SITE.url}/images/og-default.jpg`
 
   return {
-    title: fullTitle,
+    title: { absolute: fullTitle },
     description,
     alternates: { canonical: url },
     openGraph: {

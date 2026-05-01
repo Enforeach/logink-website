@@ -5,7 +5,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: {
     default: 'Logink - 360° Digital Marketing Agency Jakarta',
-    template: '%s | Logink - Digital Marketing Agency',
+    template: '%s | Logink',
   },
   description: SITE.description,
   metadataBase: new URL(SITE.url),
