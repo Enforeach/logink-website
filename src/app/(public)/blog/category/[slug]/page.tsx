@@ -5,6 +5,13 @@ import { buildMetadata } from '@/lib/seo'
 import { BlogCard } from '@/components/public/BlogCard'
 import { prisma } from '@/lib/prisma'
 
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+  const categories = await prisma.category.findMany({ select: { slug: true } })
+  return categories.map(c => ({ slug: c.slug }))
+}
+
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
