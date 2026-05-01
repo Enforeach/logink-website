@@ -1,15 +1,31 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import { buildMetadata, organizationSchema, localBusinessSchema } from '@/lib/seo'
 import { prisma } from '@/lib/prisma'
 import { HeroSection } from '@/components/public/home/HeroSection'
 import { LogoMarquee } from '@/components/public/home/LogoMarquee'
-import { ProblemSolutionSection } from '@/components/public/home/ProblemSolutionSection'
-import { ServicesSection } from '@/components/public/home/ServicesSection'
-import { HowWeWorkSection } from '@/components/public/home/HowWeWorkSection'
-import { StatsSection } from '@/components/public/home/StatsSection'
-import { CaseStudyTeaser } from '@/components/public/home/CaseStudyTeaser'
-import { CTASection } from '@/components/public/home/CTASection'
-import LeadProfiler from '@/components/public/LeadProfiler'
+
+// Lazy-load below-fold Client Components — keeps framer-motion + recharts out
+// of the initial JS bundle. HTML still SSR'd, hydration JS loads async.
+const LeadProfiler = dynamic(() => import('@/components/public/LeadProfiler'))
+const ProblemSolutionSection = dynamic(() =>
+  import('@/components/public/home/ProblemSolutionSection').then(m => ({ default: m.ProblemSolutionSection }))
+)
+const ServicesSection = dynamic(() =>
+  import('@/components/public/home/ServicesSection').then(m => ({ default: m.ServicesSection }))
+)
+const HowWeWorkSection = dynamic(() =>
+  import('@/components/public/home/HowWeWorkSection').then(m => ({ default: m.HowWeWorkSection }))
+)
+const StatsSection = dynamic(() =>
+  import('@/components/public/home/StatsSection').then(m => ({ default: m.StatsSection }))
+)
+const CaseStudyTeaser = dynamic(() =>
+  import('@/components/public/home/CaseStudyTeaser').then(m => ({ default: m.CaseStudyTeaser }))
+)
+const CTASection = dynamic(() =>
+  import('@/components/public/home/CTASection').then(m => ({ default: m.CTASection }))
+)
 
 export const metadata: Metadata = buildMetadata({
   title: 'Logink | Agensi Digital Marketing 360° Jakarta',

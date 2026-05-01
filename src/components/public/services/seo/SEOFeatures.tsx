@@ -2,14 +2,17 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { icons, LucideProps } from 'lucide-react'
+import { type LucideProps, Search, Settings2, PenLine, BarChart3 } from 'lucide-react'
+import type { FC } from 'react'
 import { SEO_FEATURES_TABS, SEO_FEATURES_TABS_EN } from './data'
 
 type Tab = typeof SEO_FEATURES_TABS[number]
 type Feature = Tab['features'][number]
 
+const ICON_MAP: Record<string, FC<LucideProps>> = { Search, Settings2, PenLine, BarChart3 }
+
 function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
-  const Icon = icons[name as keyof typeof icons]
+  const Icon = ICON_MAP[name]
   if (!Icon) return null
   return <Icon {...props} />
 }

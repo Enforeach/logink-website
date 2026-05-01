@@ -2,11 +2,14 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { icons, LucideProps } from 'lucide-react'
+import { type LucideProps, ClipboardList, Compass, PenLine, CalendarCheck } from 'lucide-react'
+import type { FC } from 'react'
 import { SOCIAL_PROCESS, SOCIAL_PROCESS_EN } from './data'
 
+const ICON_MAP: Record<string, FC<LucideProps>> = { ClipboardList, Compass, PenLine, CalendarCheck }
+
 function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
-  const Icon = icons[name as keyof typeof icons]
+  const Icon = ICON_MAP[name]
   if (!Icon) return null
   return <Icon {...props} />
 }
