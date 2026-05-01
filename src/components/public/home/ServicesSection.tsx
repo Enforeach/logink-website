@@ -212,10 +212,9 @@ function BentoCard({
       initial={initial}
       animate={animate}
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className={`${colSpan} rounded-2xl border border-white/8 bg-white/4 p-4 lg:p-6 transition-all duration-300 hover:-translate-y-1 group`}
+      className={`${colSpan} rounded-2xl bg-white/4 p-4 lg:p-6 transition-all duration-300 hover:-translate-y-1 group`}
       style={{
-        borderTopColor: svc.color,
-        borderTopWidth: '3px',
+        borderTop: `3px solid ${svc.color}`,
         boxShadow: '0 0 0 0 transparent',
       }}
       whileHover={{ boxShadow: `0 8px 30px ${svc.color}20` }}
