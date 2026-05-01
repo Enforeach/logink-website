@@ -55,22 +55,22 @@ export function HeroSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
       </div>
 
       <div className="relative max-w-5xl mx-auto text-center z-10 w-full flex flex-col items-center">
-        {/* Badge with shimmer */}
-        <div className="mb-8" style={{ animation: 'fade-down 0.5s ease-out both' }}>
+        {/* Badge — H1 for SEO: describes the business/page topic */}
+        <h1 className="mb-8" style={{ animation: 'fade-down 0.5s ease-out both' }}>
           <span className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-violet/30 bg-brand-violet/5 text-sm font-medium text-brand-violet shimmer-badge">
             <span className="h-2 w-2 rounded-full bg-brand-violet animate-pulse" />
             {c.badge}
           </span>
-        </div>
+        </h1>
 
         {/* Headline */}
-        <h1
+        <p
           className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-[var(--text-primary)] mb-6 leading-tight tracking-tight"
           style={{ animation: 'fade-up 0.5s ease-out both', animationDelay: '200ms' }}
         >
           {c.headline}{' '}
           <span className="gradient-text">{c.headlineGradient}</span>
-        </h1>
+        </p>
 
         {/* Subtitle */}
         <p
