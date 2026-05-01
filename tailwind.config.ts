@@ -24,7 +24,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        outfit: ['Outfit', 'sans-serif'],
+        outfit: ['var(--font-outfit)', 'sans-serif'],
       },
       animation: {
         'marquee': 'marquee 30s linear infinite',

@@ -16,6 +16,13 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "browserslist": [
+    "chrome >= 90",
+    "firefox >= 90",
+    "safari >= 15",
+    "edge >= 90",
+    "not dead"
+  ],
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
     "@hookform/resolvers": "^5.2.2",

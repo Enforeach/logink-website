@@ -1,6 +1,15 @@
 import type { Metadata } from 'next'
+import { Outfit } from 'next/font/google'
 import { SITE } from '@/lib/constants'
 import './globals.css'
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-outfit',
+  preload: true,
+})
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
+    <html lang="id" className={outfit.variable}>
       <body className="min-h-screen font-outfit antialiased">{children}</body>
     </html>
   )
