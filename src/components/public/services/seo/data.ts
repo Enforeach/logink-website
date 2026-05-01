@@ -106,7 +106,7 @@ export const SEO_ADDONS = [
   {
     name: 'Off-Page / Link Building',
     description: 'Bangun domain authority dengan penempatan editorial di media Indonesia.',
-    price: 'Mulai dari Rp 5 Juta/media',
+    price: 'Mulai dari Rp 1 Juta/media',
   },
 ] as const
 
@@ -117,8 +117,8 @@ export const SEO_FEATURES_TABS = [
     icon: 'Search',
     features: [
       {
-        title: 'Riset Keyword (Bahasa Indonesia)',
-        desc: 'Kami menggali apa yang benar-benar dicari pengguna Indonesia: dalam Bahasa Indonesia, bukan terjemahan dari keyword Inggris. Query long-tail, transaksional, dan informasional dipetakan ke funnel kamu.',
+        title: 'Riset Keyword',
+        desc: 'Kami mencari keywords yang sesuai dengan bisnismu kemudian Query long-tail, transaksional, dan informasional akan dipetakan ke funnel kamu.',
         badge: null,
       },
       {
@@ -256,7 +256,7 @@ export const SEO_PRICING_TIERS_EN = [
   {
     id: 'entry',
     name: 'Entry',
-    price: 'Rp 6 Juta',
+    price: 'IDR 6 Mio',
     priceValue: 6000000,
     period: '/month',
     bestFor: 'New websites starting organic',
@@ -277,7 +277,7 @@ export const SEO_PRICING_TIERS_EN = [
   {
     id: 'growth',
     name: 'Growth',
-    price: 'Rp 8 Juta',
+    price: 'IDR 8 Mio',
     priceValue: 8000000,
     period: '/month',
     bestFor: 'Scaling traffic & leads',
@@ -293,7 +293,7 @@ export const SEO_PRICING_TIERS_EN = [
   {
     id: 'full',
     name: 'Full',
-    price: 'Rp 15 Juta',
+    price: 'IDR 15 Mio',
     priceValue: 15000000,
     period: '/month',
     bestFor: 'Maximum growth velocity',
@@ -355,12 +355,12 @@ export const SEO_ADDONS_EN = [
   {
     name: 'Local SEO & Google Business Profile',
     description: "Dominate 'near me' searches and Google Business map packs in your city.",
-    price: 'Starting from Rp 2 Juta/location/month',
+    price: 'Starting from IDR 2 mio/location/month',
   },
   {
     name: 'Off-Page / Link Building',
     description: 'Build domain authority with editorial placements in Indonesian media outlets.',
-    price: 'Starting from Rp 5 Juta/media',
+    price: 'Starting from IDR 1 mio/media',
   },
 ] as const
 
@@ -371,8 +371,8 @@ export const SEO_FEATURES_TABS_EN = [
     icon: 'Search',
     features: [
       {
-        title: 'Keyword Research (Bahasa Indonesia)',
-        desc: "We dig into what Indonesian users actually search for: in Bahasa, not translated English keywords. Long-tail, transactional, and informational queries mapped to your funnel.",
+        title: 'Keyword Research',
+        desc: "We dig into your users actually search for: aligning with Long-tail, transactional, and informational queries mapped to your funnel.",
         badge: null,
       },
       {

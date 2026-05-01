@@ -89,7 +89,7 @@ export function SEOHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/8 text-xs font-semibold text-violet-400 mb-6"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
-              360° Digital Marketing · Jakarta
+              Jasa SEO Profesional Jakarta — Ranking #1 Google, Traffic Organik Berkembang
             </motion.div>
 
             <motion.h1
