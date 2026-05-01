@@ -8,7 +8,6 @@ import { ServicesSection } from '@/components/public/home/ServicesSection'
 import { HowWeWorkSection } from '@/components/public/home/HowWeWorkSection'
 import { StatsSection } from '@/components/public/home/StatsSection'
 import { CaseStudyTeaser } from '@/components/public/home/CaseStudyTeaser'
-import { TestimonialsSection } from '@/components/public/home/TestimonialsSection'
 import { CTASection } from '@/components/public/home/CTASection'
 import LeadProfiler from '@/components/public/LeadProfiler'
 
@@ -22,7 +21,7 @@ export const revalidate = 3600
 
 async function getData() {
   try {
-    const [services, featuredCaseStudy, testimonials] = await Promise.all([
+    const [services, featuredCaseStudy] = await Promise.all([
       prisma.service.findMany({
         where: { isActive: true },
         orderBy: { sortOrder: 'asc' },
@@ -38,20 +37,15 @@ async function getData() {
           service: { select: { name: true, color: true } },
         },
       }),
-      prisma.testimonial.findMany({
-        where: { isHighlighted: true },
-        orderBy: { createdAt: 'desc' },
-        take: 6,
-      }),
     ])
-    return { services, featuredCaseStudy, testimonials }
+    return { services, featuredCaseStudy }
   } catch {
-    return { services: [], featuredCaseStudy: null, testimonials: [] }
+    return { services: [], featuredCaseStudy: null }
   }
 }
 
 export default async function HomePage() {
-  const { services, featuredCaseStudy, testimonials } = await getData()
+  const { services, featuredCaseStudy } = await getData()
 
   const orgSchema = organizationSchema()
   const bizSchema = localBusinessSchema()
@@ -71,7 +65,6 @@ export default async function HomePage() {
       <HowWeWorkSection locale="id" />
       <StatsSection locale="id" />
       <CaseStudyTeaser caseStudy={featuredCaseStudy as any} />
-      <TestimonialsSection testimonials={testimonials} />
       <CTASection locale="id" />
     </>
   )

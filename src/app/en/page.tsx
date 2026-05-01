@@ -8,7 +8,6 @@ import { ServicesSection } from '@/components/public/home/ServicesSection'
 import { HowWeWorkSection } from '@/components/public/home/HowWeWorkSection'
 import { StatsSection } from '@/components/public/home/StatsSection'
 import { CaseStudyTeaser } from '@/components/public/home/CaseStudyTeaser'
-import { TestimonialsSection } from '@/components/public/home/TestimonialsSection'
 import { CTASection } from '@/components/public/home/CTASection'
 import LeadProfiler from '@/components/public/LeadProfiler'
 
@@ -23,10 +22,8 @@ export const revalidate = 3600
 
 export default async function EnHomePage() {
   let caseStudy: any = null
-  let testimonials: any[] = []
   try {
     caseStudy = await prisma.caseStudy.findFirst({ where: { status: 'PUBLISHED' }, orderBy: { publishedAt: 'desc' }, include: { metrics: true, service: true } })
-    testimonials = await prisma.testimonial.findMany({ take: 6, orderBy: { createdAt: 'desc' } })
   } catch {}
 
   return (
@@ -39,7 +36,6 @@ export default async function EnHomePage() {
       <StatsSection locale="en" />
       <HowWeWorkSection locale="en" />
       <CaseStudyTeaser caseStudy={caseStudy} />
-      <TestimonialsSection testimonials={testimonials} />
       <CTASection locale="en" />
     </>
   )
