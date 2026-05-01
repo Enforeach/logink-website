@@ -10,6 +10,19 @@ interface Props {
   alternateSlug?: string | null
 }
 
+const ID_TO_EN_SERVICE: Record<string, string> = {
+  '/layanan': '/services',
+  '/layanan/jasa-seo-profesional': '/services/seo-content-marketing',
+  '/layanan/sosial-media-manajemen': '/services/social-media-management',
+  '/layanan/paid-ads': '/services/paid-advertising',
+  '/layanan/website-development': '/services/website-landing-page',
+  '/layanan/kreatif': '/services/creative-services',
+}
+
+const EN_TO_ID_SERVICE: Record<string, string> = Object.fromEntries(
+  Object.entries(ID_TO_EN_SERVICE).map(([id, en]) => [en, id])
+)
+
 export function LanguageSwitcher({ locale, alternateSlug }: Props) {
   const pathname = usePathname()
 
@@ -18,12 +31,14 @@ export function LanguageSwitcher({ locale, alternateSlug }: Props) {
       if (alternateSlug) {
         return `/en${pathname.replace(/\/blog\/[^/]+/, `/blog/${alternateSlug}`)}`
       }
+      if (ID_TO_EN_SERVICE[pathname]) return `/en${ID_TO_EN_SERVICE[pathname]}`
       return `/en${pathname === '/' ? '' : pathname}`
     } else {
       const withoutLocale = pathname.replace(/^\/en/, '') || '/'
       if (alternateSlug) {
         return withoutLocale.replace(/\/blog\/[^/]+/, `/blog/${alternateSlug}`)
       }
+      if (EN_TO_ID_SERVICE[withoutLocale]) return EN_TO_ID_SERVICE[withoutLocale]
       return withoutLocale
     }
   }
