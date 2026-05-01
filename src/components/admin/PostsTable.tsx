@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { DataTable } from '@/components/ui/DataTable'
 import { Badge } from '@/components/ui/Badge'
+import { DeleteButton } from '@/components/admin/DeleteButton'
 import { formatDate } from '@/lib/utils'
 
 interface Post {
@@ -63,9 +64,16 @@ export function PostsTable({ posts }: { posts: Post[] }) {
           key: 'actions',
           header: '',
           render: (row) => (
-            <Link href={`/admin/posts/${row.id}/edit`} className="text-brand-violet hover:text-brand-pink text-sm font-medium transition-colors">
-              Edit
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href={`/admin/posts/${row.id}/edit`} className="text-brand-violet hover:text-brand-pink text-sm font-medium transition-colors">
+                Edit
+              </Link>
+              <DeleteButton
+                id={row.id}
+                apiPath="/api/posts"
+                confirmMessage={`Delete "${row.titleId}"? This cannot be undone.`}
+              />
+            </div>
           ),
         },
       ]}
