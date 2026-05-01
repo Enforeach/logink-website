@@ -84,7 +84,7 @@ function ProblemCard({ card, index, labels }: { card: Card; index: number; label
       initial={{ opacity: 0, x: 60 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.55, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-2xl overflow-hidden border border-white/8 bg-white/4"
+      className="rounded-2xl overflow-hidden bg-white/4"
     >
       {/* Problem */}
       <div

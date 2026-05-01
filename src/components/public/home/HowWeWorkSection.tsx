@@ -160,7 +160,7 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                           {step.num}
                         </div>
                       </div>
-                      <div className="rounded-xl border border-white/8 bg-white/4 p-4">
+                      <div className="rounded-xl bg-white/4 p-4">
                         <div className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: step.color }}>
                           {step.days}
                         </div>
@@ -191,7 +191,7 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                   >
                     {step.num}
                   </div>
-                  <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 flex-1">
+                  <div className="rounded-xl bg-white/4 p-4 flex-1">
                     <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: step.color }}>
                       {step.days}
                     </div>
