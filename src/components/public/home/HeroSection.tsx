@@ -1,28 +1,4 @@
-'use client'
-
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { WHATSAPP_URL } from '@/lib/constants'
-
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0,
-    },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0 },
-}
-
-const badgeItem = {
-  hidden: { opacity: 0, y: -16 },
-  show: { opacity: 1, y: 0 },
-}
 
 const COPY = {
   id: {
@@ -78,81 +54,74 @@ export function HeroSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         />
       </div>
 
-      <div className="relative max-w-5xl mx-auto text-center z-10 w-full">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="flex flex-col items-center"
+      <div className="relative max-w-5xl mx-auto text-center z-10 w-full flex flex-col items-center">
+        {/* Badge with shimmer */}
+        <div className="mb-8" style={{ animation: 'fade-down 0.5s ease-out both' }}>
+          <span className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-violet/30 bg-brand-violet/5 text-sm font-medium text-brand-violet shimmer-badge">
+            <span className="h-2 w-2 rounded-full bg-brand-violet animate-pulse" />
+            {c.badge}
+          </span>
+        </div>
+
+        {/* Headline */}
+        <h1
+          className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-[var(--text-primary)] mb-6 leading-tight tracking-tight"
+          style={{ animation: 'fade-up 0.5s ease-out both', animationDelay: '200ms' }}
         >
-          {/* Badge with shimmer */}
-          <motion.div variants={badgeItem} transition={{ duration: 0.5, ease: 'easeOut' }} className="mb-8">
-            <span className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-violet/30 bg-brand-violet/5 text-sm font-medium text-brand-violet shimmer-badge">
-              <span className="h-2 w-2 rounded-full bg-brand-violet animate-pulse" />
-              {c.badge}
-            </span>
-          </motion.div>
+          {c.headline}{' '}
+          <span className="gradient-text">{c.headlineGradient}</span>
+        </h1>
 
-          {/* Headline */}
-          <motion.h1
-            variants={item}
-            className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-[var(--text-primary)] mb-6 leading-tight tracking-tight"
-          >
-            {c.headline}{' '}
-            <span className="gradient-text">{c.headlineGradient}</span>
-          </motion.h1>
+        {/* Subtitle */}
+        <p
+          className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed"
+          style={{ animation: 'fade-up 0.5s ease-out both', animationDelay: '400ms' }}
+        >
+          {c.subtext}
+        </p>
 
-          {/* Subtitle */}
-          <motion.p
-            variants={item}
-            className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed"
+        {/* CTAs */}
+        <div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
+          style={{ animation: 'fade-up 0.5s ease-out both', animationDelay: '600ms' }}
+        >
+          <Link
+            href={locale === 'id' ? '/contact' : '/en/contact'}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl gradient-bg text-white font-semibold text-sm hover:scale-[1.03] hover:shadow-xl hover:shadow-brand-violet/25 transition-all duration-200"
           >
-            {c.subtext}
-          </motion.p>
+            {c.ctaPrimary}
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+          <Link
+            href={locale === 'id' ? '/portfolio' : '/en/portfolio'}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] hover:border-brand-violet/50 transition-all duration-200"
+          >
+            {c.ctaSecondary}
+          </Link>
+        </div>
 
-          {/* CTAs */}
-          <motion.div
-            variants={item}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
-          >
-            <Link
-              href={locale === 'id' ? '/contact' : '/en/contact'}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl gradient-bg text-white font-semibold text-sm hover:scale-[1.03] hover:shadow-xl hover:shadow-brand-violet/25 transition-all duration-200"
-            >
-              {c.ctaPrimary}
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-            <Link
-              href={locale === 'id' ? '/portfolio' : '/en/portfolio'}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--bg-elevated)] hover:border-brand-violet/50 transition-all duration-200"
-            >
-              {c.ctaSecondary}
-            </Link>
-          </motion.div>
-
-          {/* Stats row */}
-          <motion.div
-            variants={item}
-            className="flex flex-wrap items-center justify-center gap-10 sm:gap-16"
-          >
-            {c.stats.map((s) => (
-              <div key={s.label} className="relative text-center">
-                {/* Glow behind number */}
-                <div
-                  className="absolute inset-0 rounded-full blur-2xl animate-pulse"
-                  style={{
-                    background: `radial-gradient(circle, ${s.glow}30 0%, transparent 70%)`,
-                    animationDuration: '3s',
-                  }}
-                />
-                <div className="relative text-3xl font-extrabold gradient-text">{s.value}</div>
-                <div className="text-xs text-[var(--text-muted)] mt-0.5 uppercase tracking-widest">{s.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
+        {/* Stats row */}
+        <div
+          className="flex flex-wrap items-center justify-center gap-10 sm:gap-16"
+          style={{ animation: 'fade-up 0.5s ease-out both', animationDelay: '800ms' }}
+        >
+          {c.stats.map((s) => (
+            <div key={s.label} className="relative text-center">
+              {/* Glow behind number */}
+              <div
+                className="absolute inset-0 rounded-full blur-2xl animate-pulse"
+                style={{
+                  background: `radial-gradient(circle, ${s.glow}30 0%, transparent 70%)`,
+                  animationDuration: '3s',
+                }}
+              />
+              <div className="relative text-3xl font-extrabold gradient-text">{s.value}</div>
+              <div className="text-xs text-[var(--text-muted)] mt-0.5 uppercase tracking-widest">{s.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Scroll indicator */}

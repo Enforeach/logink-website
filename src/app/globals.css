@@ -147,6 +147,16 @@ h1, h2, h3, h4, h5, h6 {
   50% { transform: translateY(8px); opacity: 0.5; }
 }
 
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .animated-mesh {
   background: linear-gradient(
     135deg,
