@@ -1,8 +1,7 @@
 'use client'
 
-import { useRef } from 'react'
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 
 interface Service {
   id: string
@@ -200,31 +199,26 @@ function BentoCard({
   index: number
   locale: 'id' | 'en'
 }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-
-  const initial = animVariant === 'slideLeft' ? { opacity: 0, x: -40 } : { opacity: 0, scale: 0.9 }
-  const animate = isInView ? { opacity: 1, x: 0, scale: 1 } : initial
+  const [ref, isInView] = useInView({ once: true, amount: 0.2 })
+  const anim = animVariant === 'slideLeft' ? 'fade-left' : 'scale-up'
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={initial}
-      animate={animate}
-      transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className={`${colSpan} rounded-2xl bg-white/4 p-4 lg:p-6 transition-all duration-300 hover:-translate-y-1 group`}
+      className={`${colSpan} rounded-2xl bg-white/4 p-4 lg:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] group`}
       style={{
         borderTop: `3px solid ${svc.color}`,
-        boxShadow: '0 0 0 0 transparent',
+        ...(isInView
+          ? { animation: `${anim} 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 0.1}s both` }
+          : { opacity: 0 }),
       }}
-      whileHover={{ boxShadow: `0 8px 30px ${svc.color}20` }}
     >
       {svc.slug === 'seo-content-marketing' && <SEOCard svc={svc} locale={locale} />}
       {svc.slug === 'social-media-management' && <SocialCard svc={svc} locale={locale} />}
       {svc.slug === 'paid-advertising' && <PaidAdsCard svc={svc} locale={locale} />}
       {svc.slug === 'creative-services' && <CreativeCard svc={svc} locale={locale} />}
       {svc.slug === 'website-landing-page' && <WebsiteCard svc={svc} locale={locale} />}
-    </motion.div>
+    </div>
   )
 }
 
@@ -243,18 +237,17 @@ export function ServicesSection({ services = [], locale = 'id' }: { services?: S
   const creative = display.find((s) => s.slug === 'creative-services')
   const website = display.find((s) => s.slug === 'website-landing-page')
 
-  const headerRef = useRef(null)
-  const headerInView = useInView(headerRef, { once: true, amount: 0.5 })
+  const [headerRef, headerInView] = useInView({ once: true, amount: 0.5 })
 
   return (
     <section className="py-12 sm:py-16 lg:py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div
+        <div
           ref={headerRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          style={headerInView
+            ? { animation: 'fade-up 0.55s cubic-bezier(0.22,1,0.36,1) both' }
+            : { opacity: 0 }}
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-4">
@@ -266,7 +259,7 @@ export function ServicesSection({ services = [], locale = 'id' }: { services?: S
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto">
             {sc.desc}
           </p>
-        </motion.div>
+        </div>
 
         {/* Bento grid: desktop */}
         <div className="hidden sm:grid grid-cols-3 gap-5">

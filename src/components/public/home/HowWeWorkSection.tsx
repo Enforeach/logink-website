@@ -1,7 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 
 interface Step {
   num: string
@@ -91,11 +90,8 @@ const COPY = {
 export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = COPY[locale]
   const steps = locale === 'id' ? STEPS_ID : STEPS_EN
-  const leftRef = useRef(null)
-  const leftInView = useInView(leftRef, { once: true, amount: 0.3 })
-
-  const lineRef = useRef(null)
-  const lineInView = useInView(lineRef, { once: true, amount: 0.4 })
+  const [leftRef, leftInView] = useInView({ once: true, amount: 0.3 })
+  const [lineRef, lineInView] = useInView({ once: true, amount: 0.4 })
 
   return (
     <section
@@ -108,11 +104,11 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-16 items-start">
 
           {/* Left sticky column */}
-          <motion.div
+          <div
             ref={leftRef}
-            initial={{ opacity: 0, x: -30 }}
-            animate={leftInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            style={leftInView
+              ? { animation: 'fade-left 0.6s cubic-bezier(0.22,1,0.36,1) both' }
+              : { opacity: 0 }}
             className="md:w-[35%] md:sticky md:top-28 flex-shrink-0"
           >
             <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-6">
@@ -125,7 +121,7 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
             <p className="text-[var(--text-secondary)] leading-relaxed text-base">
               {c.body}
             </p>
-          </motion.div>
+          </div>
 
           {/* Right: Steps */}
           <div className="md:w-[65%]">
@@ -134,22 +130,22 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
               <div ref={lineRef} className="relative mb-8">
                 {/* Background track */}
                 <div className="absolute top-[2.25rem] left-0 right-0 h-px bg-[var(--border-default)]" />
-                {/* Animated fill */}
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={lineInView ? { width: '100%' } : {}}
-                  transition={{ duration: 1.4, ease: 'easeInOut', delay: 0.2 }}
+                {/* CSS-animated fill */}
+                <div
                   className="absolute top-[2.25rem] left-0 h-px gradient-bg"
+                  style={lineInView
+                    ? { animation: 'expand-width 1.4s ease-in-out 0.2s both' }
+                    : { width: 0 }}
                 />
 
                 {/* Step cards */}
                 <div className="grid grid-cols-4 gap-4 relative">
                   {steps.map((step, i) => (
-                    <motion.div
+                    <div
                       key={step.num}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={lineInView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: 0.3 + i * 0.2, ease: [0.22, 1, 0.36, 1] }}
+                      style={lineInView
+                        ? { animation: `fade-up 0.5s cubic-bezier(0.22,1,0.36,1) ${0.3 + i * 0.2}s both` }
+                        : { opacity: 0 }}
                     >
                       {/* Step dot */}
                       <div className="flex flex-col items-center mb-4">
@@ -167,7 +163,7 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                         <h3 className="font-bold text-[var(--text-primary)] mb-2 text-sm">{step.title}</h3>
                         <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{step.desc}</p>
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -177,33 +173,40 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
             <div className="md:hidden flex flex-col gap-6 relative">
               <div className="absolute left-[1.375rem] top-0 bottom-0 w-px bg-[var(--border-default)]" />
               {steps.map((step, i) => (
-                <motion.div
-                  key={step.num}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex gap-4"
-                >
-                  <div
-                    className="h-11 w-11 rounded-xl flex items-center justify-center text-sm font-extrabold text-white flex-shrink-0 z-10"
-                    style={{ background: `linear-gradient(135deg, ${step.color}, #DB2777)` }}
-                  >
-                    {step.num}
-                  </div>
-                  <div className="rounded-xl bg-white/4 p-4 flex-1">
-                    <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: step.color }}>
-                      {step.days}
-                    </div>
-                    <h3 className="font-bold text-[var(--text-primary)] mb-1 text-sm">{step.title}</h3>
-                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{step.desc}</p>
-                  </div>
-                </motion.div>
+                <MobileStep key={step.num} step={step} index={i} />
               ))}
             </div>
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+function MobileStep({ step, index }: { step: Step; index: number }) {
+  const [ref, inView] = useInView({ once: true, amount: 0.4 })
+
+  return (
+    <div
+      ref={ref}
+      style={inView
+        ? { animation: `slide-right 0.5s cubic-bezier(0.22,1,0.36,1) ${index * 0.1}s both` }
+        : { opacity: 0 }}
+      className="flex gap-4"
+    >
+      <div
+        className="h-11 w-11 rounded-xl flex items-center justify-center text-sm font-extrabold text-white flex-shrink-0 z-10"
+        style={{ background: `linear-gradient(135deg, ${step.color}, #DB2777)` }}
+      >
+        {step.num}
+      </div>
+      <div className="rounded-xl bg-white/4 p-4 flex-1">
+        <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: step.color }}>
+          {step.days}
+        </div>
+        <h3 className="font-bold text-[var(--text-primary)] mb-1 text-sm">{step.title}</h3>
+        <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{step.desc}</p>
+      </div>
+    </div>
   )
 }

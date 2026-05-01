@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
+import { useCountUp } from '@/hooks/useCountUp'
 
 interface Metric {
   metricLabel: string
@@ -22,34 +22,25 @@ interface CaseStudy {
   service?: { name: string; color: string } | null
 }
 
-
 function MetricCounter({ metric, index, isInView }: { metric: Metric; index: number; isInView: boolean }) {
-  const count = useMotionValue(0)
-  const rounded = useTransform(count, (v) => {
-    if (metric.suffix === '/mo') return Math.round(v).toLocaleString()
-    if (metric.metricLabel === 'Conversion Rate') return (v / 10).toFixed(1)
-    return v.toFixed(1)
-  })
+  const raw = useCountUp(metric.numericAfter ?? 0, isInView && metric.numericAfter !== undefined, 1800, index * 250)
 
-  useEffect(() => {
-    if (isInView && metric.numericAfter !== undefined) {
-      animate(count, metric.numericAfter, { duration: 1.8, ease: 'easeOut', delay: index * 0.25 })
+  let displayAfter: React.ReactNode = metric.afterValue
+  if (metric.numericAfter !== undefined) {
+    if (metric.metricLabel === 'Conversion Rate') {
+      displayAfter = <><span>{(raw / 10).toFixed(1)}</span>%</>
+    } else if (metric.suffix === '/mo') {
+      displayAfter = <><span>{raw.toLocaleString()}</span>/mo</>
+    } else {
+      displayAfter = <><span>{raw}</span>x</>
     }
-  }, [isInView, count, metric.numericAfter, index])
-
-  const displayAfter = metric.numericAfter !== undefined
-    ? metric.metricLabel === 'Conversion Rate'
-      ? <><motion.span>{rounded}</motion.span>%</>
-      : metric.suffix === '/mo'
-        ? <><motion.span>{rounded}</motion.span>/mo</>
-        : <><motion.span>{rounded}</motion.span>x</>
-    : metric.afterValue
+  }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.3 + index * 0.2, ease: [0.22, 1, 0.36, 1] }}
+    <div
+      style={isInView
+        ? { animation: `fade-up 0.5s cubic-bezier(0.22,1,0.36,1) ${0.3 + index * 0.2}s both` }
+        : { opacity: 0 }}
       className="flex-1 rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] p-4 text-center min-w-0"
     >
       <div className="text-xs text-[var(--text-muted)] uppercase tracking-wide mb-2">{metric.metricLabel}</div>
@@ -58,28 +49,23 @@ function MetricCounter({ metric, index, isInView }: { metric: Metric; index: num
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
       </svg>
       <div className="text-2xl font-extrabold gradient-text">{displayAfter}</div>
-    </motion.div>
+    </div>
   )
 }
 
 export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.25 })
+  const [ref, isInView] = useInView({ once: true, amount: 0.25 })
 
   if (!caseStudy) return null
 
   const cs = caseStudy
-  const isPlaceholder = false
 
   return (
     <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        <div
+          style={{ animation: 'fade-up 0.5s cubic-bezier(0.22,1,0.36,1) both' }}
           className="text-center mb-10"
         >
           <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-4">
@@ -88,22 +74,20 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
             Real Results, <span className="gradient-text">Real Clients</span>
           </h2>
-        </motion.div>
+        </div>
 
         {/* Case study card */}
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="relative rounded-3xl overflow-hidden p-8 sm:p-10"
           style={{
             background: 'linear-gradient(135deg, #1A1530 0%, #1d1040 50%, #1A1530 100%)',
             border: '1px solid transparent',
             backgroundClip: 'padding-box',
+            ...(isInView ? { animation: 'fade-up 0.65s cubic-bezier(0.22,1,0.36,1) both' } : { opacity: 0 }),
           }}
         >
-          {/* Gradient border via pseudo: we fake it with box-shadow and border overlay */}
+          {/* Gradient border via pseudo */}
           <div
             className="absolute inset-0 rounded-3xl pointer-events-none"
             style={{
@@ -157,7 +141,7 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
               </svg>
             </Link>
           </div>
-        </motion.div>
+        </div>
 
         {/* View all */}
         <div className="text-center mt-8">

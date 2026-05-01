@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { SITE, WHATSAPP_URL } from '@/lib/constants'
 import { LogoMark } from '@/components/ui/Logo'
+import { useInView } from '@/hooks/useInView'
 
 const COPY = {
   id: {
@@ -24,8 +24,7 @@ const COPY = {
 }
 
 export function CTASection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const [ref, inView] = useInView({ once: true, amount: 0.3 })
   const c = COPY[locale]
 
   return (
@@ -45,11 +44,9 @@ export function CTASection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
       {/* Dot grid overlay */}
       <div className="absolute inset-0 dot-grid opacity-40" />
 
-      <motion.div
+      <div
         ref={ref}
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        style={inView ? { animation: 'fade-scale 0.65s cubic-bezier(0.22,1,0.36,1) both' } : { opacity: 0 }}
         className="relative z-10 max-w-4xl mx-auto text-center"
       >
         {/* Logo mark */}
@@ -96,7 +93,7 @@ export function CTASection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         <p className="text-xs text-[var(--text-muted)] tracking-wide">
           {SITE.email} · {SITE.address}
         </p>
-      </motion.div>
+      </div>
     </section>
   )
 }

@@ -1,8 +1,7 @@
 'use client'
 
-import { useRef } from 'react'
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 
 interface Card {
   problem: string
@@ -75,15 +74,14 @@ const COPY = {
 }
 
 function ProblemCard({ card, index, labels }: { card: Card; index: number; labels: { problemLabel: string; solutionLabel: string } }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const [ref, inView] = useInView({ once: true, amount: 0.3 })
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, x: 60 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.55, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+      style={inView
+        ? { animation: `fade-right 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 0.15}s both` }
+        : { opacity: 0 }}
       className="rounded-2xl overflow-hidden bg-white/4"
     >
       {/* Problem */}
@@ -123,15 +121,14 @@ function ProblemCard({ card, index, labels }: { card: Card; index: number; label
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 export function ProblemSolutionSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = COPY[locale]
   const cards = locale === 'id' ? CARDS_ID : CARDS_EN
-  const leftRef = useRef(null)
-  const leftInView = useInView(leftRef, { once: true, amount: 0.3 })
+  const [leftRef, leftInView] = useInView({ once: true, amount: 0.3 })
 
   return (
     <section
@@ -148,11 +145,11 @@ export function ProblemSolutionSection({ locale = 'id' }: { locale?: 'id' | 'en'
         <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-16 items-start">
 
           {/* Left sticky column */}
-          <motion.div
+          <div
             ref={leftRef}
-            initial={{ opacity: 0, x: -30 }}
-            animate={leftInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            style={leftInView
+              ? { animation: 'fade-left 0.6s cubic-bezier(0.22,1,0.36,1) both' }
+              : { opacity: 0 }}
             className="md:w-2/5 md:sticky md:top-28 flex-shrink-0"
           >
             <span className="inline-block px-4 py-1.5 rounded-full border border-brand-pink/20 bg-brand-pink/5 text-brand-pink text-xs font-semibold uppercase tracking-wider mb-6">
@@ -174,7 +171,7 @@ export function ProblemSolutionSection({ locale = 'id' }: { locale?: 'id' | 'en'
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
-          </motion.div>
+          </div>
 
           {/* Right scrollable cards */}
           <div className="md:w-3/5 flex flex-col gap-6">

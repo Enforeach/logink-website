@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
+import { useCountUp } from '@/hooks/useCountUp'
 
 interface StatConfig {
   prefix?: string
@@ -20,23 +20,15 @@ const STATS: StatConfig[] = [
 ]
 
 function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number; locale: 'id' | 'en' }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.5 })
-  const count = useMotionValue(0)
-  const rounded = useTransform(count, (v) => Math.round(v))
-
-  useEffect(() => {
-    if (isInView) {
-      animate(count, stat.target, { duration: 2, ease: 'easeOut' })
-    }
-  }, [isInView, count, stat.target])
+  const [ref, inView] = useInView({ once: true, amount: 0.5 })
+  const count = useCountUp(stat.target, inView, 2000, index * 120)
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+      style={inView
+        ? { animation: `fade-up 0.5s cubic-bezier(0.22,1,0.36,1) ${index * 0.12}s both` }
+        : { opacity: 0 }}
       className="flex-1 text-center relative px-6 py-8"
     >
       {/* Glow behind number */}
@@ -53,7 +45,7 @@ function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number
       {/* Number */}
       <div className="relative text-4xl sm:text-5xl lg:text-6xl font-extrabold gradient-text leading-none mb-3">
         {stat.prefix}
-        <motion.span>{rounded}</motion.span>
+        <span>{count}</span>
         {stat.suffix}
       </div>
 
@@ -61,7 +53,7 @@ function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number
       <div className="text-xs uppercase tracking-widest text-[var(--text-muted)]">
         {locale === 'id' ? stat.labelId : stat.labelEn}
       </div>
-    </motion.div>
+    </div>
   )
 }
 
