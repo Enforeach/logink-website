@@ -15,9 +15,12 @@ const CATEGORIES = [
 ]
 
 export function generateBlogListMetadata(locale: Locale): Metadata {
+  const description = locale === 'en'
+    ? 'Latest digital marketing tips, guides, and insights from the Logink team. Learn actionable strategies for SEO, Social Media, Paid Ads, and content marketing.'
+    : 'Tips, panduan, dan insight digital marketing terbaru dari tim Logink. Pelajari strategi SEO, Social Media, Paid Ads, dan konten yang bisa langsung diterapkan.'
   return buildMetadata({
     title: locale === 'en' ? 'Digital Marketing Blog & Insights' : 'Blog Digital Marketing',
-    description: t(locale, 'blog.subtext'),
+    description,
     path: localePath('/blog', locale),
   })
 }

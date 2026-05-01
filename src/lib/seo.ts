@@ -6,14 +6,16 @@ export function buildMetadata({
   path = '',
   ogImage,
   type = 'website',
+  noSuffix = false,
 }: {
   title: string
   description: string
   path?: string
   ogImage?: string
   type?: 'website' | 'article'
+  noSuffix?: boolean
 }) {
-  const fullTitle = `${title} | Logink - Digital Marketing Agency`
+  const fullTitle = noSuffix ? title : `${title} | Logink`
   const url = `${SITE.url}${path}`
   const image = ogImage || `${SITE.url}/images/og-default.jpg`
 

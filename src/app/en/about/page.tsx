@@ -4,7 +4,7 @@ import { CTASection } from '@/components/public/CTASection'
 
 export const metadata: Metadata = buildMetadata({
   title: 'About Us',
-  description: 'Logink is a 360° digital marketing agency in Jakarta combining strategy, creativity, and data into one integrated system.',
+  description: 'Logink is a 360° digital marketing agency in Jakarta that combines strategy, creativity, and data into one integrated system built for Indonesian brands.',
   path: '/en/about',
 })
 

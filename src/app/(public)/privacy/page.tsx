@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Kebijakan Privasi',
-  description: 'Kebijakan Privasi Logink: bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda.',
+  description: 'Kebijakan Privasi Logink menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi Anda saat menggunakan layanan kami.',
   path: '/privacy',
 })
 

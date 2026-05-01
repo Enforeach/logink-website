@@ -4,7 +4,7 @@ import { ServicesPageContent } from '@/components/public/ServicesPageContent'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Our Services',
-  description: 'SEO, Social Media, Paid Advertising, Creative Services, and Website development, all integrated to maximize your digital marketing results.',
+  description: 'SEO, Social Media Management, Paid Advertising, Creative Services, and Website development, all integrated and optimized to maximize your digital marketing ROI.',
   path: '/en/services',
 })
 

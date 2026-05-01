@@ -13,8 +13,9 @@ import { CTASection } from '@/components/public/home/CTASection'
 import LeadProfiler from '@/components/public/LeadProfiler'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Logink - 360° Digital Marketing Agency Jakarta',
-  description: '360° digital marketing agency built to help Indonesian brands dominate online. SEO, Social Media, Paid Ads, Creative, & Web services.',
+  title: 'Logink | Agensi Digital Marketing 360° Jakarta',
+  description: 'Agensi digital marketing 360° untuk brand Indonesia. Layanan SEO, Social Media, Paid Ads, Creative, dan Website terintegrasi dalam satu sistem yang terukur.',
+  noSuffix: true,
 })
 
 export const revalidate = 3600

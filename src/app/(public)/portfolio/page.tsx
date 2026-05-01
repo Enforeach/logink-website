@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Portfolio & Case Studies',
-  description: 'See the real results we\'ve achieved for our clients: organic traffic growth, high ROAS, and measurable brand growth.',
+  description: 'Lihat hasil nyata yang telah Logink capai untuk klien Indonesia. Pertumbuhan organic traffic, ROAS tinggi, dan brand awareness yang terukur dan terdokumentasi.',
   path: '/portfolio',
 })
 

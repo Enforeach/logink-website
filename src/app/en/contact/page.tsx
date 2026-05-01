@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Contact Us',
-  description: "Free consultation with the Logink team. We're ready to help your brand grow digitally.",
+  description: "Free digital marketing consultation with the Logink team. Share your brand goals and we'll build a focused strategy that's transparent, measurable, and results-driven.",
   path: '/en/contact',
 })
 

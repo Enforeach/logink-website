@@ -12,9 +12,9 @@ import { CreativeCrossSell } from '@/components/public/services/creative/Creativ
 import { CREATIVE_FAQS_EN } from '@/components/public/services/creative/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Creative Services | Logink - Digital Marketing Agency',
+  title: 'Creative Services',
   description:
-    'Custom graphic design, video production, and copywriting for Indonesian brands. Brand identity, social media content, ad creative, and more. 100% original, no templates.',
+    'Graphic design, video production, and copywriting for Indonesian brands. Brand identity, social media content, and ad creatives. 100% original, no templates.',
   path: '/en/services/creative-services',
 })
 

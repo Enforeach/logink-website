@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Hubungi Kami',
-  description: 'Konsultasi gratis bersama tim Logink. Kami siap membantu brand kamu tumbuh secara digital.',
+  description: 'Konsultasi digital marketing gratis bersama tim Logink. Ceritakan kebutuhan brand kamu dan kami akan susun strategi yang tepat, terukur, dan sesuai anggaran.',
   path: '/contact',
 })
 

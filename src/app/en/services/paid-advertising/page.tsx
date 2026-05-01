@@ -11,7 +11,7 @@ import { AdsCrossSell } from '@/components/public/services/ads/AdsCrossSell'
 import { ADS_FAQS_EN } from '@/components/public/services/ads/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Paid Advertising | Logink - Digital Marketing Agency',
+  title: 'Paid Advertising',
   description:
     'Data-driven ads on Google, Meta, TikTok, and Indonesian marketplaces. ROAS 2–4×. Transparent reporting, full account access. Starting from Rp 6M/month.',
   path: '/en/services/paid-advertising',
