@@ -256,7 +256,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
         {/* ── MEGA MENU ── */}
         {servicesOpen && (
           <div
-            className="absolute left-0 right-0 top-full border-t border-[var(--border-default)] bg-[var(--bg-primary)]/95 backdrop-blur-xl shadow-2xl"
+            className="absolute left-0 right-0 top-full border-t border-[var(--border-default)] bg-[var(--bg-primary)] shadow-2xl"
             onMouseEnter={openServices}
             onMouseLeave={scheduleClose}
           >
