@@ -6,7 +6,7 @@ import { motion, useInView } from 'framer-motion'
 
 const CARDS_ID = [
   {
-    href: '/services/seo-content-marketing',
+    href: '/layanan/jasa-seo-profesional',
     accent: '#7C3AED',
     accentRgb: '124,58,237',
     title: 'SEO & Content Marketing',
@@ -15,7 +15,7 @@ const CARDS_ID = [
     pricing: 'Mulai dari Rp 6 Juta/bln',
   },
   {
-    href: '/services/creative-services',
+    href: '/layanan/kreatif',
     accent: '#F59E0B',
     accentRgb: '245,158,11',
     title: 'Creative Services',

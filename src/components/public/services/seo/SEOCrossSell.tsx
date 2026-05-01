@@ -6,7 +6,7 @@ import { useRef } from 'react'
 
 const CROSS_SELLS_ID = [
   {
-    slug: 'paid-advertising',
+    slug: 'paid-ads',
     name: 'Paid Advertising',
     color: '#D97706',
     description:
@@ -14,7 +14,7 @@ const CROSS_SELLS_ID = [
     startingFrom: 'Mulai dari Rp 6 Juta/bln',
   },
   {
-    slug: 'website-landing-page',
+    slug: 'website-development',
     name: 'Website & Landing Page',
     color: '#A78BFA',
     description:
@@ -43,7 +43,7 @@ const CROSS_SELLS_EN = [
 ]
 
 const CROSSSELL_COPY = {
-  id: { eyebrow: 'Perkuat Hasilmu', heading: 'Cocok dikombinasikan dengan', sub: 'SEO membawa trafficnya; layanan ini mengubahnya jadi revenue.', learnMore: 'Selengkapnya', basePath: '/services' },
+  id: { eyebrow: 'Perkuat Hasilmu', heading: 'Cocok dikombinasikan dengan', sub: 'SEO membawa trafficnya; layanan ini mengubahnya jadi revenue.', learnMore: 'Selengkapnya', basePath: '/layanan' },
   en: { eyebrow: 'Amplify Your Results', heading: 'Pairs well with', sub: 'SEO brings the traffic; these services turn it into revenue.', learnMore: 'Learn more', basePath: '/en/services' },
 }
 

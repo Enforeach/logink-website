@@ -6,7 +6,7 @@ import { motion, useInView } from 'framer-motion'
 
 const CARDS_ID = [
   {
-    href: '/services/seo-content-marketing',
+    href: '/layanan/jasa-seo-profesional',
     accent: '#7C3AED',
     title: 'SEO & Content Marketing',
     description:
@@ -14,7 +14,7 @@ const CARDS_ID = [
     pricing: 'Mulai dari Rp 6 Juta/bln',
   },
   {
-    href: '/services/paid-advertising',
+    href: '/layanan/paid-ads',
     accent: '#D97706',
     title: 'Paid Advertising',
     description:

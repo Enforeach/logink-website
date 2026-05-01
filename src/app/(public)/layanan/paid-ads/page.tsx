@@ -14,13 +14,13 @@ export const metadata: Metadata = buildMetadata({
   title: 'Paid Advertising',
   description:
     'Iklan berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. ROAS 2-4×. Laporan transparan, akses akun penuh. Mulai dari Rp 6 Juta/bulan.',
-  path: '/services/paid-advertising',
+  path: '/layanan/paid-ads',
 })
 
 const breadcrumbs = [
   { name: 'Beranda', url: 'https://logink.co' },
-  { name: 'Layanan', url: 'https://logink.co/services' },
-  { name: 'Paid Advertising', url: 'https://logink.co/services/paid-advertising' },
+  { name: 'Layanan', url: 'https://logink.co/layanan' },
+  { name: 'Paid Advertising', url: 'https://logink.co/layanan/paid-ads' },
 ]
 
 export default function PaidAdvertisingPage() {

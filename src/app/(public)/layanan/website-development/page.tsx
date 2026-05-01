@@ -16,13 +16,13 @@ export const metadata: Metadata = buildMetadata({
   title: 'Website & Landing Page',
   description:
     'Website dan landing page berperforma tinggi untuk brand Indonesia. Desain fokus CRO, mobile-first, waktu muat di bawah 2 detik. Mulai dari Rp 10 Juta.',
-  path: '/services/website-landing-page',
+  path: '/layanan/website-development',
 })
 
 const breadcrumbs = [
   { name: 'Beranda', url: 'https://logink.co' },
-  { name: 'Layanan', url: 'https://logink.co/services' },
-  { name: 'Website & Landing Page', url: 'https://logink.co/services/website-landing-page' },
+  { name: 'Layanan', url: 'https://logink.co/layanan' },
+  { name: 'Website & Landing Page', url: 'https://logink.co/layanan/website-development' },
 ]
 
 export default function WebsiteLandingPagePage() {

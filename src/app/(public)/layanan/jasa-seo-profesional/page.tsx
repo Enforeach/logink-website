@@ -14,13 +14,13 @@ export const metadata: Metadata = buildMetadata({
   title: 'SEO & Content Marketing',
   description:
     'Organic search growth untuk brand Indonesia. Riset keyword, konten SEO Bahasa Indonesia, optimasi teknikal, dan laporan transparan bulanan. Mulai dari Rp 6 Juta/bulan.',
-  path: '/services/seo-content-marketing',
+  path: '/layanan/jasa-seo-profesional',
 })
 
 const breadcrumbs = [
   { name: 'Beranda', url: 'https://logink.co' },
-  { name: 'Layanan', url: 'https://logink.co/services' },
-  { name: 'SEO & Content Marketing', url: 'https://logink.co/services/seo-content-marketing' },
+  { name: 'Layanan', url: 'https://logink.co/layanan' },
+  { name: 'SEO & Content Marketing', url: 'https://logink.co/layanan/jasa-seo-profesional' },
 ]
 
 export default function SEOServicePage() {

@@ -13,7 +13,7 @@ const SERVICES_ID = [
     description:
       'Butuh produksi video kustom, foto brand, atau motion graphics? Tim Creative Services kami memproduksi aset visual yang membuat konten sosialmu beda dari yang lain.',
     price: 'Harga per proyek',
-    href: '/services/creative-services',
+    href: '/layanan/kreatif',
   },
   {
     title: 'Paid Advertising',
@@ -22,7 +22,7 @@ const SERVICES_ID = [
     description:
       'Amplifikasi konten organik terbaikmu dengan kampanye berbayar tertarget. Retarget followers yang engaged, jangkau lookalike audience, dan dorong konversi dengan Meta Ads dan TikTok Ads.',
     price: 'Starting from Rp 6M/mo',
-    href: '/services/paid-advertising',
+    href: '/layanan/paid-ads',
   },
 ]
 

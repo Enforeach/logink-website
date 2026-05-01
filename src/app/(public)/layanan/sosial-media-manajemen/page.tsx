@@ -15,13 +15,13 @@ export const metadata: Metadata = buildMetadata({
   title: 'Social Media Management | Logink',
   description:
     'Strategi social media, pembuatan konten, dan community management untuk brand Indonesia. Instagram, TikTok, Facebook & LinkedIn. 100% konten original.',
-  path: '/services/social-media-management',
+  path: '/layanan/sosial-media-manajemen',
 })
 
 const breadcrumbs = [
   { name: 'Beranda', url: 'https://logink.co' },
-  { name: 'Layanan', url: 'https://logink.co/services' },
-  { name: 'Social Media Management', url: 'https://logink.co/services/social-media-management' },
+  { name: 'Layanan', url: 'https://logink.co/layanan' },
+  { name: 'Social Media Management', url: 'https://logink.co/layanan/sosial-media-manajemen' },
 ]
 
 export default function SocialMediaPage() {

@@ -15,13 +15,13 @@ export const metadata: Metadata = buildMetadata({
   title: 'Creative Services',
   description:
     'Desain grafis, produksi video, dan copywriting untuk brand Indonesia. Brand identity, konten social media, dan ad creative. 100% original, bebas template.',
-  path: '/services/creative-services',
+  path: '/layanan/kreatif',
 })
 
 const breadcrumbs = [
   { name: 'Beranda', url: 'https://logink.co' },
-  { name: 'Layanan', url: 'https://logink.co/services' },
-  { name: 'Creative Services', url: 'https://logink.co/services/creative-services' },
+  { name: 'Layanan', url: 'https://logink.co/layanan' },
+  { name: 'Creative Services', url: 'https://logink.co/layanan/kreatif' },
 ]
 
 export default function CreativeServicesPage() {

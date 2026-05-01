@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
-import { SERVICES, ServiceDetailContent, generateStaticParams } from '@/app/(public)/services/[slug]/page'
+import { SERVICES, ServiceDetailContent, generateStaticParams } from '@/app/(public)/layanan/[slug]/page'
 
 export { generateStaticParams }
 

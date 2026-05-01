@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 const HERO_COPY = {
   id: {
     trustPills: ['✓ Konten 100% original', '✓ Native Bahasa Indonesia', '✓ Kalender konten bulanan'],
-    home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/services',
+    home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/layanan',
     title1: 'Konten yang Nyambung.', title2: 'Kehadiran yang Konversi.',
     desc: 'Kami urus semua urusan social media-mu: strategi, pembuatan konten, penjadwalan, community management, dan laporan performa di Instagram, TikTok, Facebook, dan LinkedIn.',
     descHighlight: 'Kamu fokus bisnis. Kami bikin brandmu nggak bisa di-skip.',

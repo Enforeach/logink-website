@@ -16,7 +16,7 @@ const RATES = ['8.25% CTR', '25.5% CVR', '20% Close']
 const HERO_COPY = {
   id: {
     trustPills: ['✓ Rata-rata ROAS 2-4×', '✓ Akses akun penuh', '✓ Laporan optimasi mingguan'],
-    home: 'Beranda', homeHref: '/', services: 'Layanan', servicesHref: '/services',
+    home: 'Beranda', homeHref: '/', services: 'Layanan', servicesHref: '/layanan',
     title1: 'Setiap Rupiah Terinvestasi.', title2: 'Return Maksimal Terwujud.',
     desc: 'Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami bidik audiens yang tepat di momen yang tepat, mengoptimalkan tanpa henti sampai ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, tanpa kontrak lock-in jangka panjang.',
     ctaPrimary: 'Mulai Konsultasi Gratis →', ctaHref: '/contact?service=paid-advertising',

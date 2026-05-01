@@ -5,7 +5,7 @@ import { ServicesPageContent } from '@/components/public/ServicesPageContent'
 export const metadata: Metadata = buildMetadata({
   title: 'Layanan Digital Marketing',
   description: 'Lima layanan digital marketing terintegrasi: SEO, Social Media, Paid Ads, Creative Services, dan Website & Landing Page. Mulai dari Rp 6 Juta/bulan.',
-  path: '/services',
+  path: '/layanan',
 })
 
 export const revalidate = 3600

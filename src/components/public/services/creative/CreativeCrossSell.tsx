@@ -6,14 +6,14 @@ import { motion, useInView } from 'framer-motion'
 
 const CARDS_ID = [
   {
-    href: '/services/social-media-management',
+    href: '/layanan/sosial-media-manajemen',
     accent: '#DB2777',
     title: 'Social Media Management',
     description: 'Konten bagus butuh distribusi yang bagus. Tim Social Media kami menangani strategi, penjadwalan, dan community management, supaya aset kreatif yang kami buat benar-benar menjangkau audiens yang tepat di waktu yang tepat.',
     pricing: 'Harga kustom',
   },
   {
-    href: '/services/website-landing-page',
+    href: '/layanan/website-development',
     accent: '#A78BFA',
     title: 'Website & Landing Page',
     description: 'Butuh rumah untuk brandmu? Tim web kami membangun website dan landing page yang dioptimasi untuk konversi dan menampilkan identitas visual yang kami buat.',

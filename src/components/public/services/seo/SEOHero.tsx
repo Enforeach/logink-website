@@ -13,7 +13,7 @@ const COPY = {
     home: 'Beranda',
     services: 'Layanan',
     homeHref: '/',
-    servicesHref: '/services',
+    servicesHref: '/layanan',
     title1: 'Ranking Lebih Tinggi.',
     title2: 'Jangkauan Lebih Luas.',
     title3: 'Konversi Lebih Baik.',

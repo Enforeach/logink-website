@@ -7,7 +7,7 @@ const BASE = SITE.url.replace(/\/$/, '')
 const STATIC_PAGES = [
   { path: '/', priority: 1.0, changeFreq: 'weekly' as const },
   { path: '/blog', priority: 0.9, changeFreq: 'daily' as const },
-  { path: '/services', priority: 0.8, changeFreq: 'monthly' as const },
+  { path: '/layanan', priority: 0.8, changeFreq: 'monthly' as const },
   { path: '/portfolio', priority: 0.7, changeFreq: 'monthly' as const },
   { path: '/about', priority: 0.6, changeFreq: 'monthly' as const },
   { path: '/contact', priority: 0.6, changeFreq: 'monthly' as const },

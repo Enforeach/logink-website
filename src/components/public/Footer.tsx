@@ -6,11 +6,11 @@ import { type Locale, t, localePath } from '@/lib/i18n'
 import { LogoFull } from '@/components/ui/Logo'
 
 const SERVICE_LINKS = [
-  { href: '/services/seo-content-marketing', label: 'SEO & Content Marketing' },
-  { href: '/services/social-media-management', label: 'Social Media Management' },
-  { href: '/services/paid-advertising', label: 'Paid Advertising' },
-  { href: '/services/creative-services', label: 'Creative Services' },
-  { href: '/services/website-landing-page', label: 'Website & Landing Page' },
+  { href: '/layanan/jasa-seo-profesional', label: 'SEO & Content Marketing' },
+  { href: '/layanan/sosial-media-manajemen', label: 'Social Media Management' },
+  { href: '/layanan/paid-ads', label: 'Paid Advertising' },
+  { href: '/layanan/kreatif', label: 'Creative Services' },
+  { href: '/layanan/website-development', label: 'Website & Landing Page' },
 ]
 
 const COMPANY_LINKS = [

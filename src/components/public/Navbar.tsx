@@ -15,7 +15,7 @@ const SERVICE_GROUPS = [
     categoryEn: 'GROW ORGANIC',
     items: [
       {
-        slug: 'seo-content-marketing', key: 'seo', color: '#7C3AED',
+        slug: 'seo-content-marketing', slugId: 'jasa-seo-profesional', key: 'seo', color: '#7C3AED',
         descId: 'Dominasi Google, raih traffic berkualitas',
         descEn: 'Dominate Google, earn quality traffic',
         icon: (
@@ -26,7 +26,7 @@ const SERVICE_GROUPS = [
         ),
       },
       {
-        slug: 'social-media-management', key: 'social', color: '#DB2777',
+        slug: 'social-media-management', slugId: 'sosial-media-manajemen', key: 'social', color: '#DB2777',
         descId: 'Bangun audiens & komunitas engaged',
         descEn: 'Build an engaged audience & community',
         icon: (
@@ -42,7 +42,7 @@ const SERVICE_GROUPS = [
     categoryEn: 'DRIVE REVENUE',
     items: [
       {
-        slug: 'paid-advertising', key: 'ads', color: '#D97706',
+        slug: 'paid-advertising', slugId: 'paid-ads', key: 'ads', color: '#D97706',
         descId: 'Iklan yang menghasilkan ROI nyata',
         descEn: 'Ads that deliver measurable ROI',
         icon: (
@@ -53,7 +53,7 @@ const SERVICE_GROUPS = [
         ),
       },
       {
-        slug: 'website-landing-page', key: 'website', color: '#A78BFA',
+        slug: 'website-landing-page', slugId: 'website-development', key: 'website', color: '#A78BFA',
         descId: 'Website & landing page yang mengkonversi',
         descEn: 'Websites & landing pages that convert',
         icon: (
@@ -72,7 +72,7 @@ const SERVICE_GROUPS = [
     categoryEn: 'CREATIVE & CONTENT',
     items: [
       {
-        slug: 'creative-services', key: 'creative', color: '#F59E0B',
+        slug: 'creative-services', slugId: 'kreatif', key: 'creative', color: '#F59E0B',
         descId: 'Visual & konten yang menggerakkan',
         descEn: 'Visuals & content that move people',
         icon: (
@@ -127,7 +127,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
     setServicesOpen(false)
   }, [pathname])
 
-  const isServicesActive = pathname?.startsWith('/services') || pathname?.startsWith('/en/services')
+  const isServicesActive = pathname?.startsWith('/layanan') || pathname?.startsWith('/en/services')
 
   return (
     <>
@@ -273,7 +273,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
                       {group.items.map((svc) => (
                         <Link
                           key={svc.slug}
-                          href={localePath(`/services/${svc.slug}`, locale)}
+                          href={locale === 'id' ? `/layanan/${svc.slugId}` : `/en/services/${svc.slug}`}
                           className="group flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-[var(--bg-elevated)] transition-colors"
                         >
                           <span
@@ -336,7 +336,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
               {/* Footer row */}
               <div className="mt-6 pt-5 border-t border-[var(--border-default)] flex items-center justify-between">
                 <Link
-                  href={localePath('/services', locale)}
+                  href={locale === 'id' ? '/layanan' : '/en/services'}
                   className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] hover:text-brand-violet transition-colors"
                 >
                   {locale === 'en' ? 'View all services' : 'Lihat semua layanan'}
@@ -360,13 +360,13 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
             <p className="px-4 text-[10px] font-bold tracking-[0.12em] text-[var(--text-muted)] uppercase mt-2 mb-1">
               {locale === 'en' ? 'Services' : 'Layanan'}
             </p>
-            <Link href={localePath('/services', locale)} className="px-4 py-2.5 rounded-xl text-sm text-[var(--text-secondary)] font-medium hover:bg-[var(--bg-elevated)] transition-colors">
+            <Link href={locale === 'id' ? '/layanan' : '/en/services'} className="px-4 py-2.5 rounded-xl text-sm text-[var(--text-secondary)] font-medium hover:bg-[var(--bg-elevated)] transition-colors">
               {t(locale, 'nav.allServices')} →
             </Link>
             {SERVICE_GROUPS.flatMap(g => g.items).map((svc) => (
               <Link
                 key={svc.slug}
-                href={localePath(`/services/${svc.slug}`, locale)}
+                href={locale === 'id' ? `/layanan/${svc.slugId}` : `/en/services/${svc.slug}`}
                 className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-colors"
               >
                 <span className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"

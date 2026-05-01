@@ -17,9 +17,9 @@ interface Service {
 const FALLBACK: Service[] = [
   { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#7C3AED', shortDescId: 'Long-term organic growth & inbound leads', funnelPosition: 'Top Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
   { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#DB2777', shortDescId: 'Brand awareness & community building', funnelPosition: 'Top Funnel', pricingTiers: [] },
-  { id: '3', name: 'Paid Advertising', slug: 'paid-advertising', color: '#D97706', shortDescId: 'Fast scaling & immediate ROI', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
+  { id: '3', name: 'Paid Advertising', slug: 'paid-ads', color: '#D97706', shortDescId: 'Fast scaling & immediate ROI', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
   { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F59E0B', shortDescId: 'Scroll-stopping content that converts', funnelPosition: 'All Funnel', pricingTiers: [] },
-  { id: '5', name: 'Website & Landing Page', slug: 'website-landing-page', color: '#A78BFA', shortDescId: 'Converting visitors into customers', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
+  { id: '5', name: 'Website & Landing Page', slug: 'website-development', color: '#A78BFA', shortDescId: 'Converting visitors into customers', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
 ]
 
 /* ─── Individual card variants ─── */
@@ -48,7 +48,7 @@ function SEOCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
         {svc.pricingTiers?.[0] && (
           <p className="text-xs text-[var(--text-muted)] mb-3">{startingFrom} <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}{perMonth}</span></p>
         )}
-        <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
+        <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
       </div>
       {/* Mini ascending line chart */}
       <div className="flex-shrink-0 flex items-center">
@@ -87,7 +87,7 @@ function SocialCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
           </span>
         ))}
       </div>
-      <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
+      <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
 }
@@ -108,7 +108,7 @@ function PaidAdsCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
       </div>
       <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
-      <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
+      <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
 }
@@ -139,7 +139,7 @@ function CreativeCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
       </div>
       <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
-      <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
+      <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
 }
@@ -167,7 +167,7 @@ function WebsiteCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
       {svc.pricingTiers?.[0] && (
         <p className="text-xs text-[var(--text-muted)] mb-3">{locale === 'id' ? 'Mulai dari' : 'Starting from'} <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}</span></p>
       )}
-      <LearnMore href={`${locale === 'id' ? '' : '/en'}/services/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
+      <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
 }

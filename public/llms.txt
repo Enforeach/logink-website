@@ -11,11 +11,11 @@
 
 ## Services
 
-- [SEO & Content Marketing](https://logink.co/services/seo-content-marketing): Organic search growth for Indonesian brands. Keyword research, SEO articles in Bahasa Indonesia, technical optimization, and transparent monthly reporting. Starting from Rp 6 Million/month.
-- [Social Media Management](https://logink.co/services/social-media-management): Social media strategy, content creation, and community management. Covers Instagram, TikTok, Facebook, and LinkedIn. 100% original content.
-- [Paid Advertising](https://logink.co/services/paid-advertising): Data-driven ads on Google, Meta, TikTok, and Indonesian marketplaces. Average ROAS 2–4x. Transparent reporting and full account access. Starting from Rp 6 Million/month.
-- [Creative Services](https://logink.co/services/creative-services): Graphic design, video production, and copywriting. Brand identity, social media content, and ad creatives. 100% original, no templates.
-- [Website & Landing Page](https://logink.co/services/website-landing-page): High-performance websites and landing pages. CRO-focused design, mobile-first, sub-2-second load time. Starting from Rp 10 Million.
+- [SEO & Content Marketing](https://logink.co/layanan/jasa-seo-profesional): Organic search growth for Indonesian brands. Keyword research, SEO articles in Bahasa Indonesia, technical optimization, and transparent monthly reporting. Starting from Rp 6 Million/month.
+- [Social Media Management](https://logink.co/layanan/sosial-media-manajemen): Social media strategy, content creation, and community management. Covers Instagram, TikTok, Facebook, and LinkedIn. 100% original content.
+- [Paid Advertising](https://logink.co/layanan/paid-ads): Data-driven ads on Google, Meta, TikTok, and Indonesian marketplaces. Average ROAS 2–4x. Transparent reporting and full account access. Starting from Rp 6 Million/month.
+- [Creative Services](https://logink.co/layanan/kreatif): Graphic design, video production, and copywriting. Brand identity, social media content, and ad creatives. 100% original, no templates.
+- [Website & Landing Page](https://logink.co/layanan/website-development): High-performance websites and landing pages. CRO-focused design, mobile-first, sub-2-second load time. Starting from Rp 10 Million.
 
 ## Key Pages
 
@@ -25,7 +25,7 @@
 - [Portfolio](https://logink.co/portfolio): Case studies and client results
 - [Blog](https://logink.co/blog): Digital marketing tips, guides, and insights
 - [Contact](https://logink.co/contact): Free consultation and inquiry form
-- [Services Overview](https://logink.co/services): All services at a glance
+- [Layanan (ID)](https://logink.co/layanan): All services overview in Indonesian
 
 ## English Pages
 
