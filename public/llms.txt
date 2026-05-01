@@ -1,0 +1,46 @@
+# Logink
+
+> Logink is a 360° digital marketing agency based in Jakarta, Indonesia. We help Indonesian brands grow online through integrated services: SEO & Content Marketing, Social Media Management, Paid Advertising, Creative Services, and Website & Landing Page development. Our approach combines strategy, creativity, and data into one measurable system.
+
+## Company
+
+- Website: https://logink.co
+- Email: hello@logink.co
+- Location: Jakarta, Indonesia
+- Tagline: Connected Creativity
+
+## Services
+
+- [SEO & Content Marketing](https://logink.co/services/seo-content-marketing): Organic search growth for Indonesian brands. Keyword research, SEO articles in Bahasa Indonesia, technical optimization, and transparent monthly reporting. Starting from Rp 6 Million/month.
+- [Social Media Management](https://logink.co/services/social-media-management): Social media strategy, content creation, and community management. Covers Instagram, TikTok, Facebook, and LinkedIn. 100% original content.
+- [Paid Advertising](https://logink.co/services/paid-advertising): Data-driven ads on Google, Meta, TikTok, and Indonesian marketplaces. Average ROAS 2–4x. Transparent reporting and full account access. Starting from Rp 6 Million/month.
+- [Creative Services](https://logink.co/services/creative-services): Graphic design, video production, and copywriting. Brand identity, social media content, and ad creatives. 100% original, no templates.
+- [Website & Landing Page](https://logink.co/services/website-landing-page): High-performance websites and landing pages. CRO-focused design, mobile-first, sub-2-second load time. Starting from Rp 10 Million.
+
+## Key Pages
+
+- [Home (ID)](https://logink.co): Indonesian homepage
+- [Home (EN)](https://logink.co/en): English homepage
+- [About](https://logink.co/about): Company background, values, and team
+- [Portfolio](https://logink.co/portfolio): Case studies and client results
+- [Blog](https://logink.co/blog): Digital marketing tips, guides, and insights
+- [Contact](https://logink.co/contact): Free consultation and inquiry form
+- [Services Overview](https://logink.co/services): All services at a glance
+
+## English Pages
+
+- [About (EN)](https://logink.co/en/about)
+- [Portfolio (EN)](https://logink.co/en/portfolio)
+- [Blog (EN)](https://logink.co/en/blog)
+- [Contact (EN)](https://logink.co/en/contact)
+- [Services (EN)](https://logink.co/en/services)
+- [SEO & Content Marketing (EN)](https://logink.co/en/services/seo-content-marketing)
+- [Social Media Management (EN)](https://logink.co/en/services/social-media-management)
+- [Paid Advertising (EN)](https://logink.co/en/services/paid-advertising)
+- [Creative Services (EN)](https://logink.co/en/services/creative-services)
+- [Website & Landing Page (EN)](https://logink.co/en/services/website-landing-page)
+
+## Legal
+
+- [Privacy Policy](https://logink.co/privacy)
+- [Terms of Service](https://logink.co/terms)
