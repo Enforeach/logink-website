@@ -17,11 +17,10 @@
     "seed": "tsx prisma/seed.ts"
   },
   "browserslist": [
-    "chrome >= 90",
-    "firefox >= 90",
-    "safari >= 15",
-    "edge >= 90",
-    "not dead"
+    "chrome 111",
+    "edge 111",
+    "firefox 111",
+    "safari 16.4"
   ],
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
