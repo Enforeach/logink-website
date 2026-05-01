@@ -44,13 +44,13 @@ export function PostsTable({ posts }: { posts: Post[] }) {
         {
           key: 'category',
           header: 'Category',
-          render: (row) => row.category?.nameId || '—',
+          render: (row) => row.category?.nameId || '-',
           className: 'hidden md:table-cell',
         },
         {
           key: 'author',
           header: 'Author',
-          render: (row) => row.author?.name || '—',
+          render: (row) => row.author?.name || '-',
           className: 'hidden lg:table-cell',
         },
         {

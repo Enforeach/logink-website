@@ -15,7 +15,7 @@ export const en = {
       badge: '360° Digital Marketing Agency · Jakarta, Indonesia',
       headline: 'Grow Your Brand',
       headlineGradient: 'Digitally',
-      subtext: '360° digital marketing agency built to help Indonesian brands dominate online. Strategy, creativity, and data — all in one engine.',
+      subtext: '360° digital marketing agency built to help Indonesian brands dominate online. Strategy, creativity, and data: all in one engine.',
       ctaPrimary: 'Get a Free Quote →',
       ctaSecondary: 'See Our Work',
     },
@@ -70,7 +70,7 @@ export const en = {
 
   meta: {
     titleSuffix: '| Logink - Digital Marketing Agency',
-    homeTitle: 'Logink — 360° Digital Marketing Agency Jakarta',
+    homeTitle: 'Logink: 360° Digital Marketing Agency Jakarta',
     homeDescription: '360° digital marketing agency for Indonesian brands. SEO, Social Media, Paid Ads, Creative, and Website.',
   },
 } as const

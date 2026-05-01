@@ -9,7 +9,7 @@ const CARDS_ID = [
     href: '/services/social-media-management',
     accent: '#DB2777',
     title: 'Social Media Management',
-    description: 'Konten bagus butuh distribusi yang bagus. Tim Social Media kami menangani strategi, penjadwalan, dan community management — supaya aset kreatif yang kami buat benar-benar menjangkau audiens yang tepat di waktu yang tepat.',
+    description: 'Konten bagus butuh distribusi yang bagus. Tim Social Media kami menangani strategi, penjadwalan, dan community management, supaya aset kreatif yang kami buat benar-benar menjangkau audiens yang tepat di waktu yang tepat.',
     pricing: 'Harga kustom',
   },
   {
@@ -26,7 +26,7 @@ const CARDS_EN = [
     href: '/en/services/social-media-management',
     accent: '#DB2777',
     title: 'Social Media Management',
-    description: 'Great content needs great distribution. Our Social Media team handles strategy, scheduling, and community management — so the creative assets we make actually reach the right audience at the right time.',
+    description: 'Great content needs great distribution. Our Social Media team handles strategy, scheduling, and community management, so the creative assets we make actually reach the right audience at the right time.',
     pricing: 'Custom pricing',
   },
   {

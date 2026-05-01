@@ -80,7 +80,7 @@ export function SEOHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-          {/* Left — text */}
+          {/* Left: text */}
           <div>
             <motion.div
               initial={{ opacity: 0, y: -12 }}
@@ -150,7 +150,7 @@ export function SEOHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
             </motion.div>
           </div>
 
-          {/* Right — keyword tracker visual */}
+          {/* Right: keyword tracker visual */}
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             animate={{ opacity: 1, x: 0 }}

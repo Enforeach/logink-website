@@ -21,7 +21,7 @@ export const BRAND = {
 export const SITE = {
   name: 'Logink',
   tagline: 'Connected Creativity',
-  description: '360° Digital Marketing Agency — Jakarta, Indonesia',
+  description: '360° Digital Marketing Agency, Jakarta, Indonesia',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://logink.co',
   email: 'hello@logink.co',
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287782495916',

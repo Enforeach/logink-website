@@ -361,7 +361,7 @@ export function PostEditor({ post }: PostEditorProps) {
             <>
               <input
                 type="text"
-                placeholder="Article title (English) — optional"
+                placeholder="Article title (English, optional)"
                 value={titleEn2}
                 onChange={e => setTitleEn2(e.target.value)}
                 className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-2xl font-bold text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-brand-violet focus:outline-none"
@@ -490,7 +490,7 @@ export function PostEditor({ post }: PostEditorProps) {
           {/* SEO panel */}
           {activePanel === 'seo' && (
             <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">SEO — {activeLang === 'id' ? '🇮🇩 ID' : '🇬🇧 EN'}</h3>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">SEO: {activeLang === 'id' ? '🇮🇩 ID' : '🇬🇧 EN'}</h3>
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Focus Keyword</label>
                 <input type="text" placeholder="e.g. SEO Jakarta" value={focusKeyword} onChange={e => setFocusKeyword(e.target.value)} className={inputCls} />

@@ -150,7 +150,7 @@ export function AdsPlatformOverview({ locale = 'id' }: { locale?: 'id' | 'en' })
                 </div>
               </div>
 
-              {/* Right — tier availability */}
+              {/* Right: tier availability */}
               <div className="lg:col-span-2 flex flex-col justify-between gap-6">
                 <div className="rounded-xl border border-white/10 bg-white/3 p-5 space-y-3">
                   <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">{c.availableIn}</p>

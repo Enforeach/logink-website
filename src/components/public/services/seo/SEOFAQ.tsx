@@ -45,8 +45,8 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 }
 
 const FAQ_COPY = {
-  id: { heading: 'Pertanyaan yang sering ditanyakan.', sub: 'Jawaban langsung — tanpa basa-basi.' },
-  en: { heading: 'Frequently asked questions.', sub: 'Straight answers — no filler.' },
+  id: { heading: 'Pertanyaan yang sering ditanyakan.', sub: 'Jawaban langsung, tanpa basa-basi.' },
+  en: { heading: 'Frequently asked questions.', sub: 'Straight answers, no filler.' },
 }
 
 export function SEOFAQ({ locale = 'id' }: { locale?: 'id' | 'en' }) {

@@ -63,7 +63,7 @@ function StepVisual({ step }: { step: number }) {
       </div>
     )
   }
-  // step 5 — chart
+  // step 5: chart
   return (
     <div className="rounded-xl border border-violet-400/20 bg-violet-400/5 p-3 mt-3 w-full max-w-[200px]">
       <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Tren traffic</div>

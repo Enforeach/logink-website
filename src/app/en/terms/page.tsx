@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Terms of Service',
-  description: 'Logink Terms of Service — the rules and conditions governing the use of our digital marketing services.',
+  description: 'Logink Terms of Service: the rules and conditions governing the use of our digital marketing services.',
   path: '/en/terms',
 })
 

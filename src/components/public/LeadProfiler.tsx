@@ -71,9 +71,9 @@ const BRIEF_LABELS_ID: Record<string, string[]> = {
 
 const SERVICE_META_ID: Record<string, { label: string; icon: string; confirm: string }> = {
   ads: { label: 'Ads', icon: '📢', confirm: 'Oke, Anda butuh layanan Paid Ads. Keren, saya siapkan pertanyaannya! 💪' },
-  creative: { label: 'Creative', icon: '🎨', confirm: 'Oke, Creative Services — pilihan tepat! Mari kita cari tahu lebih lanjut.' },
+  creative: { label: 'Creative', icon: '🎨', confirm: 'Oke, Creative Services, pilihan tepat! Mari kita cari tahu lebih lanjut.' },
   socmed: { label: 'Social Media', icon: '📱', confirm: 'Oke, Social Media Management! Yuk kita mulai profiling bisnis Anda.' },
-  seo: { label: 'SEO', icon: '🔍', confirm: 'Oke, SEO — investasi jangka panjang yang cerdas! Ada beberapa pertanyaan.' },
+  seo: { label: 'SEO', icon: '🔍', confirm: 'Oke, SEO: investasi jangka panjang yang cerdas! Ada beberapa pertanyaan.' },
   webdev: { label: 'Website Development', icon: '💻', confirm: 'Mantap, Website Development! Kami spesialis di sini. Yuk mulai!' },
 }
 
@@ -92,21 +92,21 @@ const PATHS_EN: Record<string, Q[]> = {
     { key: 'tujuan', type: 'single', text: "What's the main goal of your ads?", opts: ['Lead generation', 'Direct sales (e-commerce)', 'Brand awareness', 'Website traffic', 'App installs'] },
     { key: 'pengalaman', type: 'single', text: 'Have you run digital ads before?', opts: ["Never run ads before", "Tried it but poor results", "Currently running, want to optimise", "Managing it myself and overwhelmed"] },
     { key: 'landing_page', type: 'single', text: "How about your landing page or website?", opts: ["Already have one, ready to use", "Have one but needs improvement", "Don't have one yet"] },
-    { key: 'budget', type: 'single', text: "Last one — what's your monthly ad budget?", opts: BUDGET_EN },
+    { key: 'budget', type: 'single', text: "Last one: what's your monthly ad budget?", opts: BUDGET_EN },
   ],
   creative: [
     { key: 'industri', type: 'single', text: "What industry is your business in?", opts: INDUSTRY_EN },
     { key: 'jenis_konten', type: 'multi', text: 'What type of creative content do you need?', opts: ['Feed & stories design', 'Video production (TVC/reels)', 'Branding & visual identity', 'Campaign & key visual', 'Product photography / catalogue', 'Motion graphic / animation'] },
     { key: 'penggunaan', type: 'multi', text: 'What will this content be used for?', opts: ['Social media posting', 'Digital ads', 'Website / landing page', 'Presentation / pitch deck', 'Print (brochure, packaging)', 'Events / exhibition'] },
     { key: 'frekuensi', type: 'single', text: 'How often do you need content?', opts: ['One-time project', 'Monthly (ongoing retainer)', 'Specific campaign', 'Not sure yet'] },
-    { key: 'brand_guideline', type: 'single', text: 'Do you already have brand guidelines?', opts: ['Yes, fully complete', 'Partially — not consistent yet', 'No, starting from scratch'] },
+    { key: 'brand_guideline', type: 'single', text: 'Do you already have brand guidelines?', opts: ['Yes, fully complete', 'Partially, not consistent yet', 'No, starting from scratch'] },
     { key: 'budget', type: 'single', text: "And roughly what's your creative budget?", opts: BUDGET_EN },
   ],
   socmed: [
     { key: 'industri', type: 'single', text: "What industry is your business in?", opts: INDUSTRY_EN },
     { key: 'platform', type: 'multi', text: 'Which platforms are your priority?', opts: ['Instagram', 'TikTok', 'LinkedIn', 'Facebook', 'YouTube', 'X (Twitter)'] },
     { key: 'tantangan', type: 'single', text: "What's your biggest social media challenge right now?", opts: ['Inconsistent posting', 'Low engagement', 'Follower growth is stagnant', "Don't know what content strategy to use", 'Competitors are more active'] },
-    { key: 'tim_internal', type: 'single', text: 'Do you have an internal team managing social media?', opts: ['No — need fully managed service', 'Yes, but need strategic direction', 'Yes, but need content only', 'Yes, but need reporting & analytics'] },
+    { key: 'tim_internal', type: 'single', text: 'Do you have an internal team managing social media?', opts: ['No, need fully managed service', 'Yes, but need strategic direction', 'Yes, but need content only', 'Yes, but need reporting & analytics'] },
     { key: 'target_posting', type: 'single', text: 'How many posts per week are you targeting?', opts: ['1–2x per week', '3–4x per week', 'Every day', "Not sure, need a recommendation"] },
     { key: 'budget', type: 'single', text: "What's your monthly social media budget?", opts: BUDGET_EN },
   ],
@@ -137,11 +137,11 @@ const BRIEF_LABELS_EN: Record<string, string[]> = {
 }
 
 const SERVICE_META_EN: Record<string, { label: string; icon: string; confirm: string }> = {
-  ads: { label: 'Paid Ads', icon: '📢', confirm: "Got it — Paid Ads! Great choice. Let me prepare a few questions. 💪" },
-  creative: { label: 'Creative', icon: '🎨', confirm: "Creative Services — perfect pick! Let's find out more about what you need." },
-  socmed: { label: 'Social Media', icon: '📱', confirm: "Social Media Management — let's build something your audience will love!" },
-  seo: { label: 'SEO', icon: '🔍', confirm: "SEO — a smart long-term investment! I have a few questions to understand your needs." },
-  webdev: { label: 'Website Development', icon: '💻', confirm: "Website Development — we specialize in this! Let's get started." },
+  ads: { label: 'Paid Ads', icon: '📢', confirm: "Got it, Paid Ads! Great choice. Let me prepare a few questions. 💪" },
+  creative: { label: 'Creative', icon: '🎨', confirm: "Creative Services: perfect pick! Let's find out more about what you need." },
+  socmed: { label: 'Social Media', icon: '📱', confirm: "Social Media Management: let's build something your audience will love!" },
+  seo: { label: 'SEO', icon: '🔍', confirm: "SEO: a smart long-term investment! I have a few questions to understand your needs." },
+  webdev: { label: 'Website Development', icon: '💻', confirm: "Website Development: we specialize in this! Let's get started." },
 }
 
 // ─── UI copy ──────────────────────────────────────────────────────────────────
@@ -155,13 +155,13 @@ const COPY = {
     init2: 'Saya akan bantu carikan solusi digital terbaik untuk bisnis Anda. Cuma butuh 1–2 menit saja!',
     gatewayQ: 'Layanan apa yang paling Anda butuhkan saat ini?',
     contactMsg1: 'Mantap, terima kasih atas jawabannya! 🙌',
-    contactMsg2: 'Tinggal selangkah lagi — isi data kontak Anda supaya tim Logink bisa follow up dalam 24 jam.',
+    contactMsg2: 'Tinggal selangkah lagi: isi data kontak Anda supaya tim Logink bisa follow up dalam 24 jam.',
     doneMsg1: (name: string) => `Terima kasih, ${name}! 🎉 Brief Anda sudah terkirim ke tim Logink via WhatsApp.`,
     doneMsg2: 'Kami akan menghubungi Anda dalam 24 jam. Sampai jumpa! 👋',
     userDataSent: 'Data terkirim! ✅',
     lastQPrefix: 'Pertanyaan terakhir! ',
     multiConfirm: (n: number) => `Lanjutkan (${n} dipilih) →`,
-    seoRedirect: 'Sepertinya Anda belum punya website — tidak apa-apa! Saya arahkan ke layanan Website Development kami. 🚀',
+    seoRedirect: 'Sepertinya Anda belum punya website, tidak apa-apa! Saya arahkan ke layanan Website Development kami. 🚀',
     restart: '↩ Mulai dari awal',
     statusTyping: 'Logink sedang mengetik...',
     statusOnline: 'Logink · Online',
@@ -182,13 +182,13 @@ const COPY = {
     init2: "I'll help find the best digital solution for your business. It only takes 1–2 minutes!",
     gatewayQ: 'Which service do you need most right now?',
     contactMsg1: "Great, thanks for your answers! 🙌",
-    contactMsg2: "Just one more step — fill in your contact details so Logink's team can follow up within 24 hours.",
+    contactMsg2: "Just one more step: fill in your contact details so Logink's team can follow up within 24 hours.",
     doneMsg1: (name: string) => `Thank you, ${name}! 🎉 Your brief has been sent to the Logink team via WhatsApp.`,
     doneMsg2: "We'll reach out within 24 hours. Talk soon! 👋",
     userDataSent: 'Details sent! ✅',
     lastQPrefix: 'Last question! ',
     multiConfirm: (n: number) => `Continue (${n} selected) →`,
-    seoRedirect: "Looks like you don't have a website yet — no problem! Let me redirect you to our Website Development service. 🚀",
+    seoRedirect: "Looks like you don't have a website yet. No problem! Let me redirect you to our Website Development service. 🚀",
     restart: '↩ Start over',
     statusTyping: 'Logink is typing...',
     statusOnline: 'Logink · Online',
@@ -395,7 +395,7 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
 
     const briefLines = questions.map((q, i) => `*${labels[i]}:* ${answers[q.key] || '-'}`).join('\n')
     const brief = [
-      '🔥 *LEAD BARU — LOGINK*',
+      '🔥 *LEAD BARU - LOGINK*',
       `📋 *Service: ${serviceMeta[service].label}*`,
       '',
       briefLines,

@@ -11,7 +11,7 @@ const CARDS_ID = [
     accentRgb: '124,58,237',
     title: 'SEO & Content Marketing',
     description:
-      'Tangkap traffic organik yang terus berkembang sementara iklanmu mendatangkan hasil cepat. SEO + Ads bersama artinya kamu mendominasi paid dan organic — kompetitor melihatmu di mana-mana.',
+      'Tangkap traffic organik yang terus berkembang sementara iklanmu mendatangkan hasil cepat. SEO + Ads bersama artinya kamu mendominasi paid dan organic, sehingga kompetitor melihatmu di mana-mana.',
     pricing: 'Mulai dari Rp 6 Juta/bln',
   },
   {
@@ -20,7 +20,7 @@ const CARDS_ID = [
     accentRgb: '245,158,11',
     title: 'Creative Services',
     description:
-      'Iklan yang perform butuh kreativitas yang bikin berhenti scroll. Tim desain dan video kami memproduksi aset iklan yang tidak terlihat seperti iklan — dari Meta carousel hingga video native TikTok.',
+      'Iklan yang perform butuh kreativitas yang bikin berhenti scroll. Tim desain dan video kami memproduksi aset iklan yang tidak terlihat seperti iklan: dari Meta carousel hingga video native TikTok.',
     pricing: 'Harga per proyek',
   },
 ] as const
@@ -32,7 +32,7 @@ const CARDS_EN = [
     accentRgb: '124,58,237',
     title: 'SEO & Content Marketing',
     description:
-      'Capture compounding organic traffic while your ads drive quick wins. SEO + Ads together means you dominate both paid and organic — competitors see you everywhere.',
+      'Capture compounding organic traffic while your ads drive quick wins. SEO + Ads together means you dominate both paid and organic, so competitors see you everywhere.',
     pricing: 'Starting from Rp 6M/mo',
   },
   {
@@ -41,7 +41,7 @@ const CARDS_EN = [
     accentRgb: '245,158,11',
     title: 'Creative Services',
     description:
-      'High-performing ads need scroll-stopping creative. Our design and video team produces ad assets that don\'t look like ads — from Meta carousels to native TikTok videos.',
+      'High-performing ads need scroll-stopping creative. Our design and video team produces ad assets that don\'t look like ads: from Meta carousels to native TikTok videos.',
     pricing: 'Priced per project',
   },
 ] as const

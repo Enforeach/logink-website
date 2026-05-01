@@ -19,7 +19,7 @@ const PLACEHOLDERS: Testimonial[] = [
     clientName: 'Rina Hartati',
     clientTitle: 'Marketing Director',
     clientPhoto: null,
-    quote: "Logink completely transformed how we approach digital marketing. Within 90 days, our organic traffic tripled and our paid ROAS went from 1.4x to 3.8x. The integrated approach makes the difference — everything actually works together.",
+    quote: "Logink completely transformed how we approach digital marketing. Within 90 days, our organic traffic tripled and our paid ROAS went from 1.4x to 3.8x. The integrated approach makes the difference: everything actually works together.",
     companyName: 'PT Maju Bersama',
   },
   {
@@ -35,7 +35,7 @@ const PLACEHOLDERS: Testimonial[] = [
     clientName: 'Sarah Wijaya',
     clientTitle: 'Head of Growth',
     clientPhoto: null,
-    quote: "The monthly Looker Studio reports alone are worth it — I finally understand exactly what's driving revenue versus what's just noise. Best decision we made for our marketing stack.",
+    quote: "The monthly Looker Studio reports alone are worth it: I finally understand exactly what's driving revenue versus what's just noise. Best decision we made for our marketing stack.",
     companyName: 'Kreasi Bangsa',
   },
 ]

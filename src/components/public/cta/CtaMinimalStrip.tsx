@@ -32,7 +32,7 @@ export function CtaMinimalStrip({ widget, onTrackClick }: Props) {
       <span className="text-xs text-[var(--text-muted)] whitespace-nowrap flex items-center gap-2">
         {widget.emoji && <span>{widget.emoji}</span>}
         {widget.heading && <span>{widget.heading}</span>}
-        {widget.heading && widget.buttonText && <span>—</span>}
+        {widget.heading && widget.buttonText && <span> · </span>}
         <motion.a
           href={widget.buttonUrl}
           onClick={onTrackClick}

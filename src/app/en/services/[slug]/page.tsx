@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const svc = SERVICES[slug as SvcKey]
   if (!svc) return {}
   return buildMetadata({
-    title: `${svc.name} — Logink Digital Marketing Jakarta`,
+    title: `${svc.name} | Logink Digital Marketing Jakarta`,
     description: svc.description.slice(0, 155),
     path: `/en/services/${slug}`,
   })

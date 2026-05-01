@@ -23,14 +23,14 @@ const STEPS_ID: Step[] = [
     num: '02',
     title: 'Strategi',
     days: 'Hari 4–7',
-    desc: 'Kami susun roadmap 90 hari yang disesuaikan untuk semua channel — SEO, social, iklan, kreatif — dengan KPI spesifik yang terhubung ke target pendapatan kamu. Bukan vanity metrics.',
+    desc: 'Kami susun roadmap 90 hari yang disesuaikan untuk semua channel (SEO, social, iklan, kreatif) dengan KPI spesifik yang terhubung ke target pendapatan kamu. Bukan vanity metrics.',
     color: '#DB2777',
   },
   {
     num: '03',
     title: 'Eksekusi',
     days: 'Hari 8–30',
-    desc: 'Konten go live. Iklan diluncurkan. Optimasi SEO bergulir. Tim terintegrasi kami bekerja paralel, bukan berurutan — tidak ada yang jadi bottleneck.',
+    desc: 'Konten go live. Iklan diluncurkan. Optimasi SEO bergulir. Tim terintegrasi kami bekerja paralel, bukan berurutan, tanpa ada bottleneck.',
     color: '#D97706',
   },
   {
@@ -54,14 +54,14 @@ const STEPS_EN: Step[] = [
     num: '02',
     title: 'Strategy',
     days: 'Days 4–7',
-    desc: 'We build a tailored 90-day roadmap across all channels — SEO, social, ads, creative — with specific KPIs tied to your revenue goals. Not vanity metrics.',
+    desc: 'We build a tailored 90-day roadmap across all channels (SEO, social, ads, creative) with specific KPIs tied to your revenue goals. Not vanity metrics.',
     color: '#DB2777',
   },
   {
     num: '03',
     title: 'Execution',
     days: 'Days 8–30',
-    desc: "Content goes live. Ads launch. SEO optimisations roll out. Our integrated team works in parallel, not in sequence — so nothing bottlenecks.",
+    desc: "Content goes live. Ads launch. SEO optimisations roll out. Our integrated team works in parallel, not in sequence, so nothing bottlenecks.",
     color: '#D97706',
   },
   {
@@ -78,13 +78,13 @@ const COPY = {
     badge: 'Proses Kami',
     headline: 'Dari Panggilan Pertama ke Hasil Pertama dalam',
     headlineGradient: '30 Hari',
-    body: 'Kami tidak percaya dengan onboarding yang bertele-tele atau strategi deck yang ujung-ujungnya cuma jadi pajangan. Proses kami dirancang untuk kecepatan — karena kompetitor kamu tidak sedang menunggu.',
+    body: 'Kami tidak percaya dengan onboarding yang bertele-tele atau strategi deck yang ujung-ujungnya cuma jadi pajangan. Proses kami dirancang untuk kecepatan, karena kompetitor kamu tidak sedang menunggu.',
   },
   en: {
     badge: 'Our Process',
     headline: 'From First Call to First Results in',
     headlineGradient: '30 Days',
-    body: "We don't believe in lengthy onboarding or endless strategy decks that sit in a drawer. Our process is built for speed — because your competitors aren't waiting.",
+    body: "We don't believe in lengthy onboarding or endless strategy decks that sit in a drawer. Our process is built for speed, because your competitors aren't waiting.",
   },
 }
 

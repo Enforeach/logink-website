@@ -46,7 +46,7 @@ const HERO_COPY = {
     pills: ['Load time di bawah 2 detik', 'Responsif mobile-first', 'GA4 + pixel tracking termasuk'],
     title1: 'Ubah Pengunjung Jadi Pelanggan.',
     title2: 'Dibangun untuk Perform.',
-    desc: 'Kami desain dan bangun website serta landing page berperforma tinggi — cepat, mobile-first, dan dirancang untuk konversi. Dari landing page kampanye hingga toko e-commerce penuh, setiap site dibangun untuk load di bawah 2 detik, ranking di Google, dan mengubah traffic menjadi revenue.',
+    desc: 'Kami desain dan bangun website serta landing page berperforma tinggi: cepat, mobile-first, dan dirancang untuk konversi. Dari landing page kampanye hingga toko e-commerce penuh, setiap site dibangun untuk load di bawah 2 detik, ranking di Google, dan mengubah traffic menjadi revenue.',
     ctaPrimary: 'Mulai Konsultasi Gratis →',
     ctaHref: '/contact?service=website-landing-page',
     ctaSecondary: 'Lihat Harga',
@@ -55,7 +55,7 @@ const HERO_COPY = {
     pills: ['Load time under 2 seconds', 'Mobile-first responsive', 'GA4 + pixel tracking included'],
     title1: 'Turn Visitors Into Customers.',
     title2: 'Built to Perform.',
-    desc: 'We design and build high-performance websites and landing pages — fast, mobile-first, and engineered for conversion. From campaign landing pages to full e-commerce stores, every site is built to load in under 2 seconds, rank on Google, and turn traffic into revenue.',
+    desc: 'We design and build high-performance websites and landing pages: fast, mobile-first, and engineered for conversion. From campaign landing pages to full e-commerce stores, every site is built to load in under 2 seconds, rank on Google, and turn traffic into revenue.',
     ctaPrimary: 'Start Free Consultation →',
     ctaHref: '/en/contact?service=website-landing-page',
     ctaSecondary: 'See Pricing',
@@ -143,7 +143,7 @@ export function WebsiteHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           </div>
         </motion.div>
 
-        {/* Right — Browser mockup */}
+        {/* Right: Browser mockup */}
         <div className="flex flex-col items-center gap-4">
           <motion.div
             initial={{ opacity: 0, x: 60 }}

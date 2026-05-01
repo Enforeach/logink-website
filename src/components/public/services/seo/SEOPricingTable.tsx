@@ -17,7 +17,7 @@ function Cell({ value, isHighest }: { value: CellValue; isHighest?: boolean }) {
     )
   }
   if (value === false) {
-    return <div className="text-center text-[var(--text-muted)] text-sm">—</div>
+    return <div className="text-center text-[var(--text-muted)] text-sm">-</div>
   }
   return (
     <div className={`text-center text-sm font-bold ${isHighest ? 'gradient-text' : 'text-[var(--text-primary)]'}`}>

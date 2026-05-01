@@ -407,7 +407,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                           accentColor={LINKEDIN_ACCENT}
                         />
                         <p className="text-[11px] text-[var(--text-muted)] mt-1.5">
-                          Halaman perusahaan + profil eksekutif — masing-masing dapat konten yang disesuaikan
+                          Halaman perusahaan + profil eksekutif, masing-masing dapat konten yang disesuaikan
                         </p>
                       </div>
                     </div>
@@ -519,7 +519,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
               </ul>
 
               <div className="text-xs text-[var(--text-muted)] mb-5 leading-relaxed">
-                <span className="font-semibold text-[var(--text-secondary)]">{locale === 'en' ? 'Price: Custom' : 'Harga: Kustom'}</span> — {locale === 'en' ? 'based on your selections above. We\'ll review your needs and send a full proposal within 24 hours. No commitment.' : 'berdasarkan pilihan di atas. Kami akan review kebutuhanmu dan kirim proposal lengkap dalam 24 jam. Tanpa komitmen.'}
+                <span className="font-semibold text-[var(--text-secondary)]">{locale === 'en' ? 'Price: Custom' : 'Harga: Kustom'}</span>: {locale === 'en' ? 'based on your selections above. We\'ll review your needs and send a full proposal within 24 hours. No commitment.' : 'berdasarkan pilihan di atas. Kami akan review kebutuhanmu dan kirim proposal lengkap dalam 24 jam. Tanpa komitmen.'}
               </div>
 
               <div className="flex flex-wrap gap-3">

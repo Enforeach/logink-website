@@ -190,7 +190,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-1">
 
-              {/* Services — mega menu trigger */}
+              {/* Services: mega menu trigger */}
               <div onMouseEnter={openServices} onMouseLeave={scheduleClose}>
                 <button
                   className={cn(

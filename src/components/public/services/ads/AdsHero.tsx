@@ -18,7 +18,7 @@ const HERO_COPY = {
     trustPills: ['✓ Rata-rata ROAS 2-4×', '✓ Akses akun penuh', '✓ Laporan optimasi mingguan'],
     home: 'Beranda', homeHref: '/', services: 'Layanan', servicesHref: '/services',
     title1: 'Setiap Rupiah Terinvestasi.', title2: 'Return Maksimal Terwujud.',
-    desc: 'Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami bidik audiens yang tepat di momen yang tepat — dan optimalkan tanpa henti sampai ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, tanpa kontrak lock-in jangka panjang.',
+    desc: 'Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami bidik audiens yang tepat di momen yang tepat, mengoptimalkan tanpa henti sampai ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, tanpa kontrak lock-in jangka panjang.',
     ctaPrimary: 'Mulai Konsultasi Gratis →', ctaHref: '/contact?service=paid-advertising',
     ctaSecondary: 'Lihat Harga',
     roasDay: 'di hari ke-90',
@@ -27,7 +27,7 @@ const HERO_COPY = {
     trustPills: ['✓ Average ROAS 2–4×', '✓ Full account access', '✓ Weekly optimization reports'],
     home: 'Home', homeHref: '/en', services: 'Services', servicesHref: '/en/services',
     title1: 'Every Rupiah Invested.', title2: 'Maximum Return Realized.',
-    desc: 'Data-driven campaigns on Google, Meta, TikTok, and Indonesian marketplaces. We target the right audience at the right moment — and optimize relentlessly until ROAS hits 2–4×. No wasted budget, no guesswork, no long-term lock-in contracts.',
+    desc: 'Data-driven campaigns on Google, Meta, TikTok, and Indonesian marketplaces. We target the right audience at the right moment, optimizing relentlessly until ROAS hits 2–4×. No wasted budget, no guesswork, no long-term lock-in contracts.',
     ctaPrimary: 'Start Free Consultation →', ctaHref: '/en/contact?service=paid-advertising',
     ctaSecondary: 'See Pricing',
     roasDay: 'by day 90',
@@ -112,7 +112,7 @@ export function AdsHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
 
       <div className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-        {/* Left — Text */}
+        {/* Left: Text */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -157,7 +157,7 @@ export function AdsHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           </div>
         </motion.div>
 
-        {/* Right — Animated Funnel */}
+        {/* Right: Animated Funnel */}
         <motion.div
           ref={funnelRef}
           initial={{ opacity: 0, x: 40, rotate: 1 }}

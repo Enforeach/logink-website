@@ -4,7 +4,7 @@ export const WEBSITE_PROJECT_TYPES = [
     title: 'Landing Page Kampanye',
     tagline: 'Mesin konversi satu halaman yang dibangun untuk kampanye dan lead generation.',
     description:
-      'Ketika kamu butuh halaman yang fokus melakukan satu hal — menangkap leads, menjual produk, atau mendorong sign-up — landing page adalah senjata tercepat dan paling cost-effective. Desain berfokus CRO, framework A/B testing, dan tracking penuh dari hari pertama.',
+      'Ketika kamu butuh halaman yang fokus melakukan satu hal: menangkap leads, menjual produk, atau mendorong sign-up. Landing page adalah senjata tercepat dan paling cost-effective. Desain berfokus CRO, framework A/B testing, dan tracking penuh dari hari pertama.',
     bestFor: 'Kampanye · Lead gen · Peluncuran produk · Promo',
     timeline: '1-2 minggu',
     accentColor: '#06B6D4',
@@ -19,7 +19,7 @@ export const WEBSITE_PROJECT_TYPES = [
   {
     id: 'company-profile',
     title: 'Website Company Profile',
-    tagline: 'Markas digital brandmu — kredibel, profesional, dan dibangun untuk berkembang.',
+    tagline: 'Markas digital brandmu: kredibel, profesional, dan dibangun untuk berkembang.',
     description:
       'Website multi-halaman yang membangun kehadiran brandmu, mengkomunikasikan nilaimu, dan menangkap leads. Desain UI kustom, integrasi CMS untuk update konten yang mudah, dan SEO on-page yang membuatmu mudah ditemukan sejak hari peluncuran.',
     bestFor: 'Brand presence · Kredibilitas · Bisnis jasa',
@@ -39,7 +39,7 @@ export const WEBSITE_PROJECT_TYPES = [
     title: 'Website E-Commerce',
     tagline: 'Toko online lengkap dengan pembayaran dan pengiriman Indonesia sudah terpasang.',
     description:
-      'Katalog produk, payment gateway lokal (Midtrans, Xendit), integrasi pengiriman (JNE, J&T, dan lainnya), dan dashboard admin untuk mengelola semuanya. Dibangun di WooCommerce, Shopify, atau fully custom — tergantung skala dan kebutuhanmu.',
+      'Katalog produk, payment gateway lokal (Midtrans, Xendit), integrasi pengiriman (JNE, J&T, dan lainnya), dan dashboard admin untuk mengelola semuanya. Dibangun di WooCommerce, Shopify, atau fully custom, tergantung skala dan kebutuhanmu.',
     bestFor: 'Toko online · Brand D2C · FMCG · Retail',
     timeline: '4-8 minggu',
     accentColor: '#10B981',
@@ -67,7 +67,7 @@ export const WEBSITE_TECH_FEATURES = [
     id: 'mobile',
     title: 'Mobile-First Responsive',
     description:
-      'Didesain untuk layar mobile dulu, lalu di-scale ke atas. Lebih dari 70% traffic web Indonesia berasal dari mobile — situsmu terlihat sempurna di setiap perangkat, setiap orientasi.',
+      'Didesain untuk layar mobile dulu, lalu di-scale ke atas. Lebih dari 70% traffic web Indonesia berasal dari mobile, dan situsmu terlihat sempurna di setiap perangkat, setiap orientasi.',
     span: 1,
     accentColor: '#7C3AED',
     badge: null,
@@ -76,7 +76,7 @@ export const WEBSITE_TECH_FEATURES = [
     id: 'seo',
     title: 'Arsitektur Siap SEO',
     description:
-      'HTML semantik yang bersih, hierarki heading, XML sitemap, robots.txt, meta tag, Open Graph, dan structured data — semuanya dikonfigurasi sebelum launch.',
+      'HTML semantik yang bersih, hierarki heading, XML sitemap, robots.txt, meta tag, Open Graph, dan structured data: semuanya dikonfigurasi sebelum launch.',
     span: 1,
     accentColor: '#10B981',
     badge: null,
@@ -278,20 +278,20 @@ export const WEBSITE_FAQS = [
   {
     question: 'Apakah hosting dan domain sudah termasuk?',
     answer:
-      'Kami tangani setup hosting dan konfigurasi DNS sebagai bagian dari proyek. Hosting tahun pertama bisa dimasukkan ke scope proyek atau di-setup di akunmu sendiri (Vercel, Cloudflare, atau provider pilihanmu). Registrasi domain adalah tanggung jawabmu — kami akan pandu prosesnya jika diperlukan.',
+      'Kami tangani setup hosting dan konfigurasi DNS sebagai bagian dari proyek. Hosting tahun pertama bisa dimasukkan ke scope proyek atau di-setup di akunmu sendiri (Vercel, Cloudflare, atau provider pilihanmu). Registrasi domain adalah tanggung jawabmu; kami akan pandu prosesnya jika diperlukan.',
   },
   {
     question: 'Apakah website mobile-responsive?',
     answer:
-      'Setiap situs yang kami bangun adalah mobile-first — didesain untuk layar mobile dulu, baru di-scale ke atas. Lebih dari 70% traffic web Indonesia datang dari perangkat mobile, jadi pendekatan yang hanya fokus desktop sudah ketinggalan zaman. Kami uji di perangkat iOS dan Android, berbagai ukuran layar, dan semua browser utama.',
+      'Setiap situs yang kami bangun adalah mobile-first: didesain untuk layar mobile dulu, baru di-scale ke atas. Lebih dari 70% traffic web Indonesia datang dari perangkat mobile, jadi pendekatan yang hanya fokus desktop sudah ketinggalan zaman. Kami uji di perangkat iOS dan Android, berbagai ukuran layar, dan semua browser utama.',
   },
   {
     question: 'Apakah pelatihan sudah termasuk?',
     answer:
-      'Ya. Setelah launch, kami berikan pelatihan CMS untuk timmu — cara update konten, menambah blog post, mengelola produk (untuk e-commerce), dan membuat perubahan dasar tanpa butuh developer. Kami juga menyediakan dokumentasi dan video walkthrough yang direkam.',
+      'Ya. Setelah launch, kami berikan pelatihan CMS untuk timmu: cara update konten, menambah blog post, mengelola produk (untuk e-commerce), dan membuat perubahan dasar tanpa butuh developer. Kami juga menyediakan dokumentasi dan video walkthrough yang direkam.',
   },
   {
-    question: 'Bagaimana dengan SEO — apakah situs saya akan ranking di Google?',
+    question: 'Bagaimana dengan SEO: apakah situs saya akan ranking di Google?',
     answer:
       'Setiap situs mencakup setup SEO dasar: struktur HTML yang bersih, meta tag, sitemap, robots.txt, Open Graph tag, dan optimasi page speed. Tier Company Profile dan E-Commerce mencakup SEO On-page Lanjutan. Untuk SEO berkelanjutan dan content marketing yang aktif menumbuhkan ranking, kami rekomendasikan menggabungkan dengan layanan SEO & Content Marketing kami.',
   },
@@ -310,7 +310,7 @@ export const WEBSITE_PROJECT_TYPES_EN = [
     title: 'Landing Page Campaign',
     tagline: 'Single-page conversion machines built for campaigns and lead generation.',
     description:
-      'When you need a focused page that does one thing — capture leads, sell a product, or drive sign-ups — a landing page is the fastest, most cost-effective weapon. CRO-focused design, A/B testing framework, and full tracking from day one.',
+      'When you need a focused page that does one thing: capture leads, sell a product, or drive sign-ups. A landing page is the fastest, most cost-effective weapon. CRO-focused design, A/B testing framework, and full tracking from day one.',
     bestFor: 'Campaigns · Lead gen · Product launches · Promos',
     timeline: '1-2 weeks',
     accentColor: '#06B6D4',
@@ -325,7 +325,7 @@ export const WEBSITE_PROJECT_TYPES_EN = [
   {
     id: 'company-profile',
     title: 'Company Profile Website',
-    tagline: "Your brand's digital headquarters — credible, professional, and built to grow.",
+    tagline: "Your brand's digital headquarters: credible, professional, and built to grow.",
     description:
       'A multi-page website that establishes your brand presence, communicates your value, and captures leads. Custom UI design, CMS integration for easy content updates, and on-page SEO that makes you findable from launch day.',
     bestFor: 'Brand presence · Credibility · Service businesses',
@@ -345,7 +345,7 @@ export const WEBSITE_PROJECT_TYPES_EN = [
     title: 'E-Commerce Website',
     tagline: 'A full online store with Indonesian payment and shipping built in.',
     description:
-      'Product catalog, local payment gateways (Midtrans, Xendit), shipping integrations (JNE, J&T, and more), and an admin dashboard to manage everything. Built on WooCommerce, Shopify, or fully custom — depending on your scale and needs.',
+      'Product catalog, local payment gateways (Midtrans, Xendit), shipping integrations (JNE, J&T, and more), and an admin dashboard to manage everything. Built on WooCommerce, Shopify, or fully custom, depending on your scale and needs.',
     bestFor: 'Online stores · D2C brands · FMCG · Retail',
     timeline: '4-8 weeks',
     accentColor: '#10B981',
@@ -373,7 +373,7 @@ export const WEBSITE_TECH_FEATURES_EN = [
     id: 'mobile',
     title: 'Mobile-First Responsive',
     description:
-      'Designed for mobile screens first, then scaled up. Over 70% of Indonesian web traffic is mobile — your site looks perfect on every device, every orientation.',
+      'Designed for mobile screens first, then scaled up. Over 70% of Indonesian web traffic is mobile, and your site looks perfect on every device, every orientation.',
     span: 1,
     accentColor: '#7C3AED',
     badge: null,
@@ -382,7 +382,7 @@ export const WEBSITE_TECH_FEATURES_EN = [
     id: 'seo',
     title: 'SEO-Ready Architecture',
     description:
-      'Clean semantic HTML, heading hierarchy, XML sitemap, robots.txt, meta tags, Open Graph, and structured data — all configured before launch.',
+      'Clean semantic HTML, heading hierarchy, XML sitemap, robots.txt, meta tags, Open Graph, and structured data: all configured before launch.',
     span: 1,
     accentColor: '#10B981',
     badge: null,
@@ -512,20 +512,20 @@ export const WEBSITE_FAQS_EN = [
   {
     question: 'Is hosting and domain included?',
     answer:
-      "We handle hosting setup and DNS configuration as part of the project. First-year hosting can be included in the project scope or set up on your own accounts (Vercel, Cloudflare, or your preferred provider). Domain registration is your responsibility — we'll guide you through the process if needed.",
+      "We handle hosting setup and DNS configuration as part of the project. First-year hosting can be included in the project scope or set up on your own accounts (Vercel, Cloudflare, or your preferred provider). Domain registration is your responsibility; we'll guide you through the process if needed.",
   },
   {
     question: 'Are websites mobile-responsive?',
     answer:
-      "Every site we build is mobile-first — designed for mobile screens first, then scaled up. Over 70% of Indonesian web traffic comes from mobile devices, so a desktop-only approach is outdated. We test on iOS and Android devices, multiple screen sizes, and all major browsers.",
+      "Every site we build is mobile-first: designed for mobile screens first, then scaled up. Over 70% of Indonesian web traffic comes from mobile devices, so a desktop-only approach is outdated. We test on iOS and Android devices, multiple screen sizes, and all major browsers.",
   },
   {
     question: 'Is training included?',
     answer:
-      'Yes. After launch, we provide CMS training for your team — how to update content, add blog posts, manage products (for e-commerce), and make basic changes without needing a developer. We also provide documentation and a recorded walkthrough video.',
+      'Yes. After launch, we provide CMS training for your team: how to update content, add blog posts, manage products (for e-commerce), and make basic changes without needing a developer. We also provide documentation and a recorded walkthrough video.',
   },
   {
-    question: 'What about SEO — will my site rank on Google?',
+    question: 'What about SEO: will my site rank on Google?',
     answer:
       'Every site includes baseline SEO setup: clean HTML structure, meta tags, sitemap, robots.txt, Open Graph tags, and page speed optimization. Company Profile and E-Commerce tiers include Advanced On-page SEO. For ongoing SEO and content marketing to actively grow your rankings, we recommend pairing with our SEO & Content Marketing service.',
   },

@@ -14,7 +14,7 @@ function Cell({ value }: { value: boolean }) {
       </div>
     )
   }
-  return <div className="text-center text-[var(--text-muted)] text-sm">—</div>
+  return <div className="text-center text-[var(--text-muted)] text-sm">-</div>
 }
 
 export function AdsPricingTable({ locale = 'id' }: { locale?: 'id' | 'en' }) {

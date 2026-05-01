@@ -75,11 +75,11 @@ export const CREATIVE_MODULES = [
     title: 'Desain Grafis & Visual Branding',
     tagline: 'Visual identity yang membuat brandmu langsung dikenali.',
     description:
-      'Dari template social media hingga brand guidelines lengkap, desainer kami membuat sistem visual kohesif yang bekerja di setiap touchpoint. Setiap aset dibangun dalam bahasa desainmu — tidak ditarik dari marketplace template.',
+      'Dari template social media hingga brand guidelines lengkap, desainer kami membuat sistem visual kohesif yang bekerja di setiap touchpoint. Setiap aset dibangun dalam bahasa desainmu, tidak dari marketplace template.',
     accentColor: '#F59E0B',
     accentRgb: '245,158,11',
     deliverables: [
-      { name: 'Template Social Media (IG feed, story, cover)', description: 'Feed post, story frame, cover design, dan highlight icon. Didesain sebagai sistem, bukan satu per satu — agar brandmu tetap konsisten bahkan saat kami tidak ada.' },
+      { name: 'Template Social Media (IG feed, story, cover)', description: 'Feed post, story frame, cover design, dan highlight icon. Didesain sebagai sistem, bukan satu per satu, agar brandmu tetap konsisten bahkan saat kami tidak ada.' },
       { name: 'Banner Display Ads', description: 'Banner HTML5 dan statis untuk Google Display Network dan kampanye programmatic. Semua ukuran IAB standar termasuk.' },
       { name: 'Infografik', description: 'Data dan proses kompleks diubah jadi visual on-brand yang mudah dibagikan. Sempurna untuk thought leadership dan engagement social.' },
       { name: 'Key Visual Kampanye', description: 'Visual hero kampanye yang menentukan arah creative untuk peluncuran, promosi, dan push musiman. Diadaptasi di semua format.' },
@@ -90,7 +90,7 @@ export const CREATIVE_MODULES = [
   {
     id: 'video-production',
     title: 'Produksi & Editing Video',
-    tagline: 'Dari konsep hingga final cut — video yang menggerakkan orang dan menggerakkan angka.',
+    tagline: 'Dari konsep hingga final cut: video yang menggerakkan orang dan menggerakkan angka.',
     description:
       'Produksi video full-service berbasis di Jakarta. Pengembangan konsep, scripting, syuting, editing, dan motion graphics. Dikirim dalam format multi-platform agar kamu dapat manfaat maksimal dari satu sesi syuting.',
     accentColor: '#DB2777',
@@ -136,7 +136,7 @@ export const CREATIVE_PROCESS = [
     step: 2,
     title: 'Konsep & Moodboard',
     timeline: 'Hari 2–3',
-    description: 'Kami presentasikan 2–3 arah creative — moodboard untuk desain, storyboard untuk video, draft angle untuk copy. Kamu pilih arah yang paling resonan.',
+    description: 'Kami presentasikan 2-3 arah creative: moodboard untuk desain, storyboard untuk video, draft angle untuk copy. Kamu pilih arah yang paling resonan.',
     deliverable: 'Arah creative yang disetujui',
     accentColor: '#DB2777',
     side: 'left' as const,
@@ -181,7 +181,7 @@ export const CREATIVE_FAQS = [
   },
   {
     question: 'Apakah revisi sudah termasuk?',
-    answer: 'Ya — 2 ronde revisi per deliverable. Kumpulkan feedback dalam satu ronde, kami implementasikan, kamu konfirmasi. Kebanyakan proyek selesai dalam 1–2 ronde. Revisi tambahan tersedia jika dibutuhkan.',
+    answer: 'Ya: 2 ronde revisi per deliverable. Kumpulkan feedback dalam satu ronde, kami implementasikan, kamu konfirmasi. Kebanyakan proyek selesai dalam 1–2 ronde. Revisi tambahan tersedia jika dibutuhkan.',
   },
   {
     question: 'Apakah kamu syuting di luar Jakarta?',
@@ -189,11 +189,11 @@ export const CREATIVE_FAQS = [
   },
   {
     question: 'Apakah kami bisa memesan hanya copywriting tanpa desain?',
-    answer: 'Tentu saja — setiap sub-layanan (Desain, Video, Copywriting) bekerja secara mandiri. Banyak klien mulai dari satu area dan berkembang seiring melihat hasilnya.',
+    answer: 'Tentu saja, setiap sub-layanan (Desain, Video, Copywriting) bekerja secara mandiri. Banyak klien mulai dari satu area dan berkembang seiring melihat hasilnya.',
   },
   {
     question: 'Apakah kamu memberikan source file?',
-    answer: 'Ya. Semua final termasuk source file — PSD, AI, AE (untuk motion), DOCX, dan file editable. Kamu memiliki semua yang kami buat untukmu. Aset diorganisir dalam folder bersama dengan penamaan yang jelas.',
+    answer: 'Ya. Semua final termasuk source file: PSD, AI, AE (untuk motion), DOCX, dan file editable. Kamu memiliki semua yang kami buat untukmu. Aset diorganisir dalam folder bersama dengan penamaan yang jelas.',
   },
   {
     question: 'Bagaimana retainer bulanan bekerja?',
@@ -210,7 +210,7 @@ export const CREATIVE_STATS = [
   {
     value: '2',
     label: 'Ronde Revisi',
-    context: 'Sudah termasuk di setiap deliverable. Ronde tambahan tersedia. Kami pastikan hasilnya tepat — dan cepat.',
+    context: 'Sudah termasuk di setiap deliverable. Ronde tambahan tersedia. Kami pastikan hasilnya tepat dan cepat.',
   },
   {
     value: '3–5hr',
@@ -298,11 +298,11 @@ export const CREATIVE_MODULES_EN = [
     title: 'Graphic Design & Visual Branding',
     tagline: 'Visual identity that makes your brand instantly recognizable.',
     description:
-      "From social media templates to full brand guidelines, our designers create cohesive visual systems that work across every touchpoint. Every asset built in your design language — not pulled from a template marketplace.",
+      "From social media templates to full brand guidelines, our designers create cohesive visual systems that work across every touchpoint. Every asset built in your design language, not pulled from a template marketplace.",
     accentColor: '#F59E0B',
     accentRgb: '245,158,11',
     deliverables: [
-      { name: 'Social Media Templates (IG feed, story, cover)', description: "Feed posts, story frames, cover designs, and highlight icons. Designed as systems, not one-offs — so your brand stays consistent even when we're not around." },
+      { name: 'Social Media Templates (IG feed, story, cover)', description: "Feed posts, story frames, cover designs, and highlight icons. Designed as systems, not one-offs, so your brand stays consistent even when we're not around." },
       { name: 'Banner Display Ads', description: 'HTML5 and static banners for Google Display Network and programmatic campaigns. All standard IAB sizes included.' },
       { name: 'Infographics', description: 'Complex data and processes turned into shareable, on-brand visuals. Perfect for thought leadership and social engagement.' },
       { name: 'Campaign Key Visuals', description: 'Campaign hero visuals that set the creative direction for launches, promotions, and seasonal pushes. Adapted across all formats.' },
@@ -313,7 +313,7 @@ export const CREATIVE_MODULES_EN = [
   {
     id: 'video-production',
     title: 'Video Production & Editing',
-    tagline: 'From concept to final cut — video that moves people and moves metrics.',
+    tagline: 'From concept to final cut: video that moves people and moves metrics.',
     description:
       'Full-service video production based in Jakarta. Concept development, scripting, shooting, editing, and motion graphics. Delivered in multi-platform formats so you get maximum mileage from a single shoot.',
     accentColor: '#DB2777',
@@ -359,7 +359,7 @@ export const CREATIVE_PROCESS_EN = [
     step: 2,
     title: 'Concept & Moodboard',
     timeline: 'Day 2–3',
-    description: 'We present 2–3 creative directions — moodboards for design, storyboards for video, draft angles for copy. You pick the direction that resonates.',
+    description: 'We present 2-3 creative directions: moodboards for design, storyboards for video, draft angles for copy. You pick the direction that resonates.',
     deliverable: 'Approved creative direction',
     accentColor: '#DB2777',
     side: 'left' as const,
@@ -404,7 +404,7 @@ export const CREATIVE_FAQS_EN = [
   },
   {
     question: 'Are revisions included?',
-    answer: 'Yes — 2 revision rounds per deliverable. Consolidate feedback into one round, we implement, you confirm. Most projects finalize in 1–2 rounds. Additional revisions available if needed.',
+    answer: 'Yes: 2 revision rounds per deliverable. Consolidate feedback into one round, we implement, you confirm. Most projects finalize in 1–2 rounds. Additional revisions available if needed.',
   },
   {
     question: 'Do you shoot outside Jakarta?',
@@ -412,11 +412,11 @@ export const CREATIVE_FAQS_EN = [
   },
   {
     question: 'Can we get just copywriting without design?',
-    answer: 'Absolutely — each sub-service (Design, Video, Copywriting) works independently. Many clients start with one area and expand as they see results.',
+    answer: 'Absolutely, each sub-service (Design, Video, Copywriting) works independently. Many clients start with one area and expand as they see results.',
   },
   {
     question: 'Do you provide source files?',
-    answer: 'Yes. All finals include source files — PSD, AI, AE (for motion), DOCX, and editables. You own everything we create for you. Assets organized in shared folders with clear naming.',
+    answer: 'Yes. All finals include source files: PSD, AI, AE (for motion), DOCX, and editables. You own everything we create for you. Assets organized in shared folders with clear naming.',
   },
   {
     question: 'How does a monthly retainer work?',
@@ -433,7 +433,7 @@ export const CREATIVE_STATS_EN = [
   {
     value: '2',
     label: 'Revision Rounds',
-    context: 'Included in every deliverable. Additional rounds available. We get it right — fast.',
+    context: 'Included in every deliverable. Additional rounds available. We get it right, fast.',
   },
   {
     value: '3–5d',

@@ -230,8 +230,8 @@ function BentoCard({
 }
 
 const SECTION_COPY = {
-  id: { badge: 'Layanan Kami', headline: 'Apa yang Kami', headlineGradient: 'Kerjakan', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem — bukan vendor-vendor yang berjalan terpisah.', viewAll: 'Lihat semua layanan' },
-  en: { badge: 'Our Services', headline: 'What We', headlineGradient: 'Do', desc: 'Five integrated services working as one system — not siloed vendors.', viewAll: 'View all services' },
+  id: { badge: 'Layanan Kami', headline: 'Apa yang Kami', headlineGradient: 'Kerjakan', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan vendor-vendor yang berjalan terpisah.', viewAll: 'Lihat semua layanan' },
+  en: { badge: 'Our Services', headline: 'What We', headlineGradient: 'Do', desc: 'Five integrated services working as one system, not siloed vendors.', viewAll: 'View all services' },
 }
 
 export function ServicesSection({ services = [], locale = 'id' }: { services?: Service[]; locale?: 'id' | 'en' }) {
@@ -269,7 +269,7 @@ export function ServicesSection({ services = [], locale = 'id' }: { services?: S
           </p>
         </motion.div>
 
-        {/* Bento grid — desktop */}
+        {/* Bento grid: desktop */}
         <div className="hidden sm:grid grid-cols-3 gap-5">
           {seo && <BentoCard svc={seo} colSpan="col-span-2" animVariant="slideLeft" index={0} locale={locale} />}
           {social && <BentoCard svc={social} colSpan="col-span-1" animVariant="scaleUp" index={1} locale={locale} />}

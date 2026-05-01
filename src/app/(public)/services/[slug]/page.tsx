@@ -30,7 +30,7 @@ export const SERVICES = {
       { icon: 'Crosshair', title: 'Keyword Research & Strategy', desc: 'In-depth analysis to find the exact queries your customers are typing right now.' },
       { icon: 'PenLine', title: 'Long-form Content Production', desc: 'Up to 150+ SEO-optimised articles/month by specialist writers.' },
       { icon: 'Wrench', title: 'Technical SEO Audit', desc: 'Fix crawlability, page speed, schema markup, and Core Web Vitals.' },
-      { icon: 'BarChart3', title: 'Looker Studio Reporting', desc: 'Live dashboards for rankings, traffic, and conversions — always on.' },
+      { icon: 'BarChart3', title: 'Looker Studio Reporting', desc: 'Live dashboards for rankings, traffic, and conversions, always on.' },
       { icon: 'Link2', title: 'Internal Linking Architecture', desc: 'Strategic links between pages to pass authority and guide user flows.' },
       { icon: 'MapPin', title: 'Local SEO', desc: 'Dominate "near me" searches and Google Business map packs.' },
     ],
@@ -48,9 +48,9 @@ export const SERVICES = {
     ],
     faqs: [
       { question: 'How long does it take to see SEO results?', answer: 'SEO typically takes 3–6 months to show significant results. However, we usually see traffic improvements within the first 4–8 weeks.' },
-      { question: 'What language are articles written in?', answer: 'We write in the language your audience uses — Indonesian, English, or both — fully optimised for your keywords.' },
+      { question: 'What language are articles written in?', answer: 'We write in the language your audience uses: Indonesian, English, or both, fully optimised for your keywords.' },
       { question: 'Can we choose article topics?', answer: 'Absolutely. We conduct keyword research and discuss relevant topics with you every month.' },
-      { question: 'How is progress reported?', answer: 'Monthly Looker Studio reports covering keyword rankings, traffic, and conversions — accessible anytime.' },
+      { question: 'How is progress reported?', answer: 'Monthly Looker Studio reports covering keyword rankings, traffic, and conversions, accessible anytime.' },
       { question: 'Is backlink building included?', answer: 'Off-page SEO and link building are available as an add-on from IDR 5M/month.' },
     ],
     crossSells: ['paid-advertising', 'website-landing-page'],
@@ -58,13 +58,13 @@ export const SERVICES = {
   'social-media-management': {
     name: 'Social Media Management',
     tagline: 'Content That Connects. Presence That Converts.',
-    description: 'We take social media completely off your plate — strategy, content creation, scheduling, and community management across Instagram, TikTok, Facebook, and LinkedIn.',
+    description: 'We take social media completely off your plate: strategy, content creation, scheduling, and community management across Instagram, TikTok, Facebook, and LinkedIn.',
     color: '#DB2777', rgb: '219,39,119',
     featuresVariant: 'emoji-cards' as const,
     processVariant: 'vertical' as const,
     features: [
       { icon: 'Smartphone', title: 'Multi-Platform Management', desc: 'Instagram, TikTok, Facebook & LinkedIn from one integrated strategy.' },
-      { icon: 'Palette', title: 'Custom Visual Design', desc: 'Every post built to your brand guide — zero stock templates.' },
+      { icon: 'Palette', title: 'Custom Visual Design', desc: 'Every post built to your brand guide, zero stock templates.' },
       { icon: 'MessageCircle', title: 'Community Management', desc: 'Comments and DMs responded to during business hours.' },
       { icon: 'CalendarDays', title: 'Content Calendar', desc: 'Monthly calendar reviewed and approved before anything goes live.' },
       { icon: 'TrendingUp', title: 'Growth Strategy', desc: 'Hashtag research, collaborations, and engagement campaigns.' },
@@ -83,7 +83,7 @@ export const SERVICES = {
     ],
     faqs: [
       { question: 'Which platforms do you manage?', answer: 'Instagram, TikTok, Facebook, and LinkedIn. We can focus on one or multiple based on your audience.' },
-      { question: 'Is community management included?', answer: 'Yes — comment and DM responses during business hours are included in all packages.' },
+      { question: 'Is community management included?', answer: 'Yes: comment and DM responses during business hours are included in all packages.' },
       { question: 'Who creates the visual content?', answer: 'Our creative team designs everything to your brand guidelines. You simply approve before publishing.' },
       { question: 'How many posts per month?', answer: 'Post frequency is tailored to your budget and goals, discussed during onboarding.' },
     ],
@@ -92,7 +92,7 @@ export const SERVICES = {
   'paid-advertising': {
     name: 'Paid Advertising',
     tagline: 'Every Rupiah Invested. Maximum Return Delivered.',
-    description: 'Data-driven paid campaigns across Google, Meta, TikTok, and Marketplace platforms. We target the right audience at the right moment — and optimise relentlessly until ROAS hits 2–4×.',
+    description: 'Data-driven paid campaigns across Google, Meta, TikTok, and Marketplace platforms. We target the right audience at the right moment, optimising relentlessly until ROAS hits 2–4×.',
     color: '#D97706', rgb: '217,119,6',
     featuresVariant: 'numbered' as const,
     processVariant: 'funnel' as const,
@@ -101,12 +101,12 @@ export const SERVICES = {
       { icon: 'Megaphone', title: 'Meta Ads', desc: 'Interests, lookalikes, and retargeting on Facebook & Instagram.' },
       { icon: 'Music', title: 'TikTok Ads', desc: 'Native-format video ads designed for conversion.' },
       { icon: 'ShoppingCart', title: 'Marketplace Ads', desc: 'Tokopedia, Shopee, and Lazada for e-commerce brands.' },
-      { icon: 'Crosshair', title: 'Full-Funnel Strategy', desc: 'TOFU, MOFU, BOFU — every stage of the customer journey covered.' },
+      { icon: 'Crosshair', title: 'Full-Funnel Strategy', desc: 'TOFU, MOFU, BOFU: every stage of the customer journey covered.' },
       { icon: 'BarChart3', title: 'Weekly Reports', desc: 'ROAS, CPC, CTR tracked weekly with optimisation notes.' },
     ],
     process: [
       { step: '01', title: 'Account Audit', desc: 'Full review of existing accounts, wasted spend, and audience data.', duration: 'Week 1' },
-      { step: '02', title: 'Funnel Mapping', desc: 'Campaign objectives defined at each stage — awareness to conversion.', duration: 'Week 1' },
+      { step: '02', title: 'Funnel Mapping', desc: 'Campaign objectives defined at each stage, from awareness to conversion.', duration: 'Week 1' },
       { step: '03', title: 'Creative Production', desc: 'Ad copy and visuals built for each platform and segment.', duration: 'Week 1–2' },
       { step: '04', title: 'Campaign Launch', desc: 'Live with controlled budgets for initial data gathering.', duration: 'Week 2' },
       { step: '05', title: 'Optimisation Loops', desc: 'Weekly bid adjustments, audience pruning, and creative refreshes.', duration: 'Weekly' },
@@ -120,7 +120,7 @@ export const SERVICES = {
       { question: 'Which ad platforms do you manage?', answer: 'Google Ads (Search, Display, Shopping), Meta Ads (Facebook & Instagram), TikTok Ads, and Marketplace Ads.' },
       { question: 'What is the minimum ad budget?', answer: 'Ad spend is separate from our fee. We recommend IDR 3–5M/month minimum for meaningful results.' },
       { question: 'What is ROAS and how do you measure it?', answer: "ROAS is the revenue generated per IDR spent on ads. We track via GA4 and each platform's native reporting." },
-      { question: 'Will I have access to my own ad accounts?', answer: 'Yes, 100%. We manage within your own accounts — full access retained at all times.' },
+      { question: 'Will I have access to my own ad accounts?', answer: 'Yes, 100%. We manage within your own accounts, with full access retained at all times.' },
       { question: 'How long until ads go live?', answer: 'Typically 1–2 weeks from kickoff, including audit, strategy, and creative production.' },
     ],
     crossSells: ['seo-content-marketing', 'creative-services'],
@@ -128,24 +128,24 @@ export const SERVICES = {
   'creative-services': {
     name: 'Creative Services',
     tagline: 'Bold Visuals. Clear Stories. Brands That Stick.',
-    description: 'From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset built for your audience — never from a template library.',
+    description: 'From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset built for your audience, never from a template library.',
     color: '#F59E0B', rgb: '245,158,11',
     featuresVariant: 'bento' as const,
     processVariant: 'flow' as const,
     features: [
       { icon: 'Palette', title: 'Brand Identity Design', desc: 'Logo, colour palette, typography, and brand guide.' },
       { icon: 'Camera', title: 'Photo & Video Production', desc: 'Shoot and post-production for product, corporate, and campaign content.' },
-      { icon: 'Film', title: 'Reels & Short-form Video', desc: 'Vertical video for TikTok, Reels, and Shorts — edited for retention.' },
-      { icon: 'Image', title: 'Social Media Graphics', desc: 'Feed posts, stories, and carousels — all original, all on-brand.' },
+      { icon: 'Film', title: 'Reels & Short-form Video', desc: 'Vertical video for TikTok, Reels, and Shorts, edited for retention.' },
+      { icon: 'Image', title: 'Social Media Graphics', desc: 'Feed posts, stories, and carousels: all original, all on-brand.' },
       { icon: 'FileText', title: 'Copywriting', desc: 'Headlines, captions, ad copy, and landing page text that converts.' },
       { icon: 'Monitor', title: 'Marketing Collateral', desc: 'Brochures, decks, banners, and event materials.' },
     ],
     process: [
       { step: '01', title: 'Creative Brief', desc: 'Align on objectives, audience, tone, and deliverables.', duration: 'Day 1–2' },
       { step: '02', title: 'Concept & Moodboard', desc: 'Initial concepts and direction presented for your approval.', duration: 'Day 3–5' },
-      { step: '03', title: 'Production', desc: 'Full execution of approved concept — shoot, design, or animate.', duration: 'Week 1–2' },
+      { step: '03', title: 'Production', desc: 'Full execution of the approved concept: shoot, design, or animate.', duration: 'Week 1–2' },
       { step: '04', title: 'Review & Refine', desc: '2 rounds of revisions, fast turnaround.', duration: 'Day 1–3' },
-      { step: '05', title: 'Final Delivery', desc: 'All formats delivered — web, print, social — ready to deploy.', duration: 'Day 1' },
+      { step: '05', title: 'Final Delivery', desc: 'All formats delivered (web, print, social), ready to deploy.', duration: 'Day 1' },
     ],
     stats: [
       { value: '500+', label: 'Assets / Month', desc: 'Total production across all clients' },
@@ -155,7 +155,7 @@ export const SERVICES = {
     faqs: [
       { question: 'What formats can you produce?', answer: 'Social posts (feed, story, reels), banner ads, video (1:1, 9:16, 16:9), infographics, landing page copy, and more.' },
       { question: 'How long does production take?', answer: 'Graphic design: 3–5 business days. Video with shooting: 1–2 weeks depending on complexity.' },
-      { question: 'Are revisions included?', answer: 'Yes — 2 rounds per deliverable. Additional revisions available at a separate fee.' },
+      { question: 'Are revisions included?', answer: 'Yes: 2 rounds per deliverable. Additional revisions available at a separate fee.' },
       { question: 'Do you shoot outside Jakarta?', answer: 'Our team covers Jakarta and surroundings. Out-of-city shoots available with additional travel costs.' },
     ],
     crossSells: ['social-media-management', 'website-landing-page'],
@@ -163,12 +163,12 @@ export const SERVICES = {
   'website-landing-page': {
     name: 'Website & Landing Page',
     tagline: 'Convert Visitors Into Customers. Built to Perform.',
-    description: 'We design and build high-performance websites and landing pages — fast, mobile-first, and wired for conversion. From company profiles to full e-commerce stores.',
+    description: 'We design and build high-performance websites and landing pages: fast, mobile-first, and wired for conversion. From company profiles to full e-commerce stores.',
     color: '#06B6D4', rgb: '6,182,212',
     featuresVariant: 'checklist' as const,
     processVariant: 'gantt' as const,
     features: [
-      { icon: 'Zap', title: 'Performance-First Build', desc: 'Core Web Vitals optimised — fast load, smooth interaction, zero layout shifts.' },
+      { icon: 'Zap', title: 'Performance-First Build', desc: 'Core Web Vitals optimised: fast load, smooth interaction, zero layout shifts.' },
       { icon: 'Smartphone', title: 'Mobile-First Responsive', desc: '100% responsive across all devices, built mobile-first from day one.' },
       { icon: 'Search', title: 'SEO-Ready Architecture', desc: 'Clean URLs, meta tags, schema markup, and sitemap at launch.' },
       { icon: 'ShoppingCart', title: 'E-Commerce Integration', desc: 'Shopify, WooCommerce, or custom cart with fully integrated checkout.' },
@@ -177,7 +177,7 @@ export const SERVICES = {
     ],
     process: [
       { step: '01', title: 'Discovery & Scope', desc: 'Goals, sitemap, references, and platform confirmed.', duration: '2–3 days' },
-      { step: '02', title: 'Wireframe & Design', desc: 'Full Figma prototype — desktop and mobile — for your approval.', duration: '5–7 days' },
+      { step: '02', title: 'Wireframe & Design', desc: 'Full Figma prototype (desktop and mobile) for your approval.', duration: '5–7 days' },
       { step: '03', title: 'Development', desc: 'Clean, fast code with all integrations and CMS configured.', duration: '7–21 days' },
       { step: '04', title: 'QA & Testing', desc: 'Cross-browser testing, speed audit, and form validation.', duration: '2–3 days' },
       { step: '05', title: 'Launch & Handover', desc: 'Go live, training session, and documentation delivered.', duration: '1 day' },
@@ -189,10 +189,10 @@ export const SERVICES = {
     ],
     faqs: [
       { question: 'How long does a website take to build?', answer: 'Landing pages: 1–2 weeks. Company profiles: 3–4 weeks. E-commerce: 4–8 weeks.' },
-      { question: 'Which platforms do you use?', answer: 'WordPress, custom Next.js, Shopify, or WooCommerce — depends on your requirements.' },
+      { question: 'Which platforms do you use?', answer: 'WordPress, custom Next.js, Shopify, or WooCommerce, depending on your requirements.' },
       { question: 'Is hosting and domain included?', answer: 'Not included, but we assist with setup and recommend the right providers.' },
-      { question: 'Are websites mobile-responsive?', answer: 'Yes — 100% mobile-first and fully responsive, on every project.' },
-      { question: 'Is training included?', answer: 'Yes — training session and documentation for your team after launch.' },
+      { question: 'Are websites mobile-responsive?', answer: 'Yes, 100% mobile-first and fully responsive, on every project.' },
+      { question: 'Is training included?', answer: 'Yes: a training session and documentation for your team after launch.' },
     ],
     crossSells: ['seo-content-marketing', 'paid-advertising'],
   },
@@ -208,7 +208,7 @@ const SERVICES_ID = {
       { icon: 'Crosshair', title: 'Riset Keyword & Strategi', desc: 'Analisis mendalam untuk menemukan kata kunci yang tepat-tepat diketik calon pelangganmu saat ini.' },
       { icon: 'PenLine', title: 'Produksi Konten Panjang', desc: 'Hingga 150+ artikel SEO per bulan oleh penulis spesialis.' },
       { icon: 'Wrench', title: 'Audit Technical SEO', desc: 'Perbaiki crawlability, kecepatan halaman, schema markup, dan Core Web Vitals.' },
-      { icon: 'BarChart3', title: 'Laporan Looker Studio', desc: 'Dashboard live untuk ranking, traffic, dan konversi — selalu aktif.' },
+      { icon: 'BarChart3', title: 'Laporan Looker Studio', desc: 'Dashboard live untuk ranking, traffic, dan konversi, selalu aktif.' },
       { icon: 'Link2', title: 'Arsitektur Internal Linking', desc: 'Link strategis antar halaman untuk meneruskan otoritas dan memandu alur pengguna.' },
       { icon: 'MapPin', title: 'Local SEO', desc: 'Dominasi pencarian "dekat sini" dan Google Business map pack.' },
     ],
@@ -226,18 +226,18 @@ const SERVICES_ID = {
     ],
     faqs: [
       { question: 'Berapa lama untuk melihat hasil SEO?', answer: 'SEO biasanya butuh 3–6 bulan untuk menunjukkan hasil signifikan. Namun, peningkatan traffic biasanya mulai terlihat dalam 4–8 minggu pertama.' },
-      { question: 'Dalam bahasa apa artikel ditulis?', answer: 'Kami menulis dalam bahasa yang digunakan audiensmu — Indonesia, Inggris, atau keduanya — sepenuhnya dioptimasi untuk keywordmu.' },
+      { question: 'Dalam bahasa apa artikel ditulis?', answer: 'Kami menulis dalam bahasa yang digunakan audiensmu: Indonesia, Inggris, atau keduanya, sepenuhnya dioptimasi untuk keywordmu.' },
       { question: 'Bisakah kami memilih topik artikel?', answer: 'Tentu. Kami melakukan riset keyword dan mendiskusikan topik yang relevan bersamamu setiap bulan.' },
-      { question: 'Bagaimana progres dilaporkan?', answer: 'Laporan Looker Studio bulanan mencakup ranking keyword, traffic, dan konversi — bisa diakses kapan saja.' },
+      { question: 'Bagaimana progres dilaporkan?', answer: 'Laporan Looker Studio bulanan mencakup ranking keyword, traffic, dan konversi, bisa diakses kapan saja.' },
       { question: 'Apakah backlink building termasuk?', answer: 'Off-page SEO dan link building tersedia sebagai add-on mulai dari IDR 5 Juta/bulan.' },
     ],
   },
   'social-media-management': {
     tagline: 'Konten yang Terhubung. Kehadiran yang Mengonversi.',
-    description: 'Kami mengurus media sosialmu sepenuhnya — strategi, pembuatan konten, penjadwalan, dan community management di Instagram, TikTok, Facebook, dan LinkedIn.',
+    description: 'Kami mengurus media sosialmu sepenuhnya: strategi, pembuatan konten, penjadwalan, dan community management di Instagram, TikTok, Facebook, dan LinkedIn.',
     features: [
       { icon: 'Smartphone', title: 'Manajemen Multi-Platform', desc: 'Instagram, TikTok, Facebook & LinkedIn dalam satu strategi terintegrasi.' },
-      { icon: 'Palette', title: 'Desain Visual Kustom', desc: 'Setiap postingan dibangun sesuai brand guide — tanpa template stok.' },
+      { icon: 'Palette', title: 'Desain Visual Kustom', desc: 'Setiap postingan dibangun sesuai brand guide, tanpa template stok.' },
       { icon: 'MessageCircle', title: 'Community Management', desc: 'Komentar dan DM direspons selama jam kerja.' },
       { icon: 'CalendarDays', title: 'Kalender Konten', desc: 'Kalender bulanan direview dan disetujui sebelum tayang.' },
       { icon: 'TrendingUp', title: 'Strategi Pertumbuhan', desc: 'Riset hashtag, kolaborasi, dan kampanye engagement.' },
@@ -256,25 +256,25 @@ const SERVICES_ID = {
     ],
     faqs: [
       { question: 'Platform mana yang kamu kelola?', answer: 'Instagram, TikTok, Facebook, dan LinkedIn. Kami bisa fokus ke satu atau beberapa sesuai audiensmu.' },
-      { question: 'Apakah community management termasuk?', answer: 'Ya — respons komentar dan DM selama jam kerja termasuk dalam semua paket.' },
+      { question: 'Apakah community management termasuk?', answer: 'Ya: respons komentar dan DM selama jam kerja termasuk dalam semua paket.' },
       { question: 'Siapa yang membuat konten visual?', answer: 'Tim kreatif kami mendesain semua sesuai brand guideline. Kamu tinggal menyetujui sebelum dipublish.' },
       { question: 'Berapa banyak postingan per bulan?', answer: 'Frekuensi posting disesuaikan dengan budget dan tujuanmu, didiskusikan saat onboarding.' },
     ],
   },
   'paid-advertising': {
     tagline: 'Setiap Rupiah yang Diinvestasikan. Imbal Hasil Maksimal.',
-    description: 'Kampanye berbasis data di Google, Meta, TikTok, dan platform Marketplace. Kami menarget audiens yang tepat di momen yang tepat — dan terus mengoptimasi hingga ROAS mencapai 2–4×.',
+    description: 'Kampanye berbasis data di Google, Meta, TikTok, dan platform Marketplace. Kami menarget audiens yang tepat di momen yang tepat, terus mengoptimasi hingga ROAS mencapai 2–4×.',
     features: [
       { icon: 'Search', title: 'Google Ads (Search + Display)', desc: 'Tangkap pembeli berniat tinggi saat mereka sedang mencari.' },
       { icon: 'Megaphone', title: 'Meta Ads', desc: 'Interests, lookalike, dan retargeting di Facebook & Instagram.' },
       { icon: 'Music', title: 'TikTok Ads', desc: 'Iklan video format native yang dirancang untuk konversi.' },
       { icon: 'ShoppingCart', title: 'Marketplace Ads', desc: 'Tokopedia, Shopee, dan Lazada untuk brand e-commerce.' },
-      { icon: 'Crosshair', title: 'Strategi Full-Funnel', desc: 'TOFU, MOFU, BOFU — semua tahapan perjalanan pelanggan tercakup.' },
+      { icon: 'Crosshair', title: 'Strategi Full-Funnel', desc: 'TOFU, MOFU, BOFU: semua tahapan perjalanan pelanggan tercakup.' },
       { icon: 'BarChart3', title: 'Laporan Mingguan', desc: 'ROAS, CPC, CTR dipantau mingguan dengan catatan optimasi.' },
     ],
     process: [
       { step: '01', title: 'Audit Akun', desc: 'Review menyeluruh akun yang ada, pengeluaran tidak efisien, dan data audiens.', duration: 'Minggu 1' },
-      { step: '02', title: 'Pemetaan Funnel', desc: 'Tujuan kampanye ditentukan di setiap tahap — dari awareness hingga konversi.', duration: 'Minggu 1' },
+      { step: '02', title: 'Pemetaan Funnel', desc: 'Tujuan kampanye ditentukan di setiap tahap, dari awareness hingga konversi.', duration: 'Minggu 1' },
       { step: '03', title: 'Produksi Kreatif', desc: 'Ad copy dan visual dibuat untuk setiap platform dan segmen.', duration: 'Minggu 1–2' },
       { step: '04', title: 'Peluncuran Kampanye', desc: 'Live dengan budget terkontrol untuk pengumpulan data awal.', duration: 'Minggu 2' },
       { step: '05', title: 'Siklus Optimasi', desc: 'Penyesuaian bid mingguan, pemangkasan audiens, dan pembaruan kreatif.', duration: 'Mingguan' },
@@ -288,27 +288,27 @@ const SERVICES_ID = {
       { question: 'Platform iklan mana yang kamu kelola?', answer: 'Google Ads (Search, Display, Shopping), Meta Ads (Facebook & Instagram), TikTok Ads, dan Marketplace Ads.' },
       { question: 'Berapa budget iklan minimum?', answer: 'Budget iklan terpisah dari fee kami. Kami rekomendasikan minimal IDR 3–5 Juta/bulan untuk hasil yang berarti.' },
       { question: 'Apa itu ROAS dan bagaimana mengukurnya?', answer: 'ROAS adalah pendapatan yang dihasilkan per rupiah yang diinvestasikan dalam iklan. Kami melacaknya melalui GA4 dan laporan native setiap platform.' },
-      { question: 'Apakah saya memiliki akses ke akun iklan sendiri?', answer: 'Ya, 100%. Kami mengelola di dalam akunmu sendiri — akses penuh tetap ada di tanganmu setiap saat.' },
+      { question: 'Apakah saya memiliki akses ke akun iklan sendiri?', answer: 'Ya, 100%. Kami mengelola di dalam akunmu sendiri, dengan akses penuh tetap ada di tanganmu setiap saat.' },
       { question: 'Berapa lama hingga iklan live?', answer: 'Biasanya 1–2 minggu dari kickoff, termasuk audit, strategi, dan produksi kreatif.' },
     ],
   },
   'creative-services': {
     tagline: 'Visual yang Berani. Cerita yang Jelas. Brand yang Diingat.',
-    description: 'Dari identitas brand hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu — bukan dari template.',
+    description: 'Dari identitas brand hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu, bukan dari template.',
     features: [
       { icon: 'Palette', title: 'Desain Identitas Brand', desc: 'Logo, palet warna, tipografi, dan brand guide.' },
       { icon: 'Camera', title: 'Produksi Foto & Video', desc: 'Syuting dan post-production untuk konten produk, korporat, dan kampanye.' },
-      { icon: 'Film', title: 'Reels & Video Pendek', desc: 'Video vertikal untuk TikTok, Reels, dan Shorts — diedit untuk retensi.' },
-      { icon: 'Image', title: 'Grafis Media Sosial', desc: 'Feed post, stories, dan carousel — semua orisinal, semua sesuai brand.' },
+      { icon: 'Film', title: 'Reels & Video Pendek', desc: 'Video vertikal untuk TikTok, Reels, dan Shorts, diedit untuk retensi.' },
+      { icon: 'Image', title: 'Grafis Media Sosial', desc: 'Feed post, stories, dan carousel: semua orisinal, semua sesuai brand.' },
       { icon: 'FileText', title: 'Copywriting', desc: 'Headline, caption, ad copy, dan teks landing page yang mengonversi.' },
       { icon: 'Monitor', title: 'Materi Marketing', desc: 'Brosur, deck, banner, dan materi event.' },
     ],
     process: [
       { step: '01', title: 'Brief Kreatif', desc: 'Selaraskan tujuan, audiens, tone, dan deliverable.', duration: 'Hari 1–2' },
       { step: '02', title: 'Konsep & Moodboard', desc: 'Konsep awal dan arahan dipresentasikan untuk persetujuanmu.', duration: 'Hari 3–5' },
-      { step: '03', title: 'Produksi', desc: 'Eksekusi penuh konsep yang disetujui — syuting, desain, atau animasi.', duration: 'Minggu 1–2' },
+      { step: '03', title: 'Produksi', desc: 'Eksekusi penuh konsep yang disetujui: syuting, desain, atau animasi.', duration: 'Minggu 1–2' },
       { step: '04', title: 'Review & Revisi', desc: '2 putaran revisi, turnaround cepat.', duration: 'Hari 1–3' },
-      { step: '05', title: 'Pengiriman Final', desc: 'Semua format dikirimkan — web, print, sosial — siap deploy.', duration: 'Hari 1' },
+      { step: '05', title: 'Pengiriman Final', desc: 'Semua format dikirimkan (web, print, sosial), siap deploy.', duration: 'Hari 1' },
     ],
     stats: [
       { value: '500+', label: 'Aset / Bulan', desc: 'Total produksi di seluruh klien' },
@@ -318,15 +318,15 @@ const SERVICES_ID = {
     faqs: [
       { question: 'Format apa saja yang bisa diproduksi?', answer: 'Postingan sosial (feed, story, reels), banner iklan, video (1:1, 9:16, 16:9), infografis, teks landing page, dan lainnya.' },
       { question: 'Berapa lama proses produksi?', answer: 'Desain grafis: 3–5 hari kerja. Video dengan syuting: 1–2 minggu tergantung kompleksitas.' },
-      { question: 'Apakah revisi termasuk?', answer: 'Ya — 2 putaran per deliverable. Revisi tambahan tersedia dengan biaya terpisah.' },
+      { question: 'Apakah revisi termasuk?', answer: 'Ya: 2 putaran per deliverable. Revisi tambahan tersedia dengan biaya terpisah.' },
       { question: 'Apakah syuting di luar Jakarta bisa?', answer: 'Tim kami mencakup Jakarta dan sekitarnya. Syuting luar kota tersedia dengan biaya perjalanan tambahan.' },
     ],
   },
   'website-landing-page': {
     tagline: 'Ubah Pengunjung Menjadi Pelanggan. Dibangun untuk Performa.',
-    description: 'Kami merancang dan membangun website serta landing page berperforma tinggi — cepat, mobile-first, dan disiapkan untuk konversi. Dari company profile hingga toko e-commerce lengkap.',
+    description: 'Kami merancang dan membangun website serta landing page berperforma tinggi: cepat, mobile-first, dan disiapkan untuk konversi. Dari company profile hingga toko e-commerce lengkap.',
     features: [
-      { icon: 'Zap', title: 'Performa Terdepan', desc: 'Core Web Vitals dioptimasi — loading cepat, interaksi mulus, tanpa layout shift.' },
+      { icon: 'Zap', title: 'Performa Terdepan', desc: 'Core Web Vitals dioptimasi: loading cepat, interaksi mulus, tanpa layout shift.' },
       { icon: 'Smartphone', title: 'Responsif Mobile-First', desc: '100% responsif di semua perangkat, dibangun mobile-first dari awal.' },
       { icon: 'Search', title: 'Arsitektur Siap SEO', desc: 'URL bersih, meta tag, schema markup, dan sitemap tersedia saat launch.' },
       { icon: 'ShoppingCart', title: 'Integrasi E-Commerce', desc: 'Shopify, WooCommerce, atau cart kustom dengan checkout yang terintegrasi penuh.' },
@@ -335,7 +335,7 @@ const SERVICES_ID = {
     ],
     process: [
       { step: '01', title: 'Discovery & Scope', desc: 'Tujuan, sitemap, referensi, dan platform dikonfirmasi.', duration: '2–3 hari' },
-      { step: '02', title: 'Wireframe & Desain', desc: 'Prototipe Figma lengkap — desktop dan mobile — untuk persetujuanmu.', duration: '5–7 hari' },
+      { step: '02', title: 'Wireframe & Desain', desc: 'Prototipe Figma lengkap (desktop dan mobile) untuk persetujuanmu.', duration: '5–7 hari' },
       { step: '03', title: 'Development', desc: 'Kode bersih dan cepat dengan semua integrasi dan CMS terkonfigurasi.', duration: '7–21 hari' },
       { step: '04', title: 'QA & Testing', desc: 'Pengujian lintas browser, audit kecepatan, dan validasi form.', duration: '2–3 hari' },
       { step: '05', title: 'Launch & Handover', desc: 'Go live, sesi pelatihan, dan dokumentasi diserahkan.', duration: '1 hari' },
@@ -347,10 +347,10 @@ const SERVICES_ID = {
     ],
     faqs: [
       { question: 'Berapa lama membangun website?', answer: 'Landing page: 1–2 minggu. Company profile: 3–4 minggu. E-commerce: 4–8 minggu.' },
-      { question: 'Platform apa yang digunakan?', answer: 'WordPress, Next.js kustom, Shopify, atau WooCommerce — tergantung kebutuhanmu.' },
+      { question: 'Platform apa yang digunakan?', answer: 'WordPress, Next.js kustom, Shopify, atau WooCommerce, tergantung kebutuhanmu.' },
       { question: 'Apakah hosting dan domain termasuk?', answer: 'Tidak termasuk, tetapi kami membantu setup dan merekomendasikan provider yang tepat.' },
-      { question: 'Apakah website responsif mobile?', answer: 'Ya — 100% mobile-first dan sepenuhnya responsif, di setiap proyek.' },
-      { question: 'Apakah pelatihan termasuk?', answer: 'Ya — sesi pelatihan dan dokumentasi untuk tim kamu setelah launch.' },
+      { question: 'Apakah website responsif mobile?', answer: 'Ya, 100% mobile-first dan sepenuhnya responsif, di setiap proyek.' },
+      { question: 'Apakah pelatihan termasuk?', answer: 'Ya: sesi pelatihan dan dokumentasi untuk tim kamu setelah launch.' },
     ],
   },
 }
@@ -493,7 +493,7 @@ function AdsHeroVisual() {
   ]
   return (
     <div className="space-y-2">
-      <div className="text-xs text-[var(--text-muted)] uppercase tracking-widest mb-4 font-semibold">Campaign Funnel — Live</div>
+      <div className="text-xs text-[var(--text-muted)] uppercase tracking-widest mb-4 font-semibold">Campaign Funnel: Live</div>
       {stages.map((s, i) => (
         <div key={i} className="rounded-xl px-4 py-3 flex items-center justify-between"
           style={{
@@ -881,7 +881,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const svcId = SERVICES_ID[slug as SvcKey]
   if (!svc) return {}
   return buildMetadata({
-    title: `${svc.name} — Logink Digital Marketing Jakarta`,
+    title: `${svc.name} | Logink Digital Marketing Jakarta`,
     description: (svcId?.description ?? svc.description).slice(0, 155),
     path: `/services/${slug}`,
   })

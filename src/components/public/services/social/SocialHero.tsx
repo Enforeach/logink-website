@@ -8,7 +8,7 @@ const HERO_COPY = {
     trustPills: ['✓ Konten 100% original', '✓ Native Bahasa Indonesia', '✓ Kalender konten bulanan'],
     home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/services',
     title1: 'Konten yang Nyambung.', title2: 'Kehadiran yang Konversi.',
-    desc: 'Kami urus semua urusan social media-mu — strategi, pembuatan konten, penjadwalan, community management, dan laporan performa di Instagram, TikTok, Facebook, dan LinkedIn.',
+    desc: 'Kami urus semua urusan social media-mu: strategi, pembuatan konten, penjadwalan, community management, dan laporan performa di Instagram, TikTok, Facebook, dan LinkedIn.',
     descHighlight: 'Kamu fokus bisnis. Kami bikin brandmu nggak bisa di-skip.',
     ctaPrimary: 'Mulai Konsultasi Gratis', ctaHref: '/contact?service=social-media-management', ctaSecondary: 'Lihat Harga',
   },
@@ -16,7 +16,7 @@ const HERO_COPY = {
     trustPills: ['✓ 100% original content', '✓ Bahasa Indonesia native', '✓ Monthly content calendar'],
     home: 'Home', services: 'Services', homeHref: '/en', servicesHref: '/en/services',
     title1: 'Content That Connects.', title2: 'Presence That Converts.',
-    desc: 'We take social media completely off your plate — strategy, content creation, scheduling, community management, and performance reporting across Instagram, TikTok, Facebook, and LinkedIn.',
+    desc: 'We take social media completely off your plate: strategy, content creation, scheduling, community management, and performance reporting across Instagram, TikTok, Facebook, and LinkedIn.',
     descHighlight: 'You focus on your business. We make your brand impossible to scroll past.',
     ctaPrimary: 'Start Free Consultation', ctaHref: '/en/contact?service=social-media-management', ctaSecondary: 'See Pricing',
   },
@@ -169,7 +169,7 @@ export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
             </motion.div>
           </div>
 
-          {/* Right — phone mockup */}
+          {/* Right: phone mockup */}
           <motion.div
             initial={{ opacity: 0, x: 60, rotate: 3 }}
             animate={{ opacity: 1, x: 0, rotate: 0 }}

@@ -8,12 +8,12 @@ const TECHSTACK_COPY = {
   id: {
     eyebrow: 'Tech Stack Kami',
     heading: 'Kami pilih tool terbaik untuk proyekmu.',
-    sub: 'Tidak terpaku pada satu platform — kami rekomendasikan berdasarkan skala, budget, dan tujuan jangka panjangmu.',
+    sub: 'Tidak terpaku pada satu platform; kami rekomendasikan berdasarkan skala, budget, dan tujuan jangka panjangmu.',
   },
   en: {
     eyebrow: 'Our Tech Stack',
     heading: 'We choose the best tool for your project.',
-    sub: "Not locked to one platform — we recommend based on scale, budget, and your long-term goals.",
+    sub: "Not locked to one platform; we recommend based on scale, budget, and your long-term goals.",
   },
 }
 

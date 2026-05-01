@@ -118,7 +118,7 @@ export const SEO_FEATURES_TABS = [
     features: [
       {
         title: 'Riset Keyword (Bahasa Indonesia)',
-        desc: 'Kami menggali apa yang benar-benar dicari pengguna Indonesia — dalam Bahasa Indonesia, bukan terjemahan dari keyword Inggris. Query long-tail, transaksional, dan informasional dipetakan ke funnel kamu.',
+        desc: 'Kami menggali apa yang benar-benar dicari pengguna Indonesia: dalam Bahasa Indonesia, bukan terjemahan dari keyword Inggris. Query long-tail, transaksional, dan informasional dipetakan ke funnel kamu.',
         badge: null,
       },
       {
@@ -150,7 +150,7 @@ export const SEO_FEATURES_TABS = [
       },
       {
         title: 'Core Web Vitals & Page Speed',
-        desc: 'Kami audit dan perbaiki LCP, FID, dan CLS. Halamanmu muat cepat di jaringan mobile Indonesia — bukan cuma di fiber.',
+        desc: 'Kami audit dan perbaiki LCP, FID, dan CLS. Halamanmu muat cepat di jaringan mobile Indonesia, bukan cuma di fiber.',
         badge: null,
       },
       {
@@ -160,7 +160,7 @@ export const SEO_FEATURES_TABS = [
       },
       {
         title: 'Arsitektur Internal Linking',
-        desc: 'Tautan strategis antar halaman untuk mendistribusikan authority dan memandu perjalanan pengguna. Bukan asal-asalan — dipetakan ke funnel konversimu.',
+        desc: 'Tautan strategis antar halaman untuk mendistribusikan authority dan memandu perjalanan pengguna. Dipetakan ke funnel konversimu, bukan asal-asalan.',
         badge: null,
       },
     ],
@@ -200,7 +200,7 @@ export const SEO_FEATURES_TABS = [
       },
       {
         title: 'Looker Studio Dashboard',
-        desc: 'Dashboard live yang bisa kamu cek kapan saja. Ranking, tren traffic, halaman teratas, conversion tracking — selalu up to date.',
+        desc: 'Dashboard live yang bisa kamu cek kapan saja. Ranking, tren traffic, halaman teratas, conversion tracking: selalu up to date.',
         badge: 'Growth+',
       },
     ],
@@ -222,7 +222,7 @@ export const SEO_PROCESS_STEPS = [
     duration: 'Minggu 1–2',
     color: '#DB2777',
     align: 'right' as const,
-    desc: 'Kami membangun topical cluster map dan editorial calendar yang disesuaikan dengan funnelmu. Setiap artikel dipetakan ke keyword, search intent, dan tujuan konversi — tidak diterbitkan sembarangan.',
+    desc: 'Kami membangun topical cluster map dan editorial calendar yang disesuaikan dengan funnelmu. Setiap artikel dipetakan ke keyword, search intent, dan tujuan konversi, tidak diterbitkan sembarangan.',
   },
   {
     step: '03',
@@ -372,7 +372,7 @@ export const SEO_FEATURES_TABS_EN = [
     features: [
       {
         title: 'Keyword Research (Bahasa Indonesia)',
-        desc: "We dig into what Indonesian users actually search for — in Bahasa, not translated English keywords. Long-tail, transactional, and informational queries mapped to your funnel.",
+        desc: "We dig into what Indonesian users actually search for: in Bahasa, not translated English keywords. Long-tail, transactional, and informational queries mapped to your funnel.",
         badge: null,
       },
       {
@@ -404,7 +404,7 @@ export const SEO_FEATURES_TABS_EN = [
       },
       {
         title: 'Core Web Vitals & Page Speed',
-        desc: 'We audit and fix LCP, FID, and CLS. Your pages load fast on Indonesian mobile networks — not just on fiber.',
+        desc: 'We audit and fix LCP, FID, and CLS. Your pages load fast on Indonesian mobile networks, not just on fiber.',
         badge: null,
       },
       {
@@ -414,7 +414,7 @@ export const SEO_FEATURES_TABS_EN = [
       },
       {
         title: 'Internal Linking Architecture',
-        desc: 'Strategic links between pages to distribute authority and guide user journeys. Not random — mapped to your conversion funnel.',
+        desc: 'Strategic links between pages to distribute authority and guide user journeys. Not random: mapped to your conversion funnel.',
         badge: null,
       },
     ],
@@ -454,7 +454,7 @@ export const SEO_FEATURES_TABS_EN = [
       },
       {
         title: 'Looker Studio Dashboard',
-        desc: 'Live dashboard you can check anytime. Rankings, traffic trends, top pages, conversion tracking — always up to date.',
+        desc: 'Live dashboard you can check anytime. Rankings, traffic trends, top pages, conversion tracking: always up to date.',
         badge: 'Growth+',
       },
     ],
@@ -476,7 +476,7 @@ export const SEO_PROCESS_STEPS_EN = [
     duration: 'Week 1–2',
     color: '#DB2777',
     align: 'right' as const,
-    desc: "We build a topical cluster map and editorial calendar tailored to your funnel. Every article is mapped to a keyword, a search intent, and a conversion goal — not published randomly.",
+    desc: "We build a topical cluster map and editorial calendar tailored to your funnel. Every article is mapped to a keyword, a search intent, and a conversion goal, not published randomly.",
   },
   {
     step: '03',
@@ -507,11 +507,11 @@ export const SEO_PROCESS_STEPS_EN = [
 export const SEO_FAQS = [
   {
     question: 'Berapa lama sampai bisa lihat hasil SEO?',
-    answer: 'SEO adalah permainan jangka panjang — itulah yang membuatnya powerful. Biasanya, kamu akan melihat pergerakan ranking awal dalam 4-6 minggu. Pertumbuhan traffic yang signifikan mulai terlihat di bulan ke-3, dan hasil yang compounding muncul sekitar bulan ke-6. Berbeda dari iklan berbayar, hasil ini tidak berhenti ketika budget habis.',
+    answer: 'SEO adalah permainan jangka panjang, dan itulah yang membuatnya powerful. Biasanya, kamu akan melihat pergerakan ranking awal dalam 4-6 minggu. Pertumbuhan traffic yang signifikan mulai terlihat di bulan ke-3, dan hasil yang compounding muncul sekitar bulan ke-6. Berbeda dari iklan berbayar, hasil ini tidak berhenti ketika budget habis.',
   },
   {
     question: 'Artikel ditulis dalam bahasa apa?',
-    answer: 'Semua konten ditulis secara native dalam Bahasa Indonesia oleh penulis spesialis yang memahami perilaku pencarian lokal. Kami tidak menerjemahkan konten Inggris — kami riset dan tulis sesuai cara pengguna Indonesia benar-benar mencari. Konten Inggris tersedia sebagai add-on untuk brand yang menarget audiens internasional.',
+    answer: 'Semua konten ditulis secara native dalam Bahasa Indonesia oleh penulis spesialis yang memahami perilaku pencarian lokal. Kami tidak menerjemahkan konten Inggris; kami riset dan tulis sesuai cara pengguna Indonesia benar-benar mencari. Konten Inggris tersedia sebagai add-on untuk brand yang menarget audiens internasional.',
   },
   {
     question: 'Apakah kami bisa memilih topik artikel?',
@@ -523,26 +523,26 @@ export const SEO_FAQS = [
   },
   {
     question: 'Apakah link building sudah termasuk?',
-    answer: 'Off-page SEO dan link building tersedia sebagai add-on mulai Rp 5 Juta per penempatan media. Pendekatan kami fokus pada penempatan editorial di media Indonesia — tidak ada PBN, tidak ada direktori spam. Kualitas di atas kuantitas.',
+    answer: 'Off-page SEO dan link building tersedia sebagai add-on mulai Rp 5 Juta per penempatan media. Pendekatan kami fokus pada penempatan editorial di media Indonesia, tanpa PBN, tanpa direktori spam. Kualitas di atas kuantitas.',
   },
   {
     question: 'Bagaimana jika kami ingin berhenti?',
-    answer: 'Tidak ada kontrak lock-in. Kami bekerja per bulan karena kami percaya hasil kami seharusnya memenangkan kepercayaanmu, bukan klausul kontrak. Semua konten, akun, dan data milikmu — kami tidak pernah menahan apapun.',
+    answer: 'Tidak ada kontrak lock-in. Kami bekerja per bulan karena kami percaya hasil kami seharusnya memenangkan kepercayaanmu, bukan klausul kontrak. Semua konten, akun, dan data milikmu; kami tidak pernah menahan apapun.',
   },
   {
     question: 'Apakah kamu menjamin ranking?',
-    answer: 'Tidak ada agency SEO yang jujur menjamin ranking spesifik — algoritma Google tidak bisa dikendalikan siapapun. Yang kami jamin adalah proses sistematis berbasis data yang secara konsisten memberikan pertumbuhan traffic 2-4× bagi klien kami dalam 6 bulan. Kami transparan tentang apa yang berhasil dan apa yang perlu disesuaikan.',
+    answer: 'Tidak ada agency SEO yang jujur menjamin ranking spesifik, karena algoritma Google tidak bisa dikendalikan siapapun. Yang kami jamin adalah proses sistematis berbasis data yang secara konsisten memberikan pertumbuhan traffic 2-4× bagi klien kami dalam 6 bulan. Kami transparan tentang apa yang berhasil dan apa yang perlu disesuaikan.',
   },
 ] as const
 
 export const SEO_FAQS_EN = [
   {
     question: 'How long does it take to see SEO results?',
-    answer: "SEO is a long game — that's what makes it powerful. Typically, you'll see initial ranking movements within 4-6 weeks. Meaningful traffic growth starts at the 3-month mark, and compounding results kick in around month 6. Unlike paid ads, these results don't stop when the budget stops.",
+    answer: "SEO is a long game, and that's what makes it powerful. Typically, you'll see initial ranking movements within 4-6 weeks. Meaningful traffic growth starts at the 3-month mark, and compounding results kick in around month 6. Unlike paid ads, these results don't stop when the budget stops.",
   },
   {
     question: 'What language are articles written in?',
-    answer: "All content is written natively in Bahasa Indonesia by specialist writers who understand local search behavior. We don't translate English content — we research and write for how Indonesian users actually search. English content is available as an add-on for brands targeting international audiences.",
+    answer: "All content is written natively in Bahasa Indonesia by specialist writers who understand local search behavior. We don't translate English content; we research and write for how Indonesian users actually search. English content is available as an add-on for brands targeting international audiences.",
   },
   {
     question: 'Can we choose article topics?',
@@ -554,14 +554,14 @@ export const SEO_FAQS_EN = [
   },
   {
     question: 'Is backlink building included?',
-    answer: 'Off-page SEO and link building is available as an add-on starting at Rp 5 Juta per media placement. Our approach focuses on editorial placements in Indonesian media outlets — no PBNs, no spammy directories. Quality over quantity.',
+    answer: 'Off-page SEO and link building is available as an add-on starting at Rp 5 Juta per media placement. Our approach focuses on editorial placements in Indonesian media outlets, no PBNs, no spammy directories. Quality over quantity.',
   },
   {
     question: 'What happens if we want to stop?',
-    answer: "There are no lock-in contracts. We work on a monthly basis because we believe our results should earn your continued partnership, not a contract clause. All content, accounts, and data are yours — we never hold anything hostage.",
+    answer: "There are no lock-in contracts. We work on a monthly basis because we believe our results should earn your continued partnership, not a contract clause. All content, accounts, and data are yours; we never hold anything hostage.",
   },
   {
     question: 'Do you guarantee rankings?',
-    answer: "No honest SEO agency guarantees specific rankings — Google's algorithm isn't something anyone controls. What we guarantee is a systematic, data-driven process that has consistently delivered 2-4x traffic growth for our clients within 6 months. We're transparent about what's working and what needs adjustment.",
+    answer: "No honest SEO agency guarantees specific rankings, as Google's algorithm isn't something anyone controls. What we guarantee is a systematic, data-driven process that has consistently delivered 2-4x traffic growth for our clients within 6 months. We're transparent about what's working and what needs adjustment.",
   },
 ] as const

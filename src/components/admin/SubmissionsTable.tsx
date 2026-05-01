@@ -33,7 +33,7 @@ export function SubmissionsTable({ submissions }: { submissions: Submission[] })
         {
           key: 'company',
           header: 'Company',
-          render: (row) => row.company || '—',
+          render: (row) => row.company || '-',
           className: 'hidden md:table-cell',
         },
         {
@@ -48,7 +48,7 @@ export function SubmissionsTable({ submissions }: { submissions: Submission[] })
                 ))}
                 {svcs.length > 2 && <Badge variant="default" size="sm">+{svcs.length - 2}</Badge>}
               </div>
-            ) : '—'
+            ) : '-'
           },
           className: 'hidden lg:table-cell',
         },

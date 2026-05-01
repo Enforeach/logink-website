@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Syarat & Ketentuan',
-  description: 'Syarat dan Ketentuan penggunaan layanan Logink — hak, kewajiban, dan aturan yang mengatur hubungan antara klien dan Logink.',
+  description: 'Syarat dan Ketentuan penggunaan layanan Logink: hak, kewajiban, dan aturan yang mengatur hubungan antara klien dan Logink.',
   path: '/terms',
 })
 

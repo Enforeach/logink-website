@@ -288,7 +288,7 @@ export function MetricGridBlockRenderer({ data, locale }: { data: MetricGridBloc
   )
 }
 
-// ─── 6. TIMELINE — sticky scroll-driven process ───
+// ─── 6. TIMELINE: sticky scroll-driven process ───
 export function TimelineBlockRenderer({ data, locale }: { data: TimelineBlockData; locale: Locale }) {
   const title = t(data as unknown as Record<string, unknown>, 'titleId', locale)
   const milestones = data.milestones || []
@@ -754,7 +754,7 @@ export function ServicesUsedBlockRenderer({ data, locale, allServices }: {
   )
 }
 
-// ─── 13. RELATED CASES (placeholder — rendered server-side in parent) ───
+// ─── 13. RELATED CASES (placeholder, rendered server-side in parent) ───
 export function RelatedCasesBlockRenderer({ locale }: { data: RelatedCasesBlockData; locale: Locale; cases?: unknown[] }) {
   return (
     <div className="max-w-5xl mx-auto">

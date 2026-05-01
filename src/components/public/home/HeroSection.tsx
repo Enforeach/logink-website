@@ -29,7 +29,7 @@ const COPY = {
     badge: '360° Digital Marketing Agency · Jakarta, Indonesia',
     headline: 'Kembangkan Brand Kamu',
     headlineGradient: 'Secara Digital',
-    subtext: 'Agensi digital marketing 360° yang siap bantu brand Indonesia tampil lebih dominan secara online. Strategi, kreativitas, dan data — semua dalam satu sistem yang terintegrasi.',
+    subtext: 'Agensi digital marketing 360° yang siap bantu brand Indonesia tampil lebih dominan secara online. Strategi, kreativitas, dan data: semua dalam satu sistem yang terintegrasi.',
     ctaPrimary: 'Minta Penawaran Gratis',
     ctaSecondary: 'Lihat Portofolio',
     stats: [
@@ -43,7 +43,7 @@ const COPY = {
     badge: '360° Digital Marketing Agency · Jakarta, Indonesia',
     headline: 'Grow Your Brand',
     headlineGradient: 'Digitally',
-    subtext: '360° digital marketing agency built to help brands dominate online. Strategy, creativity, and data — all in one integrated engine.',
+    subtext: '360° digital marketing agency built to help brands dominate online. Strategy, creativity, and data: all in one integrated engine.',
     ctaPrimary: 'Get a Free Quote',
     ctaSecondary: 'See Our Work',
     stats: [

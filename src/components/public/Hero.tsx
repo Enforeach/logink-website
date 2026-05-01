@@ -50,7 +50,7 @@ export function Hero() {
           className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           360° digital marketing agency built to help Indonesian brands dominate online.
-          Strategy, creativity, and data — all in one engine.
+          Strategy, creativity, and data: all in one engine.
         </motion.p>
 
         {/* CTAs */}

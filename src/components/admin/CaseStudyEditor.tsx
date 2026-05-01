@@ -311,7 +311,7 @@ export function CaseStudyEditor({ caseStudy }: CaseStudyEditorProps) {
             </div>
           </div>
 
-          {/* Key Metrics (legacy — still useful for homepage teaser) */}
+          {/* Key Metrics (legacy, still useful for homepage teaser) */}
           <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-5">
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-sm font-semibold text-[var(--text-primary)]">Key Metrics (Summary Cards)</h2>

@@ -52,20 +52,20 @@ const TECHFEATURES_COPY = {
   id: {
     eyebrow: 'Dibangun Dengan',
     heading: 'Setiap site yang kami bangun memenuhi standar ini.',
-    sub: 'Bukan fitur tambahan opsional — ini adalah baseline kami untuk setiap proyek.',
+    sub: 'Bukan fitur tambahan opsional: ini adalah baseline kami untuk setiap proyek.',
     perfTitle: 'Build Prioritaskan Performa',
-    perfDesc: 'Setiap site dikirim dengan load time di bawah 2 detik. Bundle code-split, gambar lazy-loaded, font teroptimasi, dan pengiriman via CDN. Kami tidak hanya membangun — kami membangun dengan cepat. Skor PageSpeed-mu akan 90+ atau kami perbaiki gratis.',
+    perfDesc: 'Setiap site dikirim dengan load time di bawah 2 detik. Bundle code-split, gambar lazy-loaded, font teroptimasi, dan pengiriman via CDN. Kami tidak hanya membangun; kami membangun dengan cepat. Skor PageSpeed-mu akan 90+ atau kami perbaiki gratis.',
     mobileTitle: 'Responsif Mobile-First',
-    mobileDesc: 'Didesain untuk layar mobile dulu, baru diperluas. Lebih dari 70% traffic web Indonesia berasal dari mobile — sitemu terlihat sempurna di setiap perangkat dan orientasi.',
+    mobileDesc: 'Didesain untuk layar mobile dulu, baru diperluas. Lebih dari 70% traffic web Indonesia berasal dari mobile, dan sitemu terlihat sempurna di setiap perangkat dan orientasi.',
   },
   en: {
     eyebrow: 'Built With',
     heading: 'Every site we build meets these standards.',
-    sub: "These aren't optional add-ons — this is our baseline for every project.",
+    sub: "These aren't optional add-ons: this is our baseline for every project.",
     perfTitle: 'Performance-First Build',
-    perfDesc: 'Every site is delivered with a sub-2-second load time. Code-split bundles, lazy-loaded images, optimized fonts, and CDN delivery. We don\'t just build — we build fast. Your PageSpeed score will be 90+ or we fix it for free.',
+    perfDesc: 'Every site is delivered with a sub-2-second load time. Code-split bundles, lazy-loaded images, optimized fonts, and CDN delivery. We don\'t just build; we build fast. Your PageSpeed score will be 90+ or we fix it for free.',
     mobileTitle: 'Mobile-First Responsive',
-    mobileDesc: 'Designed for mobile screens first, then scaled up. Over 70% of web traffic in Indonesia comes from mobile — your site looks perfect on every device and orientation.',
+    mobileDesc: 'Designed for mobile screens first, then scaled up. Over 70% of web traffic in Indonesia comes from mobile, and your site looks perfect on every device and orientation.',
   },
 }
 
@@ -94,7 +94,7 @@ export function WebsiteTechFeatures({ locale = 'id' }: { locale?: 'id' | 'en' })
 
         {/* Row 1: 2-col card + 1-col card */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
-          {/* Performance — spans 2 cols */}
+          {/* Performance: spans 2 cols */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}

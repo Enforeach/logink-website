@@ -30,11 +30,11 @@ export default async function SubmissionDetailPage({ params }: { params: Promise
       <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] divide-y divide-[var(--border-default)]">
         {[
           { label: 'Email', value: submission.email },
-          { label: 'Company', value: submission.company || '—' },
-          { label: 'Phone', value: submission.phone || '—' },
-          { label: 'Budget', value: submission.budgetRange || '—' },
-          { label: 'Timeline', value: submission.timeline || '—' },
-          { label: 'Source', value: submission.source || '—' },
+          { label: 'Company', value: submission.company || '-' },
+          { label: 'Phone', value: submission.phone || '-' },
+          { label: 'Budget', value: submission.budgetRange || '-' },
+          { label: 'Timeline', value: submission.timeline || '-' },
+          { label: 'Source', value: submission.source || '-' },
         ].map(row => (
           <div key={row.label} className="flex gap-4 px-5 py-3">
             <span className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider w-24 shrink-0 mt-0.5">{row.label}</span>

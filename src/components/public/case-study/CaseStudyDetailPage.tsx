@@ -211,7 +211,7 @@ export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], 
         )}
       </div>
 
-      {/* Sticky sub-nav — offset matches the full header height (navbar + optional announcement bar) */}
+      {/* Sticky sub-nav: offset matches the full header height (navbar + optional announcement bar) */}
       <div className="sticky z-30 bg-[var(--bg-primary)]/95 backdrop-blur border-b border-[var(--border-default)]" style={{ top: headerHeight }}>
         <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-12">
           <nav className="flex gap-5 overflow-x-auto scrollbar-hide" aria-label="In-page navigation">
@@ -281,7 +281,7 @@ export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], 
           )
         })}
 
-        {/* If no blocks at all — render legacy content */}
+        {/* If no blocks: render legacy content */}
         {blocks.length === 0 && (
           <>
             <Section id="challenge" className="bg-[var(--bg-surface)]">

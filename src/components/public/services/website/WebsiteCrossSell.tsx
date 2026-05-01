@@ -10,7 +10,7 @@ const CARDS_ID = [
     accent: '#7C3AED',
     title: 'SEO & Content Marketing',
     description:
-      'Website yang indah tanpa traffic seperti billboard di gurun. Tim SEO kami mendatangkan pengunjung organik ke sitemu yang baru dengan konten teroptimasi keyword dan technical SEO — supaya investasimu mulai menghasilkan return dari bulan pertama.',
+      'Website yang indah tanpa traffic seperti billboard di gurun. Tim SEO kami mendatangkan pengunjung organik ke sitemu yang baru dengan konten teroptimasi keyword dan technical SEO, supaya investasimu mulai menghasilkan return dari bulan pertama.',
     pricing: 'Mulai dari Rp 6 Juta/bln',
   },
   {
@@ -29,7 +29,7 @@ const CARDS_EN = [
     accent: '#7C3AED',
     title: 'SEO & Content Marketing',
     description:
-      "A beautiful website without traffic is like a billboard in the desert. Our SEO team drives organic visitors to your new site with keyword-optimized content and technical SEO — so your investment starts returning from month one.",
+      "A beautiful website without traffic is like a billboard in the desert. Our SEO team drives organic visitors to your new site with keyword-optimized content and technical SEO, so your investment starts returning from month one.",
     pricing: 'Starting from Rp 6M/mo',
   },
   {

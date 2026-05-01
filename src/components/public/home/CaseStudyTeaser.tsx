@@ -114,7 +114,7 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
             backgroundClip: 'padding-box',
           }}
         >
-          {/* Gradient border via pseudo — we fake it with box-shadow and border overlay */}
+          {/* Gradient border via pseudo: we fake it with box-shadow and border overlay */}
           <div
             className="absolute inset-0 rounded-3xl pointer-events-none"
             style={{
@@ -159,7 +159,7 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
           {/* Footer */}
           <div className="flex items-center justify-between flex-wrap gap-4">
             {isPlaceholder ? (
-              <p className="text-xs text-[var(--text-muted)] italic">Sample data — add real case studies via CMS.</p>
+              <p className="text-xs text-[var(--text-muted)] italic">Sample data. Add real case studies via CMS.</p>
             ) : (
               <Link
                 href={`/portfolio/${cs.slug}`}

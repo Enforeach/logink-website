@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Privacy Policy',
-  description: 'Logink Privacy Policy — how we collect, use, and protect your personal data.',
+  description: 'Logink Privacy Policy: how we collect, use, and protect your personal data.',
   path: '/en/privacy',
 })
 
@@ -61,7 +61,7 @@ const sections = [
       },
       {
         subtitle: 'Service Providers',
-        text: 'We may share your information with trusted service providers who help us operate our business — such as hosting providers, email services, and analytics platforms — who are bound by confidentiality agreements.',
+        text: 'We may share your information with trusted service providers who help us operate our business (such as hosting providers, email services, and analytics platforms) who are bound by confidentiality agreements.',
       },
       {
         subtitle: 'Legal Requirements',
@@ -93,7 +93,7 @@ const sections = [
     content: [
       {
         subtitle: 'Protection Measures',
-        text: 'We implement appropriate technical and organisational security measures to protect your personal information from unauthorised access, alteration, disclosure, or destruction — including data encryption, restricted access, and regular security audits.',
+        text: 'We implement appropriate technical and organisational security measures to protect your personal information from unauthorised access, alteration, disclosure, or destruction, including data encryption, restricted access, and regular security audits.',
       },
       {
         subtitle: 'Limitations',

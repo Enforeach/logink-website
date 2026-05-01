@@ -19,7 +19,7 @@ const STATS_ID: StatItem[] = [
     value: 4,
     suffix: '',
     label: 'Platform Dicakup',
-    context: 'Instagram, TikTok, Facebook, LinkedIn — dikelola sebagai satu strategi terpadu.',
+    context: 'Instagram, TikTok, Facebook, LinkedIn: dikelola sebagai satu strategi terpadu.',
   },
   {
     Icon: FileText,
@@ -43,7 +43,7 @@ const STATS_EN: StatItem[] = [
     value: 4,
     suffix: '',
     label: 'Platforms Covered',
-    context: 'Instagram, TikTok, Facebook, LinkedIn — managed as one integrated strategy.',
+    context: 'Instagram, TikTok, Facebook, LinkedIn: managed as one integrated strategy.',
   },
   {
     Icon: FileText,

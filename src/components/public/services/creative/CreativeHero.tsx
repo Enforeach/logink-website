@@ -79,7 +79,7 @@ const HERO_COPY = {
     trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi termasuk', '✓ Format multi-platform'],
     title1: 'Visual yang Berani.',
     title2: 'Cerita yang Jelas.\nBrand yang Tak Terlupakan.',
-    desc: 'Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu — tidak pernah dari library template. Desain yang tidak hanya terlihat bagus, tapi juga perform.',
+    desc: 'Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu, tidak pernah dari library template. Desain yang tidak hanya terlihat bagus, tapi juga perform.',
     ctaPrimary: 'Mulai Konsultasi Gratis →',
     ctaHref: '/contact?service=creative-services',
     ctaSecondary: 'Lihat Karya Kami',
@@ -89,7 +89,7 @@ const HERO_COPY = {
     trustPills: ['✓ 100% custom design', '✓ 2 revision rounds included', '✓ Multi-platform formats'],
     title1: 'Bold Visuals.',
     title2: 'Clear Stories.\nUnforgettable Brands.',
-    desc: 'From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset is made for your audience — never from a template library. Design that not only looks great, but also performs.',
+    desc: 'From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset is made for your audience, never from a template library. Design that not only looks great, but also performs.',
     ctaPrimary: 'Start Free Consultation →',
     ctaHref: '/en/contact?service=creative-services',
     ctaSecondary: 'See Our Work',
@@ -165,7 +165,7 @@ export function CreativeHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           </div>
         </motion.div>
 
-        {/* Right — mockup stack */}
+        {/* Right: mockup stack */}
         <motion.div
           initial={{ opacity: 0, x: 60, rotate: 6 }}
           animate={inView ? { opacity: 1, x: 0, rotate: 0 } : {}}

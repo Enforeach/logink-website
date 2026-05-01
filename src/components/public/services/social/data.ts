@@ -5,7 +5,7 @@ export const SOCIAL_MODULES = [
     platforms: ['Instagram', 'TikTok', 'Facebook'],
     tagline: 'Kehadiran harianmu di platform yang paling penting di Indonesia.',
     description:
-      'Kami tangani semuanya — dari perencanaan konten bulanan hingga posting harian, desain visual, penulisan caption dalam Bahasa Indonesia, dan community management. Kamu review dan setujui; kami kerjakan sisanya.',
+      'Kami tangani semuanya: dari perencanaan konten bulanan hingga posting harian, desain visual, penulisan caption dalam Bahasa Indonesia, dan community management. Kamu review dan setujui; kami kerjakan sisanya.',
     features: [
       {
         name: 'Monthly Content Plan',
@@ -49,7 +49,7 @@ export const SOCIAL_MODULES = [
       {
         name: 'Riset Tren & Suara Lokal',
         description:
-          'Kami pantau audio trending, format, dan challenge di ekosistem TikTok Indonesia setiap hari — bukan setelah trennya lewat.',
+          'Kami pantau audio trending, format, dan challenge di ekosistem TikTok Indonesia setiap hari, bukan setelah trennya lewat.',
       },
       {
         name: 'Video per bulan (kustom)',
@@ -69,7 +69,7 @@ export const SOCIAL_MODULES = [
       {
         name: 'Laporan Analitik TikTok',
         description:
-          'Views, completion rate, shares, pertumbuhan follower, dan performa FYP — metrik yang benar-benar penting.',
+          'Views, completion rate, shares, pertumbuhan follower, dan performa FYP: metrik yang benar-benar penting.',
       },
     ],
     accentColor: '#EC4899',
@@ -88,7 +88,7 @@ export const SOCIAL_MODULES = [
       {
         name: 'Optimasi Profil & Company Page',
         description:
-          'Overhaul lengkap pada kehadiran LinkedIn kamu — headline, about, featured content, dan visual branding yang mengkomunikasikan otoritas.',
+          'Overhaul lengkap pada kehadiran LinkedIn kamu: headline, about, featured content, dan visual branding yang mengkomunikasikan otoritas.',
       },
       {
         name: 'Post per bulan (kustom)',
@@ -125,7 +125,7 @@ export const SOCIAL_ADDONS = [
     id: 'social-audit',
     name: 'Social Media Audit',
     description:
-      'Analisis komprehensif kehadiran social mediamu saat ini — performa konten, demografi audiens, benchmarking kompetitor, dan rekomendasi yang bisa langsung dieksekusi.',
+      'Analisis komprehensif kehadiran social mediamu saat ini: performa konten, demografi audiens, benchmarking kompetitor, dan rekomendasi yang bisa langsung dieksekusi.',
     badge: 'Layanan sekali jalan',
   },
 ] as const
@@ -136,7 +136,7 @@ export const SOCIAL_CONTENT_PILLARS = [
     percentage: 40,
     subtitle: 'Bangun otoritas & kepercayaan',
     description:
-      'Tips, how-to, insight industri, dan thought leadership yang memposisikan brandmu sebagai ahli. Audiens belajar sesuatu — dan ingat siapa yang mengajari mereka.',
+      'Tips, how-to, insight industri, dan thought leadership yang memposisikan brandmu sebagai ahli. Audiens belajar sesuatu, dan ingat siapa yang mengajari mereka.',
     examples: 'Infografik carousel, reel tips, statistik industri, video penjelasan',
     accentColor: '#7C3AED',
     accentRgb: '124,58,237',
@@ -158,7 +158,7 @@ export const SOCIAL_CONTENT_PILLARS = [
     percentage: 20,
     subtitle: 'Ubah follower jadi pelanggan',
     description:
-      'Penawaran langsung, testimoni, showcase produk, dan CTA yang mendorong aksi. Strategis — tidak pernah spam. Waktunya tepat ketika audiensmu sudah siap.',
+      'Penawaran langsung, testimoni, showcase produk, dan CTA yang mendorong aksi. Strategis, tidak pernah spam. Waktunya tepat ketika audiensmu sudah siap.',
     examples: 'Peluncuran produk, pengumuman promo, testimoni klien, penawaran terbatas',
     accentColor: '#D97706',
     accentRgb: '217,119,6',
@@ -172,7 +172,7 @@ export const SOCIAL_PROCESS = [
     title: 'Brand Onboarding',
     timeline: 'Minggu 1',
     description:
-      'Kami pelajari brandmu dari dalam — tone of voice, visual identity, persona audiens, kompetitor, dan dos & don\'ts konten. Kami audit kehadiran social mediamu saat ini dan identifikasi quick wins.',
+      'Kami pelajari brandmu secara menyeluruh: tone of voice, visual identity, persona audiens, kompetitor, dan dos & don\'ts konten. Kami audit kehadiran social mediamu saat ini dan identifikasi quick wins.',
     deliverable: 'Dokumen brand brief + analisis kompetitor',
     accentColor: '#7C3AED',
     icon: 'ClipboardList',
@@ -192,7 +192,7 @@ export const SOCIAL_PROCESS = [
     title: 'Produksi Konten',
     timeline: 'Minggu 2–3',
     description:
-      'Desainer membuat visual, copywriter menulis caption dalam Bahasa Indonesia, dan video editor memproduksi reels dan TikTok. Semuanya dibuat sesuai brand guideline kamu — tanpa template.',
+      'Desainer membuat visual, copywriter menulis caption dalam Bahasa Indonesia, dan video editor memproduksi reels dan TikTok. Semuanya dibuat sesuai brand guideline kamu, tanpa template.',
     deliverable: 'Konten satu bulan penuh siap untuk review',
     accentColor: '#D97706',
     icon: 'PenLine',
@@ -213,17 +213,17 @@ export const SOCIAL_FAQS = [
   {
     question: 'Platform apa saja yang kamu kelola?',
     answer:
-      'Kami kelola Instagram, TikTok, Facebook, dan LinkedIn. Setiap platform mendapat strategi tersendiri — apa yang berhasil di TikTok tidak berlaku di LinkedIn. Kami rekomendasikan mulai dari 2–3 platform tempat audiensmu paling aktif, baru berkembang. Kami tidak menyebar tipis ke platform yang tidak relevan untuk brandmu.',
+      'Kami kelola Instagram, TikTok, Facebook, dan LinkedIn. Setiap platform mendapat strategi tersendiri, karena apa yang berhasil di TikTok tidak berlaku di LinkedIn. Kami rekomendasikan mulai dari 2–3 platform tempat audiensmu paling aktif, baru berkembang. Kami tidak menyebar tipis ke platform yang tidak relevan untuk brandmu.',
   },
   {
     question: 'Apakah community management sudah termasuk?',
     answer:
-      'Ya — kami pantau dan balas komentar serta DM di jam kerja (Sen–Jum, 09.00–18.00 WIB). Untuk brand yang butuh coverage 24/7 atau akhir pekan, kami menawarkan extended community management sebagai add-on. Setiap interaksi mengikuti panduan tone of voice brandmu.',
+      'Ya: kami pantau dan balas komentar serta DM di jam kerja (Sen–Jum, 09.00–18.00 WIB). Untuk brand yang butuh coverage 24/7 atau akhir pekan, kami menawarkan extended community management sebagai add-on. Setiap interaksi mengikuti panduan tone of voice brandmu.',
   },
   {
     question: 'Siapa yang membuat konten visual?',
     answer:
-      'Tim desain internal kami membuat semua konten visual — feed post, stories, cover reel, grafik carousel, dan thumbnail TikTok. Semuanya didesain kustom sesuai brand guideline kamu. Kami tidak pakai template Canva atau grafik stok. Jika brandmu butuh produksi video (syuting), itu ditangani tim Creative Services kami.',
+      'Tim desain internal kami membuat semua konten visual: feed post, stories, cover reel, grafik carousel, dan thumbnail TikTok. Semuanya didesain kustom sesuai brand guideline kamu. Kami tidak pakai template Canva atau grafik stok. Jika brandmu butuh produksi video (syuting), itu ditangani tim Creative Services kami.',
   },
   {
     question: 'Berapa banyak post per bulan?',
@@ -233,17 +233,17 @@ export const SOCIAL_FAQS = [
   {
     question: 'Apakah kamu membuat video TikTok?',
     answer:
-      'Ya — modul TikTok Strategy & Production kami mencakup pembuatan video penuh. Kami tangani pengembangan konsep, scripting, syuting (area Jakarta), editing, dan penulisan caption. Setiap video dioptimasi untuk algoritma FYP dengan struktur hook-first dan audio trending. Untuk brand di luar Jakarta, kami bisa bekerja dengan kreator lokal atau memberikan brief detail untuk timmu.',
+      'Ya: modul TikTok Strategy & Production kami mencakup pembuatan video penuh. Kami tangani pengembangan konsep, scripting, syuting (area Jakarta), editing, dan penulisan caption. Setiap video dioptimasi untuk algoritma FYP dengan struktur hook-first dan audio trending. Untuk brand di luar Jakarta, kami bisa bekerja dengan kreator lokal atau memberikan brief detail untuk timmu.',
   },
   {
     question: 'Apakah kami bisa approve konten sebelum tayang?',
     answer:
-      'Tentu saja — tidak ada yang tayang tanpa persetujuanmu. Kami siapkan kalender konten bulan penuh di awal, termasuk visual dan caption. Kamu review semuanya di dokumen bersama atau tool content approval. Setelah disetujui, kami tangani penjadwalan dan posting. Ronde revisi sudah termasuk.',
+      'Tentu saja, tidak ada yang tayang tanpa persetujuanmu. Kami siapkan kalender konten bulan penuh di awal, termasuk visual dan caption. Kamu review semuanya di dokumen bersama atau tool content approval. Setelah disetujui, kami tangani penjadwalan dan posting. Ronde revisi sudah termasuk.',
   },
   {
     question: 'Bagaimana kamu mengukur keberhasilan?',
     answer:
-      'Kami lacak reach, engagement rate, pertumbuhan follower, saves, shares, kunjungan profil, dan klik link — metrik yang menunjukkan pertumbuhan brand nyata, bukan angka vanity. Laporan bulanan kami mencakup analisis konten terbaik, insight demografi audiens, dan rekomendasi strategis untuk bulan depan. Kami kaitkan performa social dengan tujuan bisnismu sebisa mungkin.',
+      'Kami lacak reach, engagement rate, pertumbuhan follower, saves, shares, kunjungan profil, dan klik link: metrik yang menunjukkan pertumbuhan brand nyata, bukan angka vanity. Laporan bulanan kami mencakup analisis konten terbaik, insight demografi audiens, dan rekomendasi strategis untuk bulan depan. Kami kaitkan performa social dengan tujuan bisnismu sebisa mungkin.',
   },
 ] as const
 
@@ -252,7 +252,7 @@ export const SOCIAL_STATS = [
     value: 4,
     suffix: '',
     label: 'Platform Dikelola',
-    context: 'Instagram, TikTok, Facebook, LinkedIn — dikelola sebagai satu strategi terintegrasi.',
+    context: 'Instagram, TikTok, Facebook, LinkedIn: dikelola sebagai satu strategi terintegrasi.',
     isCounter: true,
     decimals: 0,
   },
@@ -283,7 +283,7 @@ export const SOCIAL_MODULES_EN = [
     platforms: ['Instagram', 'TikTok', 'Facebook'],
     tagline: 'Your daily presence across the platforms that matter most in Indonesia.',
     description:
-      'We handle everything — from monthly content planning to daily posting, visual design, caption writing in Bahasa Indonesia, and community management. You review and approve; we do the rest.',
+      'We handle everything: from monthly content planning to daily posting, visual design, caption writing in Bahasa Indonesia, and community management. You review and approve; we do the rest.',
     features: [
       {
         name: 'Monthly Content Plan',
@@ -327,7 +327,7 @@ export const SOCIAL_MODULES_EN = [
       {
         name: 'Local Trend & Sound Research',
         description:
-          "We monitor trending audio, formats, and challenges in the Indonesian TikTok ecosystem daily — not after they've peaked.",
+          "We monitor trending audio, formats, and challenges in the Indonesian TikTok ecosystem daily, not after they've peaked.",
       },
       {
         name: 'Videos per month (customized)',
@@ -347,7 +347,7 @@ export const SOCIAL_MODULES_EN = [
       {
         name: 'TikTok Analytics Report',
         description:
-          'Views, completion rate, shares, follower growth, and FYP performance — the metrics that actually matter.',
+          'Views, completion rate, shares, follower growth, and FYP performance: the metrics that actually matter.',
       },
     ],
     accentColor: '#EC4899',
@@ -366,7 +366,7 @@ export const SOCIAL_MODULES_EN = [
       {
         name: 'Profile & Company Page Optimization',
         description:
-          'Complete overhaul of your LinkedIn presence — headline, about, featured content, and visual branding that communicates authority.',
+          'Complete overhaul of your LinkedIn presence: headline, about, featured content, and visual branding that communicates authority.',
       },
       {
         name: 'Posts per month (customized)',
@@ -403,7 +403,7 @@ export const SOCIAL_ADDONS_EN = [
     id: 'social-audit',
     name: 'Social Media Audit',
     description:
-      'Comprehensive analysis of your current social presence — content performance, audience demographics, competitor benchmarking, and actionable recommendations.',
+      'Comprehensive analysis of your current social presence: content performance, audience demographics, competitor benchmarking, and actionable recommendations.',
     badge: 'One-time service',
   },
 ] as const
@@ -414,7 +414,7 @@ export const SOCIAL_CONTENT_PILLARS_EN = [
     percentage: 40,
     subtitle: 'Build authority & trust',
     description:
-      'Tips, how-tos, industry insights, and thought leadership that position your brand as the expert. Your audience learns something — and remembers who taught them.',
+      'Tips, how-tos, industry insights, and thought leadership that position your brand as the expert. Your audience learns something, and remembers who taught them.',
     examples: 'Carousel infographics, tips reels, industry stats, explainer videos',
     accentColor: '#7C3AED',
     accentRgb: '124,58,237',
@@ -436,7 +436,7 @@ export const SOCIAL_CONTENT_PILLARS_EN = [
     percentage: 20,
     subtitle: 'Turn followers into customers',
     description:
-      'Direct offers, testimonials, product showcases, and CTAs that drive action. Strategic — never spammy. Timed to land when your audience is already warmed up.',
+      'Direct offers, testimonials, product showcases, and CTAs that drive action. Strategic, never spammy. Timed to land when your audience is already warmed up.',
     examples: 'Product launches, promo announcements, client testimonials, limited offers',
     accentColor: '#D97706',
     accentRgb: '217,119,6',
@@ -450,7 +450,7 @@ export const SOCIAL_PROCESS_EN = [
     title: 'Brand Onboarding',
     timeline: 'Week 1',
     description:
-      "We learn your brand inside out — tone of voice, visual identity, audience personas, competitors, and content dos and don'ts. We audit your current social presence and identify quick wins.",
+      "We learn your brand thoroughly: tone of voice, visual identity, audience personas, competitors, and content dos and don'ts. We audit your current social presence and identify quick wins.",
     deliverable: 'Brand brief document + competitor analysis',
     accentColor: '#7C3AED',
     icon: 'ClipboardList',
@@ -470,7 +470,7 @@ export const SOCIAL_PROCESS_EN = [
     title: 'Content Production',
     timeline: 'Week 2–3',
     description:
-      'Designers create visuals, copywriters craft captions in Bahasa Indonesia, and video editors produce reels and TikToks. Everything built to your brand guidelines — no templates.',
+      'Designers create visuals, copywriters craft captions in Bahasa Indonesia, and video editors produce reels and TikToks. Everything built to your brand guidelines, no templates.',
     deliverable: 'Full month of content ready for review',
     accentColor: '#D97706',
     icon: 'PenLine',
@@ -491,17 +491,17 @@ export const SOCIAL_FAQS_EN = [
   {
     question: 'Which platforms do you manage?',
     answer:
-      "We manage Instagram, TikTok, Facebook, and LinkedIn. Each platform gets a tailored strategy — what works on TikTok doesn't work on LinkedIn. We recommend starting with 2–3 platforms where your audience is most active, then expanding. We don't spread thin across platforms that don't matter for your brand.",
+      "We manage Instagram, TikTok, Facebook, and LinkedIn. Each platform gets a tailored strategy, because what works on TikTok doesn't work on LinkedIn. We recommend starting with 2–3 platforms where your audience is most active, then expanding. We don't spread thin across platforms that don't matter for your brand.",
   },
   {
     question: 'Is community management included?',
     answer:
-      "Yes — we monitor and respond to comments and DMs during business hours (Mon–Fri, 9am–6pm WIB). For brands that need 24/7 or weekend coverage, we offer extended community management as an add-on. Every interaction follows your brand's tone of voice guidelines.",
+      "Yes: we monitor and respond to comments and DMs during business hours (Mon–Fri, 9am–6pm WIB). For brands that need 24/7 or weekend coverage, we offer extended community management as an add-on. Every interaction follows your brand's tone of voice guidelines.",
   },
   {
     question: 'Who creates the visual content?',
     answer:
-      "Our in-house design team creates all visual content — feed posts, stories, reels covers, carousel graphics, and TikTok thumbnails. Everything is custom-designed to your brand guidelines. We don't use Canva templates or stock graphics. If your brand needs video production (shooting), that's handled by our Creative Services team.",
+      "Our in-house design team creates all visual content: feed posts, stories, reels covers, carousel graphics, and TikTok thumbnails. Everything is custom-designed to your brand guidelines. We don't use Canva templates or stock graphics. If your brand needs video production (shooting), that's handled by our Creative Services team.",
   },
   {
     question: 'How many posts per month?',
@@ -511,17 +511,17 @@ export const SOCIAL_FAQS_EN = [
   {
     question: 'Do you create TikTok videos?',
     answer:
-      'Yes — our TikTok Strategy & Production module includes full video creation. We handle concept development, scripting, shooting (Jakarta area), editing, and caption writing. Each video is optimized for the FYP algorithm with hook-first structure and trending audio. For brands outside Jakarta, we can work with local creators or provide detailed briefs for your team to execute.',
+      'Yes: our TikTok Strategy & Production module includes full video creation. We handle concept development, scripting, shooting (Jakarta area), editing, and caption writing. Each video is optimized for the FYP algorithm with hook-first structure and trending audio. For brands outside Jakarta, we can work with local creators or provide detailed briefs for your team to execute.',
   },
   {
     question: 'Can we approve content before it goes live?',
     answer:
-      "Absolutely — nothing goes live without your approval. We prepare the full month's content calendar in advance, including visuals and captions. You review everything in a shared document or content approval tool. Once approved, we handle scheduling and posting. Revision rounds are included.",
+      "Absolutely, nothing goes live without your approval. We prepare the full month's content calendar in advance, including visuals and captions. You review everything in a shared document or content approval tool. Once approved, we handle scheduling and posting. Revision rounds are included.",
   },
   {
     question: 'How do you measure success?',
     answer:
-      "We track reach, engagement rate, follower growth, saves, shares, profile visits, and link clicks — the metrics that indicate real brand growth, not just vanity numbers. Our monthly report includes top-performing content analysis, audience demographic insights, and strategic recommendations for the next month. We tie social performance back to your business goals wherever possible.",
+      "We track reach, engagement rate, follower growth, saves, shares, profile visits, and link clicks: the metrics that indicate real brand growth, not just vanity numbers. Our monthly report includes top-performing content analysis, audience demographic insights, and strategic recommendations for the next month. We tie social performance back to your business goals wherever possible.",
   },
 ] as const
 
@@ -530,7 +530,7 @@ export const SOCIAL_STATS_EN = [
     value: 4,
     suffix: '',
     label: 'Platforms Covered',
-    context: 'Instagram, TikTok, Facebook, LinkedIn — managed as one integrated strategy.',
+    context: 'Instagram, TikTok, Facebook, LinkedIn: managed as one integrated strategy.',
     isCounter: true,
     decimals: 0,
   },

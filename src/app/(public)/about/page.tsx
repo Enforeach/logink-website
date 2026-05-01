@@ -10,7 +10,7 @@ export const metadata: Metadata = buildMetadata({
 
 const VALUES = [
   { title: 'Berbasis Data', desc: 'Setiap keputusan didukung oleh data. Kami ukur yang benar-benar penting: revenue, leads, dan ROAS.', color: '#7C3AED' },
-  { title: 'Cakupan 360°', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem — bukan agensi-agensi yang terpisah.', color: '#DB2777' },
+  { title: 'Cakupan 360°', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan agensi-agensi yang terpisah.', color: '#DB2777' },
   { title: 'Kreativitas di Depan', desc: 'Konten yang bikin scroll berhenti, dirancang khusus untuk brand dan audiens kamu.', color: '#D97706' },
   { title: 'Fokus pada Hasil', desc: 'Kami tidak berhenti sampai target tercapai. Laporan transparan, akses penuh ke setiap akun.', color: '#F59E0B' },
 ]
@@ -22,7 +22,7 @@ const DIFFERENTIATORS = [
   },
   {
     title: 'Tidak Ada Metrik yang Menyesatkan',
-    desc: '"Kami mengoptimalkan untuk revenue, leads, dan ROAS — bukan impresi dan jumlah followers."',
+    desc: '"Kami mengoptimalkan untuk revenue, leads, dan ROAS, bukan impresi dan jumlah followers."',
   },
   {
     title: 'Tidak Ada Konten Generik',
@@ -63,7 +63,7 @@ export default function AboutPage() {
                 Logink lahir dari satu keyakinan: brand tidak harus memilih antara strategi yang kuat, konten kreatif, dan hasil yang terukur. Kamu bisa dapat ketiganya.
               </p>
               <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-                Kami membangun Logink sebagai agensi digital marketing 360° yang mengelola semua channel sebagai satu sistem terintegrasi — bukan kumpulan tim yang bekerja sendiri-sendiri.
+                Kami membangun Logink sebagai agensi digital marketing 360° yang mengelola semua channel sebagai satu sistem terintegrasi, bukan kumpulan tim yang bekerja sendiri-sendiri.
               </p>
               <blockquote className="border-l-4 border-brand-violet pl-6 italic text-[var(--text-primary)] font-medium">
                 &ldquo;Kami menghubungkan strategi, kreativitas, dan data menjadi satu mesin yang mulus.&rdquo;

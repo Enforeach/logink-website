@@ -67,7 +67,7 @@ export async function generateCaseStudyMetadata(slug: string, locale: Locale): P
   const path = locale === 'en' ? `/en/portfolio/${slug}` : `/portfolio/${slug}`
   return buildMetadata({
     title: (title || cs.title) as string,
-    description: (description || `${cs.clientName} — ${cs.industry}`) as string,
+    description: (description || `${cs.clientName}: ${cs.industry}`) as string,
     path,
   })
 }

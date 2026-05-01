@@ -84,8 +84,8 @@ function ModuleCard({ mod, index, inView, locale = 'id' }: { mod: typeof CREATIV
 }
 
 const CATALOG_COPY = {
-  id: { eyebrow: 'Apa yang Kami Buat', heading: 'Tiga studio, satu tim kreatif.', sub: 'Setiap deliverable dibuat kustom untuk brandmu — tidak ada template, tidak ada stock, tidak ada jalan pintas.' },
-  en: { eyebrow: 'What We Make', heading: 'Three studios, one creative team.', sub: 'Every deliverable is custom-made for your brand — no templates, no stock, no shortcuts.' },
+  id: { eyebrow: 'Apa yang Kami Buat', heading: 'Tiga studio, satu tim kreatif.', sub: 'Setiap deliverable dibuat kustom untuk brandmu, tanpa template, tanpa stock, tanpa jalan pintas.' },
+  en: { eyebrow: 'What We Make', heading: 'Three studios, one creative team.', sub: 'Every deliverable is custom-made for your brand: no templates, no stock, no shortcuts.' },
 }
 
 export function CreativeCatalog({ locale = 'id' }: { locale?: 'id' | 'en' }) {

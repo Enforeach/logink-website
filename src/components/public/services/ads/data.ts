@@ -28,7 +28,7 @@ export const ADS_PRICING_TIERS = [
     isPopular: true,
     features: [
       'Semua yang ada di Entry',
-      'Meta Ads — Targeting Audiens Lokal',
+      'Meta Ads: Targeting Audiens Lokal',
       'Desain Ad Creative untuk Meta',
       'A/B Testing di Meta',
       'Pixel Setup & Retargeting',
@@ -108,7 +108,7 @@ export const ADS_ADDONS = [
   {
     name: 'Retargeting Campaign',
     description:
-      'Re-engage pengguna yang sudah mengunjungi situsmu tapi belum konversi. Bekerja di Google Display dan Meta — membawa prospek hangat kembali untuk menyelesaikan pembelian mereka.',
+      'Re-engage pengguna yang sudah mengunjungi situsmu tapi belum konversi. Bekerja di Google Display dan Meta, membawa prospek hangat kembali untuk menyelesaikan pembelian mereka.',
     availability: 'Add-on untuk Entry & Growth. Sudah termasuk di Full.',
     accentColor: '#D97706',
   },
@@ -146,7 +146,7 @@ export const ADS_PLATFORMS = [
     subtitle: 'Instagram & Facebook',
     tagline: 'Jangkau audiens idealmu dengan targeting presisi dan creative yang bikin scroll berhenti.',
     description:
-      'Platform iklan Meta memberimu akses ke audiens social terbesar Indonesia. Targeting demografi lokal, audiens berbasis interest, retargeting perilaku — dan creative yang benar-benar menghentikan scroll.',
+      'Platform iklan Meta memberimu akses ke audiens social terbesar Indonesia. Targeting demografi lokal, audiens berbasis interest, retargeting perilaku, dan creative yang benar-benar menghentikan scroll.',
     features: [
       'Targeting Audiens Lokal',
       'Desain Ad Creative untuk Meta',
@@ -165,7 +165,7 @@ export const ADS_PLATFORMS = [
     subtitle: 'In-feed · Spark · TopView',
     tagline: 'Iklan video format native yang dirancang untuk algoritma FYP.',
     description:
-      'TikTok Ads menjangkau audiens termuda dan paling engaged di Indonesia. Kami setup Ads Manager kamu, produksi creative brief, tangani targeting audiens, dan optimasi untuk konversi — bukan sekadar views.',
+      'TikTok Ads menjangkau audiens termuda dan paling engaged di Indonesia. Kami setup Ads Manager kamu, produksi creative brief, tangani targeting audiens, dan optimasi untuk konversi, bukan sekadar views.',
     features: [
       'Setup TikTok Ads Manager',
       'Creative Brief & Produksi',
@@ -184,7 +184,7 @@ export const ADS_PLATFORMS = [
     subtitle: 'Tokopedia · Shopee · Lazada',
     tagline: 'Menangkan buy box di platform e-commerce terbesar Indonesia.',
     description:
-      'Iklan native platform yang menempatkan produkmu di depan pembeli yang siap belanja. Optimasi keyword, strategi flash sale, dan kampanye voucher — dibangun untuk ekosistem marketplace Indonesia.',
+      'Iklan native platform yang menempatkan produkmu di depan pembeli yang siap belanja. Optimasi keyword, strategi flash sale, dan kampanye voucher, dibangun untuk ekosistem marketplace Indonesia.',
     features: [
       'Setup Tokopedia Ads & Shopee Ads',
       'Optimasi Keyword Produk',
@@ -212,7 +212,7 @@ export const ADS_PROCESS = [
     title: 'Pemetaan Funnel',
     timeline: 'Minggu 1',
     description:
-      'Tujuan kampanye didefinisikan di setiap tahap funnel — dari awareness hingga konversi. Kami petakan platform mana yang menangani tahap mana: Google Search untuk intent, Meta untuk awareness, TikTok untuk discovery. Setiap rupiah punya tujuan.',
+      'Tujuan kampanye didefinisikan di setiap tahap funnel, dari awareness hingga konversi. Kami petakan platform mana yang menangani tahap mana: Google Search untuk intent, Meta untuk awareness, TikTok untuk discovery. Setiap rupiah punya tujuan.',
     accentColor: '#DB2777',
   },
   {
@@ -228,7 +228,7 @@ export const ADS_PROCESS = [
     title: 'Launch Kampanye',
     timeline: 'Minggu 2',
     description:
-      'Live dengan budget terkontrol untuk pengumpulan data awal. Kami mulai konservatif, membiarkan algoritma mempelajari audiens idealmu — lalu scale budget ke yang berhasil. Monitoring harian dari hari pertama.',
+      'Live dengan budget terkontrol untuk pengumpulan data awal. Kami mulai konservatif, membiarkan algoritma mempelajari audiens idealmu, lalu scale budget ke yang berhasil. Monitoring harian dari hari pertama.',
     accentColor: '#F59E0B',
   },
   {
@@ -246,7 +246,7 @@ export const ADS_FAQS = [
   {
     question: 'Platform iklan apa saja yang kamu kelola?',
     answer:
-      'Kami kelola Google Ads (Search, Display, Shopping), Meta Ads (Instagram & Facebook), TikTok Ads, dan marketplace Indonesia (Tokopedia, Shopee, Lazada). Ketersediaan platform tergantung tiermu — Entry mencakup Google saja, Growth menambah Meta dan Marketplace, Full menambah TikTok. Kami rekomendasikan mulai dengan Google + Meta untuk kebanyakan brand, lalu berkembang.',
+      'Kami kelola Google Ads (Search, Display, Shopping), Meta Ads (Instagram & Facebook), TikTok Ads, dan marketplace Indonesia (Tokopedia, Shopee, Lazada). Ketersediaan platform tergantung tiermu: Entry mencakup Google saja, Growth menambah Meta dan Marketplace, Full menambah TikTok. Kami rekomendasikan mulai dengan Google + Meta untuk kebanyakan brand, lalu berkembang.',
   },
   {
     question: 'Berapa budget iklan minimum?',
@@ -261,7 +261,7 @@ export const ADS_FAQS = [
   {
     question: 'Apakah saya punya akses ke akun iklan saya sendiri?',
     answer:
-      'Tentu saja — transparansi penuh adalah hal yang tidak bisa ditawar. Kamu memiliki semua akun iklan (Google, Meta, TikTok). Kami bekerja di dalam akunmu sebagai manager, tidak pernah di akun kami sendiri. Jika kami berpisah, kamu menyimpan semuanya — kampanye, audiens, data, dan histori performa. Tidak ada yang ditahan.',
+      'Tentu saja, transparansi penuh adalah hal yang tidak bisa ditawar. Kamu memiliki semua akun iklan (Google, Meta, TikTok). Kami bekerja di dalam akunmu sebagai manager, tidak pernah di akun kami sendiri. Jika kami berpisah, kamu menyimpan semuanya: kampanye, audiens, data, dan histori performa. Tidak ada yang ditahan.',
   },
   {
     question: 'Berapa lama sampai iklan tayang?',
@@ -271,12 +271,12 @@ export const ADS_FAQS = [
   {
     question: 'Apakah kamu menangani creative (gambar/video) untuk iklan?',
     answer:
-      'Untuk Meta Ads, ya — desain ad creative sudah termasuk di tier Growth dan Full. Untuk produksi video TikTok, creative brief dan produksi sudah termasuk di tier Full. Untuk kebutuhan creative yang lebih kompleks, kami bisa bundle dengan tim Creative Services kami dengan harga diskon.',
+      'Untuk Meta Ads, ya: desain ad creative sudah termasuk di tier Growth dan Full. Untuk produksi video TikTok, creative brief dan produksi sudah termasuk di tier Full. Untuk kebutuhan creative yang lebih kompleks, kami bisa bundle dengan tim Creative Services kami dengan harga diskon.',
   },
   {
     question: 'Apa bedanya management fee dan ad spend?',
     answer:
-      'Management fee (yang kamu bayar ke Logink) mencakup strategi, setup, copywriting, creative, optimasi harian, dan pelaporan. Ad spend (yang kamu bayar langsung ke Google/Meta/TikTok) adalah budget media yang mendanai impresi dan klik yang sebenarnya. Anggap management fee sebagai membayar pilotnya — ad spend adalah bahan bakarnya. Keduanya transparan dan kamu kendalikan keduanya.',
+      'Management fee (yang kamu bayar ke Logink) mencakup strategi, setup, copywriting, creative, optimasi harian, dan pelaporan. Ad spend (yang kamu bayar langsung ke Google/Meta/TikTok) adalah budget media yang mendanai impresi dan klik yang sebenarnya. Anggap management fee sebagai membayar pilotnya; ad spend adalah bahan bakarnya. Keduanya transparan dan kamu kendalikan keduanya.',
   },
 ] as const
 
@@ -294,7 +294,7 @@ export const ADS_STATS = [
   {
     value: '5',
     label: 'Platform Iklan',
-    context: 'Google, Meta, TikTok, Tokopedia, Shopee — dikelola sebagai satu ekosistem cross-platform.',
+    context: 'Google, Meta, TikTok, Tokopedia, Shopee: dikelola sebagai satu ekosistem cross-platform.',
   },
 ] as const
 
@@ -374,7 +374,7 @@ export const ADS_PRICING_TIERS_EN = [
     isPopular: true,
     features: [
       'Everything in Entry',
-      'Meta Ads — Local Audience Targeting',
+      'Meta Ads: Local Audience Targeting',
       'Creative Ad Design for Meta',
       'A/B Testing on Meta',
       'Pixel Setup & Retargeting',
@@ -410,7 +410,7 @@ export const ADS_ADDONS_EN = [
   {
     name: 'Retargeting Campaign',
     description:
-      "Re-engage users who visited your site but didn't convert. Works across Google Display and Meta — bringing warm leads back to complete their purchase.",
+      "Re-engage users who visited your site but didn't convert. Works across Google Display and Meta, bringing warm leads back to complete their purchase.",
     availability: 'Add-on for Entry & Growth. Included in Full.',
     accentColor: '#D97706',
   },
@@ -448,7 +448,7 @@ export const ADS_PLATFORMS_EN = [
     subtitle: 'Instagram & Facebook',
     tagline: 'Reach your ideal audience with precision targeting and scroll-stopping creative.',
     description:
-      "Meta's advertising platform gives you access to Indonesia's largest social audience. Local demographic targeting, interest-based audiences, behavioral retargeting — and creative that actually stops the scroll.",
+      "Meta's advertising platform gives you access to Indonesia's largest social audience. Local demographic targeting, interest-based audiences, behavioral retargeting, and creative that actually stops the scroll.",
     features: [
       'Local Audience Targeting',
       'Creative Ad Design for Meta',
@@ -467,7 +467,7 @@ export const ADS_PLATFORMS_EN = [
     subtitle: 'In-feed · Spark · TopView',
     tagline: 'Native-format video ads designed for the FYP algorithm.',
     description:
-      "TikTok Ads reach Indonesia's youngest, most engaged audience. We set up your Ads Manager, produce creative briefs, handle audience targeting, and optimize for conversions — not just views.",
+      "TikTok Ads reach Indonesia's youngest, most engaged audience. We set up your Ads Manager, produce creative briefs, handle audience targeting, and optimize for conversions, not just views.",
     features: [
       'TikTok Ads Manager Setup',
       'Creative Brief & Production',
@@ -486,7 +486,7 @@ export const ADS_PLATFORMS_EN = [
     subtitle: 'Tokopedia · Shopee · Lazada',
     tagline: "Win the buy box on Indonesia's biggest e-commerce platforms.",
     description:
-      'Platform-native ads that put your products in front of ready-to-buy shoppers. Keyword optimization, flash sale strategy, and voucher campaigns — built for the Indonesian marketplace ecosystem.',
+      'Platform-native ads that put your products in front of ready-to-buy shoppers. Keyword optimization, flash sale strategy, and voucher campaigns, built for the Indonesian marketplace ecosystem.',
     features: [
       'Tokopedia Ads & Shopee Ads Setup',
       'Product Keyword Optimization',
@@ -514,7 +514,7 @@ export const ADS_PROCESS_EN = [
     title: 'Funnel Mapping',
     timeline: 'Week 1',
     description:
-      'Campaign objectives defined at each funnel stage — awareness to conversion. We map which platforms handle which stage: Google Search for intent, Meta for awareness, TikTok for discovery. Every rupiah has a purpose.',
+      'Campaign objectives defined at each funnel stage, from awareness to conversion. We map which platforms handle which stage: Google Search for intent, Meta for awareness, TikTok for discovery. Every rupiah has a purpose.',
     accentColor: '#DB2777',
   },
   {
@@ -530,7 +530,7 @@ export const ADS_PROCESS_EN = [
     title: 'Campaign Launch',
     timeline: 'Week 2',
     description:
-      "Live with controlled budgets for initial data gathering. We start conservative, letting the algorithms learn your ideal audience — then scale spend into what's working. Daily monitoring from day one.",
+      "Live with controlled budgets for initial data gathering. We start conservative, letting the algorithms learn your ideal audience, then scale spend into what's working. Daily monitoring from day one.",
     accentColor: '#F59E0B',
   },
   {
@@ -548,7 +548,7 @@ export const ADS_FAQS_EN = [
   {
     question: 'Which ad platforms do you manage?',
     answer:
-      'We manage Google Ads (Search, Display, Shopping), Meta Ads (Instagram & Facebook), TikTok Ads, and Indonesian marketplace platforms (Tokopedia, Shopee, Lazada). Platform availability depends on your tier — Entry covers Google only, Growth adds Meta and Marketplace, Full adds TikTok. We recommend starting with Google + Meta for most brands, then expanding.',
+      'We manage Google Ads (Search, Display, Shopping), Meta Ads (Instagram & Facebook), TikTok Ads, and Indonesian marketplace platforms (Tokopedia, Shopee, Lazada). Platform availability depends on your tier: Entry covers Google only, Growth adds Meta and Marketplace, Full adds TikTok. We recommend starting with Google + Meta for most brands, then expanding.',
   },
   {
     question: 'What is the minimum ad budget?',
@@ -563,7 +563,7 @@ export const ADS_FAQS_EN = [
   {
     question: 'Will I have access to my own ad accounts?',
     answer:
-      'Absolutely — full transparency is non-negotiable. You own all ad accounts (Google, Meta, TikTok). We work inside your accounts as managers, never in our own. If we part ways, you keep everything — campaigns, audiences, data, and historical performance. Nothing is held hostage.',
+      'Absolutely, full transparency is non-negotiable. You own all ad accounts (Google, Meta, TikTok). We work inside your accounts as managers, never in our own. If we part ways, you keep everything: campaigns, audiences, data, and historical performance. Nothing is held hostage.',
   },
   {
     question: 'How long until ads go live?',
@@ -573,12 +573,12 @@ export const ADS_FAQS_EN = [
   {
     question: 'Do you handle the creative (images/videos) for ads?',
     answer:
-      'For Meta Ads, yes — creative ad design is included in Growth and Full tiers. For TikTok video production, creative briefs and production are included in the Full tier. For more complex creative needs, we can bundle in our Creative Services team at a discounted rate.',
+      'For Meta Ads, yes: creative ad design is included in Growth and Full tiers. For TikTok video production, creative briefs and production are included in the Full tier. For more complex creative needs, we can bundle in our Creative Services team at a discounted rate.',
   },
   {
     question: "What's the difference between management fee and ad spend?",
     answer:
-      "Management fee (what you pay Logink) covers strategy, setup, copywriting, creative, daily optimization, and reporting. Ad spend (what you pay Google/Meta/TikTok directly) is your media budget that funds actual impressions and clicks. Think of management fee as hiring the pilot — ad spend is the fuel. Both are transparent and you control both.",
+      "Management fee (what you pay Logink) covers strategy, setup, copywriting, creative, daily optimization, and reporting. Ad spend (what you pay Google/Meta/TikTok directly) is your media budget that funds actual impressions and clicks. Think of management fee as paying the pilot; ad spend is the fuel. Both are transparent and you control both.",
   },
 ] as const
 
@@ -596,6 +596,6 @@ export const ADS_STATS_EN = [
   {
     value: '5',
     label: 'Ad Platforms',
-    context: 'Google, Meta, TikTok, Tokopedia, Shopee — managed as one cross-platform ecosystem.',
+    context: 'Google, Meta, TikTok, Tokopedia, Shopee: managed as one cross-platform ecosystem.',
   },
 ] as const
