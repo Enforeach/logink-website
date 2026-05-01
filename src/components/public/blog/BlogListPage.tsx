@@ -64,25 +64,28 @@ export async function BlogListPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* Category filter */}
-      <section className="py-8 px-4 bg-[var(--bg-surface)] border-b border-[var(--border-default)]">
-        <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
-          <Link
-            href={localePath('/blog', locale)}
-            className="px-4 py-2 rounded-xl text-sm font-medium gradient-bg text-white"
-          >
-            {t(locale, 'blog.allCategories')}
-          </Link>
-          {CATEGORIES.map((cat) => (
+      <nav aria-label={locale === 'en' ? 'Blog categories' : 'Kategori blog'} className="py-8 px-4 bg-[var(--bg-surface)] border-b border-[var(--border-default)]">
+        <ul className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center list-none p-0 m-0">
+          <li>
             <Link
-              key={cat.slug}
-              href={localePath(`/blog/category/${cat.slug}`, locale)}
-              className="px-4 py-2 rounded-xl text-sm font-medium border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-brand-violet/50 transition-all"
+              href={localePath('/blog', locale)}
+              className="px-4 py-2 rounded-xl text-sm font-medium gradient-bg text-white"
             >
-              {cat.name}
+              {t(locale, 'blog.allCategories')}
             </Link>
+          </li>
+          {CATEGORIES.map((cat) => (
+            <li key={cat.slug}>
+              <Link
+                href={localePath(`/blog/category/${cat.slug}`, locale)}
+                className="px-4 py-2 rounded-xl text-sm font-medium border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-brand-violet/50 transition-all"
+              >
+                {cat.name}
+              </Link>
+            </li>
           ))}
-        </div>
-      </section>
+        </ul>
+      </nav>
 
       {/* Posts grid */}
       <section className="py-20 px-4 bg-[var(--bg-primary)]">

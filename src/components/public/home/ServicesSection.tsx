@@ -39,11 +39,11 @@ function SEOCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
         </div>
         <h3 className="font-bold text-[var(--text-primary)] mb-1 text-lg">{svc.name}</h3>
         <p className="text-sm text-[var(--text-secondary)] mb-3">{svc.shortDescId}</p>
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <ul className="flex flex-wrap gap-1.5 mb-4 list-none p-0 m-0">
           {features.map((f) => (
-            <span key={f} className="text-xs px-2 py-0.5 rounded-full border border-white/12 text-[var(--text-muted)]">{f}</span>
+            <li key={f} className="text-xs px-2 py-0.5 rounded-full border border-white/12 text-[var(--text-muted)]">{f}</li>
           ))}
-        </div>
+        </ul>
         {svc.pricingTiers?.[0] && (
           <p className="text-xs text-[var(--text-muted)] mb-3">{startingFrom} <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}{perMonth}</span></p>
         )}
@@ -79,13 +79,13 @@ function SocialCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
       </div>
       <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
-      <div className="flex flex-wrap gap-2 mb-4">
+      <ul className="flex flex-wrap gap-2 mb-4 list-none p-0 m-0">
         {pillars.map((p) => (
-          <span key={p} className="text-xs px-3 py-1 rounded-full font-medium" style={{ background: `${svc.color}18`, color: svc.color }}>
+          <li key={p} className="text-xs px-3 py-1 rounded-full font-medium" style={{ background: `${svc.color}18`, color: svc.color }}>
             {p}
-          </span>
+          </li>
         ))}
-      </div>
+      </ul>
       <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
     </div>
   )
@@ -148,7 +148,7 @@ function WebsiteCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
     <div className="h-full flex flex-col">
       {/* Browser chrome mockup */}
       <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] overflow-hidden mb-4">
-        <div className="flex items-center gap-1.5 px-3 py-2 border-b border-[var(--border-default)]">
+        <div className="flex items-center gap-1.5 px-3 py-2 border-b border-[var(--border-default)]" aria-hidden="true">
           <span className="h-2 w-2 rounded-full bg-red-400/60" />
           <span className="h-2 w-2 rounded-full bg-yellow-400/60" />
           <span className="h-2 w-2 rounded-full bg-green-400/60" />

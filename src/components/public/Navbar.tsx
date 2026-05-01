@@ -193,6 +193,8 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
               {/* Services: mega menu trigger */}
               <div onMouseEnter={openServices} onMouseLeave={scheduleClose}>
                 <button
+                  aria-haspopup="true"
+                  aria-expanded={servicesOpen}
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5',
                     isServicesActive
@@ -255,7 +257,8 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
 
         {/* ── MEGA MENU ── */}
         {servicesOpen && (
-          <div
+          <nav
+            aria-label={locale === 'en' ? 'Services' : 'Layanan'}
             className="absolute left-0 right-0 top-full border-t border-[var(--border-default)] bg-[var(--bg-primary)] shadow-2xl"
             onMouseEnter={openServices}
             onMouseLeave={scheduleClose}
@@ -266,9 +269,9 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
                 {/* Service groups (3 columns) */}
                 {SERVICE_GROUPS.map((group) => (
                   <div key={group.categoryId}>
-                    <p className="text-[10px] font-bold tracking-[0.12em] text-[var(--text-muted)] uppercase mb-4">
+                    <h3 className="text-[10px] font-bold tracking-[0.12em] text-[var(--text-muted)] uppercase mb-4">
                       {locale === 'en' ? group.categoryEn : group.categoryId}
-                    </p>
+                    </h3>
                     <div className="space-y-1">
                       {group.items.map((svc) => (
                         <Link
@@ -349,14 +352,14 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
                 </p>
               </div>
             </div>
-          </div>
+          </nav>
         )}
       </header>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="fixed inset-0 z-30 pt-16 bg-[var(--bg-primary)]/95 backdrop-blur-xl lg:hidden overflow-y-auto">
-          <nav className="max-w-7xl mx-auto px-4 pt-6 flex flex-col gap-1 pb-8">
+          <nav aria-label={locale === 'en' ? 'Mobile navigation' : 'Navigasi mobile'} className="max-w-7xl mx-auto px-4 pt-6 flex flex-col gap-1 pb-8">
             <p className="px-4 text-[10px] font-bold tracking-[0.12em] text-[var(--text-muted)] uppercase mt-2 mb-1">
               {locale === 'en' ? 'Services' : 'Layanan'}
             </p>

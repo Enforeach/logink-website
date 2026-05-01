@@ -70,8 +70,8 @@ export default async function ContactPage() {
                     <div className="text-sm text-[var(--text-secondary)]">Respons dalam 24 jam</div>
                   </div>
                 </a>
-                <div className="flex items-center gap-4 p-4 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)]">
-                  <div className="h-12 w-12 rounded-xl bg-brand-amber/10 text-brand-amber flex items-center justify-center">
+                <address className="not-italic flex items-center gap-4 p-4 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)]">
+                  <div className="h-12 w-12 rounded-xl bg-brand-amber/10 text-brand-amber flex items-center justify-center" aria-hidden="true">
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     </svg>
@@ -80,7 +80,7 @@ export default async function ContactPage() {
                     <div className="font-semibold text-[var(--text-primary)]">Jakarta, Indonesia</div>
                     <div className="text-sm text-[var(--text-secondary)]">{SITE.address}</div>
                   </div>
-                </div>
+                </address>
               </div>
             </div>
 
