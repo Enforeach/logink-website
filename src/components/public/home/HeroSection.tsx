@@ -69,11 +69,11 @@ export function HeroSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
       {/* Ambient orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute top-1/4 left-1/4 h-[28rem] w-[28rem] rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 h-[14rem] sm:h-[28rem] w-[14rem] sm:w-[28rem] rounded-full blur-3xl"
           style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%)' }}
         />
         <div
-          className="absolute bottom-1/4 right-1/4 h-[28rem] w-[28rem] rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 h-[14rem] sm:h-[28rem] w-[14rem] sm:w-[28rem] rounded-full blur-3xl"
           style={{ background: 'radial-gradient(circle, rgba(219,39,119,0.15) 0%, transparent 70%)' }}
         />
       </div>
@@ -157,7 +157,7 @@ export function HeroSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-        <span className="text-[10px] uppercase tracking-widest text-[var(--text-muted)]">{c.scroll}</span>
+        <span className="text-xs uppercase tracking-widest text-[var(--text-muted)]">{c.scroll}</span>
         <div style={{ animation: 'bounce-arrow 1.8s ease-in-out infinite' }}>
           <svg className="h-5 w-5 text-[var(--text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

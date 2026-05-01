@@ -99,13 +99,13 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
 
   return (
     <section
-      className="py-24 px-4 relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-24 px-4 relative overflow-hidden"
       style={{
         background: 'linear-gradient(180deg, #0F0A1E 0%, #140b22 50%, #0F0A1E 100%)',
       }}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-16 items-start">
 
           {/* Left sticky column */}
           <motion.div
@@ -113,7 +113,7 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
             initial={{ opacity: 0, x: -30 }}
             animate={leftInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:w-[35%] lg:sticky lg:top-28 flex-shrink-0"
+            className="md:w-[35%] md:sticky md:top-28 flex-shrink-0"
           >
             <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-6">
               {c.badge}
@@ -128,9 +128,9 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           </motion.div>
 
           {/* Right: Steps */}
-          <div className="lg:w-[65%]">
+          <div className="md:w-[65%]">
             {/* Desktop: horizontal timeline */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div ref={lineRef} className="relative mb-8">
                 {/* Background track */}
                 <div className="absolute top-[2.25rem] left-0 right-0 h-px bg-[var(--border-default)]" />
@@ -160,8 +160,8 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                           {step.num}
                         </div>
                       </div>
-                      <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-4">
-                        <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: step.color }}>
+                      <div className="rounded-xl border border-white/8 bg-white/4 p-4">
+                        <div className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: step.color }}>
                           {step.days}
                         </div>
                         <h3 className="font-bold text-[var(--text-primary)] mb-2 text-sm">{step.title}</h3>
@@ -174,7 +174,7 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
             </div>
 
             {/* Mobile: vertical timeline */}
-            <div className="lg:hidden flex flex-col gap-6 relative">
+            <div className="md:hidden flex flex-col gap-6 relative">
               <div className="absolute left-[1.375rem] top-0 bottom-0 w-px bg-[var(--border-default)]" />
               {steps.map((step, i) => (
                 <motion.div

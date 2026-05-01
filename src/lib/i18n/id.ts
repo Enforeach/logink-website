@@ -52,7 +52,7 @@ export const id = {
     servicesTitle: 'LAYANAN',
     companyTitle: 'PERUSAHAAN',
     contactTitle: 'KONTAK',
-    resourcesTitle: 'SUMBER DAYA',
+    resourcesTitle: 'KATEGORI BLOG',
   },
 
   blog: {

@@ -51,7 +51,7 @@ function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number
       </div>
 
       {/* Number */}
-      <div className="relative text-5xl lg:text-6xl font-extrabold gradient-text leading-none mb-3">
+      <div className="relative text-4xl sm:text-5xl lg:text-6xl font-extrabold gradient-text leading-none mb-3">
         {stat.prefix}
         <motion.span>{rounded}</motion.span>
         {stat.suffix}

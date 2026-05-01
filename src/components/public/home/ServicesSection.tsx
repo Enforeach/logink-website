@@ -42,7 +42,7 @@ function SEOCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
         <p className="text-sm text-[var(--text-secondary)] mb-3">{svc.shortDescId}</p>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {features.map((f) => (
-            <span key={f} className="text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-default)] text-[var(--text-muted)]">{f}</span>
+            <span key={f} className="text-xs px-2 py-0.5 rounded-full border border-white/12 text-[var(--text-muted)]">{f}</span>
           ))}
         </div>
         {svc.pricingTiers?.[0] && (
@@ -62,7 +62,7 @@ function SEOCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
               />
             ))}
           </div>
-          <p className="text-[8px] text-[var(--text-muted)] text-center">Organic traffic ↑</p>
+          <p className="text-[10px] text-[var(--text-muted)] text-center">Organic traffic ↑</p>
         </div>
       </div>
     </div>
@@ -212,7 +212,7 @@ function BentoCard({
       initial={initial}
       animate={animate}
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className={`${colSpan} rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-6 transition-all duration-300 hover:-translate-y-1 group`}
+      className={`${colSpan} rounded-2xl border border-white/8 bg-white/4 p-4 lg:p-6 transition-all duration-300 hover:-translate-y-1 group`}
       style={{
         borderTopColor: svc.color,
         borderTopWidth: '3px',
@@ -248,7 +248,7 @@ export function ServicesSection({ services = [], locale = 'id' }: { services?: S
   const headerInView = useInView(headerRef, { once: true, amount: 0.5 })
 
   return (
-    <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
+    <section className="py-12 sm:py-16 lg:py-24 px-4" style={{ background: '#0F0A1E' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -288,7 +288,7 @@ export function ServicesSection({ services = [], locale = 'id' }: { services?: S
         {/* View all */}
         <div className="text-center mt-10">
           <Link
-            href={locale === 'id' ? '/services' : '/en/services'}
+            href={locale === 'id' ? '/layanan' : '/en/services'}
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-violet hover:text-brand-pink transition-colors group"
           >
             {sc.viewAll}

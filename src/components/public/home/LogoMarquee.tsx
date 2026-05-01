@@ -14,7 +14,7 @@ export function LogoMarquee() {
       <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, #7C3AED40, #DB277740, transparent)' }} />
 
       {/* Label */}
-      <p className="text-center text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-4">
+      <p className="text-center text-xs uppercase tracking-widest text-[var(--text-muted)] mb-4">
         Trusted by leading Indonesian brands
       </p>
 

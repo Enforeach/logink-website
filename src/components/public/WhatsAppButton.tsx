@@ -7,7 +7,7 @@ export function WhatsAppButton() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 3000)
+    const timer = setTimeout(() => setVisible(true), 1500)
     return () => clearTimeout(timer)
   }, [])
 
@@ -19,7 +19,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/40 hover:bg-emerald-400 hover:scale-110 transition-all duration-300 animate-in fade-in zoom-in duration-500"
+      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 h-14 w-14 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/40 hover:bg-emerald-400 hover:scale-110 transition-all duration-300 animate-in fade-in zoom-in duration-500"
       style={{
         animation: 'pulse-glow 2s ease-in-out infinite',
       }}

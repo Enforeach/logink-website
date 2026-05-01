@@ -84,7 +84,7 @@ function ProblemCard({ card, index, labels }: { card: Card; index: number; label
       initial={{ opacity: 0, x: 60 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.55, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-2xl overflow-hidden border border-[var(--border-default)] bg-[var(--bg-surface)]"
+      className="rounded-2xl overflow-hidden border border-white/8 bg-white/4"
     >
       {/* Problem */}
       <div
@@ -98,7 +98,7 @@ function ProblemCard({ card, index, labels }: { card: Card; index: number; label
             </svg>
           </div>
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: '#ef4444' }}>{labels.problemLabel}</div>
+            <div className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: '#ef4444' }}>{labels.problemLabel}</div>
             <p className="text-sm font-semibold text-[var(--text-primary)] mb-1.5">{card.problem}</p>
             <p className="text-xs text-[var(--text-muted)] leading-relaxed">{card.problemDetail}</p>
           </div>
@@ -117,7 +117,7 @@ function ProblemCard({ card, index, labels }: { card: Card; index: number; label
             </svg>
           </div>
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: '#10b981' }}>{labels.solutionLabel}</div>
+            <div className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: '#10b981' }}>{labels.solutionLabel}</div>
             <p className="text-sm font-semibold text-[var(--text-primary)] mb-1.5">{card.solution}</p>
             <p className="text-xs text-[var(--text-muted)] leading-relaxed">{card.solutionDetail}</p>
           </div>
@@ -135,7 +135,7 @@ export function ProblemSolutionSection({ locale = 'id' }: { locale?: 'id' | 'en'
 
   return (
     <section
-      className="py-24 px-4 relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-24 px-4 relative overflow-hidden"
       style={{ background: '#0F0A1E' }}
     >
       {/* Radial violet spotlight top-left */}
@@ -145,7 +145,7 @@ export function ProblemSolutionSection({ locale = 'id' }: { locale?: 'id' | 'en'
       />
 
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-16 items-start">
 
           {/* Left sticky column */}
           <motion.div
@@ -153,7 +153,7 @@ export function ProblemSolutionSection({ locale = 'id' }: { locale?: 'id' | 'en'
             initial={{ opacity: 0, x: -30 }}
             animate={leftInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:w-2/5 lg:sticky lg:top-28 flex-shrink-0"
+            className="md:w-2/5 md:sticky md:top-28 flex-shrink-0"
           >
             <span className="inline-block px-4 py-1.5 rounded-full border border-brand-pink/20 bg-brand-pink/5 text-brand-pink text-xs font-semibold uppercase tracking-wider mb-6">
               {c.badge}
@@ -177,7 +177,7 @@ export function ProblemSolutionSection({ locale = 'id' }: { locale?: 'id' | 'en'
           </motion.div>
 
           {/* Right scrollable cards */}
-          <div className="lg:w-3/5 flex flex-col gap-6">
+          <div className="md:w-3/5 flex flex-col gap-6">
             {cards.map((card, i) => (
               <ProblemCard key={i} card={card} index={i} labels={{ problemLabel: c.problemLabel, solutionLabel: c.solutionLabel }} />
             ))}
