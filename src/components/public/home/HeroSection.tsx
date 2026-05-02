@@ -13,7 +13,7 @@ const COPY = {
       { value: '150+', label: 'Artikel per Bulan', glow: '#DB2777' },
       { value: '5', label: 'Layanan Terintegrasi', glow: '#D97706' },
     ],
-    scroll: 'Gulir',
+    scroll: 'Scroll',
   },
   en: {
     badge: '360° Digital Marketing Agency · Jakarta, Indonesia',

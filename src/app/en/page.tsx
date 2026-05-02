@@ -49,7 +49,7 @@ export default async function EnHomePage() {
       <ServicesSection locale="en" />
       <StatsSection locale="en" />
       <HowWeWorkSection locale="en" />
-      <CaseStudyTeaser caseStudy={caseStudy} />
+      <CaseStudyTeaser caseStudy={caseStudy} locale="en" />
       <CTASection locale="en" />
     </>
   )

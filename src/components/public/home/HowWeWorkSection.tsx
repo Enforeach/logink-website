@@ -29,14 +29,14 @@ const STEPS_ID: Step[] = [
     num: '03',
     title: 'Eksekusi',
     days: 'Hari 8–30',
-    desc: 'Konten go live. Iklan diluncurkan. Optimasi SEO bergulir. Tim terintegrasi kami bekerja paralel, bukan berurutan, tanpa ada bottleneck.',
+    desc: 'Konten go live. Iklan diluncurkan. Optimasi SEO mulai berjalan. Tim terintegrasi kami bekerja paralel, bukan berurutan, tanpa ada bottleneck.',
     color: '#D97706',
   },
   {
     num: '04',
-    title: 'Optimalkan & Skalakan',
+    title: 'Optimasi & Kembangkan',
     days: 'Berkelanjutan',
-    desc: 'Review performa bulanan bersama tim dedikasi kamu. Kami perkuat apa yang berhasil, potong yang tidak, dan terus kompoundkan hasilnya.',
+    desc: 'Review performa bulanan bersama tim dedikasi kamu. Kami perkuat apa yang berhasil, potong yang tidak, dan terus tingkatkan hasilnya secara konsisten.',
     color: '#F59E0B',
   },
 ]
@@ -75,7 +75,7 @@ const STEPS_EN: Step[] = [
 const COPY = {
   id: {
     badge: 'Proses Kami',
-    headline: 'Dari Panggilan Pertama ke Hasil Pertama dalam',
+    headline: 'Dari Konsultasi Pertama ke Hasil Nyata dalam',
     headlineGradient: '30 Hari',
     body: 'Kami tidak percaya dengan onboarding yang bertele-tele atau strategi deck yang ujung-ujungnya cuma jadi pajangan. Proses kami dirancang untuk kecepatan, karena kompetitor kamu tidak sedang menunggu.',
   },

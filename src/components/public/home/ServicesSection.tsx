@@ -14,11 +14,11 @@ interface Service {
 }
 
 const FALLBACK: Service[] = [
-  { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#7C3AED', shortDescId: 'Long-term organic growth & inbound leads', funnelPosition: 'Top Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
-  { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#DB2777', shortDescId: 'Brand awareness & community building', funnelPosition: 'Top Funnel', pricingTiers: [] },
-  { id: '3', name: 'Paid Advertising', slug: 'paid-ads', color: '#D97706', shortDescId: 'Fast scaling & immediate ROI', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
-  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F59E0B', shortDescId: 'Scroll-stopping content that converts', funnelPosition: 'All Funnel', pricingTiers: [] },
-  { id: '5', name: 'Website & Landing Page', slug: 'website-development', color: '#A78BFA', shortDescId: 'Converting visitors into customers', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
+  { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#7C3AED', shortDescId: 'Pertumbuhan organik jangka panjang & leads inbound', funnelPosition: 'Top Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
+  { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#DB2777', shortDescId: 'Bangun brand awareness & komunitas yang aktif', funnelPosition: 'Top Funnel', pricingTiers: [] },
+  { id: '3', name: 'Paid Advertising', slug: 'paid-ads', color: '#D97706', shortDescId: 'Iklan yang langsung hasilkan ROI nyata', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
+  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F59E0B', shortDescId: 'Konten yang bikin scroll berhenti dan mengkonversi', funnelPosition: 'All Funnel', pricingTiers: [] },
+  { id: '5', name: 'Website & Landing Page', slug: 'website-development', color: '#A78BFA', shortDescId: 'Ubah pengunjung jadi pelanggan', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
 ]
 
 /* ─── Individual card variants ─── */

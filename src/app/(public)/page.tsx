@@ -80,7 +80,7 @@ export default async function HomePage() {
       <ServicesSection services={services as any} locale="id" />
       <HowWeWorkSection locale="id" />
       <StatsSection locale="id" />
-      <CaseStudyTeaser caseStudy={featuredCaseStudy as any} />
+      <CaseStudyTeaser caseStudy={featuredCaseStudy as any} locale="id" />
       <CTASection locale="id" />
     </>
   )

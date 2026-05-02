@@ -22,6 +22,11 @@ interface CaseStudy {
   service?: { name: string; color: string } | null
 }
 
+const COPY = {
+  id: { badge: 'Kisah Sukses', heading: 'Hasil Nyata,', headingGradient: 'Klien Nyata', viewFull: 'Lihat case study lengkap', viewAll: 'Lihat semua case study' },
+  en: { badge: 'Success Stories', heading: 'Real Results,', headingGradient: 'Real Clients', viewFull: 'View full case study', viewAll: 'View all case studies' },
+}
+
 function MetricCounter({ metric, index, isInView }: { metric: Metric; index: number; isInView: boolean }) {
   const raw = useCountUp(metric.numericAfter ?? 0, isInView && metric.numericAfter !== undefined, 1800, index * 250)
 
@@ -53,12 +58,14 @@ function MetricCounter({ metric, index, isInView }: { metric: Metric; index: num
   )
 }
 
-export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null }) {
+export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: CaseStudy | null; locale?: 'id' | 'en' }) {
   const [ref, isInView] = useInView({ once: true, amount: 0.25 })
+  const c = COPY[locale]
 
   if (!caseStudy) return null
 
   const cs = caseStudy
+  const portfolioBase = locale === 'en' ? '/en/portfolio' : '/portfolio'
 
   return (
     <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
@@ -69,10 +76,10 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
           className="text-center mb-10"
         >
           <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-4">
-            Success Stories
+            {c.badge}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
-            Real Results, <span className="gradient-text">Real Clients</span>
+            {c.heading} <span className="gradient-text">{c.headingGradient}</span>
           </h2>
         </div>
 
@@ -132,10 +139,10 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
           {/* Footer */}
           <div className="flex items-center justify-between flex-wrap gap-4">
             <Link
-              href={`/portfolio/${cs.slug}`}
+              href={`${portfolioBase}/${cs.slug}`}
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-violet hover:text-brand-pink transition-colors group"
             >
-              View full case study
+              {c.viewFull}
               <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -146,10 +153,10 @@ export function CaseStudyTeaser({ caseStudy }: { caseStudy?: CaseStudy | null })
         {/* View all */}
         <div className="text-center mt-8">
           <Link
-            href="/portfolio"
+            href={portfolioBase}
             className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-secondary)] hover:text-brand-violet transition-colors group"
           >
-            View all case studies
+            {c.viewAll}
             <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
