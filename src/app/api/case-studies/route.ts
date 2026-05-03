@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { requireAuth } from '@/lib/api-auth'
 import { prisma } from '@/lib/prisma'
 
@@ -128,6 +129,13 @@ export async function POST(req: NextRequest) {
       },
       include: FULL_INCLUDE,
     })
+
+    revalidatePath('/portfolio')
+    revalidatePath('/en/portfolio')
+    revalidatePath('/')
+    revalidatePath('/en')
+    if (caseStudy.slug) revalidatePath(`/portfolio/${caseStudy.slug}`)
+    if (caseStudy.slugEn) revalidatePath(`/en/portfolio/${caseStudy.slugEn}`)
 
     return NextResponse.json(caseStudy, { status: 201 })
   } catch (err: unknown) {

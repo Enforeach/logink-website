@@ -1,7 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { requireAuth } from '@/lib/api-auth'
 import { prisma } from '@/lib/prisma'
 import type { BlockType, Prisma } from '@prisma/client'
+
+function revalidateCaseStudy(slugs: { slug?: string | null; slugEn?: string | null }[]) {
+  revalidatePath('/portfolio')
+  revalidatePath('/en/portfolio')
+  revalidatePath('/')
+  revalidatePath('/en')
+  for (const s of slugs) {
+    if (s.slug) revalidatePath(`/portfolio/${s.slug}`)
+    if (s.slugEn) revalidatePath(`/en/portfolio/${s.slugEn}`)
+  }
+}
 
 const FULL_INCLUDE = {
   metrics: { orderBy: { sortOrder: 'asc' as const } },
@@ -42,7 +54,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       status, metrics, blocks,
     } = body
 
-    const existing = await prisma.caseStudy.findUnique({ where: { id }, select: { status: true } })
+    const existing = await prisma.caseStudy.findUnique({ where: { id }, select: { status: true, slug: true, slugEn: true } })
     const isNowPublished = status === 'PUBLISHED' && existing?.status !== 'PUBLISHED'
 
     // Replace metrics
@@ -103,6 +115,11 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       include: FULL_INCLUDE,
     })
 
+    revalidateCaseStudy([
+      { slug: existing?.slug, slugEn: existing?.slugEn },
+      { slug: cs.slug, slugEn: cs.slugEn },
+    ])
+
     return NextResponse.json(cs)
   } catch (err: unknown) {
     const e = err as { code?: string }
@@ -117,7 +134,9 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   if (!authResult.authorized) return authResult.response
   try {
     const { id } = await params
+    const existing = await prisma.caseStudy.findUnique({ where: { id }, select: { slug: true, slugEn: true } })
     await prisma.caseStudy.delete({ where: { id } })
+    if (existing) revalidateCaseStudy([{ slug: existing.slug, slugEn: existing.slugEn }])
     return NextResponse.json({ ok: true })
   } catch {
     return NextResponse.json({ error: 'Failed to delete case study' }, { status: 500 })
