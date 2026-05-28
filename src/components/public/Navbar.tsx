@@ -142,7 +142,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
       >
         {/* Announcement Bar */}
         {bannerVisible && (
-          <div className="bg-[#0F0A1E] border-b border-white/10 relative flex items-center justify-center px-10 py-2">
+          <div className="bg-[#16142E] border-b border-white/10 relative flex items-center justify-center px-10 py-2">
             {/* Subtle gradient accents */}
             <div className="absolute left-0 top-0 h-full w-40 pointer-events-none"
               style={{ background: 'linear-gradient(to right, rgba(124,58,237,0.25), transparent)' }} />
@@ -300,7 +300,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
                 ))}
 
                 {/* Featured card (4th column) */}
-                <div className="rounded-2xl overflow-hidden bg-[#0F0A1E] p-5 flex flex-col justify-between min-h-[200px] relative">
+                <div className="rounded-2xl overflow-hidden bg-[#16142E] p-5 flex flex-col justify-between min-h-[200px] relative">
                   {/* Gradient blob */}
                   <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-40 pointer-events-none"
                     style={{ background: 'radial-gradient(circle, #7C3AED 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />

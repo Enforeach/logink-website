@@ -68,7 +68,7 @@ export function AdsPlatformOverview({ locale = 'id' }: { locale?: 'id' | 'en' })
   const c = PLATFORM_COPY[locale]
 
   return (
-    <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
+    <section className="py-24 px-4" style={{ background: '#16142E' }}>
       <div className="max-w-5xl mx-auto">
 
         <div className="text-center mb-14">

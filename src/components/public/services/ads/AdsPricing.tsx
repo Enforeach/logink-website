@@ -53,7 +53,7 @@ export function AdsPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
       id="pricing"
       ref={ref}
       className="py-24 px-4"
-      style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(217,119,6,0.05) 0%, transparent 60%), #0F0A1E' }}
+      style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(217,119,6,0.05) 0%, transparent 60%), #16142E' }}
     >
       <div className="max-w-5xl mx-auto">
 

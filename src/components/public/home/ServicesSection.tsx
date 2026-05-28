@@ -240,7 +240,7 @@ export function ServicesSection({ services = [], locale = 'id' }: { services?: S
   const [headerRef, headerInView] = useInView({ once: true, amount: 0.5 })
 
   return (
-    <section className="py-12 sm:py-16 lg:py-24 px-4" style={{ background: '#0F0A1E' }}>
+    <section className="py-12 sm:py-16 lg:py-24 px-4" style={{ background: '#16142E' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div

@@ -68,7 +68,7 @@ export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: Case
   const portfolioBase = locale === 'en' ? '/en/portfolio' : '/portfolio'
 
   return (
-    <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
+    <section className="py-24 px-4" style={{ background: '#16142E' }}>
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div
@@ -88,7 +88,7 @@ export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: Case
           ref={ref}
           className="relative rounded-3xl overflow-hidden p-8 sm:p-10"
           style={{
-            background: 'linear-gradient(135deg, #1A1530 0%, #1d1040 50%, #1A1530 100%)',
+            background: 'linear-gradient(135deg, #221E40 0%, #1d1040 50%, #221E40 100%)',
             border: '1px solid transparent',
             backgroundClip: 'padding-box',
             ...(isInView ? { animation: 'fade-up 0.65s cubic-bezier(0.22,1,0.36,1) both' } : { opacity: 0 }),

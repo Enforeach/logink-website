@@ -30,7 +30,7 @@ export function CtaServiceCard({ widget, onTrackClick }: Props) {
       transition={{ duration: 0.4, ease: 'easeOut' }}
       whileHover={{ y: -3 }}
       className={`relative group rounded-2xl p-7 my-6 ${widget.cssClass || ''}`}
-      style={{ background: '#1A1530', border: '1px solid rgba(255,247,237,0.08)' }}
+      style={{ background: '#221E40', border: '1px solid rgba(230,225,240,0.08)' }}
       {...(widget.dataAttributes || {})}
     >
       {/* Gradient border on hover */}
@@ -53,8 +53,8 @@ export function CtaServiceCard({ widget, onTrackClick }: Props) {
         {widget.emoji || '📈'}
       </motion.div>
 
-      <h3 className="text-xl font-bold text-[#FFF7ED] tracking-tight mb-2">{widget.heading}</h3>
-      {widget.subheading && <p className="text-sm text-[#FFF7ED]/60 leading-relaxed mb-5">{widget.subheading}</p>}
+      <h3 className="text-xl font-bold text-[#E6E1F0] tracking-tight mb-2">{widget.heading}</h3>
+      {widget.subheading && <p className="text-sm text-[#E6E1F0]/60 leading-relaxed mb-5">{widget.subheading}</p>}
 
       <motion.a
         href={widget.buttonUrl}

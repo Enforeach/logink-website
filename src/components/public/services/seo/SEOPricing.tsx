@@ -141,7 +141,7 @@ export function SEOPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
     <section
       id="pricing"
       className="py-20 px-4"
-      style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.06) 0%, #0F0A1E 50%)' }}
+      style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.06) 0%, #16142E 50%)' }}
     >
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">

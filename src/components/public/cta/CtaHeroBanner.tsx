@@ -50,7 +50,7 @@ export function CtaHeroBanner({ widget, onTrackClick }: Props) {
             {/* Dot grid */}
             <div
               className="absolute inset-0 opacity-[0.05]"
-              style={{ backgroundImage: 'radial-gradient(circle, #FFF7ED 1px, transparent 1px)', backgroundSize: '24px 24px' }}
+              style={{ backgroundImage: 'radial-gradient(circle, #E6E1F0 1px, transparent 1px)', backgroundSize: '24px 24px' }}
             />
 
             {/* Close button */}
@@ -105,7 +105,7 @@ export function CtaHeroBanner({ widget, onTrackClick }: Props) {
                   href={widget.buttonUrl}
                   onClick={onTrackClick}
                   whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-[#0F0A1E] font-semibold text-sm"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-[#16142E] font-semibold text-sm"
                   style={{ boxShadow: '0 0 0 rgba(255,255,255,0)' }}
                   onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 24px rgba(255,255,255,0.3)')}
                   onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 0 rgba(255,255,255,0)')}

@@ -11,11 +11,11 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          dark: '#0F0A1E',
-          'dark-surface': '#1A1530',
-          warm: '#FFF7ED',
-          cream: '#FFF9F2',
-          'cream-surface': '#F8F6F2',
+          dark: '#16142E',
+          'dark-surface': '#221E40',
+          warm: '#E6E1F0',
+          cream: '#EEEAF5',
+          'cream-surface': '#F4F1F8',
           violet: '#7C3AED',
           pink: '#DB2777',
           amber: '#D97706',

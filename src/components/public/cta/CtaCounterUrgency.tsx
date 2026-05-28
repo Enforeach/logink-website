@@ -72,14 +72,14 @@ export function CtaCounterUrgency({ widget, onTrackClick }: Props) {
       viewport={{ once: true }}
       transition={{ type: 'spring', stiffness: 200, damping: 18 }}
       className={`relative rounded-2xl p-8 text-center my-8 ${widget.cssClass || ''}`}
-      style={{ background: '#1A1530', border: '1px solid rgba(255,247,237,0.08)' }}
+      style={{ background: '#221E40', border: '1px solid rgba(230,225,240,0.08)' }}
       {...(widget.dataAttributes || {})}
     >
       {widget.dismissible && (
         <button onClick={dismiss} className="absolute top-3 right-3 h-6 w-6 rounded-full bg-white/5 flex items-center justify-center text-white/30 hover:bg-white/10 text-xs">✕</button>
       )}
 
-      <p className="text-xs text-[#FFF7ED]/50 uppercase tracking-wider font-medium mb-4">
+      <p className="text-xs text-[#E6E1F0]/50 uppercase tracking-wider font-medium mb-4">
         {widget.emoji} {widget.countdownLabel || 'Offer ends in:'}
       </p>
 
@@ -92,19 +92,19 @@ export function CtaCounterUrgency({ widget, onTrackClick }: Props) {
             { val: timeLeft.seconds, label: 'sec' },
           ].map(({ val, label }, i) => (
             <div key={label} className="flex items-center gap-2">
-              <div className="rounded-xl px-4 py-4 w-[64px] text-center" style={{ background: '#0F0A1E', border: '1px solid rgba(255,247,237,0.08)' }}>
+              <div className="rounded-xl px-4 py-4 w-[64px] text-center" style={{ background: '#16142E', border: '1px solid rgba(230,225,240,0.08)' }}>
                 <FlipDigit value={val} />
-                <p className="text-[10px] text-[#FFF7ED]/40 uppercase mt-1">{label}</p>
+                <p className="text-[10px] text-[#E6E1F0]/40 uppercase mt-1">{label}</p>
               </div>
-              {i < 3 && <span className="text-xl text-[#FFF7ED]/20 font-bold pb-4">:</span>}
+              {i < 3 && <span className="text-xl text-[#E6E1F0]/20 font-bold pb-4">:</span>}
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-sm text-[#FFF7ED]/40 mb-6">This offer has expired.</p>
+        <p className="text-sm text-[#E6E1F0]/40 mb-6">This offer has expired.</p>
       )}
 
-      {widget.heading && <p className="text-lg font-semibold text-[#FFF7ED] mb-5">{widget.heading}</p>}
+      {widget.heading && <p className="text-lg font-semibold text-[#E6E1F0] mb-5">{widget.heading}</p>}
 
       {!timeLeft.expired && (
         <motion.a

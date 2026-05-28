@@ -563,17 +563,17 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <section style={{ width: '100%', padding: '0 24px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#0F0A1E' }}>
+    <section style={{ width: '100%', padding: '0 24px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#16142E' }}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
       <div className="text-center mb-8">
         <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#7C3AED', marginBottom: 10 }}>
           {copy.sectionLabel}
         </p>
-        <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontWeight: 800, color: '#FFF7ED', marginBottom: 8, lineHeight: 1.2 }}>
+        <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontWeight: 800, color: '#E6E1F0', marginBottom: 8, lineHeight: 1.2 }}>
           {copy.sectionTitle}
         </h2>
-        <p style={{ fontSize: 15, color: 'rgba(255,247,237,0.4)', maxWidth: 440, margin: '0 auto' }}>
+        <p style={{ fontSize: 15, color: 'rgba(230,225,240,0.4)', maxWidth: 440, margin: '0 auto' }}>
           {copy.sectionSubtext}
         </p>
       </div>
@@ -653,7 +653,7 @@ function BotMessage({ text }: { text: string }) {
       <div style={{ width: 30, height: 30, borderRadius: '50%', flexShrink: 0, background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <LogoMark size={18} />
       </div>
-      <div style={{ padding: '10px 14px', borderRadius: '4px 20px 20px 20px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)', color: '#FFF7ED', fontSize: 14, lineHeight: 1.55, whiteSpace: 'pre-wrap' }}>
+      <div style={{ padding: '10px 14px', borderRadius: '4px 20px 20px 20px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)', color: '#E6E1F0', fontSize: 14, lineHeight: 1.55, whiteSpace: 'pre-wrap' }}>
         {text}
       </div>
     </div>
@@ -663,7 +663,7 @@ function BotMessage({ text }: { text: string }) {
 function UserMessage({ text }: { text: string }) {
   return (
     <div className="lp-msg flex justify-end">
-      <div style={{ padding: '10px 14px', borderRadius: '20px 4px 20px 20px', background: 'rgba(124,58,237,0.25)', border: '1px solid rgba(124,58,237,0.3)', color: '#FFF7ED', fontSize: 14, lineHeight: 1.55, maxWidth: '75%', whiteSpace: 'pre-wrap' }}>
+      <div style={{ padding: '10px 14px', borderRadius: '20px 4px 20px 20px', background: 'rgba(124,58,237,0.25)', border: '1px solid rgba(124,58,237,0.3)', color: '#E6E1F0', fontSize: 14, lineHeight: 1.55, maxWidth: '75%', whiteSpace: 'pre-wrap' }}>
         {text}
       </div>
     </div>

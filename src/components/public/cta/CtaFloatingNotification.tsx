@@ -63,7 +63,7 @@ export function CtaFloatingNotification({ widget, onTrackClick }: Props) {
           {...(widget.dataAttributes || {})}
         >
           <div className="h-[2px] rounded-t-2xl" style={{ background: 'linear-gradient(to right, #7C3AED, #DB2777)' }} />
-          <div className="rounded-b-2xl p-5 shadow-2xl" style={{ background: '#1A1530', border: '1px solid rgba(255,247,237,0.1)', boxShadow: '0 8px 40px rgba(0,0,0,0.4)' }}>
+          <div className="rounded-b-2xl p-5 shadow-2xl" style={{ background: '#221E40', border: '1px solid rgba(230,225,240,0.1)', boxShadow: '0 8px 40px rgba(0,0,0,0.4)' }}>
             {widget.dismissible && (
               <button
                 onClick={dismiss}
@@ -73,10 +73,10 @@ export function CtaFloatingNotification({ widget, onTrackClick }: Props) {
               </button>
             )}
             <div className="pr-8">
-              <p className="text-base font-bold text-[#FFF7ED] mb-1">
+              <p className="text-base font-bold text-[#E6E1F0] mb-1">
                 {widget.emoji} {widget.heading}
               </p>
-              {widget.subheading && <p className="text-xs text-[#FFF7ED]/60 leading-relaxed mb-4">{widget.subheading}</p>}
+              {widget.subheading && <p className="text-xs text-[#E6E1F0]/60 leading-relaxed mb-4">{widget.subheading}</p>}
               <motion.a
                 href={widget.buttonUrl}
                 onClick={onTrackClick}

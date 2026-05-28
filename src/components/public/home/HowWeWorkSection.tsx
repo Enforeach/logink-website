@@ -97,7 +97,7 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
     <section
       className="py-12 sm:py-16 lg:py-24 px-4 relative overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #0F0A1E 0%, #140b22 50%, #0F0A1E 100%)',
+        background: 'linear-gradient(180deg, #16142E 0%, #140b22 50%, #16142E 100%)',
       }}
     >
       <div className="max-w-7xl mx-auto">

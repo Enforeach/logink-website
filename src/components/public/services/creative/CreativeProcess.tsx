@@ -16,7 +16,7 @@ export function CreativeProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = PROCESS_COPY[locale]
 
   return (
-    <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
+    <section ref={ref} className="py-24 px-4" style={{ background: '#16142E' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">{c.eyebrow}</p>

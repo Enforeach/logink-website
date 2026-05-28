@@ -15,7 +15,7 @@ export function CreativeFAQ({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = FAQ_COPY[locale]
 
   return (
-    <section className="py-24 px-4" style={{ background: '#0F0A1E' }}>
+    <section className="py-24 px-4" style={{ background: '#16142E' }}>
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">FAQ</p>

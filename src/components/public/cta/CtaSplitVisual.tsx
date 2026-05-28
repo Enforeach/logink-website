@@ -37,7 +37,7 @@ export function CtaSplitVisual({ widget, onTrackClick }: Props) {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       whileHover={{ y: -2 }}
       className={`grid grid-cols-1 md:grid-cols-[200px_1fr] rounded-2xl overflow-hidden my-8 ${isRight ? 'md:grid-cols-[1fr_200px]' : ''} ${widget.cssClass || ''}`}
-      style={{ background: '#1A1530', border: '1px solid rgba(255,247,237,0.08)' }}
+      style={{ background: '#221E40', border: '1px solid rgba(230,225,240,0.08)' }}
       {...(widget.dataAttributes || {})}
     >
       {/* Image */}
@@ -57,13 +57,13 @@ export function CtaSplitVisual({ widget, onTrackClick }: Props) {
           <button onClick={dismiss} className="absolute top-3 right-3 h-6 w-6 rounded-full bg-white/5 flex items-center justify-center text-white/30 hover:bg-white/10 text-xs">✕</button>
         )}
         <motion.h3 initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-          className="text-xl font-bold text-[#FFF7ED] mb-2"
+          className="text-xl font-bold text-[#E6E1F0] mb-2"
         >
           {widget.emoji && <span className="mr-2">{widget.emoji}</span>}{widget.heading}
         </motion.h3>
         {widget.subheading && (
           <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-            className="text-sm text-[#FFF7ED]/60 leading-relaxed mb-5"
+            className="text-sm text-[#E6E1F0]/60 leading-relaxed mb-5"
           >
             {widget.subheading}
           </motion.p>
@@ -79,8 +79,8 @@ export function CtaSplitVisual({ widget, onTrackClick }: Props) {
           </motion.a>
           {widget.secondaryButtonUrl && (
             <motion.a href={widget.secondaryButtonUrl} whileHover={{ scale: 1.01 }}
-              className="inline-flex items-center gap-1 px-5 py-2.5 rounded-xl text-[#FFF7ED]/70 font-semibold text-sm"
-              style={{ border: '1px solid rgba(255,247,237,0.15)' }}
+              className="inline-flex items-center gap-1 px-5 py-2.5 rounded-xl text-[#E6E1F0]/70 font-semibold text-sm"
+              style={{ border: '1px solid rgba(230,225,240,0.15)' }}
             >
               {widget.secondaryButtonText}
             </motion.a>

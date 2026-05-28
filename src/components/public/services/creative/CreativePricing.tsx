@@ -120,7 +120,7 @@ export function CreativePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
     <section
       ref={ref}
       className="py-24 px-4"
-      style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.04) 0%, transparent 60%), #0F0A1E' }}
+      style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.04) 0%, transparent 60%), #16142E' }}
     >
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-14">

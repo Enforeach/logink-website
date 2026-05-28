@@ -60,7 +60,7 @@ export function TestimonialsSection({ testimonials = [] }: { testimonials?: Test
   return (
     <section
       className="py-24 px-4 relative overflow-hidden"
-      style={{ background: '#0F0A1E' }}
+      style={{ background: '#16142E' }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

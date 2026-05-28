@@ -118,7 +118,7 @@ export function WebsiteProjectTypes({ locale = 'id' }: { locale?: 'id' | 'en' })
   const c = PROJECTTYPES_COPY[locale]
 
   return (
-    <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
+    <section ref={ref} className="py-24 px-4" style={{ background: '#16142E' }}>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-4">
           <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">{c.eyebrow}</p>

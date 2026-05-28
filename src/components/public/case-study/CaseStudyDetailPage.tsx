@@ -173,7 +173,7 @@ export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], 
             {cs.featuredImage && (
               <div className="absolute inset-0">
                 <Image src={cs.featuredImage} alt={title || cs.clientName} fill className="object-cover" priority />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0F0A1E]/70 via-[#0F0A1E]/50 to-[#0F0A1E]/90" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#16142E]/70 via-[#16142E]/50 to-[#16142E]/90" />
               </div>
             )}
             <div className={`relative max-w-4xl mx-auto ${cs.featuredImage ? 'pt-20 pb-10' : 'pt-10 pb-4 mesh-gradient rounded-2xl px-8'}`}>

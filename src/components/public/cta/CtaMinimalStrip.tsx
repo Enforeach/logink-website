@@ -26,7 +26,7 @@ export function CtaMinimalStrip({ widget, onTrackClick }: Props) {
     >
       <motion.div
         className="flex-1 h-px"
-        style={{ background: 'linear-gradient(to right, transparent, rgba(255,247,237,0.1), transparent)' }}
+        style={{ background: 'linear-gradient(to right, transparent, rgba(230,225,240,0.1), transparent)' }}
         initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
       />
       <span className="text-xs text-[var(--text-muted)] whitespace-nowrap flex items-center gap-2">
@@ -45,7 +45,7 @@ export function CtaMinimalStrip({ widget, onTrackClick }: Props) {
       </span>
       <motion.div
         className="flex-1 h-px"
-        style={{ background: 'linear-gradient(to right, transparent, rgba(255,247,237,0.1), transparent)' }}
+        style={{ background: 'linear-gradient(to right, transparent, rgba(230,225,240,0.1), transparent)' }}
         initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
       />
     </motion.div>

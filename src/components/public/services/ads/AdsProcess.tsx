@@ -19,7 +19,7 @@ export function AdsProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
     <section
       ref={ref}
       className="py-24 px-4"
-      style={{ background: 'linear-gradient(180deg, #0F0A1E 0%, #120D20 40%, #0F0A1E 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #16142E 0%, #120D20 40%, #16142E 100%)' }}
     >
       <div className="max-w-4xl mx-auto">
 

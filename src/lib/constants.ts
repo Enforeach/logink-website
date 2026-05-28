@@ -1,7 +1,7 @@
 export const BRAND = {
-  dark: '#0F0A1E',
-  darkSurface: '#1A1530',
-  warm: '#FFF7ED',
+  dark: '#16142E',
+  darkSurface: '#221E40',
+  warm: '#E6E1F0',
   cream: '#FFF9F2',
   creamSurface: '#F8F6F2',
   violet: '#7C3AED',

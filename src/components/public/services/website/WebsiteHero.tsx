@@ -89,7 +89,7 @@ export function WebsiteHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   return (
     <section
       className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16"
-      style={{ background: '#0F0A1E' }}
+      style={{ background: '#16142E' }}
     >
       {/* Teal radial from top-right */}
       <div

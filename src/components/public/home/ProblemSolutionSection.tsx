@@ -133,7 +133,7 @@ export function ProblemSolutionSection({ locale = 'id' }: { locale?: 'id' | 'en'
   return (
     <section
       className="py-12 sm:py-16 lg:py-24 px-4 relative overflow-hidden"
-      style={{ background: '#0F0A1E' }}
+      style={{ background: '#16142E' }}
     >
       {/* Radial violet spotlight top-left */}
       <div

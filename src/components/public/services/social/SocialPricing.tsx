@@ -150,7 +150,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   )
 
   return (
-    <section id="pricing" className="py-20 px-4" style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(219,39,119,0.04) 0%, #0F0A1E 60%)' }}>
+    <section id="pricing" className="py-20 px-4" style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(219,39,119,0.04) 0%, #16142E 60%)' }}>
       <div className="max-w-3xl mx-auto" ref={sectionRef}>
         <div className="mb-12">
           <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">Pricing</div>

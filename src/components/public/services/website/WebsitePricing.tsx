@@ -47,7 +47,7 @@ export function WebsitePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
       id="pricing"
       ref={ref}
       className="py-24 px-4 relative"
-      style={{ background: '#0F0A1E' }}
+      style={{ background: '#16142E' }}
     >
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"

@@ -31,7 +31,7 @@ export function WebsiteProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const totalWeeks = 8
 
   return (
-    <section ref={ref} className="py-24 px-4" style={{ background: '#0F0A1E' }}>
+    <section ref={ref} className="py-24 px-4" style={{ background: '#16142E' }}>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-xs font-bold uppercase tracking-widest text-[#06B6D4] mb-3">{c.eyebrow}</p>

@@ -115,7 +115,7 @@ export function CreativeHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
     <section
       ref={ref}
       className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16"
-      style={{ background: '#0F0A1E' }}
+      style={{ background: '#16142E' }}
     >
       <div className="absolute inset-0 animated-mesh opacity-60" />
       <div className="absolute inset-0 dot-grid opacity-30" />
