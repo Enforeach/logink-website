@@ -234,6 +234,12 @@ const CSS = `
 .lp-chip { animation: lp-chipin 0.3s ease both; }
 `
 
+// Light option tile (single/gateway) — shared classes
+const TILE =
+  'lp-chip rounded-full border border-[var(--border-default)] bg-white text-[var(--text-secondary)] ' +
+  'hover:-translate-y-0.5 hover:border-[var(--border-hover)] hover:text-[var(--text-primary)] hover:shadow-card ' +
+  'transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/40'
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 interface Props { locale?: Locale }
@@ -445,7 +451,7 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
           {Object.entries(serviceMeta).map(([key, svc], i) => (
             <button
               key={key}
-              className="lp-chip px-4 py-2 rounded-2xl text-sm font-semibold border border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all"
+              className={`${TILE} px-4 py-2 text-sm font-semibold`}
               style={{ animationDelay: `${i * 0.04}s` }}
               onClick={() => handleServiceSelect(key)}
             >
@@ -463,7 +469,7 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
             {currentQ.opts.map((opt, i) => (
               <button
                 key={opt}
-                className="lp-chip px-3 py-1.5 rounded-2xl text-sm border border-white/10 bg-white/5 text-white/80 hover:bg-violet-600/30 hover:border-violet-500/50 hover:text-white transition-all"
+                className={`${TILE} px-4 py-2 text-sm`}
                 style={{ animationDelay: `${i * 0.04}s` }}
                 onClick={() => handleSingleSelect(opt)}
               >
@@ -483,12 +489,16 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
                 return (
                   <button
                     key={opt}
-                    className="lp-chip px-3 py-1.5 rounded-2xl text-sm border transition-all"
+                    className="lp-chip px-4 py-2 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/40"
                     style={{
                       animationDelay: `${i * 0.04}s`,
-                      background: sel ? 'rgba(124,58,237,0.3)' : 'rgba(255,255,255,0.05)',
-                      borderColor: sel ? 'rgba(139,92,246,0.6)' : 'rgba(255,255,255,0.1)',
-                      color: sel ? '#fff' : 'rgba(255,255,255,0.75)',
+                      // Selected: gradient border via padding-box/border-box layering
+                      border: sel ? '1.5px solid transparent' : '1px solid var(--border-default)',
+                      background: sel
+                        ? 'linear-gradient(#fff,#fff) padding-box, var(--grad-cta) border-box'
+                        : '#fff',
+                      color: sel ? 'var(--brand-crimson)' : 'var(--text-secondary)',
+                      fontWeight: sel ? 600 : 400,
                     }}
                     onClick={() => toggleMulti(opt)}
                   >
@@ -499,8 +509,8 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
             </div>
             {multiSel.length > 0 && (
               <button
-                className="lp-chip px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
-                style={{ background: 'linear-gradient(135deg, #7C3AED, #DB2777, #F97316)', animationDelay: '0.2s' }}
+                className="lp-chip px-6 py-2.5 rounded-full text-sm font-semibold text-white gradient-bg shadow-cta transition-all hover:scale-[1.02] hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/50"
+                style={{ animationDelay: '0.2s' }}
                 onClick={handleMultiConfirm}
               >
                 {copy.multiConfirm(multiSel.length)}
@@ -514,7 +524,7 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
     if (phase === 'contact') {
       const f = copy.form
       return (
-        <div className="lp-chip rounded-2xl border border-white/10 p-4 space-y-3" style={{ background: 'rgba(255,255,255,0.04)' }}>
+        <div className="lp-chip rounded-2xl border border-[var(--border-default)] bg-[var(--bg-base)] p-4 space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {([
               { field: 'nama' as const, label: f.nama, placeholder: f.namaPlaceholder, type: 'text' },
@@ -523,14 +533,13 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
               { field: 'wa' as const, label: f.wa, placeholder: f.waPlaceholder, type: 'tel' },
             ]).map(({ field, label, placeholder, type }) => (
               <div key={field} className="space-y-1">
-                <label className="text-xs font-medium text-white/50">{label}</label>
+                <label className="text-xs font-medium text-[var(--text-muted)]">{label}</label>
                 <input
                   type={type}
                   placeholder={placeholder}
                   value={contact[field]}
                   onChange={e => setContact(c => ({ ...c, [field]: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-xl text-sm border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-violet-500/60 transition-colors"
-                  style={{ background: 'rgba(255,255,255,0.06)' }}
+                  className="w-full px-3 py-2 rounded-xl text-sm bg-white border border-[var(--border-default)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-brand-crimson/50 focus:ring-2 focus:ring-brand-crimson/15 transition-colors"
                 />
               </div>
             ))}
@@ -538,8 +547,11 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
           <button
             disabled={!contactValid}
             onClick={handleContactSubmit}
-            className="w-full py-3 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ background: contactValid ? 'linear-gradient(135deg, #7C3AED, #DB2777, #F97316)' : 'rgba(255,255,255,0.1)' }}
+            className={`w-full py-3 rounded-full text-sm font-bold text-white transition-all disabled:cursor-not-allowed ${
+              contactValid
+                ? 'gradient-bg shadow-cta hover:scale-[1.01] hover:brightness-105'
+                : 'bg-[var(--border-hover)] opacity-60'
+            }`}
           >
             {f.submit}
           </button>
@@ -550,7 +562,7 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
     if (phase === 'done') {
       return (
         <button
-          className="lp-chip px-5 py-2.5 rounded-2xl text-sm font-semibold border border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white transition-all"
+          className={`${TILE} px-5 py-2.5 text-sm font-semibold`}
           onClick={handleReset}
         >
           {copy.restart}
@@ -563,60 +575,59 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <section style={{ width: '100%', padding: '0 24px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#16142E' }}>
+    <section className="w-full bg-white px-6 pt-16 pb-20 md:pt-20 md:pb-28 flex flex-col items-center">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
-      <div className="text-center mb-8">
-        <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#7C3AED', marginBottom: 10 }}>
-          {copy.sectionLabel}
-        </p>
-        <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontWeight: 800, color: '#E6E1F0', marginBottom: 8, lineHeight: 1.2 }}>
+      <div className="text-center mb-10">
+        <p className="eyebrow mb-3">{copy.sectionLabel}</p>
+        <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.03em] leading-[1.1] text-[var(--text-primary)] mb-3">
           {copy.sectionTitle}
         </h2>
-        <p style={{ fontSize: 15, color: 'rgba(230,225,240,0.4)', maxWidth: 440, margin: '0 auto' }}>
+        <p className="text-[15px] text-[var(--text-secondary)] max-w-md mx-auto">
           {copy.sectionSubtext}
         </p>
       </div>
 
-      {/* Mac frame */}
+      {/* Chat card */}
       <div
+        className="w-full max-w-2xl rounded-3xl bg-white border border-[var(--border-default)] shadow-card overflow-hidden"
         style={{
-          width: '100%', maxWidth: 900,
-          borderRadius: 20,
-          background: 'rgba(20,14,36,0.92)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
           opacity: mounted ? 1 : 0,
           transform: mounted ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.97)',
           transition: 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1)',
-          overflow: 'hidden',
         }}
       >
         {/* Title bar */}
-        <div style={{ display: 'flex', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)', gap: 12, minHeight: 44 }}>
+        <div className="flex items-center gap-3 px-4 py-3 min-h-11 border-b border-[var(--border-default)] bg-[var(--bg-base)]">
           <div className="hidden sm:flex items-center gap-1.5 shrink-0">
             {(['#FF5F57', '#FEBC2E', '#28C840'] as const).map((c, i) => (
-              <span key={i} style={{ width: 12, height: 12, borderRadius: '50%', background: c, display: 'block' }} />
+              <span key={i} className="block h-3 w-3 rounded-full" style={{ background: c }} />
             ))}
           </div>
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.03em' }}>
+          <div className="flex-1 flex justify-center">
+            <div className="text-xs font-semibold tracking-wide text-[var(--text-secondary)]">
               Logink Assistant
             </div>
           </div>
           {service && phase === 'questions' && (
             <div className="hidden sm:flex items-center gap-2 shrink-0">
-              <div style={{ width: 80, height: 4, background: 'rgba(255,255,255,0.08)', borderRadius: 4, overflow: 'hidden' }}>
-                <div style={{ height: '100%', background: 'linear-gradient(90deg, #7C3AED, #DB2777, #F97316)', borderRadius: 4, width: `${progress}%`, transition: 'width 0.5s cubic-bezier(0.16,1,0.3,1)' }} />
+              <div className="h-1 w-20 rounded-full overflow-hidden bg-[rgba(35,26,38,0.08)]">
+                <div
+                  className="h-full rounded-full"
+                  style={{ background: 'var(--grad-cta)', width: `${progress}%`, transition: 'width 0.5s cubic-bezier(0.16,1,0.3,1)' }}
+                />
               </div>
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontVariantNumeric: 'tabular-nums' }}>{qIdx + 1}/6</span>
+              <span className="text-[11px] tabular-nums text-[var(--text-muted)]">{qIdx + 1}/6</span>
             </div>
           )}
         </div>
 
         {/* Chat body */}
-        <div ref={scrollRef} style={{ height: 'clamp(360px, 45vw, 520px)', overflowY: 'auto', padding: '24px 24px 16px', display: 'flex', flexDirection: 'column', gap: 16, scrollBehavior: 'smooth' }}>
+        <div
+          ref={scrollRef}
+          className="flex flex-col gap-4 overflow-y-auto px-6 pt-6 pb-4"
+          style={{ height: 'clamp(360px, 45vw, 520px)', scrollBehavior: 'smooth' }}
+        >
           {messages.map(msg => (
             msg.from === 'bot'
               ? <BotMessage key={msg.id} text={msg.text} />
@@ -627,18 +638,21 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
 
         {/* Options area */}
         {showOpts && !typing && (
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '16px 24px', background: 'rgba(255,255,255,0.01)' }}>
+          <div className="border-t border-[var(--border-default)] px-6 py-4 bg-[var(--bg-base)]">
             {renderOptions()}
           </div>
         )}
 
         {/* Bottom bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 16px', borderTop: '1px solid rgba(255,255,255,0.04)', fontSize: 11 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'rgba(255,255,255,0.35)' }}>
-            <span style={{ width: 7, height: 7, borderRadius: '50%', display: 'inline-block', background: typing ? '#F59E0B' : '#22C55E', boxShadow: typing ? '0 0 6px #F59E0B' : '0 0 6px #22C55E', transition: 'all 0.3s' }} />
+        <div className="flex items-center justify-between px-4 py-2 border-t border-[var(--border-default)] text-[11px]">
+          <div className="flex items-center gap-1.5 text-[var(--text-muted)]">
+            <span
+              className="inline-block h-[7px] w-[7px] rounded-full transition-all duration-300"
+              style={{ background: typing ? '#F59E0B' : '#22C55E', boxShadow: typing ? '0 0 6px #F59E0B' : '0 0 6px #22C55E' }}
+            />
             <span>{typing ? copy.statusTyping : copy.statusOnline}</span>
           </div>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>{copy.poweredBy}</span>
+          <span className="text-[var(--text-muted)] opacity-60">{copy.poweredBy}</span>
         </div>
       </div>
     </section>
@@ -647,13 +661,21 @@ export default function LeadProfiler({ locale = 'id' }: Props) {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
+function BotAvatar() {
+  return (
+    <div className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full border border-brand-crimson/20 bg-brand-crimson/10">
+      <LogoMark size={18} />
+    </div>
+  )
+}
+
 function BotMessage({ text }: { text: string }) {
   return (
-    <div className="lp-msg flex items-end gap-2.5" style={{ maxWidth: '80%' }}>
-      <div style={{ width: 30, height: 30, borderRadius: '50%', flexShrink: 0, background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <LogoMark size={18} />
-      </div>
-      <div style={{ padding: '10px 14px', borderRadius: '4px 20px 20px 20px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)', color: '#E6E1F0', fontSize: 14, lineHeight: 1.55, whiteSpace: 'pre-wrap' }}>
+    <div className="lp-msg flex items-end gap-2.5 max-w-[80%]">
+      <BotAvatar />
+      <div
+        className="whitespace-pre-wrap rounded-[4px_20px_20px_20px] border border-[var(--border-default)] bg-[var(--bg-base)] px-3.5 py-2.5 text-sm leading-relaxed text-[var(--text-primary)]"
+      >
         {text}
       </div>
     </div>
@@ -663,7 +685,10 @@ function BotMessage({ text }: { text: string }) {
 function UserMessage({ text }: { text: string }) {
   return (
     <div className="lp-msg flex justify-end">
-      <div style={{ padding: '10px 14px', borderRadius: '20px 4px 20px 20px', background: 'rgba(124,58,237,0.25)', border: '1px solid rgba(124,58,237,0.3)', color: '#E6E1F0', fontSize: 14, lineHeight: 1.55, maxWidth: '75%', whiteSpace: 'pre-wrap' }}>
+      <div
+        className="max-w-[75%] whitespace-pre-wrap rounded-[20px_4px_20px_20px] px-3.5 py-2.5 text-sm leading-relaxed text-white"
+        style={{ background: 'var(--grad-cta)' }}
+      >
         {text}
       </div>
     </div>
@@ -673,12 +698,10 @@ function UserMessage({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-2.5">
-      <div style={{ width: 30, height: 30, borderRadius: '50%', flexShrink: 0, background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <LogoMark size={18} />
-      </div>
-      <div style={{ padding: '12px 16px', borderRadius: '4px 20px 20px 20px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', gap: 5, alignItems: 'center' }}>
+      <BotAvatar />
+      <div className="flex items-center gap-[5px] rounded-[4px_20px_20px_20px] border border-[var(--border-default)] bg-[var(--bg-base)] px-4 py-3">
         {[0, 1, 2].map(i => (
-          <span key={i} className="lp-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: 'rgba(255,255,255,0.45)', display: 'block' }} />
+          <span key={i} className="lp-dot block h-[7px] w-[7px] rounded-full bg-[rgba(35,26,38,0.35)]" />
         ))}
       </div>
     </div>

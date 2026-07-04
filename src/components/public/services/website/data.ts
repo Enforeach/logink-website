@@ -7,7 +7,7 @@ export const WEBSITE_PROJECT_TYPES = [
       'Ketika kamu butuh halaman yang fokus melakukan satu hal: menangkap leads, menjual produk, atau mendorong sign-up. Landing page adalah senjata tercepat dan paling cost-effective. Desain berfokus CRO, framework A/B testing, dan tracking penuh dari hari pertama.',
     bestFor: 'Kampanye · Lead gen · Peluncuran produk · Promo',
     timeline: '1-2 minggu',
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
     features: [
       'Desain Berfokus CRO',
       'Framework A/B Testing',
@@ -24,7 +24,7 @@ export const WEBSITE_PROJECT_TYPES = [
       'Website multi-halaman yang membangun kehadiran brandmu, mengkomunikasikan nilaimu, dan menangkap leads. Desain UI kustom, integrasi CMS untuk update konten yang mudah, dan SEO on-page yang membuatmu mudah ditemukan sejak hari peluncuran.',
     bestFor: 'Brand presence · Kredibilitas · Bisnis jasa',
     timeline: '3-5 minggu',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     features: [
       'Desain UI Kustom',
       'Integrasi CMS',
@@ -42,7 +42,7 @@ export const WEBSITE_PROJECT_TYPES = [
       'Katalog produk, payment gateway lokal (Midtrans, Xendit), integrasi pengiriman (JNE, J&T, dan lainnya), dan dashboard admin untuk mengelola semuanya. Dibangun di WooCommerce, Shopify, atau fully custom, tergantung skala dan kebutuhanmu.',
     bestFor: 'Toko online · Brand D2C · FMCG · Retail',
     timeline: '4-8 minggu',
-    accentColor: '#10B981',
+    accentColor: '#EE3D5E',
     features: [
       'Setup Katalog Produk',
       'Payment Gateway Lokal (Midtrans, Xendit)',
@@ -60,7 +60,7 @@ export const WEBSITE_TECH_FEATURES = [
     description:
       'Setiap situs hadir dengan waktu muat di bawah 2 detik. Bundle code-split, gambar lazy-load, font teroptimasi, dan CDN delivery. PageSpeed score kamu akan 90+ atau kami perbaiki gratis.',
     span: 2,
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
     badge: '90+',
   },
   {
@@ -69,7 +69,7 @@ export const WEBSITE_TECH_FEATURES = [
     description:
       'Didesain untuk layar mobile dulu, lalu di-scale ke atas. Lebih dari 70% traffic web Indonesia berasal dari mobile, dan situsmu terlihat sempurna di setiap perangkat, setiap orientasi.',
     span: 1,
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     badge: null,
   },
   {
@@ -78,7 +78,7 @@ export const WEBSITE_TECH_FEATURES = [
     description:
       'HTML semantik yang bersih, hierarki heading, XML sitemap, robots.txt, meta tag, Open Graph, dan structured data: semuanya dikonfigurasi sebelum launch.',
     span: 1,
-    accentColor: '#10B981',
+    accentColor: '#EE3D5E',
     badge: null,
   },
   {
@@ -87,7 +87,7 @@ export const WEBSITE_TECH_FEATURES = [
     description:
       'Google Analytics 4, Meta Pixel, WhatsApp chat, dan integrasi CRM agar kamu bisa melacak setiap pengunjung dan konversi sejak hari pertama.',
     span: 1,
-    accentColor: '#D97706',
+    accentColor: '#F88438',
     badge: null,
   },
   {
@@ -96,7 +96,7 @@ export const WEBSITE_TECH_FEATURES = [
     description:
       'HTTPS sebagai default, hosting aman, backup rutin, dan konfigurasi yang diperketat. Data pengunjungmu terlindungi.',
     span: 1,
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
     badge: null,
   },
 ] as const
@@ -131,7 +131,7 @@ export const WEBSITE_PROCESS = [
     barEnd: 15,
     description:
       'Wawancara stakeholder, analisis kompetitor, perencanaan sitemap, keputusan teknologi, dan dokumen scope yang detail. Kami tentukan setiap halaman, fitur, dan integrasi sebelum desain dimulai.',
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
   },
   {
     phase: 2,
@@ -141,7 +141,7 @@ export const WEBSITE_PROCESS = [
     barEnd: 40,
     description:
       'Wireframe low-fidelity untuk struktur dan alur pengguna, lalu mockup desain UI high-fidelity di Figma. Versi desktop dan mobile. Kamu setujui desainnya sebelum satu baris kode pun ditulis.',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
   },
   {
     phase: 3,
@@ -151,7 +151,7 @@ export const WEBSITE_PROCESS = [
     barEnd: 75,
     description:
       'Build front-end, integrasi back-end, setup CMS, konfigurasi payment gateway, tracking analytics, dan implementasi responsive. Deploy ke staging URL untuk reviewmu.',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
   },
   {
     phase: 4,
@@ -161,7 +161,7 @@ export const WEBSITE_PROCESS = [
     barEnd: 85,
     description:
       'Testing lintas browser (Chrome, Safari, Firefox, Edge), mobile testing (iOS + Android), load testing, pengujian form submission, pengujian alur pembayaran, dan audit aksesibilitas.',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
   },
   {
     phase: 5,
@@ -171,7 +171,7 @@ export const WEBSITE_PROCESS = [
     barEnd: 100,
     description:
       'Konfigurasi DNS, setup SSL, deployment final, redirect 301, monitoring pasca-launch selama 2 minggu, pelatihan CMS untuk timmu, dan serah terima dokumentasi lengkap.',
-    accentColor: '#10B981',
+    accentColor: '#EE3D5E',
   },
 ] as const
 
@@ -220,46 +220,46 @@ export const WEBSITE_ADDONS = [
     description:
       'Hosting berkelanjutan, pembaruan keamanan, monitoring performa, pembaruan konten, dan dukungan teknikal. Jaga situsmu tetap cepat, aman, dan up-to-date setelah launch.',
     badge: 'Retainer bulanan',
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
   },
   {
     name: 'CRO (Conversion Rate Optimization)',
     description:
       'Optimasi pasca-launch: analisis heatmap, rekaman sesi pengguna, A/B testing, optimasi form, dan analisis funnel. Kami tingkatkan conversion rate-mu dengan data, bukan tebakan.',
     badge: 'Retainer bulanan',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
   },
 ] as const
 
 export const WEBSITE_TECH_STACK = [
   {
     category: 'Framework & CMS',
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
     items: ['Next.js', 'WordPress', 'Webflow', 'Shopify', 'WooCommerce', 'Laravel'],
   },
   {
     category: 'Frontend',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     items: ['React', 'Tailwind CSS', 'TypeScript', 'Framer Motion'],
   },
   {
     category: 'Hosting & Infrastruktur',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
     items: ['Vercel', 'Cloudflare', 'AWS', 'Nginx'],
   },
   {
     category: 'Pembayaran & Pengiriman (Indonesia)',
-    accentColor: '#10B981',
+    accentColor: '#EE3D5E',
     items: ['Midtrans', 'Xendit', 'JNE', 'J&T Express', 'SiCepat'],
   },
   {
     category: 'Analytics & Tracking',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
     items: ['Google Analytics 4', 'Google Tag Manager', 'Meta Pixel', 'Looker Studio', 'Hotjar'],
   },
   {
     category: 'Desain & Kolaborasi',
-    accentColor: '#F59E0B',
+    accentColor: '#F5A623',
     items: ['Figma', 'Adobe Creative Suite', 'Notion'],
   },
 ] as const
@@ -313,7 +313,7 @@ export const WEBSITE_PROJECT_TYPES_EN = [
       'When you need a focused page that does one thing: capture leads, sell a product, or drive sign-ups. A landing page is the fastest, most cost-effective weapon. CRO-focused design, A/B testing framework, and full tracking from day one.',
     bestFor: 'Campaigns · Lead gen · Product launches · Promos',
     timeline: '1-2 weeks',
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
     features: [
       'CRO-Focused Design',
       'A/B Testing Framework',
@@ -330,7 +330,7 @@ export const WEBSITE_PROJECT_TYPES_EN = [
       'A multi-page website that establishes your brand presence, communicates your value, and captures leads. Custom UI design, CMS integration for easy content updates, and on-page SEO that makes you findable from launch day.',
     bestFor: 'Brand presence · Credibility · Service businesses',
     timeline: '3-5 weeks',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     features: [
       'Custom UI Design',
       'CMS Integration',
@@ -348,7 +348,7 @@ export const WEBSITE_PROJECT_TYPES_EN = [
       'Product catalog, local payment gateways (Midtrans, Xendit), shipping integrations (JNE, J&T, and more), and an admin dashboard to manage everything. Built on WooCommerce, Shopify, or fully custom, depending on your scale and needs.',
     bestFor: 'Online stores · D2C brands · FMCG · Retail',
     timeline: '4-8 weeks',
-    accentColor: '#10B981',
+    accentColor: '#EE3D5E',
     features: [
       'Product Catalog Setup',
       'Local Payment Gateway (Midtrans, Xendit)',
@@ -366,7 +366,7 @@ export const WEBSITE_TECH_FEATURES_EN = [
     description:
       "Every site ships with under 2-second load times. Code-split bundles, lazy-loaded images, optimized fonts, and CDN delivery. Your PageSpeed score will be 90+ or we fix it for free.",
     span: 2,
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
     badge: '90+',
   },
   {
@@ -375,7 +375,7 @@ export const WEBSITE_TECH_FEATURES_EN = [
     description:
       'Designed for mobile screens first, then scaled up. Over 70% of Indonesian web traffic is mobile, and your site looks perfect on every device, every orientation.',
     span: 1,
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     badge: null,
   },
   {
@@ -384,7 +384,7 @@ export const WEBSITE_TECH_FEATURES_EN = [
     description:
       'Clean semantic HTML, heading hierarchy, XML sitemap, robots.txt, meta tags, Open Graph, and structured data: all configured before launch.',
     span: 1,
-    accentColor: '#10B981',
+    accentColor: '#EE3D5E',
     badge: null,
   },
   {
@@ -393,7 +393,7 @@ export const WEBSITE_TECH_FEATURES_EN = [
     description:
       'Google Analytics 4, Meta Pixel, WhatsApp chat, and CRM integration so you track every visitor and conversion from day one.',
     span: 1,
-    accentColor: '#D97706',
+    accentColor: '#F88438',
     badge: null,
   },
   {
@@ -402,7 +402,7 @@ export const WEBSITE_TECH_FEATURES_EN = [
     description:
       "HTTPS by default, secure hosting, regular backups, and hardened configurations. Your visitors' data is protected.",
     span: 1,
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
     badge: null,
   },
 ] as const
@@ -437,7 +437,7 @@ export const WEBSITE_PROCESS_EN = [
     barEnd: 15,
     description:
       'Stakeholder interviews, competitor analysis, sitemap planning, technology decisions, and detailed scope document. We define every page, feature, and integration before design begins.',
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
   },
   {
     phase: 2,
@@ -447,7 +447,7 @@ export const WEBSITE_PROCESS_EN = [
     barEnd: 40,
     description:
       'Low-fidelity wireframes for structure and user flow, then high-fidelity UI design mockups in Figma. Desktop and mobile versions. You approve the design before a single line of code is written.',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
   },
   {
     phase: 3,
@@ -457,7 +457,7 @@ export const WEBSITE_PROCESS_EN = [
     barEnd: 75,
     description:
       'Front-end build, back-end integration, CMS setup, payment gateway configuration, analytics tracking, and responsive implementation. Deployed to a staging URL for your review.',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
   },
   {
     phase: 4,
@@ -467,7 +467,7 @@ export const WEBSITE_PROCESS_EN = [
     barEnd: 85,
     description:
       'Cross-browser testing (Chrome, Safari, Firefox, Edge), mobile testing (iOS + Android), load testing, form submission testing, payment flow testing, and accessibility audit.',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
   },
   {
     phase: 5,
@@ -477,7 +477,7 @@ export const WEBSITE_PROCESS_EN = [
     barEnd: 100,
     description:
       'DNS configuration, SSL setup, final deployment, 301 redirects, post-launch monitoring for 2 weeks, CMS training for your team, and complete documentation handover.',
-    accentColor: '#10B981',
+    accentColor: '#EE3D5E',
   },
 ] as const
 
@@ -487,14 +487,14 @@ export const WEBSITE_ADDONS_EN = [
     description:
       'Ongoing hosting, security updates, performance monitoring, content updates, and technical support. Keep your site fast, secure, and up-to-date after launch.',
     badge: 'Monthly retainer',
-    accentColor: '#06B6D4',
+    accentColor: '#C084FC',
   },
   {
     name: 'CRO (Conversion Rate Optimization)',
     description:
       'Post-launch optimization: heatmap analysis, user session recording, A/B testing, form optimization, and funnel analysis. We improve your conversion rate with data, not guesswork.',
     badge: 'Monthly retainer',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
   },
 ] as const
 

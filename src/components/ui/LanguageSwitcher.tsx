@@ -49,16 +49,16 @@ export function LanguageSwitcher({ locale, alternateSlug }: Props) {
   const enPath = locale === 'id' ? alternatePath : pathname
 
   return (
-    <div className="flex items-center rounded-lg border border-[var(--border-default)] bg-[var(--bg-elevated)] p-0.5">
+    <div className="inline-flex w-fit items-center rounded-full border border-[var(--border-default)] bg-white p-0.5">
       <Link
         href={idPath}
         hrefLang="id"
         title="Lihat dalam Bahasa Indonesia"
         className={cn(
-          'flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150',
+          'flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson',
           locale === 'id'
-            ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm'
-            : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
+            ? 'bg-[var(--bg-tint-peach)] text-[var(--text-primary)] shadow-sm'
+            : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
         )}
       >
         <span className="text-[11px] leading-none">🇮🇩</span>
@@ -69,10 +69,10 @@ export function LanguageSwitcher({ locale, alternateSlug }: Props) {
         hrefLang="en"
         title="View in English"
         className={cn(
-          'flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150',
+          'flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson',
           locale === 'en'
-            ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm'
-            : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
+            ? 'bg-[var(--bg-tint-peach)] text-[var(--text-primary)] shadow-sm'
+            : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
         )}
       >
         <span className="text-[11px] leading-none">🇬🇧</span>

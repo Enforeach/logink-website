@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { buildMetadata } from '@/lib/seo'
-import { BlogCard } from '@/components/public/BlogCard'
+import { BlogListRow, type RowPost } from '@/components/public/blog/BlogListRow'
+import { BlogSidebarCta } from '@/components/public/blog/BlogSidebarCta'
+import { Reveal } from '@/components/public/blog/Reveal'
 import { prisma } from '@/lib/prisma'
 
 interface Props { params: Promise<{ slug: string }> }
@@ -18,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function EnBlogCategoryPage({ params }: Props) {
   const { slug } = await params
   let category = null
-  let posts: any[] = []
+  let posts: RowPost[] = []
   try {
     category = await prisma.category.findUnique({ where: { slug } })
     if (category) {
@@ -44,22 +46,35 @@ export default async function EnBlogCategoryPage({ params }: Props) {
 
   return (
     <>
-      <section className="pt-32 pb-16 px-4 mesh-gradient text-center">
-        <Link href="/en/blog" className="text-sm text-brand-violet hover:text-brand-pink transition-colors mb-6 inline-block">← All Articles</Link>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-4">
-          {category?.nameEn || category?.nameId || slug}
-        </h1>
+      <section className="pt-32 pb-12 px-6 mesh-gradient">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/en/blog" className="text-sm font-medium text-brand-crimson hover:text-brand-magenta transition-colors mb-5 inline-block">← All Articles</Link>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-[-0.03em] leading-[1.05] text-[var(--text-primary)]">
+            {category?.nameEn || category?.nameId || slug}
+          </h1>
+        </div>
       </section>
-      <section className="py-20 px-4 bg-[var(--bg-primary)]">
+      <section className="py-16 md:py-20 px-6">
         <div className="max-w-7xl mx-auto">
           {posts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {posts.map((p: any) => <BlogCard key={p.id} post={p} locale="en" />)}
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-12 items-start">
+              <div className="divide-y divide-[var(--border-default)] -mt-7">
+                {posts.map((p, i) => (
+                  <Reveal key={p.id} delay={Math.min(i * 0.06, 0.3)}>
+                    <BlogListRow post={p} locale="en" />
+                  </Reveal>
+                ))}
+              </div>
+              <aside className="hidden lg:block">
+                <div className="sticky top-24">
+                  <BlogSidebarCta locale="en" />
+                </div>
+              </aside>
             </div>
           ) : (
             <div className="text-center py-20">
               <p className="text-[var(--text-secondary)]">No English articles in this category yet.</p>
-              <Link href={`/blog/category/${slug}`} className="text-sm text-brand-violet mt-3 inline-block hover:opacity-80">
+              <Link href={`/blog/category/${slug}`} className="text-sm text-brand-crimson mt-3 inline-block hover:opacity-80">
                 View in Bahasa Indonesia →
               </Link>
             </div>

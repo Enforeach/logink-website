@@ -18,22 +18,21 @@ interface Props {
 export function CtaInlineCallout({ widget, onTrackClick }: Props) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -16 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.4 }}
-      className={`relative pl-6 my-8 rounded-xl py-5 pr-6 ${widget.cssClass || ''}`}
-      style={{ background: 'linear-gradient(to right, rgba(124,58,237,0.05), transparent)' }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative overflow-hidden pl-6 my-8 rounded-xl py-5 pr-6 bg-brand-peach border border-[var(--border-default)] ${widget.cssClass || ''}`}
       {...(widget.dataAttributes || {})}
     >
-      {/* Animated left border */}
+      {/* Animated gradient left edge */}
       <motion.div
-        className="absolute left-0 top-0 w-[3px] rounded-l-xl"
-        style={{ background: 'linear-gradient(to bottom, #7C3AED, #DB2777)' }}
+        className="absolute left-0 top-0 w-[3px] rounded-l-xl gradient-bg"
         initial={{ height: 0 }}
         whileInView={{ height: '100%' }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
+        aria-hidden="true"
       />
 
       <p className="text-sm font-semibold text-[var(--text-primary)] mb-1">
@@ -46,8 +45,7 @@ export function CtaInlineCallout({ widget, onTrackClick }: Props) {
         href={widget.buttonUrl}
         onClick={onTrackClick}
         whileHover={{ x: 2 }}
-        className="inline-flex items-center gap-1 text-sm font-medium pl-6"
-        style={{ background: 'linear-gradient(to right, #7C3AED, #DB2777)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+        className="inline-flex items-center gap-1 text-sm font-semibold text-brand-crimson hover:text-brand-orange transition-colors pl-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/50 rounded-sm"
       >
         {widget.buttonText || 'Learn more'} →
       </motion.a>

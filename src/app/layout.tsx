@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { Outfit } from 'next/font/google'
+import { Outfit, Bricolage_Grotesque } from 'next/font/google'
 import { SITE } from '@/lib/constants'
 import './globals.css'
 
@@ -10,6 +10,13 @@ const outfit = Outfit({
   display: 'swap',
   variable: '--font-outfit',
   preload: true,
+})
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-display',
 })
 
 export const metadata: Metadata = {
@@ -35,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={outfit.variable}>
+    <html lang="id" className={`${outfit.variable} ${bricolage.variable}`}>
       <body className="min-h-screen font-outfit antialiased">
         <noscript>
           <iframe

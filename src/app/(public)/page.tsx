@@ -77,10 +77,10 @@ export default async function HomePage() {
       <LeadProfiler />
       <LogoMarquee />
       <ProblemSolutionSection locale="id" />
-      <ServicesSection services={services as any} locale="id" />
+      <ServicesSection services={services} locale="id" />
       <HowWeWorkSection locale="id" />
       <StatsSection locale="id" />
-      <CaseStudyTeaser caseStudy={featuredCaseStudy as any} locale="id" />
+      <CaseStudyTeaser caseStudy={featuredCaseStudy} locale="id" />
       <CTASection locale="id" />
     </>
   )

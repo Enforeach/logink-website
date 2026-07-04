@@ -24,13 +24,12 @@ export function CtaCustomImage({ widget, onTrackClick }: Props) {
     <motion.a
       href={widget.buttonUrl}
       onClick={onTrackClick}
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ scale: 1.01 }}
-      className={`block relative rounded-2xl overflow-hidden group my-8 cursor-pointer ${widget.cssClass || ''}`}
-      style={{ boxShadow: '0 4px 40px rgba(0,0,0,0.2)' }}
+      className={`block relative rounded-2xl overflow-hidden group my-8 cursor-pointer border border-[var(--border-default)] shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/50 ${widget.cssClass || ''}`}
       {...(widget.dataAttributes || {})}
     >
       <div className="relative aspect-[16/5] w-full">
@@ -44,16 +43,16 @@ export function CtaCustomImage({ widget, onTrackClick }: Props) {
         />
       </div>
 
-      {/* Hover overlay */}
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-        <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-sm font-medium bg-black/30 px-4 py-2 rounded-lg backdrop-blur-sm">
+      {/* Hover overlay — soft ink scrim so the pill reads on any image */}
+      <div className="absolute inset-0 bg-brand-ink/0 group-hover:bg-brand-ink/20 transition-colors duration-300 flex items-center justify-center">
+        <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-brand-ink text-sm font-semibold px-5 py-2.5 rounded-full shadow-card">
           {widget.buttonText || 'Click to learn more'} →
         </span>
       </div>
 
       {/* Sponsored label */}
       {widget.sponsoredLabel && (
-        <span className="absolute top-0 left-0 text-[10px] text-white/60 bg-black/40 backdrop-blur-sm rounded-br-lg px-2.5 py-1">
+        <span className="absolute top-3 left-3 text-[10px] font-medium text-[var(--text-secondary)] bg-white/85 backdrop-blur-sm rounded-full px-2.5 py-1">
           Sponsored
         </span>
       )}

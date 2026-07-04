@@ -35,10 +35,9 @@ export const metadata: Metadata = buildMetadata({
 export const revalidate = 3600
 
 export default async function EnHomePage() {
-  let caseStudy: any = null
-  try {
-    caseStudy = await prisma.caseStudy.findFirst({ where: { status: 'PUBLISHED' }, orderBy: { publishedAt: 'desc' }, include: { metrics: true, service: true } })
-  } catch {}
+  const caseStudy = await prisma.caseStudy
+    .findFirst({ where: { status: 'PUBLISHED' }, orderBy: { publishedAt: 'desc' }, include: { metrics: true, service: true } })
+    .catch(() => null)
 
   return (
     <>

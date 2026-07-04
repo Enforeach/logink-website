@@ -81,46 +81,48 @@ function AnimatedNumber({ target, suffix }: { target: number; suffix: string }) 
   )
 }
 
+const EASE = [0.22, 1, 0.36, 1] as const
+
 export function SocialStats({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const STATS = locale === 'en' ? STATS_EN : STATS_ID
   return (
-    <section
-      className="py-16 px-4 relative"
-      style={{ background: '#0A0716' }}
-    >
+    // Ink band — one of max two inverted moments on this page
+    <section className="py-20 md:py-24 px-4 relative overflow-hidden" style={{ background: 'var(--bg-ink)' }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg,transparent,rgba(219,39,119,0.3),transparent)' }}
+        style={{ background: 'linear-gradient(90deg,transparent,rgba(216,28,92,0.5),transparent)' }}
+        aria-hidden
       />
       <div
-        className="absolute bottom-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg,transparent,rgba(124,58,237,0.3),transparent)' }}
+        className="orb top-[-30%] right-[10%] h-96 w-96 opacity-60"
+        style={{ background: 'radial-gradient(circle, rgba(216,28,92,0.25) 0%, transparent 70%)' }}
+        aria-hidden
       />
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto relative">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {STATS.map((stat) => (
-            <div
+          {STATS.map((stat, i) => (
+            <motion.div
               key={stat.label}
-              className="group flex flex-col items-center text-center p-7 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-pink-500/30 hover:shadow-lg hover:shadow-pink-500/10 hover:-translate-y-1 transition-all duration-300"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
+              className="flex flex-col items-center text-center p-7 rounded-2xl border transition-transform duration-300 hover:-translate-y-1"
+              style={{
+                borderColor: 'rgba(253,248,243,0.12)',
+                background: 'rgba(253,248,243,0.04)',
+              }}
             >
-              <div className="mb-4 p-2.5 rounded-xl inline-flex" style={{ background: 'rgba(219,39,119,0.12)' }}>
-                <stat.Icon size={22} strokeWidth={1.5} className="text-pink-400" />
+              <div className="mb-4 p-2.5 rounded-xl inline-flex" style={{ background: 'rgba(216,28,92,0.18)' }}>
+                <stat.Icon size={22} strokeWidth={1.5} className="text-brand-coral" />
               </div>
-              <div
-                className="text-5xl font-extrabold mb-2 leading-none"
-                style={{
-                  background: 'linear-gradient(135deg, #DB2777, #7C3AED)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
+              <div className="font-display text-5xl md:text-6xl font-bold mb-2 leading-none gradient-text">
                 <AnimatedNumber target={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-sm font-semibold text-[var(--text-primary)] mb-3">{stat.label}</div>
-              <div className="h-px w-10 mb-3" style={{ background: 'linear-gradient(90deg,#DB2777,#7C3AED)' }} />
-              <p className="text-xs text-[var(--text-muted)] leading-relaxed">{stat.context}</p>
-            </div>
+              <div className="text-sm font-semibold mb-3" style={{ color: 'var(--text-on-ink)' }}>{stat.label}</div>
+              <div className="h-px w-10 mb-3 gradient-bg" aria-hidden />
+              <p className="text-xs leading-relaxed" style={{ color: 'rgba(253,248,243,0.55)' }}>{stat.context}</p>
+            </motion.div>
           ))}
         </div>
       </div>

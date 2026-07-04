@@ -11,8 +11,8 @@ export function Card({ className, hover = false, glow = false, ...props }: CardP
     <div
       className={cn(
         'rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] transition-all duration-200',
-        hover && 'hover:border-[var(--border-hover)] hover:-translate-y-1 hover:shadow-xl',
-        glow && 'hover:shadow-brand-violet/20',
+        hover && 'hover:border-[var(--border-hover)] hover:-translate-y-1 hover:shadow-card',
+        glow && 'hover:shadow-cta',
         className
       )}
       {...props}

@@ -97,21 +97,19 @@ function AnimatedNumber({ target, decimals, suffix }: { target: number; decimals
   )
 }
 
-function StatCard({ stat }: { stat: StatItem }) {
+function StatBlock({ stat, index }: { stat: StatItem; index: number }) {
   return (
-    <div className="group flex flex-col items-center text-center p-7 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10 hover:-translate-y-1 transition-all duration-300">
-      <div className="mb-4 p-2.5 rounded-xl inline-flex" style={{ background: 'rgba(124,58,237,0.12)' }}>
-        <stat.Icon size={22} strokeWidth={1.5} className="text-violet-400" />
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className="flex flex-col items-center text-center px-6 py-4"
+    >
+      <div className="mb-4 p-2.5 rounded-xl inline-flex" style={{ background: 'rgba(168,85,247,0.16)' }}>
+        <stat.Icon size={22} strokeWidth={1.5} style={{ color: '#C084FC' }} aria-hidden />
       </div>
-      <div
-        className="text-5xl font-extrabold mb-2 leading-none"
-        style={{
-          background: 'linear-gradient(135deg, #7C3AED, #DB2777)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-        }}
-      >
+      <div className="font-display text-5xl md:text-6xl font-bold mb-2 leading-none gradient-text">
         {stat.isCounter ? (
           <AnimatedNumber
             target={stat.counterTarget!}
@@ -122,21 +120,21 @@ function StatCard({ stat }: { stat: StatItem }) {
           stat.value
         )}
       </div>
-      <div className="text-sm font-semibold text-[var(--text-primary)] mb-3">{stat.label}</div>
-      <div className="h-px w-10 mb-3" style={{ background: 'linear-gradient(90deg,#7C3AED,#DB2777)' }} />
-      <p className="text-xs text-[var(--text-muted)] leading-relaxed">{stat.context}</p>
-    </div>
+      <div className="text-sm font-semibold text-[var(--text-on-ink)] mb-3">{stat.label}</div>
+      <div className="h-px w-10 mb-3 gradient-bg" />
+      <p className="text-xs leading-relaxed" style={{ color: 'rgba(253,248,243,0.6)' }}>{stat.context}</p>
+    </motion.div>
   )
 }
 
 export function SEOStats({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const STATS = locale === 'en' ? STATS_EN : STATS_ID
   return (
-    <section className="py-16 px-4" style={{ background: '#0A0716' }}>
+    <section className="py-16 md:py-20 px-4" style={{ background: 'var(--bg-ink)' }}>
       <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {STATS.map((stat) => (
-            <StatCard key={stat.label} stat={stat} />
+        <div className="grid grid-cols-1 sm:grid-cols-3 sm:divide-x sm:divide-[rgba(253,248,243,0.1)] divide-y sm:divide-y-0 divide-[rgba(253,248,243,0.1)]">
+          {STATS.map((stat, i) => (
+            <StatBlock key={stat.label} stat={stat} index={i} />
           ))}
         </div>
       </div>

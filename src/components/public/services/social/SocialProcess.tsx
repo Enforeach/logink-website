@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useScroll } from 'framer-motion'
 import { type LucideProps, ClipboardList, Compass, PenLine, CalendarCheck } from 'lucide-react'
 import type { FC } from 'react'
 import { SOCIAL_PROCESS, SOCIAL_PROCESS_EN } from './data'
@@ -14,54 +14,49 @@ function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
   return <Icon {...props} />
 }
 
-function ProcessCard({ step, index }: { step: typeof SOCIAL_PROCESS[number]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, amount: 0.2 })
+const EASE = [0.22, 1, 0.36, 1] as const
 
+function ProcessStep({ step, index }: { step: typeof SOCIAL_PROCESS[number]; index: number }) {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="flex flex-col rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-6 snap-start flex-shrink-0 hover:-translate-y-1 transition-transform duration-300"
-      style={{
-        borderTop: `3px solid ${step.accentColor}`,
-        minWidth: 220,
-      }}
+    <motion.li
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: EASE }}
+      className="relative flex gap-5 sm:gap-7 pl-0"
     >
-      {/* Timeline badge */}
-      <span
-        className="inline-flex self-start px-2.5 py-1 rounded-full text-[10px] font-bold mb-5"
-        style={{
-          background: `${step.accentColor}18`,
-          color: step.accentColor,
-          border: `1px solid ${step.accentColor}40`,
-        }}
-      >
-        {step.timeline}
-      </span>
-
-      {/* Step number behind title */}
-      <div className="relative mb-1">
-        <span
-          className="absolute -top-3 left-0 text-5xl font-black leading-none select-none"
-          style={{ color: `${step.accentColor}20` }}
+      {/* Number marker on the connector line */}
+      <div className="relative z-10 flex-shrink-0">
+        <div
+          className="h-11 w-11 rounded-2xl bg-white border flex items-center justify-center font-display text-lg font-bold"
+          style={{ borderColor: `${step.accentColor}40`, color: step.accentColor }}
         >
-          {String(step.step).padStart(2, '0')}
-        </span>
-        <div className="relative flex items-center gap-2 pt-5">
-          <LucideIcon name={step.icon} size={18} strokeWidth={1.5} style={{ color: step.accentColor }} />
-          <h3 className="font-bold text-[var(--text-primary)]">{step.title}</h3>
+          {step.step}
         </div>
       </div>
 
-      <p className="text-sm text-[var(--text-secondary)] leading-relaxed mt-3 flex-1">{step.description}</p>
+      {/* Card */}
+      <div className="flex-1 rounded-2xl border border-[var(--border-default)] bg-white p-6 mb-8 hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+        <div className="flex flex-wrap items-center gap-3 mb-3">
+          <span
+            className="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold"
+            style={{ background: `${step.accentColor}14`, color: step.accentColor }}
+          >
+            {step.timeline}
+          </span>
+          <div className="flex items-center gap-2">
+            <LucideIcon name={step.icon} size={18} strokeWidth={1.5} style={{ color: step.accentColor }} />
+            <h3 className="font-display font-bold text-lg text-[var(--text-primary)]">{step.title}</h3>
+          </div>
+        </div>
 
-      <div className="mt-4 pt-4 border-t border-[var(--border-default)]">
-        <p className="text-[11px] text-[var(--text-muted)] italic">→ {step.deliverable}</p>
+        <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{step.description}</p>
+
+        <div className="mt-4 pt-4 border-t border-[var(--border-default)]">
+          <p className="text-[11px] text-[var(--text-muted)] italic">→ {step.deliverable}</p>
+        </div>
       </div>
-    </motion.div>
+    </motion.li>
   )
 }
 
@@ -73,29 +68,41 @@ const PROC_COPY = {
 export function SocialProcess({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const steps = locale === 'en' ? SOCIAL_PROCESS_EN : SOCIAL_PROCESS
   const c = PROC_COPY[locale]
+  const timelineRef = useRef<HTMLOListElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start 0.75', 'end 0.6'],
+  })
+
   return (
-    <section className="py-20 px-4 bg-[var(--bg-primary)]">
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-10">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">{c.eyebrow}</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
-          <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
+    <section className="py-20 md:py-28 px-4 bg-white">
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-12">
+          <div className="eyebrow mb-3">{c.eyebrow}</div>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text-primary)]">{c.heading}</h2>
+          <p className="text-[var(--text-secondary)] mt-4 max-w-xl">
             {c.sub}
           </p>
         </div>
 
-        {/* Desktop: 4-column grid | Mobile: horizontal scroll */}
-        <div
-          className="flex gap-4 overflow-x-auto pb-4 md:grid md:grid-cols-4 md:overflow-visible md:pb-0"
-          style={{ scrollSnapType: 'x mandatory' }}
-        >
+        {/* Vertical timeline with scroll-fill connector line */}
+        <ol ref={timelineRef} className="relative list-none m-0 p-0">
+          <div
+            className="absolute left-[21px] top-2 bottom-10 w-px bg-[var(--border-default)]"
+            aria-hidden
+          />
+          <motion.div
+            className="absolute left-[21px] top-2 bottom-10 w-px gradient-brand-bg origin-top"
+            style={{ scaleY: scrollYProgress }}
+            aria-hidden
+          />
           {(steps as typeof SOCIAL_PROCESS).map((step, i) => (
-            <ProcessCard key={step.step} step={step} index={i} />
+            <ProcessStep key={step.step} step={step} index={i} />
           ))}
-        </div>
+        </ol>
 
         {/* Repeat note */}
-        <div className="mt-8 flex items-center gap-3">
+        <div className="mt-2 flex items-center gap-3">
           <div className="h-px flex-1 bg-[var(--border-default)]" />
           <p className="text-xs text-[var(--text-muted)] text-center max-w-sm px-4">
             {c.repeatNote}

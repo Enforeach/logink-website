@@ -8,11 +8,15 @@ import { formatDate } from '@/lib/utils'
 import dynamic from 'next/dynamic'
 import { TableOfContents } from './TableOfContents'
 import { AuthorBio } from './AuthorBio'
+import { BlogListRow } from './BlogListRow'
+import { BlogSidebarCta } from './BlogSidebarCta'
+import { Reveal } from './Reveal'
 import { CtaRenderer } from '@/components/public/cta/CtaRenderer'
 
 const ReadingProgress = dynamic(() => import('./ReadingProgress').then(m => ({ default: m.ReadingProgress })))
 const ShareBar = dynamic(() => import('./ShareBar').then(m => ({ default: m.ShareBar })))
 import { filterCtasForPost, extractHeadings, injectHeadingIds, type CtaWidgetRow } from '@/lib/cta'
+import type { Prisma } from '@prisma/client'
 import { resolvePostContent } from '@/lib/i18n/content'
 import { type Locale, t, localePath } from '@/lib/i18n'
 import { SITE } from '@/lib/constants'
@@ -56,7 +60,7 @@ async function getPost(slug: string, locale: Locale) {
 async function getRelated(postId: string, categoryId: string | null, locale: Locale, limit = 3) {
   if (!categoryId) return []
   try {
-    const where: any = { status: 'PUBLISHED', categoryId, id: { not: postId } }
+    const where: Prisma.PostWhereInput = { status: 'PUBLISHED', categoryId, id: { not: postId } }
     if (locale === 'en') {
       where.titleEn = { not: null }
       where.bodyEn = { not: null }
@@ -94,23 +98,18 @@ export async function generateBlogDetailMetadata(slug: string, locale: Locale): 
   const post = await getPost(slug, locale)
   if (!post) return {}
 
-  const resolved = resolvePostContent({
-    ...post,
-    slugEn: (post as any).slugEn ?? null,
-    metaTitleEn: (post as any).metaTitleEn ?? null,
-    metaDescriptionEn: (post as any).metaDescriptionEn ?? null,
-  }, locale)
+  const resolved = resolvePostContent(post, locale)
 
   const siteUrl = SITE.url
   const idPath = `/blog/${post.slug}`
-  const enPath = (post as any).slugEn ? `/en/blog/${(post as any).slugEn}` : null
+  const enPath = post.slugEn ? `/en/blog/${post.slugEn}` : null
 
   return {
     ...buildMetadata({
       title: resolved.metaTitle || resolved.title,
       description: resolved.metaDescription || resolved.excerpt || '',
       path: localePath(`/blog/${slug}`, locale),
-      ogImage: (post as any).ogImage || post.featuredImage || undefined,
+      ogImage: post.ogImage || post.featuredImage || undefined,
       type: 'article',
     }),
     alternates: {
@@ -128,15 +127,10 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
   const [post, allCtas] = await Promise.all([getPost(slug, locale), getActiveCtas()])
   if (!post) notFound()
 
-  const resolved = resolvePostContent({
-    ...post,
-    slugEn: (post as any).slugEn ?? null,
-    metaTitleEn: (post as any).metaTitleEn ?? null,
-    metaDescriptionEn: (post as any).metaDescriptionEn ?? null,
-  }, locale)
+  const resolved = resolvePostContent(post, locale)
 
-  const tagIds = post.tags.map((t: any) => t.tag.id)
-  const tagNames = post.tags.map((t: any) => t.tag.name)
+  const tagIds = post.tags.map(pt => pt.tag.id)
+  const tagNames = post.tags.map(pt => pt.tag.name)
   const matchedCtas = filterCtasForPost(allCtas, post.id, tagIds, post.categoryId)
 
   const rawHtml = resolved.body || ''
@@ -186,17 +180,17 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <ReadingProgress />
 
-      {/* Hero */}
-      <section className="pt-32 pb-12 px-4 mesh-gradient">
-        <div className="max-w-3xl mx-auto">
+      {/* F-pattern sweep 1 — category · title · meta row */}
+      <section className="pt-32 pb-10 px-6 mesh-gradient">
+        <div className="max-w-6xl mx-auto">
           <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-6" aria-label="Breadcrumb">
-            <Link href={localePath('/', locale)} className="hover:text-[var(--text-primary)]">Home</Link>
+            <Link href={localePath('/', locale)} className="hover:text-[var(--text-primary)] transition-colors">Home</Link>
             <span>/</span>
-            <Link href={localePath('/blog', locale)} className="hover:text-[var(--text-primary)]">{t(locale, 'nav.blog')}</Link>
+            <Link href={localePath('/blog', locale)} className="hover:text-[var(--text-primary)] transition-colors">{t(locale, 'nav.blog')}</Link>
             {post.category && (
               <>
                 <span>/</span>
-                <Link href={localePath(`/blog/category/${post.category.slug}`, locale)} className="hover:text-[var(--text-primary)]">
+                <Link href={localePath(`/blog/category/${post.category.slug}`, locale)} className="hover:text-[var(--text-primary)] transition-colors">
                   {categoryName}
                 </Link>
               </>
@@ -204,18 +198,14 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
           </nav>
 
           {post.category && (
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-brand-violet/10 text-brand-violet border border-brand-violet/20 mb-4">
+            <span className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-brand-crimson/10 text-brand-crimson mb-4">
               {categoryName}
             </span>
           )}
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text-primary)] mb-6 leading-tight">
+          <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-[-0.03em] leading-[1.08] text-[var(--text-primary)] mb-6 max-w-4xl">
             {resolved.title}
           </h1>
-
-          {resolved.excerpt && (
-            <p className="text-lg text-[var(--text-secondary)] leading-relaxed mb-6">{resolved.excerpt}</p>
-          )}
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--text-muted)]">
             <div className="flex items-center gap-2">
@@ -229,21 +219,31 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
               <span className="font-medium text-[var(--text-secondary)]">{post.author.name}</span>
             </div>
             {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
-            {post.readingTime && <span>{post.readingTime} {t(locale, 'common.readingTime')}</span>}
-            {post.wordCount && <span>{post.wordCount.toLocaleString()} words</span>}
+            {!!post.readingTime && <span>{post.readingTime} {t(locale, 'common.readingTime')}</span>}
+            {!!post.wordCount && <span>{post.wordCount.toLocaleString()} words</span>}
+          </div>
+
+          {/* F-pattern sweep 2 — hook line + share row under a hairline */}
+          <div className="mt-8 pt-6 border-t border-[var(--border-default)]">
+            {resolved.excerpt && (
+              <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed max-w-3xl">{resolved.excerpt}</p>
+            )}
+            <div className="mt-5">
+              <ShareBar title={resolved.title} url={articleUrl} tags={tagNames} />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Fallback banner for EN posts without translation */}
       {resolved.isFallback && (
-        <div className="max-w-3xl mx-auto px-4 mt-4">
-          <div className="flex items-start gap-3 rounded-xl border-l-4 border-blue-500 bg-blue-500/5 px-4 py-3">
-            <span className="text-blue-400 mt-0.5 shrink-0">ℹ</span>
+        <div className="max-w-6xl mx-auto px-6 mt-6">
+          <div className="flex items-start gap-3 rounded-xl border-l-4 border-brand-purple bg-brand-purple/5 px-4 py-3">
+            <span className="text-brand-purple mt-0.5 shrink-0">ℹ</span>
             <div className="text-sm">
               <span className="text-[var(--text-secondary)]">{t(locale, 'blog.fallbackBanner')} </span>
               {resolved.alternateSlug && (
-                <Link href={`/blog/${resolved.alternateSlug}`} className="text-blue-400 hover:text-blue-300 underline underline-offset-2">
+                <Link href={`/blog/${resolved.alternateSlug}`} className="text-brand-purple hover:text-brand-magenta underline underline-offset-2">
                   {t(locale, 'blog.viewOriginal')}
                 </Link>
               )}
@@ -254,24 +254,24 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
 
       {/* Featured image */}
       {post.featuredImage && (
-        <div className="max-w-5xl mx-auto px-4 -mt-4 mb-8">
-          <div className="aspect-[16/9] relative rounded-2xl overflow-hidden shadow-lg">
-            <Image src={post.featuredImage} alt={(post as any).featuredImageAlt || resolved.title} fill className="object-cover" priority />
+        <div className="max-w-6xl mx-auto px-6 mt-8 mb-10">
+          <div className="aspect-[16/9] relative rounded-2xl overflow-hidden border border-[var(--border-default)]">
+            <Image src={post.featuredImage} alt={post.featuredImageAlt || resolved.title} fill className="object-cover" priority />
           </div>
         </div>
       )}
 
       {/* Above-fold CTAs */}
       {aboveFold.length > 0 && (
-        <div className="max-w-3xl mx-auto px-4 mb-8 space-y-4">
+        <div className="max-w-6xl mx-auto px-6 mb-8 space-y-4">
           {aboveFold.map(cta => <CtaRenderer key={cta.id} widget={cta} />)}
         </div>
       )}
 
-      {/* Main content grid */}
-      <section className="pb-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12">
+      {/* F-pattern stem — body left (max-w-[65ch]) + sticky right rail */}
+      <section className="pb-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-12 items-start">
             <article>
               {headings.length > 0 && (
                 <div className="lg:hidden mb-8 p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)]">
@@ -284,11 +284,13 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
                 </div>
               )}
               {htmlWithIds ? (
-                <div className="tiptap prose max-w-none" dangerouslySetInnerHTML={{ __html: htmlWithIds }} />
+                <div
+                  className="tiptap max-w-[65ch] leading-[1.75] [&_h2]:font-display [&_h2]:text-[1.75rem] [&_h2]:font-bold [&_h2]:tracking-[-0.02em] [&_h2]:leading-[1.15] [&_h2]:scroll-mt-28 [&_h3]:font-display [&_h3]:font-semibold [&_h3]:tracking-[-0.01em] [&_h3]:scroll-mt-28 [&>p:first-of-type]:text-lg [&>p:first-of-type]:text-[var(--text-secondary)] [&_a]:text-brand-purple [&_a:hover]:text-brand-magenta [&_strong]:font-semibold [&_strong]:text-[var(--text-primary)]"
+                  dangerouslySetInnerHTML={{ __html: htmlWithIds }}
+                />
               ) : (
                 <p className="text-[var(--text-secondary)]">Article content is not yet available.</p>
               )}
-              <ShareBar title={resolved.title} url={articleUrl} tags={tagNames} />
               <AuthorBio name={post.author.name} image={post.author.image} />
             </article>
 
@@ -305,6 +307,7 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
                   </div>
                 )}
                 {sidebarCtas.map(cta => <CtaRenderer key={cta.id} widget={cta} />)}
+                {sidebarCtas.length === 0 && <BlogSidebarCta locale={locale} />}
               </div>
             </aside>
           </div>
@@ -312,39 +315,22 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
       </section>
 
       {belowArticle.length > 0 && (
-        <div className="max-w-3xl mx-auto px-4 mb-12 space-y-4">
+        <div className="max-w-6xl mx-auto px-6 mb-12 space-y-4">
           {belowArticle.map(cta => <CtaRenderer key={cta.id} widget={cta} />)}
         </div>
       )}
 
-      {/* Related articles */}
+      {/* Related articles — compact horizontal rows, same F rhythm */}
       {related.length > 0 && (
-        <section className="py-16 px-4 bg-[var(--bg-subtle)]">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-8">{t(locale, 'blog.relatedArticles')}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {related.map((rel: any) => {
-                const relTitle = (locale === 'en' && rel.titleEn) ? rel.titleEn : rel.titleId
-                const relExcerpt = (locale === 'en' && rel.excerptEn) ? rel.excerptEn : rel.excerptId
-                const relSlug = (locale === 'en' && rel.slugEn) ? rel.slugEn : rel.slug
-                return (
-                  <Link key={rel.id} href={localePath(`/blog/${relSlug}`, locale)} className="group block rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] overflow-hidden hover:border-[var(--border-hover)] transition-all">
-                    {rel.featuredImage && (
-                      <div className="aspect-[16/9] relative overflow-hidden">
-                        <Image src={rel.featuredImage} alt={relTitle} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
-                      </div>
-                    )}
-                    <div className="p-5">
-                      <h3 className="font-semibold text-[var(--text-primary)] leading-snug mb-2 group-hover:text-brand-violet transition-colors line-clamp-2">{relTitle}</h3>
-                      {relExcerpt && <p className="text-sm text-[var(--text-muted)] line-clamp-2">{relExcerpt}</p>}
-                      <div className="flex items-center gap-3 text-xs text-[var(--text-muted)] mt-3">
-                        {rel.publishedAt && <span>{formatDate(rel.publishedAt)}</span>}
-                        {rel.readingTime && <span>{rel.readingTime} {t(locale, 'common.readingTime')}</span>}
-                      </div>
-                    </div>
-                  </Link>
-                )
-              })}
+        <section className="py-16 md:py-24 px-6 bg-[var(--bg-surface)] border-t border-[var(--border-default)]">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-[var(--text-primary)] mb-4">{t(locale, 'blog.relatedArticles')}</h2>
+            <div className="divide-y divide-[var(--border-default)]">
+              {related.map((rel, i) => (
+                <Reveal key={rel.id} delay={Math.min(i * 0.08, 0.24)}>
+                  <BlogListRow post={rel} locale={locale} />
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>

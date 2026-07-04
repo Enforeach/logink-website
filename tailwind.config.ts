@@ -11,20 +11,32 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          dark: '#16142E',
-          'dark-surface': '#221E40',
-          warm: '#E6E1F0',
-          cream: '#EEEAF5',
-          'cream-surface': '#F4F1F8',
-          violet: '#7C3AED',
-          pink: '#DB2777',
-          amber: '#D97706',
-          gold: '#F59E0B',
-          'light-violet': '#A78BFA',
+          // "Warm Canvas" palette — from the logo ribbon gradient
+          magenta: '#A8138F',
+          crimson: '#D81C5C',
+          coral: '#EE3D5E',
+          orange: '#F88438',
+          purple: '#A855F7',
+          cream: '#FDF8F3',
+          'cream-surface': '#FFFFFF',
+          peach: '#FBEFE4',
+          rose: '#FBE9EF',
+          lilac: '#F5EFFB',
+          ink: '#231A26',
+          // Legacy aliases (admin + not-yet-migrated code) → nearest new hue
+          violet: '#A855F7',
+          pink: '#D81C5C',
+          amber: '#F88438',
+          gold: '#F5A623',
+          'light-violet': '#C084FC',
+          dark: '#231A26',
+          'dark-surface': '#2A2130',
+          warm: '#FDF8F3',
         },
       },
       fontFamily: {
         outfit: ['var(--font-outfit)', 'sans-serif'],
+        display: ['var(--font-display)', 'var(--font-outfit)', 'sans-serif'],
       },
       animation: {
         'marquee': 'marquee 30s linear infinite',
@@ -38,8 +50,13 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        'gradient-brand': 'linear-gradient(135deg, #7C3AED, #DB2777)',
-        'gradient-mesh': 'radial-gradient(at 40% 20%, #7C3AED33 0px, transparent 50%), radial-gradient(at 80% 0%, #DB277733 0px, transparent 50%), radial-gradient(at 0% 50%, #D9770633 0px, transparent 50%)',
+        'gradient-brand': 'linear-gradient(100deg, #A8138F 0%, #D81C5C 35%, #EE3D5E 65%, #F88438 100%)',
+        'gradient-cta': 'linear-gradient(100deg, #D81C5C, #F88438)',
+        'gradient-mesh': 'radial-gradient(at 18% 12%, #F8843824 0px, transparent 50%), radial-gradient(at 82% 8%, #D81C5C1A 0px, transparent 45%), radial-gradient(at 65% 55%, #A855F712 0px, transparent 50%)',
+      },
+      boxShadow: {
+        cta: '0 8px 24px -8px rgba(216, 28, 92, 0.45)',
+        card: '0 16px 40px -16px rgba(35, 26, 38, 0.16)',
       },
     },
   },

@@ -19,15 +19,15 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 h-14 w-14 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/40 hover:bg-emerald-400 hover:scale-110 transition-all duration-300 animate-in fade-in zoom-in duration-500"
+      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 h-14 w-14 rounded-full bg-[#25D366] ring-4 ring-white flex items-center justify-center hover:brightness-105 hover:scale-110 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/50"
       style={{
         animation: 'pulse-glow 2s ease-in-out infinite',
       }}
     >
       <style jsx>{`
         @keyframes pulse-glow {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4), 0 8px 24px rgba(52, 211, 153, 0.4); }
-          50% { box-shadow: 0 0 0 12px rgba(52, 211, 153, 0), 0 8px 24px rgba(52, 211, 153, 0.4); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.35), 0 8px 24px rgba(37, 211, 102, 0.35); }
+          50% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0), 0 8px 24px rgba(37, 211, 102, 0.35); }
         }
       `}</style>
       <svg className="h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24">

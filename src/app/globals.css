@@ -2,8 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── DESIGN TOKENS ─── */
+/* ═══════════════════════════════════════════════════════════
+   LOGINK "WARM CANVAS" DESIGN TOKENS — 2026 rebrand
+   Light warm-cream base, logo gradient (magenta→coral→orange)
+   as the single source of accent color.
+   ═══════════════════════════════════════════════════════════ */
 :root {
+  /* Backgrounds */
+  --bg-primary: #FDF8F3;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-tint-peach: #FBEFE4;
+  --bg-tint-rose: #FBE9EF;
+  --bg-tint-lilac: #F5EFFB;
+  --bg-ink: #231A26;
+
+  /* Text */
+  --text-primary: #231A26;
+  --text-secondary: rgba(35, 26, 38, 0.66);
+  --text-muted: rgba(35, 26, 38, 0.45);
+  --text-on-ink: #FDF8F3;
+
+  /* Lines */
+  --border-default: rgba(35, 26, 38, 0.08);
+  --border-hover: rgba(35, 26, 38, 0.18);
+
+  /* Brand accents (from the logo ribbon) */
+  --brand-magenta: #A8138F;
+  --brand-crimson: #D81C5C;
+  --brand-coral: #EE3D5E;
+  --brand-orange: #F88438;
+  --brand-purple: #A855F7;
+
+  /* Gradients */
+  --grad-brand: linear-gradient(100deg, #A8138F 0%, #D81C5C 35%, #EE3D5E 65%, #F88438 100%);
+  --grad-cta: linear-gradient(100deg, #D81C5C, #F88438);
+  --shadow-cta: 0 8px 24px -8px rgba(216, 28, 92, 0.45);
+  --shadow-card: 0 16px 40px -16px rgba(35, 26, 38, 0.16);
+}
+
+/* Admin CMS keeps the legacy dark shell (out of redesign scope).
+   Scoped so the public light theme never leaks into /admin. */
+.theme-dark-admin {
   --bg-primary: #16142E;
   --bg-surface: #221E40;
   --bg-elevated: #2D2850;
@@ -12,6 +52,8 @@
   --text-muted: rgba(230, 225, 240, 0.42);
   --border-default: rgba(230, 225, 240, 0.09);
   --border-hover: rgba(230, 225, 240, 0.18);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /* ─── BASE ─── */
@@ -26,46 +68,64 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-outfit), sans-serif;
+  font-family: var(--font-display), var(--font-outfit), sans-serif;
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.2;
+  line-height: 1.12;
+}
+
+::selection {
+  background: rgba(238, 61, 94, 0.22);
 }
 
 /* ─── UTILITIES ─── */
 .gradient-text {
-  background: linear-gradient(135deg, #7C3AED, #DB2777);
+  background: var(--grad-brand);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-bg {
-  background: linear-gradient(135deg, #7C3AED, #DB2777);
+  background: var(--grad-cta);
 }
 
+.gradient-brand-bg {
+  background: var(--grad-brand);
+}
+
+/* Light warm mesh — hero / page-top ambience */
 .mesh-gradient {
-  background-color: #16142E;
+  background-color: #FDF8F3;
   background-image:
-    radial-gradient(at 40% 20%, rgba(124, 58, 237, 0.16) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, rgba(219, 39, 119, 0.16) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, rgba(217, 119, 6, 0.08) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, rgba(124, 58, 237, 0.12) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(219, 39, 119, 0.08) 0px, transparent 50%);
+    radial-gradient(at 18% 12%, rgba(248, 132, 56, 0.14) 0px, transparent 50%),
+    radial-gradient(at 82% 8%, rgba(216, 28, 92, 0.10) 0px, transparent 45%),
+    radial-gradient(at 65% 55%, rgba(168, 85, 247, 0.07) 0px, transparent 50%),
+    radial-gradient(at 8% 80%, rgba(238, 61, 94, 0.08) 0px, transparent 45%);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-crimson);
 }
 
 .card {
   border-radius: 1rem;
   border: 1px solid var(--border-default);
   background-color: var(--bg-surface);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.card:hover { border-color: var(--border-hover); }
+.card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-card);
+}
 
 /* ─── MARQUEE ─── */
 .marquee-container { overflow: hidden; }
@@ -80,9 +140,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-surface); }
-::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.7); }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(216, 28, 92, 0.35); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(216, 28, 92, 0.6); }
 
 /* ─── TIPTAP EDITOR ─── */
 .tiptap { outline: none; }
@@ -98,7 +158,7 @@ h1, h2, h3, h4, h5, h6 {
 .tiptap p { margin-bottom: 1rem; }
 .tiptap ul, .tiptap ol { padding-left: 1.5rem; margin-bottom: 1rem; }
 .tiptap blockquote {
-  border-left: 4px solid #7C3AED;
+  border-left: 4px solid var(--brand-crimson);
   padding-left: 1rem;
   font-style: italic;
   color: var(--text-secondary);
@@ -117,7 +177,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow-x: auto;
   margin-bottom: 1rem;
 }
-.tiptap a { color: #7C3AED; text-decoration: underline; text-underline-offset: 3px; }
+.tiptap a { color: var(--brand-purple); text-decoration: underline; text-underline-offset: 3px; }
 .tiptap img { max-width: 100%; height: auto; border-radius: 0.5rem; }
 
 /* ─── READING PROGRESS ─── */
@@ -126,25 +186,24 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(135deg, #7C3AED, #DB2777);
+  background: var(--grad-brand);
   z-index: 9999;
   transition: width 0.1s linear;
 }
 
-/* ─── HOMEPAGE ANIMATIONS ─── */
-@keyframes gradient-float {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* ─── MOTION PRIMITIVES ─── */
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(28px, -22px) scale(1.06); }
+  66% { transform: translate(-18px, 16px) scale(0.96); }
 }
 
-@keyframes shimmer-sweep {
-  0% { transform: translateX(-100%) skewX(-20deg); }
-  100% { transform: translateX(300%) skewX(-20deg); }
-}
-
-@keyframes bounce-arrow {
-  0%, 100% { transform: translateY(0px); opacity: 1; }
-  50% { transform: translateY(8px); opacity: 0.5; }
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  pointer-events: none;
+  animation: orb-drift 14s ease-in-out infinite;
 }
 
 @keyframes fade-up {
@@ -187,34 +246,16 @@ h1, h2, h3, h4, h5, h6 {
   to { opacity: 1; transform: scale(1); }
 }
 
-.animated-mesh {
-  background: linear-gradient(
-    135deg,
-    #16142E 0%,
-    #211a40 25%,
-    #16142E 50%,
-    #1c1638 75%,
-    #16142E 100%
-  );
-  background-size: 400% 400%;
-  animation: gradient-float 18s ease infinite;
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateY(0px); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.5; }
 }
 
-.dot-grid {
-  background-image: radial-gradient(circle, rgba(230,225,240,0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%) skewX(-20deg); }
+  100% { transform: translateX(300%) skewX(-20deg); }
 }
 
-.shimmer-badge::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-  animation: shimmer-sweep 2.5s ease-out 0.5s 1 forwards;
-  border-radius: inherit;
-}
-
-/* ─── CTA ANIMATIONS ─── */
 @keyframes gradientShift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -223,6 +264,20 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes shimmer {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(400%); }
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(35, 26, 38, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.shimmer-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+  animation: shimmer-sweep 2.5s ease-out 0.5s 1 forwards;
+  border-radius: inherit;
 }
 
 /* ─── REDUCED MOTION ─── */
@@ -234,6 +289,6 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto !important;
   }
   .marquee-track { animation: none; }
-  .animated-mesh { animation: none; }
+  .orb { animation: none; }
   .shimmer-badge::after { animation: none; }
 }

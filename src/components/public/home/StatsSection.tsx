@@ -9,14 +9,13 @@ interface StatConfig {
   suffix: string
   labelId: string
   labelEn: string
-  color: string
 }
 
 const STATS: StatConfig[] = [
-  { prefix: '2–', target: 4, suffix: 'x', labelId: 'Rata-rata ROAS', labelEn: 'Average ROAS', color: '#7C3AED' },
-  { target: 150, suffix: '+', labelId: 'Artikel per Bulan', labelEn: 'Articles Per Month', color: '#DB2777' },
-  { target: 5, suffix: '', labelId: 'Layanan Terintegrasi', labelEn: 'Integrated Services', color: '#D97706' },
-  { target: 100, suffix: '%', labelId: 'Pelaporan Transparan', labelEn: 'Transparent Reporting', color: '#F59E0B' },
+  { prefix: '2–', target: 4, suffix: 'x', labelId: 'Rata-rata ROAS', labelEn: 'Average ROAS' },
+  { target: 150, suffix: '+', labelId: 'Artikel per Bulan', labelEn: 'Articles Per Month' },
+  { target: 5, suffix: '', labelId: 'Layanan Terintegrasi', labelEn: 'Integrated Services' },
+  { target: 100, suffix: '%', labelId: 'Pelaporan Transparan', labelEn: 'Transparent Reporting' },
 ]
 
 function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number; locale: 'id' | 'en' }) {
@@ -29,28 +28,20 @@ function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number
       style={inView
         ? { animation: `fade-up 0.5s cubic-bezier(0.22,1,0.36,1) ${index * 0.12}s both` }
         : { opacity: 0 }}
-      className="flex-1 text-center relative px-6 py-8"
+      className="flex-1 text-center px-6 py-8"
     >
-      {/* Glow behind number */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ opacity: 0.12 }}
-      >
-        <div
-          className="h-32 w-32 rounded-full blur-3xl"
-          style={{ background: `radial-gradient(circle, ${stat.color} 0%, transparent 70%)` }}
-        />
-      </div>
-
       {/* Number */}
-      <div className="relative text-4xl sm:text-5xl lg:text-6xl font-extrabold gradient-text leading-none mb-3">
+      <div className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em] gradient-text leading-none mb-4">
         {stat.prefix}
         <span>{count}</span>
         {stat.suffix}
       </div>
 
       {/* Label */}
-      <div className="text-xs uppercase tracking-widest text-[var(--text-muted)]">
+      <div
+        className="text-xs uppercase tracking-[0.18em] font-medium"
+        style={{ color: 'rgba(253, 248, 243, 0.6)' }}
+      >
         {locale === 'id' ? stat.labelId : stat.labelEn}
       </div>
     </div>
@@ -59,11 +50,15 @@ function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number
 
 export function StatsSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   return (
-    <section className="px-4 py-4" style={{ background: '#0A0716' }}>
-      {/* Gradient top border */}
-      <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #7C3AED, #DB2777, #D97706, transparent)' }} />
+    <section className="relative overflow-hidden px-6 py-16 md:py-24" style={{ background: 'var(--bg-ink)' }}>
+      {/* Subtle light dot grid on the ink band */}
+      <div
+        aria-hidden
+        className="absolute inset-0 dot-grid pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle, rgba(253, 248, 243, 0.07) 1px, transparent 1px)' }}
+      />
 
-      <div className="max-w-7xl mx-auto py-8">
+      <div className="relative max-w-7xl mx-auto">
         {/* Mobile: 2x2 grid */}
         <div className="grid grid-cols-2 lg:hidden gap-4">
           {STATS.map((s, i) => (
@@ -71,16 +66,13 @@ export function StatsSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           ))}
         </div>
 
-        {/* Desktop: row with dividers */}
-        <div className="hidden lg:flex items-stretch divide-x divide-[var(--border-default)]">
+        {/* Desktop: row with hairline dividers */}
+        <div className="hidden lg:flex items-stretch divide-x divide-[rgba(253,248,243,0.12)]">
           {STATS.map((s, i) => (
             <AnimatedStat key={s.labelEn} stat={s} index={i} locale={locale} />
           ))}
         </div>
       </div>
-
-      {/* Gradient bottom border */}
-      <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #7C3AED, #DB2777, #D97706, transparent)' }} />
     </section>
   )
 }

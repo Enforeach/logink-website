@@ -1,5 +1,3 @@
-'use client'
-
 const LOGOS = [
   'Tokopedia', 'Shopee', 'Gojek', 'Traveloka', 'Bukalapak',
   'OVO', 'Grab', 'Lazada', 'Blibli', 'Tiket.com',
@@ -7,14 +5,9 @@ const LOGOS = [
 
 export function LogoMarquee() {
   return (
-    <section className="relative py-6" style={{ background: '#0A0716' }}>
-      {/* Top gradient border */}
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, #7C3AED40, #DB277740, transparent)' }} />
-      {/* Bottom gradient border */}
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, #7C3AED40, #DB277740, transparent)' }} />
-
-      {/* Label */}
-      <p className="text-center text-xs uppercase tracking-widest text-[var(--text-muted)] mb-4">
+    <section className="relative py-8 bg-[var(--bg-base)] border-y border-[var(--border-default)]">
+      {/* Eyebrow */}
+      <p className="eyebrow text-center mb-5">
         Trusted by leading Indonesian brands
       </p>
 
@@ -30,10 +23,7 @@ export function LogoMarquee() {
           {[...LOGOS, ...LOGOS].map((logo, i) => (
             <span
               key={i}
-              className="inline-block mx-10 text-sm font-semibold uppercase tracking-widest select-none transition-all duration-200 hover:opacity-70 cursor-default"
-              style={{ opacity: 0.3, color: 'var(--text-primary)' }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = '0.7')}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = '0.3')}
+              className="inline-block mx-10 text-sm font-semibold uppercase tracking-widest select-none cursor-default grayscale opacity-60 text-[var(--text-secondary)] transition-all duration-200 hover:grayscale-0 hover:opacity-100 hover:text-[var(--text-primary)]"
             >
               {logo}
             </span>

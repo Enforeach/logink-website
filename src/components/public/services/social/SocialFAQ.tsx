@@ -9,18 +9,19 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="border border-[var(--border-default)] rounded-xl overflow-hidden">
+    <div className="border-b border-[var(--border-default)]">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left hover:bg-[var(--bg-elevated)] transition-colors"
+        aria-expanded={open}
+        className="w-full flex items-center justify-between gap-4 py-5 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/50 rounded-lg"
       >
-        <span className="font-semibold text-[var(--text-primary)] text-sm">{q}</span>
+        <span className="font-semibold text-[var(--text-primary)] text-sm group-hover:text-brand-crimson transition-colors">{q}</span>
         <motion.div
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.2 }}
           className="flex-shrink-0"
         >
-          <Plus size={18} className="text-pink-400" />
+          <Plus size={18} className="text-brand-crimson" />
         </motion.div>
       </button>
 
@@ -33,10 +34,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             style={{ overflow: 'hidden' }}
           >
-            <div className="px-5 pb-5 pt-0">
-              <div className="h-px bg-[var(--border-default)] mb-4" />
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{a}</p>
-            </div>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed pb-5 pr-8">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -53,17 +51,17 @@ export function SocialFAQ({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const faqs = locale === 'en' ? SOCIAL_FAQS_EN : SOCIAL_FAQS
   const c = FAQ_COPY[locale]
   return (
-    <section className="py-20 px-4 bg-[var(--bg-primary)]">
+    <section className="py-20 md:py-28 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-3xl mx-auto">
         <div className="mb-10">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">FAQ</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
-          <p className="text-[var(--text-secondary)] mt-3">
+          <div className="eyebrow mb-3">FAQ</div>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text-primary)]">{c.heading}</h2>
+          <p className="text-[var(--text-secondary)] mt-4">
             {c.sub}
           </p>
         </div>
 
-        <div className="space-y-3">
+        <div className="border-t border-[var(--border-default)]">
           {faqs.map((faq) => (
             <FAQItem key={faq.question} q={faq.question} a={faq.answer} />
           ))}

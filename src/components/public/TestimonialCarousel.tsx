@@ -39,22 +39,34 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
   const t = testimonials[current]
 
   return (
-    <section className="py-20 px-4 bg-[var(--bg-primary)]">
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-sm font-medium mb-10">
-          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-          </svg>
-          Testimonials
-        </div>
+    <section className="py-20 md:py-28 px-6 relative overflow-hidden" style={{ background: 'var(--bg-tint-peach)' }}>
+      {/* Oversized decorative quote */}
+      <div
+        className="absolute top-12 left-6 sm:left-16 font-display text-[140px] font-bold text-[var(--text-primary)] leading-none select-none pointer-events-none"
+        style={{ opacity: 0.1, lineHeight: 1 }}
+        aria-hidden
+      >
+        &ldquo;
+      </div>
+
+      <div className="max-w-4xl mx-auto text-center relative z-10">
+        <span className="eyebrow inline-block mb-10">Testimonials</span>
 
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            drag={testimonials.length > 1 ? 'x' : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -60) next()
+              else if (info.offset.x > 60) prev()
+            }}
+            className={testimonials.length > 1 ? 'cursor-grab active:cursor-grabbing' : undefined}
           >
             <blockquote className="text-xl lg:text-2xl font-medium text-[var(--text-primary)] leading-relaxed mb-8">
               &ldquo;{t.quote}&rdquo;
@@ -67,10 +79,10 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
                   alt={t.clientName}
                   width={52}
                   height={52}
-                  className="rounded-full border-2 border-brand-violet/30"
+                  className="rounded-full border-2 border-brand-crimson/25"
                 />
               ) : (
-                <div className="h-13 w-13 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-lg">
+                <div className="h-12 w-12 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-lg">
                   {t.clientName[0]}
                 </div>
               )}
@@ -86,7 +98,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
           <div className="flex items-center justify-center gap-4 mt-10">
             <button
               onClick={prev}
-              className="h-10 w-10 rounded-full border border-[var(--border-default)] bg-[var(--bg-elevated)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-brand-violet/50 transition-all"
+              className="h-10 w-10 rounded-full border border-[var(--border-default)] bg-white flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-crimson"
               aria-label="Previous"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -98,14 +110,14 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`h-2 rounded-full transition-all duration-300 ${i === current ? 'w-6 bg-brand-violet' : 'w-2 bg-[var(--border-hover)]'}`}
+                  className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-crimson ${i === current ? 'w-7 gradient-bg' : 'w-2 bg-[var(--border-hover)] hover:bg-[var(--text-muted)]'}`}
                   aria-label={`Go to testimonial ${i + 1}`}
                 />
               ))}
             </div>
             <button
               onClick={next}
-              className="h-10 w-10 rounded-full border border-[var(--border-default)] bg-[var(--bg-elevated)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-brand-violet/50 transition-all"
+              className="h-10 w-10 rounded-full border border-[var(--border-default)] bg-white flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-crimson"
               aria-label="Next"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

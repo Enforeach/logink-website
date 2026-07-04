@@ -1,9 +1,12 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { ChevronDown, Check } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { type LucideProps, Smartphone, Film, Briefcase, Check } from 'lucide-react'
+import type { FC } from 'react'
 import { SOCIAL_MODULES, SOCIAL_MODULES_EN } from './data'
+
+const ICON_MAP: Record<string, FC<LucideProps>> = { Smartphone, Film, Briefcase }
 
 const PLATFORM_COLORS: Record<string, string> = {
   Instagram: '#E4405F',
@@ -14,40 +17,49 @@ const PLATFORM_COLORS: Record<string, string> = {
 
 type Module = typeof SOCIAL_MODULES[number]
 
+const EASE = [0.22, 1, 0.36, 1] as const
+
 function ModuleCard({ mod, index, locale = 'id' }: { mod: Module; index: number; locale?: 'id' | 'en' }) {
   const [expanded, setExpanded] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, amount: 0.15 })
+  const Icon = ICON_MAP[mod.icon]
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: -40 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] overflow-hidden hover:border-[var(--border-hover)] transition-colors"
-      style={{ borderLeft: `3px solid ${mod.accentColor}` }}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: EASE }}
+      className="rounded-2xl border border-[var(--border-default)] bg-white overflow-hidden hover:border-[var(--border-hover)] hover:shadow-card hover:-translate-y-1 transition-all duration-300"
     >
-      <div className="p-6">
-        {/* Platform pills */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {(mod.platforms as readonly string[]).map((p) => (
-            <span
-              key={p}
-              className="px-2.5 py-1 rounded-full text-xs font-semibold"
-              style={{
-                background: `${PLATFORM_COLORS[p] || mod.accentColor}20`,
-                color: PLATFORM_COLORS[p] || mod.accentColor,
-                border: `1px solid ${PLATFORM_COLORS[p] || mod.accentColor}40`,
-              }}
-            >
-              {p}
-            </span>
-          ))}
+      <div className="p-6 sm:p-7">
+        <div className="flex items-start gap-4 mb-4">
+          {/* Accent icon squircle */}
+          <div
+            className="flex-shrink-0 h-12 w-12 rounded-2xl flex items-center justify-center"
+            style={{ background: `rgba(${mod.accentRgb},0.12)` }}
+          >
+            {Icon && <Icon size={24} strokeWidth={1.5} style={{ color: mod.accentColor }} />}
+          </div>
+          <div className="min-w-0">
+            {/* Platform pills */}
+            <div className="flex flex-wrap gap-2 mb-2">
+              {(mod.platforms as readonly string[]).map((p) => (
+                <span
+                  key={p}
+                  className="px-2.5 py-0.5 rounded-full text-xs font-semibold"
+                  style={{
+                    background: `${PLATFORM_COLORS[p] || mod.accentColor}14`,
+                    color: PLATFORM_COLORS[p] || mod.accentColor,
+                  }}
+                >
+                  {p}
+                </span>
+              ))}
+            </div>
+            <h3 className="font-display text-xl font-bold text-[var(--text-primary)]">{mod.title}</h3>
+          </div>
         </div>
 
-        {/* Title + icon */}
-        <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">{mod.title}</h3>
         <p className="text-sm italic text-[var(--text-muted)] mb-3">{mod.tagline}</p>
         <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">{mod.description}</p>
 
@@ -56,7 +68,7 @@ function ModuleCard({ mod, index, locale = 'id' }: { mod: Module; index: number;
           {(mod.features as readonly { name: string; description: string }[]).map((f) => (
             <span
               key={f.name}
-              className="px-2.5 py-1 rounded-full text-xs font-medium border border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]"
+              className="px-2.5 py-1 rounded-full text-xs font-medium border border-[var(--border-default)] bg-[var(--bg-primary)] text-[var(--text-secondary)]"
             >
               {f.name}
             </span>
@@ -66,7 +78,8 @@ function ModuleCard({ mod, index, locale = 'id' }: { mod: Module; index: number;
         {/* Toggle */}
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="flex items-center gap-2 text-sm font-semibold transition-colors"
+          aria-expanded={expanded}
+          className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/50 rounded"
           style={{ color: mod.accentColor }}
         >
           <span>{expanded ? (locale === 'en' ? 'Close ▲' : 'Tutup ▲') : (locale === 'en' ? 'See details ▼' : 'Lihat detail ▼')}</span>
@@ -83,7 +96,7 @@ function ModuleCard({ mod, index, locale = 'id' }: { mod: Module; index: number;
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             style={{ overflow: 'hidden' }}
           >
-            <div className="px-6 pb-6 space-y-3 border-t border-[var(--border-default)] pt-5">
+            <div className="px-6 sm:px-7 pb-6 space-y-3 border-t border-[var(--border-default)] pt-5">
               {(mod.features as readonly { name: string; description: string }[]).map((f) => (
                 <div key={f.name} className="flex gap-3">
                   <div
@@ -115,14 +128,14 @@ export function SocialSubServices({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const modules = locale === 'en' ? SOCIAL_MODULES_EN : SOCIAL_MODULES
   const c = SUB_COPY[locale]
   return (
-    <section className="py-20 px-4 bg-[var(--bg-primary)]">
+    <section className="py-20 md:py-28 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3">{c.eyebrow}</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
+          <div className="eyebrow mb-3">{c.eyebrow}</div>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text-primary)]">
             {c.heading}
           </h2>
-          <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
+          <p className="text-[var(--text-secondary)] mt-4 max-w-xl">
             {c.sub}
           </p>
         </div>

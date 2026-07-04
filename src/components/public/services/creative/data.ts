@@ -1,8 +1,8 @@
 export const CREATIVE_DELIVERABLES = {
   design: {
     category: 'Design',
-    accentColor: '#F59E0B',
-    accentRgb: '245,158,11',
+    accentColor: '#F5A623',
+    accentRgb: '245,166,35',
     items: [
       { id: 'social-templates', name: 'Template Social Media (IG feed, story, cover)', description: 'Feed post, story frame, cover design, dan highlight icon.' },
       { id: 'banner-ads', name: 'Banner / Display Ads', description: 'Banner HTML5 dan statis untuk Google Display. Semua ukuran IAB.' },
@@ -14,8 +14,8 @@ export const CREATIVE_DELIVERABLES = {
   },
   video: {
     category: 'Video',
-    accentColor: '#DB2777',
-    accentRgb: '219,39,119',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
     items: [
       { id: 'brand-film', name: 'Brand Film / Company Profile', description: 'Company profile atau brand documentary berdurasi 1–5 menit.' },
       { id: 'product-video', name: 'Video Produk / Tutorial', description: 'Showcase produk dan tutorial cara penggunaan.' },
@@ -26,8 +26,8 @@ export const CREATIVE_DELIVERABLES = {
   },
   copy: {
     category: 'Copy',
-    accentColor: '#7C3AED',
-    accentRgb: '124,58,237',
+    accentColor: '#A855F7',
+    accentRgb: '168,85,247',
     items: [
       { id: 'ad-copy', name: 'Ad Copy (Google, Meta, TikTok)', description: 'Headline, deskripsi, dan CTA per platform. Varian A/B.' },
       { id: 'landing-page-copy', name: 'Landing Page Copy', description: 'Copy halaman berfokus CRO yang terstruktur untuk konversi maksimal.' },
@@ -76,8 +76,8 @@ export const CREATIVE_MODULES = [
     tagline: 'Visual identity yang membuat brandmu langsung dikenali.',
     description:
       'Dari template social media hingga brand guidelines lengkap, desainer kami membuat sistem visual kohesif yang bekerja di setiap touchpoint. Setiap aset dibangun dalam bahasa desainmu, tidak dari marketplace template.',
-    accentColor: '#F59E0B',
-    accentRgb: '245,158,11',
+    accentColor: '#F5A623',
+    accentRgb: '245,166,35',
     deliverables: [
       { name: 'Template Social Media (IG feed, story, cover)', description: 'Feed post, story frame, cover design, dan highlight icon. Didesain sebagai sistem, bukan satu per satu, agar brandmu tetap konsisten bahkan saat kami tidak ada.' },
       { name: 'Banner Display Ads', description: 'Banner HTML5 dan statis untuk Google Display Network dan kampanye programmatic. Semua ukuran IAB standar termasuk.' },
@@ -93,8 +93,8 @@ export const CREATIVE_MODULES = [
     tagline: 'Dari konsep hingga final cut: video yang menggerakkan orang dan menggerakkan angka.',
     description:
       'Produksi video full-service berbasis di Jakarta. Pengembangan konsep, scripting, syuting, editing, dan motion graphics. Dikirim dalam format multi-platform agar kamu dapat manfaat maksimal dari satu sesi syuting.',
-    accentColor: '#DB2777',
-    accentRgb: '219,39,119',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
     deliverables: [
       { name: 'Pengembangan Konsep & Script', description: 'Konsep creative dan script yang menyeimbangkan brand storytelling dengan tujuan performa.' },
       { name: 'Syuting (Jakarta & sekitarnya)', description: 'Kru profesional, peralatan, dan koordinasi talent. On-location atau studio. Area Jabodetabek tercakup.' },
@@ -110,8 +110,8 @@ export const CREATIVE_MODULES = [
     tagline: 'Kata-kata yang menjual, dalam bahasa yang digunakan audiens kamu.',
     description:
       'Headline yang menghentikan scroll, landing page yang mengkonversi, dan ad copy yang mendapat klik. Ditulis secara native dalam Bahasa Indonesia oleh penulis yang memahami psikologi konsumen Indonesia.',
-    accentColor: '#7C3AED',
-    accentRgb: '124,58,237',
+    accentColor: '#A855F7',
+    accentRgb: '168,85,247',
     deliverables: [
       { name: 'Ad Copy (Google, Meta, TikTok)', description: 'Headline, deskripsi, dan CTA yang dioptimasi per platform. Varian A/B sudah termasuk.' },
       { name: 'Landing Page Copy', description: 'Copy halaman berfokus CRO: hero headline, seksi benefit, social proof, FAQ, dan CTA.' },
@@ -129,7 +129,7 @@ export const CREATIVE_PROCESS = [
     timeline: 'Hari 1',
     description: 'Kami selaraskan tujuan, audiens, tone, deliverable, dan timeline. Kamu bagikan aset brand dan referensi. Kami ajukan pertanyaan yang menghemat ronde revisi ke depannya.',
     deliverable: 'Dokumen brief yang sudah ditandatangani',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     side: 'center' as const,
   },
   {
@@ -138,7 +138,7 @@ export const CREATIVE_PROCESS = [
     timeline: 'Hari 2–3',
     description: 'Kami presentasikan 2-3 arah creative: moodboard untuk desain, storyboard untuk video, draft angle untuk copy. Kamu pilih arah yang paling resonan.',
     deliverable: 'Arah creative yang disetujui',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
     side: 'left' as const,
   },
   {
@@ -147,7 +147,7 @@ export const CREATIVE_PROCESS = [
     timeline: 'Hari 3–7',
     description: 'Eksekusi penuh dari konsep yang disetujui. Desainer mendesain, videografer syuting, copywriter menulis. Semuanya dibangun dari nol sesuai spesifikasi brandmu.',
     deliverable: 'Draft pertama deliverable',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
     side: 'right' as const,
   },
   {
@@ -156,7 +156,7 @@ export const CREATIVE_PROCESS = [
     timeline: 'Hari 7–9',
     description: 'Kamu review hasilnya. Dua ronde revisi sudah termasuk. Feedback dikumpulkan dalam satu ronde per siklus agar prosesnya efisien.',
     deliverable: 'Aset final yang disetujui',
-    accentColor: '#F59E0B',
+    accentColor: '#F5A623',
     side: 'left' as const,
   },
   {
@@ -165,7 +165,7 @@ export const CREATIVE_PROCESS = [
     timeline: 'Hari 9–10',
     description: 'Aset final dikirim dalam semua format dan ukuran. Source file sudah termasuk. Diorganisir dalam folder bersama dengan konvensi penamaan yang jelas.',
     deliverable: 'Paket aset lengkap + source file',
-    accentColor: '#A78BFA',
+    accentColor: '#C084FC',
     side: 'right' as const,
   },
 ] as const
@@ -224,8 +224,8 @@ export const CREATIVE_STATS = [
 export const CREATIVE_DELIVERABLES_EN = {
   design: {
     category: 'Design',
-    accentColor: '#F59E0B',
-    accentRgb: '245,158,11',
+    accentColor: '#F5A623',
+    accentRgb: '245,166,35',
     items: [
       { id: 'social-templates', name: 'Social Media Templates (IG feed, story, cover)', description: 'Feed posts, story frames, cover designs, and highlight icons.' },
       { id: 'banner-ads', name: 'Banner / Display Ads', description: 'HTML5 and static banners for Google Display. All IAB sizes.' },
@@ -237,8 +237,8 @@ export const CREATIVE_DELIVERABLES_EN = {
   },
   video: {
     category: 'Video',
-    accentColor: '#DB2777',
-    accentRgb: '219,39,119',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
     items: [
       { id: 'brand-film', name: 'Brand Film / Company Profile', description: '1–5 minute company profile or brand documentary.' },
       { id: 'product-video', name: 'Product / Tutorial Video', description: 'Product showcases and how-to tutorials.' },
@@ -249,8 +249,8 @@ export const CREATIVE_DELIVERABLES_EN = {
   },
   copy: {
     category: 'Copy',
-    accentColor: '#7C3AED',
-    accentRgb: '124,58,237',
+    accentColor: '#A855F7',
+    accentRgb: '168,85,247',
     items: [
       { id: 'ad-copy', name: 'Ad Copy (Google, Meta, TikTok)', description: 'Headlines, descriptions, and CTAs per platform. A/B variants.' },
       { id: 'landing-page-copy', name: 'Landing Page Copy', description: 'CRO-focused page copy structured for maximum conversion.' },
@@ -299,8 +299,8 @@ export const CREATIVE_MODULES_EN = [
     tagline: 'Visual identity that makes your brand instantly recognizable.',
     description:
       "From social media templates to full brand guidelines, our designers create cohesive visual systems that work across every touchpoint. Every asset built in your design language, not pulled from a template marketplace.",
-    accentColor: '#F59E0B',
-    accentRgb: '245,158,11',
+    accentColor: '#F5A623',
+    accentRgb: '245,166,35',
     deliverables: [
       { name: 'Social Media Templates (IG feed, story, cover)', description: "Feed posts, story frames, cover designs, and highlight icons. Designed as systems, not one-offs, so your brand stays consistent even when we're not around." },
       { name: 'Banner Display Ads', description: 'HTML5 and static banners for Google Display Network and programmatic campaigns. All standard IAB sizes included.' },
@@ -316,8 +316,8 @@ export const CREATIVE_MODULES_EN = [
     tagline: 'From concept to final cut: video that moves people and moves metrics.',
     description:
       'Full-service video production based in Jakarta. Concept development, scripting, shooting, editing, and motion graphics. Delivered in multi-platform formats so you get maximum mileage from a single shoot.',
-    accentColor: '#DB2777',
-    accentRgb: '219,39,119',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
     deliverables: [
       { name: 'Concept & Script Development', description: 'Creative concepts and scripts that balance brand storytelling with performance goals.' },
       { name: 'Shooting (Jakarta & surroundings)', description: 'Professional crew, equipment, and talent coordination. On-location or studio. Jabodetabek area covered.' },
@@ -333,8 +333,8 @@ export const CREATIVE_MODULES_EN = [
     tagline: 'Words that sell, in the language your audience speaks.',
     description:
       'Headlines that stop the scroll, landing pages that convert, and ad copy that earns clicks. Written natively in Bahasa Indonesia by writers who understand Indonesian consumer psychology.',
-    accentColor: '#7C3AED',
-    accentRgb: '124,58,237',
+    accentColor: '#A855F7',
+    accentRgb: '168,85,247',
     deliverables: [
       { name: 'Ad Copy (Google, Meta, TikTok)', description: 'Headlines, descriptions, and CTAs optimized per platform. A/B variants included.' },
       { name: 'Landing Page Copy', description: 'CRO-focused page copy: hero headlines, benefit sections, social proof, FAQs, and CTAs.' },
@@ -352,7 +352,7 @@ export const CREATIVE_PROCESS_EN = [
     timeline: 'Day 1',
     description: 'We align on objectives, audience, tone, deliverables, and timelines. You share brand assets and references. We ask the questions that save revision rounds later.',
     deliverable: 'Signed brief document',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     side: 'center' as const,
   },
   {
@@ -361,7 +361,7 @@ export const CREATIVE_PROCESS_EN = [
     timeline: 'Day 2–3',
     description: 'We present 2-3 creative directions: moodboards for design, storyboards for video, draft angles for copy. You pick the direction that resonates.',
     deliverable: 'Approved creative direction',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
     side: 'left' as const,
   },
   {
@@ -370,7 +370,7 @@ export const CREATIVE_PROCESS_EN = [
     timeline: 'Day 3–7',
     description: 'Full execution of the approved concept. Designers design, videographers shoot, copywriters write. Everything built from scratch to your brand specifications.',
     deliverable: 'First draft deliverables',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
     side: 'right' as const,
   },
   {
@@ -379,7 +379,7 @@ export const CREATIVE_PROCESS_EN = [
     timeline: 'Day 7–9',
     description: 'You review the work. Two revision rounds are included. Feedback collected in one round per cycle to keep things efficient.',
     deliverable: 'Final approved assets',
-    accentColor: '#F59E0B',
+    accentColor: '#F5A623',
     side: 'left' as const,
   },
   {
@@ -388,7 +388,7 @@ export const CREATIVE_PROCESS_EN = [
     timeline: 'Day 9–10',
     description: 'Final assets delivered in all formats and sizes. Source files included. Organized in shared folders with clear naming conventions.',
     deliverable: 'Complete asset package + source files',
-    accentColor: '#A78BFA',
+    accentColor: '#C084FC',
     side: 'right' as const,
   },
 ] as const

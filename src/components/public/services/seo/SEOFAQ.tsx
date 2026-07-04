@@ -8,19 +8,33 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] overflow-hidden hover:border-violet-500/20 transition-colors">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.45, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+    >
       <button
         onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+        aria-expanded={open}
+        className="w-full flex items-center justify-between gap-4 py-5 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] rounded-lg"
       >
-        <span className="text-base font-medium text-[var(--text-primary)]">{q}</span>
+        <span className="text-base font-medium text-[var(--text-primary)] group-hover:text-[#9333EA] transition-colors">{q}</span>
         <motion.div
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.2 }}
-          className="flex-shrink-0 h-6 w-6 rounded-full flex items-center justify-center"
-          style={{ background: open ? 'linear-gradient(135deg,#7C3AED,#DB2777)' : 'rgba(124,58,237,0.12)' }}
+          className={`flex-shrink-0 h-7 w-7 rounded-full flex items-center justify-center transition-colors ${open ? 'gradient-bg' : ''}`}
+          style={open ? undefined : { background: 'rgba(168,85,247,0.10)' }}
         >
-          <svg className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <svg
+            className={`h-3.5 w-3.5 ${open ? 'text-white' : ''}`}
+            style={open ? undefined : { color: '#9333EA' }}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            aria-hidden
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
           </svg>
         </motion.div>
@@ -33,14 +47,13 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
           >
-            <div className="px-6 pb-5 border-t border-[var(--border-default)]">
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed pt-4 max-w-2xl">{a}</p>
-            </div>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed pb-5 max-w-2xl">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }
 
@@ -53,15 +66,21 @@ export function SEOFAQ({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const faqs = locale === 'en' ? SEO_FAQS_EN : SEO_FAQS
   const c = FAQ_COPY[locale]
   return (
-    <section className="py-20 px-4 bg-[var(--bg-primary)]">
+    <section className="py-20 md:py-28 px-6 bg-[var(--bg-primary)]">
       <div className="max-w-3xl mx-auto">
-        <div className="mb-10">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">FAQ</div>
-          <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-10"
+        >
+          <div className="eyebrow mb-3">FAQ</div>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--text-primary)] tracking-[-0.03em]">{c.heading}</h2>
           <p className="text-[var(--text-secondary)] mt-2 text-sm">{c.sub}</p>
-        </div>
+        </motion.div>
 
-        <div className="space-y-3">
+        <div className="divide-y divide-[var(--border-default)] border-y border-[var(--border-default)]">
           {faqs.map((faq, i) => (
             <FAQItem key={i} q={faq.question} a={faq.answer} index={i} />
           ))}

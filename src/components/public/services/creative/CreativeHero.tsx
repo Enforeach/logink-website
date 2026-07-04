@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 
 const CARDS = [
@@ -24,12 +24,12 @@ const CARDS = [
   },
   {
     label: 'Brand Guide',
-    bg: 'linear-gradient(160deg,#1a0533,#2d1060)',
+    bg: 'linear-gradient(160deg,#231A26,#3D2A44)',
     aspect: 'aspect-[3/4]',
     content: (
       <div className="flex flex-col h-full p-4 gap-3">
         <div className="flex gap-2">
-          {['#7C3AED','#DB2777','#D97706','#10B981'].map(c => (
+          {['#A8138F','#D81C5C','#F88438','#F5A623'].map(c => (
             <div key={c} className="h-5 w-5 rounded-full" style={{ background: c }} />
           ))}
         </div>
@@ -44,7 +44,7 @@ const CARDS = [
   },
   {
     label: 'Video 16:9',
-    bg: 'linear-gradient(135deg,#D97706,#F59E0B)',
+    bg: 'linear-gradient(135deg,#F88438,#F5A623)',
     aspect: 'aspect-video',
     content: (
       <div className="flex h-full items-center justify-center">
@@ -58,7 +58,7 @@ const CARDS = [
   },
   {
     label: 'Banner Ad',
-    bg: 'linear-gradient(135deg,#7C3AED,#DB2777)',
+    bg: 'linear-gradient(135deg,#A8138F,#D81C5C)',
     aspect: 'aspect-[3/1]',
     content: (
       <div className="flex h-full items-center justify-between px-5">
@@ -78,6 +78,7 @@ const HERO_COPY = {
   id: {
     badge: 'Jasa Desain Kreatif Jakarta — Branding, Konten Visual & Produksi Video',
     trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi termasuk', '✓ Format multi-platform'],
+    home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/layanan',
     title1: 'Visual yang Berani.',
     title2: 'Cerita yang Jelas.\nBrand yang Tak Terlupakan.',
     desc: 'Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu, tidak pernah dari library template. Desain yang tidak hanya terlihat bagus, tapi juga perform.',
@@ -89,6 +90,7 @@ const HERO_COPY = {
   en: {
     badge: 'Creative Design Services Jakarta — Branding, Visual Content & Video Production',
     trustPills: ['✓ 100% custom design', '✓ 2 revision rounds included', '✓ Multi-platform formats'],
+    home: 'Home', services: 'Services', homeHref: '/en', servicesHref: '/en/services',
     title1: 'Bold Visuals.',
     title2: 'Clear Stories.\nUnforgettable Brands.',
     desc: 'From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset is made for your audience, never from a template library. Design that not only looks great, but also performs.',
@@ -98,6 +100,8 @@ const HERO_COPY = {
     ctaSecondaryHref: '/en/portfolio',
   },
 }
+
+const EASE = [0.22, 1, 0.36, 1] as const
 
 export function CreativeHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -114,120 +118,160 @@ export function CreativeHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   return (
     <section
       ref={ref}
-      className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16"
-      style={{ background: '#16142E' }}
+      className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-28 pb-16 mesh-gradient"
     >
-      <div className="absolute inset-0 animated-mesh opacity-60" />
-      <div className="absolute inset-0 dot-grid opacity-30" />
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 h-96 w-96 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-1/3 left-1/3 h-64 w-64 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, rgba(219,39,119,0.1) 0%, transparent 70%)' }} />
-      </div>
+      <div className="absolute inset-0 dot-grid opacity-40" aria-hidden />
+      {/* Gold + crimson accent orbs */}
+      <div
+        className="orb top-[12%] right-[10%] h-96 w-96"
+        style={{ background: 'radial-gradient(circle, rgba(245,166,35,0.20) 0%, transparent 70%)' }}
+        aria-hidden
+      />
+      <div
+        className="orb bottom-[12%] left-[6%] h-72 w-72"
+        style={{ background: 'radial-gradient(circle, rgba(216,28,92,0.10) 0%, transparent 70%)', animationDelay: '-7s' }}
+        aria-hidden
+      />
 
-      <div className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-10">
+          <Link href={c.homeHref} className="hover:text-[var(--text-primary)] transition-colors">{c.home}</Link>
+          <span>/</span>
+          <Link href={c.servicesHref} className="hover:text-[var(--text-primary)] transition-colors">{c.services}</Link>
+          <span>/</span>
+          <span className="text-[var(--text-secondary)]">Creative Services</span>
+        </nav>
 
-        {/* Left */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col gap-6"
-        >
-          <h1 className="inline-flex items-center gap-2 w-fit px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-            <span className="text-xs font-semibold text-amber-400">{c.badge}</span>
-          </h1>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
-          <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight text-[var(--text-primary)]">
-            {c.title1}{' '}
-            <span className="gradient-text">{c.title2.split('\n').map((line, i) => (
-              <span key={i}>{line}{i < c.title2.split('\n').length - 1 && <br />}</span>
-            ))}</span>
-          </h2>
+          {/* Left */}
+          <div>
+            <motion.h1
+              initial={{ opacity: 0, y: -12 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, ease: EASE }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-brand-gold mb-6 border border-brand-gold/25"
+              style={{ background: 'rgba(245,166,35,0.10)' }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-gold animate-pulse" aria-hidden />
+              {c.badge}
+            </motion.h1>
 
-          <p className="text-base text-[var(--text-secondary)] leading-relaxed max-w-md">
-            {c.desc}
-          </p>
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.12, ease: EASE }}
+              className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] leading-[1.08] tracking-tight mb-5"
+            >
+              {c.title1}{' '}
+              <span className="gradient-text">{c.title2.split('\n').map((line, i) => (
+                <span key={i}>{line}{i < c.title2.split('\n').length - 1 && <br />}</span>
+              ))}</span>
+            </motion.h2>
 
-          <div className="flex flex-wrap gap-2">
-            {c.trustPills.map(p => (
-              <span key={p} className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[var(--text-secondary)]">{p}</span>
-            ))}
-          </div>
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.24, ease: EASE }}
+              className="text-lg text-[var(--text-secondary)] leading-relaxed max-w-lg mb-8"
+            >
+              {c.desc}
+            </motion.p>
 
-          <div className="flex gap-3 flex-wrap">
-            <Link href={c.ctaHref} className="gradient-bg px-6 py-3 rounded-xl font-semibold text-white text-sm hover:scale-[1.02] hover:shadow-lg hover:shadow-amber-500/20 transition-all">
-              {c.ctaPrimary}
-            </Link>
-            <Link href={c.ctaSecondaryHref} className="px-6 py-3 rounded-xl font-semibold text-sm border border-white/15 text-[var(--text-secondary)] hover:border-white/30 hover:text-[var(--text-primary)] transition-all">
-              {c.ctaSecondary}
-            </Link>
-          </div>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.36, ease: EASE }}
+              className="flex flex-wrap items-center gap-3 mb-6"
+            >
+              <Link
+                href={c.ctaHref}
+                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full gradient-bg text-white font-semibold text-sm shadow-cta hover:scale-[1.02] hover:brightness-105 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2"
+              >
+                {c.ctaPrimary}
+              </Link>
+              <Link
+                href={c.ctaSecondaryHref}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[var(--border-hover)] text-[var(--text-primary)] font-semibold text-sm hover:bg-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2"
+              >
+                {c.ctaSecondary}
+              </Link>
+            </motion.div>
 
-        {/* Right: mockup stack */}
-        <motion.div
-          initial={{ opacity: 0, x: 60, rotate: 6 }}
-          animate={inView ? { opacity: 1, x: 0, rotate: 0 } : {}}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative w-full max-w-[320px]"
-          >
-            {/* Stacked cards */}
-            <div className="relative h-64">
-              {CARDS.map((card, i) => {
-                const offset = i - active
-                const normalised = ((offset % CARDS.length) + CARDS.length) % CARDS.length
-                const zIndex = CARDS.length - normalised
-                const isTop = normalised === 0
-
-                return (
-                  <motion.div
-                    key={card.label}
-                    className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50"
-                    style={{ background: card.bg }}
-                    animate={{
-                      scale: isTop ? 1 : 1 - normalised * 0.05,
-                      y: isTop ? 0 : normalised * 14,
-                      x: isTop ? 0 : normalised * 8,
-                      rotate: isTop ? 0 : normalised * 2,
-                      zIndex,
-                      opacity: normalised > 2 ? 0 : 1,
-                    }}
-                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    {card.content}
-                    <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-black/40 text-[10px] text-white/70 font-semibold">
-                      {card.label}
-                    </div>
-                  </motion.div>
-                )
-              })}
-            </div>
-
-            {/* Floating pills */}
-            <div className="mt-6 flex flex-wrap gap-2 justify-center">
-              {PILLS.map((pill, i) => (
-                <motion.span
-                  key={pill}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.6 + i * 0.1 }}
-                  className="px-3 py-1 rounded-full text-xs font-semibold border border-white/15 bg-white/5 text-[var(--text-muted)]"
-                >
-                  {pill}
-                </motion.span>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.48, ease: EASE }}
+              className="flex flex-wrap gap-2"
+            >
+              {c.trustPills.map(p => (
+                <span key={p} className="text-xs px-3 py-1.5 rounded-full border border-[var(--border-default)] bg-white text-[var(--text-secondary)]">{p}</span>
               ))}
-            </div>
-          </motion.div>
-        </motion.div>
+            </motion.div>
+          </div>
 
+          {/* Right: mockup stack */}
+          <motion.div
+            initial={{ opacity: 0, x: 60, rotate: 6 }}
+            animate={inView ? { opacity: 1, x: 0, rotate: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
+            className="relative flex justify-center"
+          >
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative w-full max-w-[320px]"
+            >
+              {/* Stacked cards */}
+              <div className="relative h-64">
+                {CARDS.map((card, i) => {
+                  const offset = i - active
+                  const normalised = ((offset % CARDS.length) + CARDS.length) % CARDS.length
+                  const zIndex = CARDS.length - normalised
+                  const isTop = normalised === 0
+
+                  return (
+                    <motion.div
+                      key={card.label}
+                      className="absolute inset-0 rounded-2xl overflow-hidden"
+                      style={{ background: card.bg, boxShadow: '0 24px 64px -20px rgba(35,26,38,0.35), 0 8px 32px -8px rgba(245,166,35,0.18)' }}
+                      animate={{
+                        scale: isTop ? 1 : 1 - normalised * 0.05,
+                        y: isTop ? 0 : normalised * 14,
+                        x: isTop ? 0 : normalised * 8,
+                        rotate: isTop ? 0 : normalised * 2,
+                        zIndex,
+                        opacity: normalised > 2 ? 0 : 1,
+                      }}
+                      transition={{ duration: 0.5, ease: EASE }}
+                    >
+                      {card.content}
+                      <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-black/40 text-[10px] text-white/80 font-semibold">
+                        {card.label}
+                      </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
+
+              {/* Floating pills */}
+              <div className="mt-6 flex flex-wrap gap-2 justify-center">
+                {PILLS.map((pill, i) => (
+                  <motion.span
+                    key={pill}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.6 + i * 0.1 }}
+                    className="px-3 py-1 rounded-full text-xs font-semibold border border-[var(--border-default)] bg-white text-[var(--text-secondary)]"
+                  >
+                    {pill}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   )

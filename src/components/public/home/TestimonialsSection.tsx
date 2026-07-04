@@ -49,6 +49,10 @@ export function TestimonialsSection({ testimonials = [] }: { testimonials?: Test
     setCurrent((prev) => (prev + 1) % display.length)
   }, [display.length])
 
+  const prev = useCallback(() => {
+    setCurrent((p) => (p - 1 + display.length) % display.length)
+  }, [display.length])
+
   useEffect(() => {
     if (display.length <= 1 || paused) return
     const interval = setInterval(next, 6000)
@@ -59,49 +63,48 @@ export function TestimonialsSection({ testimonials = [] }: { testimonials?: Test
 
   return (
     <section
-      className="py-24 px-4 relative overflow-hidden"
-      style={{ background: '#16142E' }}
+      className="py-20 md:py-28 px-6 relative overflow-hidden"
+      style={{ background: 'var(--bg-tint-peach)' }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Radial gradient behind quote */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.05) 0%, transparent 70%)' }}
-      />
-
       <div className="max-w-3xl mx-auto text-center relative z-10">
-        {/* Label */}
+        {/* Eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider">
-            What Our Clients Say
-          </span>
+          <span className="eyebrow">What Our Clients Say</span>
         </motion.div>
 
-        {/* Giant decorative opening quote */}
+        {/* Oversized decorative opening quote */}
         <div
-          className="absolute top-[4.5rem] left-4 sm:left-0 text-[120px] font-extrabold gradient-text leading-none select-none pointer-events-none"
-          style={{ opacity: 0.12, lineHeight: 1 }}
+          className="absolute top-16 left-4 sm:left-0 font-display text-[140px] font-bold text-[var(--text-primary)] leading-none select-none pointer-events-none"
+          style={{ opacity: 0.1, lineHeight: 1 }}
           aria-hidden
         >
           &ldquo;
         </div>
 
-        {/* Quote carousel */}
+        {/* Quote carousel — draggable */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-10"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            drag={display.length > 1 ? 'x' : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -60) next()
+              else if (info.offset.x > 60) prev()
+            }}
+            className="mb-10 cursor-grab active:cursor-grabbing"
           >
             <blockquote className="text-xl sm:text-2xl font-medium text-[var(--text-primary)] leading-relaxed italic mb-8 max-w-2xl mx-auto">
               &ldquo;{t.quote}&rdquo;
@@ -115,7 +118,7 @@ export function TestimonialsSection({ testimonials = [] }: { testimonials?: Test
                   alt={t.clientName}
                   width={48}
                   height={48}
-                  className="rounded-full border-2 border-brand-violet/30"
+                  className="rounded-full border-2 border-brand-crimson/25"
                 />
               ) : (
                 <div className="h-12 w-12 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-base flex-shrink-0">
@@ -130,23 +133,23 @@ export function TestimonialsSection({ testimonials = [] }: { testimonials?: Test
           </motion.div>
         </AnimatePresence>
 
-        {/* Giant closing quote */}
+        {/* Oversized decorative closing quote */}
         <div
-          className="absolute bottom-10 right-4 sm:right-0 text-[120px] font-extrabold gradient-text leading-none select-none pointer-events-none"
-          style={{ opacity: 0.12, lineHeight: 1 }}
+          className="absolute bottom-8 right-4 sm:right-0 font-display text-[140px] font-bold text-[var(--text-primary)] leading-none select-none pointer-events-none"
+          style={{ opacity: 0.1, lineHeight: 1 }}
           aria-hidden
         >
           &rdquo;
         </div>
 
-        {/* Dots */}
+        {/* Pill dots */}
         {display.length > 1 && (
           <div className="flex items-center justify-center gap-2">
             {display.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`rounded-full transition-all duration-300 ${i === current ? 'w-6 h-2 gradient-bg' : 'w-2 h-2 bg-[var(--border-hover)]'}`}
+                className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-crimson ${i === current ? 'w-7 gradient-bg' : 'w-2 bg-[var(--border-hover)] hover:bg-[var(--text-muted)]'}`}
                 aria-label={`Go to testimonial ${i + 1}`}
               />
             ))}

@@ -53,26 +53,38 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 
 export function StatsCounter() {
   return (
-    <section className="py-20 px-4 bg-[var(--bg-surface)]">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <section className="relative overflow-hidden px-6 py-16 md:py-24" style={{ background: 'var(--bg-ink)' }}>
+      {/* Subtle light dot grid on the ink band */}
+      <div
+        aria-hidden
+        className="absolute inset-0 dot-grid pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle, rgba(253, 248, 243, 0.07) 1px, transparent 1px)' }}
+      />
+
+      <div className="relative max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-[rgba(253,248,243,0.12)]">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.label}
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
+              className="text-center lg:px-6"
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">
+              <div className="font-display text-5xl lg:text-6xl font-bold tracking-[-0.03em] gradient-text leading-none mb-3">
                 {stat.numericValue !== undefined ? (
                   <CountUp target={stat.numericValue} suffix={stat.suffix} />
                 ) : (
                   stat.value
                 )}
               </div>
-              <p className="text-sm text-[var(--text-secondary)]">{stat.label}</p>
+              <p
+                className="text-xs uppercase tracking-[0.18em] font-medium"
+                style={{ color: 'rgba(253, 248, 243, 0.6)' }}
+              >
+                {stat.label}
+              </p>
             </motion.div>
           ))}
         </div>

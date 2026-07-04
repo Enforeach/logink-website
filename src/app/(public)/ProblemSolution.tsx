@@ -80,7 +80,7 @@ export function ProblemSolution() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-xs font-semibold text-brand-violet uppercase tracking-wider mb-1">Logink's Solution</div>
+                    <div className="text-xs font-semibold text-brand-violet uppercase tracking-wider mb-1">Logink&apos;s Solution</div>
                     <p className="text-sm text-[var(--text-secondary)]">{item.solution}</p>
                   </div>
                 </div>

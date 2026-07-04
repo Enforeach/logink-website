@@ -29,19 +29,19 @@ export function TableOfContents({ headings }: Props) {
 
   return (
     <nav className="text-sm">
-      <p className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-3">Table of Contents</p>
-      <ul className="space-y-1.5">
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-3">Table of Contents</p>
+      <ul className="space-y-0.5 border-l border-[var(--border-default)]">
         {headings.map(h => (
-          <li key={h.id} className={h.level === 3 ? 'pl-4' : ''}>
+          <li key={h.id}>
             <a
               href={`#${h.id}`}
               onClick={e => {
                 e.preventDefault()
                 document.getElementById(h.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
               }}
-              className={`block text-[13px] leading-snug transition-colors truncate ${
+              className={`relative block py-1 text-[13px] leading-snug transition-colors truncate ${h.level === 3 ? 'pl-7' : 'pl-4'} ${
                 activeId === h.id
-                  ? 'text-brand-violet font-medium'
+                  ? 'gradient-text font-semibold before:absolute before:-left-px before:top-1 before:bottom-1 before:w-[2px] before:rounded-full before:bg-gradient-cta'
                   : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
               }`}
             >

@@ -8,6 +8,7 @@ import {
   PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Legend
 } from 'recharts'
+import { serviceAccent } from '@/components/public/CaseStudyCard'
 import type {
   HeroBlockData, OverviewBlockData, ClientSnapshotBlockData, NarrativeBlockData,
   MetricGridBlockData, TimelineBlockData, ChartBlockData, BeforeAfterBlockData,
@@ -25,7 +26,7 @@ function t(obj: Record<string, unknown>, idKey: string, locale: Locale): string 
 }
 
 // ─── Animated Counter ───
-function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
+export function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [value, setValue] = useState(0)
   const ref = useRef<HTMLSpanElement>(null)
   const started = useRef(false)
@@ -99,19 +100,21 @@ export function HeroBlockRenderer({ data, locale, clientName, clientLogo, durati
   const bgImage = data.mediaUrl || featuredImage || null
   return (
     <div className="relative overflow-hidden">
-      {bgImage && (
+      {bgImage ? (
         <div className="absolute inset-0">
           <Image src={bgImage} alt={data.mediaAlt || clientName} fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#16142E]/60 via-[#16142E]/40 to-[#16142E]/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#231A26]/60 via-[#231A26]/40 to-[#231A26]/85" />
         </div>
+      ) : (
+        <div className="absolute inset-0 mesh-gradient" aria-hidden />
       )}
       <div className={`relative max-w-5xl mx-auto px-4 ${bgImage ? 'pt-40 pb-20 text-white' : 'pt-12 pb-10'}`}>
         {t(data as unknown as Record<string, unknown>, 'eyebrowId', locale) && (
-          <div className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/30 bg-brand-violet/10 text-brand-violet text-sm font-medium mb-6">
+          <div className={`inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-6 ${bgImage ? 'bg-white/15 text-white backdrop-blur-sm' : 'bg-brand-crimson/10 text-brand-crimson'}`}>
             {t(data as unknown as Record<string, unknown>, 'eyebrowId', locale)}
           </div>
         )}
-        <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4 ${bgImage ? 'text-white' : 'text-[var(--text-primary)]'}`}>
+        <h1 className={`font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-[-0.03em] mb-4 ${bgImage ? 'text-white' : 'text-[var(--text-primary)]'}`}>
           {t(data as unknown as Record<string, unknown>, 'headingId', locale)}
         </h1>
         {t(data as unknown as Record<string, unknown>, 'subheadingId', locale) && (
@@ -122,32 +125,40 @@ export function HeroBlockRenderer({ data, locale, clientName, clientLogo, durati
         {/* Client + duration + services row */}
         <div className="flex flex-wrap items-center gap-3 mb-10">
           {clientLogo && (
-            <div className="h-10 w-24 relative bg-white/10 rounded-lg overflow-hidden">
+            <div className={`h-10 w-24 relative rounded-lg overflow-hidden ${bgImage ? 'bg-white/90' : 'bg-white border border-[var(--border-default)]'}`}>
               <Image src={clientLogo} alt={clientName} fill className="object-contain p-1" />
             </div>
           )}
-          <span className={`text-sm font-medium ${bgImage ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{clientName}</span>
-          {durationLabel && <span className={`text-sm px-3 py-1 rounded-full bg-white/10 ${bgImage ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{durationLabel}</span>}
+          <span className={`text-sm font-medium ${bgImage ? 'text-white/80' : 'text-[var(--text-secondary)]'}`}>{clientName}</span>
+          {durationLabel && <span className={`text-sm px-3 py-1 rounded-full ${bgImage ? 'bg-white/10 text-white/80' : 'bg-white border border-[var(--border-default)] text-[var(--text-secondary)]'}`}>{durationLabel}</span>}
           {services?.map(s => (
-            <span key={s.name} className="text-xs px-3 py-1 rounded-full font-medium text-white" style={{ backgroundColor: s.color }}>{s.name}</span>
+            <span
+              key={s.name}
+              className={`text-xs px-3 py-1 rounded-full font-semibold ${bgImage ? 'text-white' : ''}`}
+              style={bgImage
+                ? { backgroundColor: serviceAccent(s.color) }
+                : { color: `color-mix(in srgb, ${serviceAccent(s.color)} 65%, #231A26)`, backgroundColor: `color-mix(in srgb, ${serviceAccent(s.color)} 12%, white)` }}
+            >
+              {s.name}
+            </span>
           ))}
         </div>
         {/* Hero metrics */}
         {metrics.length > 0 && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-white/20">
+          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t ${bgImage ? 'border-white/20' : 'border-[var(--border-default)]'}`}>
             {metrics.slice(0, 3).map((m, i) => {
               const numericVal = parseFloat(String(m.value).replace(/[^0-9.]/g, ''))
               const suffix = String(m.value).replace(/[0-9.]/g, '')
               return (
                 <Reveal key={i} delay={i * 100}>
                   <div>
-                    <div className={`text-4xl sm:text-5xl font-extrabold tabular-nums gradient-text`}>
+                    <div className="font-display text-4xl sm:text-5xl font-bold tracking-tight tabular-nums gradient-text">
                       {isNaN(numericVal) ? m.value : <Counter target={numericVal} suffix={suffix} />}
                     </div>
                     <div className="flex items-center gap-1.5 mt-1">
-                      {m.deltaDirection === 'up' && <span className="text-emerald-400 text-sm">↑</span>}
-                      {m.deltaDirection === 'down' && <span className="text-red-400 text-sm">↓</span>}
-                      <span className={`text-sm ${bgImage ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{t(m as unknown as Record<string, unknown>, 'labelId', locale)}</span>
+                      {m.deltaDirection === 'up' && <span className="text-emerald-500 text-sm">↑</span>}
+                      {m.deltaDirection === 'down' && <span className="text-red-500 text-sm">↓</span>}
+                      <span className={`text-sm ${bgImage ? 'text-white/80' : 'text-[var(--text-secondary)]'}`}>{t(m as unknown as Record<string, unknown>, 'labelId', locale)}</span>
                     </div>
                   </div>
                 </Reveal>
@@ -166,12 +177,12 @@ export function OverviewBlockRenderer({ data, locale }: { data: OverviewBlockDat
   const bullets = (locale === 'en' ? data.bulletsEn || data.bulletsId : data.bulletsId) || []
   return (
     <Reveal>
-      <div className="max-w-3xl mx-auto rounded-2xl border-l-4 border-brand-violet bg-brand-violet/5 p-6 sm:p-8">
-        <h2 className="text-lg font-bold text-[var(--text-primary)] mb-4">{title}</h2>
+      <div className="max-w-3xl mx-auto rounded-2xl border-l-4 border-brand-purple bg-[var(--bg-tint-lilac)] p-6 sm:p-8">
+        <h2 className="font-display text-lg font-bold tracking-tight text-[var(--text-primary)] mb-4">{title}</h2>
         <ul className="space-y-2">
           {bullets.map((b, i) => (
             <li key={i} className="flex gap-3 text-[var(--text-secondary)]">
-              <span className="text-brand-violet mt-1 flex-shrink-0">✓</span>
+              <span className="text-brand-purple mt-1 flex-shrink-0">✓</span>
               <span>{b}</span>
             </li>
           ))}
@@ -190,18 +201,18 @@ export function ClientSnapshotBlockRenderer({ data, locale, clientName, clientLo
       <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-8">
         <div>
           {clientLogo && (
-            <div className="h-16 w-40 relative mb-4 bg-[var(--bg-surface)] rounded-xl overflow-hidden border border-[var(--border-default)]">
+            <div className="h-16 w-40 relative mb-4 bg-white rounded-xl overflow-hidden border border-[var(--border-default)]">
               <Image src={clientLogo} alt={clientName} fill className="object-contain p-3" />
             </div>
           )}
-          <h3 className="font-bold text-[var(--text-primary)] mb-2">{clientName}</h3>
+          <h3 className="font-display font-bold tracking-tight text-[var(--text-primary)] mb-2">{clientName}</h3>
           {t(data as unknown as Record<string, unknown>, 'aboutId', locale) && (
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
               {t(data as unknown as Record<string, unknown>, 'aboutId', locale)}
             </p>
           )}
           {data.website && (
-            <a href={data.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-brand-violet hover:underline mt-3">
+            <a href={data.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-brand-purple hover:underline mt-3">
               {data.website.replace('https://', '')} ↗
             </a>
           )}
@@ -226,21 +237,26 @@ export function ClientSnapshotBlockRenderer({ data, locale, clientName, clientLo
 }
 
 // ─── 4. NARRATIVE ───
-export function NarrativeBlockRenderer({ data, locale }: { data: NarrativeBlockData; locale: Locale }) {
+export function NarrativeBlockRenderer({ data, locale, num }: { data: NarrativeBlockData; locale: Locale; num?: string }) {
   const eyebrow = t(data as unknown as Record<string, unknown>, 'eyebrowId', locale)
   const heading = t(data as unknown as Record<string, unknown>, 'headingId', locale)
   const body = t(data as unknown as Record<string, unknown>, 'bodyId', locale)
   const pullQuote = t(data as unknown as Record<string, unknown>, 'pullQuoteId', locale)
   return (
     <Reveal>
-      <div className="max-w-3xl mx-auto">
-        {eyebrow && <p className="text-sm font-semibold text-brand-violet uppercase tracking-wider mb-2">{eyebrow}</p>}
-        {heading && <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-5">{heading}</h2>}
+      <div className="max-w-3xl mx-auto relative">
+        {num && (
+          <span className="absolute -top-14 -left-4 sm:-left-12 font-display font-bold text-[7rem] leading-none text-[var(--text-primary)] opacity-[0.08] select-none pointer-events-none" aria-hidden>
+            {num}
+          </span>
+        )}
+        {eyebrow && <p className="eyebrow relative mb-2">{eyebrow}</p>}
+        {heading && <h2 className="relative font-display font-bold tracking-[-0.03em] text-3xl text-[var(--text-primary)] mb-5">{heading}</h2>}
         {body && (
-          <div className="prose prose-neutral dark:prose-invert max-w-none text-[var(--text-secondary)] leading-relaxed whitespace-pre-wrap">{body}</div>
+          <div className="relative prose prose-neutral max-w-prose text-[var(--text-secondary)] leading-relaxed whitespace-pre-wrap">{body}</div>
         )}
         {pullQuote && (
-          <blockquote className="my-8 pl-6 border-l-4 border-brand-violet italic text-xl text-[var(--text-primary)] font-medium">
+          <blockquote className="my-8 pl-6 border-l-4 border-brand-crimson italic text-xl text-[var(--text-primary)] font-medium">
             &ldquo;{pullQuote}&rdquo;
           </blockquote>
         )}
@@ -260,15 +276,15 @@ export function MetricGridBlockRenderer({ data, locale }: { data: MetricGridBloc
   return (
     <Reveal>
       <div className="max-w-5xl mx-auto">
-        {title && <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-8 text-center">{title}</h2>}
+        {title && <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] mb-8 text-center">{title}</h2>}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {data.metrics.map((m, i) => {
             const numericVal = parseFloat(String(m.value).replace(/[^0-9.]/g, ''))
             const suffix = String(m.value).replace(/[0-9.]/g, '')
             return (
               <Reveal key={i} delay={i * 80}>
-                <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-5 text-center">
-                  <div className="text-3xl sm:text-4xl font-extrabold tabular-nums gradient-text mb-1">
+                <div className="rounded-2xl border border-[var(--border-default)] bg-white p-5 text-center hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+                  <div className="font-display text-3xl sm:text-4xl font-bold tracking-tight tabular-nums gradient-text mb-1">
                     {isNaN(numericVal) ? m.value : <Counter target={numericVal} suffix={suffix} />}
                   </div>
                   {m.unit && <div className="text-xs text-[var(--text-muted)] mb-1">{m.unit}</div>}
@@ -327,13 +343,14 @@ export function TimelineBlockRenderer({ data, locale }: { data: TimelineBlockDat
     return () => window.removeEventListener('scroll', handleScroll)
   }, [milestones.length])
 
+  // Warm Canvas brand phase palette (text shades darkened for AA on cream)
   const PHASE_COLORS = [
-    { bg: 'bg-violet-500/10', border: 'border-violet-500/30', dot: 'bg-violet-500', text: 'text-violet-400', glow: 'shadow-violet-500/30' },
-    { bg: 'bg-pink-500/10',   border: 'border-pink-500/30',   dot: 'bg-pink-500',   text: 'text-pink-400',   glow: 'shadow-pink-500/30' },
-    { bg: 'bg-orange-500/10', border: 'border-orange-500/30', dot: 'bg-orange-500', text: 'text-orange-400', glow: 'shadow-orange-500/30' },
-    { bg: 'bg-emerald-500/10',border: 'border-emerald-500/30',dot: 'bg-emerald-500',text: 'text-emerald-400',glow: 'shadow-emerald-500/30' },
-    { bg: 'bg-cyan-500/10',   border: 'border-cyan-500/30',   dot: 'bg-cyan-500',   text: 'text-cyan-400',   glow: 'shadow-cyan-500/30' },
-    { bg: 'bg-amber-500/10',  border: 'border-amber-500/30',  dot: 'bg-amber-500',  text: 'text-amber-400',  glow: 'shadow-amber-500/30' },
+    { bg: 'bg-brand-purple/10',  border: 'border-brand-purple/30',  dot: 'bg-brand-purple',  text: 'text-purple-700',       glow: 'shadow-brand-purple/20' },
+    { bg: 'bg-brand-crimson/10', border: 'border-brand-crimson/30', dot: 'bg-brand-crimson', text: 'text-brand-crimson',    glow: 'shadow-brand-crimson/20' },
+    { bg: 'bg-brand-orange/10',  border: 'border-brand-orange/30',  dot: 'bg-brand-orange',  text: 'text-orange-700',       glow: 'shadow-brand-orange/20' },
+    { bg: 'bg-brand-magenta/10', border: 'border-brand-magenta/30', dot: 'bg-brand-magenta', text: 'text-brand-magenta',    glow: 'shadow-brand-magenta/20' },
+    { bg: 'bg-brand-coral/10',   border: 'border-brand-coral/30',   dot: 'bg-brand-coral',   text: 'text-rose-700',         glow: 'shadow-brand-coral/20' },
+    { bg: 'bg-brand-gold/10',    border: 'border-brand-gold/30',    dot: 'bg-brand-gold',    text: 'text-amber-700',        glow: 'shadow-brand-gold/20' },
   ]
 
   return (
@@ -341,10 +358,10 @@ export function TimelineBlockRenderer({ data, locale }: { data: TimelineBlockDat
       {/* Section header */}
       <Reveal>
         <div className="mb-16 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-widest mb-4">
+          <p className="eyebrow mb-4">
             {locale === 'en' ? 'Project Journey' : 'Perjalanan Proyek'}
-          </span>
-          {title && <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{title}</h2>}
+          </p>
+          {title && <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-[var(--text-primary)]">{title}</h2>}
         </div>
       </Reveal>
 
@@ -502,7 +519,7 @@ export function TimelineBlockRenderer({ data, locale }: { data: TimelineBlockDat
 }
 
 // ─── 7. CHART ───
-const BRAND_COLORS = ['#7C3AED', '#DB2777', '#F97316', '#FCD34D', '#10B981', '#06B6D4']
+const BRAND_COLORS = ['#A8138F', '#D81C5C', '#EE3D5E', '#F88438', '#A855F7', '#F5A623']
 
 export function ChartBlockRenderer({ data, locale }: { data: ChartBlockData; locale: Locale }) {
   const title = t(data as unknown as Record<string, unknown>, 'titleId', locale)
@@ -557,9 +574,9 @@ export function ChartBlockRenderer({ data, locale }: { data: ChartBlockData; loc
   return (
     <Reveal>
       <div className="max-w-4xl mx-auto">
-        {title && <h2 className="text-xl font-bold text-[var(--text-primary)] mb-6">{title}</h2>}
+        {title && <h2 className="font-display text-xl font-bold tracking-tight text-[var(--text-primary)] mb-6">{title}</h2>}
         {dataset.length > 0 ? (
-          <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 sm:p-6">
+          <div className="rounded-2xl border border-[var(--border-default)] bg-white p-4 sm:p-6">
             <ResponsiveContainer width="100%" height={300}>
               {renderChart()}
             </ResponsiveContainer>
@@ -620,7 +637,7 @@ export function BeforeAfterBlockRenderer({ data, locale }: { data: BeforeAfterBl
           {/* Divider */}
           <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg" style={{ left: `${sliderPos}%` }}>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white shadow-xl flex items-center justify-center">
-              <svg className="w-4 h-4 text-[#16142E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 text-[#231A26]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l-3 3 3 3M16 9l3 3-3 3" />
               </svg>
             </div>
@@ -650,11 +667,11 @@ export function GalleryBlockRenderer({ data, locale }: { data: GalleryBlockData;
     <Reveal>
       <div className="max-w-5xl mx-auto">
         {t(data as unknown as Record<string, unknown>, 'titleId', locale) && (
-          <h2 className="text-xl font-bold text-[var(--text-primary)] mb-6">{t(data as unknown as Record<string, unknown>, 'titleId', locale)}</h2>
+          <h2 className="font-display text-xl font-bold tracking-tight text-[var(--text-primary)] mb-6">{t(data as unknown as Record<string, unknown>, 'titleId', locale)}</h2>
         )}
         <div className={`grid ${cols} gap-4`}>
           {items.map((item, i) => (
-            <button key={i} onClick={() => setLightbox(i)} className="group relative rounded-xl overflow-hidden aspect-video bg-[var(--bg-surface)] focus:outline-none focus:ring-2 focus:ring-brand-violet">
+            <button key={i} onClick={() => setLightbox(i)} className="group relative rounded-2xl overflow-hidden aspect-video bg-[var(--bg-tint-peach)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson">
               <Image src={item.mediaUrl} alt={item.alt || t(item as unknown as Record<string, unknown>, 'captionId', locale) || ''} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
             </button>
@@ -706,8 +723,8 @@ export function QuoteBlockRenderer({ data, locale }: { data: QuoteBlockData; loc
   const quote = t(data as unknown as Record<string, unknown>, 'quoteId', locale)
   return (
     <Reveal>
-      <div className="max-w-3xl mx-auto text-center py-6">
-        <div className="text-6xl gradient-text font-serif leading-none mb-4 select-none" aria-hidden>&ldquo;</div>
+      <div className="max-w-3xl mx-auto rounded-3xl bg-[var(--bg-tint-peach)] p-8 sm:p-12 text-center">
+        <div className="font-display text-8xl gradient-text leading-none mb-2 select-none" aria-hidden>&ldquo;</div>
         <blockquote className="text-xl sm:text-2xl font-medium text-[var(--text-primary)] leading-relaxed italic mb-6">
           {quote}
         </blockquote>
@@ -739,13 +756,13 @@ export function ServicesUsedBlockRenderer({ data, locale, allServices }: {
   return (
     <Reveal>
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">{locale === 'en' ? 'Services Used' : 'Layanan yang Digunakan'}</h2>
+        <h2 className="font-display text-xl font-bold tracking-tight text-[var(--text-primary)] mb-2">{locale === 'en' ? 'Services Used' : 'Layanan yang Digunakan'}</h2>
         {desc && <p className="text-[var(--text-secondary)] mb-6">{desc}</p>}
         <div className="flex flex-wrap gap-3">
           {services.map(s => (
-            <Link key={s.id} href={`/${locale === 'en' ? 'en/' : ''}services/${s.slug}`} className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-[var(--border-hover)] hover:shadow-md transition-all group">
-              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: s.color }} />
-              <span className="text-sm font-medium text-[var(--text-primary)] group-hover:text-brand-violet transition-colors">{s.name}</span>
+            <Link key={s.id} href={`/${locale === 'en' ? 'en/' : ''}services/${s.slug}`} className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-[var(--border-default)] bg-white hover:border-[var(--border-hover)] hover:shadow-card hover:-translate-y-0.5 transition-all group">
+              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: serviceAccent(s.color) }} />
+              <span className="text-sm font-medium text-[var(--text-primary)] group-hover:text-brand-crimson transition-colors">{s.name}</span>
             </Link>
           ))}
         </div>
@@ -758,7 +775,7 @@ export function ServicesUsedBlockRenderer({ data, locale, allServices }: {
 export function RelatedCasesBlockRenderer({ locale }: { data: RelatedCasesBlockData; locale: Locale; cases?: unknown[] }) {
   return (
     <div className="max-w-5xl mx-auto">
-      <h2 className="text-xl font-bold text-[var(--text-primary)] mb-6">{locale === 'en' ? 'Related Case Studies' : 'Studi Kasus Terkait'}</h2>
+      <h2 className="font-display text-xl font-bold tracking-tight text-[var(--text-primary)] mb-6">{locale === 'en' ? 'Related Case Studies' : 'Studi Kasus Terkait'}</h2>
     </div>
   )
 }
@@ -771,15 +788,16 @@ export function CtaBlockRenderer({ data, locale }: { data: CtaBlockData; locale:
   const dark = data.variant === 'dark-band'
   return (
     <Reveal>
-      <div className={`rounded-3xl p-8 sm:p-12 text-center ${dark ? 'bg-[#16142E] text-white' : 'bg-brand-violet/5 border border-brand-violet/20'}`}>
-        <h2 className={`text-3xl sm:text-4xl font-extrabold mb-3 ${dark ? 'text-white' : 'text-[var(--text-primary)]'}`}>{heading}</h2>
-        {body && <p className={`text-lg mb-8 max-w-xl mx-auto ${dark ? 'text-white/70' : 'text-[var(--text-secondary)]'}`}>{body}</p>}
+      <div className={`max-w-4xl mx-auto rounded-3xl p-8 sm:p-12 text-center ${dark ? 'bg-[var(--bg-ink)] text-[var(--text-on-ink)]' : 'bg-[var(--bg-tint-peach)]'}`}>
+        <h2 className={`font-display text-3xl sm:text-4xl font-bold tracking-[-0.03em] mb-3 ${dark ? 'text-[var(--text-on-ink)]' : 'text-[var(--text-primary)]'}`}>{heading}</h2>
+        {body && <p className={`text-lg mb-8 max-w-xl mx-auto ${dark ? 'text-[var(--text-on-ink)]/70' : 'text-[var(--text-secondary)]'}`}>{body}</p>}
         <div className="flex gap-3 justify-center flex-wrap">
-          <Link href={data.primaryCtaHref} className="gradient-bg px-6 py-3 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity">
+          <Link href={data.primaryCtaHref} className="group inline-flex items-center gap-2 gradient-bg shadow-cta px-7 py-3.5 rounded-full font-semibold text-white hover:scale-[1.02] hover:brightness-105 transition-all">
             {primaryLabel}
+            <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
           </Link>
           {data.secondaryCtaHref && t(data as unknown as Record<string, unknown>, 'secondaryCtaLabelId', locale) && (
-            <Link href={data.secondaryCtaHref} className={`px-6 py-3 rounded-xl font-semibold border transition-colors ${dark ? 'border-white/30 text-white hover:bg-white/10' : 'border-[var(--border-default)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'}`}>
+            <Link href={data.secondaryCtaHref} className={`px-7 py-3.5 rounded-full font-semibold border transition-colors ${dark ? 'border-white/30 text-[var(--text-on-ink)] hover:bg-white/10' : 'border-[var(--border-hover)] text-[var(--text-primary)] hover:bg-white'}`}>
               {t(data as unknown as Record<string, unknown>, 'secondaryCtaLabelId', locale)}
             </Link>
           )}
@@ -794,15 +812,16 @@ export function LeadFormBlockRenderer({ locale }: { data: LeadFormBlockData; loc
   const href = locale === 'en' ? '/en/contact' : '/contact'
   return (
     <Reveal>
-      <div className="max-w-xl mx-auto text-center rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] p-8">
-        <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">
+      <div className="max-w-xl mx-auto text-center rounded-2xl border border-[var(--border-default)] bg-white p-8 shadow-card">
+        <h2 className="font-display text-xl font-bold tracking-tight text-[var(--text-primary)] mb-2">
           {locale === 'en' ? 'Ready to grow?' : 'Siap untuk berkembang?'}
         </h2>
         <p className="text-[var(--text-secondary)] mb-6 text-sm">
           {locale === 'en' ? "Let's discuss your goals and build a strategy that delivers." : 'Konsultasikan kebutuhan bisnis Anda dengan tim kami.'}
         </p>
-        <Link href={href} className="gradient-bg px-6 py-3 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity inline-block">
+        <Link href={href} className="group gradient-bg shadow-cta px-7 py-3.5 rounded-full font-semibold text-white hover:scale-[1.02] hover:brightness-105 transition-all inline-flex items-center gap-2">
           {locale === 'en' ? 'Contact Us' : 'Hubungi Kami'}
+          <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
         </Link>
       </div>
     </Reveal>
@@ -817,13 +836,13 @@ export function FaqBlockRenderer({ data, locale }: { data: FaqBlockData; locale:
   return (
     <Reveal>
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">{title}</h2>
+        <h2 className="font-display text-2xl font-bold tracking-[-0.03em] text-[var(--text-primary)] mb-6">{title}</h2>
         <div className="space-y-2">
           {items.map((item, i) => {
             const q = t(item as unknown as Record<string, unknown>, 'questionId', locale)
             const a = t(item as unknown as Record<string, unknown>, 'answerId', locale)
             return (
-              <div key={i} className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] overflow-hidden">
+              <div key={i} className="rounded-xl border border-[var(--border-default)] bg-white overflow-hidden">
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
                   className="w-full text-left px-5 py-4 flex items-center justify-between gap-4"
@@ -852,7 +871,7 @@ export function RichTextBlockRenderer({ data, locale }: { data: RichTextBlockDat
   return (
     <Reveal>
       <div
-        className="max-w-3xl mx-auto prose prose-neutral dark:prose-invert text-[var(--text-secondary)]"
+        className="max-w-prose mx-auto prose prose-neutral prose-img:rounded-2xl text-[var(--text-secondary)]"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </Reveal>

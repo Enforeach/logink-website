@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
 import Link from 'next/link'
+import { ChevronDown } from 'lucide-react'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Kebijakan Privasi',
@@ -167,90 +168,132 @@ const sections = [
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="bg-[var(--bg-primary)] min-h-screen">
-      {/* Hero */}
-      <section className="pt-32 pb-12 px-4 mesh-gradient">
-        <div className="max-w-3xl mx-auto text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-sm font-medium mb-6">
-            Legal
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] mb-4">
+    <div className="min-h-screen bg-[var(--bg-primary)]">
+      {/* Title band — first horizontal sweep of the F */}
+      <header className="px-6 pb-0 pt-32">
+        <div className="mx-auto max-w-6xl">
+          <p className="eyebrow mb-4">Legal</p>
+          <h1 className="font-display text-[clamp(2.75rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-[var(--text-primary)]">
             Kebijakan Privasi
           </h1>
-          <p className="text-[var(--text-secondary)] text-lg">
+          <p className="mt-5 max-w-[60ch] text-lg text-[var(--text-secondary)]">
             Kami berkomitmen untuk melindungi privasi dan data pribadi Anda.
           </p>
-          <p className="text-sm text-[var(--text-muted)] mt-4">
-            Terakhir diperbarui: <span className="font-medium text-[var(--text-secondary)]">{LAST_UPDATED}</span>
-          </p>
-        </div>
-      </section>
-
-      {/* Content */}
-      <div className="max-w-6xl mx-auto px-4 py-16 lg:flex lg:gap-12">
-        {/* Sticky TOC */}
-        <aside className="hidden lg:block w-56 flex-shrink-0">
-          <div className="sticky top-28">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)] mb-4">Daftar Isi</p>
-            <nav className="space-y-1">
-              {sections.map(s => (
-                <a
-                  key={s.id}
-                  href={`#${s.id}`}
-                  className="block text-sm text-[var(--text-muted)] hover:text-brand-violet transition-colors py-1 pl-3 border-l-2 border-transparent hover:border-brand-violet"
-                >
-                  {s.title.replace(/^\d+\.\s/, '')}
-                </a>
-              ))}
-            </nav>
-            <div className="mt-8 pt-6 border-t border-[var(--border-default)]">
-              <p className="text-xs text-[var(--text-muted)] mb-2">Versi bahasa lain</p>
-              <Link href="/en/privacy" className="text-xs text-brand-violet hover:underline">
-                English version →
-              </Link>
-            </div>
-          </div>
-        </aside>
-
-        {/* Main content */}
-        <main className="flex-1 max-w-3xl">
-          {/* Intro */}
-          <div className="mb-10 p-6 rounded-2xl bg-brand-violet/5 border border-brand-violet/10">
-            <p className="text-[var(--text-secondary)] leading-relaxed">
-              Logink ("kami", "kita", atau "milik kami") mengoperasikan situs web <strong className="text-[var(--text-primary)]">logink.co</strong> dan menyediakan layanan digital marketing. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi Anda ketika Anda menggunakan layanan kami.
-            </p>
-          </div>
-
-          {/* Sections */}
-          <div className="space-y-12">
-            {sections.map(s => (
-              <section key={s.id} id={s.id} className="scroll-mt-28">
-                <h2 className="text-xl font-bold text-[var(--text-primary)] mb-6 pb-3 border-b border-[var(--border-default)]">
-                  {s.title}
-                </h2>
-                <div className="space-y-5">
-                  {s.content.map((c, i) => (
-                    <div key={i}>
-                      <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-2">{c.subtitle}</h3>
-                      <p className="text-[var(--text-secondary)] leading-relaxed text-sm">{c.text}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
-
-          {/* CTA footer */}
-          <div className="mt-16 p-6 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] text-center">
-            <p className="text-[var(--text-secondary)] mb-4">Ada pertanyaan tentang kebijakan privasi kami?</p>
-            <Link
-              href="/contact"
-              className="inline-block gradient-bg text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity"
-            >
-              Hubungi Kami
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[var(--text-muted)]">
+            <span>
+              Terakhir diperbarui:{' '}
+              <span className="font-medium text-[var(--text-secondary)]">{LAST_UPDATED}</span>
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>{sections.length} bagian</span>
+            <span aria-hidden="true">·</span>
+            <Link href="/en/privacy" className="font-medium text-brand-purple hover:underline">
+              English version →
             </Link>
           </div>
-        </main>
+          <div className="mt-10 border-b border-[var(--border-default)]" />
+        </div>
+      </header>
+
+      {/* F layout: sticky TOC stem left, reading column right */}
+      <div className="mx-auto max-w-6xl px-6 pb-24 pt-12 lg:flex lg:gap-16">
+        {/* Desktop TOC rail */}
+        <aside className="hidden w-[260px] flex-shrink-0 lg:block">
+          <nav aria-label="Daftar isi" className="sticky top-24">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+              Daftar Isi
+            </p>
+            <ol className="space-y-0.5">
+              {sections.map((s, i) => (
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    className="group flex items-baseline gap-3 rounded-md py-1.5 text-sm text-[var(--text-secondary)] transition-colors hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/40"
+                  >
+                    <span className="text-[11px] font-semibold tabular-nums text-[var(--text-muted)] transition-colors group-hover:text-brand-crimson">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span>{s.title.replace(/^\d+\.\s/, '')}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+
+        <div className="min-w-0 flex-1">
+          {/* Mobile TOC */}
+          <details className="group mb-10 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] lg:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-sm font-semibold text-[var(--text-primary)] [&::-webkit-details-marker]:hidden">
+              Daftar Isi
+              <ChevronDown
+                className="h-4 w-4 text-[var(--text-muted)] transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <ol className="border-t border-[var(--border-default)] px-5 py-3">
+              {sections.map((s, i) => (
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    className="flex items-baseline gap-3 py-1.5 text-sm text-[var(--text-secondary)] transition-colors hover:text-brand-crimson"
+                  >
+                    <span className="text-[11px] font-semibold tabular-nums text-[var(--text-muted)]">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span>{s.title.replace(/^\d+\.\s/, '')}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </details>
+
+          <main className="max-w-[70ch]">
+            {/* Intro */}
+            <p className="text-lg leading-relaxed text-[var(--text-secondary)]">
+              Logink (&ldquo;kami&rdquo;, &ldquo;kita&rdquo;, atau &ldquo;milik kami&rdquo;) mengoperasikan situs web <strong className="font-semibold text-[var(--text-primary)]">logink.co</strong> dan menyediakan layanan digital marketing. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi Anda ketika Anda menggunakan layanan kami.
+            </p>
+
+            {/* Sections */}
+            <div className="mt-4 divide-y divide-[var(--border-default)]">
+              {sections.map((s, i) => (
+                <section key={s.id} id={s.id} className="scroll-mt-24 py-10">
+                  <h2 className="font-display text-2xl font-bold leading-tight tracking-[-0.02em] text-[var(--text-primary)]">
+                    <span className="mr-2 tabular-nums text-brand-crimson">
+                      {String(i + 1).padStart(2, '0')}.
+                    </span>
+                    {s.title.replace(/^\d+\.\s/, '')}
+                  </h2>
+                  <div className="mt-6 space-y-6">
+                    {s.content.map((c, j) => (
+                      <div key={j}>
+                        <h3 className="mb-1.5 font-semibold text-[var(--text-primary)]">{c.subtitle}</h3>
+                        <p className="text-[15px] leading-[1.7] text-[var(--text-secondary)]">{c.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+
+            {/* Quiet contact strip */}
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-6 py-5">
+              <p className="text-sm text-[var(--text-secondary)]">Ada pertanyaan tentang kebijakan privasi kami?</p>
+              <p className="text-sm">
+                <a href="mailto:hello@logink.co" className="font-semibold text-brand-purple hover:underline">
+                  hello@logink.co
+                </a>
+                <span aria-hidden="true" className="mx-2 text-[var(--text-muted)]">·</span>
+                <Link
+                  href="/contact"
+                  className="font-medium text-[var(--text-secondary)] transition-colors hover:text-brand-crimson"
+                >
+                  Hubungi Kami →
+                </Link>
+              </p>
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   )

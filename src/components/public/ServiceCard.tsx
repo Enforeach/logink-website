@@ -1,4 +1,17 @@
+'use client'
+
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import {
+  Search,
+  MessagesSquare,
+  TrendingUp,
+  Palette,
+  MonitorSmartphone,
+  Check,
+  ArrowRight,
+  type LucideIcon,
+} from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { ServiceData } from '@/types'
 
@@ -7,55 +20,48 @@ interface ServiceCardProps {
   size?: 'sm' | 'lg'
 }
 
-const SERVICE_ICONS: Record<string, React.ReactNode> = {
-  'seo-content-marketing': (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-    </svg>
-  ),
-  'social-media-management': (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-    </svg>
-  ),
-  'paid-advertising': (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-    </svg>
-  ),
-  'creative-services': (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-    </svg>
-  ),
-  'website-landing-page': (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
-    </svg>
-  ),
+/* 2026 "Warm Canvas" service accents — override legacy DB hexes by slug */
+export const SERVICE_ACCENTS: Record<string, string> = {
+  'seo-content-marketing': '#A855F7',
+  'social-media-management': '#D81C5C',
+  'paid-advertising': '#F88438',
+  'creative-services': '#F5A623',
+  'website-landing-page': '#C084FC',
+}
+
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  'seo-content-marketing': Search,
+  'social-media-management': MessagesSquare,
+  'paid-advertising': TrendingUp,
+  'creative-services': Palette,
+  'website-landing-page': MonitorSmartphone,
 }
 
 export function ServiceCard({ service, size = 'sm' }: ServiceCardProps) {
-  const icon = SERVICE_ICONS[service.slug] || SERVICE_ICONS['seo-content-marketing']
+  const accent = SERVICE_ACCENTS[service.slug] ?? service.color
+  const Icon = SERVICE_ICONS[service.slug] ?? Search
   const startingPrice = service.pricingTiers?.[0]?.priceLabel
 
   return (
     <Link
       href={`/layanan/${service.slug}`}
-      className="group block rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] overflow-hidden transition-all duration-300 hover:border-[var(--border-hover)] hover:-translate-y-1 hover:shadow-xl"
-      style={{ borderTopColor: service.color, borderTopWidth: '3px' }}
+      className="group block rounded-2xl border border-[var(--border-default)] bg-white overflow-hidden transition-all duration-300 hover:border-[var(--border-hover)] hover:-translate-y-1 hover:shadow-card hover:bg-[var(--card-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2"
+      style={{ '--card-tint': `${accent}0F` } as React.CSSProperties}
     >
+      {/* Accent hairline */}
+      <span aria-hidden className="block h-0.5 w-full" style={{ background: accent }} />
+
       <div className={size === 'lg' ? 'p-8' : 'p-6'}>
-        {/* Icon */}
+        {/* Icon squircle */}
         <div
-          className={`${size === 'lg' ? 'h-14 w-14 mb-6' : 'h-12 w-12 mb-4'} rounded-xl flex items-center justify-center transition-transform group-hover:scale-110`}
-          style={{ backgroundColor: `${service.color}15`, color: service.color }}
+          className={`${size === 'lg' ? 'h-14 w-14 mb-6' : 'h-12 w-12 mb-4'} rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}
+          style={{ backgroundColor: `${accent}14`, color: accent }}
         >
-          {icon}
+          <Icon size={size === 'lg' ? 26 : 22} strokeWidth={1.75} aria-hidden />
         </div>
 
         {/* Name */}
-        <h3 className={`font-bold text-[var(--text-primary)] mb-2 ${size === 'lg' ? 'text-xl' : 'text-base'}`}>
+        <h3 className={`font-display font-bold tracking-tight text-[var(--text-primary)] mb-2 ${size === 'lg' ? 'text-xl' : 'text-base'}`}>
           {service.name}
         </h3>
 
@@ -72,7 +78,7 @@ export function ServiceCard({ service, size = 'sm' }: ServiceCardProps) {
           {startingPrice && size === 'lg' && (
             <span className="text-xs text-[var(--text-muted)]">
               Starting from{' '}
-              <span className="font-semibold" style={{ color: service.color }}>
+              <span className="font-display font-semibold" style={{ color: accent }}>
                 {startingPrice}
               </span>
             </span>
@@ -80,13 +86,120 @@ export function ServiceCard({ service, size = 'sm' }: ServiceCardProps) {
         </div>
 
         {/* Learn more */}
-        <div className="mt-4 flex items-center gap-1 text-sm font-medium transition-colors group-hover:text-brand-violet" style={{ color: service.color }}>
+        <div className="mt-4 flex items-center gap-1 text-sm font-semibold" style={{ color: accent }}>
           Learn more
-          <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
+          <ArrowRight aria-hidden className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>
       </div>
     </Link>
+  )
+}
+
+/* ── Full-width alternating row (services hub) ── */
+
+interface ServiceRowProps {
+  service: ServiceData
+  deliverables: string[]
+  flip: boolean
+  href: string
+  startingFromLabel: string
+  learnMoreLabel: string
+}
+
+export function ServiceRow({ service, deliverables, flip, href, startingFromLabel, learnMoreLabel }: ServiceRowProps) {
+  const accent = SERVICE_ACCENTS[service.slug] ?? service.color
+  const Icon = SERVICE_ICONS[service.slug] ?? Search
+  const startingPrice = service.pricingTiers?.[0]?.priceLabel
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, x: flip ? 48 : -48 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="grid items-center gap-8 md:grid-cols-2 md:gap-14 lg:gap-20"
+    >
+      {/* Icon panel */}
+      <div className={flip ? 'md:order-2' : undefined}>
+        <div
+          className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl border border-[var(--border-default)]"
+          style={{ backgroundColor: `${accent}14` }}
+        >
+          <div aria-hidden className="absolute inset-0 dot-grid opacity-60" />
+          <div
+            aria-hidden
+            className="absolute -right-12 -top-12 h-48 w-48 rounded-full blur-2xl"
+            style={{ background: `${accent}2E` }}
+          />
+          <div
+            aria-hidden
+            className="absolute -bottom-16 -left-10 h-40 w-40 rounded-full blur-2xl"
+            style={{ background: `${accent}1F` }}
+          />
+          <div
+            className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-white shadow-card"
+            style={{ color: accent }}
+          >
+            <Icon size={44} strokeWidth={1.5} aria-hidden />
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className={flip ? 'md:order-1' : undefined}>
+        {service.funnelPosition && (
+          <span
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide"
+            style={{ backgroundColor: `${accent}1A`, color: accent }}
+          >
+            {service.funnelPosition}
+          </span>
+        )}
+
+        <h3 className="mt-4 font-display text-2xl font-bold tracking-tight text-[var(--text-primary)] md:text-3xl">
+          {service.name}
+        </h3>
+
+        <p className="mt-3 text-[var(--text-secondary)] leading-relaxed">
+          {service.shortDescId || service.descriptionId}
+        </p>
+
+        {deliverables.length > 0 && (
+          <ul className="mt-6 space-y-3">
+            {deliverables.map((item) => (
+              <li key={item} className="flex items-start gap-2.5 text-sm text-[var(--text-secondary)]">
+                <span
+                  className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full"
+                  style={{ backgroundColor: `${accent}1A`, color: accent }}
+                >
+                  <Check size={12} strokeWidth={3} aria-hidden />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
+          {startingPrice && (
+            <div>
+              <div className="text-xs text-[var(--text-muted)]">{startingFromLabel}</div>
+              <div className="font-display text-2xl font-bold tracking-tight text-[var(--text-primary)]">
+                {startingPrice}
+              </div>
+            </div>
+          )}
+          <Link
+            href={href}
+            className="group inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 rounded-full"
+            style={{ color: accent }}
+            aria-label={`${learnMoreLabel}: ${service.name}`}
+          >
+            {learnMoreLabel}
+            <ArrowRight aria-hidden className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </div>
+    </motion.article>
   )
 }

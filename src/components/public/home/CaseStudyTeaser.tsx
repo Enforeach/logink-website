@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useInView } from '@/hooks/useInView'
 import { useCountUp } from '@/hooks/useCountUp'
 
@@ -20,6 +21,10 @@ interface CaseStudy {
   industry: string
   metrics: Metric[]
   service?: { name: string; color: string } | null
+  thumbnail?: string | null
+  featuredImage?: string | null
+  summaryId?: string | null
+  summaryEn?: string | null
 }
 
 const COPY = {
@@ -44,16 +49,13 @@ function MetricCounter({ metric, index, isInView }: { metric: Metric; index: num
   return (
     <div
       style={isInView
-        ? { animation: `fade-up 0.5s cubic-bezier(0.22,1,0.36,1) ${0.3 + index * 0.2}s both` }
+        ? { animation: `fade-up 0.5s cubic-bezier(0.22,1,0.36,1) ${0.3 + index * 0.15}s both` }
         : { opacity: 0 }}
-      className="flex-1 rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] p-4 text-center min-w-0"
+      className="flex-1 rounded-xl border border-[var(--border-default)] bg-[var(--bg-base)] px-3 py-4 text-center min-w-0"
     >
-      <div className="text-xs text-[var(--text-muted)] uppercase tracking-wide mb-2">{metric.metricLabel}</div>
-      <div className="text-sm text-[var(--text-muted)] line-through mb-1">{metric.beforeValue}</div>
-      <svg className="h-4 w-4 mx-auto mb-1 text-brand-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-      </svg>
-      <div className="text-2xl font-extrabold gradient-text">{displayAfter}</div>
+      <div className="font-display text-xl sm:text-2xl font-bold gradient-text leading-none mb-1.5">{displayAfter}</div>
+      <div className="text-[11px] uppercase tracking-wide text-[var(--text-muted)]">{metric.metricLabel}</div>
+      <div className="text-[11px] text-[var(--text-muted)] line-through mt-0.5">{metric.beforeValue}</div>
     </div>
   )
 }
@@ -66,87 +68,90 @@ export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: Case
 
   const cs = caseStudy
   const portfolioBase = locale === 'en' ? '/en/portfolio' : '/portfolio'
+  const image = cs.featuredImage || cs.thumbnail
+  const excerpt = locale === 'en' ? cs.summaryEn : cs.summaryId
 
   return (
-    <section className="py-24 px-4" style={{ background: '#16142E' }}>
-      <div className="max-w-5xl mx-auto">
+    <section className="px-6 py-20 md:py-28 bg-[var(--bg-surface)]">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div
           style={{ animation: 'fade-up 0.5s cubic-bezier(0.22,1,0.36,1) both' }}
-          className="text-center mb-10"
+          className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-4">
-            {c.badge}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
+          <span className="eyebrow block mb-4">{c.badge}</span>
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.03em] leading-[1.1] text-[var(--text-primary)]">
             {c.heading} <span className="gradient-text">{c.headingGradient}</span>
           </h2>
         </div>
 
-        {/* Case study card */}
+        {/* Case study card — horizontal split */}
         <div
           ref={ref}
-          className="relative rounded-3xl overflow-hidden p-8 sm:p-10"
-          style={{
-            background: 'linear-gradient(135deg, #221E40 0%, #1d1040 50%, #221E40 100%)',
-            border: '1px solid transparent',
-            backgroundClip: 'padding-box',
-            ...(isInView ? { animation: 'fade-up 0.65s cubic-bezier(0.22,1,0.36,1) both' } : { opacity: 0 }),
-          }}
+          style={isInView ? { animation: 'fade-up 0.65s cubic-bezier(0.22,1,0.36,1) both' } : { opacity: 0 }}
+          className="group grid md:grid-cols-2 overflow-hidden rounded-3xl border border-[var(--border-default)] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
         >
-          {/* Gradient border via pseudo */}
-          <div
-            className="absolute inset-0 rounded-3xl pointer-events-none"
-            style={{
-              background: 'linear-gradient(135deg, rgba(124,58,237,0.3), rgba(219,39,119,0.3), rgba(217,119,6,0.2))',
-              padding: '1px',
-              WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-              WebkitMaskComposite: 'xor',
-              maskComposite: 'exclude',
-            }}
-          />
-          {/* Radial spotlight */}
-          <div
-            className="absolute top-0 left-0 h-64 w-64 pointer-events-none"
-            style={{ background: 'radial-gradient(circle at top left, rgba(124,58,237,0.12) 0%, transparent 70%)' }}
-          />
-
-          {/* Header row */}
-          <div className="relative flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                {cs.service && (
-                  <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: `${cs.service.color}20`, color: cs.service.color }}>
-                    {cs.service.name}
-                  </span>
-                )}
-                <span className="text-xs px-2 py-0.5 rounded-full border border-[var(--border-default)] text-[var(--text-muted)]">
-                  {cs.industry}
+          {/* Left: content */}
+          <div className="p-8 sm:p-10 flex flex-col">
+            <div className="flex flex-wrap items-center gap-2 mb-4">
+              {cs.service && (
+                <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ background: `${cs.service.color}1A`, color: cs.service.color }}>
+                  {cs.service.name}
                 </span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)]">{cs.title}</h3>
-              <p className="text-sm text-[var(--text-secondary)] mt-0.5">Client: {cs.clientName}</p>
+              )}
+              <span className="text-xs px-2.5 py-1 rounded-full border border-[var(--border-default)] text-[var(--text-muted)]">
+                {cs.industry}
+              </span>
+            </div>
+
+            <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] leading-[1.15] text-[var(--text-primary)]">
+              {cs.title}
+            </h3>
+            <p className="text-sm text-[var(--text-secondary)] mt-1.5">Client: {cs.clientName}</p>
+
+            {excerpt && (
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed mt-4 line-clamp-3">{excerpt}</p>
+            )}
+
+            {/* Metric chips */}
+            <div className="flex flex-col sm:flex-row gap-3 mt-6 mb-8">
+              {cs.metrics.map((m, i) => (
+                <MetricCounter key={i} metric={m} index={i} isInView={isInView} />
+              ))}
+            </div>
+
+            <div className="mt-auto">
+              <Link
+                href={`${portfolioBase}/${cs.slug}`}
+                className="inline-flex items-center gap-2 text-sm font-semibold group/link"
+              >
+                <span className="gradient-text">{c.viewFull}</span>
+                <svg className="h-4 w-4 text-brand-orange transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
             </div>
           </div>
 
-          {/* Metrics */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            {cs.metrics.map((m, i) => (
-              <MetricCounter key={i} metric={m} index={i} isInView={isInView} />
-            ))}
-          </div>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <Link
-              href={`${portfolioBase}/${cs.slug}`}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-violet hover:text-brand-pink transition-colors group"
-            >
-              {c.viewFull}
-              <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+          {/* Right: thumbnail */}
+          <div className="relative p-4 sm:p-6 flex">
+            <div className="relative w-full min-h-[240px] md:min-h-full rounded-2xl overflow-hidden">
+              {image ? (
+                <Image
+                  src={image}
+                  alt={cs.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                />
+              ) : (
+                <div className="absolute inset-0 gradient-brand-bg flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-[1.04]">
+                  <span className="font-display text-7xl sm:text-8xl font-bold text-white/30 select-none" aria-hidden>
+                    {cs.clientName[0]}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -154,7 +159,7 @@ export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: Case
         <div className="text-center mt-8">
           <Link
             href={portfolioBase}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-secondary)] hover:text-brand-violet transition-colors group"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-secondary)] hover:text-brand-crimson transition-colors group"
           >
             {c.viewAll}
             <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

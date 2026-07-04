@@ -8,45 +8,46 @@ interface PricingTierProps {
   color?: string
 }
 
-export function PricingTierCard({ tier, serviceSlug, color = '#7C3AED' }: PricingTierProps) {
+/* ponytail: legacy DB hexes → 2026 Warm Canvas accents; drop once DB colors are migrated */
+const COLOR_REMAP: Record<string, string> = {
+  '#7C3AED': '#A855F7',
+  '#DB2777': '#D81C5C',
+  '#D97706': '#F88438',
+  '#F59E0B': '#F5A623',
+  '#A78BFA': '#C084FC',
+}
+
+export function PricingTierCard({ tier, serviceSlug, color = '#A855F7' }: PricingTierProps) {
+  const accent = COLOR_REMAP[color] ?? color
   const features = Array.isArray(tier.features) ? tier.features : []
 
-  return (
+  const body = (
     <div
       className={cn(
-        'relative rounded-2xl border p-6 flex flex-col',
+        'flex h-full flex-col bg-white p-6',
         tier.isPopular
-          ? 'border-brand-violet bg-[var(--bg-surface)] shadow-xl shadow-brand-violet/10'
-          : 'border-[var(--border-default)] bg-[var(--bg-surface)]'
+          ? 'rounded-[calc(1rem-2px)]'
+          : 'rounded-2xl border border-[var(--border-default)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border-hover)] hover:shadow-card'
       )}
-      style={tier.isPopular ? { borderColor: color } : {}}
     >
-      {tier.isPopular && (
-        <div
-          className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold text-white shadow-lg"
-          style={{ backgroundColor: color }}
-        >
-          Most Popular
-        </div>
-      )}
-
       <div className="mb-6">
-        <h3 className="text-lg font-bold text-[var(--text-primary)] mb-1">{tier.tierName}</h3>
-        <div className="text-3xl font-extrabold" style={{ color }}>
+        <h3 className="mb-1 text-lg font-bold text-[var(--text-primary)]">{tier.tierName}</h3>
+        <div className="font-display text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
           {tier.priceLabel}
-          <span className="text-sm font-normal text-[var(--text-muted)]">/bulan</span>
+          <span className="font-outfit text-sm font-normal tracking-normal text-[var(--text-muted)]">/bulan</span>
         </div>
       </div>
 
-      <ul className="space-y-3 flex-1 mb-6">
+      <ul className="mb-6 flex-1 space-y-3">
         {features.map((feature, i) => (
           <li key={i} className="flex items-start gap-2.5 text-sm text-[var(--text-secondary)]">
             <svg
-              className="h-4 w-4 flex-shrink-0 mt-0.5"
-              style={{ color }}
+              className="mt-0.5 h-4 w-4 flex-shrink-0"
+              style={{ color: accent }}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
@@ -58,15 +59,25 @@ export function PricingTierCard({ tier, serviceSlug, color = '#7C3AED' }: Pricin
       <Link
         href={`/contact${serviceSlug ? `?service=${serviceSlug}&tier=${tier.tierName.toLowerCase()}` : ''}`}
         className={cn(
-          'block text-center px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200',
+          'block rounded-full px-6 py-3 text-center text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2',
           tier.isPopular
-            ? 'text-white hover:scale-[1.02] hover:shadow-lg'
-            : 'border border-[var(--border-hover)] text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]'
+            ? 'gradient-bg text-white shadow-cta hover:scale-[1.02] hover:brightness-105'
+            : 'border border-[var(--border-hover)] text-[var(--text-primary)] hover:bg-[var(--bg-primary)]'
         )}
-        style={tier.isPopular ? { background: `linear-gradient(135deg, ${color}, #DB2777)` } : {}}
       >
         Get Started
       </Link>
+    </div>
+  )
+
+  if (!tier.isPopular) return body
+
+  return (
+    <div className="relative rounded-2xl bg-gradient-cta p-[2px] shadow-cta">
+      <div className="gradient-bg absolute -top-3 left-1/2 z-10 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-bold text-white shadow-cta">
+        Most Popular
+      </div>
+      {body}
     </div>
   )
 }

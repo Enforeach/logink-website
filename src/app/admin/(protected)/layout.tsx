@@ -16,7 +16,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <ToastProvider>
-      <div className="flex h-screen overflow-hidden bg-[var(--bg-primary)]">
+      {/* theme-dark-admin keeps the legacy dark shell — admin is out of the 2026 light rebrand scope */}
+      <div className="theme-dark-admin flex h-screen overflow-hidden bg-[var(--bg-primary)]">
         <Sidebar />
         <div className="flex flex-col flex-1 overflow-hidden">
           <Topbar unreadCount={unreadCount} />

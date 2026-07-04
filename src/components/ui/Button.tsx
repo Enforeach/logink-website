@@ -14,12 +14,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', loading, fullWidth, children, disabled, href, ...props }, ref) => {
-    const base = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-violet focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+    const base = 'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
 
     const variants = {
-      primary: 'gradient-bg text-white hover:scale-[1.02] hover:shadow-lg hover:shadow-brand-violet/30 active:scale-[0.98]',
-      ghost: 'border border-[var(--border-hover)] text-[var(--text-primary)] bg-transparent hover:bg-[var(--bg-elevated)] hover:border-brand-violet/50',
-      outline: 'border border-brand-violet text-brand-violet bg-transparent hover:bg-brand-violet hover:text-white',
+      primary: 'gradient-bg text-white shadow-cta hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]',
+      ghost: 'border border-[var(--border-hover)] text-[var(--text-primary)] bg-transparent hover:bg-[var(--bg-surface)] hover:border-brand-crimson/40',
+      outline: 'border border-brand-crimson text-brand-crimson bg-transparent hover:bg-brand-crimson hover:text-white',
       danger: 'bg-red-600 text-white hover:bg-red-700',
     }
 

@@ -110,14 +110,14 @@ export const ADS_ADDONS = [
     description:
       'Re-engage pengguna yang sudah mengunjungi situsmu tapi belum konversi. Bekerja di Google Display dan Meta, membawa prospek hangat kembali untuk menyelesaikan pembelian mereka.',
     availability: 'Add-on untuk Entry & Growth. Sudah termasuk di Full.',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
   },
   {
     name: 'Programmatic Display Advertising',
     description:
       'Pembelian display ad otomatis di jaringan publisher Indonesia premium. Jangkau audiensmu dalam skala besar di luar ekosistem Google dan Meta.',
     availability: 'Tersedia sebagai add-on untuk tier Growth & Full.',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
   },
 ] as const
 
@@ -137,8 +137,8 @@ export const ADS_PLATFORMS = [
       'Laporan Performa (bulanan)',
     ],
     tiers: { entry: true, growth: true, full: true },
-    accentColor: '#D97706',
-    accentRgb: '217,119,6',
+    accentColor: '#F88438',
+    accentRgb: '248,132,56',
   },
   {
     id: 'meta',
@@ -205,7 +205,7 @@ export const ADS_PROCESS = [
     timeline: 'Minggu 1',
     description:
       'Review menyeluruh akun iklan yang ada, analisis pemborosan budget, evaluasi data audiens, dan setup conversion tracking. Jika mulai dari nol, kami setup setiap akun dari awal.',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
   },
   {
     step: 2,
@@ -213,7 +213,7 @@ export const ADS_PROCESS = [
     timeline: 'Minggu 1',
     description:
       'Tujuan kampanye didefinisikan di setiap tahap funnel, dari awareness hingga konversi. Kami petakan platform mana yang menangani tahap mana: Google Search untuk intent, Meta untuk awareness, TikTok untuk discovery. Setiap rupiah punya tujuan.',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
   },
   {
     step: 3,
@@ -221,7 +221,7 @@ export const ADS_PROCESS = [
     timeline: 'Minggu 1–2',
     description:
       'Ad copy dan visual dibangun untuk setiap platform dan segmen audiens. Search ads mendapat copy teroptimasi keyword. Meta mendapat visual yang menghentikan scroll. TikTok mendapat video format native. Tidak ada yang didaur ulang antar platform.',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
   },
   {
     step: 4,
@@ -229,7 +229,7 @@ export const ADS_PROCESS = [
     timeline: 'Minggu 2',
     description:
       'Live dengan budget terkontrol untuk pengumpulan data awal. Kami mulai konservatif, membiarkan algoritma mempelajari audiens idealmu, lalu scale budget ke yang berhasil. Monitoring harian dari hari pertama.',
-    accentColor: '#F59E0B',
+    accentColor: '#F5A623',
   },
   {
     step: 5,
@@ -237,7 +237,7 @@ export const ADS_PROCESS = [
     timeline: 'Mingguan',
     description:
       'Penyesuaian bid mingguan, refinement audiens, rotasi creative iklan, dan realokasi budget. Kami matikan iklan yang underperform dengan cepat, gandakan yang menang, dan terus uji sudut pandang baru. Review strategi bulanan bersama timmu.',
-    accentColor: '#A78BFA',
+    accentColor: '#C084FC',
     isOngoing: true,
   },
 ] as const
@@ -412,14 +412,14 @@ export const ADS_ADDONS_EN = [
     description:
       "Re-engage users who visited your site but didn't convert. Works across Google Display and Meta, bringing warm leads back to complete their purchase.",
     availability: 'Add-on for Entry & Growth. Included in Full.',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
   },
   {
     name: 'Programmatic Display Advertising',
     description:
       "Automated display ad buying across premium Indonesian publisher networks. Reach your audience at scale beyond Google and Meta's ecosystems.",
     availability: 'Available as add-on for Growth & Full tiers.',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
   },
 ] as const
 
@@ -439,8 +439,8 @@ export const ADS_PLATFORMS_EN = [
       'Performance Report (monthly)',
     ],
     tiers: { entry: true, growth: true, full: true },
-    accentColor: '#D97706',
-    accentRgb: '217,119,6',
+    accentColor: '#F88438',
+    accentRgb: '248,132,56',
   },
   {
     id: 'meta',
@@ -507,7 +507,7 @@ export const ADS_PROCESS_EN = [
     timeline: 'Week 1',
     description:
       "Full review of existing ad accounts, wasted spend analysis, audience data evaluation, and conversion tracking setup. If you're starting fresh, we set up every account from scratch.",
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
   },
   {
     step: 2,
@@ -515,7 +515,7 @@ export const ADS_PROCESS_EN = [
     timeline: 'Week 1',
     description:
       'Campaign objectives defined at each funnel stage, from awareness to conversion. We map which platforms handle which stage: Google Search for intent, Meta for awareness, TikTok for discovery. Every rupiah has a purpose.',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
   },
   {
     step: 3,
@@ -523,7 +523,7 @@ export const ADS_PROCESS_EN = [
     timeline: 'Week 1–2',
     description:
       'Ad copy and visuals built for each platform and audience segment. Search ads get keyword-optimized copy. Meta gets scroll-stopping visuals. TikTok gets native-format video. Nothing recycled across platforms.',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
   },
   {
     step: 4,
@@ -531,7 +531,7 @@ export const ADS_PROCESS_EN = [
     timeline: 'Week 2',
     description:
       "Live with controlled budgets for initial data gathering. We start conservative, letting the algorithms learn your ideal audience, then scale spend into what's working. Daily monitoring from day one.",
-    accentColor: '#F59E0B',
+    accentColor: '#F5A623',
   },
   {
     step: 5,
@@ -539,7 +539,7 @@ export const ADS_PROCESS_EN = [
     timeline: 'Weekly',
     description:
       'Weekly bid adjustments, audience refinement, ad creative rotation, and budget reallocation. We kill underperforming ads fast, double down on winners, and continuously test new angles. Monthly strategy review with your team.',
-    accentColor: '#A78BFA',
+    accentColor: '#C084FC',
     isOngoing: true,
   },
 ] as const

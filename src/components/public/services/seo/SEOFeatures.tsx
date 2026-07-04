@@ -17,13 +17,14 @@ function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
   return <Icon {...props} />
 }
 
+// Tinted badge bg + AA-safe text on light surfaces
 const TAB_BADGE_COLORS: Record<string, string> = {
-  'Growth+': 'rgba(124,58,237,0.15)',
-  'Full only': 'rgba(217,119,6,0.15)',
+  'Growth+': 'rgba(168,85,247,0.12)',
+  'Full only': 'rgba(248,132,56,0.15)',
 }
 const TAB_BADGE_TEXT: Record<string, string> = {
-  'Growth+': '#A78BFA',
-  'Full only': '#FCD34D',
+  'Growth+': '#9333EA',
+  'Full only': '#C2410C',
 }
 
 const COPY = {
@@ -38,24 +39,32 @@ export function SEOFeatures({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = COPY[locale]
 
   return (
-    <section className="py-20 px-4 bg-[var(--bg-primary)]">
+    <section className="py-20 md:py-28 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
-        <div className="mb-12">
-          <div className="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">{c.eyebrow}</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">{c.heading}</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12"
+        >
+          <div className="eyebrow mb-3">{c.eyebrow}</div>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text-primary)] tracking-[-0.03em]">{c.heading}</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-xl">
             {c.sub}
           </p>
-        </div>
+        </motion.div>
 
         {/* Tab bar */}
-        <div className="flex gap-1 border-b border-[var(--border-default)] mb-8 overflow-x-auto pb-0 scrollbar-none">
+        <div className="flex gap-1 border-b border-[var(--border-default)] mb-8 overflow-x-auto pb-0 scrollbar-none" role="tablist">
           {TABS.map((t, i) => (
             <button
               key={t.id}
+              role="tab"
+              aria-selected={activeTab === i}
               onClick={() => setActiveTab(i)}
-              className="relative flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors flex-shrink-0"
-              style={{ color: activeTab === i ? '#7C3AED' : 'var(--text-muted)' }}
+              className="relative flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] rounded-t-lg"
+              style={{ color: activeTab === i ? '#9333EA' : 'var(--text-muted)' }}
             >
               <LucideIcon name={t.icon} size={14} strokeWidth={1.5} />
               <span>{t.label}</span>
@@ -63,7 +72,7 @@ export function SEOFeatures({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                 <motion.div
                   layoutId="tab-underline"
                   className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full"
-                  style={{ background: 'linear-gradient(90deg,#7C3AED,#DB2777)' }}
+                  style={{ background: '#A855F7' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                 />
               )}
@@ -79,44 +88,52 @@ export function SEOFeatures({ locale = 'id' }: { locale?: 'id' | 'en' }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
-            className="space-y-4"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {(tab.features as readonly Feature[]).map((f, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="p-5 rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-violet-500/20 transition-colors"
-                style={{ borderLeft: '2px solid', borderLeftColor: '#7C3AED' }}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="p-6 rounded-2xl border border-[var(--border-default)] bg-white hover:shadow-card hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="flex items-start justify-between gap-4 flex-wrap">
+                <div className="flex items-start gap-4">
+                  <div
+                    className="flex-shrink-0 h-11 w-11 rounded-xl flex items-center justify-center"
+                    style={{ background: 'rgba(168,85,247,0.10)' }}
+                  >
+                    <LucideIcon name={tab.icon} size={20} strokeWidth={1.5} color="#9333EA" />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
-                      <h3 className="font-semibold text-[var(--text-primary)]">{f.title}</h3>
+                      <h3 className="font-display font-semibold text-[var(--text-primary)]">{f.title}</h3>
                       {'badge' in f && f.badge && (
                         <span
                           className="text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0"
                           style={{
-                            background: TAB_BADGE_COLORS[f.badge] || 'rgba(124,58,237,0.15)',
-                            color: TAB_BADGE_TEXT[f.badge] || '#A78BFA',
+                            background: TAB_BADGE_COLORS[f.badge] || 'rgba(168,85,247,0.12)',
+                            color: TAB_BADGE_TEXT[f.badge] || '#9333EA',
                           }}
                         >
                           {f.badge}
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-2xl">{f.desc}</p>
+                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{f.desc}</p>
+                    {'tiers' in f && f.tiers && (
+                      <div className="flex gap-4 mt-4 pt-3 border-t border-[var(--border-default)]">
+                        {Object.entries(f.tiers).map(([tier, val]) => (
+                          <div key={tier} className="text-center">
+                            <div className="text-xs font-bold" style={{ color: '#9333EA' }}>{val as string}</div>
+                            <div className="text-[10px] text-[var(--text-muted)] capitalize">{tier}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  {'tiers' in f && f.tiers && (
-                    <div className="flex gap-3 flex-shrink-0">
-                      {Object.entries(f.tiers).map(([tier, val]) => (
-                        <div key={tier} className="text-center">
-                          <div className="text-xs font-bold text-[var(--text-primary)]">{val as string}</div>
-                          <div className="text-[10px] text-[var(--text-muted)] capitalize">{tier}</div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>

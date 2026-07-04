@@ -17,12 +17,12 @@ const CATEGORIES = [
   },
   {
     label: 'Identitas Brand',
-    accent: 'linear-gradient(135deg,#1a0533,#2d1060)',
+    accent: 'linear-gradient(135deg,#231A26,#3D2A44)',
     preview: (
       <div className="flex flex-col gap-3 p-4 h-full justify-center">
         <div className="h-12 w-12 rounded-full gradient-bg mx-auto flex items-center justify-center text-white font-black text-lg">L</div>
         <div className="flex justify-center gap-1.5">
-          {['#7C3AED','#DB2777','#D97706','#10B981'].map(c => (
+          {['#A8138F','#D81C5C','#F88438','#F5A623'].map(c => (
             <div key={c} className="h-4 w-4 rounded-full" style={{ background: c }} />
           ))}
         </div>
@@ -32,7 +32,7 @@ const CATEGORIES = [
   },
   {
     label: 'Produksi Video',
-    accent: 'linear-gradient(135deg,#D97706,#F59E0B)',
+    accent: 'linear-gradient(135deg,#F88438,#F5A623)',
     preview: (
       <div className="flex flex-col h-full">
         <div className="flex-1 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.3)' }}>
@@ -42,7 +42,7 @@ const CATEGORIES = [
         </div>
         <div className="p-2">
           <div className="h-1.5 w-full rounded-full bg-white/20 overflow-hidden">
-            <div className="h-full w-2/5 rounded-full bg-amber-400" />
+            <div className="h-full w-2/5 rounded-full bg-brand-gold" />
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@ const CATEGORIES = [
   },
   {
     label: 'Motion Graphics',
-    accent: 'linear-gradient(135deg,#DB2777,#7C3AED)',
+    accent: 'linear-gradient(135deg,#D81C5C,#A855F7)',
     preview: (
       <div className="flex h-full items-center justify-center p-4">
         <div className="relative w-full h-full flex items-center justify-center">
@@ -61,7 +61,7 @@ const CATEGORIES = [
               style={{
                 width: `${(i+1)*30}%`,
                 height: `${(i+1)*30}%`,
-                borderColor: i === 0 ? '#DB2777' : i === 1 ? '#A855F7' : '#7C3AED',
+                borderColor: i === 0 ? '#D81C5C' : i === 1 ? '#EE3D5E' : '#A855F7',
                 animation: `spin ${3 + i}s linear infinite ${i % 2 === 0 ? '' : 'reverse'}`,
               }}
             />
@@ -73,13 +73,13 @@ const CATEGORIES = [
   },
   {
     label: 'Copywriting',
-    accent: 'linear-gradient(135deg,#1e1b4b,#312e81)',
+    accent: 'linear-gradient(135deg,#2D1F33,#4A2E55)',
     preview: (
       <div className="flex flex-col gap-2 p-4 h-full justify-center">
         {[85,60,90,45,75].map((w,i) => (
           <div key={i} className="h-2 rounded-full bg-white/20" style={{ width: `${w}%` }} />
         ))}
-        <div className="mt-2 self-start px-3 py-1 rounded-lg bg-violet-500/40 text-white/80 text-xs font-bold">CTA →</div>
+        <div className="mt-2 self-start px-3 py-1 rounded-lg bg-white/20 text-white/90 text-xs font-bold">CTA →</div>
       </div>
     ),
   },
@@ -110,33 +110,41 @@ const SHOWCASE_COPY = {
 export function CreativeShowcase({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = SHOWCASE_COPY[locale]
   return (
-    <section className="py-20 overflow-hidden" style={{ background: '#0A0716' }}>
-      <div className="max-w-6xl mx-auto px-4 mb-10">
-        <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">{c.eyebrow}</p>
-        <div className="flex items-end justify-between">
-          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">
+    <section className="py-20 md:py-28 overflow-hidden bg-white">
+      <div className="max-w-7xl mx-auto px-6 mb-10">
+        <div className="eyebrow mb-3">{c.eyebrow}</div>
+        <div className="flex items-end justify-between gap-4 flex-wrap">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text-primary)] tracking-tight">
             {c.heading}
           </h2>
-          <Link href={c.href} className="text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors">
+          <Link href={c.href} className="text-sm font-semibold text-brand-crimson hover:text-brand-coral transition-colors">
             {c.portfolio}
           </Link>
         </div>
       </div>
 
-      {/* Marquee */}
-      <div className="relative" style={{ maskImage: 'linear-gradient(90deg,transparent,black 10%,black 90%,transparent)' }}>
-        <div className="flex gap-4 animate-marquee w-max">
+      {/* Horizontal-scroll media gallery (marquee) */}
+      <div className="marquee-container relative" style={{ maskImage: 'linear-gradient(90deg,transparent,black 8%,black 92%,transparent)' }}>
+        <div className="marquee-track gap-5 pr-5">
           {ITEMS.map((cat, i) => (
             <div
               key={`${cat.label}-${i}`}
-              className="group flex-shrink-0 w-52 rounded-2xl border border-white/10 bg-[var(--bg-surface)] overflow-hidden hover:-translate-y-2 transition-transform duration-300 cursor-pointer"
-              style={{ height: 220 }}
+              className="group relative flex-shrink-0 w-56 rounded-2xl overflow-hidden border border-[var(--border-default)] cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_40px_-16px_rgba(35,26,38,0.25)]"
+              style={{ height: 240 }}
             >
-              <div className="h-3/4" style={{ background: cat.accent }}>
+              {/* Media tile */}
+              <div
+                className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-105"
+                style={{ background: cat.accent }}
+              >
                 {cat.preview}
               </div>
-              <div className="h-1/4 flex items-center px-4">
-                <span className="text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
+              {/* Gradient overlay caption reveal */}
+              <div
+                className="absolute inset-x-0 bottom-0 flex items-end p-4 pt-12 opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: 'linear-gradient(180deg, transparent, rgba(35,26,38,0.72))' }}
+              >
+                <span className="text-sm font-display font-semibold text-white translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
                   {cat.label}
                 </span>
               </div>
@@ -145,17 +153,7 @@ export function CreativeShowcase({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 28s linear infinite;
-        }
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
+      <style jsx global>{`
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }

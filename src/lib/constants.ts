@@ -1,21 +1,23 @@
 export const BRAND = {
-  dark: '#16142E',
-  darkSurface: '#221E40',
-  warm: '#E6E1F0',
-  cream: '#FFF9F2',
-  creamSurface: '#F8F6F2',
-  violet: '#7C3AED',
-  pink: '#DB2777',
-  amber: '#D97706',
-  gold: '#F59E0B',
+  // "Warm Canvas" 2026 rebrand — accents come from the logo ribbon
+  cream: '#FDF8F3',
+  surface: '#FFFFFF',
+  ink: '#231A26',
+  magenta: '#A8138F',
+  crimson: '#D81C5C',
+  coral: '#EE3D5E',
+  orange: '#F88438',
+  purple: '#A855F7',
+  gold: '#F5A623',
   services: {
-    seo: '#7C3AED',
-    social: '#DB2777',
-    ads: '#D97706',
-    creative: '#F59E0B',
-    web: '#A78BFA',
+    seo: '#A855F7',
+    social: '#D81C5C',
+    ads: '#F88438',
+    creative: '#F5A623',
+    web: '#C084FC',
   },
-  gradient: 'linear-gradient(135deg, #7C3AED, #DB2777)',
+  gradient: 'linear-gradient(100deg, #A8138F 0%, #D81C5C 35%, #EE3D5E 65%, #F88438 100%)',
+  gradientCta: 'linear-gradient(100deg, #D81C5C, #F88438)',
 } as const
 
 export const SITE = {
@@ -33,7 +35,6 @@ export const NAV_LINKS = [
   { href: '/layanan', label: 'Services' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },
-  { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
 ] as const
 

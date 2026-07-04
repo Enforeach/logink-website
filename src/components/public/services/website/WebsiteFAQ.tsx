@@ -9,54 +9,82 @@ const FAQ_COPY = {
   en: { heading: 'Frequently asked questions.' },
 }
 
+function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.45, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="w-full flex items-center justify-between gap-4 py-5 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C084FC] rounded-lg"
+      >
+        <span className="text-base font-medium text-[var(--text-primary)] group-hover:text-[#9333EA] transition-colors">{q}</span>
+        <motion.div
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.2 }}
+          className={`flex-shrink-0 h-7 w-7 rounded-full flex items-center justify-center transition-colors ${open ? 'gradient-bg' : ''}`}
+          style={open ? undefined : { background: 'rgba(192,132,252,0.16)' }}
+        >
+          <svg
+            className={`h-3.5 w-3.5 ${open ? 'text-white' : ''}`}
+            style={open ? undefined : { color: '#9333EA' }}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            aria-hidden
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </motion.div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed pb-5 max-w-2xl">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
+
 export function WebsiteFAQ({ locale = 'id' }: { locale?: 'id' | 'en' }) {
-  const [open, setOpen] = useState<number | null>(null)
   const faqs = locale === 'en' ? WEBSITE_FAQS_EN : WEBSITE_FAQS
   const c = FAQ_COPY[locale]
 
   return (
-    <section className="py-24 px-4" style={{ background: '#16142E' }}>
+    <section className="py-20 md:py-28 px-6 bg-[var(--bg-primary)]">
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#06B6D4] mb-3">FAQ</p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-10"
+        >
+          <div className="eyebrow mb-3">FAQ</div>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--text-primary)] tracking-[-0.03em]">
             {c.heading}
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="space-y-2">
+        <div className="divide-y divide-[var(--border-default)] border-y border-[var(--border-default)]">
           {(faqs as typeof WEBSITE_FAQS).map((faq, i) => (
-            <div key={i} className="rounded-xl border border-white/10 bg-[var(--bg-surface)] overflow-hidden">
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left"
-              >
-                <span className="text-sm font-semibold text-[var(--text-primary)]">{faq.question}</span>
-                <motion.svg
-                  animate={{ rotate: open === i ? 45 : 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="h-5 w-5 flex-shrink-0 text-[#06B6D4]"
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </motion.svg>
-              </button>
-              <AnimatePresence>
-                {open === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-6 pb-5 text-sm text-[var(--text-secondary)] leading-relaxed border-t border-white/10 pt-4">
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <FAQItem key={i} q={faq.question} a={faq.answer} index={i} />
           ))}
         </div>
       </div>

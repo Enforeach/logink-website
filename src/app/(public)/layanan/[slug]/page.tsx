@@ -23,7 +23,7 @@ export const SERVICES = {
     name: 'SEO & Content Marketing',
     tagline: 'Rank Higher. Reach Further. Convert Better.',
     description: 'We build organic search presence that compounds month over month. From keyword strategy to 150+ articles per month, every piece is crafted to capture high-intent traffic and turn it into revenue.',
-    color: '#7C3AED', rgb: '124,58,237',
+    color: '#A855F7', rgb: '168,85,247',
     featuresVariant: 'list' as const,
     processVariant: 'horizontal' as const,
     features: [
@@ -59,7 +59,7 @@ export const SERVICES = {
     name: 'Social Media Management',
     tagline: 'Content That Connects. Presence That Converts.',
     description: 'We take social media completely off your plate: strategy, content creation, scheduling, and community management across Instagram, TikTok, Facebook, and LinkedIn.',
-    color: '#DB2777', rgb: '219,39,119',
+    color: '#D81C5C', rgb: '216,28,92',
     featuresVariant: 'emoji-cards' as const,
     processVariant: 'vertical' as const,
     features: [
@@ -93,7 +93,7 @@ export const SERVICES = {
     name: 'Paid Advertising',
     tagline: 'Every Rupiah Invested. Maximum Return Delivered.',
     description: 'Data-driven paid campaigns across Google, Meta, TikTok, and Marketplace platforms. We target the right audience at the right moment, optimising relentlessly until ROAS hits 2–4×.',
-    color: '#D97706', rgb: '217,119,6',
+    color: '#F88438', rgb: '248,132,56',
     featuresVariant: 'numbered' as const,
     processVariant: 'funnel' as const,
     features: [
@@ -129,7 +129,7 @@ export const SERVICES = {
     name: 'Creative Services',
     tagline: 'Bold Visuals. Clear Stories. Brands That Stick.',
     description: 'From brand identity to video production, our creative team transforms ideas into visuals that stop scrolls and drive action. Every asset built for your audience, never from a template library.',
-    color: '#F59E0B', rgb: '245,158,11',
+    color: '#F5A623', rgb: '245,166,35',
     featuresVariant: 'bento' as const,
     processVariant: 'flow' as const,
     features: [
@@ -164,7 +164,7 @@ export const SERVICES = {
     name: 'Website & Landing Page',
     tagline: 'Convert Visitors Into Customers. Built to Perform.',
     description: 'We design and build high-performance websites and landing pages: fast, mobile-first, and wired for conversion. From company profiles to full e-commerce stores.',
-    color: '#06B6D4', rgb: '6,182,212',
+    color: '#C084FC', rgb: '192,132,252',
     featuresVariant: 'checklist' as const,
     processVariant: 'gantt' as const,
     features: [
@@ -407,11 +407,11 @@ const UI_COPY = {
 }
 
 const SERVICE_META: Record<string, { name: string; color: string }> = {
-  'seo-content-marketing': { name: 'SEO & Content Marketing', color: '#7C3AED' },
-  'social-media-management': { name: 'Social Media Management', color: '#DB2777' },
-  'paid-advertising': { name: 'Paid Advertising', color: '#D97706' },
-  'creative-services': { name: 'Creative Services', color: '#F59E0B' },
-  'website-landing-page': { name: 'Website & Landing Page', color: '#06B6D4' },
+  'seo-content-marketing': { name: 'SEO & Content Marketing', color: '#A855F7' },
+  'social-media-management': { name: 'Social Media Management', color: '#D81C5C' },
+  'paid-advertising': { name: 'Paid Advertising', color: '#F88438' },
+  'creative-services': { name: 'Creative Services', color: '#F5A623' },
+  'website-landing-page': { name: 'Website & Landing Page', color: '#C084FC' },
 }
 
 type SvcKey = keyof typeof SERVICES
@@ -454,7 +454,7 @@ function SeoHeroVisual() {
         </div>
       </div>
       <div className="absolute -top-3 -right-3 px-3 py-1.5 rounded-xl text-xs font-bold text-white shadow-lg"
-        style={{ background: 'linear-gradient(135deg,#7C3AED,#DB2777)' }}>
+        style={{ background: 'linear-gradient(135deg,#A855F7,#D81C5C)' }}>
         Page #1 ✓
       </div>
     </div>
@@ -532,7 +532,7 @@ function CreativeHeroVisual() {
           style={{ background: 'rgba(6,182,212,0.15)', height: '80px' }}>📸</div>
         <div className="col-span-2 rounded-2xl px-4 flex items-center gap-3"
           style={{ background: 'rgba(245,158,11,0.1)', height: '80px' }}>
-          {['#F59E0B', '#DB2777', '#7C3AED', '#06B6D4', '#10B981'].map((c) => (
+          {['#F5A623', '#D81C5C', '#A855F7', '#C084FC', '#059669'].map((c) => (
             <div key={c} className="h-9 w-9 rounded-full border-2 border-white/20 flex-shrink-0" style={{ background: c }} />
           ))}
         </div>
@@ -558,7 +558,7 @@ function WebHeroVisual() {
         <div className="flex items-center gap-3 pb-3 border-b border-[var(--border-default)]">
           <div className="h-4 w-14 rounded" style={{ background: 'rgba(6,182,212,0.3)' }} />
           {[1, 2, 3].map((i) => <div key={i} className="h-3 w-10 rounded bg-[var(--bg-surface)]" />)}
-          <div className="ml-auto h-7 w-20 rounded-lg" style={{ background: 'linear-gradient(135deg,#06B6D4,#7C3AED)' }} />
+          <div className="ml-auto h-7 w-20 rounded-lg" style={{ background: 'linear-gradient(135deg,#C084FC,#A855F7)' }} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-2">
@@ -574,7 +574,7 @@ function WebHeroVisual() {
           </div>
         </div>
         <div className="flex gap-2 pt-2 border-t border-[var(--border-default)]">
-          {[{ label: 'Perf', score: 98, color: '#10B981' }, { label: 'SEO', score: 100, color: '#06B6D4' }, { label: 'A11y', score: 95, color: '#A78BFA' }].map((m) => (
+          {[{ label: 'Perf', score: 98, color: '#059669' }, { label: 'SEO', score: 100, color: '#C084FC' }, { label: 'A11y', score: 95, color: '#A855F7' }].map((m) => (
             <div key={m.label} className="flex-1 text-center">
               <div className="text-sm font-bold" style={{ color: m.color }}>{m.score}</div>
               <div className="text-[10px] text-[var(--text-muted)]">{m.label}</div>
@@ -716,7 +716,7 @@ function ProcessSection({ steps, variant, color, rgb }: {
           {steps.map((s, i) => (
             <div key={i} className="relative flex flex-col items-center text-center">
               <div className="h-10 w-10 rounded-2xl flex items-center justify-center text-sm font-black text-white mb-4 relative z-10"
-                style={{ background: `linear-gradient(135deg,${color},#DB2777)` }}>
+                style={{ background: `linear-gradient(135deg,${color},#D81C5C)` }}>
                 {s.step}
               </div>
               <div className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-2"
@@ -739,7 +739,7 @@ function ProcessSection({ steps, variant, color, rgb }: {
           <div key={i} className="flex gap-5">
             <div className="flex flex-col items-center">
               <div className="h-10 w-10 rounded-2xl flex items-center justify-center text-sm font-black text-white flex-shrink-0"
-                style={{ background: `linear-gradient(135deg,${color},#7C3AED)` }}>
+                style={{ background: `linear-gradient(135deg,${color},#A855F7)` }}>
                 {s.step}
               </div>
               {i < steps.length - 1 && (
@@ -924,7 +924,7 @@ export async function ServiceDetailContent({ slug, locale = 'id' }: { slug: stri
 
       {/* ── HERO ── */}
       <section className="relative min-h-[80vh] flex items-center overflow-hidden px-4 pt-24 pb-20">
-        <div className="absolute inset-0 animated-mesh opacity-80" />
+        <div className="absolute inset-0 mesh-gradient opacity-80" />
         <div className="absolute inset-0 dot-grid opacity-40" />
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full blur-3xl"
@@ -961,7 +961,7 @@ export async function ServiceDetailContent({ slug, locale = 'id' }: { slug: stri
               <div className="flex flex-wrap gap-3">
                 <Link href={ui.contactPath}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm hover:scale-[1.02] hover:shadow-xl transition-all duration-200"
-                  style={{ background: `linear-gradient(135deg,${svc.color},#DB2777)` }}>
+                  style={{ background: `linear-gradient(135deg,${svc.color},#D81C5C)` }}>
                   {ui.ctaPrimary}
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

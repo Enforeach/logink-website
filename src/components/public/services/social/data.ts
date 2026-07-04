@@ -33,8 +33,8 @@ export const SOCIAL_MODULES = [
           'Reach, engagement, pertumbuhan follower, konten terbaik, dan rekomendasi bulan depan.',
       },
     ],
-    accentColor: '#DB2777',
-    accentRgb: '219,39,119',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
     icon: 'Smartphone',
     priceNote: 'Harga kustom berdasarkan jumlah platform dan volume post',
   },
@@ -72,8 +72,8 @@ export const SOCIAL_MODULES = [
           'Views, completion rate, shares, pertumbuhan follower, dan performa FYP: metrik yang benar-benar penting.',
       },
     ],
-    accentColor: '#EC4899',
-    accentRgb: '236,72,153',
+    accentColor: '#EE3D5E',
+    accentRgb: '238,61,94',
     icon: 'Film',
     priceNote: 'Harga kustom berdasarkan volume video',
   },
@@ -138,8 +138,8 @@ export const SOCIAL_CONTENT_PILLARS = [
     description:
       'Tips, how-to, insight industri, dan thought leadership yang memposisikan brandmu sebagai ahli. Audiens belajar sesuatu, dan ingat siapa yang mengajari mereka.',
     examples: 'Infografik carousel, reel tips, statistik industri, video penjelasan',
-    accentColor: '#7C3AED',
-    accentRgb: '124,58,237',
+    accentColor: '#A855F7',
+    accentRgb: '168,85,247',
     icon: 'BookOpen',
   },
   {
@@ -149,8 +149,8 @@ export const SOCIAL_CONTENT_PILLARS = [
     description:
       'Trend-jacking, humor, behind-the-scenes, dan konten relatable yang mendapat shares dan saves. Inilah yang membuat brandmu terasa manusiawi dan membuat algoritma bekerja untukmu.',
     examples: 'Reel audio trending, meme, konten BTS, challenges, video POV',
-    accentColor: '#DB2777',
-    accentRgb: '219,39,119',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
     icon: 'Sparkles',
   },
   {
@@ -160,8 +160,8 @@ export const SOCIAL_CONTENT_PILLARS = [
     description:
       'Penawaran langsung, testimoni, showcase produk, dan CTA yang mendorong aksi. Strategis, tidak pernah spam. Waktunya tepat ketika audiensmu sudah siap.',
     examples: 'Peluncuran produk, pengumuman promo, testimoni klien, penawaran terbatas',
-    accentColor: '#D97706',
-    accentRgb: '217,119,6',
+    accentColor: '#F88438',
+    accentRgb: '248,132,56',
     icon: 'ShoppingCart',
   },
 ] as const
@@ -174,7 +174,7 @@ export const SOCIAL_PROCESS = [
     description:
       'Kami pelajari brandmu secara menyeluruh: tone of voice, visual identity, persona audiens, kompetitor, dan dos & don\'ts konten. Kami audit kehadiran social mediamu saat ini dan identifikasi quick wins.',
     deliverable: 'Dokumen brand brief + analisis kompetitor',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     icon: 'ClipboardList',
   },
   {
@@ -184,7 +184,7 @@ export const SOCIAL_PROCESS = [
     description:
       'Kami tentukan pilar kontenmu (Edukasi, Hiburan, Konversi), fokus platform, jadwal posting, dan kalender konten bulan pertama. Semuanya dipetakan ke tujuan bisnismu.',
     deliverable: 'Deck strategi konten + kalender Bulan 1',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
     icon: 'Compass',
   },
   {
@@ -194,7 +194,7 @@ export const SOCIAL_PROCESS = [
     description:
       'Desainer membuat visual, copywriter menulis caption dalam Bahasa Indonesia, dan video editor memproduksi reels dan TikTok. Semuanya dibuat sesuai brand guideline kamu, tanpa template.',
     deliverable: 'Konten satu bulan penuh siap untuk review',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
     icon: 'PenLine',
   },
   {
@@ -204,7 +204,7 @@ export const SOCIAL_PROCESS = [
     description:
       'Kamu review kalender konten dan setujui setiap konten. Kami tangani penjadwalan, riset hashtag, dan waktu posting optimal. Setelah disetujui, semuanya dijadwalkan dan tayang otomatis.',
     deliverable: 'Kalender disetujui + community management aktif',
-    accentColor: '#F59E0B',
+    accentColor: '#EE3D5E',
     icon: 'CalendarCheck',
   },
 ] as const
@@ -311,8 +311,8 @@ export const SOCIAL_MODULES_EN = [
           "Reach, engagement, follower growth, top content, and next month's recommendations.",
       },
     ],
-    accentColor: '#DB2777',
-    accentRgb: '219,39,119',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
     icon: 'Smartphone',
     priceNote: 'Custom pricing based on platform count and post volume',
   },
@@ -350,8 +350,8 @@ export const SOCIAL_MODULES_EN = [
           'Views, completion rate, shares, follower growth, and FYP performance: the metrics that actually matter.',
       },
     ],
-    accentColor: '#EC4899',
-    accentRgb: '236,72,153',
+    accentColor: '#EE3D5E',
+    accentRgb: '238,61,94',
     icon: 'Film',
     priceNote: 'Custom pricing based on video volume',
   },
@@ -416,8 +416,8 @@ export const SOCIAL_CONTENT_PILLARS_EN = [
     description:
       'Tips, how-tos, industry insights, and thought leadership that position your brand as the expert. Your audience learns something, and remembers who taught them.',
     examples: 'Carousel infographics, tips reels, industry stats, explainer videos',
-    accentColor: '#7C3AED',
-    accentRgb: '124,58,237',
+    accentColor: '#A855F7',
+    accentRgb: '168,85,247',
     icon: 'BookOpen',
   },
   {
@@ -427,8 +427,8 @@ export const SOCIAL_CONTENT_PILLARS_EN = [
     description:
       'Trend-jacking, humor, behind-the-scenes, and relatable content that earns shares and saves. This is what makes your brand feel human and gets the algorithm working for you.',
     examples: 'Trending audio reels, memes, BTS content, challenges, POV videos',
-    accentColor: '#DB2777',
-    accentRgb: '219,39,119',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
     icon: 'Sparkles',
   },
   {
@@ -438,8 +438,8 @@ export const SOCIAL_CONTENT_PILLARS_EN = [
     description:
       'Direct offers, testimonials, product showcases, and CTAs that drive action. Strategic, never spammy. Timed to land when your audience is already warmed up.',
     examples: 'Product launches, promo announcements, client testimonials, limited offers',
-    accentColor: '#D97706',
-    accentRgb: '217,119,6',
+    accentColor: '#F88438',
+    accentRgb: '248,132,56',
     icon: 'ShoppingCart',
   },
 ] as const
@@ -452,7 +452,7 @@ export const SOCIAL_PROCESS_EN = [
     description:
       "We learn your brand thoroughly: tone of voice, visual identity, audience personas, competitors, and content dos and don'ts. We audit your current social presence and identify quick wins.",
     deliverable: 'Brand brief document + competitor analysis',
-    accentColor: '#7C3AED',
+    accentColor: '#A855F7',
     icon: 'ClipboardList',
   },
   {
@@ -462,7 +462,7 @@ export const SOCIAL_PROCESS_EN = [
     description:
       "We define your content pillars (Educate, Entertain, Convert), platform focus, posting cadence, and the first month's content calendar. Everything is mapped to your business goals.",
     deliverable: 'Content strategy deck + Month 1 calendar',
-    accentColor: '#DB2777',
+    accentColor: '#D81C5C',
     icon: 'Compass',
   },
   {
@@ -472,7 +472,7 @@ export const SOCIAL_PROCESS_EN = [
     description:
       'Designers create visuals, copywriters craft captions in Bahasa Indonesia, and video editors produce reels and TikToks. Everything built to your brand guidelines, no templates.',
     deliverable: 'Full month of content ready for review',
-    accentColor: '#D97706',
+    accentColor: '#F88438',
     icon: 'PenLine',
   },
   {
@@ -482,7 +482,7 @@ export const SOCIAL_PROCESS_EN = [
     description:
       'You review the content calendar and approve each piece. We handle scheduling, hashtag research, and optimal posting times. Once approved, everything is queued and goes live automatically.',
     deliverable: 'Approved calendar live + community management active',
-    accentColor: '#F59E0B',
+    accentColor: '#EE3D5E',
     icon: 'CalendarCheck',
   },
 ] as const

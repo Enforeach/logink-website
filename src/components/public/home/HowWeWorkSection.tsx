@@ -1,6 +1,7 @@
 'use client'
 
-import { useInView } from '@/hooks/useInView'
+import { useRef } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 
 interface Step {
   num: string
@@ -16,28 +17,28 @@ const STEPS_ID: Step[] = [
     title: 'Discovery',
     days: 'Hari 1–3',
     desc: 'Kami audit kehadiran digital kamu saat ini, analisis kompetitor, dan identifikasi quick wins. Kamu dapat gambaran jelas tentang posisi brand sekarang dan peluang yang bisa diambil.',
-    color: '#7C3AED',
+    color: '#A855F7',
   },
   {
     num: '02',
     title: 'Strategi',
     days: 'Hari 4–7',
     desc: 'Kami susun roadmap 90 hari yang disesuaikan untuk semua channel (SEO, social, iklan, kreatif) dengan KPI spesifik yang terhubung ke target pendapatan kamu. Bukan vanity metrics.',
-    color: '#DB2777',
+    color: '#D81C5C',
   },
   {
     num: '03',
     title: 'Eksekusi',
     days: 'Hari 8–30',
     desc: 'Konten go live. Iklan diluncurkan. Optimasi SEO mulai berjalan. Tim terintegrasi kami bekerja paralel, bukan berurutan, tanpa ada bottleneck.',
-    color: '#D97706',
+    color: '#F88438',
   },
   {
     num: '04',
     title: 'Optimasi & Kembangkan',
     days: 'Berkelanjutan',
     desc: 'Review performa bulanan bersama tim dedikasi kamu. Kami perkuat apa yang berhasil, potong yang tidak, dan terus tingkatkan hasilnya secara konsisten.',
-    color: '#F59E0B',
+    color: '#F5A623',
   },
 ]
 
@@ -47,28 +48,28 @@ const STEPS_EN: Step[] = [
     title: 'Discovery',
     days: 'Days 1–3',
     desc: 'We audit your current digital presence, analyse competitors, and identify quick wins. You get a clear picture of where you stand and where the opportunities are.',
-    color: '#7C3AED',
+    color: '#A855F7',
   },
   {
     num: '02',
     title: 'Strategy',
     days: 'Days 4–7',
     desc: 'We build a tailored 90-day roadmap across all channels (SEO, social, ads, creative) with specific KPIs tied to your revenue goals. Not vanity metrics.',
-    color: '#DB2777',
+    color: '#D81C5C',
   },
   {
     num: '03',
     title: 'Execution',
     days: 'Days 8–30',
     desc: "Content goes live. Ads launch. SEO optimisations roll out. Our integrated team works in parallel, not in sequence, so nothing bottlenecks.",
-    color: '#D97706',
+    color: '#F88438',
   },
   {
     num: '04',
     title: 'Optimise & Scale',
     days: 'Ongoing',
     desc: 'Monthly performance reviews with your dedicated team. We double down on what works, cut what doesn\'t, and continuously compound your results.',
-    color: '#F59E0B',
+    color: '#F5A623',
   },
 ]
 
@@ -87,126 +88,99 @@ const COPY = {
   },
 }
 
-export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
-  const c = COPY[locale]
-  const steps = locale === 'id' ? STEPS_ID : STEPS_EN
-  const [leftRef, leftInView] = useInView({ once: true, amount: 0.3 })
-  const [lineRef, lineInView] = useInView({ once: true, amount: 0.4 })
+/* Accent darkened for AA text contrast on white */
+const accentText = (hex: string) => `color-mix(in srgb, ${hex} 55%, #231A26)`
+
+function StepCard({ step, index }: { step: Step; index: number }) {
+  const right = index % 2 === 1
 
   return (
-    <section
-      className="py-12 sm:py-16 lg:py-24 px-4 relative overflow-hidden"
-      style={{
-        background: 'linear-gradient(180deg, #16142E 0%, #140b22 50%, #16142E 100%)',
-      }}
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-16 items-start">
-
-          {/* Left sticky column */}
-          <div
-            ref={leftRef}
-            style={leftInView
-              ? { animation: 'fade-left 0.6s cubic-bezier(0.22,1,0.36,1) both' }
-              : { opacity: 0 }}
-            className="md:w-[35%] md:sticky md:top-28 flex-shrink-0"
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-6">
-              {c.badge}
+    <li className="relative pl-16 md:pl-0 md:grid md:grid-cols-2 md:gap-16 list-none">
+      {/* Timeline dot */}
+      <span
+        aria-hidden="true"
+        className="absolute left-6 md:left-1/2 top-9 -translate-x-1/2 h-4 w-4 rounded-full gradient-brand-bg ring-4 ring-[var(--bg-base)] z-10"
+      />
+      <motion.div
+        initial={{ opacity: 0, y: 24, x: right ? 24 : -24 }}
+        whileInView={{ opacity: 1, y: 0, x: 0 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={`rounded-2xl bg-white border border-[var(--border-default)] p-6 md:p-8 transition-shadow duration-300 hover:shadow-[0_16px_40px_-16px_rgba(35,26,38,0.16)] ${right ? 'md:col-start-2' : 'md:col-start-1'}`}
+      >
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <span
+              className="inline-block rounded-full px-3 py-1 text-xs font-semibold mb-3"
+              style={{ background: `${step.color}1A`, color: accentText(step.color) }}
+            >
+              {step.days}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-5 leading-tight">
-              {c.headline}{' '}
-              <span className="gradient-text">{c.headlineGradient}</span>
-            </h2>
-            <p className="text-[var(--text-secondary)] leading-relaxed text-base">
-              {c.body}
-            </p>
+            <h3 className="font-display text-xl font-bold text-[var(--text-primary)] mb-2">{step.title}</h3>
           </div>
-
-          {/* Right: Steps */}
-          <div className="md:w-[65%]">
-            {/* Desktop: horizontal timeline */}
-            <div className="hidden md:block">
-              <div ref={lineRef} className="relative mb-8">
-                {/* Background track */}
-                <div className="absolute top-[2.25rem] left-0 right-0 h-px bg-[var(--border-default)]" />
-                {/* CSS-animated fill */}
-                <div
-                  className="absolute top-[2.25rem] left-0 h-px gradient-bg"
-                  style={lineInView
-                    ? { animation: 'expand-width 1.4s ease-in-out 0.2s both' }
-                    : { width: 0 }}
-                />
-
-                {/* Step cards */}
-                <div className="grid grid-cols-4 gap-4 relative">
-                  {steps.map((step, i) => (
-                    <div
-                      key={step.num}
-                      style={lineInView
-                        ? { animation: `fade-up 0.5s cubic-bezier(0.22,1,0.36,1) ${0.3 + i * 0.2}s both` }
-                        : { opacity: 0 }}
-                    >
-                      {/* Step dot */}
-                      <div className="flex flex-col items-center mb-4">
-                        <div
-                          className="h-[4.5rem] w-[4.5rem] rounded-2xl flex items-center justify-center text-xl font-extrabold text-white z-10 relative shadow-lg"
-                          style={{ background: `linear-gradient(135deg, ${step.color}, #DB2777)` }}
-                        >
-                          {step.num}
-                        </div>
-                      </div>
-                      <div className="rounded-xl bg-white/4 p-4">
-                        <div className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: step.color }}>
-                          {step.days}
-                        </div>
-                        <h3 className="font-bold text-[var(--text-primary)] mb-2 text-sm">{step.title}</h3>
-                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{step.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile: vertical timeline */}
-            <div className="md:hidden flex flex-col gap-6 relative">
-              <div className="absolute left-[1.375rem] top-0 bottom-0 w-px bg-[var(--border-default)]" />
-              {steps.map((step, i) => (
-                <MobileStep key={step.num} step={step} index={i} />
-              ))}
-            </div>
-          </div>
+          {/* Huge ghost step number */}
+          <span
+            aria-hidden="true"
+            className="font-display text-6xl md:text-7xl font-extrabold leading-none gradient-text opacity-30 select-none flex-shrink-0 -mt-1"
+          >
+            {step.num}
+          </span>
         </div>
-      </div>
-    </section>
+        <p className="text-sm text-[var(--text-secondary)] leading-relaxed m-0">{step.desc}</p>
+      </motion.div>
+    </li>
   )
 }
 
-function MobileStep({ step, index }: { step: Step; index: number }) {
-  const [ref, inView] = useInView({ once: true, amount: 0.4 })
+export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
+  const c = COPY[locale]
+  const steps = locale === 'id' ? STEPS_ID : STEPS_EN
+
+  const trackRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ['start 0.75', 'end 0.5'],
+  })
+  const scaleY = useSpring(scrollYProgress, { stiffness: 140, damping: 30 })
 
   return (
-    <div
-      ref={ref}
-      style={inView
-        ? { animation: `slide-right 0.5s cubic-bezier(0.22,1,0.36,1) ${index * 0.1}s both` }
-        : { opacity: 0 }}
-      className="flex gap-4"
-    >
-      <div
-        className="h-11 w-11 rounded-xl flex items-center justify-center text-sm font-extrabold text-white flex-shrink-0 z-10"
-        style={{ background: `linear-gradient(135deg, ${step.color}, #DB2777)` }}
-      >
-        {step.num}
-      </div>
-      <div className="rounded-xl bg-white/4 p-4 flex-1">
-        <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: step.color }}>
-          {step.days}
+    <section className="py-20 md:py-28 px-4 sm:px-6" style={{ background: 'var(--bg-base)' }}>
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-16"
+        >
+          <span className="eyebrow block mb-4">{c.badge}</span>
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-[var(--text-primary)] mb-4 leading-[1.12] tracking-[-0.03em] max-w-3xl mx-auto">
+            {c.headline}{' '}
+            <span className="gradient-text">{c.headlineGradient}</span>
+          </h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
+            {c.body}
+          </p>
+        </motion.div>
+
+        {/* Scroll-linked zigzag timeline */}
+        <div ref={trackRef} className="relative max-w-4xl mx-auto">
+          {/* Track */}
+          <div aria-hidden="true" className="absolute left-6 md:left-1/2 -translate-x-1/2 top-2 bottom-2 w-px bg-[var(--border-default)]" />
+          {/* Gradient fill — grows with scroll */}
+          <motion.div
+            aria-hidden="true"
+            className="absolute left-6 md:left-1/2 top-2 bottom-2 w-[3px] rounded-full gradient-brand-bg origin-top"
+            style={{ scaleY, x: '-50%' }}
+          />
+          <ol className="space-y-10 md:space-y-14 p-0 m-0">
+            {steps.map((step, i) => (
+              <StepCard key={step.num} step={step} index={i} />
+            ))}
+          </ol>
         </div>
-        <h3 className="font-bold text-[var(--text-primary)] mb-1 text-sm">{step.title}</h3>
-        <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{step.desc}</p>
       </div>
-    </div>
+    </section>
   )
 }

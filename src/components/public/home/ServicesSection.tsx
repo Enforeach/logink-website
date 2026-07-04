@@ -1,7 +1,9 @@
 'use client'
 
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
-import { useInView } from '@/hooks/useInView'
+import { motion } from 'framer-motion'
+import { Search, MessagesSquare, TrendingUp, Palette, MonitorSmartphone, ArrowRight, Sparkles, type LucideIcon } from 'lucide-react'
 
 interface Service {
   id: string
@@ -14,212 +16,22 @@ interface Service {
 }
 
 const FALLBACK: Service[] = [
-  { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#7C3AED', shortDescId: 'Pertumbuhan organik jangka panjang & leads inbound', funnelPosition: 'Top Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
-  { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#DB2777', shortDescId: 'Bangun brand awareness & komunitas yang aktif', funnelPosition: 'Top Funnel', pricingTiers: [] },
-  { id: '3', name: 'Paid Advertising', slug: 'paid-ads', color: '#D97706', shortDescId: 'Iklan yang langsung hasilkan ROI nyata', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
-  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F59E0B', shortDescId: 'Konten yang bikin scroll berhenti dan mengkonversi', funnelPosition: 'All Funnel', pricingTiers: [] },
-  { id: '5', name: 'Website & Landing Page', slug: 'website-development', color: '#A78BFA', shortDescId: 'Ubah pengunjung jadi pelanggan', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
+  { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#A855F7', shortDescId: 'Pertumbuhan organik jangka panjang & leads inbound', funnelPosition: 'Top Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
+  { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#D81C5C', shortDescId: 'Bangun brand awareness & komunitas yang aktif', funnelPosition: 'Top Funnel', pricingTiers: [] },
+  { id: '3', name: 'Paid Advertising', slug: 'paid-ads', color: '#F88438', shortDescId: 'Iklan yang langsung hasilkan ROI nyata', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
+  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', shortDescId: 'Konten yang bikin scroll berhenti dan mengkonversi', funnelPosition: 'All Funnel', pricingTiers: [] },
+  { id: '5', name: 'Website & Landing Page', slug: 'website-development', color: '#C084FC', shortDescId: 'Ubah pengunjung jadi pelanggan', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
 ]
 
-/* ─── Individual card variants ─── */
-
-function SEOCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
-  const features = locale === 'id'
-    ? ['Riset Kata Kunci', '30 Artikel/bln', 'Looker Studio']
-    : ['Keyword Research', 'Up to 30 Articles/mo', 'Looker Studio']
-  const startingFrom = locale === 'id' ? 'Mulai dari' : 'Starting from'
-  const perMonth = locale === 'id' ? '/bln' : '/mo'
-  return (
-    <div className="flex flex-col sm:flex-row h-full gap-6">
-      <div className="flex-1">
-        <div className="h-12 w-12 rounded-xl mb-4 flex items-center justify-center" style={{ background: `${svc.color}18`, color: svc.color }}>
-          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </div>
-        <h3 className="font-bold text-[var(--text-primary)] mb-1 text-lg">{svc.name}</h3>
-        <p className="text-sm text-[var(--text-secondary)] mb-3">{svc.shortDescId}</p>
-        <ul className="flex flex-wrap gap-1.5 mb-4 list-none p-0 m-0">
-          {features.map((f) => (
-            <li key={f} className="text-xs px-2 py-0.5 rounded-full border border-white/12 text-[var(--text-muted)]">{f}</li>
-          ))}
-        </ul>
-        {svc.pricingTiers?.[0] && (
-          <p className="text-xs text-[var(--text-muted)] mb-3">{startingFrom} <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}{perMonth}</span></p>
-        )}
-        <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
-      </div>
-      {/* Mini ascending line chart */}
-      <div className="flex-shrink-0 flex items-center">
-        <div className="w-32 h-24 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-3 flex flex-col justify-end gap-1">
-          <div className="flex items-end gap-1 h-full">
-            {[30, 45, 38, 55, 62, 70, 80, 95].map((h, i) => (
-              <div
-                key={i}
-                className="flex-1 rounded-sm opacity-80"
-                style={{ height: `${h}%`, background: `linear-gradient(to top, ${svc.color}, ${svc.color}60)` }}
-              />
-            ))}
-          </div>
-          <p className="text-[10px] text-[var(--text-muted)] text-center">Organic traffic ↑</p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function SocialCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
-  const pillars = locale === 'id' ? ['Edukasi', 'Hiburan', 'Konversi'] : ['Educate', 'Entertain', 'Convert']
-  return (
-    <div className="h-full flex flex-col" style={{ background: `radial-gradient(circle at top center, ${svc.color}0d 0%, transparent 60%)` }}>
-      <div className="h-12 w-12 rounded-xl mb-4 flex items-center justify-center" style={{ background: `${svc.color}18`, color: svc.color }}>
-        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-        </svg>
-      </div>
-      <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
-      <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
-      <ul className="flex flex-wrap gap-2 mb-4 list-none p-0 m-0">
-        {pillars.map((p) => (
-          <li key={p} className="text-xs px-3 py-1 rounded-full font-medium" style={{ background: `${svc.color}18`, color: svc.color }}>
-            {p}
-          </li>
-        ))}
-      </ul>
-      <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
-    </div>
-  )
-}
-
-function PaidAdsCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
-  const roasLabel = locale === 'id' ? 'Rata-rata ROAS dalam 3 bulan' : 'Typical ROAS in 3 months'
-  return (
-    <div className="h-full flex flex-col">
-      <div className="mb-4">
-        <div className="text-5xl font-extrabold gradient-text leading-none">2–4x</div>
-        <div className="text-xs text-[var(--text-muted)] mt-1 uppercase tracking-wide">{roasLabel}</div>
-      </div>
-      <div className="h-px bg-[var(--border-default)] mb-4" />
-      <div className="h-12 w-12 rounded-xl mb-3 flex items-center justify-center" style={{ background: `${svc.color}18`, color: svc.color }}>
-        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-        </svg>
-      </div>
-      <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
-      <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
-      <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
-    </div>
-  )
-}
-
-function CreativeCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
-  const colors = ['#7C3AED', '#DB2777', '#D97706']
-  return (
-    <div className="h-full flex flex-col">
-      {/* Stacked thumbnail mockups */}
-      <div className="relative h-20 mb-4 ml-2">
-        {colors.map((c, i) => (
-          <div
-            key={i}
-            className="absolute h-14 w-24 rounded-lg border border-[var(--border-default)]"
-            style={{
-              background: `linear-gradient(135deg, ${c}25, ${c}08)`,
-              left: `${i * 10}px`,
-              top: `${i * 4}px`,
-              zIndex: colors.length - i,
-            }}
-          />
-        ))}
-      </div>
-      <div className="h-12 w-12 rounded-xl mb-3 flex items-center justify-center" style={{ background: `${svc.color}18`, color: svc.color }}>
-        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-        </svg>
-      </div>
-      <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
-      <p className="text-sm text-[var(--text-secondary)] mb-4 flex-1">{svc.shortDescId}</p>
-      <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
-    </div>
-  )
-}
-
-function WebsiteCard({ svc, locale }: { svc: Service; locale: 'id' | 'en' }) {
-  return (
-    <div className="h-full flex flex-col">
-      {/* Browser chrome mockup */}
-      <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] overflow-hidden mb-4">
-        <div className="flex items-center gap-1.5 px-3 py-2 border-b border-[var(--border-default)]" aria-hidden="true">
-          <span className="h-2 w-2 rounded-full bg-red-400/60" />
-          <span className="h-2 w-2 rounded-full bg-yellow-400/60" />
-          <span className="h-2 w-2 rounded-full bg-green-400/60" />
-          <div className="flex-1 mx-2 h-3 rounded bg-[var(--bg-elevated)]" />
-        </div>
-        <div className="h-16 gradient-bg opacity-30" />
-      </div>
-      <div className="h-12 w-12 rounded-xl mb-3 flex items-center justify-center" style={{ background: `${svc.color}18`, color: svc.color }}>
-        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
-        </svg>
-      </div>
-      <h3 className="font-bold text-[var(--text-primary)] mb-1">{svc.name}</h3>
-      <p className="text-sm text-[var(--text-secondary)] mb-2 flex-1">{svc.shortDescId}</p>
-      {svc.pricingTiers?.[0] && (
-        <p className="text-xs text-[var(--text-muted)] mb-3">{locale === 'id' ? 'Mulai dari' : 'Starting from'} <span className="font-semibold" style={{ color: svc.color }}>{svc.pricingTiers[0].priceLabel}</span></p>
-      )}
-      <LearnMore href={`${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`} color={svc.color} label={locale === 'id' ? 'Selengkapnya' : 'Learn more'} />
-    </div>
-  )
-}
-
-function LearnMore({ href, color, label }: { href: string; color: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="inline-flex items-center gap-1 text-xs font-semibold mt-auto transition-colors group"
-      style={{ color }}
-    >
-      {label}
-      <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-      </svg>
-    </Link>
-  )
-}
-
-function BentoCard({
-  svc,
-  colSpan,
-  animVariant,
-  index,
-  locale,
-}: {
-  svc: Service
-  colSpan: string
-  animVariant: 'slideLeft' | 'scaleUp'
-  index: number
-  locale: 'id' | 'en'
-}) {
-  const [ref, isInView] = useInView({ once: true, amount: 0.2 })
-  const anim = animVariant === 'slideLeft' ? 'fade-left' : 'scale-up'
-
-  return (
-    <div
-      ref={ref}
-      className={`${colSpan} rounded-2xl bg-white/4 p-4 lg:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] group`}
-      style={{
-        borderTop: `3px solid ${svc.color}`,
-        ...(isInView
-          ? { animation: `${anim} 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 0.1}s both` }
-          : { opacity: 0 }),
-      }}
-    >
-      {svc.slug === 'seo-content-marketing' && <SEOCard svc={svc} locale={locale} />}
-      {svc.slug === 'social-media-management' && <SocialCard svc={svc} locale={locale} />}
-      {svc.slug === 'paid-advertising' && <PaidAdsCard svc={svc} locale={locale} />}
-      {svc.slug === 'creative-services' && <CreativeCard svc={svc} locale={locale} />}
-      {svc.slug === 'website-landing-page' && <WebsiteCard svc={svc} locale={locale} />}
-    </div>
-  )
+/* Warm Canvas accents keyed by slug (covers both id/en slug variants) */
+const META: Record<string, { accent: string; icon: LucideIcon }> = {
+  'seo-content-marketing': { accent: '#A855F7', icon: Search },
+  'social-media-management': { accent: '#D81C5C', icon: MessagesSquare },
+  'paid-advertising': { accent: '#F88438', icon: TrendingUp },
+  'paid-ads': { accent: '#F88438', icon: TrendingUp },
+  'creative-services': { accent: '#F5A623', icon: Palette },
+  'website-landing-page': { accent: '#C084FC', icon: MonitorSmartphone },
+  'website-development': { accent: '#C084FC', icon: MonitorSmartphone },
 }
 
 const SECTION_COPY = {
@@ -227,66 +39,161 @@ const SECTION_COPY = {
   en: { badge: 'Our Services', headline: 'What We', headlineGradient: 'Do', desc: 'Five integrated services working as one system, not siloed vendors.', viewAll: 'View all services' },
 }
 
+/* Accent darkened for AA text contrast on white */
+const ACCENT_TEXT = 'text-[color-mix(in_srgb,var(--acc)_55%,#231A26)]'
+
+function SeoExtra({ locale, accent }: { locale: 'id' | 'en'; accent: string }) {
+  const features = locale === 'id'
+    ? ['Riset Kata Kunci', '30 Artikel/bln', 'Looker Studio']
+    : ['Keyword Research', 'Up to 30 Articles/mo', 'Looker Studio']
+  return (
+    <>
+      <ul className="flex flex-wrap gap-1.5 mb-4 list-none p-0 m-0">
+        {features.map((f) => (
+          <li key={f} className="text-xs px-2.5 py-1 rounded-full border border-[var(--border-default)] text-[var(--text-secondary)]">{f}</li>
+        ))}
+      </ul>
+      {/* Mini ascending bar chart */}
+      <div className="hidden sm:flex w-36 h-24 rounded-xl border border-[var(--border-default)] bg-[var(--bg-base)] p-3 flex-col justify-end gap-1 absolute bottom-6 right-6" aria-hidden="true">
+        <div className="flex items-end gap-1 h-full">
+          {[30, 45, 38, 55, 62, 70, 80, 95].map((h, i) => (
+            <div
+              key={i}
+              className="flex-1 rounded-sm"
+              style={{ height: `${h}%`, background: `linear-gradient(to top, ${accent}, ${accent}55)` }}
+            />
+          ))}
+        </div>
+        <p className="text-[10px] text-[var(--text-muted)] text-center m-0">Organic traffic ↑</p>
+      </div>
+    </>
+  )
+}
+
+function SocialExtra({ locale }: { locale: 'id' | 'en' }) {
+  const pillars = locale === 'id' ? ['Edukasi', 'Hiburan', 'Konversi'] : ['Educate', 'Entertain', 'Convert']
+  return (
+    <ul className="flex flex-wrap gap-2 mb-4 list-none p-0 m-0">
+      {pillars.map((p) => (
+        <li key={p} className={`text-xs px-3 py-1 rounded-full font-medium bg-[color-mix(in_srgb,var(--acc)_10%,white)] ${ACCENT_TEXT}`}>
+          {p}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function PaidExtra({ locale }: { locale: 'id' | 'en' }) {
+  const roasLabel = locale === 'id' ? 'Rata-rata ROAS dalam 3 bulan' : 'Typical ROAS in 3 months'
+  return (
+    <div className="mb-4">
+      <div className="font-display text-5xl font-extrabold gradient-text leading-none">2–4x</div>
+      <div className="text-xs text-[var(--text-muted)] mt-1.5 uppercase tracking-wide">{roasLabel}</div>
+    </div>
+  )
+}
+
+function BentoCard({ svc, locale, index }: { svc: Service; locale: 'id' | 'en'; index: number }) {
+  const meta = META[svc.slug] ?? { accent: svc.color, icon: Sparkles }
+  const Icon = meta.icon
+  const isSeo = svc.slug === 'seo-content-marketing'
+  const isSocial = svc.slug === 'social-media-management'
+  const isPaid = svc.slug === 'paid-advertising' || svc.slug === 'paid-ads'
+  const href = `${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`
+  const startingFrom = locale === 'id' ? 'Mulai dari' : 'Starting from'
+  const perMonth = locale === 'id' ? '/bln' : '/mo'
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
+      style={{ '--acc': meta.accent } as CSSProperties}
+      className={`group relative rounded-2xl bg-white border border-[var(--border-default)] p-6 lg:p-7 transition-[border-color,box-shadow] duration-300 hover:border-[var(--border-hover)] hover:shadow-[0_16px_40px_-16px_rgba(35,26,38,0.16)] ${isSeo ? 'sm:col-span-2' : ''}`}
+    >
+      {/* Accent tint on hover (~6%) */}
+      <span aria-hidden="true" className="absolute inset-0 rounded-2xl bg-[var(--acc)] opacity-0 group-hover:opacity-[0.06] transition-opacity duration-300 pointer-events-none" />
+
+      <div className="relative flex flex-col h-full">
+        <div className="flex items-start justify-between gap-3 mb-4">
+          {/* Icon squircle — saturates on hover */}
+          <span className="h-12 w-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-[color-mix(in_srgb,var(--acc)_12%,white)] text-[var(--acc)] group-hover:bg-[var(--acc)] group-hover:text-white transition-colors duration-300">
+            <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
+          </span>
+          {svc.funnelPosition && (
+            <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[color-mix(in_srgb,var(--acc)_10%,white)] ${ACCENT_TEXT}`}>
+              {svc.funnelPosition}
+            </span>
+          )}
+        </div>
+
+        {isPaid && <PaidExtra locale={locale} />}
+
+        <h3 className="font-display font-bold text-[var(--text-primary)] mb-1.5 text-lg">{svc.name}</h3>
+        <p className={`text-sm text-[var(--text-secondary)] mb-4 ${isSeo ? 'sm:max-w-md' : 'flex-1'}`}>{svc.shortDescId}</p>
+
+        {isSeo && <SeoExtra locale={locale} accent={meta.accent} />}
+        {isSocial && <SocialExtra locale={locale} />}
+
+        {svc.pricingTiers?.[0] && (
+          <p className="text-xs text-[var(--text-muted)] mb-3">
+            {startingFrom}{' '}
+            <span className={`font-semibold ${ACCENT_TEXT}`}>
+              {svc.pricingTiers[0].priceLabel}{isSeo ? perMonth : ''}
+            </span>
+          </p>
+        )}
+
+        <Link href={href} className={`inline-flex items-center gap-1.5 text-xs font-semibold mt-auto ${ACCENT_TEXT}`}>
+          {locale === 'id' ? 'Selengkapnya' : 'Learn more'}
+          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+        </Link>
+      </div>
+    </motion.div>
+  )
+}
+
 export function ServicesSection({ services = [], locale = 'id' }: { services?: Service[]; locale?: 'id' | 'en' }) {
   const display = services.length > 0 ? services : FALLBACK
   const sc = SECTION_COPY[locale]
 
-  const seo = display.find((s) => s.slug === 'seo-content-marketing')
-  const social = display.find((s) => s.slug === 'social-media-management')
-  const paid = display.find((s) => s.slug === 'paid-advertising')
-  const creative = display.find((s) => s.slug === 'creative-services')
-  const website = display.find((s) => s.slug === 'website-landing-page')
-
-  const [headerRef, headerInView] = useInView({ once: true, amount: 0.5 })
-
   return (
-    <section className="py-12 sm:py-16 lg:py-24 px-4" style={{ background: '#16142E' }}>
+    <section className="py-20 md:py-28 px-4 sm:px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div
-          ref={headerRef}
-          style={headerInView
-            ? { animation: 'fade-up 0.55s cubic-bezier(0.22,1,0.36,1) both' }
-            : { opacity: 0 }}
-          className="text-center mb-12"
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-14"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-4">
-            {sc.badge}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] mb-3">
+          <span className="eyebrow block mb-4">{sc.badge}</span>
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-[var(--text-primary)] mb-4 leading-[1.12] tracking-[-0.03em]">
             {sc.headline} <span className="gradient-text">{sc.headlineGradient}</span>
           </h2>
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto">
             {sc.desc}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Bento grid: desktop */}
-        <div className="hidden sm:grid grid-cols-3 gap-5">
-          {seo && <BentoCard svc={seo} colSpan="col-span-2" animVariant="slideLeft" index={0} locale={locale} />}
-          {social && <BentoCard svc={social} colSpan="col-span-1" animVariant="scaleUp" index={1} locale={locale} />}
-          {paid && <BentoCard svc={paid} colSpan="col-span-1" animVariant="scaleUp" index={2} locale={locale} />}
-          {creative && <BentoCard svc={creative} colSpan="col-span-1" animVariant="scaleUp" index={3} locale={locale} />}
-          {website && <BentoCard svc={website} colSpan="col-span-1" animVariant="scaleUp" index={4} locale={locale} />}
-        </div>
-
-        {/* Mobile: single column */}
-        <div className="flex flex-col gap-4 sm:hidden">
+        {/* Asymmetric bento: featured SEO card spans 2 cols */}
+        <div className="grid sm:grid-cols-3 gap-5">
           {display.map((svc, i) => (
-            <BentoCard key={svc.id} svc={svc} colSpan="" animVariant="scaleUp" index={i} locale={locale} />
+            <BentoCard key={svc.id} svc={svc} locale={locale} index={i} />
           ))}
         </div>
 
         {/* View all */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-12">
           <Link
             href={locale === 'id' ? '/layanan' : '/en/services'}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-violet hover:text-brand-pink transition-colors group"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[color-mix(in_srgb,#A855F7_55%,#231A26)] hover:text-brand-crimson transition-colors group"
           >
             {sc.viewAll}
-            <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </Link>
         </div>
       </div>
