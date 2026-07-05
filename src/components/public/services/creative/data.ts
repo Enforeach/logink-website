@@ -6,7 +6,7 @@ export const CREATIVE_DELIVERABLES = {
     items: [
       { id: 'social-templates', name: 'Template Social Media (IG feed, story, cover)', description: 'Feed post, story frame, cover design, dan highlight icon.' },
       { id: 'banner-ads', name: 'Banner / Display Ads', description: 'Banner HTML5 dan statis untuk Google Display. Semua ukuran IAB.' },
-      { id: 'infographics', name: 'Infografik', description: 'Data dan proses diubah jadi visual on-brand yang mudah dibagikan.' },
+      { id: 'infographics', name: 'Infografik', description: 'Data dan proses diubah menjadi visual on-brand yang mudah dibagikan.' },
       { id: 'campaign-kv', name: 'Key Visual Kampanye', description: 'Visual hero yang menentukan arah creative untuk peluncuran dan promosi.' },
       { id: 'motion-elements', name: 'Elemen Motion Graphic', description: 'Animasi logo, animasi social, dan micro-interaction.' },
       { id: 'brand-guidelines', name: 'Brand Guidelines (buku brand lengkap)', description: 'Logo, warna, tipografi, gaya fotografi, dan tone of voice.' },
@@ -21,7 +21,7 @@ export const CREATIVE_DELIVERABLES = {
       { id: 'product-video', name: 'Video Produk / Tutorial', description: 'Showcase produk dan tutorial cara penggunaan.' },
       { id: 'testimonial-video', name: 'Video Testimoni / Studi Kasus', description: 'Video testimoni klien dan cerita keberhasilan.' },
       { id: 'reels-tiktok', name: 'Reels / TikTok (Short-form)', description: 'Video short-form vertikal untuk platform social.' },
-      { id: 'motion-standalone', name: 'Motion Graphics (Standalone)', description: 'Explainer dan video promosi yang sepenuhnya dianimasi.' },
+      { id: 'motion-standalone', name: 'Motion Graphics (Standalone)', description: 'Explainer dan video promosi beranimasi penuh.' },
     ],
   },
   copy: {
@@ -65,7 +65,7 @@ export const CREATIVE_ENGAGEMENT_TYPES = [
   {
     id: 'not-sure',
     name: 'Belum tahu',
-    description: 'Yuk ngobrol dulu tentang kebutuhanmu dan cari pengaturan terbaik.',
+    description: 'Mari diskusikan kebutuhan Anda dan temukan pengaturan yang paling tepat.',
   },
 ] as const
 
@@ -73,17 +73,17 @@ export const CREATIVE_MODULES = [
   {
     id: 'graphic-design',
     title: 'Desain Grafis & Visual Branding',
-    tagline: 'Visual identity yang membuat brandmu langsung dikenali.',
+    tagline: 'Visual identity yang membuat brand Anda langsung dikenali.',
     description:
-      'Dari template social media hingga brand guidelines lengkap, desainer kami membuat sistem visual kohesif yang bekerja di setiap touchpoint. Setiap aset dibangun dalam bahasa desainmu, tidak dari marketplace template.',
+      'Dari template social media hingga brand guidelines lengkap, desainer kami membangun sistem visual yang kohesif dan bekerja di setiap touchpoint. Setiap aset dibuat dalam bahasa desain Anda, bukan dari marketplace template.',
     accentColor: '#F5A623',
     accentRgb: '245,166,35',
     deliverables: [
-      { name: 'Template Social Media (IG feed, story, cover)', description: 'Feed post, story frame, cover design, dan highlight icon. Didesain sebagai sistem, bukan satu per satu, agar brandmu tetap konsisten bahkan saat kami tidak ada.' },
+      { name: 'Template Social Media (IG feed, story, cover)', description: 'Feed post, story frame, cover design, dan highlight icon. Didesain sebagai sistem, bukan satu per satu, agar brand Anda tetap konsisten bahkan tanpa kehadiran kami.' },
       { name: 'Banner Display Ads', description: 'Banner HTML5 dan statis untuk Google Display Network dan kampanye programmatic. Semua ukuran IAB standar termasuk.' },
-      { name: 'Infografik', description: 'Data dan proses kompleks diubah jadi visual on-brand yang mudah dibagikan. Sempurna untuk thought leadership dan engagement social.' },
+      { name: 'Infografik', description: 'Data dan proses kompleks diubah menjadi visual on-brand yang mudah dibagikan. Ideal untuk thought leadership dan engagement social.' },
       { name: 'Key Visual Kampanye', description: 'Visual hero kampanye yang menentukan arah creative untuk peluncuran, promosi, dan push musiman. Diadaptasi di semua format.' },
-      { name: 'Elemen Motion Graphic', description: 'Animasi logo, loading screen, animasi social media, dan micro-interaction yang menghidupkan brandmu.' },
+      { name: 'Elemen Motion Graphic', description: 'Animasi logo, loading screen, animasi social media, dan micro-interaction yang menghidupkan brand Anda.' },
       { name: 'Brand Guidelines', description: 'Buku brand komprehensif: penggunaan logo, palet warna, tipografi, gaya fotografi, tone of voice, dan contoh aplikasi.' },
     ],
   },
@@ -92,13 +92,13 @@ export const CREATIVE_MODULES = [
     title: 'Produksi & Editing Video',
     tagline: 'Dari konsep hingga final cut: video yang menggerakkan orang dan menggerakkan angka.',
     description:
-      'Produksi video full-service berbasis di Jakarta. Pengembangan konsep, scripting, syuting, editing, dan motion graphics. Dikirim dalam format multi-platform agar kamu dapat manfaat maksimal dari satu sesi syuting.',
+      'Produksi video full-service berbasis di Jakarta. Pengembangan konsep, scripting, syuting, editing, dan motion graphics. Dikirim dalam format multi-platform agar Anda mendapat manfaat maksimal dari satu sesi syuting.',
     accentColor: '#D81C5C',
     accentRgb: '216,28,92',
     deliverables: [
       { name: 'Pengembangan Konsep & Script', description: 'Konsep creative dan script yang menyeimbangkan brand storytelling dengan tujuan performa.' },
       { name: 'Syuting (Jakarta & sekitarnya)', description: 'Kru profesional, peralatan, dan koordinasi talent. On-location atau studio. Area Jabodetabek tercakup.' },
-      { name: 'Editing Profesional', description: 'Color grading, sound design, pacing, dan struktur storytelling. Kami edit untuk rentang perhatian penonton.' },
+      { name: 'Editing Profesional', description: 'Color grading, sound design, pacing, dan struktur storytelling. Kami mengedit dengan memperhitungkan rentang perhatian penonton.' },
       { name: 'Motion Graphics', description: 'Teks animasi, visualisasi data, animasi logo, dan sekuen explainer.' },
       { name: 'Format Multi-Platform (1:1, 9:16, 16:9)', description: 'Satu syuting, banyak output untuk feed, stories, reels, TikTok, dan YouTube.' },
       { name: 'Brand Film / Testimoni / Tutorial', description: 'Company profile, testimoni pelanggan, dan tutorial produk. Durasi 1–5 menit.' },
@@ -107,14 +107,14 @@ export const CREATIVE_MODULES = [
   {
     id: 'copywriting',
     title: 'Copywriting & Penulisan Konten',
-    tagline: 'Kata-kata yang menjual, dalam bahasa yang digunakan audiens kamu.',
+    tagline: 'Kata-kata yang menjual, dalam bahasa yang digunakan audiens Anda.',
     description:
-      'Headline yang menghentikan scroll, landing page yang mengkonversi, dan ad copy yang mendapat klik. Ditulis secara native dalam Bahasa Indonesia oleh penulis yang memahami psikologi konsumen Indonesia.',
+      'Headline yang scroll-stopping, landing page yang mengonversi, dan ad copy yang mengundang klik. Ditulis langsung dalam Bahasa Indonesia oleh penulis yang memahami psikologi konsumen Indonesia.',
     accentColor: '#A855F7',
     accentRgb: '168,85,247',
     deliverables: [
       { name: 'Ad Copy (Google, Meta, TikTok)', description: 'Headline, deskripsi, dan CTA yang dioptimasi per platform. Varian A/B sudah termasuk.' },
-      { name: 'Landing Page Copy', description: 'Copy halaman berfokus CRO: hero headline, seksi benefit, social proof, FAQ, dan CTA.' },
+      { name: 'Landing Page Copy', description: 'Copy halaman berfokus CRO: hero headline, bagian benefit, social proof, FAQ, dan CTA.' },
       { name: 'Email Blast Copy', description: 'Subject line, preview text, body copy, dan CTA untuk email promosi dan nurturing.' },
       { name: 'Caption Social Media / bulan', description: 'Caption spesifik platform dengan hashtag strategis, CTA, dan brand voice.' },
       { name: 'Konten Long-form / Artikel', description: 'Blog post, thought leadership, dan artikel SEO. Bisa diintegrasikan dengan tim SEO kami.' },
@@ -127,7 +127,7 @@ export const CREATIVE_PROCESS = [
     step: 1,
     title: 'Creative Brief',
     timeline: 'Hari 1',
-    description: 'Kami selaraskan tujuan, audiens, tone, deliverable, dan timeline. Kamu bagikan aset brand dan referensi. Kami ajukan pertanyaan yang menghemat ronde revisi ke depannya.',
+    description: 'Kami selaraskan tujuan, audiens, tone, deliverable, dan timeline. Anda membagikan aset brand dan referensi. Kami ajukan pertanyaan yang menghemat ronde revisi ke depan.',
     deliverable: 'Dokumen brief yang sudah ditandatangani',
     accentColor: '#A855F7',
     side: 'center' as const,
@@ -136,7 +136,7 @@ export const CREATIVE_PROCESS = [
     step: 2,
     title: 'Konsep & Moodboard',
     timeline: 'Hari 2–3',
-    description: 'Kami presentasikan 2-3 arah creative: moodboard untuk desain, storyboard untuk video, draft angle untuk copy. Kamu pilih arah yang paling resonan.',
+    description: 'Kami presentasikan 2-3 arah creative: moodboard untuk desain, storyboard untuk video, draft angle untuk copy. Anda memilih arah yang paling sesuai.',
     deliverable: 'Arah creative yang disetujui',
     accentColor: '#D81C5C',
     side: 'left' as const,
@@ -145,7 +145,7 @@ export const CREATIVE_PROCESS = [
     step: 3,
     title: 'Produksi',
     timeline: 'Hari 3–7',
-    description: 'Eksekusi penuh dari konsep yang disetujui. Desainer mendesain, videografer syuting, copywriter menulis. Semuanya dibangun dari nol sesuai spesifikasi brandmu.',
+    description: 'Eksekusi penuh dari konsep yang disetujui. Desainer mendesain, videografer syuting, copywriter menulis. Semuanya dibangun dari nol sesuai spesifikasi brand Anda.',
     deliverable: 'Draft pertama deliverable',
     accentColor: '#F88438',
     side: 'right' as const,
@@ -154,7 +154,7 @@ export const CREATIVE_PROCESS = [
     step: 4,
     title: 'Review & Revisi',
     timeline: 'Hari 7–9',
-    description: 'Kamu review hasilnya. Dua ronde revisi sudah termasuk. Feedback dikumpulkan dalam satu ronde per siklus agar prosesnya efisien.',
+    description: 'Anda meninjau hasilnya. Dua ronde revisi sudah termasuk. Feedback dikumpulkan dalam satu ronde per siklus agar prosesnya efisien.',
     deliverable: 'Aset final yang disetujui',
     accentColor: '#F5A623',
     side: 'left' as const,
@@ -172,7 +172,7 @@ export const CREATIVE_PROCESS = [
 
 export const CREATIVE_FAQS = [
   {
-    question: 'Format apa saja yang bisa kamu produksi?',
+    question: 'Format apa saja yang bisa Anda produksi?',
     answer: 'Kami mencakup grafis statis (semua format social, banner, cetak), video (reels/TikTok, brand film, tutorial, testimoni), motion graphics (animasi logo, explainer), dan konten tertulis (ad copy, landing page, artikel blog, email). Semuanya dalam format multi-platform.',
   },
   {
@@ -181,10 +181,10 @@ export const CREATIVE_FAQS = [
   },
   {
     question: 'Apakah revisi sudah termasuk?',
-    answer: 'Ya: 2 ronde revisi per deliverable. Kumpulkan feedback dalam satu ronde, kami implementasikan, kamu konfirmasi. Kebanyakan proyek selesai dalam 1–2 ronde. Revisi tambahan tersedia jika dibutuhkan.',
+    answer: 'Ya: 2 ronde revisi per deliverable. Kumpulkan feedback dalam satu ronde, kami implementasikan, lalu Anda konfirmasi. Kebanyakan proyek selesai dalam 1–2 ronde. Revisi tambahan tersedia jika dibutuhkan.',
   },
   {
-    question: 'Apakah kamu syuting di luar Jakarta?',
+    question: 'Apakah Anda syuting di luar Jakarta?',
     answer: 'Jabodetabek tercakup tanpa biaya tambahan. Di luar Jakarta, biaya transportasi dan akomodasi dikuotasi terpisah. Untuk pulau lain, kami bekerja dengan mitra produksi lokal di bawah arahan creative kami.',
   },
   {
@@ -192,8 +192,8 @@ export const CREATIVE_FAQS = [
     answer: 'Tentu saja, setiap sub-layanan (Desain, Video, Copywriting) bekerja secara mandiri. Banyak klien mulai dari satu area dan berkembang seiring melihat hasilnya.',
   },
   {
-    question: 'Apakah kamu memberikan source file?',
-    answer: 'Ya. Semua final termasuk source file: PSD, AI, AE (untuk motion), DOCX, dan file editable. Kamu memiliki semua yang kami buat untukmu. Aset diorganisir dalam folder bersama dengan penamaan yang jelas.',
+    question: 'Apakah Anda memberikan source file?',
+    answer: 'Ya. Semua final termasuk source file: PSD, AI, AE (untuk motion), DOCX, dan file editable. Anda memiliki semua yang kami buat untuk Anda. Aset diorganisir dalam folder bersama dengan penamaan yang jelas.',
   },
   {
     question: 'Bagaimana retainer bulanan bekerja?',
@@ -205,7 +205,7 @@ export const CREATIVE_STATS = [
   {
     value: '500+',
     label: 'Aset / Bulan',
-    context: 'Total kapasitas produksi di semua klien. Proyekmu mendapat perhatian desainer yang dedicated, bukan antrian.',
+    context: 'Total kapasitas produksi di semua klien. Proyek Anda mendapat perhatian desainer yang dedicated, bukan sekadar antrian.',
   },
   {
     value: '2',

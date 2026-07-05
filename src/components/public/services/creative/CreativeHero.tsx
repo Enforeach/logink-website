@@ -77,11 +77,11 @@ const PILLS = ['IG Feed 1:1','Story 9:16','TikTok 9:16','Banner 16:9','Brand Gui
 const HERO_COPY = {
   id: {
     badge: 'Jasa Desain Kreatif Jakarta — Branding, Konten Visual & Produksi Video',
-    trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi termasuk', '✓ Format multi-platform'],
+    trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi sudah termasuk', '✓ Format multi-platform'],
     home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/layanan',
     title1: 'Visual yang Berani.',
     title2: 'Cerita yang Jelas.\nBrand yang Tak Terlupakan.',
-    desc: 'Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu, tidak pernah dari library template. Desain yang tidak hanya terlihat bagus, tapi juga perform.',
+    desc: 'Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang mencuri perhatian dan mendorong audiens untuk bertindak. Setiap aset dibuat khusus untuk audiens Anda, bukan template pasaran. Desain yang tidak hanya indah dipandang, tapi juga terbukti efektif.',
     ctaPrimary: 'Mulai Konsultasi Gratis →',
     ctaHref: '/contact?service=creative-services',
     ctaSecondary: 'Lihat Karya Kami',

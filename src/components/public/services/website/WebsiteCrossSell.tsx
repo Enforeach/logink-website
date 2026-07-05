@@ -9,7 +9,7 @@ const CARDS_ID = [
     accent: '#A855F7',
     title: 'SEO & Content Marketing',
     description:
-      'Website yang indah tanpa traffic seperti billboard di gurun. Tim SEO kami mendatangkan pengunjung organik ke sitemu yang baru dengan konten teroptimasi keyword dan technical SEO, supaya investasimu mulai menghasilkan return dari bulan pertama.',
+      'Website yang indah tanpa traffic ibarat billboard di tengah gurun. Tim SEO kami mendatangkan pengunjung organik ke site baru Anda lewat konten teroptimasi keyword dan technical SEO, agar investasi Anda mulai menghasilkan return sejak bulan pertama.',
     pricing: 'Mulai dari Rp 6 Juta/bln',
   },
   {
@@ -17,7 +17,7 @@ const CARDS_ID = [
     accent: '#F88438',
     title: 'Paid Advertising',
     description:
-      'Datangkan traffic instan ke landing page atau toko e-commerce barumu dengan kampanye Google dan Meta yang tertarget. Kami urus iklannya, kamu urus pesanannya.',
+      'Datangkan traffic instan ke landing page atau toko e-commerce baru Anda dengan kampanye Google dan Meta yang tertarget. Kami urus iklannya, Anda urus pesanannya.',
     pricing: 'Mulai dari Rp 6 Juta/bln',
   },
 ] as const
@@ -42,7 +42,7 @@ const CARDS_EN = [
 ] as const
 
 const CROSSSELL_COPY = {
-  id: { eyebrow: 'Cocok dikombinasikan dengan', heading: 'Perkuat websitemu.', learnMore: 'Pelajari lebih lanjut →' },
+  id: { eyebrow: 'Cocok dikombinasikan dengan', heading: 'Perkuat website Anda.', learnMore: 'Pelajari lebih lanjut →' },
   en: { eyebrow: 'Pairs well with', heading: 'Amplify your website.', learnMore: 'Learn more →' },
 }
 

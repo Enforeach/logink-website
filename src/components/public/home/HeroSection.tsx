@@ -4,9 +4,9 @@ import { ArrowRight, TrendingUp, FileText, Layers, ChevronDown } from 'lucide-re
 const COPY = {
   id: {
     badge: '360° Digital Marketing Agency · Jakarta, Indonesia',
-    headline: 'Kembangkan Brand Kamu',
+    headline: 'Kembangkan Brand Anda',
     headlineGradient: 'Secara Digital',
-    subtext: 'Agensi digital marketing 360° yang siap bantu brand Indonesia tampil lebih dominan secara online. Strategi, kreativitas, dan data: semua dalam satu sistem yang terintegrasi.',
+    subtext: 'Agensi digital marketing 360° yang dirancang untuk membantu brand Indonesia tumbuh dan memimpin di ranah digital. Strategi, kreativitas, dan data bekerja sebagai satu sistem yang terintegrasi.',
     ctaPrimary: 'Minta Penawaran Gratis',
     ctaSecondary: 'Lihat Portofolio',
     trust: 'Tanpa kontrak lock-in · Laporan GA4 transparan',

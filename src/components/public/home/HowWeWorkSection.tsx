@@ -16,14 +16,14 @@ const STEPS_ID: Step[] = [
     num: '01',
     title: 'Discovery',
     days: 'Hari 1–3',
-    desc: 'Kami audit kehadiran digital kamu saat ini, analisis kompetitor, dan identifikasi quick wins. Kamu dapat gambaran jelas tentang posisi brand sekarang dan peluang yang bisa diambil.',
+    desc: 'Kami mengaudit kehadiran digital Anda saat ini, menganalisis kompetitor, dan mengidentifikasi quick wins. Anda mendapat gambaran jelas tentang posisi brand sekarang dan peluang yang bisa diambil.',
     color: '#A855F7',
   },
   {
     num: '02',
     title: 'Strategi',
     days: 'Hari 4–7',
-    desc: 'Kami susun roadmap 90 hari yang disesuaikan untuk semua channel (SEO, social, iklan, kreatif) dengan KPI spesifik yang terhubung ke target pendapatan kamu. Bukan vanity metrics.',
+    desc: 'Kami menyusun roadmap 90 hari yang disesuaikan untuk semua channel (SEO, social, iklan, kreatif) dengan KPI spesifik yang terhubung ke target pendapatan Anda. Bukan vanity metrics.',
     color: '#D81C5C',
   },
   {
@@ -37,7 +37,7 @@ const STEPS_ID: Step[] = [
     num: '04',
     title: 'Optimasi & Kembangkan',
     days: 'Berkelanjutan',
-    desc: 'Review performa bulanan bersama tim dedikasi kamu. Kami perkuat apa yang berhasil, potong yang tidak, dan terus tingkatkan hasilnya secara konsisten.',
+    desc: 'Review performa bulanan bersama tim dedikasi Anda. Kami perkuat yang berhasil, hentikan yang tidak, dan terus tingkatkan hasilnya secara konsisten.',
     color: '#F5A623',
   },
 ]
@@ -78,7 +78,7 @@ const COPY = {
     badge: 'Proses Kami',
     headline: 'Dari Konsultasi Pertama ke Hasil Nyata dalam',
     headlineGradient: '30 Hari',
-    body: 'Kami tidak percaya dengan onboarding yang bertele-tele atau strategi deck yang ujung-ujungnya cuma jadi pajangan. Proses kami dirancang untuk kecepatan, karena kompetitor kamu tidak sedang menunggu.',
+    body: 'Kami tidak percaya pada onboarding yang bertele-tele atau strategy deck yang akhirnya hanya jadi pajangan. Proses kami dirancang untuk kecepatan, karena kompetitor Anda tidak sedang menunggu.',
   },
   en: {
     badge: 'Our Process',

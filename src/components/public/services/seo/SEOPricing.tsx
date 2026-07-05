@@ -10,11 +10,11 @@ const PRICING_COPY = {
   id: {
     popular: 'Paling Populer',
     eyebrow: 'Pricing',
-    heading: 'Pilih paket yang sesuai dengan tahap pertumbuhanmu.',
+    heading: 'Pilih paket yang sesuai dengan tahap pertumbuhan bisnis Anda.',
     sub: 'Semua paket mencakup akses GA4 penuh dan laporan bulanan. Tanpa kontrak lock-in.',
     addonsTitle: 'Add-on Tersedia',
     addonBadge: 'Opsional',
-    addonCta: 'Tambah ke kuota →',
+    addonCta: 'Tambah ke paket →',
     addonHref: '/contact?service=seo-content-marketing&addon=true',
     tierCtaHref: (id: string) => `/contact?service=seo-content-marketing&tier=${id}`,
     tierCta: 'Mulai Konsultasi Gratis →',

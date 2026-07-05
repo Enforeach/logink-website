@@ -5,7 +5,7 @@ import { motion, useScroll } from 'framer-motion'
 import { ADS_PROCESS, ADS_PROCESS_EN } from './data'
 
 const PROCESS_COPY = {
-  id: { eyebrow: 'Cara Kerjanya', heading: 'Dari kickoff hingga hasil nyata.', sub: 'Proses yang jelas dan berulang supaya kamu selalu tahu apa yang terjadi berikutnya.', ongoing: 'Berkelanjutan' },
+  id: { eyebrow: 'Cara Kerjanya', heading: 'Dari kickoff hingga hasil nyata.', sub: 'Proses yang jelas dan berulang agar Anda selalu tahu apa yang terjadi berikutnya.', ongoing: 'Berkelanjutan' },
   en: { eyebrow: 'How It Works', heading: 'From kickoff to real results.', sub: 'A clear, repeatable process so you always know what happens next.', ongoing: 'Ongoing' },
 }
 

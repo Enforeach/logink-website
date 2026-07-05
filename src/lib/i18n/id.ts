@@ -15,7 +15,7 @@ export const id = {
       badge: '360° Digital Marketing Agency · Jakarta, Indonesia',
       headline: 'Kembangkan Brand Anda',
       headlineGradient: 'Secara Digital',
-      subtext: 'Agensi digital marketing 360° yang dibangun untuk membantu brand Indonesia mendominasi online. Strategi, kreativitas, dan data: semua dalam satu mesin.',
+      subtext: 'Agensi digital marketing 360° yang dirancang untuk membantu brand Indonesia tumbuh dan memimpin di ranah digital. Strategi, kreativitas, dan data bekerja sebagai satu sistem yang terintegrasi.',
       ctaPrimary: 'Minta Penawaran Gratis →',
       ctaSecondary: 'Lihat Portofolio',
     },
@@ -24,8 +24,8 @@ export const id = {
   services: {
     seo: { name: 'SEO & Content Marketing', tagline: 'Pertumbuhan organik jangka panjang & inbound leads' },
     social: { name: 'Social Media Management', tagline: 'Brand awareness, engagement & community building' },
-    ads: { name: 'Paid Advertising', tagline: 'Skalasi cepat & ROI langsung' },
-    creative: { name: 'Creative Services', tagline: 'Konten yang menghentikan scroll dan mengubah perhatian jadi aksi' },
+    ads: { name: 'Paid Advertising', tagline: 'Scaling cepat dengan ROI yang terukur' },
+    creative: { name: 'Creative Services', tagline: 'Konten yang mencuri perhatian dan mendorong audiens untuk bertindak' },
     website: { name: 'Website & Landing Page', tagline: 'Mengubah pengunjung menjadi pelanggan' },
   },
 
@@ -48,7 +48,7 @@ export const id = {
   },
 
   footer: {
-    description: 'Agensi digital marketing 360° yang dibangun untuk membantu brand Indonesia mendominasi online.',
+    description: 'Agensi digital marketing 360° yang membantu brand Indonesia tumbuh dan memimpin di ranah digital.',
     servicesTitle: 'LAYANAN',
     companyTitle: 'PERUSAHAAN',
     contactTitle: 'KONTAK',

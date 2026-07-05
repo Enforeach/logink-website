@@ -33,7 +33,7 @@ const STATS_ID: StatItem[] = [
     value: 100,
     suffix: '%',
     label: 'Konten Original',
-    context: 'Didesain khusus untuk brandmu. Tidak ada template stock, tidak ada grafis daur ulang.',
+    context: 'Didesain khusus untuk brand Anda. Tidak ada template pasaran, tidak ada grafis daur ulang.',
   },
 ]
 

@@ -21,7 +21,7 @@ const HERO_COPY = {
     trustPills: ['✓ Rata-rata ROAS 2-4×', '✓ Akses akun penuh', '✓ Laporan optimasi mingguan'],
     home: 'Beranda', homeHref: '/', services: 'Layanan', servicesHref: '/layanan',
     title1: 'Setiap Rupiah Terinvestasi.', title2: 'Return Maksimal Terwujud.',
-    desc: 'Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami bidik audiens yang tepat di momen yang tepat, mengoptimalkan tanpa henti sampai ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, tanpa kontrak lock-in jangka panjang.',
+    desc: 'Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami membidik audiens yang tepat di momen yang tepat, dan mengoptimasi tanpa henti hingga ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, dan tanpa kontrak lock-in jangka panjang.',
     metricChip: 'ROAS 2–4×',
     ctaPrimary: 'Mulai Konsultasi Gratis →', ctaHref: '/contact?service=paid-advertising',
     ctaWhatsApp: 'Chat di WhatsApp',

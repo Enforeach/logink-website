@@ -10,7 +10,7 @@ const CROSS_SELLS_ID = [
     name: 'Paid Advertising',
     color: '#F88438',
     description:
-      'Retarget pengunjung organikmu dengan iklan presisi. Pengguna yang menemukanmu via search tapi belum konversi mendapat touchpoint kedua di Meta dan Google Display.',
+      'Retarget pengunjung organik Anda dengan iklan yang presisi. Pengguna yang menemukan Anda lewat search tetapi belum konversi mendapat touchpoint kedua di Meta dan Google Display.',
     startingFrom: 'Mulai dari Rp 6 Juta/bln',
   },
   {
@@ -18,7 +18,7 @@ const CROSS_SELLS_ID = [
     name: 'Website & Landing Page',
     color: '#C084FC',
     description:
-      'Website yang cepat dan dioptimasi untuk konversi adalah fondasi SEO. Kalau situsmu lambat atau strukturnya buruk, tidak ada konten yang bisa menyelamatkan rankingmu.',
+      'Website yang cepat dan dioptimasi untuk konversi adalah fondasi SEO. Jika situs Anda lambat atau strukturnya buruk, tidak ada konten yang bisa menyelamatkan ranking Anda.',
     startingFrom: 'Mulai dari Rp 10 Juta',
   },
 ]
@@ -43,7 +43,7 @@ const CROSS_SELLS_EN = [
 ]
 
 const CROSSSELL_COPY = {
-  id: { eyebrow: 'Perkuat Hasilmu', heading: 'Cocok dikombinasikan dengan', sub: 'SEO membawa trafficnya; layanan ini mengubahnya jadi revenue.', learnMore: 'Selengkapnya', basePath: '/layanan' },
+  id: { eyebrow: 'Perkuat Hasil Anda', heading: 'Cocok dikombinasikan dengan', sub: 'SEO mendatangkan trafficnya; layanan ini mengubahnya menjadi revenue.', learnMore: 'Selengkapnya', basePath: '/layanan' },
   en: { eyebrow: 'Amplify Your Results', heading: 'Pairs well with', sub: 'SEO brings the traffic; these services turn it into revenue.', learnMore: 'Learn more', basePath: '/en/services' },
 }
 

@@ -10,7 +10,7 @@ const SERVICES_ID = [
     color: '#F5A623',
     rgb: '245,166,35',
     description:
-      'Butuh produksi video kustom, foto brand, atau motion graphics? Tim Creative Services kami memproduksi aset visual yang membuat konten sosialmu beda dari yang lain.',
+      'Butuh produksi video kustom, foto brand, atau motion graphics? Tim Creative Services kami memproduksi aset visual yang membuat konten sosial Anda tampil beda dari yang lain.',
     price: 'Harga per proyek',
     href: '/layanan/kreatif',
   },
@@ -19,7 +19,7 @@ const SERVICES_ID = [
     color: '#F88438',
     rgb: '248,132,56',
     description:
-      'Amplifikasi konten organik terbaikmu dengan kampanye berbayar tertarget. Retarget followers yang engaged, jangkau lookalike audience, dan dorong konversi dengan Meta Ads dan TikTok Ads.',
+      'Amplifikasi konten organik terbaik Anda dengan kampanye berbayar tertarget. Retarget followers yang engaged, jangkau lookalike audience, dan dorong konversi dengan Meta Ads dan TikTok Ads.',
     price: 'Starting from Rp 6M/mo',
     href: '/layanan/paid-ads',
   },

@@ -10,12 +10,12 @@ const COPY = {
     badge: 'Layanan Kami',
     headline: '360° Layanan Digital',
     headlineGradient: 'Marketing',
-    desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan agensi-agensi yang terpisah.',
+    desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan agensi yang berjalan sendiri-sendiri.',
     startingFrom: 'Mulai dari',
     learnMore: 'Pelajari lebih lanjut',
     integrationHeadline: 'Semua Layanan Bekerja',
     integrationGradient: 'Bersama',
-    integrationDesc: 'SEO kamu menginformasikan iklan kamu. Social media kamu mengisi konten. Website kamu mengonversi semuanya. Semua saling menguatkan.',
+    integrationDesc: 'SEO Anda memperkuat iklan Anda. Social media Anda mengisi konten. Website Anda mengonversi semuanya. Semuanya saling menguatkan.',
     funnelSteps: [
       { label: 'Jangkauan', color: '#A855F7' },
       { label: 'Keterlibatan', color: '#D81C5C' },
@@ -23,10 +23,10 @@ const COPY = {
       { label: 'Retensi', color: '#F5A623' },
     ],
     deliverables: {
-      'seo-content-marketing': ['Riset keyword & strategi konten', 'Artikel SEO berkualitas tinggi', 'Laporan performa GA4 transparan'],
+      'seo-content-marketing': ['Riset keyword & strategi konten', 'Artikel SEO berkualitas tinggi', 'Laporan performa GA4 yang transparan'],
       'social-media-management': ['Kalender konten bulanan', 'Manajemen IG, TikTok, FB & LinkedIn', 'Community management & laporan'],
       'paid-advertising': ['Setup Google, Meta & TikTok Ads', 'Optimasi ROAS mingguan', 'Dashboard laporan real-time'],
-      'creative-services': ['Desain grafis semua platform', 'Produksi video & motion', 'Copywriting yang mengonversi'],
+      'creative-services': ['Desain grafis untuk semua platform', 'Produksi video & motion', 'Copywriting yang mengonversi'],
       'website-landing-page': ['Desain CRO-focused', 'Development cepat & SEO-ready', 'Integrasi analytics & tracking'],
     } as Record<string, string[]>,
   },
@@ -57,10 +57,10 @@ const COPY = {
 }
 
 const FALLBACK_ID = [
-  { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#A855F7', funnelPosition: 'Top Funnel', shortDescId: 'Pertumbuhan organik jangka panjang & inbound leads', descriptionId: 'Strategi SEO komprehensif dengan konten berkualitas tinggi untuk meningkatkan traffic organik jangka panjang.', isActive: true, sortOrder: 0, pricingTiers: [{ id: '1', tierName: 'Entry', priceLabel: 'Rp 6 Juta', priceValue: 6000, features: ['Keyword Research'], isPopular: false, sortOrder: 0 }], addOns: [] },
+  { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#A855F7', funnelPosition: 'Top Funnel', shortDescId: 'Pertumbuhan organik jangka panjang & inbound leads', descriptionId: 'Strategi SEO menyeluruh dengan konten berkualitas tinggi untuk mendorong pertumbuhan traffic organik jangka panjang.', isActive: true, sortOrder: 0, pricingTiers: [{ id: '1', tierName: 'Entry', priceLabel: 'Rp 6 Juta', priceValue: 6000, features: ['Keyword Research'], isPopular: false, sortOrder: 0 }], addOns: [] },
   { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#D81C5C', funnelPosition: 'Top Funnel', shortDescId: 'Brand awareness & community building', descriptionId: 'Manajemen media sosial menyeluruh di IG, TikTok, Facebook, dan LinkedIn.', isActive: true, sortOrder: 1, pricingTiers: [], addOns: [] },
-  { id: '3', name: 'Paid Advertising', slug: 'paid-advertising', color: '#F88438', funnelPosition: 'Mid Funnel', shortDescId: 'Skalasi cepat & ROI langsung', descriptionId: 'Google Ads, Meta Ads, TikTok Ads, dan Marketplace Ads untuk hasil cepat.', isActive: true, sortOrder: 2, pricingTiers: [{ id: '3', tierName: 'Entry', priceLabel: 'Rp 6 Juta', priceValue: 6000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
-  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', funnelPosition: 'All Funnel', shortDescId: 'Konten yang bikin scroll berhenti dan mengonversi', descriptionId: 'Desain grafis, video production, dan copywriting untuk semua platform.', isActive: true, sortOrder: 3, pricingTiers: [], addOns: [] },
+  { id: '3', name: 'Paid Advertising', slug: 'paid-advertising', color: '#F88438', funnelPosition: 'Mid Funnel', shortDescId: 'Scaling cepat dengan ROI yang terukur', descriptionId: 'Google Ads, Meta Ads, TikTok Ads, dan Marketplace Ads untuk hasil yang cepat terlihat.', isActive: true, sortOrder: 2, pricingTiers: [{ id: '3', tierName: 'Entry', priceLabel: 'Rp 6 Juta', priceValue: 6000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
+  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', funnelPosition: 'All Funnel', shortDescId: 'Konten yang mencuri perhatian dan mendorong konversi', descriptionId: 'Desain grafis, video production, dan copywriting untuk semua platform.', isActive: true, sortOrder: 3, pricingTiers: [], addOns: [] },
   { id: '5', name: 'Website & Landing Page', slug: 'website-landing-page', color: '#C084FC', funnelPosition: 'Bottom Funnel', shortDescId: 'Mengubah pengunjung menjadi pelanggan', descriptionId: 'Landing page, company profile, dan e-commerce website dengan CRO-focused design.', isActive: true, sortOrder: 4, pricingTiers: [{ id: '5', tierName: 'Entry', priceLabel: 'Rp 10 Juta', priceValue: 10000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
 ]
 

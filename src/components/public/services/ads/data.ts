@@ -23,7 +23,7 @@ export const ADS_PRICING_TIERS = [
     price: 'Rp 12 Juta',
     priceValue: 12000000,
     period: '/bulan',
-    bestFor: 'Scale multi-platform',
+    bestFor: 'Scaling multi-platform',
     platformCoverage: 'Google + Meta + Marketplace',
     isPopular: true,
     features: [
@@ -108,14 +108,14 @@ export const ADS_ADDONS = [
   {
     name: 'Retargeting Campaign',
     description:
-      'Re-engage pengguna yang sudah mengunjungi situsmu tapi belum konversi. Bekerja di Google Display dan Meta, membawa prospek hangat kembali untuk menyelesaikan pembelian mereka.',
+      'Aktifkan kembali pengguna yang sudah mengunjungi situs Anda tetapi belum melakukan konversi. Bekerja di Google Display dan Meta untuk membawa prospek hangat kembali menyelesaikan pembelian.',
     availability: 'Add-on untuk Entry & Growth. Sudah termasuk di Full.',
     accentColor: '#F88438',
   },
   {
     name: 'Programmatic Display Advertising',
     description:
-      'Pembelian display ad otomatis di jaringan publisher Indonesia premium. Jangkau audiensmu dalam skala besar di luar ekosistem Google dan Meta.',
+      'Pembelian display ad secara otomatis di jaringan publisher premium Indonesia. Jangkau audiens Anda dalam skala besar, di luar ekosistem Google dan Meta.',
     availability: 'Tersedia sebagai add-on untuk tier Growth & Full.',
     accentColor: '#A855F7',
   },
@@ -128,7 +128,7 @@ export const ADS_PLATFORMS = [
     subtitle: 'Search · Display · Shopping',
     tagline: 'Tangkap pembeli high-intent tepat saat mereka mencari.',
     description:
-      'Google Ads menempatkan brandmu di puncak hasil pencarian ketika pengguna Indonesia aktif mencari apa yang kamu jual. Search untuk intent, Display untuk retargeting dan brand awareness, Shopping untuk listing produk e-commerce.',
+      'Google Ads menempatkan brand Anda di puncak hasil pencarian saat pengguna Indonesia aktif mencari apa yang Anda jual. Search untuk intent, Display untuk retargeting dan brand awareness, Shopping untuk listing produk e-commerce.',
     features: [
       'Setup Struktur Campaign & Ad Group',
       'Strategi Keyword Bidding',
@@ -144,9 +144,9 @@ export const ADS_PLATFORMS = [
     id: 'meta',
     name: 'Meta Ads',
     subtitle: 'Instagram & Facebook',
-    tagline: 'Jangkau audiens idealmu dengan targeting presisi dan creative yang bikin scroll berhenti.',
+    tagline: 'Jangkau audiens ideal Anda dengan targeting presisi dan creative yang mencuri perhatian.',
     description:
-      'Platform iklan Meta memberimu akses ke audiens social terbesar Indonesia. Targeting demografi lokal, audiens berbasis interest, retargeting perilaku, dan creative yang benar-benar menghentikan scroll.',
+      'Platform iklan Meta memberi Anda akses ke audiens social terbesar Indonesia. Targeting demografi lokal, audiens berbasis interest, retargeting berbasis perilaku, dan creative yang benar-benar menarik perhatian di feed.',
     features: [
       'Targeting Audiens Lokal',
       'Desain Ad Creative untuk Meta',
@@ -165,7 +165,7 @@ export const ADS_PLATFORMS = [
     subtitle: 'In-feed · Spark · TopView',
     tagline: 'Iklan video format native yang dirancang untuk algoritma FYP.',
     description:
-      'TikTok Ads menjangkau audiens termuda dan paling engaged di Indonesia. Kami setup Ads Manager kamu, produksi creative brief, tangani targeting audiens, dan optimasi untuk konversi, bukan sekadar views.',
+      'TikTok Ads menjangkau audiens termuda dan paling engaged di Indonesia. Kami setup Ads Manager Anda, memproduksi creative brief, menangani targeting audiens, dan mengoptimasi untuk konversi, bukan sekadar views.',
     features: [
       'Setup TikTok Ads Manager',
       'Creative Brief & Produksi',
@@ -184,7 +184,7 @@ export const ADS_PLATFORMS = [
     subtitle: 'Tokopedia · Shopee · Lazada',
     tagline: 'Menangkan buy box di platform e-commerce terbesar Indonesia.',
     description:
-      'Iklan native platform yang menempatkan produkmu di depan pembeli yang siap belanja. Optimasi keyword, strategi flash sale, dan kampanye voucher, dibangun untuk ekosistem marketplace Indonesia.',
+      'Iklan native platform yang menempatkan produk Anda di depan pembeli yang siap belanja. Optimasi keyword, strategi flash sale, dan kampanye voucher, dirancang untuk ekosistem marketplace Indonesia.',
     features: [
       'Setup Tokopedia Ads & Shopee Ads',
       'Optimasi Keyword Produk',
@@ -220,7 +220,7 @@ export const ADS_PROCESS = [
     title: 'Produksi Creative',
     timeline: 'Minggu 1–2',
     description:
-      'Ad copy dan visual dibangun untuk setiap platform dan segmen audiens. Search ads mendapat copy teroptimasi keyword. Meta mendapat visual yang menghentikan scroll. TikTok mendapat video format native. Tidak ada yang didaur ulang antar platform.',
+      'Ad copy dan visual dirancang khusus untuk setiap platform dan segmen audiens. Search ads mendapat copy yang dioptimasi untuk keyword. Meta mendapat visual yang mencuri perhatian. TikTok mendapat video format native. Tidak ada materi yang dipakai ulang antar platform.',
     accentColor: '#F88438',
   },
   {
@@ -228,7 +228,7 @@ export const ADS_PROCESS = [
     title: 'Launch Kampanye',
     timeline: 'Minggu 2',
     description:
-      'Live dengan budget terkontrol untuk pengumpulan data awal. Kami mulai konservatif, membiarkan algoritma mempelajari audiens idealmu, lalu scale budget ke yang berhasil. Monitoring harian dari hari pertama.',
+      'Tayang dengan budget terkontrol untuk pengumpulan data awal. Kami mulai konservatif, membiarkan algoritma mempelajari audiens ideal Anda, lalu menaikkan budget ke yang terbukti berhasil. Monitoring harian sejak hari pertama.',
     accentColor: '#F5A623',
   },
   {
@@ -236,7 +236,7 @@ export const ADS_PROCESS = [
     title: 'Loop Optimasi',
     timeline: 'Mingguan',
     description:
-      'Penyesuaian bid mingguan, refinement audiens, rotasi creative iklan, dan realokasi budget. Kami matikan iklan yang underperform dengan cepat, gandakan yang menang, dan terus uji sudut pandang baru. Review strategi bulanan bersama timmu.',
+      'Penyesuaian bid mingguan, penyempurnaan audiens, rotasi creative iklan, dan realokasi budget. Kami hentikan iklan yang underperform dengan cepat, perkuat yang berhasil, dan terus menguji sudut pandang baru. Review strategi bulanan bersama tim Anda.',
     accentColor: '#C084FC',
     isOngoing: true,
   },
@@ -244,24 +244,24 @@ export const ADS_PROCESS = [
 
 export const ADS_FAQS = [
   {
-    question: 'Platform iklan apa saja yang kamu kelola?',
+    question: 'Platform iklan apa saja yang Anda kelola?',
     answer:
-      'Kami kelola Google Ads (Search, Display, Shopping), Meta Ads (Instagram & Facebook), TikTok Ads, dan marketplace Indonesia (Tokopedia, Shopee, Lazada). Ketersediaan platform tergantung tiermu: Entry mencakup Google saja, Growth menambah Meta dan Marketplace, Full menambah TikTok. Kami rekomendasikan mulai dengan Google + Meta untuk kebanyakan brand, lalu berkembang.',
+      'Kami mengelola Google Ads (Search, Display, Shopping), Meta Ads (Instagram & Facebook), TikTok Ads, dan marketplace Indonesia (Tokopedia, Shopee, Lazada). Ketersediaan platform tergantung tier Anda: Entry mencakup Google saja, Growth menambah Meta dan Marketplace, Full menambah TikTok. Untuk kebanyakan brand, kami rekomendasikan mulai dengan Google + Meta, lalu berkembang dari sana.',
   },
   {
     question: 'Berapa budget iklan minimum?',
     answer:
-      'Tidak ada minimum yang baku, tapi kami rekomendasikan setidaknya Rp 5 Juta/bulan untuk ad spend di Entry, Rp 15 Juta untuk Growth, dan Rp 50 Juta+ untuk Full. Budget lebih kecil bisa berhasil untuk kampanye hyper-lokal atau niche, tapi menyebar terlalu tipis ke banyak platform mengurangi efektivitas. Kami akan sarankan alokasi optimal saat onboarding.',
+      'Tidak ada minimum baku, tetapi kami rekomendasikan setidaknya Rp 5 Juta/bulan untuk ad spend di Entry, Rp 15 Juta untuk Growth, dan Rp 50 Juta+ untuk Full. Budget lebih kecil bisa berhasil untuk kampanye hyper-lokal atau niche, tetapi menyebar terlalu tipis ke banyak platform akan menurunkan efektivitas. Kami akan menyarankan alokasi optimal saat onboarding.',
   },
   {
-    question: 'Apa itu ROAS dan bagaimana kamu mengukurnya?',
+    question: 'Apa itu ROAS dan bagaimana cara Anda mengukurnya?',
     answer:
-      'ROAS (Return on Ad Spend) mengukur revenue yang dihasilkan per rupiah yang dibelanjakan untuk iklan. Jika kamu spend Rp 10 Juta dan menghasilkan Rp 30 Juta revenue, ROAS-mu adalah 3×. Kami lacak ini melalui conversion tracking GA4, atribusi native platform, dan jika memungkinkan, integrasi CRM langsung. Klien kami biasanya mencapai ROAS 2-4× dalam 3 bulan.',
+      'ROAS (Return on Ad Spend) mengukur revenue yang dihasilkan per rupiah yang dibelanjakan untuk iklan. Jika Anda membelanjakan Rp 10 Juta dan menghasilkan Rp 30 Juta revenue, ROAS Anda adalah 3×. Kami melacaknya melalui conversion tracking GA4, atribusi native platform, dan jika memungkinkan, integrasi CRM langsung. Klien kami biasanya mencapai ROAS 2-4× dalam 3 bulan.',
   },
   {
     question: 'Apakah saya punya akses ke akun iklan saya sendiri?',
     answer:
-      'Tentu saja, transparansi penuh adalah hal yang tidak bisa ditawar. Kamu memiliki semua akun iklan (Google, Meta, TikTok). Kami bekerja di dalam akunmu sebagai manager, tidak pernah di akun kami sendiri. Jika kami berpisah, kamu menyimpan semuanya: kampanye, audiens, data, dan histori performa. Tidak ada yang ditahan.',
+      'Tentu saja. Transparansi penuh bagi kami tidak bisa ditawar. Anda memiliki semua akun iklan (Google, Meta, TikTok). Kami bekerja di dalam akun Anda sebagai manager, bukan di akun kami sendiri. Jika suatu saat kita berpisah, Anda tetap memiliki semuanya: kampanye, audiens, data, dan histori performa. Tidak ada yang kami tahan.',
   },
   {
     question: 'Berapa lama sampai iklan tayang?',
@@ -269,14 +269,14 @@ export const ADS_FAQS = [
       'Biasanya 2 minggu dari kickoff. Minggu 1 adalah audit akun, pemetaan funnel, dan produksi creative. Minggu 2 adalah launch kampanye dengan budget awal. Kami mulai melihat data dalam beberapa hari setelah launch, dan pola optimasi yang berarti muncul dalam 2–4 minggu.',
   },
   {
-    question: 'Apakah kamu menangani creative (gambar/video) untuk iklan?',
+    question: 'Apakah Anda menangani creative (gambar/video) untuk iklan?',
     answer:
-      'Untuk Meta Ads, ya: desain ad creative sudah termasuk di tier Growth dan Full. Untuk produksi video TikTok, creative brief dan produksi sudah termasuk di tier Full. Untuk kebutuhan creative yang lebih kompleks, kami bisa bundle dengan tim Creative Services kami dengan harga diskon.',
+      'Untuk Meta Ads, ya: desain ad creative sudah termasuk di tier Growth dan Full. Untuk produksi video TikTok, creative brief dan produksi sudah termasuk di tier Full. Untuk kebutuhan creative yang lebih kompleks, kami dapat menggabungkannya dengan tim Creative Services kami dengan harga khusus.',
   },
   {
     question: 'Apa bedanya management fee dan ad spend?',
     answer:
-      'Management fee (yang kamu bayar ke Logink) mencakup strategi, setup, copywriting, creative, optimasi harian, dan pelaporan. Ad spend (yang kamu bayar langsung ke Google/Meta/TikTok) adalah budget media yang mendanai impresi dan klik yang sebenarnya. Anggap management fee sebagai membayar pilotnya; ad spend adalah bahan bakarnya. Keduanya transparan dan kamu kendalikan keduanya.',
+      'Management fee (yang Anda bayar ke Logink) mencakup strategi, setup, copywriting, creative, optimasi harian, dan pelaporan. Ad spend (yang Anda bayar langsung ke Google/Meta/TikTok) adalah budget media yang mendanai impresi dan klik. Anggap management fee sebagai membayar pilotnya; ad spend adalah bahan bakarnya. Keduanya transparan dan sepenuhnya Anda kendalikan.',
   },
 ] as const
 
@@ -284,12 +284,12 @@ export const ADS_STATS = [
   {
     value: '2–4×',
     label: 'Rata-rata ROAS',
-    context: 'Return on ad spend di kampanye klien pada tanda 3 bulan. Kami optimasi sampai tercapai.',
+    context: 'Return on ad spend di kampanye klien pada bulan ke-3. Kami optimasi hingga target tercapai.',
   },
   {
     value: '~35%',
     label: 'Rata-rata Penurunan CPA',
-    context: 'Pengurangan cost per acquisition setelah 90 hari optimasi vs. agency sebelumnya atau in-house klien.',
+    context: 'Pengurangan cost per acquisition setelah 90 hari optimasi, dibandingkan agency sebelumnya atau tim in-house klien.',
   },
   {
     value: '5',

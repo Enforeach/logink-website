@@ -6,7 +6,7 @@ import { getContactServices } from '@/payload/queries'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Hubungi Kami',
-  description: 'Konsultasi digital marketing gratis bersama tim Logink. Ceritakan kebutuhan brand kamu dan kami akan susun strategi yang tepat, terukur, dan sesuai anggaran.',
+  description: 'Konsultasi digital marketing gratis bersama tim Logink. Ceritakan kebutuhan brand Anda dan kami akan menyusun strategi yang tepat, terukur, dan sesuai anggaran.',
   path: '/contact',
 })
 
@@ -21,9 +21,9 @@ export default async function ContactPage() {
       <section className="pt-32 pb-16 px-4 mesh-gradient text-center">
         <span className="inline-block px-4 py-1.5 rounded-full border border-brand-violet/20 bg-brand-violet/5 text-brand-violet text-sm font-medium mb-6">Kontak</span>
         <h1 className="text-4xl sm:text-5xl font-extrabold text-[var(--text-primary)] mb-4">
-          Ayo Kerja <span className="gradient-text">Bersama</span>
+          Mari Kerja <span className="gradient-text">Bersama</span>
         </h1>
-        <p className="text-[var(--text-secondary)] max-w-md mx-auto">Ceritakan bisnis kamu. Kami akan merespons dalam 24 jam.</p>
+        <p className="text-[var(--text-secondary)] max-w-md mx-auto">Ceritakan bisnis Anda. Kami akan merespons dalam 24 jam.</p>
       </section>
 
       <section className="py-20 px-4 bg-[var(--bg-primary)]">
@@ -84,9 +84,9 @@ export default async function ContactPage() {
               <h3 className="font-bold text-[var(--text-primary)] mb-4">Selanjutnya Apa?</h3>
               <ol className="space-y-3">
                 {[
-                  'Kami review brief kamu dalam 24 jam',
+                  'Kami tinjau brief Anda dalam 24 jam',
                   'Jadwalkan sesi discovery gratis selama 30 menit',
-                  'Kami siapkan proposal yang disesuaikan',
+                  'Kami siapkan proposal khusus untuk Anda',
                   'Onboarding & kickoff dalam 1 minggu',
                 ].map((step, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">

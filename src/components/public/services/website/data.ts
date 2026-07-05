@@ -2,9 +2,9 @@ export const WEBSITE_PROJECT_TYPES = [
   {
     id: 'landing-page',
     title: 'Landing Page Kampanye',
-    tagline: 'Mesin konversi satu halaman yang dibangun untuk kampanye dan lead generation.',
+    tagline: 'Mesin konversi satu halaman yang dirancang untuk kampanye dan lead generation.',
     description:
-      'Ketika kamu butuh halaman yang fokus melakukan satu hal: menangkap leads, menjual produk, atau mendorong sign-up. Landing page adalah senjata tercepat dan paling cost-effective. Desain berfokus CRO, framework A/B testing, dan tracking penuh dari hari pertama.',
+      'Saat Anda butuh halaman yang fokus pada satu tujuan: menangkap leads, menjual produk, atau mendorong sign-up. Landing page adalah senjata tercepat dan paling cost-effective. Desain berfokus CRO, framework A/B testing, dan tracking penuh sejak hari pertama.',
     bestFor: 'Kampanye · Lead gen · Peluncuran produk · Promo',
     timeline: '1-2 minggu',
     accentColor: '#C084FC',
@@ -19,9 +19,9 @@ export const WEBSITE_PROJECT_TYPES = [
   {
     id: 'company-profile',
     title: 'Website Company Profile',
-    tagline: 'Markas digital brandmu: kredibel, profesional, dan dibangun untuk berkembang.',
+    tagline: 'Markas digital brand Anda: kredibel, profesional, dan dirancang untuk berkembang.',
     description:
-      'Website multi-halaman yang membangun kehadiran brandmu, mengkomunikasikan nilaimu, dan menangkap leads. Desain UI kustom, integrasi CMS untuk update konten yang mudah, dan SEO on-page yang membuatmu mudah ditemukan sejak hari peluncuran.',
+      'Website multi-halaman yang membangun kehadiran brand Anda, mengomunikasikan nilai Anda, dan menangkap leads. Desain UI kustom, integrasi CMS untuk update konten yang mudah, dan SEO on-page yang membuat Anda mudah ditemukan sejak hari peluncuran.',
     bestFor: 'Brand presence · Kredibilitas · Bisnis jasa',
     timeline: '3-5 minggu',
     accentColor: '#A855F7',
@@ -37,9 +37,9 @@ export const WEBSITE_PROJECT_TYPES = [
   {
     id: 'e-commerce',
     title: 'Website E-Commerce',
-    tagline: 'Toko online lengkap dengan pembayaran dan pengiriman Indonesia sudah terpasang.',
+    tagline: 'Toko online lengkap dengan sistem pembayaran dan pengiriman Indonesia yang sudah terpasang.',
     description:
-      'Katalog produk, payment gateway lokal (Midtrans, Xendit), integrasi pengiriman (JNE, J&T, dan lainnya), dan dashboard admin untuk mengelola semuanya. Dibangun di WooCommerce, Shopify, atau fully custom, tergantung skala dan kebutuhanmu.',
+      'Katalog produk, payment gateway lokal (Midtrans, Xendit), integrasi pengiriman (JNE, J&T, dan lainnya), dan dashboard admin untuk mengelola semuanya. Dibangun di WooCommerce, Shopify, atau fully custom, sesuai skala dan kebutuhan Anda.',
     bestFor: 'Toko online · Brand D2C · FMCG · Retail',
     timeline: '4-8 minggu',
     accentColor: '#EE3D5E',
@@ -56,9 +56,9 @@ export const WEBSITE_PROJECT_TYPES = [
 export const WEBSITE_TECH_FEATURES = [
   {
     id: 'performance',
-    title: 'Build Prioritas Performa',
+    title: 'Build yang Mengutamakan Performa',
     description:
-      'Setiap situs hadir dengan waktu muat di bawah 2 detik. Bundle code-split, gambar lazy-load, font teroptimasi, dan CDN delivery. PageSpeed score kamu akan 90+ atau kami perbaiki gratis.',
+      'Setiap situs hadir dengan waktu muat di bawah 2 detik. Bundle code-split, gambar lazy-load, font teroptimasi, dan CDN delivery. PageSpeed score Anda dijamin 90+ atau kami perbaiki gratis.',
     span: 2,
     accentColor: '#C084FC',
     badge: '90+',
@@ -67,7 +67,7 @@ export const WEBSITE_TECH_FEATURES = [
     id: 'mobile',
     title: 'Mobile-First Responsive',
     description:
-      'Didesain untuk layar mobile dulu, lalu di-scale ke atas. Lebih dari 70% traffic web Indonesia berasal dari mobile, dan situsmu terlihat sempurna di setiap perangkat, setiap orientasi.',
+      'Didesain untuk layar mobile lebih dulu, lalu di-scale ke atas. Lebih dari 70% traffic web Indonesia berasal dari mobile, dan situs Anda tampil sempurna di setiap perangkat dan orientasi.',
     span: 1,
     accentColor: '#A855F7',
     badge: null,
@@ -85,7 +85,7 @@ export const WEBSITE_TECH_FEATURES = [
     id: 'tracking',
     title: 'Setup CRM & Analytics',
     description:
-      'Google Analytics 4, Meta Pixel, WhatsApp chat, dan integrasi CRM agar kamu bisa melacak setiap pengunjung dan konversi sejak hari pertama.',
+      'Google Analytics 4, Meta Pixel, WhatsApp chat, dan integrasi CRM agar Anda dapat melacak setiap pengunjung dan konversi sejak hari pertama.',
     span: 1,
     accentColor: '#F88438',
     badge: null,
@@ -94,7 +94,7 @@ export const WEBSITE_TECH_FEATURES = [
     id: 'security',
     title: 'SSL & Keamanan',
     description:
-      'HTTPS sebagai default, hosting aman, backup rutin, dan konfigurasi yang diperketat. Data pengunjungmu terlindungi.',
+      'HTTPS sebagai default, hosting aman, backup rutin, dan konfigurasi yang diperketat. Data pengunjung Anda terlindungi.',
     span: 1,
     accentColor: '#D81C5C',
     badge: null,
@@ -140,7 +140,7 @@ export const WEBSITE_PROCESS = [
     barStart: 10,
     barEnd: 40,
     description:
-      'Wireframe low-fidelity untuk struktur dan alur pengguna, lalu mockup desain UI high-fidelity di Figma. Versi desktop dan mobile. Kamu setujui desainnya sebelum satu baris kode pun ditulis.',
+      'Wireframe low-fidelity untuk struktur dan alur pengguna, lalu mockup desain UI high-fidelity di Figma. Versi desktop dan mobile. Anda menyetujui desainnya sebelum satu baris kode pun ditulis.',
     accentColor: '#A855F7',
   },
   {
@@ -150,7 +150,7 @@ export const WEBSITE_PROCESS = [
     barStart: 30,
     barEnd: 75,
     description:
-      'Build front-end, integrasi back-end, setup CMS, konfigurasi payment gateway, tracking analytics, dan implementasi responsive. Deploy ke staging URL untuk reviewmu.',
+      'Build front-end, integrasi back-end, setup CMS, konfigurasi payment gateway, tracking analytics, dan implementasi responsive. Deploy ke staging URL untuk review Anda.',
     accentColor: '#D81C5C',
   },
   {
@@ -170,7 +170,7 @@ export const WEBSITE_PROCESS = [
     barStart: 75,
     barEnd: 100,
     description:
-      'Konfigurasi DNS, setup SSL, deployment final, redirect 301, monitoring pasca-launch selama 2 minggu, pelatihan CMS untuk timmu, dan serah terima dokumentasi lengkap.',
+      'Konfigurasi DNS, setup SSL, deployment final, redirect 301, monitoring pasca-launch selama 2 minggu, pelatihan CMS untuk tim Anda, dan serah terima dokumentasi lengkap.',
     accentColor: '#EE3D5E',
   },
 ] as const
@@ -218,14 +218,14 @@ export const WEBSITE_ADDONS = [
   {
     name: 'Maintenance & Hosting Website',
     description:
-      'Hosting berkelanjutan, pembaruan keamanan, monitoring performa, pembaruan konten, dan dukungan teknikal. Jaga situsmu tetap cepat, aman, dan up-to-date setelah launch.',
+      'Hosting berkelanjutan, pembaruan keamanan, monitoring performa, pembaruan konten, dan dukungan teknis. Jaga situs Anda tetap cepat, aman, dan up-to-date setelah launch.',
     badge: 'Retainer bulanan',
     accentColor: '#C084FC',
   },
   {
     name: 'CRO (Conversion Rate Optimization)',
     description:
-      'Optimasi pasca-launch: analisis heatmap, rekaman sesi pengguna, A/B testing, optimasi form, dan analisis funnel. Kami tingkatkan conversion rate-mu dengan data, bukan tebakan.',
+      'Optimasi pasca-launch: analisis heatmap, rekaman sesi pengguna, A/B testing, optimasi form, dan analisis funnel. Kami tingkatkan conversion rate Anda dengan data, bukan tebakan.',
     badge: 'Retainer bulanan',
     accentColor: '#F88438',
   },
@@ -266,39 +266,39 @@ export const WEBSITE_TECH_STACK = [
 
 export const WEBSITE_FAQS = [
   {
-    question: 'Berapa lama waktu membangun sebuah website?',
+    question: 'Berapa lama waktu yang dibutuhkan untuk membangun sebuah website?',
     answer:
-      'Landing page biasanya membutuhkan 1-2 minggu. Website company profile membutuhkan 3-5 minggu. Situs e-commerce membutuhkan 4-8 minggu tergantung ukuran katalog produk dan integrasi. Kami menyediakan timeline detail selama fase Discovery & Scope, dan kamu selalu tahu di mana posisi project-nya.',
+      'Landing page biasanya membutuhkan 1-2 minggu. Website company profile 3-5 minggu. Situs e-commerce 4-8 minggu, tergantung ukuran katalog produk dan integrasi. Kami memberikan timeline detail pada fase Discovery & Scope, dan Anda selalu tahu posisi proyek Anda.',
   },
   {
-    question: 'Platform apa yang kamu gunakan?',
+    question: 'Platform apa saja yang Anda gunakan?',
     answer:
-      'Kami pilih teknologi terbaik untuk proyekmu: WordPress untuk situs berbasis konten yang butuh editing mudah, Shopify untuk e-commerce dengan ekosistem terbukti, WooCommerce untuk toko berbasis WordPress, Webflow untuk company profile yang mengutamakan desain, atau build fully custom dengan Next.js untuk performa maksimal. Kami rekomendasikan berdasarkan kebutuhanmu, bukan preferensi kami.',
+      'Kami memilih teknologi terbaik untuk proyek Anda: WordPress untuk situs berbasis konten yang butuh editing mudah, Shopify untuk e-commerce dengan ekosistem terbukti, WooCommerce untuk toko berbasis WordPress, Webflow untuk company profile yang mengutamakan desain, atau build fully custom dengan Next.js untuk performa maksimal. Kami merekomendasikan berdasarkan kebutuhan Anda, bukan preferensi kami.',
   },
   {
     question: 'Apakah hosting dan domain sudah termasuk?',
     answer:
-      'Kami tangani setup hosting dan konfigurasi DNS sebagai bagian dari proyek. Hosting tahun pertama bisa dimasukkan ke scope proyek atau di-setup di akunmu sendiri (Vercel, Cloudflare, atau provider pilihanmu). Registrasi domain adalah tanggung jawabmu; kami akan pandu prosesnya jika diperlukan.',
+      'Kami menangani setup hosting dan konfigurasi DNS sebagai bagian dari proyek. Hosting tahun pertama bisa dimasukkan ke scope proyek atau di-setup di akun Anda sendiri (Vercel, Cloudflare, atau provider pilihan Anda). Registrasi domain menjadi tanggung jawab Anda; kami akan memandu prosesnya jika diperlukan.',
   },
   {
     question: 'Apakah website mobile-responsive?',
     answer:
-      'Setiap situs yang kami bangun adalah mobile-first: didesain untuk layar mobile dulu, baru di-scale ke atas. Lebih dari 70% traffic web Indonesia datang dari perangkat mobile, jadi pendekatan yang hanya fokus desktop sudah ketinggalan zaman. Kami uji di perangkat iOS dan Android, berbagai ukuran layar, dan semua browser utama.',
+      'Setiap situs yang kami bangun bersifat mobile-first: didesain untuk layar mobile lebih dulu, baru di-scale ke atas. Lebih dari 70% traffic web Indonesia datang dari perangkat mobile, jadi pendekatan yang hanya fokus desktop sudah ketinggalan zaman. Kami menguji di perangkat iOS dan Android, berbagai ukuran layar, dan semua browser utama.',
   },
   {
     question: 'Apakah pelatihan sudah termasuk?',
     answer:
-      'Ya. Setelah launch, kami berikan pelatihan CMS untuk timmu: cara update konten, menambah blog post, mengelola produk (untuk e-commerce), dan membuat perubahan dasar tanpa butuh developer. Kami juga menyediakan dokumentasi dan video walkthrough yang direkam.',
+      'Ya. Setelah launch, kami memberikan pelatihan CMS untuk tim Anda: cara update konten, menambah blog post, mengelola produk (untuk e-commerce), dan melakukan perubahan dasar tanpa perlu developer. Kami juga menyediakan dokumentasi dan video walkthrough yang direkam.',
   },
   {
     question: 'Bagaimana dengan SEO: apakah situs saya akan ranking di Google?',
     answer:
-      'Setiap situs mencakup setup SEO dasar: struktur HTML yang bersih, meta tag, sitemap, robots.txt, Open Graph tag, dan optimasi page speed. Tier Company Profile dan E-Commerce mencakup SEO On-page Lanjutan. Untuk SEO berkelanjutan dan content marketing yang aktif menumbuhkan ranking, kami rekomendasikan menggabungkan dengan layanan SEO & Content Marketing kami.',
+      'Setiap situs mencakup setup SEO dasar: struktur HTML yang bersih, meta tag, sitemap, robots.txt, Open Graph tag, dan optimasi page speed. Tier Company Profile dan E-Commerce mencakup SEO On-page Lanjutan. Untuk SEO berkelanjutan dan content marketing yang aktif menumbuhkan ranking, kami merekomendasikan menggabungkannya dengan layanan SEO & Content Marketing kami.',
   },
   {
     question: 'Apa yang terjadi setelah launch?',
     answer:
-      'Kami pantau situsmu selama 2 minggu pasca-launch untuk menangkap masalah apapun. Setelah itu, kami menawarkan retainer Maintenance & Hosting Website opsional untuk pembaruan berkelanjutan, patch keamanan, dan monitoring performa. Kamu juga bisa menambahkan CRO (Conversion Rate Optimization) untuk terus meningkatkan performa konversi situsmu.',
+      'Kami memantau situs Anda selama 2 minggu pasca-launch untuk menangkap masalah apa pun. Setelah itu, kami menawarkan retainer Maintenance & Hosting Website opsional untuk pembaruan berkelanjutan, patch keamanan, dan monitoring performa. Anda juga bisa menambahkan CRO (Conversion Rate Optimization) untuk terus meningkatkan performa konversi situs Anda.',
   },
 ] as const
 

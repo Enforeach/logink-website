@@ -11,27 +11,27 @@ export const metadata: Metadata = buildMetadata({
 })
 
 const VALUES = [
-  { title: 'Berbasis Data', desc: 'Setiap keputusan didukung oleh data. Kami ukur yang benar-benar penting: revenue, leads, dan ROAS.', color: '#A855F7', tint: 'bg-brand-lilac', icon: BarChart3 },
-  { title: 'Cakupan 360°', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan agensi-agensi yang terpisah.', color: '#D81C5C', tint: 'bg-brand-rose', icon: Orbit },
-  { title: 'Kreativitas di Depan', desc: 'Konten yang bikin scroll berhenti, dirancang khusus untuk brand dan audiens kamu.', color: '#F5A623', tint: 'bg-brand-peach', icon: Sparkles },
-  { title: 'Fokus pada Hasil', desc: 'Kami tidak berhenti sampai target tercapai. Laporan transparan, akses penuh ke setiap akun.', color: '#F88438', tint: 'bg-white', icon: Target },
+  { title: 'Berbasis Data', desc: 'Setiap keputusan didukung oleh data. Kami mengukur yang benar-benar penting: revenue, leads, dan ROAS.', color: '#A855F7', tint: 'bg-brand-lilac', icon: BarChart3 },
+  { title: 'Cakupan 360°', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan beberapa agensi yang berjalan terpisah.', color: '#D81C5C', tint: 'bg-brand-rose', icon: Orbit },
+  { title: 'Kreativitas Terdepan', desc: 'Konten yang mencuri perhatian di feed, dirancang khusus untuk brand dan audiens Anda.', color: '#F5A623', tint: 'bg-brand-peach', icon: Sparkles },
+  { title: 'Fokus pada Hasil', desc: 'Kami tidak berhenti sebelum target tercapai. Laporan transparan dan akses penuh ke setiap akun.', color: '#F88438', tint: 'bg-white', icon: Target },
 ]
 
 const DIFFERENTIATORS = [
   {
     title: 'Tidak Ada Tim yang Bekerja Sendiri-Sendiri',
-    desc: '"Kami mengelola semua channel sebagai satu sistem. SEO kamu menginformasikan iklan kamu. Social media kamu mengisi konten. Semua saling menguatkan."',
+    desc: '"Kami mengelola semua channel sebagai satu sistem. Data SEO Anda menajamkan iklan Anda. Social media Anda memasok konten. Semuanya saling menguatkan."',
   },
   {
     title: 'Tidak Ada Metrik yang Menyesatkan',
-    desc: '"Kami mengoptimalkan untuk revenue, leads, dan ROAS, bukan impresi dan jumlah followers."',
+    desc: '"Kami mengoptimalkan revenue, leads, dan ROAS, bukan sekadar impresi dan jumlah followers."',
   },
   {
     title: 'Tidak Ada Konten Generik',
-    desc: '"Setiap kreasi dibuat untuk brand kamu, audiens kamu, dan pasar Indonesia."',
+    desc: '"Setiap karya dibuat khusus untuk brand Anda, audiens Anda, dan pasar Indonesia."',
   },
   {
-    title: 'Tidak Ada Kotak Hitam',
+    title: 'Tidak Ada Sistem Tertutup',
     desc: '"Dashboard GA4 yang transparan, laporan Looker Studio, dan akses penuh ke setiap akun."',
   },
 ]
@@ -53,7 +53,7 @@ export default function AboutPage() {
             <span className="gradient-text">Terhubung</span>
           </h1>
           <p className="text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
-            Kami menghubungkan strategi, kreativitas, dan data menjadi satu mesin yang mulus untuk pertumbuhan digital brand kamu.
+            Kami menyatukan strategi, kreativitas, dan data menjadi satu sistem yang mulus untuk pertumbuhan digital brand Anda.
           </p>
         </Reveal>
       </section>
@@ -64,14 +64,14 @@ export default function AboutPage() {
           <Reveal>
             <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.03em] leading-[1.1] text-[var(--text-primary)] mb-6">Misi Kami</h2>
             <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-              Logink lahir dari satu keyakinan: brand tidak harus memilih antara strategi yang kuat, konten kreatif, dan hasil yang terukur. Kamu bisa dapat ketiganya.
+              Logink lahir dari satu keyakinan: brand tidak harus memilih antara strategi yang kuat, konten kreatif, dan hasil yang terukur. Anda bisa mendapatkan ketiganya.
             </p>
             <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
               Kami membangun Logink sebagai agensi digital marketing 360° yang mengelola semua channel sebagai satu sistem terintegrasi, bukan kumpulan tim yang bekerja sendiri-sendiri.
             </p>
             <blockquote className="relative pl-6 italic text-[var(--text-primary)] font-medium">
               <span aria-hidden className="absolute left-0 top-0 h-full w-1 rounded-full gradient-brand-bg" />
-              &ldquo;Kami menghubungkan strategi, kreativitas, dan data menjadi satu mesin yang mulus.&rdquo;
+              &ldquo;Kami menyatukan strategi, kreativitas, dan data menjadi satu sistem yang mulus.&rdquo;
             </blockquote>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -103,7 +103,7 @@ export default function AboutPage() {
               Kenapa Bukan Agensi <span className="gradient-text">Lain?</span>
             </h2>
             <p className="text-[var(--text-secondary)] max-w-lg mx-auto">
-              Kami tahu kamu punya banyak pilihan. Inilah kenapa klien memilih Logink.
+              Kami tahu Anda punya banyak pilihan. Inilah alasan klien memilih Logink.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
@@ -129,7 +129,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <CTASection title="Siap Kerja Sama?" subtitle="Mari diskusikan bagaimana kami bisa bantu brand kamu berkembang." locale="id" />
+      <CTASection title="Siap Kerja Sama?" subtitle="Mari diskusikan bagaimana kami bisa membantu brand Anda berkembang." locale="id" />
     </>
   )
 }

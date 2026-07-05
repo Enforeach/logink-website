@@ -21,33 +21,33 @@ const BUDGET_ID = ['< Rp 5 juta', 'Rp 5–20 juta', 'Rp 20–50 juta', 'Rp 50 ju
 const PATHS_ID: Record<string, Q[]> = {
   ads: [
     { key: 'industri', type: 'single', text: 'Pertama, bisnis Anda bergerak di industri apa?', opts: INDUSTRY_ID },
-    { key: 'platform', type: 'single', text: 'Platform iklan mana yang ingin Anda gunakan?', opts: ['Google Ads', 'Meta (Facebook/Instagram)', 'TikTok Ads', 'LinkedIn Ads', 'Belum tahu butuh arahan'] },
+    { key: 'platform', type: 'single', text: 'Platform iklan mana yang ingin Anda gunakan?', opts: ['Google Ads', 'Meta (Facebook/Instagram)', 'TikTok Ads', 'LinkedIn Ads', 'Belum tahu, butuh arahan'] },
     { key: 'tujuan', type: 'single', text: 'Apa tujuan utama dari iklan ini?', opts: ['Lead generation', 'Penjualan langsung (e-commerce)', 'Brand awareness', 'Traffic ke website', 'App installs'] },
-    { key: 'pengalaman', type: 'single', text: 'Apakah Anda sudah pernah beriklan digital sebelumnya?', opts: ['Belum pernah', 'Pernah tapi hasilnya kurang', 'Sedang jalan ingin optimasi', 'Handle sendiri & kewalahan'] },
-    { key: 'landing_page', type: 'single', text: 'Bagaimana dengan landing page atau website Anda?', opts: ['Sudah ada siap dipakai', 'Ada tapi perlu diperbaiki', 'Belum ada'] },
+    { key: 'pengalaman', type: 'single', text: 'Apakah Anda sudah pernah beriklan digital sebelumnya?', opts: ['Belum pernah', 'Pernah, tapi hasilnya kurang', 'Sedang berjalan, ingin optimasi', 'Kelola sendiri & kewalahan'] },
+    { key: 'landing_page', type: 'single', text: 'Bagaimana dengan landing page atau website Anda?', opts: ['Sudah ada, siap dipakai', 'Ada, tapi perlu diperbaiki', 'Belum ada'] },
     { key: 'budget', type: 'single', text: 'Terakhir, berapa budget iklan bulanan Anda?', opts: BUDGET_ID },
   ],
   creative: [
     { key: 'industri', type: 'single', text: 'Bisnis Anda di industri apa?', opts: INDUSTRY_ID },
     { key: 'jenis_konten', type: 'multi', text: 'Jenis konten kreatif apa yang dibutuhkan?', opts: ['Desain feed & stories', 'Video produksi (TVC/reels)', 'Branding & visual identity', 'Campaign & key visual', 'Foto produk / katalog', 'Motion graphic / animasi'] },
-    { key: 'penggunaan', type: 'multi', text: 'Konten ini akan digunakan untuk apa?', opts: ['Posting sosial media', 'Iklan digital', 'Website / landing page', 'Presentasi / pitch deck', 'Print (brosur packaging)', 'Event / exhibition'] },
+    { key: 'penggunaan', type: 'multi', text: 'Konten ini akan digunakan untuk apa?', opts: ['Posting sosial media', 'Iklan digital', 'Website / landing page', 'Presentasi / pitch deck', 'Print (brosur, packaging)', 'Event / exhibition'] },
     { key: 'frekuensi', type: 'single', text: 'Seberapa rutin Anda butuh konten?', opts: ['One-time project', 'Bulanan (ongoing retainer)', 'Kampanye spesifik', 'Belum tahu'] },
-    { key: 'brand_guideline', type: 'single', text: 'Apakah Anda sudah punya brand guideline?', opts: ['Sudah lengkap', 'Ada sebagian tapi belum konsisten', 'Belum ada sama sekali'] },
+    { key: 'brand_guideline', type: 'single', text: 'Apakah Anda sudah punya brand guideline?', opts: ['Sudah lengkap', 'Ada sebagian, tapi belum konsisten', 'Belum ada sama sekali'] },
     { key: 'budget', type: 'single', text: 'Dan budget kreatif Anda kira-kira berapa?', opts: BUDGET_ID },
   ],
   socmed: [
     { key: 'industri', type: 'single', text: 'Bisnis Anda bergerak di bidang apa?', opts: INDUSTRY_ID },
     { key: 'platform', type: 'multi', text: 'Platform mana yang jadi prioritas?', opts: ['Instagram', 'TikTok', 'LinkedIn', 'Facebook', 'YouTube', 'X (Twitter)'] },
     { key: 'tantangan', type: 'single', text: 'Apa tantangan terbesar di media sosial Anda saat ini?', opts: ['Tidak konsisten posting', 'Engagement rendah', 'Followers tidak bertumbuh', 'Tidak tahu strategi konten', 'Kompetitor lebih aktif'] },
-    { key: 'tim_internal', type: 'single', text: 'Apakah sudah ada tim internal untuk kelola sosmed?', opts: ['Belum butuh fully managed', 'Ada tapi butuh arahan strategi', 'Ada tapi butuh konten saja', 'Ada tapi butuh reporting & analytics'] },
-    { key: 'target_posting', type: 'single', text: 'Berapa target posting per minggu?', opts: ['1–2x per minggu', '3–4x per minggu', 'Setiap hari', 'Belum tahu butuh rekomendasi'] },
+    { key: 'tim_internal', type: 'single', text: 'Apakah sudah ada tim internal untuk mengelola media sosial?', opts: ['Belum, butuh fully managed', 'Ada, tapi butuh arahan strategi', 'Ada, tapi butuh konten saja', 'Ada, tapi butuh reporting & analytics'] },
+    { key: 'target_posting', type: 'single', text: 'Berapa target posting per minggu?', opts: ['1–2x per minggu', '3–4x per minggu', 'Setiap hari', 'Belum tahu, butuh rekomendasi'] },
     { key: 'budget', type: 'single', text: 'Budget social media management bulanan?', opts: BUDGET_ID },
   ],
   seo: [
     { key: 'industri', type: 'single', text: 'Industri bisnis Anda?', opts: INDUSTRY_ID },
-    { key: 'status_website', type: 'single', text: 'Bagaimana status website Anda saat ini?', opts: ['Ada tapi tidak muncul di Google', 'Ada ranking turun belakangan', 'Ada baru dibuat', 'Belum punya website'] },
+    { key: 'status_website', type: 'single', text: 'Bagaimana status website Anda saat ini?', opts: ['Ada, tapi tidak muncul di Google', 'Ada, tapi ranking menurun belakangan', 'Ada, baru dibuat', 'Belum punya website'] },
     { key: 'target_pencarian', type: 'multi', text: 'Apa yang ingin ditemukan calon customer Anda di Google?', opts: ['Produk/jasa spesifik', 'Nama brand', 'Edukasi/informasi industri', 'Lokasi bisnis (Google Maps)'] },
-    { key: 'pengalaman_seo', type: 'single', text: 'Pengalaman SEO sebelumnya?', opts: ['Belum pernah', 'Pernah tapi tidak lanjut', 'Sedang jalan hasil kurang', 'Pernah pakai jasa SEO lain'] },
+    { key: 'pengalaman_seo', type: 'single', text: 'Pengalaman SEO sebelumnya?', opts: ['Belum pernah', 'Pernah, tapi tidak dilanjutkan', 'Sedang berjalan, hasil kurang', 'Pernah menggunakan jasa SEO lain'] },
     { key: 'prioritas', type: 'single', text: 'Apa prioritas SEO Anda?', opts: ['Ranking halaman 1 Google', 'Meningkatkan traffic website', 'Leads dari organic search', 'Mengalahkan kompetitor di search'] },
     { key: 'budget', type: 'single', text: 'Budget SEO bulanan?', opts: BUDGET_ID },
   ],
@@ -70,11 +70,11 @@ const BRIEF_LABELS_ID: Record<string, string[]> = {
 }
 
 const SERVICE_META_ID: Record<string, { label: string; icon: string; confirm: string }> = {
-  ads: { label: 'Ads', icon: '📢', confirm: 'Oke, Anda butuh layanan Paid Ads. Keren, saya siapkan pertanyaannya! 💪' },
-  creative: { label: 'Creative', icon: '🎨', confirm: 'Oke, Creative Services, pilihan tepat! Mari kita cari tahu lebih lanjut.' },
-  socmed: { label: 'Social Media', icon: '📱', confirm: 'Oke, Social Media Management! Yuk kita mulai profiling bisnis Anda.' },
-  seo: { label: 'SEO', icon: '🔍', confirm: 'Oke, SEO: investasi jangka panjang yang cerdas! Ada beberapa pertanyaan.' },
-  webdev: { label: 'Website Development', icon: '💻', confirm: 'Mantap, Website Development! Kami spesialis di sini. Yuk mulai!' },
+  ads: { label: 'Ads', icon: '📢', confirm: 'Baik, Paid Ads, pilihan tepat! Saya siapkan beberapa pertanyaannya. 💪' },
+  creative: { label: 'Creative', icon: '🎨', confirm: 'Baik, Creative Services, pilihan tepat! Mari kita pahami kebutuhan Anda.' },
+  socmed: { label: 'Social Media', icon: '📱', confirm: 'Baik, Social Media Management! Mari kita mulai memahami bisnis Anda.' },
+  seo: { label: 'SEO', icon: '🔍', confirm: 'Baik, SEO: investasi jangka panjang yang cerdas! Ada beberapa pertanyaan untuk Anda.' },
+  webdev: { label: 'Website Development', icon: '💻', confirm: 'Baik, Website Development, keahlian utama kami! Mari kita mulai.' },
 }
 
 // ─── English data ─────────────────────────────────────────────────────────────
@@ -152,10 +152,10 @@ const COPY = {
     sectionTitle: 'Temukan Solusi Digital Terbaik',
     sectionSubtext: 'Jawab beberapa pertanyaan singkat dan dapatkan rekomendasi layanan + konsultasi gratis',
     init1: 'Halo! 👋 Selamat datang di Logink.',
-    init2: 'Saya akan bantu carikan solusi digital terbaik untuk bisnis Anda. Cuma butuh 1–2 menit saja!',
+    init2: 'Saya akan bantu carikan solusi digital terbaik untuk bisnis Anda. Hanya butuh 1–2 menit!',
     gatewayQ: 'Layanan apa yang paling Anda butuhkan saat ini?',
-    contactMsg1: 'Mantap, terima kasih atas jawabannya! 🙌',
-    contactMsg2: 'Tinggal selangkah lagi: isi data kontak Anda supaya tim Logink bisa follow up dalam 24 jam.',
+    contactMsg1: 'Bagus, terima kasih atas jawaban Anda! 🙌',
+    contactMsg2: 'Tinggal satu langkah lagi: isi data kontak Anda agar tim Logink dapat menghubungi Anda dalam 24 jam.',
     doneMsg1: (name: string) => `Terima kasih, ${name}! 🎉 Brief Anda sudah terkirim ke tim Logink via WhatsApp.`,
     doneMsg2: 'Kami akan menghubungi Anda dalam 24 jam. Sampai jumpa! 👋',
     userDataSent: 'Data terkirim! ✅',
