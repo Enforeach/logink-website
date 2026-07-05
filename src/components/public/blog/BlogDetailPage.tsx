@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { prisma } from '@/lib/prisma'
+import { getPostBySlug, getRelatedPosts, getActiveCtas } from '@/payload/queries'
+import { getPayloadClient } from '@/payload/client'
 import { buildMetadata } from '@/lib/seo'
 import { formatDate } from '@/lib/utils'
 import dynamic from 'next/dynamic'
@@ -15,87 +16,23 @@ import { CtaRenderer } from '@/components/public/cta/CtaRenderer'
 
 const ReadingProgress = dynamic(() => import('./ReadingProgress').then(m => ({ default: m.ReadingProgress })))
 const ShareBar = dynamic(() => import('./ShareBar').then(m => ({ default: m.ShareBar })))
-import { filterCtasForPost, extractHeadings, injectHeadingIds, type CtaWidgetRow } from '@/lib/cta'
-import type { Prisma } from '@prisma/client'
+import { filterCtasForPost, extractHeadings, injectHeadingIds } from '@/lib/cta'
 import { resolvePostContent } from '@/lib/i18n/content'
 import { type Locale, t, localePath } from '@/lib/i18n'
 import { SITE } from '@/lib/constants'
 
-async function getPost(slug: string, locale: Locale) {
+// ponytail: mapped post drops category id; one depth-0 read recovers it for CTA/related targeting
+async function getPostCategoryId(postId: string): Promise<string | null> {
   try {
-    // For EN: try slugEn first, then fall back to regular slug
-    if (locale === 'en') {
-      const bySlugEn = await prisma.post.findFirst({
-        where: { slugEn: slug, status: 'PUBLISHED' },
-        include: {
-          author: { select: { name: true, image: true } },
-          category: { select: { nameId: true, nameEn: true, slug: true } },
-          tags: { include: { tag: true } },
-        },
-      })
-      if (bySlugEn) return bySlugEn
-
-      // Fallback: find by regular slug (will show ID content with fallback banner)
-      return await prisma.post.findUnique({
-        where: { slug, status: 'PUBLISHED' },
-        include: {
-          author: { select: { name: true, image: true } },
-          category: { select: { nameId: true, nameEn: true, slug: true } },
-          tags: { include: { tag: true } },
-        },
-      })
-    }
-
-    return await prisma.post.findUnique({
-      where: { slug, status: 'PUBLISHED' },
-      include: {
-        author: { select: { name: true, image: true } },
-        category: { select: { nameId: true, nameEn: true, slug: true } },
-        tags: { include: { tag: true } },
-      },
-    })
+    const payload = await getPayloadClient()
+    const res = await payload.find({ collection: 'posts', where: { id: { equals: postId } }, depth: 0, limit: 1 })
+    const cat = (res.docs[0] as { category?: unknown } | undefined)?.category
+    return cat != null ? String(cat) : null
   } catch { return null }
 }
 
-async function getRelated(postId: string, categoryId: string | null, locale: Locale, limit = 3) {
-  if (!categoryId) return []
-  try {
-    const where: Prisma.PostWhereInput = { status: 'PUBLISHED', categoryId, id: { not: postId } }
-    if (locale === 'en') {
-      where.titleEn = { not: null }
-      where.bodyEn = { not: null }
-    }
-    return await prisma.post.findMany({
-      where,
-      select: { id: true, titleId: true, titleEn: true, slug: true, slugEn: true, featuredImage: true, publishedAt: true, readingTime: true, excerptId: true, excerptEn: true },
-      orderBy: { publishedAt: 'desc' },
-      take: limit,
-    })
-  } catch { return [] }
-}
-
-async function getActiveCtas(): Promise<CtaWidgetRow[]> {
-  try {
-    const now = new Date()
-    const rows = await prisma.ctaWidget.findMany({
-      where: {
-        isActive: true,
-        OR: [{ startDate: null }, { startDate: { lte: now } }],
-        AND: [{ OR: [{ endDate: null }, { endDate: { gte: now } }] }],
-      },
-    })
-    return rows.map(r => ({
-      ...r,
-      templateType: r.templateType as string,
-      placement: r.placement as string,
-      targetingType: r.targetingType as string,
-      scrollDepthThreshold: r.scrollDepthThreshold ? Number(r.scrollDepthThreshold) : null,
-    })) as CtaWidgetRow[]
-  } catch { return [] }
-}
-
 export async function generateBlogDetailMetadata(slug: string, locale: Locale): Promise<Metadata> {
-  const post = await getPost(slug, locale)
+  const post = await getPostBySlug(slug, locale)
   if (!post) return {}
 
   const resolved = resolvePostContent(post, locale)
@@ -124,14 +61,15 @@ export async function generateBlogDetailMetadata(slug: string, locale: Locale): 
 }
 
 export async function BlogDetailPage({ slug, locale }: { slug: string; locale: Locale }) {
-  const [post, allCtas] = await Promise.all([getPost(slug, locale), getActiveCtas()])
+  const [post, allCtas] = await Promise.all([getPostBySlug(slug, locale), getActiveCtas()])
   if (!post) notFound()
 
   const resolved = resolvePostContent(post, locale)
 
+  const categoryId = await getPostCategoryId(post.id)
   const tagIds = post.tags.map(pt => pt.tag.id)
   const tagNames = post.tags.map(pt => pt.tag.name)
-  const matchedCtas = filterCtasForPost(allCtas, post.id, tagIds, post.categoryId)
+  const matchedCtas = filterCtasForPost(allCtas, post.id, tagIds, categoryId)
 
   const rawHtml = resolved.body || ''
   const htmlWithIds = injectHeadingIds(rawHtml)
@@ -143,7 +81,7 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
   const belowArticle = matchedCtas.filter(c => c.placement === 'BELOW_ARTICLE')
   const stickyBottom = matchedCtas.filter(c => c.placement === 'STICKY_BOTTOM')
 
-  const related = await getRelated(post.id, post.categoryId, locale)
+  const related = await getRelatedPosts(post.id, categoryId, locale)
 
   const siteUrl = SITE.url
   const articleUrl = `${siteUrl}${localePath(`/blog/${slug}`, locale)}`

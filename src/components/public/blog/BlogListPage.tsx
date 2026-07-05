@@ -1,12 +1,11 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { prisma } from '@/lib/prisma'
+import { getBlogList } from '@/payload/queries'
 import { buildMetadata } from '@/lib/seo'
 import { formatDate } from '@/lib/utils'
 import { BlogEmptyState } from './BlogEmptyState'
 import { BlogListRow, type RowPost } from './BlogListRow'
-import type { Prisma } from '@prisma/client'
 import { BlogSidebarCta } from './BlogSidebarCta'
 import { Reveal } from './Reveal'
 import { type Locale, t, localePath } from '@/lib/i18n'
@@ -33,23 +32,8 @@ export function generateBlogListMetadata(locale: Locale): Metadata {
 export async function BlogListPage({ locale }: { locale: Locale }) {
   let posts: RowPost[] = []
   try {
-    const where: Prisma.PostWhereInput = { status: 'PUBLISHED' }
-    if (locale === 'en') {
-      where.titleEn = { not: null }
-      where.bodyEn = { not: null }
-    }
-    posts = await prisma.post.findMany({
-      where,
-      orderBy: { publishedAt: 'desc' },
-      take: 12,
-      select: {
-        id: true, titleId: true, titleEn: true, slug: true, slugEn: true,
-        excerptId: true, excerptEn: true, featuredImage: true,
-        publishedAt: true, readingTime: true, status: true, createdAt: true,
-        author: { select: { name: true, image: true } },
-        category: { select: { nameId: true, nameEn: true, slug: true } },
-      },
-    })
+    const result = await getBlogList(locale)
+    posts = result.posts
   } catch { posts = [] }
 
   const featured = posts[0]

@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { getSitemapEntries } from '@/payload/queries'
 import { SITE } from '@/lib/constants'
 
 const BASE = SITE.url.replace(/\/$/, '')
@@ -55,18 +55,7 @@ const STATIC_PAIRS: [string, string, number, Freq][] = [
 export async function GET() {
   const now = new Date().toISOString()
 
-  const [posts, caseStudies] = await Promise.all([
-    prisma.post.findMany({
-      where: { status: 'PUBLISHED' },
-      select: { slug: true, slugEn: true, updatedAt: true },
-      orderBy: { updatedAt: 'desc' },
-    }),
-    prisma.caseStudy.findMany({
-      where: { status: 'PUBLISHED' },
-      select: { slug: true, slugEn: true, updatedAt: true },
-      orderBy: { updatedAt: 'desc' },
-    }),
-  ])
+  const { posts, caseStudies } = await getSitemapEntries()
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
   xml += '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n'
@@ -84,16 +73,18 @@ export async function GET() {
     const idUrl = `${BASE}/blog/${post.slug}`
     const enUrl = post.slugEn ? `${BASE}/en/blog/${post.slugEn}` : null
     const alts = enUrl ? { id: idUrl, en: enUrl } : undefined
-    xml += urlEntry(idUrl, post.updatedAt.toISOString(), 'weekly', 0.7, alts)
-    if (enUrl) xml += urlEntry(enUrl, post.updatedAt.toISOString(), 'weekly', 0.65, alts)
+    const lastmod = post.updatedAt?.toISOString() ?? now
+    xml += urlEntry(idUrl, lastmod, 'weekly', 0.7, alts)
+    if (enUrl) xml += urlEntry(enUrl, lastmod, 'weekly', 0.65, alts)
   }
 
   for (const cs of caseStudies) {
     const idUrl = `${BASE}/portfolio/${cs.slug}`
     const enUrl = cs.slugEn ? `${BASE}/en/portfolio/${cs.slugEn}` : null
     const alts = enUrl ? { id: idUrl, en: enUrl } : undefined
-    xml += urlEntry(idUrl, cs.updatedAt.toISOString(), 'monthly', 0.7, alts)
-    if (enUrl) xml += urlEntry(enUrl, cs.updatedAt.toISOString(), 'monthly', 0.65, alts)
+    const lastmod = cs.updatedAt?.toISOString() ?? now
+    xml += urlEntry(idUrl, lastmod, 'monthly', 0.7, alts)
+    if (enUrl) xml += urlEntry(enUrl, lastmod, 'monthly', 0.65, alts)
   }
 
   xml += '</urlset>'

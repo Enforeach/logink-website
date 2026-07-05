@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next'
 import withBundleAnalyzer from '@next/bundle-analyzer'
+import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
   async redirects() {
@@ -29,4 +30,7 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig)
+export default withPayload(
+  withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig),
+  { devBundleServerPackages: false },
+)

@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import { ServiceRow } from '@/components/public/ServiceCard'
 import type { ServiceData, PricingTierData } from '@/types'
 import { CTASection } from '@/components/public/CTASection'
-import { prisma } from '@/lib/prisma'
+import { getServicesList } from '@/payload/queries'
 import type { Locale } from '@/lib/i18n'
 
 const COPY = {
@@ -82,14 +82,7 @@ export async function ServicesPageContent({ locale = 'id' }: { locale?: Locale }
 
   let services: RawService[]
   try {
-    services = await prisma.service.findMany({
-      where: { isActive: true },
-      orderBy: { sortOrder: 'asc' },
-      include: {
-        pricingTiers: { orderBy: { sortOrder: 'asc' } },
-        addOns: { where: { isActive: true } },
-      },
-    })
+    services = await getServicesList()
     if (!services.length) services = fallback
   } catch {
     services = fallback
