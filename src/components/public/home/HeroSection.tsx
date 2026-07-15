@@ -41,7 +41,7 @@ export function HeroSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = COPY[locale]
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden px-4 pt-36 md:pt-20 pb-28 mesh-gradient">
+    <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden px-4 pt-36 md:pt-32 pb-28 mesh-gradient">
       {/* Dot grid overlay */}
       <div className="absolute inset-0 dot-grid opacity-50" />
 
