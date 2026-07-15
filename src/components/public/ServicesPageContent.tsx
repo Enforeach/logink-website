@@ -10,7 +10,7 @@ const COPY = {
     badge: 'Layanan Kami',
     headline: '360° Layanan Digital',
     headlineGradient: 'Marketing',
-    desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan agensi yang berjalan sendiri-sendiri.',
+    desc: 'Layanan digital terintegrasi yang bekerja sebagai satu sistem, bukan agensi yang berjalan sendiri-sendiri.',
     startingFrom: 'Mulai dari',
     learnMore: 'Pelajari lebih lanjut',
     integrationHeadline: 'Semua Layanan Bekerja',
@@ -28,13 +28,14 @@ const COPY = {
       'paid-advertising': ['Setup Google, Meta & TikTok Ads', 'Optimasi ROAS mingguan', 'Dashboard laporan real-time'],
       'creative-services': ['Desain grafis untuk semua platform', 'Produksi video & motion', 'Copywriting yang mengonversi'],
       'website-landing-page': ['Desain CRO-focused', 'Development cepat & SEO-ready', 'Integrasi analytics & tracking'],
+      'local-seo': ['Setup & optimasi Google Business Profile', 'Landing page lokal + keyword "near me"', 'Target map pack dalam radius 20 km'],
     } as Record<string, string[]>,
   },
   en: {
     badge: 'Our Services',
     headline: '360° Digital',
     headlineGradient: 'Marketing Services',
-    desc: 'Five integrated services working as one system, not separate siloed agencies.',
+    desc: 'Integrated digital services working as one system, not separate siloed agencies.',
     startingFrom: 'Starting from',
     learnMore: 'Learn more',
     integrationHeadline: 'All Services Work',
@@ -52,6 +53,7 @@ const COPY = {
       'paid-advertising': ['Google, Meta & TikTok Ads setup', 'Weekly ROAS optimization', 'Real-time reporting dashboard'],
       'creative-services': ['Graphic design for every platform', 'Video & motion production', 'Copywriting that converts'],
       'website-landing-page': ['CRO-focused design', 'Fast, SEO-ready development', 'Analytics & tracking integration'],
+      'local-seo': ['Google Business Profile setup & optimization', 'Local landing page + "near me" keywords', 'Map pack targeting within a 20 km radius'],
     } as Record<string, string[]>,
   },
 }
@@ -62,6 +64,7 @@ const FALLBACK_ID = [
   { id: '3', name: 'Paid Advertising', slug: 'paid-advertising', color: '#F88438', funnelPosition: 'Mid Funnel', shortDescId: 'Scaling cepat dengan ROI yang terukur', descriptionId: 'Google Ads, Meta Ads, TikTok Ads, dan Marketplace Ads untuk hasil yang cepat terlihat.', isActive: true, sortOrder: 2, pricingTiers: [{ id: '3', tierName: 'Entry', priceLabel: 'Rp 6 Juta', priceValue: 6000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
   { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', funnelPosition: 'All Funnel', shortDescId: 'Konten yang mencuri perhatian dan mendorong konversi', descriptionId: 'Desain grafis, video production, dan copywriting untuk semua platform.', isActive: true, sortOrder: 3, pricingTiers: [], addOns: [] },
   { id: '5', name: 'Website & Landing Page', slug: 'website-landing-page', color: '#C084FC', funnelPosition: 'Bottom Funnel', shortDescId: 'Mengubah pengunjung menjadi pelanggan', descriptionId: 'Landing page, company profile, dan e-commerce website dengan CRO-focused design.', isActive: true, sortOrder: 4, pricingTiers: [{ id: '5', tierName: 'Entry', priceLabel: 'Rp 10 Juta', priceValue: 10000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
+  { id: '6', name: 'Local SEO & Google Maps', slug: 'local-seo', color: '#0D9488', funnelPosition: 'Local', shortDescId: 'Menang di Google Maps & pencarian "near me"', descriptionId: 'Optimasi Google Business Profile & landing page lokal untuk tampil di map pack dan pencarian "near me" dalam radius hingga 20 km. Termasuk setup GBP.', isActive: true, sortOrder: 5, pricingTiers: [{ id: '6', tierName: 'Starter', priceLabel: 'Rp 1 Juta', priceValue: 1000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
 ]
 
 const FALLBACK_EN = [
@@ -70,6 +73,7 @@ const FALLBACK_EN = [
   { id: '3', name: 'Paid Advertising', slug: 'paid-advertising', color: '#F88438', funnelPosition: 'Mid Funnel', shortDescId: 'Fast scaling & immediate ROI', descriptionId: 'Google Ads, Meta Ads, TikTok Ads, and Marketplace Ads for fast results.', isActive: true, sortOrder: 2, pricingTiers: [{ id: '3', tierName: 'Entry', priceLabel: 'IDR 6M', priceValue: 6000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
   { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', funnelPosition: 'All Funnel', shortDescId: 'Scroll-stopping content that converts', descriptionId: 'Graphic design, video production, and copywriting for all platforms.', isActive: true, sortOrder: 3, pricingTiers: [], addOns: [] },
   { id: '5', name: 'Website & Landing Page', slug: 'website-landing-page', color: '#C084FC', funnelPosition: 'Bottom Funnel', shortDescId: 'Converting visitors into customers', descriptionId: 'Landing pages, company profiles, and e-commerce websites with CRO-focused design.', isActive: true, sortOrder: 4, pricingTiers: [{ id: '5', tierName: 'Entry', priceLabel: 'IDR 10M', priceValue: 10000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
+  { id: '6', name: 'Local SEO & Google Maps', slug: 'local-seo', color: '#0D9488', funnelPosition: 'Local', shortDescId: 'Win Google Maps & "near me" searches', descriptionId: 'Google Business Profile optimization & a local landing page to rank in the map pack and "near me" searches within a radius of up to 20 km. GBP setup included.', isActive: true, sortOrder: 5, pricingTiers: [{ id: '6', tierName: 'Starter', priceLabel: 'IDR 1M', priceValue: 1000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
 ]
 
 // ServiceData with raw (Json) tier features — covers both Prisma rows and the in-file fallbacks

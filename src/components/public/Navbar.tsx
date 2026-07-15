@@ -37,6 +37,17 @@ const SERVICE_GROUPS = [
           </svg>
         ),
       },
+      {
+        slug: 'local-seo', slugId: 'local-seo', key: 'localseo', color: '#0D9488',
+        descId: 'Menang di Google Maps & pencarian "near me"',
+        descEn: 'Win Google Maps & "near me" searches',
+        icon: (
+          <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 17.5s5.5-4.9 5.5-9a5.5 5.5 0 10-11 0c0 4.1 5.5 9 5.5 9z" />
+            <circle cx="10" cy="8.5" r="1.9" />
+          </svg>
+        ),
+      },
     ],
   },
   {

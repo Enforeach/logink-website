@@ -28,6 +28,7 @@ export const id = {
     ads: { name: 'Paid Advertising', tagline: 'Scaling cepat dengan ROI yang terukur' },
     creative: { name: 'Creative Services', tagline: 'Konten yang mencuri perhatian dan mendorong audiens untuk bertindak' },
     website: { name: 'Website & Landing Page', tagline: 'Mengubah pengunjung menjadi pelanggan' },
+    localseo: { name: 'Local SEO & Google Maps', tagline: 'Menang di pencarian "near me" & Google Maps lokal' },
   },
 
   common: {

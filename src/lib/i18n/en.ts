@@ -28,6 +28,7 @@ export const en = {
     ads: { name: 'Paid Advertising', tagline: 'Fast scaling & immediate ROI' },
     creative: { name: 'Creative Services', tagline: 'Scroll-stopping content that converts attention into action' },
     website: { name: 'Website & Landing Page', tagline: 'Converting visitors into customers' },
+    localseo: { name: 'Local SEO & Google Maps', tagline: 'Win "near me" searches & local Google Maps' },
   },
 
   common: {
