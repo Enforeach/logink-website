@@ -76,7 +76,7 @@ const PILLS = ['IG Feed 1:1','Story 9:16','TikTok 9:16','Banner 16:9','Brand Gui
 
 const HERO_COPY = {
   id: {
-    badge: 'Jasa Desain Kreatif Jakarta — Branding, Konten Visual & Produksi Video',
+    badge: 'Jasa Desain & Video Jakarta: Branding, Creative Content & Copywriting',
     trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi sudah termasuk', '✓ Format multi-platform'],
     home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/layanan',
     title1: 'Visual yang Berani.',
@@ -88,7 +88,7 @@ const HERO_COPY = {
     ctaSecondaryHref: '/portfolio',
   },
   en: {
-    badge: 'Creative Design Services Jakarta — Branding, Visual Content & Video Production',
+    badge: 'Design & Video Production Jakarta: Branding, Creative Content & Copywriting',
     trustPills: ['✓ 100% custom design', '✓ 2 revision rounds included', '✓ Multi-platform formats'],
     home: 'Home', services: 'Services', homeHref: '/en', servicesHref: '/en/services',
     title1: 'Bold Visuals.',

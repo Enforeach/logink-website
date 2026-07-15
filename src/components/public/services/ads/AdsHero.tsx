@@ -17,7 +17,7 @@ const ACCENT = '#F88438'
 
 const HERO_COPY = {
   id: {
-    badge: 'Jasa Iklan Digital Jakarta — Google Ads & Meta Ads, ROAS 2–4× Terbukti',
+    badge: 'Jasa Iklan Digital Jakarta: Google Ads & Meta Ads, ROAS 2–4× Terbukti',
     trustPills: ['✓ Rata-rata ROAS 2-4×', '✓ Akses akun penuh', '✓ Laporan optimasi mingguan'],
     home: 'Beranda', homeHref: '/', services: 'Layanan', servicesHref: '/layanan',
     title1: 'Setiap Rupiah Terinvestasi.', title2: 'Return Maksimal Terwujud.',
@@ -30,7 +30,7 @@ const HERO_COPY = {
     roasDay: 'di hari ke-90',
   },
   en: {
-    badge: 'Digital Advertising Jakarta — Google & Meta Ads, Proven 2–4× ROAS',
+    badge: 'Digital Advertising Jakarta: Google & Meta Ads, Proven 2–4× ROAS',
     trustPills: ['✓ Average ROAS 2–4×', '✓ Full account access', '✓ Weekly optimization reports'],
     home: 'Home', homeHref: '/en', services: 'Services', servicesHref: '/en/services',
     title1: 'Every Rupiah Invested.', title2: 'Maximum Return Realized.',
@@ -152,7 +152,7 @@ export function AdsHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
               {c.desc}
             </p>
 
-            {/* Key ROAS metric chip — CRO anchor */}
+            {/* Key ROAS metric chip, CRO anchor */}
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-[var(--border-default)] shadow-sm">
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={2} aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 17l6-6 4 4 8-8M15 7h6v6" />

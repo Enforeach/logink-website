@@ -19,8 +19,8 @@ const FALLBACK: Service[] = [
   { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#A855F7', shortDescId: 'Pertumbuhan organik jangka panjang & leads inbound', funnelPosition: 'Top Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
   { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#D81C5C', shortDescId: 'Bangun brand awareness & komunitas yang aktif', funnelPosition: 'Top Funnel', pricingTiers: [] },
   { id: '3', name: 'Paid Advertising', slug: 'paid-ads', color: '#F88438', shortDescId: 'Iklan yang langsung hasilkan ROI nyata', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
-  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', shortDescId: 'Konten yang bikin scroll berhenti dan mengkonversi', funnelPosition: 'All Funnel', pricingTiers: [] },
-  { id: '5', name: 'Website & Landing Page', slug: 'website-development', color: '#C084FC', shortDescId: 'Ubah pengunjung jadi pelanggan', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
+  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', shortDescId: 'Konten yang mencuri perhatian dan mengkonversi', funnelPosition: 'All Funnel', pricingTiers: [] },
+  { id: '5', name: 'Website & Landing Page', slug: 'website-development', color: '#C084FC', shortDescId: 'Ubah pengunjung menjadi pelanggan', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
 ]
 
 /* Warm Canvas accents keyed by slug (covers both id/en slug variants) */
@@ -35,8 +35,8 @@ const META: Record<string, { accent: string; icon: LucideIcon }> = {
 }
 
 const SECTION_COPY = {
-  id: { badge: 'Layanan Kami', headline: 'Apa yang Kami', headlineGradient: 'Kerjakan', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan vendor-vendor yang berjalan terpisah.', viewAll: 'Lihat semua layanan' },
-  en: { badge: 'Our Services', headline: 'What We', headlineGradient: 'Do', desc: 'Five integrated services working as one system, not siloed vendors.', viewAll: 'View all services' },
+  id: { badge: 'Layanan Kami', headline: 'Digital Marketing', headlineGradient: '360°', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan vendor-vendor yang berjalan terpisah.', viewAll: 'Lihat semua layanan' },
+  en: { badge: 'Our Services', headline: '360° Digital', headlineGradient: 'Marketing', desc: 'Five integrated services working as one system, not siloed vendors.', viewAll: 'View all services' },
 }
 
 /* Accent darkened for AA text contrast on white */
@@ -118,7 +118,7 @@ function BentoCard({ svc, locale, index }: { svc: Service; locale: 'id' | 'en'; 
 
       <div className="relative flex flex-col h-full">
         <div className="flex items-start justify-between gap-3 mb-4">
-          {/* Icon squircle — saturates on hover */}
+          {/* Icon squircle that saturates on hover */}
           <span className="h-12 w-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-[color-mix(in_srgb,var(--acc)_12%,white)] text-[var(--acc)] group-hover:bg-[var(--acc)] group-hover:text-white transition-colors duration-300">
             <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
           </span>

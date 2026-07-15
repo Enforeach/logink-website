@@ -527,7 +527,7 @@ export const SEO_FAQS = [
   },
   {
     question: 'Bagaimana jika kami ingin berhenti?',
-    answer: 'Tidak ada kontrak lock-in. Kami bekerja per bulan karena kami percaya kepercayaan Anda harus kami menangkan lewat hasil, bukan lewat klausul kontrak. Semua konten, akun, dan data adalah milik Anda; kami tidak pernah menahan apa pun.',
+    answer: 'Tidak ada kontrak lock-in. Kami bekerja bulanan karena kepercayaan Anda layak dimenangkan lewat hasil, bukan lewat klausul kontrak. Semua konten, akun, dan data adalah milik Anda; kami tidak pernah menahan apa pun.',
   },
   {
     question: 'Apakah ranking dijamin?',

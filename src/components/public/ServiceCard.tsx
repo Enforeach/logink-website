@@ -20,7 +20,7 @@ interface ServiceCardProps {
   size?: 'sm' | 'lg'
 }
 
-/* 2026 "Warm Canvas" service accents — override legacy DB hexes by slug */
+/* 2026 "Warm Canvas" service accents - override legacy DB hexes by slug */
 export const SERVICE_ACCENTS: Record<string, string> = {
   'seo-content-marketing': '#A855F7',
   'social-media-management': '#D81C5C',

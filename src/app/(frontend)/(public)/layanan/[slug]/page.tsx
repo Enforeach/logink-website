@@ -203,14 +203,14 @@ export const SERVICES = {
 const SERVICES_ID = {
   'seo-content-marketing': {
     tagline: 'Peringkat Lebih Tinggi. Jangkauan Lebih Luas. Konversi Lebih Baik.',
-    description: 'Kami membangun kehadiran pencarian organik yang terus bertumbuh dari bulan ke bulan. Dari strategi keyword hingga 150+ artikel per bulan, setiap konten dirancang untuk menangkap traffic dengan intent tinggi dan mengubahnya menjadi pendapatan.',
+    description: 'Jasa SEO dan content marketing yang membangun kehadiran organik di Google, terus bertumbuh dari bulan ke bulan. Dari strategi keyword hingga 150+ artikel per bulan, setiap konten dirancang untuk menangkap traffic dengan intent tinggi dan mengubahnya menjadi pendapatan.',
     features: [
-      { icon: 'Crosshair', title: 'Riset Keyword & Strategi', desc: 'Analisis mendalam untuk menemukan kata kunci persis yang sedang diketik calon pelanggan Anda saat ini.' },
+      { icon: 'Crosshair', title: 'Riset Keyword & Strategi', desc: 'Analisis mendalam untuk menemukan kata kunci yang persis dicari calon pelanggan Anda.' },
       { icon: 'PenLine', title: 'Produksi Konten Panjang', desc: 'Hingga 150+ artikel SEO per bulan oleh penulis spesialis.' },
       { icon: 'Wrench', title: 'Audit Technical SEO', desc: 'Perbaiki crawlability, kecepatan halaman, schema markup, dan Core Web Vitals.' },
-      { icon: 'BarChart3', title: 'Laporan Looker Studio', desc: 'Dashboard live untuk ranking, traffic, dan konversi, selalu aktif.' },
+      { icon: 'BarChart3', title: 'Laporan Looker Studio', desc: 'Dashboard live untuk ranking, traffic, dan konversi yang bisa diakses kapan saja.' },
       { icon: 'Link2', title: 'Arsitektur Internal Linking', desc: 'Link strategis antar halaman untuk meneruskan otoritas dan memandu alur pengguna.' },
-      { icon: 'MapPin', title: 'Local SEO', desc: 'Dominasi pencarian "terdekat" dan Google Business map pack.' },
+      { icon: 'MapPin', title: 'Local SEO', desc: 'Kuasai pencarian "near me" dan map pack Google Business Profile.' },
     ],
     process: [
       { step: '01', title: 'Audit Keyword', desc: 'Pemetaan ranking saat ini, celah kompetitor, dan peluang terbaik.', duration: 'Minggu 1' },
@@ -225,7 +225,7 @@ const SERVICES_ID = {
       { value: '2.5×', label: 'Peningkatan Traffic', desc: 'Rata-rata di klien setelah 6 bulan' },
     ],
     faqs: [
-      { question: 'Berapa lama untuk melihat hasil SEO?', answer: 'SEO biasanya butuh 3–6 bulan untuk menunjukkan hasil signifikan. Namun, peningkatan traffic biasanya mulai terlihat dalam 4–8 minggu pertama.' },
+      { question: 'Berapa lama jasa SEO mulai memberi hasil?', answer: 'SEO biasanya butuh 3–6 bulan untuk menunjukkan hasil signifikan. Namun, peningkatan traffic biasanya mulai terlihat dalam 4–8 minggu pertama.' },
       { question: 'Dalam bahasa apa artikel ditulis?', answer: 'Kami menulis dalam bahasa yang digunakan audiens Anda: Indonesia, Inggris, atau keduanya, sepenuhnya dioptimasi untuk keyword Anda.' },
       { question: 'Bisakah kami memilih topik artikel?', answer: 'Tentu. Kami melakukan riset keyword dan mendiskusikan topik yang relevan bersama Anda setiap bulan.' },
       { question: 'Bagaimana progres dilaporkan?', answer: 'Laporan Looker Studio bulanan mencakup ranking keyword, traffic, dan konversi, bisa diakses kapan saja.' },
@@ -234,10 +234,10 @@ const SERVICES_ID = {
   },
   'social-media-management': {
     tagline: 'Konten yang Terhubung. Kehadiran yang Mengonversi.',
-    description: 'Kami mengurus media sosial Anda sepenuhnya: strategi, pembuatan konten, penjadwalan, dan community management di Instagram, TikTok, Facebook, dan LinkedIn.',
+    description: 'Jasa social media management yang mengelola akun Anda sepenuhnya: strategi, pembuatan konten, penjadwalan, dan community management di Instagram, TikTok, Facebook, dan LinkedIn.',
     features: [
       { icon: 'Smartphone', title: 'Manajemen Multi-Platform', desc: 'Instagram, TikTok, Facebook & LinkedIn dalam satu strategi terintegrasi.' },
-      { icon: 'Palette', title: 'Desain Visual Kustom', desc: 'Setiap postingan dibangun sesuai brand guide, tanpa template stok.' },
+      { icon: 'Palette', title: 'Desain Visual Kustom', desc: 'Setiap postingan dibuat sesuai brand guide Anda, bukan template pasaran.' },
       { icon: 'MessageCircle', title: 'Community Management', desc: 'Komentar dan DM direspons selama jam kerja.' },
       { icon: 'CalendarDays', title: 'Kalender Konten', desc: 'Kalender bulanan direview dan disetujui sebelum tayang.' },
       { icon: 'TrendingUp', title: 'Strategi Pertumbuhan', desc: 'Riset hashtag, kolaborasi, dan kampanye engagement.' },
@@ -255,15 +255,15 @@ const SERVICES_ID = {
       { value: '100%', label: 'Konten Orisinal', desc: 'Dibuat khusus untuk brand Anda' },
     ],
     faqs: [
-      { question: 'Platform apa saja yang Logink kelola?', answer: 'Instagram, TikTok, Facebook, dan LinkedIn. Kami bisa fokus ke satu atau beberapa sesuai audiens Anda.' },
+      { question: 'Media sosial apa saja yang Logink kelola?', answer: 'Instagram, TikTok, Facebook, dan LinkedIn. Kami bisa fokus ke satu atau beberapa sesuai audiens Anda.' },
       { question: 'Apakah community management termasuk?', answer: 'Ya: respons komentar dan DM selama jam kerja termasuk dalam semua paket.' },
       { question: 'Siapa yang membuat konten visual?', answer: 'Tim kreatif kami mendesain semuanya sesuai brand guideline. Anda tinggal menyetujui sebelum dipublish.' },
       { question: 'Berapa banyak postingan per bulan?', answer: 'Frekuensi posting disesuaikan dengan budget dan tujuan Anda, didiskusikan saat onboarding.' },
     ],
   },
   'paid-advertising': {
-    tagline: 'Setiap Rupiah yang Diinvestasikan. Imbal Hasil Maksimal.',
-    description: 'Kampanye berbasis data di Google, Meta, TikTok, dan platform Marketplace. Kami menarget audiens yang tepat di momen yang tepat, terus mengoptimasi hingga ROAS mencapai 2–4×.',
+    tagline: 'Setiap Rupiah Iklan Bekerja Keras. Imbal Hasil Maksimal.',
+    description: 'Jasa iklan digital berbasis data di Google Ads, Meta Ads, TikTok Ads, dan Marketplace. Kami menargetkan audiens yang tepat di momen yang tepat, terus mengoptimasi hingga ROAS mencapai 2–4×.',
     features: [
       { icon: 'Search', title: 'Google Ads (Search + Display)', desc: 'Tangkap pembeli berniat tinggi saat mereka sedang mencari.' },
       { icon: 'Megaphone', title: 'Meta Ads', desc: 'Interests, lookalike, dan retargeting di Facebook & Instagram.' },
@@ -294,7 +294,7 @@ const SERVICES_ID = {
   },
   'creative-services': {
     tagline: 'Visual yang Berani. Cerita yang Jelas. Brand yang Diingat.',
-    description: 'Dari identitas brand hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang mencuri perhatian dan mendorong audiens untuk bertindak. Setiap aset dibuat khusus untuk audiens Anda, bukan template pasaran.',
+    description: 'Jasa desain dan video production, dari identitas brand hingga creative content yang mencuri perhatian dan mendorong audiens untuk bertindak. Setiap aset dibuat khusus untuk brand Anda, bukan template pasaran.',
     features: [
       { icon: 'Palette', title: 'Desain Identitas Brand', desc: 'Logo, palet warna, tipografi, dan brand guide.' },
       { icon: 'Camera', title: 'Produksi Foto & Video', desc: 'Syuting dan post-production untuk konten produk, korporat, dan kampanye.' },
@@ -319,12 +319,12 @@ const SERVICES_ID = {
       { question: 'Format apa saja yang bisa diproduksi?', answer: 'Postingan sosial (feed, story, reels), banner iklan, video (1:1, 9:16, 16:9), infografis, teks landing page, dan lainnya.' },
       { question: 'Berapa lama proses produksi?', answer: 'Desain grafis: 3–5 hari kerja. Video dengan syuting: 1–2 minggu tergantung kompleksitas.' },
       { question: 'Apakah revisi termasuk?', answer: 'Ya: 2 putaran per deliverable. Revisi tambahan tersedia dengan biaya terpisah.' },
-      { question: 'Apakah syuting di luar Jakarta bisa?', answer: 'Tim kami mencakup Jakarta dan sekitarnya. Syuting luar kota tersedia dengan biaya perjalanan tambahan.' },
+      { question: 'Apakah bisa syuting di luar Jakarta?', answer: 'Tim kami mencakup Jakarta dan sekitarnya. Syuting luar kota tersedia dengan biaya perjalanan tambahan.' },
     ],
   },
   'website-landing-page': {
     tagline: 'Ubah Pengunjung Menjadi Pelanggan. Dibangun untuk Performa.',
-    description: 'Kami merancang dan membangun website serta landing page berperforma tinggi: cepat, mobile-first, dan disiapkan untuk konversi. Dari company profile hingga toko e-commerce lengkap.',
+    description: 'Jasa pembuatan website dan landing page berperforma tinggi: cepat, mobile-first, dan disiapkan untuk konversi. Dari company profile hingga toko e-commerce lengkap.',
     features: [
       { icon: 'Zap', title: 'Performa Terdepan', desc: 'Core Web Vitals dioptimasi: loading cepat, interaksi mulus, tanpa layout shift.' },
       { icon: 'Smartphone', title: 'Responsif Mobile-First', desc: '100% responsif di semua perangkat, dibangun mobile-first dari awal.' },
@@ -346,7 +346,7 @@ const SERVICES_ID = {
       { value: '1–8 mggu', label: 'Waktu hingga Launch', desc: 'Dari landing page hingga e-commerce penuh' },
     ],
     faqs: [
-      { question: 'Berapa lama membangun website?', answer: 'Landing page: 1–2 minggu. Company profile: 3–4 minggu. E-commerce: 4–8 minggu.' },
+      { question: 'Berapa lama proses pembuatan website?', answer: 'Landing page: 1–2 minggu. Company profile: 3–4 minggu. E-commerce: 4–8 minggu.' },
       { question: 'Platform apa yang digunakan?', answer: 'WordPress, Next.js kustom, Shopify, atau WooCommerce, tergantung kebutuhan Anda.' },
       { question: 'Apakah hosting dan domain termasuk?', answer: 'Tidak termasuk, tetapi kami membantu setup dan merekomendasikan provider yang tepat.' },
       { question: 'Apakah website responsif mobile?', answer: 'Ya, 100% mobile-first dan sepenuhnya responsif, di setiap proyek.' },

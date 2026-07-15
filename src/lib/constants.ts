@@ -1,5 +1,5 @@
 export const BRAND = {
-  // "Warm Canvas" 2026 rebrand — accents come from the logo ribbon
+  // "Warm Canvas" 2026 rebrand, accents come from the logo ribbon
   cream: '#FDF8F3',
   surface: '#FFFFFF',
   ink: '#231A26',

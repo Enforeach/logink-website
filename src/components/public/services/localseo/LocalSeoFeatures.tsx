@@ -19,13 +19,13 @@ function LucideIcon({ name, ...props }: { name: string } & LucideProps) {
 const COPY = {
   id: {
     eyebrow: 'Apa yang Anda Dapatkan',
-    heading: 'Semua yang dibutuhkan untuk menang lokal.',
-    sub: 'Profil Google Business, landing page, keyword "near me", hingga review — satu tim menangani seluruh kehadiran lokal Anda.',
+    heading: 'Semua yang Anda butuhkan untuk menang di pencarian lokal.',
+    sub: 'Google Business Profile, landing page, keyword "near me", hingga review. Satu tim menangani seluruh kehadiran lokal Anda.',
   },
   en: {
     eyebrow: 'What You Get',
     heading: 'Everything you need to win locally.',
-    sub: 'Google Business Profile, landing page, "near me" keywords, and reviews — one team handling your entire local presence.',
+    sub: 'Google Business Profile, landing page, "near me" keywords, and reviews. One team handling your entire local presence.',
   },
 }
 

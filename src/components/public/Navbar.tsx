@@ -149,7 +149,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close menus on navigation — state adjustment during render instead of an effect
+  // Close menus on navigation - state adjustment during render instead of an effect
   const [prevPathname, setPrevPathname] = useState(pathname)
   if (pathname !== prevPathname) {
     setPrevPathname(pathname)
@@ -170,7 +170,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
             : 'bg-transparent'
         )}
       >
-        {/* Announcement Bar — ink band */}
+        {/* Announcement Bar - ink band */}
         {bannerVisible && (
           <div className="bg-[#231A26] relative flex items-center justify-center px-10 py-2">
             {/* Subtle gradient accents */}
@@ -213,7 +213,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
           <div className="flex h-16 items-center justify-between gap-8">
 
             {/* Logo */}
-            <Link href={localePath('/', locale)} className="flex items-center flex-shrink-0" aria-label="Logink — home">
+            <Link href={localePath('/', locale)} className="flex items-center flex-shrink-0" aria-label="Logink home">
               <LogoFull size={30} theme="light" />
             </Link>
 
@@ -361,7 +361,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
                       </div>
                     ))}
 
-                    {/* Featured card (4th column) — peach tint */}
+                    {/* Featured card (4th column) - peach tint */}
                     <div className="rounded-2xl overflow-hidden bg-[var(--bg-tint-peach)] p-5 flex flex-col justify-between min-h-[200px] relative">
                       {/* Soft brand orbs */}
                       <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-20 pointer-events-none blur-2xl"
@@ -420,7 +420,7 @@ export function Navbar({ locale = 'id' }: NavbarProps) {
         </AnimatePresence>
       </header>
 
-      {/* Mobile Menu — full-screen light drawer */}
+      {/* Mobile Menu - full-screen light drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div

@@ -43,7 +43,7 @@ export function CtaCustomImage({ widget, onTrackClick }: Props) {
         />
       </div>
 
-      {/* Hover overlay — soft ink scrim so the pill reads on any image */}
+      {/* Hover overlay - soft ink scrim so the pill reads on any image */}
       <div className="absolute inset-0 bg-brand-ink/0 group-hover:bg-brand-ink/20 transition-colors duration-300 flex items-center justify-center">
         <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-brand-ink text-sm font-semibold px-5 py-2.5 rounded-full shadow-card">
           {widget.buttonText || 'Click to learn more'} →

@@ -59,7 +59,7 @@ const COPY = {
     badge: 'Mengapa Logink?',
     headline: 'Masalah yang',
     headlineGradient: 'Kami Selesaikan',
-    body: 'Agensi konvensional bekerja sendiri-sendiri: vendor terpisah, meeting tak ada habisnya, tanpa sinergi. Logink dirancang berbeda — satu tim terintegrasi yang mengelola semua channel sekaligus, sehingga setiap kampanye saling menguatkan.',
+    body: 'Agensi konvensional bekerja sendiri-sendiri: vendor terpisah, meeting tak ada habisnya, tanpa sinergi. Logink dirancang berbeda: satu tim terintegrasi yang mengelola semua channel sekaligus, sehingga setiap kampanye saling menguatkan.',
     hint: 'Arahkan kursor atau ketuk kartu untuk melihat solusinya',
     link: 'Lihat bedanya →',
     problemLabel: 'Masalah',
@@ -165,7 +165,7 @@ function FlipCard({
             : 'border-[var(--border-default)]'
         }`}
       >
-        {/* Gradient left edge — solution state */}
+        {/* Gradient left edge: solution state */}
         <span
           aria-hidden="true"
           className={`absolute inset-y-0 left-0 w-1 gradient-brand-bg transition-opacity duration-300 ${solved ? 'opacity-100' : 'opacity-0'}`}

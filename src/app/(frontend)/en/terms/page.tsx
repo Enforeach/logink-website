@@ -213,7 +213,7 @@ const sections = [
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
-      {/* Title band — first horizontal sweep of the F */}
+      {/* Title band: first horizontal sweep of the F */}
       <header className="px-6 pb-0 pt-32">
         <div className="mx-auto max-w-6xl">
           <p className="eyebrow mb-4">Legal</p>

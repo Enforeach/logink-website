@@ -55,7 +55,7 @@ export function WebsitePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           </h2>
         </motion.div>
 
-        {/* Pricing panel — gradient border + CTA shadow */}
+        {/* Pricing panel: gradient border + CTA shadow */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}

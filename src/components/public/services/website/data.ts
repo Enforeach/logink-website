@@ -56,7 +56,7 @@ export const WEBSITE_PROJECT_TYPES = [
 export const WEBSITE_TECH_FEATURES = [
   {
     id: 'performance',
-    title: 'Build yang Mengutamakan Performa',
+    title: 'Dibangun untuk Performa Tinggi',
     description:
       'Setiap situs hadir dengan waktu muat di bawah 2 detik. Bundle code-split, gambar lazy-load, font teroptimasi, dan CDN delivery. PageSpeed score Anda dijamin 90+ atau kami perbaiki gratis.',
     span: 2,
@@ -266,7 +266,7 @@ export const WEBSITE_TECH_STACK = [
 
 export const WEBSITE_FAQS = [
   {
-    question: 'Berapa lama waktu yang dibutuhkan untuk membangun sebuah website?',
+    question: 'Berapa lama proses pembuatan website?',
     answer:
       'Landing page biasanya membutuhkan 1-2 minggu. Website company profile 3-5 minggu. Situs e-commerce 4-8 minggu, tergantung ukuran katalog produk dan integrasi. Kami memberikan timeline detail pada fase Discovery & Scope, dan Anda selalu tahu posisi proyek Anda.',
   },

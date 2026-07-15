@@ -5,7 +5,7 @@ import { makeRevalidateHooks } from '../payload/revalidate'
 const revalidate = makeRevalidateHooks(['/', '/en'])
 
 // Client logos for the "Trusted by leading Indonesian brands" home strip.
-// The strip only renders when at least one active logo exists — so it stays
+// The strip only renders when at least one active logo exists, so it stays
 // hidden until the team has enough clients to show.
 export const ClientLogos: CollectionConfig = {
   slug: 'client-logos',

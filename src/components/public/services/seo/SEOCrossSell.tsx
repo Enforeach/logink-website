@@ -43,7 +43,7 @@ const CROSS_SELLS_EN = [
 ]
 
 const CROSSSELL_COPY = {
-  id: { eyebrow: 'Perkuat Hasil Anda', heading: 'Cocok dikombinasikan dengan', sub: 'SEO mendatangkan trafficnya; layanan ini mengubahnya menjadi revenue.', learnMore: 'Selengkapnya', basePath: '/layanan' },
+  id: { eyebrow: 'Perkuat Hasil Anda', heading: 'Cocok dikombinasikan dengan', sub: 'SEO mendatangkan traffic; layanan ini mengubahnya menjadi revenue.', learnMore: 'Selengkapnya', basePath: '/layanan' },
   en: { eyebrow: 'Amplify Your Results', heading: 'Pairs well with', sub: 'SEO brings the traffic; these services turn it into revenue.', learnMore: 'Learn more', basePath: '/en/services' },
 }
 

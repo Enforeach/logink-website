@@ -10,7 +10,7 @@ const PRICING_COPY = {
   id: {
     popular: 'Paling Populer',
     eyebrow: 'Pricing',
-    heading: 'Pilih paket yang sesuai dengan tahap pertumbuhan bisnis Anda.',
+    heading: 'Pilih paket jasa SEO sesuai tahap pertumbuhan bisnis Anda.',
     sub: 'Semua paket mencakup akses GA4 penuh dan laporan bulanan. Tanpa kontrak lock-in.',
     addonsTitle: 'Add-on Tersedia',
     addonBadge: 'Opsional',

@@ -27,7 +27,7 @@ const CTASection = dynamic(() =>
 
 export const metadata: Metadata = buildMetadata({
   title: 'Logink | 360° Digital Marketing Agency Jakarta',
-  description: 'Full-service digital marketing agency for Indonesian brands. SEO, Social Media, Paid Advertising, Creative, and Website — all integrated, all measurable.',
+  description: 'Full-service digital marketing agency for Indonesian brands. SEO, Social Media, Paid Advertising, Creative, and Website: all integrated, all measurable.',
   path: '/en',
   noSuffix: true,
 })

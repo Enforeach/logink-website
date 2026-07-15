@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 const HERO_COPY = {
   id: {
-    badge: 'Jasa Social Media Marketing Jakarta — Konten Viral, Followers & Engagement Bertumbuh',
+    badge: 'Jasa Social Media Marketing Jakarta: Konten Viral, Followers & Engagement Bertumbuh',
     trustPills: ['✓ Konten 100% original', '✓ Native Bahasa Indonesia', '✓ Kalender konten bulanan'],
     home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/layanan',
     title1: 'Konten yang Mengena.', title2: 'Kehadiran yang Mengonversi.',
@@ -15,7 +15,7 @@ const HERO_COPY = {
     ctaWhatsApp: 'Chat di WhatsApp',
   },
   en: {
-    badge: 'Social Media Management Jakarta — Viral Content, Growing Followers & Engagement',
+    badge: 'Social Media Management Jakarta: Viral Content, Growing Followers & Engagement',
     trustPills: ['✓ 100% original content', '✓ Bahasa Indonesia native', '✓ Monthly content calendar'],
     home: 'Home', services: 'Services', homeHref: '/en', servicesHref: '/en/services',
     title1: 'Content That Connects.', title2: 'Presence That Converts.',

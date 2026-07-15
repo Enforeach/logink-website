@@ -146,7 +146,7 @@ export const ADS_PLATFORMS = [
     subtitle: 'Instagram & Facebook',
     tagline: 'Jangkau audiens ideal Anda dengan targeting presisi dan creative yang mencuri perhatian.',
     description:
-      'Platform iklan Meta memberi Anda akses ke audiens social terbesar Indonesia. Targeting demografi lokal, audiens berbasis interest, retargeting berbasis perilaku, dan creative yang benar-benar menarik perhatian di feed.',
+      'Platform iklan Meta memberi Anda akses ke audiens media sosial terbesar di Indonesia. Targeting demografi lokal, audiens berbasis interest, retargeting berbasis perilaku, dan creative yang benar-benar menarik perhatian di feed.',
     features: [
       'Targeting Audiens Lokal',
       'Desain Ad Creative untuk Meta',

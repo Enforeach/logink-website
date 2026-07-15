@@ -234,7 +234,7 @@ const CSS = `
 .lp-chip { animation: lp-chipin 0.3s ease both; }
 `
 
-// Light option tile (single/gateway) — shared classes
+// Light option tile (single/gateway), shared classes
 const TILE =
   'lp-chip rounded-full border border-[var(--border-default)] bg-white text-[var(--text-secondary)] ' +
   'hover:-translate-y-0.5 hover:border-[var(--border-hover)] hover:text-[var(--text-primary)] hover:shadow-card ' +

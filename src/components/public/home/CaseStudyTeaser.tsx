@@ -85,7 +85,7 @@ export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: Case
           </h2>
         </div>
 
-        {/* Case study card — horizontal split */}
+        {/* Case study card: horizontal split */}
         <div
           ref={ref}
           style={isInView ? { animation: 'fade-up 0.65s cubic-bezier(0.22,1,0.36,1) both' } : { opacity: 0 }}

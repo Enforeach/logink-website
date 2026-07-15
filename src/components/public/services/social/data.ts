@@ -10,7 +10,7 @@ export const SOCIAL_MODULES = [
       {
         name: 'Monthly Content Plan',
         description:
-          'Kalender strategis yang selaras dengan tujuan brand, tren musiman, dan event industri. Diulas dan disetujui sebelum apapun tayang.',
+          'Kalender strategis yang selaras dengan tujuan brand, tren musiman, dan event industri. Ditinjau dan disetujui sebelum apa pun tayang.',
       },
       {
         name: 'Jumlah post per bulan (kustom)',
@@ -213,7 +213,7 @@ export const SOCIAL_FAQS = [
   {
     question: 'Platform apa saja yang Logink kelola?',
     answer:
-      'Kami kelola Instagram, TikTok, Facebook, dan LinkedIn. Setiap platform mendapat strategi tersendiri, karena apa yang berhasil di TikTok belum tentu berlaku di LinkedIn. Kami sarankan mulai dari 2–3 platform tempat audiens Anda paling aktif, lalu berkembang dari sana. Kami tidak menyebar tenaga terlalu tipis ke platform yang tidak relevan untuk brand Anda.',
+      'Kami kelola Instagram, TikTok, Facebook, dan LinkedIn. Setiap platform mendapat strategi tersendiri, karena apa yang berhasil di TikTok belum tentu berlaku di LinkedIn. Kami sarankan mulai dari 2–3 platform tempat audiens Anda paling aktif, lalu berkembang dari sana. Kami tidak memaksakan kehadiran di platform yang tidak relevan untuk brand Anda.',
   },
   {
     question: 'Apakah community management sudah termasuk?',
@@ -238,7 +238,7 @@ export const SOCIAL_FAQS = [
   {
     question: 'Apakah kami bisa menyetujui konten sebelum tayang?',
     answer:
-      'Tentu saja, tidak ada yang tayang tanpa persetujuan Anda. Kami siapkan kalender konten satu bulan penuh di awal, lengkap dengan visual dan caption. Anda dapat me-review semuanya di dokumen bersama atau tool content approval. Setelah disetujui, kami tangani penjadwalan dan posting. Ronde revisi sudah termasuk.',
+      'Tentu saja, tidak ada yang tayang tanpa persetujuan Anda. Kami siapkan kalender konten satu bulan penuh di awal, lengkap dengan visual dan caption. Anda dapat review semuanya di dokumen bersama atau tool content approval. Setelah disetujui, kami tangani penjadwalan dan posting. Ronde revisi sudah termasuk.',
   },
   {
     question: 'Bagaimana Logink mengukur keberhasilan?',

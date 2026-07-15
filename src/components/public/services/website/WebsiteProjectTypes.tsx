@@ -88,7 +88,7 @@ const MOCKUP_MAP: Record<string, (accent: string) => React.ReactElement> = {
 const PROJECTTYPES_COPY = {
   id: {
     eyebrow: 'Apa yang Kami Bangun',
-    heading1: 'Tiga tipe proyek web.',
+    heading1: 'Tiga jenis proyek website.',
     heading2: 'Satu standar kualitas.',
     pricingLabel: 'Semua proyek',
     pricingNote: 'Scope dan harga final diberikan setelah Discovery call gratis.',

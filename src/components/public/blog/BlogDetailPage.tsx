@@ -118,7 +118,7 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <ReadingProgress />
 
-      {/* F-pattern sweep 1 — category · title · meta row */}
+      {/* F-pattern sweep 1 - category · title · meta row */}
       <section className="pt-32 pb-10 px-6 mesh-gradient">
         <div className="max-w-6xl mx-auto">
           <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-6" aria-label="Breadcrumb">
@@ -161,7 +161,7 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
             {!!post.wordCount && <span>{post.wordCount.toLocaleString()} words</span>}
           </div>
 
-          {/* F-pattern sweep 2 — hook line + share row under a hairline */}
+          {/* F-pattern sweep 2 - hook line + share row under a hairline */}
           <div className="mt-8 pt-6 border-t border-[var(--border-default)]">
             {resolved.excerpt && (
               <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed max-w-3xl">{resolved.excerpt}</p>
@@ -206,7 +206,7 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
         </div>
       )}
 
-      {/* F-pattern stem — body left (max-w-[65ch]) + sticky right rail */}
+      {/* F-pattern stem - body left (max-w-[65ch]) + sticky right rail */}
       <section className="pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-12 items-start">
@@ -258,7 +258,7 @@ export async function BlogDetailPage({ slug, locale }: { slug: string; locale: L
         </div>
       )}
 
-      {/* Related articles — compact horizontal rows, same F rhythm */}
+      {/* Related articles - compact horizontal rows, same F rhythm */}
       {related.length > 0 && (
         <section className="py-16 md:py-24 px-6 bg-[var(--bg-surface)] border-t border-[var(--border-default)]">
           <div className="max-w-6xl mx-auto">

@@ -3,7 +3,7 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 /**
  * Revalidate the given static paths after a mutation. Wired into content
  * collections so edits appear immediately instead of only after the ISR window
- * — repairing the thin/broken revalidation of the old CMS.
+ * repairing the thin/broken revalidation of the old CMS.
  *
  * `next/cache` is imported LAZILY inside the hook: this config is also loaded by
  * the Payload CLI (migrations / generate:types) in a plain Node context where
@@ -20,7 +20,7 @@ export function makeRevalidateHooks(paths: string[], _tags: string[] = []): {
       const { revalidatePath } = await import('next/cache')
       for (const p of paths) revalidatePath(p)
     } catch {
-      // revalidate throws outside a request scope (migration/seed/CLI) — ignore.
+      // revalidate throws outside a request scope (migration/seed/CLI); ignore.
     }
   }
   return {

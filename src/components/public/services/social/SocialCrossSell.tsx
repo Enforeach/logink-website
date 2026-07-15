@@ -58,7 +58,7 @@ export function SocialCrossSell({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = CROSSSELL_COPY[locale]
 
   return (
-    // Peach tint band — sibling services in their own accents
+    // Peach tint band, sibling services in their own accents
     <section className="py-20 md:py-28 px-4" style={{ background: 'var(--bg-tint-peach)' }}>
       <div className="max-w-4xl mx-auto">
         <div className="mb-10">

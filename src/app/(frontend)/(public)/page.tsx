@@ -5,7 +5,7 @@ import { getHomeData } from '@/payload/queries'
 import { HeroSection } from '@/components/public/home/HeroSection'
 import { LogoMarquee } from '@/components/public/home/LogoMarquee'
 
-// Lazy-load below-fold Client Components — keeps framer-motion + recharts out
+// Lazy-load below-fold Client Components, keeps framer-motion + recharts out
 // of the initial JS bundle. HTML still SSR'd, hydration JS loads async.
 const LeadProfiler = dynamic(() => import('@/components/public/LeadProfiler'))
 const ProblemSolutionSection = dynamic(() =>

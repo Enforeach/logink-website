@@ -3,7 +3,7 @@ import { getClientLogos } from '@/payload/queries'
 import { type Locale, t } from '@/lib/i18n'
 
 // Data-driven "Trusted by" strip. Renders nothing while there are no active
-// client logos in the CMS — so the section stays hidden until the team adds
+// client logos in the CMS, so the section stays hidden until the team adds
 // logos in Payload (Content → Client Logos), then it appears automatically.
 export async function LogoMarquee({ locale = 'id' }: { locale?: Locale }) {
   let logos: Awaited<ReturnType<typeof getClientLogos>> = []

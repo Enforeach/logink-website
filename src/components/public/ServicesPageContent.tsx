@@ -10,12 +10,12 @@ const COPY = {
     badge: 'Layanan Kami',
     headline: '360° Layanan Digital',
     headlineGradient: 'Marketing',
-    desc: 'Layanan digital terintegrasi yang bekerja sebagai satu sistem, bukan agensi yang berjalan sendiri-sendiri.',
+    desc: 'Layanan digital marketing terintegrasi yang bekerja sebagai satu sistem, bukan tim yang berjalan sendiri-sendiri.',
     startingFrom: 'Mulai dari',
     learnMore: 'Pelajari lebih lanjut',
-    integrationHeadline: 'Semua Layanan Bekerja',
+    integrationHeadline: 'Semua Layanan Digital Bekerja',
     integrationGradient: 'Bersama',
-    integrationDesc: 'SEO Anda memperkuat iklan Anda. Social media Anda mengisi konten. Website Anda mengonversi semuanya. Semuanya saling menguatkan.',
+    integrationDesc: 'SEO Anda memperkuat iklan Anda. Social media Anda menghidupkan konten. Website Anda mengonversi semuanya. Semuanya saling menguatkan.',
     funnelSteps: [
       { label: 'Jangkauan', color: '#A855F7' },
       { label: 'Keterlibatan', color: '#D81C5C' },
@@ -76,7 +76,7 @@ const FALLBACK_EN = [
   { id: '6', name: 'Local SEO & Google Maps', slug: 'local-seo', color: '#0D9488', funnelPosition: 'Local', shortDescId: 'Win Google Maps & "near me" searches', descriptionId: 'Google Business Profile optimization & a local landing page to rank in the map pack and "near me" searches within a radius of up to 20 km. GBP setup included.', isActive: true, sortOrder: 5, pricingTiers: [{ id: '6', tierName: 'Starter', priceLabel: 'IDR 1M', priceValue: 1000, features: [], isPopular: false, sortOrder: 0 }], addOns: [] },
 ]
 
-// ServiceData with raw (Json) tier features — covers both Prisma rows and the in-file fallbacks
+// ServiceData with raw (Json) tier features, covers both Prisma rows and the in-file fallbacks
 type RawTier = Omit<PricingTierData, 'features'> & { features: unknown }
 type RawService = Omit<ServiceData, 'pricingTiers'> & { pricingTiers: RawTier[] }
 
@@ -110,7 +110,7 @@ export async function ServicesPageContent({ locale = 'id' }: { locale?: Locale }
         </div>
       </section>
 
-      {/* Services — alternating full-width rows */}
+      {/* Services - alternating full-width rows */}
       <section className="bg-[var(--bg-primary)] px-6 py-20 md:py-28">
         <div className="mx-auto max-w-7xl space-y-20 md:space-y-28">
           {services.map((svc, i) => {

@@ -153,7 +153,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   )
 
   return (
-    // Rose tint band — the conversion moment on this page
+    // Rose tint band, the conversion moment on this page
     <section id="pricing" className="py-20 md:py-28 px-4" style={{ background: 'var(--bg-tint-rose)' }}>
       <div className="max-w-3xl mx-auto">
         <div className="mb-12">

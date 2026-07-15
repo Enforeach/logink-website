@@ -10,7 +10,7 @@ const ACCENT_TEXT = '#C2410C' // AA-safe orange for small text on light bg
 
 const PRICING_COPY = {
   id: {
-    heading: 'Pilih paket Anda.',
+    heading: 'Pilih paket iklan Anda.',
     sub: 'Harga transparan, tanpa kejutan. Semua paket mencakup akses akun penuh dan optimasi mingguan.',
     popular: '★ Paling Populer',
     managementFee: '(biaya manajemen)',

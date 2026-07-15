@@ -131,7 +131,7 @@ export function LocalSeoPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           <p className="text-[var(--text-secondary)] mt-3 max-w-lg mx-auto">{copy.sub}</p>
         </motion.div>
 
-        {/* Tier cards — 2 tiers, centered */}
+        {/* Tier cards: 2 tiers, centered */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-4 items-stretch">
           {(tiers as typeof LOCALSEO_PRICING_TIERS).map((tier, i) => (
             <TierCard key={tier.id} tier={tier} index={i} copy={copy} />

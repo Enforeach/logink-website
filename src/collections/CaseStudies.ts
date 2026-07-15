@@ -26,7 +26,7 @@ export const CaseStudies: CollectionConfig = {
     // Legacy
     { name: 'title', type: 'text', required: true },
     { name: 'industry', type: 'text' },
-    // Legacy narrative fields — newer block-based case studies leave these empty.
+    // Legacy narrative fields; newer block-based case studies leave these empty.
     { name: 'challenge', type: 'textarea' },
     { name: 'strategy', type: 'textarea' },
     { name: 'results', type: 'textarea' },

@@ -43,7 +43,7 @@ function PageSpeedRing({ score }: { score: number }) {
 
 const HERO_COPY = {
   id: {
-    badge: 'Jasa Website & Landing Page Jakarta — Cepat, Mobile-First, Konversi Tinggi',
+    badge: 'Jasa Pembuatan Website & Landing Page Jakarta: Cepat, Mobile-First, Konversi Tinggi',
     pills: ['Load time di bawah 2 detik', 'Responsif mobile-first', 'GA4 + pixel tracking termasuk'],
     home: 'Beranda',
     services: 'Layanan',
@@ -59,7 +59,7 @@ const HERO_COPY = {
     ctaSecondary: 'Lihat Harga',
   },
   en: {
-    badge: 'Website & Landing Page Development Jakarta — Fast, Mobile-First, High Conversion',
+    badge: 'Website & Landing Page Development Jakarta: Fast, Mobile-First, High Conversion',
     pills: ['Load time under 2 seconds', 'Mobile-first responsive', 'GA4 + pixel tracking included'],
     home: 'Home',
     services: 'Services',

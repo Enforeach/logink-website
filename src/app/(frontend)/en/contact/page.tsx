@@ -45,7 +45,7 @@ export default async function ContactEnPage() {
           <aside className="lg:col-span-2 space-y-4">
             <h2 className="font-display text-xl font-bold tracking-[-0.02em] text-[var(--text-primary)] mb-2">Or Reach Us Directly</h2>
 
-            {/* WhatsApp — most prominent */}
+            {/* WhatsApp, most prominent */}
             <a
               href={WHATSAPP_URL}
               target="_blank"

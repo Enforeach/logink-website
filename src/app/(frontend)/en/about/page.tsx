@@ -24,7 +24,7 @@ const DIFFERENTIATORS = [
   { title: 'No Black Boxes', desc: '"Transparent GA4 dashboards, Looker Studio reports, and full access to every account."' },
 ]
 
-/* Derive the "pain" phrase from the claim title — data stays intact */
+/* Derive the "pain" phrase from the claim title, data stays intact */
 const pain = (title: string) => title.replace(/^No\s+/, '')
 
 export default function AboutEnPage() {
@@ -35,7 +35,7 @@ export default function AboutEnPage() {
         <div aria-hidden className="orb" style={{ width: 320, height: 320, top: -110, right: -70, background: 'rgba(248,132,56,0.20)' }} />
         <div aria-hidden className="orb" style={{ width: 260, height: 260, bottom: -120, left: -60, background: 'rgba(168,85,247,0.14)', animationDelay: '-7s' }} />
         <Reveal className="relative z-10 max-w-4xl mx-auto text-center">
-          <span className="eyebrow block mb-4">About Logink</span>
+          <span className="eyebrow block mb-4">360° Digital Marketing Agency</span>
           <h1 className="font-display text-[clamp(2.75rem,6vw,4.5rem)] font-bold tracking-[-0.03em] leading-[1.05] text-[var(--text-primary)] mb-6">
             Connected{' '}
             <span className="gradient-text">Creativity</span>

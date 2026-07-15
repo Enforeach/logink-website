@@ -120,7 +120,7 @@ function ModuleCard({ mod, index, locale = 'id' }: { mod: Module; index: number;
 }
 
 const SUB_COPY = {
-  id: { eyebrow: 'Apa yang Anda Dapat', heading: 'Tiga modul, satu strategi.', sub: 'Pilih satu, dua, atau ketiganya: setiap modul dirancang untuk berdiri sendiri maupun digabungkan.' },
+  id: { eyebrow: 'Apa yang Anda Dapat', heading: 'Tiga modul, satu strategi social media.', sub: 'Pilih satu, dua, atau ketiganya: setiap modul dirancang untuk berdiri sendiri maupun digabungkan.' },
   en: { eyebrow: 'What You Get', heading: 'Three engines, one strategy.', sub: 'Choose one, two, or all three: every module is designed to work standalone or combined.' },
 }
 

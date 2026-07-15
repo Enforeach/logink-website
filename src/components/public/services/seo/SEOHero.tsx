@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 const COPY = {
   id: {
-    badge: 'Jasa SEO Profesional Jakarta — Ranking #1 Google, Traffic Organik Berkembang',
+    badge: 'Jasa SEO Profesional Jakarta: Ranking #1 Google, Traffic Organik Berkembang',
     trustPills: [
       '✓ Penulis native Bahasa Indonesia',
       '✓ Transparansi GA4 penuh',
@@ -31,7 +31,7 @@ const COPY = {
     changeLabel: 'Δ Naik',
   },
   en: {
-    badge: 'Professional SEO Services Jakarta — Rank #1 on Google, Grow Organic Traffic',
+    badge: 'Professional SEO Services Jakarta: Rank #1 on Google, Grow Organic Traffic',
     trustPills: [
       '✓ Bahasa Indonesia native writers',
       '✓ Full GA4 transparency',

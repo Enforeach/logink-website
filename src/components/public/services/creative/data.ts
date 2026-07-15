@@ -65,7 +65,7 @@ export const CREATIVE_ENGAGEMENT_TYPES = [
   {
     id: 'not-sure',
     name: 'Belum tahu',
-    description: 'Mari diskusikan kebutuhan Anda dan temukan pengaturan yang paling tepat.',
+    description: 'Mari diskusikan kebutuhan Anda dan temukan model kerja sama yang paling tepat.',
   },
 ] as const
 

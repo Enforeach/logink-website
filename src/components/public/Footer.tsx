@@ -48,7 +48,7 @@ export function Footer({ locale = 'id' }: FooterProps) {
         <div className="py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex mb-4" aria-label="Logink — home">
+            <Link href="/" className="inline-flex mb-4" aria-label="Logink home">
               <LogoFull size={30} theme="light" />
             </Link>
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">

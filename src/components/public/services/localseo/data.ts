@@ -1,4 +1,4 @@
-// Local SEO / Google Maps service — content for both locales.
+// Local SEO / Google Maps service: content for both locales.
 // Accent: teal #0D9488 (location/maps). Two annual-billed packages that both
 // include a simple local landing page + Google Business Profile setup.
 
@@ -12,7 +12,7 @@ export const LOCALSEO_PRICING_TIERS = [
     price: 'Rp 1 Juta',
     priceValue: 1000000,
     period: '/bulan',
-    billing: 'Ditagih tahunan — Rp 12 Juta/tahun',
+    billing: 'Ditagih tahunan (Rp 12 Juta/tahun)',
     bestFor: 'Bisnis 1 lokasi yang ingin tampil di Google Maps',
     isPopular: false,
     color: '#0D9488',
@@ -32,7 +32,7 @@ export const LOCALSEO_PRICING_TIERS = [
     price: 'Rp 2 Juta',
     priceValue: 2000000,
     period: '/bulan',
-    billing: 'Ditagih tahunan — Rp 24 Juta/tahun',
+    billing: 'Ditagih tahunan (Rp 24 Juta/tahun)',
     bestFor: 'Bisnis yang ingin mendominasi map pack & review',
     isPopular: true,
     color: '#0EA5A4',
@@ -55,7 +55,7 @@ export const LOCALSEO_PRICING_TIERS_EN = [
     price: 'IDR 1 Mio',
     priceValue: 1000000,
     period: '/month',
-    billing: 'Billed annually — IDR 12 Mio/year',
+    billing: 'Billed annually (IDR 12 Mio/year)',
     bestFor: 'Single-location businesses getting on Google Maps',
     isPopular: false,
     color: '#0D9488',
@@ -75,7 +75,7 @@ export const LOCALSEO_PRICING_TIERS_EN = [
     price: 'IDR 2 Mio',
     priceValue: 2000000,
     period: '/month',
-    billing: 'Billed annually — IDR 24 Mio/year',
+    billing: 'Billed annually (IDR 24 Mio/year)',
     bestFor: 'Businesses aiming to dominate the map pack & reviews',
     isPopular: true,
     color: '#0EA5A4',

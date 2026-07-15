@@ -6,7 +6,7 @@ import { LOCALSEO_ACCENT } from './data'
 
 const COPY = {
   id: {
-    badge: 'Jasa Local SEO & Google Maps — Muncul saat pelanggan mencari "terdekat"',
+    badge: 'Jasa Local SEO & Google Maps: Muncul saat pelanggan mencari "terdekat"',
     home: 'Beranda',
     services: 'Layanan',
     homeHref: '/',
@@ -40,7 +40,7 @@ const COPY = {
     ],
   },
   en: {
-    badge: 'Local SEO & Google Maps — Show up when customers search "near me"',
+    badge: 'Local SEO & Google Maps: Show up when customers search "near me"',
     home: 'Home',
     services: 'Services',
     homeHref: '/en',

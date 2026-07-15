@@ -88,7 +88,7 @@ function StepVisual({ step }: { step: number }) {
 }
 
 const PROCESS_COPY = {
-  id: { eyebrow: 'Cara Kerjanya', heading: 'Dari kickoff hingga hasil nyata.', sub: 'Proses yang jelas dan berulang agar Anda selalu tahu apa yang terjadi selanjutnya.' },
+  id: { eyebrow: 'Cara Kerjanya', heading: 'Proses SEO dari kickoff hingga hasil nyata.', sub: 'Proses yang jelas dan berulang agar Anda selalu tahu apa yang terjadi selanjutnya.' },
   en: { eyebrow: 'How It Works', heading: 'From kickoff to real results.', sub: 'A clear, repeatable process so you always know what happens next.' },
 }
 

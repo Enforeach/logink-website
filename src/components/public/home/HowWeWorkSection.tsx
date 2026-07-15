@@ -168,7 +168,7 @@ export function HowWeWorkSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
         <div ref={trackRef} className="relative max-w-4xl mx-auto">
           {/* Track */}
           <div aria-hidden="true" className="absolute left-6 md:left-1/2 -translate-x-1/2 top-2 bottom-2 w-px bg-[var(--border-default)]" />
-          {/* Gradient fill — grows with scroll */}
+          {/* Gradient fill that grows with scroll */}
           <motion.div
             aria-hidden="true"
             className="absolute left-6 md:left-1/2 top-2 bottom-2 w-[3px] rounded-full gradient-brand-bg origin-top"
