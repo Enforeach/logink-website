@@ -377,6 +377,30 @@ export async function getAllActiveServicesBrief() {
   return res.docs.map((s: AnyDoc) => ({ id: String(s.id), name: s.name ?? '', slug: s.slug ?? '', color: s.color ?? null, icon: s.icon ?? null }))
 }
 
+export async function getClientLogos() {
+  const payload = await getPayloadClient()
+  const res = await payload.find({
+    collection: 'client-logos',
+    where: { isActive: { equals: true } },
+    sort: 'sortOrder',
+    depth: 2,
+    limit: 100,
+  })
+  return res.docs
+    .map((d: AnyDoc) => {
+      const logo = d.logo && typeof d.logo === 'object' ? (d.logo as AnyDoc) : null
+      return {
+        id: String(d.id),
+        name: d.name ?? '',
+        url: d.url ?? null,
+        logo: mediaUrl(d.logo),
+        width: logo?.width ?? 160,
+        height: logo?.height ?? 48,
+      }
+    })
+    .filter((l) => !!l.logo)
+}
+
 export async function getSitemapEntries() {
   const payload = await getPayloadClient()
   const [posts, cases] = await Promise.all([

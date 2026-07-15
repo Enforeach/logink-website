@@ -19,6 +19,7 @@ export const en = {
       ctaPrimary: 'Get a Free Quote →',
       ctaSecondary: 'See Our Work',
     },
+    trustedBy: 'Trusted by leading Indonesian brands',
   },
 
   services: {

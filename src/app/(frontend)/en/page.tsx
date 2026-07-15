@@ -43,7 +43,7 @@ export default async function EnHomePage() {
     <>
       <HeroSection locale="en" />
       <LeadProfiler locale="en" />
-      <LogoMarquee />
+      <LogoMarquee locale="en" />
       <ProblemSolutionSection locale="en" />
       <ServicesSection locale="en" />
       <StatsSection locale="en" />

@@ -58,7 +58,7 @@ export default async function HomePage() {
 
       <HeroSection locale="id" />
       <LeadProfiler />
-      <LogoMarquee />
+      <LogoMarquee locale="id" />
       <ProblemSolutionSection locale="id" />
       <ServicesSection services={services} locale="id" />
       <HowWeWorkSection locale="id" />

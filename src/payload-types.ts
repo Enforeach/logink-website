@@ -75,6 +75,7 @@ export interface Config {
     services: Service;
     testimonials: Testimonial;
     'cta-widgets': CtaWidget;
+    'client-logos': ClientLogo;
     media: Media;
     'contact-submissions': ContactSubmission;
     users: User;
@@ -93,6 +94,7 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'cta-widgets': CtaWidgetsSelect<false> | CtaWidgetsSelect<true>;
+    'client-logos': ClientLogosSelect<false> | ClientLogosSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -334,10 +336,10 @@ export interface Tag {
 export interface CaseStudy {
   id: number;
   title: string;
-  industry: string;
-  challenge: string;
-  strategy: string;
-  results: string;
+  industry?: string | null;
+  challenge?: string | null;
+  strategy?: string | null;
+  results?: string | null;
   thumbnail?: (number | null) | Media;
   service?: (number | null) | Service;
   titleId?: string | null;
@@ -590,6 +592,34 @@ export interface CtaWidget {
   createdAt: string;
 }
 /**
+ * Logos shown in the homepage "Trusted by" strip. The strip is hidden while this list is empty.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "client-logos".
+ */
+export interface ClientLogo {
+  id: number;
+  /**
+   * Client / brand name (used as alt text).
+   */
+  name: string;
+  /**
+   * Transparent PNG or SVG works best.
+   */
+  logo: number | Media;
+  /**
+   * Optional link to the client website.
+   */
+  url?: string | null;
+  isActive?: boolean | null;
+  /**
+   * Lower shows first.
+   */
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-submissions".
  */
@@ -671,6 +701,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'cta-widgets';
         value: number | CtaWidget;
+      } | null)
+    | ({
+        relationTo: 'client-logos';
+        value: number | ClientLogo;
       } | null)
     | ({
         relationTo: 'media';
@@ -949,6 +983,19 @@ export interface CtaWidgetsSelect<T extends boolean = true> {
   sponsoredLabel?: T;
   impressionCount?: T;
   clickCount?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "client-logos_select".
+ */
+export interface ClientLogosSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  url?: T;
+  isActive?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }

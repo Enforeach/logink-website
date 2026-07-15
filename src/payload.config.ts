@@ -17,6 +17,7 @@ import { CaseStudies } from './collections/CaseStudies'
 import { Testimonials } from './collections/Testimonials'
 import { CtaWidgets } from './collections/CtaWidgets'
 import { ContactSubmissions } from './collections/ContactSubmissions'
+import { ClientLogos } from './collections/ClientLogos'
 import { SiteSettings } from './globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
@@ -44,6 +45,7 @@ export default buildConfig({
     Services,
     Testimonials,
     CtaWidgets,
+    ClientLogos,
     Media,
     ContactSubmissions,
     Users,

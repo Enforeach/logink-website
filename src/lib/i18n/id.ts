@@ -19,6 +19,7 @@ export const id = {
       ctaPrimary: 'Minta Penawaran Gratis →',
       ctaSecondary: 'Lihat Portofolio',
     },
+    trustedBy: 'Dipercaya oleh brand terkemuka Indonesia',
   },
 
   services: {
