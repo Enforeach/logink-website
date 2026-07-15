@@ -162,7 +162,7 @@ export function WebsiteHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                 {c.ctaPrimary}
               </Link>
               <a
-                href={`https://wa.me/6287782495916?text=${encodeURIComponent(c.waMessage)}`}
+                href={`https://wa.me/628139453933?text=${encodeURIComponent(c.waMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={c.ctaWhatsApp}

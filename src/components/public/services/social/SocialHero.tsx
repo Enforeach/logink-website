@@ -134,7 +134,7 @@ export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                 </svg>
               </Link>
               <a
-                href="https://wa.me/6287782495916"
+                href="https://wa.me/628139453933"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={c.ctaWhatsApp}

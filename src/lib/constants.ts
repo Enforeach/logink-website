@@ -26,7 +26,7 @@ export const SITE = {
   description: '360° Digital Marketing Agency, Jakarta, Indonesia',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://logink.co',
   email: 'hello@logink.co',
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287782495916',
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '628139453933',
   instagram: 'https://instagram.com/logink.co',
   address: 'Jakarta, Indonesia',
 } as const
@@ -38,4 +38,4 @@ export const NAV_LINKS = [
   { href: '/about', label: 'About' },
 ] as const
 
-export const WHATSAPP_URL = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287782495916'}?text=Hi%20Logink%2C%20I%27m%20interested%20in%20your%20services`
+export const WHATSAPP_URL = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '628139453933'}?text=Hi%20Logink%2C%20I%27m%20interested%20in%20your%20services`

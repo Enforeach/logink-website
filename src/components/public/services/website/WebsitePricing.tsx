@@ -37,7 +37,7 @@ const PRICING_COPY = {
 export function WebsitePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const copy = PRICING_COPY[locale]
   const addons = locale === 'en' ? WEBSITE_ADDONS_EN : WEBSITE_ADDONS
-  const WA_LINK = `https://wa.me/6287782495916?text=${encodeURIComponent(copy.waMessage)}`
+  const WA_LINK = `https://wa.me/628139453933?text=${encodeURIComponent(copy.waMessage)}`
 
   return (
     <section id="pricing" className="py-20 md:py-28 px-6 bg-[var(--bg-primary)]">

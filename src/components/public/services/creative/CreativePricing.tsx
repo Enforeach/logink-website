@@ -291,7 +291,7 @@ export function CreativePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                     {copy.ctaQuote}
                   </a>
                   <a
-                    href={`https://wa.me/6287782495916?text=${whatsappMsg}`}
+                    href={`https://wa.me/628139453933?text=${whatsappMsg}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"

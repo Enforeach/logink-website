@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { LogoMark } from '@/components/ui/Logo'
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287782495916'
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '628139453933'
 
 // ─── Shared (language-agnostic) ───────────────────────────────────────────────
 
