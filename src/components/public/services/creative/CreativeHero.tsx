@@ -118,7 +118,7 @@ export function CreativeHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   return (
     <section
       ref={ref}
-      className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-28 pb-16 mesh-gradient"
+      className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden />
       {/* Gold + crimson accent orbs */}

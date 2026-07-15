@@ -917,7 +917,7 @@ export async function ServiceDetailContent({ slug, locale = 'id' }: { slug: stri
       }} />
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[80vh] flex items-center overflow-hidden px-4 pt-24 pb-20">
+      <section className="relative min-h-[80vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-20">
         <div className="absolute inset-0 mesh-gradient opacity-80" />
         <div className="absolute inset-0 dot-grid opacity-40" />
         <div className="absolute inset-0 pointer-events-none">

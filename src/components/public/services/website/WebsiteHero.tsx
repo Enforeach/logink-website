@@ -101,7 +101,7 @@ export function WebsiteHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   ]
 
   return (
-    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16 mesh-gradient">
+    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient">
       <div className="absolute inset-0 dot-grid opacity-50" aria-hidden />
       {/* Lilac service-accent orb */}
       <div

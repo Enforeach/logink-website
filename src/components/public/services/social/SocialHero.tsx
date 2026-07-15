@@ -60,7 +60,7 @@ const EASE = [0.22, 1, 0.36, 1] as const
 export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = HERO_COPY[locale]
   return (
-    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-28 pb-16 mesh-gradient">
+    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient">
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden />
       {/* Floating accent orbs */}
       <div

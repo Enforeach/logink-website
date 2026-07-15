@@ -89,7 +89,7 @@ function Stars({ rating }: { rating: string }) {
 export function LocalSeoHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = COPY[locale]
   return (
-    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16 mesh-gradient">
+    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient">
       <div className="absolute inset-0 dot-grid opacity-50" aria-hidden />
       {/* Teal accent orb */}
       <div
