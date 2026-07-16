@@ -11,7 +11,7 @@ import { AdsCrossSell } from '@/components/public/services/ads/AdsCrossSell'
 import { ADS_FAQS } from '@/components/public/services/ads/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Paid Advertising',
+  title: 'Jasa Iklan Digital Jakarta: Google & Meta Ads',
   description:
     'Iklan berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. ROAS 2-4×. Laporan transparan, akses akun penuh. Mulai dari Rp 6 Juta/bulan.',
   path: '/layanan/paid-ads',

@@ -16,7 +16,10 @@ interface Metric {
 interface CaseStudy {
   id: string
   title: string
+  titleId?: string | null
+  titleEn?: string | null
   slug: string
+  slugEn?: string | null
   clientName: string
   industry: string
   metrics: Metric[]
@@ -70,6 +73,7 @@ export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: Case
   const portfolioBase = locale === 'en' ? '/en/portfolio' : '/portfolio'
   const image = cs.featuredImage || cs.thumbnail
   const excerpt = locale === 'en' ? cs.summaryEn : cs.summaryId
+  const title = locale === 'en' ? (cs.titleEn || cs.title) : (cs.titleId || cs.title)
 
   return (
     <section className="px-6 py-20 md:py-28 bg-[var(--bg-surface)]">
@@ -105,7 +109,7 @@ export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: Case
             </div>
 
             <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] leading-[1.15] text-[var(--text-primary)]">
-              {cs.title}
+              {title}
             </h3>
             <p className="text-sm text-[var(--text-secondary)] mt-1.5">Client: {cs.clientName}</p>
 
@@ -139,7 +143,7 @@ export function CaseStudyTeaser({ caseStudy, locale = 'id' }: { caseStudy?: Case
               {image ? (
                 <Image
                   src={image}
-                  alt={cs.title}
+                  alt={title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"

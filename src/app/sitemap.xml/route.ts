@@ -50,6 +50,7 @@ const STATIC_PAIRS: [string, string, number, Freq][] = [
   ['/layanan/paid-ads', '/en/services/paid-advertising', 0.9, 'monthly'],
   ['/layanan/website-development', '/en/services/website-landing-page', 0.9, 'monthly'],
   ['/layanan/kreatif', '/en/services/creative-services', 0.9, 'monthly'],
+  ['/layanan/local-seo', '/en/services/local-seo', 0.9, 'monthly'],
 ]
 
 export async function GET() {

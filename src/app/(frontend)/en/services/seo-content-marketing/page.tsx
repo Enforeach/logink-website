@@ -11,7 +11,7 @@ import { SEOCrossSell } from '@/components/public/services/seo/SEOCrossSell'
 import { SEO_FAQS_EN } from '@/components/public/services/seo/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'SEO & Content Marketing',
+  title: 'SEO & Content Marketing Services Jakarta',
   description:
     'SEO for Indonesian brands: keyword research, Bahasa Indonesia content creation, technical optimization, and transparent monthly reporting. Starting from Rp 6M/month.',
   path: '/en/services/seo-content-marketing',

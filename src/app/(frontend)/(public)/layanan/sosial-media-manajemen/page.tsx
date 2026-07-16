@@ -12,7 +12,7 @@ import { SocialCrossSell } from '@/components/public/services/social/SocialCross
 import { SOCIAL_FAQS } from '@/components/public/services/social/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Social Media Management | Logink',
+  title: 'Jasa Social Media Management Jakarta',
   description:
     'Strategi social media, pembuatan konten, dan community management untuk brand Indonesia. Instagram, TikTok, Facebook & LinkedIn. 100% konten original.',
   path: '/layanan/sosial-media-manajemen',

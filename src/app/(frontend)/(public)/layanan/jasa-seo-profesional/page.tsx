@@ -11,7 +11,7 @@ import { SEOCrossSell } from '@/components/public/services/seo/SEOCrossSell'
 import { SEO_FAQS } from '@/components/public/services/seo/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'SEO & Content Marketing',
+  title: 'Jasa SEO Profesional Jakarta',
   description:
     'Organic search growth untuk brand Indonesia. Riset keyword, konten SEO Bahasa Indonesia, optimasi teknikal, dan laporan transparan bulanan. Mulai dari Rp 6 Juta/bulan.',
   path: '/layanan/jasa-seo-profesional',

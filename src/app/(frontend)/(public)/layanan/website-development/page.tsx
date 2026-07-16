@@ -13,7 +13,7 @@ import { WebsiteCrossSell } from '@/components/public/services/website/WebsiteCr
 import { WEBSITE_FAQS } from '@/components/public/services/website/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Website & Landing Page',
+  title: 'Jasa Pembuatan Website & Landing Page Jakarta',
   description:
     'Website dan landing page berperforma tinggi untuk brand Indonesia. Desain fokus CRO, mobile-first, waktu muat di bawah 2 detik. Mulai dari Rp 10 Juta.',
   path: '/layanan/website-development',

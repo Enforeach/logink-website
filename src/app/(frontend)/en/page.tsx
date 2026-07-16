@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import { buildMetadata } from '@/lib/seo'
+import { buildMetadata, organizationSchema, localBusinessSchema } from '@/lib/seo'
 import { getHomeData } from '@/payload/queries'
 import { HeroSection } from '@/components/public/home/HeroSection'
 import { LogoMarquee } from '@/components/public/home/LogoMarquee'
@@ -35,20 +35,23 @@ export const metadata: Metadata = buildMetadata({
 export const revalidate = 3600
 
 export default async function EnHomePage() {
-  const caseStudy = await getHomeData('en')
-    .then(d => d.featuredCaseStudy)
-    .catch(() => null)
+  const { services, featuredCaseStudy } = await getHomeData('en').catch(() => ({ services: [], featuredCaseStudy: null }))
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema(), localBusinessSchema()]) }}
+      />
+
       <HeroSection locale="en" />
       <LeadProfiler locale="en" />
       <LogoMarquee locale="en" />
       <ProblemSolutionSection locale="en" />
-      <ServicesSection locale="en" />
+      <ServicesSection services={services} locale="en" />
       <StatsSection locale="en" />
       <HowWeWorkSection locale="en" />
-      <CaseStudyTeaser caseStudy={caseStudy} locale="en" />
+      <CaseStudyTeaser caseStudy={featuredCaseStudy} locale="en" />
       <CTASection locale="en" />
     </>
   )

@@ -12,7 +12,7 @@ import { CreativeCrossSell } from '@/components/public/services/creative/Creativ
 import { CREATIVE_FAQS } from '@/components/public/services/creative/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Creative Services',
+  title: 'Jasa Desain & Video Kreatif Jakarta',
   description:
     'Desain grafis, produksi video, dan copywriting untuk brand Indonesia. Brand identity, konten social media, dan ad creative. 100% original, bebas template.',
   path: '/layanan/kreatif',

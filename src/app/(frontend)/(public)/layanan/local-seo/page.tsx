@@ -12,7 +12,7 @@ import { LocalSeoCrossSell } from '@/components/public/services/localseo/LocalSe
 import { LOCALSEO_FAQS } from '@/components/public/services/localseo/data'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Local SEO & Google Maps',
+  title: 'Jasa Local SEO & Optimasi Google Maps',
   description:
     'Menang di pencarian "near me" dan Google Maps. Setup Google Business Profile, landing page lokal, dan optimasi map pack dalam radius hingga 20 km. Mulai Rp 1 Juta/bulan, ditagih tahunan.',
   path: '/layanan/local-seo',

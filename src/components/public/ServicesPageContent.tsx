@@ -120,6 +120,7 @@ export async function ServicesPageContent({ locale = 'id' }: { locale?: Locale }
             return (
               <ServiceRow
                 key={svc.id}
+                locale={locale}
                 flip={i % 2 === 1}
                 href={locale === 'id' ? `/layanan/${svc.slug}` : `/en/services/${svc.slug}`}
                 startingFromLabel={c.startingFrom}
