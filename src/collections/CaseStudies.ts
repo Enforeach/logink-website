@@ -3,9 +3,21 @@ import { isAuthenticated, publishedOrAuthed } from '../payload/access'
 import { slugField, statusField, setPublishedAt } from '../payload/fields'
 import { makeRevalidateHooks } from '../payload/revalidate'
 
+// Revalidate the portfolio lists AND each case study's own detail URL (new +
+// previous slug) so unpublishing or renaming immediately purges its page.
 const { afterChange, afterDelete } = makeRevalidateHooks(
   ['/portfolio', '/en/portfolio', '/', '/en'],
-  ['case-study'],
+  (doc, prev) => {
+    const paths: string[] = []
+    const add = (p: unknown, base: string) => {
+      if (typeof p === 'string' && p) paths.push(`${base}/${p}`)
+    }
+    add(doc.slug, '/portfolio')
+    add(doc.slugEn, '/en/portfolio')
+    if (prev && prev.slug !== doc.slug) add(prev.slug, '/portfolio')
+    if (prev && prev.slugEn !== doc.slugEn) add(prev.slugEn, '/en/portfolio')
+    return paths
+  },
 )
 
 export const CaseStudies: CollectionConfig = {

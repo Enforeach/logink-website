@@ -3,7 +3,20 @@ import { isAuthenticated, publishedOrAuthed } from '../payload/access'
 import { slugField, statusField, setPublishedAt } from '../payload/fields'
 import { makeRevalidateHooks } from '../payload/revalidate'
 
-const { afterChange, afterDelete } = makeRevalidateHooks(['/blog', '/en/blog', '/'], ['posts'])
+// Revalidate the blog lists AND each post's own detail URL (new + previous slug),
+// so drafting/unpublishing or renaming a post immediately purges its page from
+// cache instead of leaving it publicly reachable until ISR expires.
+const { afterChange, afterDelete } = makeRevalidateHooks(['/blog', '/en/blog', '/'], (doc, prev) => {
+  const paths: string[] = []
+  const add = (p: unknown, base: string) => {
+    if (typeof p === 'string' && p) paths.push(`${base}/${p}`)
+  }
+  add(doc.slug, '/blog')
+  add(doc.slugEn, '/en/blog')
+  if (prev && prev.slug !== doc.slug) add(prev.slug, '/blog')
+  if (prev && prev.slugEn !== doc.slugEn) add(prev.slugEn, '/en/blog')
+  return paths
+})
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
