@@ -1,5 +1,6 @@
 import 'server-only'
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
+import { marked } from 'marked'
 import { getPayloadClient } from './client'
 
 /**
@@ -29,6 +30,23 @@ const richToHtml = (v: unknown): string => {
     return ''
   }
 }
+
+// Markdown → HTML (synchronous; no async marked extensions in use).
+const mdToHtml = (v: unknown): string => {
+  if (typeof v !== 'string' || !v.trim()) return ''
+  try {
+    return (marked.parse(v, { async: false }) as string) || ''
+  } catch {
+    return ''
+  }
+}
+
+// Resolve a post body to HTML, honoring the per-post format switch
+// (Markdown source vs the rich-text editor).
+const bodyToHtml = (doc: AnyDoc, lang: 'id' | 'en'): string =>
+  doc.bodyFormat === 'markdown'
+    ? mdToHtml(lang === 'id' ? doc.bodyMarkdownId : doc.bodyMarkdownEn)
+    : richToHtml(lang === 'id' ? doc.bodyId : doc.bodyEn)
 
 const relId = (v: unknown): string | null => {
   if (v == null) return null
@@ -66,8 +84,8 @@ export function mapPost(doc: AnyDoc, opts: { withBody?: boolean } = {}) {
     excerptId: doc.excerptId ?? null,
     excerptEn: doc.excerptEn ?? null,
     // always present so the type is `string`/`string | null`; only convert lexical when the body is actually needed
-    bodyId: opts.withBody ? richToHtml(doc.bodyId) : '',
-    bodyEn: opts.withBody && doc.bodyEn ? richToHtml(doc.bodyEn) : null,
+    bodyId: opts.withBody ? bodyToHtml(doc, 'id') : '',
+    bodyEn: opts.withBody ? (bodyToHtml(doc, 'en') || null) : null,
     featuredImage: mediaUrl(doc.featuredImage),
     featuredImageAlt: doc.featuredImageAlt ?? null,
     metaTitle: doc.metaTitle ?? null,
@@ -264,8 +282,15 @@ export function mapCta(doc: AnyDoc) {
 }
 
 // ─── query functions (mirror the old inline Prisma reads) ───
+// An EN post is "translated" if it has an English title and an English body in
+// either format (rich text OR markdown).
 const enPublished = (extra: AnyDoc = {}) => ({
-  and: [{ status: { equals: 'PUBLISHED' } }, { titleEn: { exists: true } }, { bodyEn: { exists: true } }, ...(extra.and ?? [])],
+  and: [
+    { status: { equals: 'PUBLISHED' } },
+    { titleEn: { exists: true } },
+    { or: [{ bodyEn: { exists: true } }, { bodyMarkdownEn: { exists: true } }] },
+    ...(extra.and ?? []),
+  ],
 })
 
 export async function getHomeData(_locale: Locale) {
@@ -333,7 +358,7 @@ export async function getRelatedPosts(postId: string, categoryId: string | null,
   if (!categoryId) return []
   const payload = await getPayloadClient()
   const base: AnyDoc[] = [{ status: { equals: 'PUBLISHED' } }, { category: { equals: categoryId } }, { id: { not_equals: postId } }]
-  if (locale === 'en') base.push({ titleEn: { exists: true } }, { bodyEn: { exists: true } })
+  if (locale === 'en') base.push({ titleEn: { exists: true } }, { or: [{ bodyEn: { exists: true } }, { bodyMarkdownEn: { exists: true } }] })
   const res = await payload.find({ collection: 'posts', where: { and: base }, sort: '-publishedAt', limit: 3, depth: 2 })
   return res.docs.map((d) => mapPost(d))
 }

@@ -159,7 +159,11 @@ export interface Post {
   slugEn?: string | null;
   excerptId?: string | null;
   excerptEn?: string | null;
-  bodyId: {
+  /**
+   * How you author the article body. "Rich text" uses the visual editor; "Markdown" lets you write/paste raw Markdown. The published article uses whichever is selected here.
+   */
+  bodyFormat?: ('richtext' | 'markdown') | null;
+  bodyId?: {
     root: {
       type: string;
       children: {
@@ -173,7 +177,7 @@ export interface Post {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   bodyEn?: {
     root: {
       type: string;
@@ -189,6 +193,14 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Markdown source: headings (## / ###), lists, links, bold/italic, blockquotes, images, code.
+   */
+  bodyMarkdownId?: string | null;
+  /**
+   * Optional English translation, in Markdown.
+   */
+  bodyMarkdownEn?: string | null;
   featuredImage?: (number | null) | Media;
   featuredImageAlt?: string | null;
   metaTitle?: string | null;
@@ -771,8 +783,11 @@ export interface PostsSelect<T extends boolean = true> {
   slugEn?: T;
   excerptId?: T;
   excerptEn?: T;
+  bodyFormat?: T;
   bodyId?: T;
   bodyEn?: T;
+  bodyMarkdownId?: T;
+  bodyMarkdownEn?: T;
   featuredImage?: T;
   featuredImageAlt?: T;
   metaTitle?: T;

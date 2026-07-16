@@ -31,8 +31,53 @@ export const Posts: CollectionConfig = {
     },
     { name: 'excerptId', type: 'textarea' },
     { name: 'excerptEn', type: 'textarea' },
-    { name: 'bodyId', type: 'richText', required: true },
-    { name: 'bodyEn', type: 'richText' },
+    {
+      name: 'bodyFormat',
+      type: 'radio',
+      defaultValue: 'richtext',
+      options: [
+        { label: 'Rich text editor', value: 'richtext' },
+        { label: 'Markdown', value: 'markdown' },
+      ],
+      admin: {
+        layout: 'horizontal',
+        description: 'How you author the article body. "Rich text" uses the visual editor; "Markdown" lets you write/paste raw Markdown. The published article uses whichever is selected here.',
+      },
+    },
+    // Rich text bodies (shown when format = richtext)
+    {
+      name: 'bodyId',
+      type: 'richText',
+      label: 'Body — Indonesian (Rich Text)',
+      admin: { condition: (data) => data?.bodyFormat !== 'markdown' },
+    },
+    {
+      name: 'bodyEn',
+      type: 'richText',
+      label: 'Body — English (Rich Text)',
+      admin: { condition: (data) => data?.bodyFormat !== 'markdown' },
+    },
+    // Markdown bodies (shown when format = markdown)
+    {
+      name: 'bodyMarkdownId',
+      type: 'textarea',
+      label: 'Body — Indonesian (Markdown)',
+      admin: {
+        condition: (data) => data?.bodyFormat === 'markdown',
+        rows: 22,
+        description: 'Markdown source: headings (## / ###), lists, links, bold/italic, blockquotes, images, code.',
+      },
+    },
+    {
+      name: 'bodyMarkdownEn',
+      type: 'textarea',
+      label: 'Body — English (Markdown)',
+      admin: {
+        condition: (data) => data?.bodyFormat === 'markdown',
+        rows: 22,
+        description: 'Optional English translation, in Markdown.',
+      },
+    },
     { name: 'featuredImage', type: 'upload', relationTo: 'media' },
     { name: 'featuredImageAlt', type: 'text' },
     { name: 'metaTitle', type: 'text' },
