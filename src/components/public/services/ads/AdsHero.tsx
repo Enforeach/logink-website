@@ -17,11 +17,11 @@ const ACCENT = '#F88438'
 
 const HERO_COPY = {
   id: {
-    badge: 'Jasa Iklan Digital Jakarta — Google Ads & Meta Ads, ROAS 2–4× Terbukti',
+    badge: 'Jasa Iklan Digital Jakarta: Google Ads & Meta Ads, ROAS 2–4× Terbukti',
     trustPills: ['✓ Rata-rata ROAS 2-4×', '✓ Akses akun penuh', '✓ Laporan optimasi mingguan'],
     home: 'Beranda', homeHref: '/', services: 'Layanan', servicesHref: '/layanan',
     title1: 'Setiap Rupiah Terinvestasi.', title2: 'Return Maksimal Terwujud.',
-    desc: 'Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami bidik audiens yang tepat di momen yang tepat, mengoptimalkan tanpa henti sampai ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, tanpa kontrak lock-in jangka panjang.',
+    desc: 'Kampanye berbasis data di Google, Meta, TikTok, dan marketplace Indonesia. Kami membidik audiens yang tepat di momen yang tepat, dan mengoptimasi tanpa henti hingga ROAS mencapai 2–4×. Tanpa budget terbuang, tanpa tebak-tebakan, dan tanpa kontrak lock-in jangka panjang.',
     metricChip: 'ROAS 2–4×',
     ctaPrimary: 'Mulai Konsultasi Gratis →', ctaHref: '/contact?service=paid-advertising',
     ctaWhatsApp: 'Chat di WhatsApp',
@@ -30,7 +30,7 @@ const HERO_COPY = {
     roasDay: 'di hari ke-90',
   },
   en: {
-    badge: 'Digital Advertising Jakarta — Google & Meta Ads, Proven 2–4× ROAS',
+    badge: 'Digital Advertising Jakarta: Google & Meta Ads, Proven 2–4× ROAS',
     trustPills: ['✓ Average ROAS 2–4×', '✓ Full account access', '✓ Weekly optimization reports'],
     home: 'Home', homeHref: '/en', services: 'Services', servicesHref: '/en/services',
     title1: 'Every Rupiah Invested.', title2: 'Maximum Return Realized.',
@@ -107,7 +107,7 @@ export function AdsHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   return (
     <section
       ref={ref}
-      className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16 mesh-gradient"
+      className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient"
     >
       <div className="absolute inset-0 dot-grid opacity-50" aria-hidden />
       {/* Single orange service-accent orb */}
@@ -152,7 +152,7 @@ export function AdsHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
               {c.desc}
             </p>
 
-            {/* Key ROAS metric chip — CRO anchor */}
+            {/* Key ROAS metric chip, CRO anchor */}
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-[var(--border-default)] shadow-sm">
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={2} aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 17l6-6 4 4 8-8M15 7h6v6" />
@@ -169,7 +169,7 @@ export function AdsHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                 {c.ctaPrimary}
               </Link>
               <a
-                href={`https://wa.me/6287782495916?text=${encodeURIComponent(c.waMessage)}`}
+                href={`https://wa.me/628139453933?text=${encodeURIComponent(c.waMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={c.ctaWhatsApp}

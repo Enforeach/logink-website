@@ -37,7 +37,7 @@ const STATS_ID: StatItem[] = [
     Icon: BarChart3,
     value: '2.5×',
     label: 'Peningkatan Traffic',
-    context: 'Rata-rata di semua klien pada 6 bulan eksekusi konsisten.',
+    context: 'Rata-rata seluruh klien setelah 6 bulan eksekusi konsisten.',
     isCounter: true,
     counterTarget: 2.5,
     counterDecimals: 1,

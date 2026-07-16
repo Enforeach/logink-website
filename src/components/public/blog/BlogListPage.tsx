@@ -1,12 +1,11 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { prisma } from '@/lib/prisma'
+import { getBlogList } from '@/payload/queries'
 import { buildMetadata } from '@/lib/seo'
 import { formatDate } from '@/lib/utils'
 import { BlogEmptyState } from './BlogEmptyState'
 import { BlogListRow, type RowPost } from './BlogListRow'
-import type { Prisma } from '@prisma/client'
 import { BlogSidebarCta } from './BlogSidebarCta'
 import { Reveal } from './Reveal'
 import { type Locale, t, localePath } from '@/lib/i18n'
@@ -24,7 +23,7 @@ export function generateBlogListMetadata(locale: Locale): Metadata {
     ? 'Latest digital marketing tips, guides, and insights from the Logink team. Learn actionable strategies for SEO, Social Media, Paid Ads, and content marketing.'
     : 'Tips, panduan, dan insight digital marketing terbaru dari tim Logink. Pelajari strategi SEO, Social Media, Paid Ads, dan konten yang bisa langsung diterapkan.'
   return buildMetadata({
-    title: locale === 'en' ? 'Digital Marketing Blog & Insights' : 'Blog Digital Marketing',
+    title: locale === 'en' ? 'Digital Marketing Blog & Insights' : 'Blog & Insight Digital Marketing',
     description,
     path: localePath('/blog', locale),
   })
@@ -33,23 +32,8 @@ export function generateBlogListMetadata(locale: Locale): Metadata {
 export async function BlogListPage({ locale }: { locale: Locale }) {
   let posts: RowPost[] = []
   try {
-    const where: Prisma.PostWhereInput = { status: 'PUBLISHED' }
-    if (locale === 'en') {
-      where.titleEn = { not: null }
-      where.bodyEn = { not: null }
-    }
-    posts = await prisma.post.findMany({
-      where,
-      orderBy: { publishedAt: 'desc' },
-      take: 12,
-      select: {
-        id: true, titleId: true, titleEn: true, slug: true, slugEn: true,
-        excerptId: true, excerptEn: true, featuredImage: true,
-        publishedAt: true, readingTime: true, status: true, createdAt: true,
-        author: { select: { name: true, image: true } },
-        category: { select: { nameId: true, nameEn: true, slug: true } },
-      },
-    })
+    const result = await getBlogList(locale)
+    posts = result.posts
   } catch { posts = [] }
 
   const featured = posts[0]
@@ -61,15 +45,15 @@ export async function BlogListPage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      {/* F-pattern sweep 1 — page header + featured post (text left, image right) */}
+      {/* F-pattern sweep 1 - page header + featured post (text left, image right) */}
       <section className="pt-32 pb-14 px-6 mesh-gradient">
         <div className="max-w-7xl mx-auto">
           <p className="eyebrow mb-4">{t(locale, 'blog.headline').split('&')[0].trim()}</p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.05] text-[var(--text-primary)] mb-4 max-w-3xl">
             {locale === 'en' ? (
-              <>Digital Marketing <span className="gradient-text">Insights</span></>
+              <>Digital Marketing Blog & <span className="gradient-text">Insights</span></>
             ) : (
-              <>Blog & <span className="gradient-text">Insight</span></>
+              <>Blog & Insight <span className="gradient-text">Digital Marketing</span></>
             )}
           </h1>
           <p className="text-[var(--text-secondary)] max-w-xl">{t(locale, 'blog.subtext')}</p>
@@ -127,7 +111,7 @@ export async function BlogListPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* F-pattern sweep 2 — category filter pills */}
+      {/* F-pattern sweep 2 - category filter pills */}
       <nav aria-label={locale === 'en' ? 'Blog categories' : 'Kategori blog'} className="py-5 px-6 bg-[var(--bg-surface)] border-y border-[var(--border-default)]">
         <ul className="max-w-7xl mx-auto flex flex-wrap gap-2 list-none p-0 m-0">
           <li>
@@ -151,7 +135,7 @@ export async function BlogListPage({ locale }: { locale: Locale }) {
         </ul>
       </nav>
 
-      {/* F-pattern vertical stem — list rows + sticky CRO rail */}
+      {/* F-pattern vertical stem - list rows + sticky CRO rail */}
       <section className="py-16 md:py-20 px-6">
         <div className="max-w-7xl mx-auto">
           {posts.length > 0 ? (

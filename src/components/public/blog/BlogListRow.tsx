@@ -30,7 +30,7 @@ export function BlogListRow({ post, locale = 'id' }: { post: RowPost; locale?: L
       href={localePath(`/blog/${slug}`, locale)}
       className="group flex flex-col sm:flex-row items-start gap-5 py-7 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson/40"
     >
-      {/* Thumbnail — fixed left column */}
+      {/* Thumbnail - fixed left column */}
       <div className="relative w-full sm:w-[200px] shrink-0 aspect-[16/10] rounded-xl overflow-hidden bg-brand-peach">
         {post.featuredImage ? (
           <Image
@@ -45,7 +45,7 @@ export function BlogListRow({ post, locale = 'id' }: { post: RowPost; locale?: L
         )}
       </div>
 
-      {/* Content — left-aligned stem */}
+      {/* Content - left-aligned stem */}
       <div className="min-w-0 flex-1">
         {post.category && (
           <span className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-brand-crimson/10 text-brand-crimson mb-2">

@@ -58,7 +58,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 }
 
 const FAQ_COPY = {
-  id: { heading: 'Pertanyaan yang sering ditanyakan.', sub: 'Jawaban langsung, tanpa basa-basi.' },
+  id: { heading: 'Pertanyaan seputar SEO & content marketing.', sub: 'Jawaban langsung, tanpa basa-basi.' },
   en: { heading: 'Frequently asked questions.', sub: 'Straight answers, no filler.' },
 }
 

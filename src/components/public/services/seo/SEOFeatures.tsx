@@ -28,7 +28,7 @@ const TAB_BADGE_TEXT: Record<string, string> = {
 }
 
 const COPY = {
-  id: { eyebrow: 'Apa yang Kamu Dapat', heading: 'Semua sudah termasuk.', sub: 'Tidak ada biaya tersembunyi. Semua deliverable yang dibutuhkan brandmu untuk tumbuh, dalam satu atap.' },
+  id: { eyebrow: 'Apa yang Anda Dapatkan', heading: 'Semua sudah termasuk.', sub: 'Tanpa biaya tersembunyi. Semua deliverable yang dibutuhkan brand Anda untuk tumbuh, dalam satu atap.' },
   en: { eyebrow: 'What You Get', heading: 'Everything included.', sub: 'No hidden extras. Every deliverable your brand needs to grow, under one roof.' },
 }
 

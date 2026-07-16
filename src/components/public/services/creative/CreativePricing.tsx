@@ -49,12 +49,12 @@ function Checkbox({
 const PRICING_COPY = {
   id: {
     heading: 'Setiap proyek unik. Begitu juga harganya.',
-    sub: 'Pekerjaan kreatif tidak muat dalam kotak yang baku. Kasih tahu apa yang kamu butuhkan, dan kami bangun scope serta penawaran kustom dalam 24 jam.',
-    whatNeed: 'Apa yang kamu butuhkan?',
+    sub: 'Pekerjaan kreatif tidak muat dalam kotak yang baku. Beri tahu kami kebutuhan Anda, dan kami susun scope serta penawaran kustom dalam 24 jam.',
+    whatNeed: 'Apa yang Anda butuhkan?',
     addonsLabel: 'Add-on Tersedia',
     engagementLabel: 'Tipe Engagement',
-    briefLabel: 'Brief kreatifmu',
-    noSelect: 'Pilih deliverable di atas untuk membangun brief kreatifmu',
+    briefLabel: 'Brief kreatif Anda',
+    noSelect: 'Pilih deliverable di atas untuk menyusun brief kreatif Anda',
     ctaQuote: 'Dapatkan Penawaran Kustom →',
     ctaWa: 'Chat di WhatsApp',
     waPrefix: 'Halo Logink! Saya tertarik dengan Creative Services:\n',
@@ -291,7 +291,7 @@ export function CreativePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                     {copy.ctaQuote}
                   </a>
                   <a
-                    href={`https://wa.me/6287782495916?text=${whatsappMsg}`}
+                    href={`https://wa.me/628139453933?text=${whatsappMsg}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"

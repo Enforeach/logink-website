@@ -3,7 +3,7 @@
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Search, MessagesSquare, TrendingUp, Palette, MonitorSmartphone, ArrowRight, Sparkles, type LucideIcon } from 'lucide-react'
+import { Search, MessagesSquare, TrendingUp, Palette, MonitorSmartphone, MapPin, ArrowRight, Sparkles, type LucideIcon } from 'lucide-react'
 
 interface Service {
   id: string
@@ -11,16 +11,30 @@ interface Service {
   slug: string
   color: string
   shortDescId?: string | null
+  shortDescEn?: string | null
   funnelPosition?: string | null
   pricingTiers?: { priceLabel: string }[]
 }
 
+/* Canonical dedicated service pages per locale (match the sitemap). Keyed by
+   every slug variant so links resolve regardless of which slug the CMS uses. */
+const ROUTES: Record<string, { id: string; en: string }> = {
+  'seo-content-marketing': { id: '/layanan/jasa-seo-profesional', en: '/en/services/seo-content-marketing' },
+  'social-media-management': { id: '/layanan/sosial-media-manajemen', en: '/en/services/social-media-management' },
+  'paid-advertising': { id: '/layanan/paid-ads', en: '/en/services/paid-advertising' },
+  'paid-ads': { id: '/layanan/paid-ads', en: '/en/services/paid-advertising' },
+  'creative-services': { id: '/layanan/kreatif', en: '/en/services/creative-services' },
+  'website-landing-page': { id: '/layanan/website-development', en: '/en/services/website-landing-page' },
+  'website-development': { id: '/layanan/website-development', en: '/en/services/website-landing-page' },
+  'local-seo': { id: '/layanan/local-seo', en: '/en/services/local-seo' },
+}
+
 const FALLBACK: Service[] = [
-  { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#A855F7', shortDescId: 'Pertumbuhan organik jangka panjang & leads inbound', funnelPosition: 'Top Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
-  { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#D81C5C', shortDescId: 'Bangun brand awareness & komunitas yang aktif', funnelPosition: 'Top Funnel', pricingTiers: [] },
-  { id: '3', name: 'Paid Advertising', slug: 'paid-ads', color: '#F88438', shortDescId: 'Iklan yang langsung hasilkan ROI nyata', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
-  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', shortDescId: 'Konten yang bikin scroll berhenti dan mengkonversi', funnelPosition: 'All Funnel', pricingTiers: [] },
-  { id: '5', name: 'Website & Landing Page', slug: 'website-development', color: '#C084FC', shortDescId: 'Ubah pengunjung jadi pelanggan', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
+  { id: '1', name: 'SEO & Content Marketing', slug: 'seo-content-marketing', color: '#A855F7', shortDescId: 'Pertumbuhan organik jangka panjang & inbound leads', shortDescEn: 'Long-term organic growth & inbound leads', funnelPosition: 'Top Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
+  { id: '2', name: 'Social Media Management', slug: 'social-media-management', color: '#D81C5C', shortDescId: 'Bangun brand awareness & komunitas yang aktif', shortDescEn: 'Build brand awareness & an engaged community', funnelPosition: 'Top Funnel', pricingTiers: [] },
+  { id: '3', name: 'Paid Advertising', slug: 'paid-advertising', color: '#F88438', shortDescId: 'Iklan yang langsung menghasilkan ROI nyata', shortDescEn: 'Ads that deliver measurable ROI, fast', funnelPosition: 'Mid Funnel', pricingTiers: [{ priceLabel: 'IDR 6M' }] },
+  { id: '4', name: 'Creative Services', slug: 'creative-services', color: '#F5A623', shortDescId: 'Konten yang mencuri perhatian dan mengonversi', shortDescEn: 'Content that grabs attention and converts', funnelPosition: 'All Funnel', pricingTiers: [] },
+  { id: '5', name: 'Website & Landing Page', slug: 'website-landing-page', color: '#C084FC', shortDescId: 'Ubah pengunjung menjadi pelanggan', shortDescEn: 'Turn visitors into customers', funnelPosition: 'Bottom Funnel', pricingTiers: [{ priceLabel: 'IDR 10M' }] },
 ]
 
 /* Warm Canvas accents keyed by slug (covers both id/en slug variants) */
@@ -32,11 +46,12 @@ const META: Record<string, { accent: string; icon: LucideIcon }> = {
   'creative-services': { accent: '#F5A623', icon: Palette },
   'website-landing-page': { accent: '#C084FC', icon: MonitorSmartphone },
   'website-development': { accent: '#C084FC', icon: MonitorSmartphone },
+  'local-seo': { accent: '#0D9488', icon: MapPin },
 }
 
 const SECTION_COPY = {
-  id: { badge: 'Layanan Kami', headline: 'Apa yang Kami', headlineGradient: 'Kerjakan', desc: 'Lima layanan terintegrasi yang bekerja sebagai satu sistem, bukan vendor-vendor yang berjalan terpisah.', viewAll: 'Lihat semua layanan' },
-  en: { badge: 'Our Services', headline: 'What We', headlineGradient: 'Do', desc: 'Five integrated services working as one system, not siloed vendors.', viewAll: 'View all services' },
+  id: { badge: 'Layanan Kami', headline: 'Digital Marketing', headlineGradient: '360°', desc: 'Layanan digital marketing terintegrasi yang bekerja sebagai satu sistem, bukan vendor-vendor yang berjalan terpisah.', viewAll: 'Lihat semua layanan' },
+  en: { badge: 'Our Services', headline: '360° Digital', headlineGradient: 'Marketing', desc: 'Integrated digital marketing services working as one system, not siloed vendors.', viewAll: 'View all services' },
 }
 
 /* Accent darkened for AA text contrast on white */
@@ -99,7 +114,8 @@ function BentoCard({ svc, locale, index }: { svc: Service; locale: 'id' | 'en'; 
   const isSeo = svc.slug === 'seo-content-marketing'
   const isSocial = svc.slug === 'social-media-management'
   const isPaid = svc.slug === 'paid-advertising' || svc.slug === 'paid-ads'
-  const href = `${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`
+  const href = ROUTES[svc.slug]?.[locale] ?? `${locale === 'id' ? '/layanan' : '/en/services'}/${svc.slug}`
+  const shortDesc = locale === 'en' ? (svc.shortDescEn ?? svc.shortDescId) : svc.shortDescId
   const startingFrom = locale === 'id' ? 'Mulai dari' : 'Starting from'
   const perMonth = locale === 'id' ? '/bln' : '/mo'
 
@@ -118,7 +134,7 @@ function BentoCard({ svc, locale, index }: { svc: Service; locale: 'id' | 'en'; 
 
       <div className="relative flex flex-col h-full">
         <div className="flex items-start justify-between gap-3 mb-4">
-          {/* Icon squircle — saturates on hover */}
+          {/* Icon squircle that saturates on hover */}
           <span className="h-12 w-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-[color-mix(in_srgb,var(--acc)_12%,white)] text-[var(--acc)] group-hover:bg-[var(--acc)] group-hover:text-white transition-colors duration-300">
             <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
           </span>
@@ -132,7 +148,7 @@ function BentoCard({ svc, locale, index }: { svc: Service; locale: 'id' | 'en'; 
         {isPaid && <PaidExtra locale={locale} />}
 
         <h3 className="font-display font-bold text-[var(--text-primary)] mb-1.5 text-lg">{svc.name}</h3>
-        <p className={`text-sm text-[var(--text-secondary)] mb-4 ${isSeo ? 'sm:max-w-md' : 'flex-1'}`}>{svc.shortDescId}</p>
+        <p className={`text-sm text-[var(--text-secondary)] mb-4 ${isSeo ? 'sm:max-w-md' : 'flex-1'}`}>{shortDesc}</p>
 
         {isSeo && <SeoExtra locale={locale} accent={meta.accent} />}
         {isSocial && <SocialExtra locale={locale} />}

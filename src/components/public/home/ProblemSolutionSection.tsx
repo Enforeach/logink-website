@@ -14,22 +14,22 @@ interface Card {
 
 const CARDS_ID: Card[] = [
   {
-    problem: 'Agensi-agensi yang bekerja sendiri-sendiri',
-    problemDetail: 'Kamu hire satu agensi untuk SEO, yang lain untuk social media, freelancer lagi untuk iklan. Tidak ada yang ngobrol satu sama lain. Pesan brand kamu jadi kacau di setiap channel.',
+    problem: 'Agensi yang bekerja sendiri-sendiri',
+    problemDetail: 'Anda menyewa satu agensi untuk SEO, agensi lain untuk social media, dan freelancer untuk iklan. Tidak ada yang saling berkoordinasi, sehingga pesan brand Anda menjadi tidak konsisten di setiap channel.',
     solution: 'Satu tim terintegrasi untuk semua channel',
-    solutionDetail: 'Strategi SEO menginformasikan copy iklan kamu. Konten social media jadi bahan blog. Data iklan mempertajam targeting organik. Semua saling menguatkan.',
+    solutionDetail: 'Strategi SEO memperkuat copy iklan Anda. Konten social media menjadi bahan artikel blog. Data iklan mempertajam targeting organik. Semuanya saling menguatkan.',
   },
   {
     problem: 'Laporan penuh angka yang tidak berarti',
-    problemDetail: 'Followers terus naik, impresi meroket, tapi pendapatan tidak bergerak. Dashboard yang terlihat keren, padahal tidak ada yang benar-benar bekerja.',
+    problemDetail: 'Followers terus naik, impresi meroket, tapi pendapatan tidak bergerak. Dashboard terlihat mengesankan, padahal tidak ada yang benar-benar berdampak.',
     solution: 'Kami optimalkan untuk revenue, leads, dan ROAS',
-    solutionDetail: 'Transparansi penuh lewat GA4, dashboard Looker Studio, dan review bulanan yang fokus pada angka yang benar-benar menggerakkan bisnis kamu. Bukan screenshot pilihan.',
+    solutionDetail: 'Transparansi penuh melalui GA4, dashboard Looker Studio, dan review bulanan yang fokus pada angka yang benar-benar menggerakkan bisnis Anda. Bukan sekadar screenshot pilihan.',
   },
   {
-    problem: 'Konten generik yang daur ulang',
-    problemDetail: 'Konten \'kustom\' kamu terlihat sangat mirip konten kompetitor. Wajar saja: template sama, foto stok sama, hanya logo yang berbeda.',
-    solution: 'Setiap konten dibuat khusus untuk brand kamu',
-    solutionDetail: 'Kreatif yang custom, riset tren lokal, dan konten yang dirancang sesuai cara audiens kamu mengonsumsi media. Tidak ada copy-paste.',
+    problem: 'Konten generik hasil daur ulang',
+    problemDetail: 'Konten \'custom\' Anda terlihat sangat mirip dengan milik kompetitor. Wajar saja: template sama, foto stok sama, hanya logonya yang berbeda.',
+    solution: 'Setiap konten dibuat khusus untuk brand Anda',
+    solutionDetail: 'Kreatif yang custom, riset tren lokal, dan konten yang dirancang sesuai cara audiens Anda mengonsumsi media. Tidak ada copy-paste.',
   },
 ]
 
@@ -56,10 +56,10 @@ const CARDS_EN: Card[] = [
 
 const COPY = {
   id: {
-    badge: 'Kenapa Logink?',
+    badge: 'Mengapa Logink?',
     headline: 'Masalah yang',
     headlineGradient: 'Kami Selesaikan',
-    body: 'Agensi konvensional bekerja sendiri-sendiri. Vendor berbeda-beda, meeting yang tidak ada habisnya, dan nol sinergi. Logink dibangun berbeda: satu tim terintegrasi yang mengelola semua channel sekaligus, supaya setiap kampanye saling menguatkan.',
+    body: 'Agensi konvensional bekerja sendiri-sendiri: vendor terpisah, meeting tak ada habisnya, tanpa sinergi. Logink dirancang berbeda: satu tim terintegrasi yang mengelola semua channel sekaligus, sehingga setiap kampanye saling menguatkan.',
     hint: 'Arahkan kursor atau ketuk kartu untuk melihat solusinya',
     link: 'Lihat bedanya →',
     problemLabel: 'Masalah',
@@ -165,7 +165,7 @@ function FlipCard({
             : 'border-[var(--border-default)]'
         }`}
       >
-        {/* Gradient left edge — solution state */}
+        {/* Gradient left edge: solution state */}
         <span
           aria-hidden="true"
           className={`absolute inset-y-0 left-0 w-1 gradient-brand-bg transition-opacity duration-300 ${solved ? 'opacity-100' : 'opacity-0'}`}

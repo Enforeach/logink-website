@@ -15,8 +15,8 @@ export function CTASection({
   subtitle,
   locale = 'id',
 }: CTASectionProps) {
-  const defaultTitle = locale === 'id' ? 'Ayo Kerja Sama' : "Let's Work Together"
-  const defaultSubtitle = locale === 'id' ? 'Siap diskusikan bagaimana kami bisa bantu brand kamu berkembang.' : "Ready to take your brand to the next level?"
+  const defaultTitle = locale === 'id' ? 'Mari Bertumbuh Bersama' : "Let's Work Together"
+  const defaultSubtitle = locale === 'id' ? 'Ceritakan tantangan bisnis Anda, dan mari kita rancang strategi untuk mencapainya.' : "Ready to take your brand to the next level?"
   title = title ?? defaultTitle
   subtitle = subtitle ?? defaultSubtitle
   return (

@@ -4,9 +4,9 @@ import { ArrowRight, TrendingUp, FileText, Layers, ChevronDown } from 'lucide-re
 const COPY = {
   id: {
     badge: '360° Digital Marketing Agency · Jakarta, Indonesia',
-    headline: 'Kembangkan Brand Kamu',
+    headline: 'Kembangkan Brand Anda',
     headlineGradient: 'Secara Digital',
-    subtext: 'Agensi digital marketing 360° yang siap bantu brand Indonesia tampil lebih dominan secara online. Strategi, kreativitas, dan data: semua dalam satu sistem yang terintegrasi.',
+    subtext: 'Agensi digital marketing 360° yang dirancang untuk membantu brand Indonesia tumbuh dan memimpin di ranah digital. Strategi, kreativitas, dan data bekerja sebagai satu sistem yang terintegrasi.',
     ctaPrimary: 'Minta Penawaran Gratis',
     ctaSecondary: 'Lihat Portofolio',
     trust: 'Tanpa kontrak lock-in · Laporan GA4 transparan',
@@ -41,7 +41,7 @@ export function HeroSection({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = COPY[locale]
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden px-4 pt-36 md:pt-20 mesh-gradient">
+    <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden px-4 pt-36 md:pt-32 pb-28 mesh-gradient">
       {/* Dot grid overlay */}
       <div className="absolute inset-0 dot-grid opacity-50" />
 

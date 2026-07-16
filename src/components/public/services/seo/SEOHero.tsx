@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 const COPY = {
   id: {
-    badge: 'Jasa SEO Profesional Jakarta — Ranking #1 Google, Traffic Organik Berkembang',
+    badge: 'Jasa SEO Profesional Jakarta: Ranking #1 Google, Traffic Organik Berkembang',
     trustPills: [
       '✓ Penulis native Bahasa Indonesia',
       '✓ Transparansi GA4 penuh',
@@ -18,8 +18,8 @@ const COPY = {
     title1: 'Ranking Lebih Tinggi.',
     title2: 'Jangkauan Lebih Luas.',
     title3: 'Konversi Lebih Baik.',
-    desc: 'Kami bangun kehadiran organic search yang terus berkompon setiap bulan. Dari strategi keyword hingga 150+ artikel per bulan, setiap konten dirancang untuk menangkap traffic high-intent dan mengubahnya jadi revenue.',
-    descHighlight: 'Tidak ada vanity metric. Tidak ada template daur ulang. Hanya pertumbuhan sistematis.',
+    desc: 'Kami membangun kehadiran organic search yang efeknya terus berlipat setiap bulan. Dari strategi keyword hingga 150+ artikel per bulan, setiap konten dirancang untuk menangkap traffic high-intent dan mengubahnya menjadi revenue.',
+    descHighlight: 'Tanpa vanity metric. Tanpa template pasaran. Hanya pertumbuhan yang sistematis.',
     metricChip: '2.5× traffic organik dalam 6 bulan',
     ctaPrimary: 'Mulai Konsultasi Gratis',
     ctaHref: '/contact?service=seo-content-marketing',
@@ -31,7 +31,7 @@ const COPY = {
     changeLabel: 'Δ Naik',
   },
   en: {
-    badge: 'Professional SEO Services Jakarta — Rank #1 on Google, Grow Organic Traffic',
+    badge: 'Professional SEO Services Jakarta: Rank #1 on Google, Grow Organic Traffic',
     trustPills: [
       '✓ Bahasa Indonesia native writers',
       '✓ Full GA4 transparency',
@@ -70,7 +70,7 @@ const ACCENT = '#A855F7'
 export function SEOHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = COPY[locale]
   return (
-    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16 mesh-gradient">
+    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient">
       <div className="absolute inset-0 dot-grid opacity-50" aria-hidden />
       {/* Single accent-tinted orb */}
       <div
@@ -152,7 +152,7 @@ export function SEOHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                 </svg>
               </Link>
               <a
-                href={`https://wa.me/6287782495916?text=${encodeURIComponent(c.waMessage)}`}
+                href={`https://wa.me/628139453933?text=${encodeURIComponent(c.waMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={c.ctaWhatsApp}

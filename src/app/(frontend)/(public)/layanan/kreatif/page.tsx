@@ -1,0 +1,51 @@
+import { Metadata } from 'next'
+import { buildMetadata, breadcrumbSchema, faqSchema } from '@/lib/seo'
+import { CTASection } from '@/components/public/home/CTASection'
+import { CreativeHero } from '@/components/public/services/creative/CreativeHero'
+import { CreativeShowcase } from '@/components/public/services/creative/CreativeShowcase'
+import { CreativeCatalog } from '@/components/public/services/creative/CreativeCatalog'
+import { CreativePricing } from '@/components/public/services/creative/CreativePricing'
+import { CreativeStats } from '@/components/public/services/creative/CreativeStats'
+import { CreativeProcess } from '@/components/public/services/creative/CreativeProcess'
+import { CreativeFAQ } from '@/components/public/services/creative/CreativeFAQ'
+import { CreativeCrossSell } from '@/components/public/services/creative/CreativeCrossSell'
+import { CREATIVE_FAQS } from '@/components/public/services/creative/data'
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Jasa Desain & Video Kreatif Jakarta',
+  description:
+    'Desain grafis, produksi video, dan copywriting untuk brand Indonesia. Brand identity, konten social media, dan ad creative. 100% original, bebas template.',
+  path: '/layanan/kreatif',
+})
+
+const breadcrumbs = [
+  { name: 'Beranda', url: 'https://logink.co' },
+  { name: 'Layanan', url: 'https://logink.co/layanan' },
+  { name: 'Creative Services', url: 'https://logink.co/layanan/kreatif' },
+]
+
+export default function CreativeServicesPage() {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            breadcrumbSchema(breadcrumbs),
+            faqSchema([...CREATIVE_FAQS]),
+          ]),
+        }}
+      />
+
+      <CreativeHero />
+      <CreativeShowcase />
+      <CreativeCatalog />
+      <CreativePricing />
+      <CreativeStats />
+      <CreativeProcess />
+      <CreativeFAQ />
+      <CreativeCrossSell />
+      <CTASection />
+    </>
+  )
+}

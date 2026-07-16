@@ -50,12 +50,12 @@ function PageSpeedGauge({ target }: { target: number }) {
 const TECHFEATURES_COPY = {
   id: {
     eyebrow: 'Dibangun Dengan',
-    heading: 'Setiap site yang kami bangun memenuhi standar ini.',
+    heading: 'Setiap website yang kami bangun memenuhi standar ini.',
     sub: 'Bukan fitur tambahan opsional: ini adalah baseline kami untuk setiap proyek.',
-    perfTitle: 'Build Prioritaskan Performa',
-    perfDesc: 'Setiap site dikirim dengan load time di bawah 2 detik. Bundle code-split, gambar lazy-loaded, font teroptimasi, dan pengiriman via CDN. Kami tidak hanya membangun; kami membangun dengan cepat. Skor PageSpeed-mu akan 90+ atau kami perbaiki gratis.',
+    perfTitle: 'Dibangun untuk Performa Tinggi',
+    perfDesc: 'Setiap website dibangun dengan load time di bawah 2 detik. Bundle code-split, gambar lazy-loaded, font teroptimasi, dan delivery lewat CDN. Bukan sekadar dibangun, tapi dibangun untuk kecepatan. Skor PageSpeed Anda dijamin 90+ atau kami perbaiki gratis.',
     mobileTitle: 'Responsif Mobile-First',
-    mobileDesc: 'Didesain untuk layar mobile dulu, baru diperluas. Lebih dari 70% traffic web Indonesia berasal dari mobile, dan sitemu terlihat sempurna di setiap perangkat dan orientasi.',
+    mobileDesc: 'Didesain untuk layar mobile lebih dulu, lalu dioptimalkan untuk layar yang lebih besar. Lebih dari 70% traffic web Indonesia berasal dari mobile, dan website Anda tampil sempurna di setiap perangkat dan orientasi.',
   },
   en: {
     eyebrow: 'Built With',

@@ -7,7 +7,7 @@ import { ADS_FAQS, ADS_FAQS_EN } from './data'
 const ACCENT_TEXT = '#C2410C'
 
 const FAQ_COPY = {
-  id: { heading: 'Pertanyaan yang sering ditanyakan.' },
+  id: { heading: 'Pertanyaan seputar jasa iklan digital.' },
   en: { heading: 'Frequently asked questions.' },
 }
 
