@@ -91,6 +91,12 @@ const MAP = {
     ['film/web-poster-1600.webp', 'poster-1600.webp', 'poster', 60 * KB],
     ['film/web-poster-960.webp', 'poster-960.webp', 'poster-sm', 30 * KB],
   ],
+  'film-creative': [ // owner's creative film (2026-10-05), full 16:9 frame and full 15 s in the Creative service hero
+    ['film/creative-1600x900.vp9.webm', 'film-1600.webm', 'film', 2.5 * KB * KB],
+    ['film/creative-960x540.vp9.webm', 'film-960.webm', 'film-sm', 1.2 * KB * KB],
+    ['film/creative-poster-1600.webp', 'poster-1600.webp', 'poster', 60 * KB],
+    ['film/creative-poster-960.webp', 'poster-960.webp', 'poster-sm', 30 * KB],
+  ],
   ig: [
     ['stills/ig-batik-shirt-480.webp', 'tile-1.webp', 'tile-1', 25 * KB],
     ['stills/ig-batik-texture-480.webp', 'tile-2.webp', 'tile-2', 25 * KB],

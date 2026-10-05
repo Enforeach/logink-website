@@ -462,6 +462,14 @@ const groups = (d: Deliv, addons: typeof CREATIVE_ADDONS | typeof CREATIVE_ADDON
   { id: 'type', label: l === 'id' ? 'Tipe kerja sama' : 'Engagement type', multi: false, items: types.map((t) => ({ id: t.id, label: t.name })) },
 ]
 
+// Rich page (owner 2026-10-05, benchmarked on the live page; the SEO page's pattern): the three studios as the USP,
+// every deliverable as tabs (the film's scope: design, video, copy), no comparison panel, the homepage process.
+// The dropped asset counter above stays out: the stats band uses the FAQ's own numbers.
+const studios = (ms: typeof CREATIVE_MODULES | typeof CREATIVE_MODULES_EN) =>
+  ms.map((m) => ({ title: m.title, text: m.tagline, points: m.deliverables.slice(0, 4).map((d) => d.name) }))
+const tabsOf = (d: Deliv, labels: [string, string, string]) =>
+  (['design', 'video', 'copy'] as const).map((k, i) => ({ label: labels[i], items: d[k].items.map((x) => ({ title: x.name, text: x.description })) }))
+
 const id: ServiceContent = {
   answer: 'Jasa desain grafis dan video Logink membuat template social media, banner iklan, key visual, video, foto produk, dan copywriting Bahasa Indonesia. Setiap deliverable mendapat 2 ronde revisi, dan semua source file menjadi milik Anda.',
   campaign: {
@@ -495,16 +503,28 @@ const id: ServiceContent = {
       groups: groups(CREATIVE_DELIVERABLES, CREATIVE_ADDONS, CREATIVE_ENGAGEMENT_TYPES, 'id'),
     },
   },
-  compare: {
-    caption: 'Proyek sekali jalan vs retainer bulanan',
-    head: ['Aspek', 'Proyek sekali jalan', 'Retainer bulanan'],
-    rows: [
-      ['Scope', 'Jelas, dengan awal dan akhir', 'Tetap setiap bulan'],
-      ['Cocok untuk', 'Brand guidelines, brand film, peluncuran kampanye', 'Konten social, ad creative, copywriting'],
-      ['Biaya', 'Per proyek, sesuai penawaran', 'Bulanan, bisa diprediksi'],
+  compare: null,
+  trust: ['Desain kustom, bukan template', '2 ronde revisi per deliverable', 'Source file milik Anda'],
+  highlights: {
+    items: [
+      { value: '2', label: 'ronde revisi sudah termasuk di setiap deliverable' },
+      { value: '3–5', label: 'hari kerja untuk deliverable grafis standar' },
+      { value: '3', label: 'studio: desain, video, dan copywriting' },
     ],
-    note: 'Belum tahu yang mana? Ceritakan kebutuhan Anda, dan kami bantu memilih model yang paling tepat.',
+    note: 'Timeline video tergantung scope dan disepakati di awal.',
   },
+  usp: {
+    heading: 'Tiga studio, satu tim kreatif',
+    accent: 2,
+    lead: 'Desain, video, dan copy dibuat kustom untuk brand Anda, tanpa template dan tanpa stok, supaya brand Anda mudah diingat.',
+    cards: studios(CREATIVE_MODULES),
+  },
+  included: {
+    heading: 'Semua yang bisa kami buat',
+    lead: 'Pilih satu deliverable atau gabungkan beberapa. Semuanya mengikuti brand guideline yang sama.',
+    tabs: tabsOf(CREATIVE_DELIVERABLES, ['Desain', 'Video', 'Copy']),
+  },
+  process: true,
   stats: [
     { text: 'Menambahkan statistik, kutipan, dan sumber di dalam teks menaikkan visibilitas di mesin generatif hingga 40% (studi lab)', src: 'Aggarwal dkk., KDD', year: 2024, url: 'https://arxiv.org/abs/2311.09735' },
     { text: 'Sebutan di YouTube adalah sinyal terkuat visibilitas brand di AI (korelasi 0,737; 75.000 brand)', src: 'Ahrefs via BusinessWire', year: 2026, url: 'https://www.businesswire.com/news/home/20260526119691/en/Across-75000-Brands-YouTube-Mentions-Are-the-Strongest-Signal-of-AI-Visibility-New-Ahrefs-Report-Reveals' },
@@ -557,16 +577,28 @@ const en: ServiceContent = {
       groups: groups(CREATIVE_DELIVERABLES_EN, CREATIVE_ADDONS_EN, CREATIVE_ENGAGEMENT_TYPES_EN, 'en'),
     },
   },
-  compare: {
-    caption: 'One-time project vs monthly retainer',
-    head: ['Aspect', 'One-time project', 'Monthly retainer'],
-    rows: [
-      ['Scope', 'Defined, with a start and an end', 'Fixed every month'],
-      ['Best for', 'Brand guidelines, brand films, campaign launches', 'Social content, ad creative, copywriting'],
-      ['Cost', 'Per project, as quoted', 'Monthly, predictable'],
+  compare: null,
+  trust: ['Custom design, not templates', '2 revision rounds per deliverable', 'The source files are yours'],
+  highlights: {
+    items: [
+      { value: '2', label: 'revision rounds included in every deliverable' },
+      { value: '3–5', label: 'working days for standard graphic deliverables' },
+      { value: '3', label: 'studios: design, video and copywriting' },
     ],
-    note: "Not sure which one? Tell us what you need and we'll help you pick the right arrangement.",
+    note: 'Video timelines depend on the scope and are agreed at the start.',
   },
+  usp: {
+    heading: 'Three studios, one creative team',
+    accent: 3,
+    lead: 'Design, video and copy made for your brand, with no templates and no stock, so your brand is easy to remember.',
+    cards: studios(CREATIVE_MODULES_EN),
+  },
+  included: {
+    heading: 'Everything we can make',
+    lead: 'Pick one deliverable or combine several. All of it follows the same brand guideline.',
+    tabs: tabsOf(CREATIVE_DELIVERABLES_EN, ['Design', 'Video', 'Copy']),
+  },
+  process: true,
   stats: [
     { text: 'Adding statistics, quotations and sources to a text raised visibility in generative engines by up to 40% (lab study)', src: 'Aggarwal et al., KDD', year: 2024, url: 'https://arxiv.org/abs/2311.09735' },
     { text: 'YouTube mentions are the strongest signal of brand visibility in AI (correlation 0.737; 75,000 brands)', src: 'Ahrefs via BusinessWire', year: 2026, url: 'https://www.businesswire.com/news/home/20260526119691/en/Across-75000-Brands-YouTube-Mentions-Are-the-Strongest-Signal-of-AI-Visibility-New-Ahrefs-Report-Reveals' },

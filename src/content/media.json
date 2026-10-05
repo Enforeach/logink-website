@@ -540,6 +540,41 @@
         }
       }
     },
+    "film-creative": {
+      "dir": "/media/film-creative-f57bd04b",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis kreatif Logink: desain dan branding, video, copy dan konten, add-on, dari brief sampai produksi, ditutup ajakan konsultasi gratis",
+        "en": "Logink creative motion graphic: design and branding, video, copy and content, add-ons, from brief to production, ending on a free-consultation call"
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/film-creative-f57bd04b/film-1600.webm",
+          "w": 1600,
+          "h": 900,
+          "bytes": 2336298
+        },
+        "film-sm": {
+          "src": "/media/film-creative-f57bd04b/film-960.webm",
+          "w": 960,
+          "h": 540,
+          "bytes": 1119881
+        },
+        "poster": {
+          "src": "/media/film-creative-f57bd04b/poster-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 19494
+        },
+        "poster-sm": {
+          "src": "/media/film-creative-f57bd04b/poster-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 10872
+        }
+      }
+    },
     "ig": {
       "dir": "/media/ig-100cea92",
       "rendered": false,
