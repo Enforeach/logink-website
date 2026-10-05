@@ -1,0 +1,99 @@
+// Pure helpers for the Overture canvas sequence ('Satu atap, satu hari'). No DOM, no imports,
+// so sequence-core.check.ts runs them in plain Node (node >= 23 strips the types).
+//
+// Reviewed from scratchpad/cinematic-tech/sequence-core.ts. Changes (judges' fixes):
+//  - the 'mobile' and 'lite' tiers are gone: phones never run the player (CSS/T1 keyframes instead);
+//  - the gate (canvasEligible) lives in gates.ts so every page's tiny gate chunk never pulls this file;
+//  - frames are loaded step stops first (0, 40, 80, 119), then coarse-to-fine bisection;
+//  - decoded bitmaps live in a BYTE-budgeted window (not a frame count);
+//  - scroll progress maps piecewise through the step stops, so each step rests exactly on the frame
+//    that is also its static keyframe image (seamless canvas <-> <img> handover).
+
+// Decoded RGBA bitmaps: 1280x720 = 3.69 MB each. 128 MiB => 36 frames around the playhead.
+export const BITMAP_BUDGET = 128 * 2 ** 20
+
+export function cacheCapacity(budgetBytes: number, w: number, h: number, count: number): number {
+  return Math.max(2, Math.min(count, Math.floor(budgetBytes / (w * h * 4))))
+}
+
+// Frames that each story step rests on: 120 frames / 4 steps -> [0, 40, 80, 119]; 96 -> [0, 32, 64, 95].
+export function stepStops(n: number, steps: number): number[] {
+  if (steps < 2) return [0]
+  const stride = Math.round((n - 1) / (steps - 1))
+  return Array.from({ length: steps }, (_, k) => Math.min(n - 1, k * stride))
+}
+
+// Scroll progress 0..1 -> frame index, linear inside each step segment.
+export function frameAt(p: number, stops: number[]): number {
+  const segs = stops.length - 1
+  if (segs < 1) return stops[0] ?? 0
+  const x = Math.min(1, Math.max(0, p)) * segs
+  const k = Math.min(segs - 1, Math.floor(x))
+  return Math.round(stops[k] + (x - k) * (stops[k + 1] - stops[k]))
+}
+
+// Progress of the sticky stage through the runway (the <ol data-runway>): 0 when the first step's top
+// meets the stage top, 1 when the runway's bottom meets the stage bottom.
+export function runwayProgress(runwayTop: number, runwayHeight: number, stageTop: number, stageHeight: number): number {
+  const span = runwayHeight - stageHeight
+  if (span <= 0) return 0
+  return Math.min(1, Math.max(0, (stageTop - runwayTop) / span))
+}
+
+// Fetch order: the step stops first (where readers rest), then first/last, then bisection
+// (stride 64, 32, 16 ...). After ~12 requests every scroll position has a frame within +-8.
+export function loadOrder(n: number, first: number[] = []): number[] {
+  const seen = new Uint8Array(n)
+  const out: number[] = []
+  const add = (i: number) => {
+    if (i >= 0 && i < n && !seen[i]) {
+      seen[i] = 1
+      out.push(i)
+    }
+  }
+  first.forEach(add)
+  add(0)
+  add(n - 1)
+  for (let step = 2 ** Math.floor(Math.log2(Math.max(1, n - 1))); step >= 1; step /= 2)
+    for (let i = 0; i < n; i += step) add(i)
+  return out
+}
+
+// Frames to keep decoded, most urgent first: nearest the playhead (alternating ahead/behind),
+// with the step stops reserved so a fast scrub always lands on a sharp frame. Never more than cap.
+export function wantedFrames(n: number, cur: number, cap: number, keys: number[] = []): number[] {
+  const out = new Set<number>()
+  const reserve = Math.min(keys.length, Math.max(0, cap - 2))
+  for (let d = 0; out.size < cap - reserve && d < n; d++) {
+    if (cur + d < n) out.add(cur + d)
+    if (d > 0 && cur - d >= 0 && out.size < cap - reserve) out.add(cur - d)
+  }
+  for (const k of keys) if (out.size < cap) out.add(k)
+  return [...out]
+}
+
+// Nearest cached frame to the playhead, or -1.
+export function nearestCached(cur: number, n: number, has: (i: number) => boolean): number {
+  for (let d = 0; d < n; d++) {
+    if (has(cur - d)) return cur - d
+    if (has(cur + d)) return cur + d
+  }
+  return -1
+}
+
+// object-fit: cover as a source crop for the 9-argument drawImage. fx/fy = focal point (0..1).
+export function coverCrop(iw: number, ih: number, cw: number, ch: number, fx = 0.5, fy = 0.5) {
+  const s = Math.max(cw / iw, ch / ih)
+  const sw = cw / s
+  const sh = ch / s
+  return { sx: (iw - sw) * fx, sy: (ih - sh) * fy, sw, sh }
+}
+
+// Canvas pixel ratio: never above 2, never more pixels than the source has at cover scale.
+export function effectiveDpr(dpr: number, cssW: number, cssH: number, iw: number, ih: number): number {
+  const srcPxPerCssPx = 1 / Math.max(cssW / iw, cssH / ih)
+  return Math.max(1, Math.min(dpr || 1, 2, srcPxPerCssPx))
+}
+
+// Naming contract with frames.sh: 1-based, 4 digits.
+export const frameUrl = (dir: string, i: number) => `${dir}/f${String(i + 1).padStart(4, '0')}.webp`

@@ -1,0 +1,169 @@
+// Logink design-system check → scripts/check-tokens.mjs in the repo (CI).
+// 1) token × surface WCAG 2.x matrix from the hexes in tokens.css
+// 2) the --ks-*/--kn allow-list in tokens.css only names AA pairs
+// 3) data-hour CSS prefixes == hourInfo() for all 24 hours
+// 4) (--browser) computed colours for every hour × ground in Chromium
+// 5) (--browser) fallback stacks within ±4% of Archivo width per cut
+// Usage (repo): npx tailwindcss -i src/styles/tokens.css -o /tmp/lk.css && node scripts/check-tokens.mjs --browser /tmp/lk.css
+// env: TOKENS_DIR (tokens.css + tailwind.tokens.ts, default: this dir), PLAYWRIGHT (module id),
+//      ARCHIVO_WOFF2 (latin woff2 for the fallback check; skipped when absent)
+import { readFileSync, existsSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+
+const here = resolve(process.env.TOKENS_DIR ?? dirname(fileURLToPath(import.meta.url))) // repo: relative paths resolve against cwd
+const css = readFileSync(join(here, 'tokens.css'), 'utf8')
+const fail = []
+const ok = (cond, msg) => { if (!cond) fail.push(msg) }
+
+// ── 1 · hexes straight from tokens.css ──
+const C = Object.fromEntries([...css.matchAll(/--c-([\w-]+):\s*(#[0-9A-Fa-f]{6})/g)].map(m => [m[1], m[2].toUpperCase()]))
+const lin = v => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+const lum = h => { const [r, g, b] = h.slice(1).match(/../g).map(x => lin(parseInt(x, 16) / 255)); return 0.2126 * r + 0.7152 * g + 0.0722 * b }
+const cr = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05) }
+const R = (fg, bg) => cr(C[fg] ?? fg, C[bg] ?? bg)
+
+const LIGHT = ['putih', 'kertas'], DARK = ['senja', 'senja-dalam', 'malam', 'malam-dalam']
+// [fg, bg, min, role]
+const TEXT = [
+  ...LIGHT.flatMap(g => [['aspal', g, 4.5, 'ink'], ['aspal-70', g, 4.5, 'ink-2'], ['magenta', g, 4.5, 'link · key-ink (Ditemukan)']]),
+  ['aspal', 'semburat', 4.5, 'Stabilo text'], ['aspal-70', 'semburat', 4.5, 'ink-2 in Stabilo'], ['magenta', 'semburat', 4.5, 'link in Stabilo'],
+  ['crimson', 'putih', 4.5, 'key-ink (Dipercaya) · error — Putih only'],
+  ...DARK.flatMap(g => [['cahaya', g, 4.5, 'ink'], ['cahaya-70', g, 4.5, 'ink-2'], ['jingga', g, 4.5, 'link · focus · key-ink (Dihubungi)']]),
+  ['coral', 'senja', 4.5, 'key-ink (Dikutip) · citation chips — Senja base only'],
+  ['putih', 'aspal', 4.5, 'ink button label'], ['malam', 'cahaya', 4.5, 'partner button label (dark)'],
+  ['wa-label', 'wa', 4.5, 'WhatsApp label + glyph'],
+  ['putih', 'magenta', 4.5, 'key-on (magenta fill)'], ['putih', 'crimson', 4.5, "'Paling populer' badge"],
+  ['aspal', 'coral', 4.5, 'key-on (coral fill)'], ['aspal', 'jingga', 4.5, 'key-on (jingga fill)'],
+]
+const LARGE = [ // ≥24px, or ≥18.66px bold: numerals, display
+  ['crimson', 'kertas', 3, 'key-num 12.40 on Kertas (small text banned by margin rule)'],
+  ['coral', 'putih', 3, 'key-num 18.05 on paper'], ['coral', 'kertas', 3, 'key-num 18.05 on paper'],
+  ['coral', 'senja-dalam', 3, 'large text / UI on Senja Dalam'],
+]
+const NONTEXT = [
+  ['garis', 'putih', 3, 'input / table boundary'], ['garis', 'kertas', 3, 'input / table boundary'],
+  ...DARK.map(g => ['garis-gelap', g, 3, 'boundary on dark (new token)']),
+  ['aspal', 'putih', 3, 'focus ring'], ['aspal', 'kertas', 3, 'focus ring'], ...DARK.map(g => ['jingga', g, 3, 'focus ring']),
+  ['wa-label', 'putih', 3, 'WhatsApp 1.5px inset edge'], ['wa-label', 'kertas', 3, 'WhatsApp 1.5px inset edge'],
+  ['wa', 'senja', 3, 'WhatsApp fill boundary on dark'], ['wa', 'malam', 3, 'WhatsApp fill boundary on dark'],
+  ['magenta', 'kertas', 3, 'key rule/dot'], ['crimson', 'putih', 3, 'key rule/dot'], ['coral', 'senja', 3, 'key rule/dot'], ['jingga', 'malam', 3, 'key rule/dot'],
+]
+const BANNED = [ // listed so the lint knows them; each must FAIL its use or be banned by rule
+  ['coral', 'putih', 4.5, 'coral text on paper'], ['coral', 'kertas', 4.5, 'coral text on paper'],
+  ['jingga', 'putih', 3, 'jingga text or graphic on paper'], ['jingga', 'kertas', 3, 'jingga text or graphic on paper'],
+  ['magenta', 'senja', 3, 'magenta on dark'], ['magenta', 'malam', 3, 'magenta on dark'], ['magenta', 'malam-dalam', 3, 'magenta on dark'],
+  ['crimson', 'senja', 4.5, 'crimson text on dark'], ['crimson', 'malam', 4.5, 'crimson text on dark'],
+  ['coral', 'senja-dalam', 4.5, 'coral SMALL text on Senja Dalam (P6 label defect)'],
+  ['putih', 'wa', 4.5, 'white on WhatsApp green'], ['putih', 'coral', 4.5, 'white on coral fill'], ['putih', 'jingga', 4.5, 'white on jingga fill'],
+  ['wa', 'putih', 3, 'green fill without inset edge on Putih'], ['wa', 'kertas', 3, 'green fill without inset edge on Kertas'],
+  ['jingga', 'semburat', 4.5, 'dark-ground link inside Stabilo'], ['garis-gelap', 'senja-dalam', 4.5, 'garis as text'],
+]
+
+const rows = []
+for (const [list, kind] of [[TEXT, 'text'], [LARGE, 'large'], [NONTEXT, 'non-text']])
+  for (const [fg, bg, min, role] of list) { const r = R(fg, bg); rows.push({ kind, fg, bg, r, min, role, pass: r >= min }); ok(r >= min, `${kind} ${fg}/${bg} ${r.toFixed(2)} < ${min}`) }
+for (const [fg, bg, min, why] of BANNED) {
+  const r = R(fg, bg)
+  const banByRule = ['crimson/kertas', 'coral/senja-dalam'].includes(`${fg}/${bg}`)
+  ok(r < min || banByRule, `banned ${fg}/${bg} is ${r.toFixed(2)} ≥ ${min}; remove from BANNED or justify`)
+  rows.push({ kind: 'BANNED', fg, bg, r, min, role: why, pass: true })
+}
+
+// ── 2 · CSS allow-list only names allowed pairs ──
+const allowText = new Set(TEXT.map(([f, b]) => `${f}/${b}`))
+const largeOk = new Set([...allowText, ...LARGE.map(([f, b]) => `${f}/${b}`)])
+const blocks = [...css.matchAll(/\n([^{}]*data-stage="(\w+)"[^{}]*)\{([^}]*)\}/g)]
+ok(blocks.length === 4, `expected 4 stage blocks, got ${blocks.length}`)
+for (const [, , stage, body] of blocks) {
+  for (const [, g, col] of body.matchAll(/--ks-([\w-]+):\s*var\(--c-([\w-]+)\)/g)) {
+    const grounds = g === 'malam' ? ['malam', 'malam-dalam'] : [g]
+    for (const gg of grounds) ok(allowText.has(`${col}/${gg}`) && !(col === 'crimson' && gg === 'kertas'), `CSS ${stage}: --ks-${g} = ${col} is not an allowed small-text pair on ${gg}`)
+  }
+  const kn = body.match(/--kn:\s*var\(--c-([\w-]+)\)/)
+  if (kn) for (const g of LIGHT) ok(largeOk.has(`${kn[1]}/${g}`), `CSS ${stage}: --kn ${kn[1]} not allowed as large text on ${g}`)
+}
+
+// ── 3 · hour parity with the TS mirror ──
+const { hourInfo } = await import(pathToFileURL(join(here, 'tailwind.tokens.ts')).href)
+const stageOfCss = hh => {
+  for (const [, sel, stage] of blocks) if ([...sel.matchAll(/data-hour\^="(\d+)"/g)].some(m => hh.startsWith(m[1]))) return stage
+  return 'ditemukan' // :root default
+}
+for (let h = 0; h < 24; h++) { const hh = String(h).padStart(2, '0') + '00'; ok(stageOfCss(hh) === hourInfo(hh).stage, `hour ${hh}: css ${stageOfCss(hh)} vs ts ${hourInfo(hh).stage}`) }
+
+// ── report ──
+const fmt = x => x.toFixed(2).padStart(6)
+console.log('kind      fg           bg            ratio   min  role')
+for (const x of rows) console.log(`${x.kind.padEnd(9)} ${x.fg.padEnd(12)} ${x.bg.padEnd(12)} ${fmt(x.r)} ${String(x.min).padStart(4)}  ${x.role}`)
+console.log(`logo wordmark #A855F7 (exempt, logotype): Putih ${R('#A855F7', 'putih').toFixed(2)} · Kertas ${R('#A855F7', 'kertas').toFixed(2)} · Senja ${R('#A855F7', 'senja').toFixed(2)} · Malam ${R('#A855F7', 'malam').toFixed(2)}`)
+
+// ── 4/5 · browser ──
+const bi = process.argv.indexOf('--browser')
+if (bi > 0) {
+  const compiled = readFileSync(process.argv[bi + 1], 'utf8')
+  const pw = await import(process.env.PLAYWRIGHT ?? '@playwright/test')
+  const { chromium } = pw.chromium ? pw : pw.default
+  const b = await chromium.launch(); const p = await b.newPage()
+  const HOURS = ['0445', '0530', '0600', '0700', '0830', '1240', '1510', '1630', '1805', '2030', '2130']
+  const GROUNDS = ['', 'putih', 'kertas', 'senja', 'senja-dalam', 'malam', 'malam-dalam']
+  const cells = HOURS.flatMap(h => GROUNDS.map(g => `<section data-hour="${h}" ${g ? `data-ground="${g}"` : ''} style="padding:8px">
+    <p class="dateline"><span>JAKARTA, ${h} WIB</span><span>x</span></p><span class="t-clock" style="font-size:40px">07.00</span>
+    <p class="ink">Teks</p><p class="ink2" style="color:var(--ink-2)">Teks</p><a class="link" href="#">tautan</a>
+    <a class="btn btn-ink">P</a><a class="btn btn-wa">W</a>
+    <div data-ground="kertas" class="inset"><p class="dateline"><span>inset</span></p></div></section>`)).join('')
+  await p.setContent(`<html lang="id"><head><style>${compiled}</style></head><body><main>${cells}
+    <header class="site-header">h</header></main></body></html>`)
+  const bad = await p.evaluate(() => {
+    const parse = c => c.match(/[\d.]+/g).slice(0, 3).map(Number)
+    const L = ([r, g, b]) => [r, g, b].map(v => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4 }).reduce((s, v, i) => s + v * [0.2126, 0.7152, 0.0722][i], 0)
+    const ratio = (a, b) => { const [x, y] = [L(a), L(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05) }
+    const bgOf = el => { for (let e = el; e; e = e.parentElement) { const c = getComputedStyle(e).backgroundColor; if (!c.startsWith('rgba(0, 0, 0, 0)')) return parse(c) } return [255, 255, 255] }
+    const out = []
+    const check = (el, min, what) => { const r = ratio(parse(getComputedStyle(el).color), bgOf(el)); if (r < min) out.push(`${what} ${r.toFixed(2)} in ${el.closest('[data-hour]').dataset.hour}/${el.closest('[data-ground]')?.dataset.ground ?? 'default'}`) }
+    for (const s of document.querySelectorAll('section')) {
+      check(s.querySelector('.dateline > span'), 4.5, 'key-ink')
+      check(s.querySelector('.inset .dateline > span'), 4.5, 'key-ink (nested Kertas)')
+      check(s.querySelector('.t-clock'), 3, 'key-num')
+      check(s.querySelector('.ink'), 4.5, 'ink'); check(s.querySelector('.ink2'), 4.5, 'ink-2'); check(s.querySelector('.link'), 4.5, 'link')
+      check(s.querySelector('.btn-ink'), 4.5, 'btn'); check(s.querySelector('.btn-wa'), 4.5, 'wa')
+    }
+    return out
+  })
+  ok(bad.length === 0, `computed contrast failures:\n  ${bad.join('\n  ')}`)
+  const n = await p.evaluate(() => document.querySelectorAll('section').length)
+  console.log(`browser: ${n} hour × ground cells checked (8 roles each)`)
+
+  // header follows main[data-sky] before hydration, then html[data-sky]
+  await p.setContent(`<html><head><style>${compiled}</style></head><body><header class="site-header">h</header><main data-sky="dark"></main></body></html>`)
+  const hdr1 = await p.evaluate(() => getComputedStyle(document.querySelector('.site-header')).backgroundColor)
+  await p.evaluate(() => document.documentElement.setAttribute('data-sky', 'light'))
+  const hdr2 = await p.evaluate(() => getComputedStyle(document.querySelector('.site-header')).backgroundColor)
+  ok(hdr1 === 'rgb(12, 19, 48)' && hdr2 === 'rgb(255, 255, 255)', `header sky: ${hdr1} → ${hdr2}`)
+
+  // fallback widths: Archivo vs fallback-only stack, per cut
+  const woff = resolve(process.env.ARCHIVO_WOFF2 ?? join(here, 'archivo-full.woff2'))
+  if (existsSync(woff)) {
+  const faces = [...css.matchAll(/@font-face\s*\{[^}]*\}/g)].map(m => m[0]).join('\n')
+  const { writeFileSync } = await import('node:fs')
+  writeFileSync(join(tmpdir(), 'lk-fallback.html'), `<style>@font-face{font-family:A;src:url(file://${woff});font-weight:100 900;font-stretch:62% 125%}
+    ${faces} span{position:absolute;white-space:nowrap;font-size:100px}</style><body>`)
+  await p.goto(pathToFileURL(join(tmpdir(), 'lk-fallback.html')).href)
+  await p.evaluate(() => document.fonts.load('850 100px A'))
+  const cuts = [['title', 'LK Title N', 62, 850, 'DITEMUKAN. DIPERCAYA. DIHUBUNGI.'], ['title-A', 'LK Title A', 62, 850, 'DITEMUKAN. DIPERCAYA.'],
+    ['clock', 'LK Title N', 62, 300, '07.00 12.40 18.05'], ['svc', 'LK Mid N', 74, 780, 'Jasa Pembuatan Website & Landing'],
+    ['svc-A', 'LK Mid A', 74, 780, 'Jasa Pembuatan Website & Landing'], ['h3', 'LK H3 A', 88, 650, 'Jasa Meta Ads (Facebook & Instagram)'],
+    ['exp', 'LK Exp A', 125, 620, 'AGENSI DIGITAL MARKETING 360° DI JAKARTA:'], ['wide', 'LK Wide A', 125, 300, 'DIKUTIP AI.'],
+    ['text', 'LK Text', 100, 400, 'Logink adalah agensi digital marketing 360° di Jakarta untuk UMKM.'], ['ui', 'LK Text', 100, 650, 'Chat WhatsApp · Minta Penawaran']]
+  const widths = await p.evaluate(cuts => cuts.map(([k, fam, wd, wg, t]) => {
+    const w = f => { const s = document.createElement('span'); s.textContent = t; Object.assign(s.style, { fontFamily: f, fontWeight: wg, fontStretch: wd + '%' }); document.body.append(s); const r = s.getBoundingClientRect().width; s.remove(); return r }
+    return [k, w('A'), w(`'${fam}'`)]
+  }), cuts)
+  for (const [k, a, f] of widths) { const d = (f / a - 1) * 100; console.log(`fallback ${k.padEnd(8)} Δ ${d.toFixed(1).padStart(5)}%`); ok(Math.abs(d) <= 4, `fallback ${k} off by ${d.toFixed(1)}%`) }
+  }
+  await b.close()
+}
+
+if (fail.length) { console.error(`\nFAIL (${fail.length})\n- ` + fail.join('\n- ')); process.exit(1) }
+console.log(`\nOK: ${rows.filter(r => r.kind !== 'BANNED').length} allowed pairs pass, ${BANNED.length} banned pairs confirmed, CSS allow-list clean, 24 hours in parity`)

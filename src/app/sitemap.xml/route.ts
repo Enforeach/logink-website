@@ -1,99 +1,64 @@
-import { getSitemapEntries } from '@/payload/queries'
-import { SITE } from '@/lib/constants'
+// Sitemap from the registry + CMS (BUILD §1.11): 15 registry pairs, published posts and cases, and the
+// blog categories with >= CATEGORY_MIN_POSTS posts in that locale. lastmod is the registry `updated` or
+// the CMS updatedAt, never the build time. hreflang only where both sides exist.
+import { getBlogList, getSitemapEntries } from '@/payload/queries'
+import { CATEGORIES, CATEGORY_MIN_POSTS, SITE_URL, STATIC_PAIRS } from '@/lib/services'
 
-const BASE = SITE.url.replace(/\/$/, '')
+export const revalidate = 3600
 
-function esc(s: string) {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-}
+type Alts = { id: string; en: string } | null
+type Entry = { loc: string; lastmod: string; freq: string; priority: number; alts: Alts }
 
-type Freq = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+const abs = (p: string) => `${SITE_URL}${p === '/' ? '' : p}`
+const day = (d: Date | string | null | undefined) => (d ? new Date(d).toISOString().slice(0, 10) : null)
+const latest = (ds: (Date | null | undefined)[]) => day(ds.filter(Boolean).sort((a, b) => +b! - +a!)[0])
 
-function urlEntry(
-  url: string,
-  lastmod: string,
-  changefreq: Freq,
-  priority: number,
-  alts?: { id: string; en: string }
-): string {
-  const altLinks = alts
+function url({ loc, lastmod, freq, priority, alts }: Entry) {
+  const links = alts
     ? `    <xhtml:link rel="alternate" hreflang="id" href="${esc(alts.id)}" />\n` +
       `    <xhtml:link rel="alternate" hreflang="en" href="${esc(alts.en)}" />\n` +
       `    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(alts.id)}" />\n`
     : ''
-  return (
-    `  <url>\n` +
-    `    <loc>${esc(url)}</loc>\n` +
-    altLinks +
-    `    <lastmod>${lastmod}</lastmod>\n` +
-    `    <changefreq>${changefreq}</changefreq>\n` +
-    `    <priority>${priority}</priority>\n` +
-    `  </url>\n`
-  )
+  return `  <url>\n    <loc>${esc(loc)}</loc>\n${links}    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n  </url>\n`
 }
 
-const STATIC_PAIRS: [string, string, number, Freq][] = [
-  ['/', '/en', 1.0, 'weekly'],
-  ['/about', '/en/about', 0.6, 'monthly'],
-  ['/contact', '/en/contact', 0.6, 'monthly'],
-  ['/portfolio', '/en/portfolio', 0.75, 'weekly'],
-  ['/blog', '/en/blog', 0.9, 'daily'],
-  ['/privacy', '/en/privacy', 0.3, 'yearly'],
-  ['/terms', '/en/terms', 0.3, 'yearly'],
-  ['/layanan', '/en/services', 0.85, 'monthly'],
-  ['/layanan/jasa-seo-profesional', '/en/services/seo-content-marketing', 0.9, 'monthly'],
-  ['/layanan/sosial-media-manajemen', '/en/services/social-media-management', 0.9, 'monthly'],
-  ['/layanan/paid-ads', '/en/services/paid-advertising', 0.9, 'monthly'],
-  ['/layanan/website-development', '/en/services/website-landing-page', 0.9, 'monthly'],
-  ['/layanan/kreatif', '/en/services/creative-services', 0.9, 'monthly'],
-  ['/layanan/local-seo', '/en/services/local-seo', 0.9, 'monthly'],
-]
+// Both sides of a pair (or one side when the other is null); EN priority is 90% of ID.
+function pair(id: string | null, en: string | null, lastmod: string, freq: string, priority: number): Entry[] {
+  const alts = id && en ? { id: abs(id), en: abs(en) } : null
+  return [
+    ...(id ? [{ loc: abs(id), lastmod, freq, priority, alts }] : []),
+    ...(en ? [{ loc: abs(en), lastmod, freq, priority: Math.round(priority * 90) / 100, alts }] : []),
+  ]
+}
 
 export async function GET() {
-  const now = new Date().toISOString()
-
   const { posts, caseStudies } = await getSitemapEntries()
+  const cats = await Promise.all(
+    Object.keys(CATEGORIES).map(async (slug) => {
+      const [id, en] = await Promise.all([getBlogList('id', slug), getBlogList('en', slug)])
+      return { slug, id: id.posts, en: en.posts }
+    }),
+  )
 
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
-  xml += '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n'
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+  const entries: Entry[] = [
+    ...STATIC_PAIRS().flatMap(([id, en, priority, freq, updated]) => pair(id, en, updated, freq, priority)),
+    ...posts.flatMap((p) => pair(`/blog/${p.slug}`, p.slugEn ? `/en/blog/${p.slugEn}` : null, day(p.updatedAt)!, 'weekly', 0.7)),
+    ...caseStudies.flatMap((c) => pair(`/portfolio/${c.slug}`, c.slugEn ? `/en/portfolio/${c.slugEn}` : null, day(c.updatedAt)!, 'monthly', 0.7)),
+    ...cats.flatMap((c) => {
+      const idOk = c.id.length >= CATEGORY_MIN_POSTS
+      const enOk = c.en.length >= CATEGORY_MIN_POSTS
+      const lastmod = latest([...c.id, ...c.en].map((p) => p.updatedAt))
+      return lastmod ? pair(idOk ? `/blog/category/${c.slug}` : null, enOk ? `/en/blog/category/${c.slug}` : null, lastmod, 'weekly', 0.5) : []
+    }),
+  ].filter((e) => e.lastmod)
 
-  for (const [idPath, enPath, priority, freq] of STATIC_PAIRS) {
-    const idUrl = `${BASE}${idPath}`
-    const enUrl = `${BASE}${enPath}`
-    const alts = { id: idUrl, en: enUrl }
-    xml += urlEntry(idUrl, now, freq, priority, alts)
-    xml += urlEntry(enUrl, now, freq, Math.round(priority * 90) / 100, alts)
-  }
+  const xml =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
+    entries.map(url).join('') +
+    '</urlset>'
 
-  for (const post of posts) {
-    const idUrl = `${BASE}/blog/${post.slug}`
-    const enUrl = post.slugEn ? `${BASE}/en/blog/${post.slugEn}` : null
-    const alts = enUrl ? { id: idUrl, en: enUrl } : undefined
-    const lastmod = post.updatedAt?.toISOString() ?? now
-    xml += urlEntry(idUrl, lastmod, 'weekly', 0.7, alts)
-    if (enUrl) xml += urlEntry(enUrl, lastmod, 'weekly', 0.65, alts)
-  }
-
-  for (const cs of caseStudies) {
-    const idUrl = `${BASE}/portfolio/${cs.slug}`
-    const enUrl = cs.slugEn ? `${BASE}/en/portfolio/${cs.slugEn}` : null
-    const alts = enUrl ? { id: idUrl, en: enUrl } : undefined
-    const lastmod = cs.updatedAt?.toISOString() ?? now
-    xml += urlEntry(idUrl, lastmod, 'monthly', 0.7, alts)
-    if (enUrl) xml += urlEntry(enUrl, lastmod, 'monthly', 0.65, alts)
-  }
-
-  xml += '</urlset>'
-
-  return new Response(xml, {
-    headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
-    },
-  })
+  return new Response(xml, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } })
 }

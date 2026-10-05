@@ -1,0 +1,192 @@
+// Behavioural test of the blueprint primitives on the fixture (node serve.cjs fixture/dist 4180 first).
+// Desktop: canvas paints the frame the scroll position asks for, decoded bitmaps stay inside the byte
+// window, all are released offscreen and after Mode teks; cursor zones/labels/tones, key-light dot,
+// magnetic, hover still, loupe, drag row, header nav + sky. Phone: data-step drives the keyframe band.
+const assert = require('assert')
+const { chromium, PHONE, DESKTOP } = require('./acceptance/lib.cjs')
+const BASE = process.env.BASE || 'http://localhost:4180'
+const CAP = Math.floor((128 * 2 ** 20) / (1280 * 720 * 4)) // 36 frames: sequence-core BITMAP_BUDGET
+
+const counters = () => {
+  window.__bmp = { recv: 0, closed: 0 }
+  const W = window.Worker
+  window.Worker = class extends W {
+    constructor(...a) {
+      super(...a)
+      this.addEventListener('message', (e) => e.data && e.data.bmp && window.__bmp.recv++)
+    }
+  }
+  const close = ImageBitmap.prototype.close
+  ImageBitmap.prototype.close = function () {
+    window.__bmp.closed++
+    return close.call(this)
+  }
+}
+const live = (page) => page.evaluate(() => window.__bmp.recv - window.__bmp.closed)
+
+// Expected frame for the current scroll position (same math as sequence-core) vs the painted pixel.
+const probe = (page) =>
+  page.evaluate(() => {
+    const r = document.querySelector('[data-runway]').getBoundingClientRect()
+    const s = document.querySelector('.lk-seq__stage').getBoundingClientRect()
+    const p = Math.min(1, Math.max(0, (s.top - r.top) / (r.height - s.height)))
+    const stops = [0, 40, 80, 119]
+    const x = p * 3
+    const k = Math.min(2, Math.floor(x))
+    const want = Math.round(stops[k] + (x - k) * (stops[k + 1] - stops[k]))
+    const c = document.querySelector('.lk-seq__canvas')
+    const px = c.getContext('2d').getImageData(c.width >> 1, c.height >> 1, 1, 1).data
+    return { p: +p.toFixed(3), want, got: Math.round(px[0] / 2), drawn: c.hasAttribute('data-drawn'), step: document.querySelector('[data-steps]').getAttribute('data-step') }
+  })
+
+;(async () => {
+  const browser = await chromium.launch()
+  const out = {}
+
+  // ---------- desktop, rich pointer ----------
+  const ctx = await browser.newContext(DESKTOP)
+  await ctx.addInitScript(counters)
+  const page = await ctx.newPage()
+  const errors = []
+  page.on('pageerror', (e) => errors.push(e.message))
+  await page.goto(BASE, { waitUntil: 'load' })
+  await page.waitForTimeout(2500)
+  assert.ok(await page.evaluate(() => document.documentElement.classList.contains('rich') && document.documentElement.classList.contains('lenis')), 'rich layer + Lenis on desktop')
+
+  // Header: top -> hide on scroll down -> pill on scroll up; sky follows the section under the header.
+  const nav0 = await page.evaluate(() => document.documentElement.dataset.nav)
+  await page.evaluate(() => scrollTo(0, 1200))
+  await page.waitForTimeout(400)
+  const nav1 = await page.evaluate(() => document.documentElement.dataset.nav)
+  await page.evaluate(() => scrollTo(0, 1100))
+  await page.waitForTimeout(400)
+  const nav2 = await page.evaluate(() => document.documentElement.dataset.nav)
+  assert.deepStrictEqual([nav0, nav1, nav2], ['top', 'hide', 'pill'], 'header nav states')
+
+  // Services table: label disc, hover still, key-light dot from the row's data-stage.
+  await page.evaluate(() => document.querySelector('.lk-svc').scrollIntoView({ block: 'center' }))
+  await page.waitForTimeout(600)
+  const row = page.locator('.lk-svc tbody tr').nth(3) // data-stage=dipercaya -> crimson
+  const rb = await row.boundingBox()
+  await page.mouse.move(rb.x + rb.width * 0.6, rb.y + rb.height / 2, { steps: 8 })
+  await page.waitForTimeout(500)
+  out.table = await page.evaluate(() => {
+    const cur = document.querySelector('.lk-cur')
+    return { mode: cur.dataset.mode, label: cur.querySelector('span').textContent, dot: cur.style.getPropertyValue('--dot'), still: !!document.querySelector('.lk-still[data-on]'), img: document.querySelector('.lk-still img[data-on]')?.getAttribute('src') }
+  })
+  assert.strictEqual(out.table.mode, 'label')
+  assert.strictEqual(out.table.label, 'Buka layanan')
+  assert.ok(/#d81c5c/i.test(out.table.dot), `dot takes the row key light, got ${out.table.dot}`)
+  assert.ok(out.table.still && out.table.img === '/img/still-3.webp', 'hover still shows the row image')
+
+  // Overture canvas: painted frame == frame asked by the scroll position (+-2), steps follow.
+  const top = await page.evaluate(() => document.querySelector('[data-runway]').getBoundingClientRect().top + scrollY)
+  const span = await page.evaluate(() => {
+    const r = document.querySelector('[data-runway]').getBoundingClientRect()
+    return r.height - document.querySelector('.lk-seq__stage').getBoundingClientRect().height
+  })
+  out.scrub = []
+  for (const f of [0, 0.1, 0.33, 0.5, 0.66, 0.8, 1, 0.45, 0.05]) {
+    await page.evaluate((y) => scrollTo(0, y), Math.round(top + f * span))
+    await page.waitForTimeout(700)
+    out.scrub.push(await probe(page))
+  }
+  for (const s of out.scrub) {
+    assert.ok(s.drawn, 'canvas drawn')
+    assert.ok(Math.abs(s.got - s.want) <= 2, `frame at p=${s.p}: want ${s.want}, painted ${s.got}`)
+  }
+  out.liveAfterScrub = await live(page)
+  assert.ok(out.liveAfterScrub <= CAP + 2, `decoded window ${out.liveAfterScrub} > ${CAP} + 2`)
+
+  // Release offscreen: > 1 viewport away every bitmap is closed; coming back repaints.
+  await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight))
+  await page.waitForTimeout(1200)
+  out.liveOffscreen = await live(page)
+  assert.strictEqual(out.liveOffscreen, 0, 'all bitmaps released offscreen')
+  await page.evaluate((y) => scrollTo(0, y), Math.round(top + 0.5 * span))
+  await page.waitForTimeout(1200)
+  const back = await probe(page)
+  assert.ok(back.drawn && Math.abs(back.got - back.want) <= 2, `repaint after return: ${JSON.stringify(back)}`)
+
+  // Magnetic + WhatsApp tone.
+  await page.evaluate(() => scrollTo(0, 0))
+  await page.waitForTimeout(600)
+  const cta = await page.locator('[data-testid=cta-wa]').boundingBox()
+  await page.mouse.move(cta.x + cta.width + 6, cta.y + cta.height, { steps: 4 })
+  await page.mouse.move(cta.x + cta.width - 3, cta.y + cta.height - 2, { steps: 10 })
+  await page.waitForTimeout(500)
+  out.magnetic = await page.evaluate(() => ({ t: document.querySelector('[data-testid=cta-wa]').style.translate, tone: document.querySelector('.lk-cur').dataset.tone }))
+  assert.ok(out.magnetic.t && out.magnetic.t !== '0px 0px', 'magnetic CTA moved')
+  assert.strictEqual(out.magnetic.tone, 'wa', 'WhatsApp disc tone')
+  const [mx, my] = out.magnetic.t.split(' ').map(parseFloat)
+  assert.ok(Math.abs(mx) <= 14.01 && Math.abs(my) <= 14.01, 'magnetic clamped to 14px')
+
+  // Drag row: a mouse drag scrolls the snap row and does not follow the card link.
+  await page.evaluate(() => document.querySelector('[data-testid=cases]').scrollIntoView({ block: 'center' }))
+  await page.waitForTimeout(600)
+  const cb = await page.locator('[data-testid=cases]').boundingBox()
+  await page.mouse.move(cb.x + 300, cb.y + 100)
+  await page.mouse.down()
+  await page.mouse.move(cb.x + 20, cb.y + 100, { steps: 10 })
+  await page.mouse.up()
+  await page.waitForTimeout(800)
+  out.drag = await page.evaluate(() => ({ left: document.querySelector('[data-testid=cases]').scrollLeft, url: location.pathname }))
+  assert.ok(out.drag.left > 100 && out.drag.url === '/', `drag scrolled (${out.drag.left}) without navigating (${out.drag.url})`)
+
+  // Loupe + sky on Senja.
+  await page.evaluate(() => document.querySelector('.lk-proof__zone').scrollIntoView({ block: 'center' }))
+  await page.waitForTimeout(900)
+  const zb = await page.locator('.lk-proof__zone').boundingBox()
+  await page.mouse.move(zb.x + 120, zb.y + 80, { steps: 6 })
+  await page.waitForTimeout(500)
+  out.loupe = await page.evaluate(() => ({ lens: !!document.querySelector('.lk-loupe'), op: getComputedStyle(document.querySelector('.lk-loupe')).opacity, curMode: document.querySelector('.lk-cur').dataset.mode, curSky: document.querySelector('.lk-cur').dataset.sky }))
+  assert.ok(out.loupe.lens && Number(out.loupe.op) > 0.9, 'loupe visible on hover')
+  assert.strictEqual(out.loupe.curMode, 'hidden', 'follower hidden over the loupe zone')
+  await page.evaluate(() => { const s = document.querySelector('[data-hour="1805"]'); scrollTo(0, s.getBoundingClientRect().top + scrollY + 40) })
+  await page.waitForTimeout(500)
+  out.sky = await page.evaluate(() => document.documentElement.dataset.sky)
+  assert.strictEqual(out.sky, 'dark', 'html[data-sky] follows the Senja section')
+
+  // Menu dialog opens without any component JS (Invoker Commands or SiteObserver's fallback).
+  await page.evaluate(() => scrollTo(0, 0))
+  await page.waitForTimeout(500)
+  await page.click('.site-header button')
+  out.menu = await page.evaluate(() => document.getElementById('menu').open)
+  assert.ok(out.menu, 'menu dialog opens')
+  await page.keyboard.press('Escape')
+
+  // Mode teks tears everything down.
+  await page.evaluate((y) => scrollTo(0, y), Math.round(top + 0.3 * span))
+  await page.waitForTimeout(800)
+  await page.evaluate(() => document.getElementById('mode-teks').click())
+  await page.waitForTimeout(800)
+  out.teks = await page.evaluate(() => ({ cls: document.documentElement.classList.contains('mode-teks'), rich: document.documentElement.classList.contains('rich'), lenis: document.documentElement.classList.contains('lenis'), cur: !!document.querySelector('.lk-cur'), drawn: !!document.querySelector('canvas[data-drawn]'), stored: localStorage.getItem('lk-teks') }))
+  out.liveTeks = await live(page)
+  assert.deepStrictEqual(out.teks, { cls: true, rich: false, lenis: false, cur: false, drawn: false, stored: '1' }, 'Mode teks teardown')
+  assert.strictEqual(out.liveTeks, 0, 'bitmaps closed on Mode teks')
+  assert.deepStrictEqual(errors, [], 'no page errors')
+  await ctx.close()
+
+  // ---------- phone: step band driven by data-step, no canvas ----------
+  const phone = await browser.newContext(PHONE)
+  const pp = await phone.newPage()
+  await pp.goto(BASE, { waitUntil: 'load' })
+  await pp.waitForTimeout(1500)
+  out.phone = []
+  for (const k of [0, 1, 2, 3]) {
+    await pp.evaluate((k) => { const li = document.querySelector(`[data-testid=step-${k}]`); scrollTo(0, li.getBoundingClientRect().top + scrollY - innerHeight * 0.5) }, k)
+    await pp.waitForTimeout(700)
+    out.phone.push(await pp.evaluate(() => ({ step: document.querySelector('[data-steps]').getAttribute('data-step'), on: document.querySelector('.lk-seq__frames [data-step-panel][data-on]')?.getAttribute('data-k'), canvas: getComputedStyle(document.querySelector('.lk-seq__canvas')).display })))
+  }
+  assert.deepStrictEqual(out.phone.map((s) => s.step), ['0', '1', '2', '3'], 'phone steps advance')
+  assert.deepStrictEqual(out.phone.map((s) => s.on), ['0', '1', '2', '3'], 'phone keyframe band follows')
+  assert.ok(out.phone.every((s) => s.canvas === 'none'), 'no canvas on phones')
+  await phone.close()
+
+  await browser.close()
+  console.log(JSON.stringify(out, null, 1))
+  console.log('motion-runtime: PASS')
+})().catch((e) => {
+  console.error('motion-runtime: FAIL', e.message)
+  process.exit(1)
+})

@@ -1,0 +1,510 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Logink · "Sehari Semalam" design tokens            → src/styles/tokens.css
+   The ONE stylesheet of the v2 site. It is the Tailwind entry for
+   tailwind.v2.config.ts and is imported only by the v2 root layouts:
+     src/app/(frontend)/(v2-id)/layout.tsx  and  (v2-en)/layout.tsx
+   Never import it from (payload) or (legacy).
+
+   HARD RULES (CI greps these):
+   - NEVER define --font-sans. Logo.tsx renders its wordmark with
+     var(--font-sans, -apple-system, system-ui); defining it restyles the logo.
+   - No raw hex / rgba() outside this file. Components use roles only.
+   - Text colours exist only as ground-resolved roles (--ink, --ink-2,
+     --key-ink, --key-num, --link, --error). Banned pairs cannot be written.
+   ═══════════════════════════════════════════════════════════════════════ */
+@config "../../tailwind.v2.config.ts";
+@tailwind base;
+
+/* ─── 1 · PRIMITIVES (only this file may reference --c-*) ─────────────── */
+:root {
+  /* paper */
+  --c-putih: #FFFFFF;        /* first light, Bab II, forms, header by day */
+  --c-kertas: #F5F5F1;       /* newsprint reading surface */
+  --c-semburat: #FFD6C9;     /* Stabilo + house-lights spill. Never text, never a section fill */
+  /* ink on paper */
+  --c-aspal: #14121B;
+  --c-aspal-70: #4A4757;
+  --c-garis: #8A8794;        /* meaningful boundaries on paper (≥3:1) */
+  /* ribbon stops = stage key lights (logo order) */
+  --c-magenta: #A8138F;      /* 07.00 Ditemukan */
+  --c-crimson: #D81C5C;      /* 12.40 Dipercaya */
+  --c-coral: #EE3D5E;        /* 18.05 Dikutip AI */
+  --c-jingga: #F88438;       /* 21.30 Dihubungi (sodium light) */
+  /* dark grounds */
+  --c-senja: #2A0D2E;
+  --c-senja-dalam: #3A1340;
+  --c-malam: #0C1330;
+  --c-malam-dalam: #151E47;
+  --c-cahaya: #F4F1F7;
+  --c-cahaya-70: #B9B3C9;
+  --c-garis-gelap: #74738C;  /* NEW: meaningful boundaries on dark (3.40–3.97:1) */
+  /* WhatsApp: recognition beats consistency */
+  --c-wa: #25D366;
+  --c-wa-label: #0A2E17;
+  /* hairlines (decorative, exempt from 1.4.11) */
+  --c-hair-light: rgba(20, 18, 27, .12);
+  --c-hair-dark: rgba(244, 241, 247, .14);
+  /* logo wordmark "Log" ink, mirrors Logo.tsx theme prop output exactly */
+  --logo-log-light: #0A0118;
+  --logo-log-dark: #FFFFFF;
+  /* logo ribbon, offsets copied from Logo.tsx (0 / .30 / .65 / 1) */
+  --ribbon-stops: #A8138F 0%, #D81C5C 30%, #EE3D5E 65%, #F88438 100%;
+  /* 2% static noise against 8-bit banding (horizon band only) */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* ─── type stacks: Archivo + measured size-adjust fallbacks (§2) ─── */
+  --ff-text: var(--font-archivo, 'Archivo'), 'LK Text', system-ui, sans-serif;
+  --ff-title: var(--font-archivo, 'Archivo'), 'LK Title N', 'LK Title A', sans-serif;  /* wdth 62 */
+  --ff-mid: var(--font-archivo, 'Archivo'), 'LK Mid N', 'LK Mid A', sans-serif;        /* wdth 74 */
+  --ff-h3: var(--font-archivo, 'Archivo'), 'LK H3 A', sans-serif;                      /* wdth 88 */
+  --ff-exp: var(--font-archivo, 'Archivo'), 'LK Exp A', sans-serif;                    /* wdth 125 bold caps */
+  --ff-wide: var(--font-archivo, 'Archivo'), 'LK Wide A', sans-serif;                  /* wdth 125 light */
+  --ff-mono: var(--font-martian, 'Martian Mono'), 'LK Mono C', 'LK Mono A', ui-monospace, 'SF Mono', Menlo, Consolas, 'Roboto Mono', monospace;
+
+  /* ─── type scale (clamp min/max ≤ 2.5× so 200% zoom works, WCAG 1.4.4) ─── */
+  --fs-title: clamp(3.25rem, 1rem + 7.9vw, 8.125rem);    /* 52 → 130. Direction said 140; 140/52 = 2.69 fails 1.4.4 */
+  --fs-wide: calc(var(--fs-title) * .64);
+  --fs-kicker: clamp(1.25rem, 1rem + 1vw, 1.75rem);      /* 20 → 28 */
+  --fs-clock: clamp(6rem, 3rem + 12vw, 14rem);           /* 96 → 224 */
+  --fs-h1-svc: clamp(2.5rem, 1.4rem + 4.4vw, 5.5rem);    /* 40 → 86 */
+  --fs-h2: clamp(2rem, 1.2rem + 3.2vw, 4.25rem);         /* 32 → 65@1440 → 68 */
+  --fs-h3: clamp(1.25rem, 1.05rem + .8vw, 1.75rem);      /* 20 → 28 */
+  --fs-lead: clamp(1.125rem, 1rem + .5vw, 1.375rem);     /* 18 → 22 */
+  --fs-body: clamp(1rem, .96rem + .2vw, 1.125rem);       /* 16 → 18 (17 min on dark, see grounds) */
+  --fs-stat: clamp(3rem, 2rem + 4vw, 6rem);              /* 48 → 90 */
+  --fs-ui: 1rem;
+  --fs-small: .875rem;
+  --fs-dateline: .75rem;
+  --fs-mono: .8125rem;
+  --fs-caption: .75rem;
+
+  /* ─── space & layout (Tailwind's 4px spacing scale is kept for the rest) ─── */
+  --grid-max: 1360px;
+  --gutter: 16px;                                        /* 24 @640, 40 @1024, 48 @1440 */
+  --col-gap: clamp(16px, .5rem + 1.2vw, 32px);
+  --section-y: clamp(56px, 2rem + 5vw, 128px);
+  --section-y-sm: clamp(40px, 1.5rem + 2.5vw, 72px);
+  --measure: 66ch;
+  --measure-lead: 60ch;
+  --tap: 48px;
+  --nav-h: 56px;                                         /* 72 @1024; condensed 56 */
+  --nav-h-condensed: 56px;
+  --bar-h: 56px;                                         /* phone bottom action bar */
+  --dial-h: 3px;
+  --stage-bar-h: 4px;
+  --hero-min: min(100svh, 1000px);
+  --stage-h: min(100svh, 900px);                         /* sticky stages; runway = N × --stage-h */
+  --horizon-h: clamp(160px, 110px + 12vw, 280px);
+
+  /* ─── shape ─── */
+  --r-0: 0;
+  --r-ui: 4px;           /* buttons, inputs, media frames */
+  --r-chip: 999px;       /* chips only */
+  --hair-w: 1px;
+  --rule-w: 2px;         /* stage key-light rules */
+  --wa-edge-w: 1.5px;
+  --focus-w: 2px;
+  --focus-offset: 2px;
+
+  /* ─── z-index (popover + <dialog> use the top layer, no z needed) ─── */
+  --z-under: -1;
+  --z-lamp: 1;           /* under text, over film */
+  --z-content: 2;
+  --z-loupe: 3;
+  --z-sticky: 10;
+  --z-bar: 40;
+  --z-header: 40;
+  --z-wa-pill: 41;
+  --z-dial: 42;
+  --z-cursor: 50;
+  --z-toast: 55;
+  --z-skip: 60;
+
+  /* ─── motion ─── */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);      /* expo-out: entrances, reveals */
+  --ease-ui: cubic-bezier(.25, 1, .5, 1);       /* quart-out: hover, small UI */
+  --ease-drawer: cubic-bezier(.32, .72, 0, 1);  /* menus, sheets, popovers */
+  --ease-in-out: cubic-bezier(.83, 0, .17, 1);  /* quint in-out: horizon wipes */
+  --ease-in: cubic-bezier(.5, 0, .75, 0);       /* exits only */
+  --dur-press: 90ms;
+  --dur-hover: 150ms;
+  --dur-ui: 240ms;          /* UI, phone-screen crossfade, page-in */
+  --dur-page-out: 150ms;
+  --dur-reveal: 700ms;
+  --dur-rise: 800ms;        /* front-page H1 rise */
+  --dur-image: 900ms;       /* horizon wipe */
+  --stagger-line: 90ms;
+  --stagger-word: 45ms;
+  --stagger-max: 600ms;     /* ≤ 6 items */
+}
+@media (min-width: 640px)  { :root { --gutter: 24px; } }
+@media (min-width: 1024px) { :root { --gutter: clamp(40px, 2vw + 20px, 48px); --nav-h: 72px; } }
+:root:lang(id) { --fs-title: clamp(3.055rem, .94rem + 7.426vw, 7.6375rem); } /* × .94 for longer Indonesian words */
+
+/* ─── 2 · FALLBACK FACES ───────────────────────────────────────────────
+   size-adjust = Archivo width / fallback width, measured in Chromium on
+   2026-09-27 (blueprint/design-system/measure.cjs). ascent/descent =
+   Archivo hhea 878/210 ÷ size-adjust. One face per (cut × fallback):
+   size-adjust is per face, so a single src: local(A), local(B) chain
+   cannot be tuned for both (defect in the direction's one-face chain).
+   Display lines are nowrap + fixed line-height + overflow-x: clip, so a
+   swap there is CLS-free anyway; these faces matter for wrapping text. */
+@font-face { font-family: 'LK Text'; src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Roboto'), local('Roboto-Regular');
+  font-weight: 100 550; size-adjust: 98.6%; ascent-override: 89.0%; descent-override: 21.3%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Text'; src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('Roboto Bold'), local('Roboto-Bold');
+  font-weight: 551 900; size-adjust: 97.3%; ascent-override: 90.2%; descent-override: 21.6%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Title N'; src: local('Arial Narrow'), local('ArialNarrow'), local('Roboto Condensed'), local('RobotoCondensed-Regular');
+  font-weight: 100 500; size-adjust: 78.2%; ascent-override: 112.3%; descent-override: 26.9%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Title N'; src: local('Arial Narrow Bold'), local('ArialNarrow-Bold'), local('Roboto Condensed Bold'), local('RobotoCondensed-Bold');
+  font-weight: 501 900; size-adjust: 85.9%; ascent-override: 102.2%; descent-override: 24.4%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Title A'; src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Roboto'), local('Roboto-Regular');
+  font-weight: 100 500; size-adjust: 64.1%; ascent-override: 137.0%; descent-override: 32.8%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Title A'; src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('Roboto Bold'), local('Roboto-Bold');
+  font-weight: 501 900; size-adjust: 70.4%; ascent-override: 124.7%; descent-override: 29.8%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Mid N'; src: local('Arial Narrow Bold'), local('ArialNarrow-Bold'), local('Roboto Condensed Bold'), local('RobotoCondensed-Bold');
+  font-weight: 100 900; size-adjust: 97.0%; ascent-override: 90.5%; descent-override: 21.6%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Mid A'; src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('Roboto Bold'), local('Roboto-Bold');
+  font-weight: 100 900; size-adjust: 79.6%; ascent-override: 110.3%; descent-override: 26.4%; line-gap-override: 0%; }
+@font-face { font-family: 'LK H3 A'; src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('Roboto Bold'), local('Roboto-Bold');
+  font-weight: 100 900; size-adjust: 87.6%; ascent-override: 100.2%; descent-override: 24.0%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Exp A'; src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('Roboto Bold'), local('Roboto-Bold');
+  font-weight: 100 900; size-adjust: 126.7%; ascent-override: 69.3%; descent-override: 16.6%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Wide A'; src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Roboto'), local('Roboto-Regular');
+  font-weight: 100 900; size-adjust: 126.3%; ascent-override: 69.5%; descent-override: 16.6%; line-gap-override: 0%; }
+/* Martian Mono advance = .700em; Consolas .55em, the rest ≈ .602em */
+@font-face { font-family: 'LK Mono C'; src: local('Consolas');
+  size-adjust: 127.3%; ascent-override: 78.6%; descent-override: 15.7%; line-gap-override: 0%; }
+@font-face { font-family: 'LK Mono A'; src: local('Menlo'), local('Menlo-Regular'), local('DejaVu Sans Mono'), local('Droid Sans Mono'), local('Roboto Mono'), local('Courier New');
+  size-adjust: 116.3%; ascent-override: 86.0%; descent-override: 17.2%; line-gap-override: 0%; }
+
+/* ─── 3 · HOURS & STAGES: the key light ─────────────────────────────────
+   data-hour="HHMM" (pages, sections) → stage by time of day:
+     04–09 pagi   → Ditemukan  magenta   default ground Kertas
+     10–16 siang  → Dipercaya  crimson   default ground Putih
+     17–19 senja  → Dikutip AI coral     default ground Senja
+     20–03 malam  → Dihubungi  jingga    default ground Malam
+   data-stage="ditemukan|dipercaya|dikutip|dihubungi" (chips, cards, rows,
+   dial segments) → key light only, never a surface.
+   --ks-<ground> = the key as SMALL text on that ground. Only AA pairs are
+   declared; every other pair is `initial`, so the ground falls back to its
+   neutral ink. The allow-list below IS the contrast matrix.
+   --kn = the key as LARGE text (numerals) on paper; dark grounds use Cahaya. */
+:root,
+[data-stage="ditemukan"],
+:is([data-hour^="04"], [data-hour^="05"], [data-hour^="06"], [data-hour^="07"], [data-hour^="08"], [data-hour^="09"]) {
+  --key: var(--c-magenta); --key-on: var(--c-putih);
+  --ks-putih: var(--c-magenta); --ks-kertas: var(--c-magenta);
+  --ks-senja: initial; --ks-senja-dalam: initial; --ks-malam: initial;
+  --kn: var(--c-magenta);
+  --cursor-dot: var(--c-magenta);
+}
+[data-stage="dipercaya"],
+:is([data-hour^="10"], [data-hour^="11"], [data-hour^="12"], [data-hour^="13"], [data-hour^="14"], [data-hour^="15"], [data-hour^="16"]) {
+  --key: var(--c-crimson); --key-on: var(--c-putih);
+  --ks-putih: var(--c-crimson); --ks-kertas: initial;   /* 4.53 on Kertas: large only */
+  --ks-senja: initial; --ks-senja-dalam: initial; --ks-malam: initial;
+  --kn: var(--c-crimson);
+  --cursor-dot: var(--c-crimson);
+}
+[data-stage="dikutip"],
+:is([data-hour^="17"], [data-hour^="18"], [data-hour^="19"]) {
+  --key: var(--c-coral); --key-on: var(--c-aspal);
+  --ks-putih: initial; --ks-kertas: initial;
+  --ks-senja: var(--c-coral); --ks-senja-dalam: initial; --ks-malam: initial;  /* 4.06 on Senja Dalam: large/UI only */
+  --kn: var(--c-coral);
+  --cursor-dot: var(--c-coral);
+}
+[data-stage="dihubungi"],
+:is([data-hour^="2"], [data-hour^="00"], [data-hour^="01"], [data-hour^="02"], [data-hour^="03"]) {
+  --key: var(--c-jingga); --key-on: var(--c-aspal);
+  --ks-putih: initial; --ks-kertas: initial;
+  --ks-senja: var(--c-jingga); --ks-senja-dalam: var(--c-jingga); --ks-malam: var(--c-jingga);
+  --kn: initial;                                        /* 2.30 on paper */
+  --cursor-dot: var(--c-jingga);
+}
+
+/* ─── 4 · GROUNDS: surface + ink roles ─────────────────────────────────
+   data-ground="putih|kertas|senja|senja-dalam|malam|malam-dalam" overrides
+   the hour's default ground. A ground re-resolves key text for its own
+   element, so a card that needs stage-coloured TEXT must carry both
+   data-stage and data-ground (Section and Card do this for you).
+   The header pill and phone bar follow html[data-sky] (set by SiteObserver);
+   before hydration they read main[data-sky] via :has(). */
+:root,
+[data-ground="putih"], [data-ground="kertas"],
+:is([data-hour^="04"], [data-hour^="05"], [data-hour^="06"], [data-hour^="07"], [data-hour^="08"], [data-hour^="09"],
+    [data-hour^="10"], [data-hour^="11"], [data-hour^="12"], [data-hour^="13"], [data-hour^="14"], [data-hour^="15"], [data-hour^="16"]):not([data-ground]),
+.site-header, .bottom-bar {
+  color-scheme: light;
+  --sky: light;
+  --ink: var(--c-aspal);
+  --ink-2: var(--c-aspal-70);
+  --line: var(--c-garis);
+  --hair: var(--c-hair-light);
+  --link: var(--c-magenta);
+  --focus: var(--c-aspal);
+  --btn: var(--c-aspal);
+  --btn-ink: var(--c-putih);
+  --wa-edge: inset 0 0 0 var(--wa-edge-w) var(--c-wa-label);  /* green on white is 1.98:1 */
+  --key-num: var(--kn, var(--ink));
+  --cursor-disc: var(--c-aspal);
+  --lamp: transparent;                                           /* lamp is off on paper */
+  --logo-log: var(--logo-log-light);
+  background-color: var(--surface);
+  color: var(--ink);
+}
+[data-ground="putih"],
+:is([data-hour^="10"], [data-hour^="11"], [data-hour^="12"], [data-hour^="13"], [data-hour^="14"], [data-hour^="15"], [data-hour^="16"]):not([data-ground]),
+.site-header, .bottom-bar {
+  --surface: var(--c-putih); --surface-alt: var(--c-kertas);
+  --key-ink: var(--ks-putih, var(--ink));
+  --error: var(--c-crimson);                                     /* forms live on Putih only */
+}
+:root,
+[data-ground="kertas"],
+:is([data-hour^="04"], [data-hour^="05"], [data-hour^="06"], [data-hour^="07"], [data-hour^="08"], [data-hour^="09"]):not([data-ground]) {
+  --surface: var(--c-kertas); --surface-alt: var(--c-putih);
+  --key-ink: var(--ks-kertas, var(--ink));
+  --error: var(--c-aspal);                                       /* + icon; crimson is 4.53 here */
+}
+[data-ground="senja"], [data-ground="senja-dalam"], [data-ground="malam"], [data-ground="malam-dalam"],
+:is([data-hour^="17"], [data-hour^="18"], [data-hour^="19"], [data-hour^="2"], [data-hour^="00"], [data-hour^="01"], [data-hour^="02"], [data-hour^="03"]):not([data-ground]),
+:root[data-sky="dark"] :is(.site-header, .bottom-bar),
+:is(:root:not([data-sky]):has(main[data-sky="dark"])) :is(.site-header, .bottom-bar) {
+  color-scheme: dark;
+  --sky: dark;
+  --ink: var(--c-cahaya);
+  --ink-2: var(--c-cahaya-70);
+  --line: var(--c-garis-gelap);
+  --hair: var(--c-hair-dark);
+  --link: var(--c-jingga);
+  --focus: var(--c-jingga);
+  --btn: var(--c-cahaya);
+  --btn-ink: var(--c-malam);
+  --wa-edge: 0 0 #0000;                                          /* green on dark is 8.86–9.20:1 */
+  --key-num: var(--ink);                                         /* numerals are Cahaya on dark */
+  --cursor-disc: var(--c-cahaya);
+  --lamp: var(--key);                                            /* streetlight in the stage colour */
+  --logo-log: var(--logo-log-dark);
+  --error: var(--c-cahaya);
+  --fs-body: clamp(1.0625rem, 1rem + .2vw, 1.125rem);           /* ≥17px on dark */
+  font-size: var(--fs-body);
+  background-color: var(--surface);
+  color: var(--ink);
+}
+[data-ground="senja"], :is([data-hour^="17"], [data-hour^="18"], [data-hour^="19"]):not([data-ground]) {
+  --surface: var(--c-senja); --surface-alt: var(--c-senja-dalam);
+  --key-ink: var(--ks-senja, var(--ink));
+}
+[data-ground="senja-dalam"] {
+  --surface: var(--c-senja-dalam); --surface-alt: var(--c-senja);
+  --key-ink: var(--ks-senja-dalam, var(--ink));
+}
+[data-ground="malam"],
+:is([data-hour^="2"], [data-hour^="00"], [data-hour^="01"], [data-hour^="02"], [data-hour^="03"]):not([data-ground]),
+:root[data-sky="dark"] :is(.site-header, .bottom-bar),
+:is(:root:not([data-sky]):has(main[data-sky="dark"])) :is(.site-header, .bottom-bar) {
+  --surface: var(--c-malam); --surface-alt: var(--c-malam-dalam);
+  --key-ink: var(--ks-malam, var(--ink));
+}
+[data-ground="malam-dalam"] {
+  --surface: var(--c-malam-dalam); --surface-alt: var(--c-malam);
+  --key-ink: var(--ks-malam, var(--ink));
+}
+
+/* ─── 5 · BASE ────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    font-family: var(--ff-text);
+    font-stretch: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--nav-h) + 16px);   /* native AND Lenis anchors */
+    interpolate-size: allow-keywords;                /* <details> height, where supported */
+    /* no scroll-behavior: smooth (conflicts with Lenis) */
+  }
+  body {
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    font-kerning: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  :where(h1, h2, h3, h4) { text-wrap: balance; }
+  :where(p, li, dd, figcaption) { text-wrap: pretty; }
+  :focus-visible { outline: var(--focus-w) solid var(--focus); outline-offset: var(--focus-offset); }
+  ::selection { background: var(--c-semburat); color: var(--c-aspal); }
+  mark { background: none; color: inherit; }
+  :where(input[type="checkbox"], input[type="radio"]) { accent-color: var(--ink); }
+  ::placeholder { color: var(--ink-2); opacity: 1; }
+  :where(table) { font-variant-numeric: tabular-nums; }
+}
+
+/* ─── 6 · COMPONENT CLASSES (purged when unused) ──────────────────────── */
+@layer components {
+  /* type cuts: one class = one cut. Utilities may override single props. */
+  .t-title { font-family: var(--ff-title); font-size: var(--fs-title); font-stretch: 62%; font-weight: 850; line-height: .86;
+             letter-spacing: -.005em; word-spacing: .14em; text-transform: uppercase; overflow-x: clip; }
+  .t-wide  { font-family: var(--ff-wide); font-size: var(--fs-wide); font-stretch: 125%; font-weight: 300; line-height: 1.02;
+             letter-spacing: .01em; text-transform: uppercase; }
+  .ln { display: block; white-space: nowrap; }            /* one display line; CLS guard */
+  .t-kicker { font-family: var(--ff-exp); font-size: var(--fs-kicker); font-stretch: 125%; font-weight: 620; line-height: 1.2;
+              letter-spacing: .06em; text-transform: uppercase; }
+  .t-clock { font-family: var(--ff-title); font-size: var(--fs-clock); font-stretch: 62%; font-weight: 300; line-height: .8;
+             letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--key-num); }
+  .t-h1svc { font-family: var(--ff-mid); font-size: var(--fs-h1-svc); font-stretch: 74%; font-weight: 780; line-height: .95;
+             letter-spacing: -.01em; max-width: 18ch; }
+  .t-h1svc .tail { display: block; font-family: var(--ff-text); font-size: max(18px, .34em); font-stretch: 100%; font-weight: 500;
+                   line-height: 1.25; letter-spacing: 0; margin-top: .9rem; max-width: 34ch; }
+  .t-h2 { font-family: var(--ff-mid); font-size: var(--fs-h2); font-stretch: 74%; font-weight: 760; line-height: 1; letter-spacing: -.01em; }
+  .t-h3 { font-family: var(--ff-h3); font-size: var(--fs-h3); font-stretch: 88%; font-weight: 650; line-height: 1.2; }
+  .t-lead { font-size: var(--fs-lead); line-height: 1.45; max-width: var(--measure-lead); }
+  .t-body { font-size: var(--fs-body); line-height: 1.6; max-width: var(--measure); }
+  .t-stat { font-family: var(--ff-title); font-size: var(--fs-stat); font-stretch: 62%; font-weight: 300; line-height: .9;
+            font-variant-numeric: tabular-nums; }
+  .t-dateline { font-family: var(--ff-exp); font-size: var(--fs-dateline); font-stretch: 125%; font-weight: 600; line-height: 1.3;
+                letter-spacing: .12em; text-transform: uppercase; }
+  .t-ui { font-size: var(--fs-ui); font-weight: 650; line-height: 1; }
+  .t-small { font-size: var(--fs-small); line-height: 1.45; }
+  .t-mono { font-family: var(--ff-mono); font-size: var(--fs-mono); line-height: 1.5; letter-spacing: 0; }
+  .t-caption { font-family: var(--ff-mono); font-size: var(--fs-caption); line-height: 1.45; letter-spacing: .02em;
+               text-transform: uppercase; color: var(--ink-2); }
+
+  /* layout */
+  .wrap { width: 100%; max-width: calc(var(--grid-max) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+  .grid-12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); }
+
+  /* motif 1 · dateline */
+  .dateline { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 16px; row-gap: 4px;
+              border-top: var(--hair-w) solid var(--hair); padding-top: 12px;
+              font-family: var(--ff-exp); font-size: var(--fs-dateline); font-stretch: 125%; font-weight: 600; line-height: 1.3;
+              letter-spacing: .12em; text-transform: uppercase; color: var(--key-ink); }
+  .dateline > :last-child { color: var(--ink-2); }
+
+  /* motif 2 · day dial: 4 ribbon stops as hard segments + Malam tail */
+  .day-dial { --dial: linear-gradient(90deg, var(--c-magenta) 0 20%, var(--c-crimson) 20% 40%, var(--c-coral) 40% 60%,
+                                              var(--c-jingga) 60% 80%, var(--c-malam) 80% 100%);
+              background: var(--dial); }
+  .day-dial--progress { position: fixed; inset: 0 0 auto; height: var(--dial-h); z-index: var(--z-dial); pointer-events: none; overflow: clip; }
+  /* sun: a 6px Cahaya tick riding scroll(root); transform only; static where unsupported (Firefox) */
+  .day-dial--progress::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--c-cahaya) 0 6px, transparent 6px); }
+  @supports (animation-timeline: scroll()) {
+    .day-dial--progress::after { animation: lk-dial-sun linear both; animation-timeline: scroll(root); }
+  }
+  .stage-bar { display: block; height: var(--stage-bar-h); background: var(--key); }
+
+  /* motif 3 · Stabilo on citable passages (paper grounds only) */
+  .stabilo { background: linear-gradient(transparent 12%, var(--c-semburat) 12% 92%, transparent 92%); color: var(--c-aspal);
+             padding-inline: .1em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .stabilo a { color: var(--c-magenta); }                  /* 4.98:1 on Semburat */
+
+  /* buttons: fills are Aspal (light), Cahaya (dark), WhatsApp. Nothing else. */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: var(--tap); padding-inline: 20px;
+         border: 1.5px solid transparent; border-radius: var(--r-ui); font-family: var(--ff-text); font-size: var(--fs-ui);
+         font-stretch: 100%; font-weight: 650; line-height: 1; text-decoration: none; white-space: nowrap;
+         transition: transform var(--dur-press) var(--ease-ui); }
+  .btn:active { transform: scale(.97); }
+  .btn svg { transition: transform var(--dur-hover) var(--ease-ui); }
+  @media (hover: hover) { .btn:hover svg { transform: translateX(3px); } }
+  .btn-ink { background-color: var(--btn); color: var(--btn-ink); }
+  .btn-wa { background-color: var(--c-wa); color: var(--c-wa-label); box-shadow: var(--wa-edge); }
+  .btn-ghost { color: var(--ink); border-color: var(--line); }
+  .btn-sm { min-height: 40px; padding-inline: 16px; font-size: .9375rem; }
+  .btn-lg { min-height: 56px; }
+  .badge-populer { display: inline-block; padding: 4px 8px; background: var(--c-crimson); color: var(--c-putih);
+                   font-family: var(--ff-exp); font-size: .6875rem; font-stretch: 125%; font-weight: 650;
+                   letter-spacing: .08em; text-transform: uppercase; line-height: 1.2; }   /* 4.95:1 */
+
+  /* links: body links are always underlined (magenta vs Aspal is 2.8:1, WCAG 1.4.1) */
+  .link, .prose a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+  .link:hover, .prose a:hover { text-decoration-thickness: 2px; }
+
+  /* chips: the only pills */
+  .chip { display: inline-flex; align-items: center; gap: .375rem; min-height: 28px; padding-inline: 10px; border: var(--hair-w) solid var(--hair);
+          border-radius: var(--r-chip); font-family: var(--ff-exp); font-size: .6875rem; font-stretch: 125%; font-weight: 600;
+          letter-spacing: .08em; text-transform: uppercase; line-height: 1; color: var(--ink-2); text-decoration: none; }
+  .chip[data-stage]::before { content: ""; inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--key); }
+  .chip-choice { min-height: var(--tap); border-color: var(--line); color: var(--ink); }
+
+  /* honesty labels */
+  .mock-label { font-family: var(--ff-exp); font-size: .6875rem; font-stretch: 125%; font-weight: 600; letter-spacing: .12em;
+                text-transform: uppercase; color: var(--ink-2); }            /* "Ilustrasi · data contoh", never coral */
+
+  /* tables: 0 radius, hairlines, caption as dateline */
+  .tbl { width: 100%; border-collapse: collapse; }
+  .tbl caption { caption-side: top; text-align: left; padding-bottom: 12px; }
+  .tbl :is(th, td) { text-align: left; vertical-align: top; padding: 14px 16px 14px 0; border-bottom: var(--hair-w) solid var(--hair); }
+  .tbl thead th { border-bottom-color: var(--line); }
+  .tbl-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+  .tbl-scroll :is(th, td):first-child { position: sticky; left: 0; background-color: var(--surface); }
+
+  /* FAQ: <details>, answers always in the DOM */
+  .faq > details { border-top: var(--hair-w) solid var(--hair); }
+  .faq summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: var(--tap);
+                 padding-block: 16px; cursor: pointer; list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq details::details-content { block-size: 0; overflow: clip;
+                                  transition: block-size var(--dur-ui) var(--ease-drawer), content-visibility var(--dur-ui) allow-discrete; }
+  .faq details[open]::details-content { block-size: auto; }
+
+  /* the page's single text-free ribbon (home + AI page only) */
+  .ribbon-horizon { position: relative; height: var(--horizon-h);
+                    background: linear-gradient(180deg, var(--horizon-from, var(--c-putih)) 0%, var(--c-jingga) 30%, var(--c-coral) 52%,
+                                                var(--c-crimson) 70%, var(--c-magenta) 86%, var(--c-senja) 100%); }
+  .ribbon-horizon::after { content: ""; position: absolute; inset: 0; background-image: var(--noise); opacity: .02; pointer-events: none; }
+
+  /* house lights: a Kertas sheet slides over the sticky Malam band */
+  .house-lights > .hl-night { position: sticky; top: 0; }
+  .house-lights > .hl-sheet { position: relative; z-index: 1; }
+  .house-lights > .hl-sheet::before { content: ""; position: absolute; inset-inline: 0; bottom: 100%; height: 48px; pointer-events: none;
+                                      background: linear-gradient(to top, var(--c-semburat), transparent); opacity: .7; }  /* keep ≥48px text-free padding at the band's bottom */
+
+  /* one LogoFull in the header swaps "Log" ink by sky without a re-render
+     (CSS beats SVG presentation attributes; output equals theme="light"/"dark") */
+  .logo-auto tspan:first-of-type { fill: var(--logo-log); }
+}
+
+@keyframes lk-dial-sun { from { transform: translateX(0); } to { transform: translateX(calc(100% - 6px)); } }
+
+@tailwind components;
+@tailwind utilities;
+
+/* ─── 7 · USER MODES (after utilities, so they win) ───────────────────── */
+@media (prefers-contrast: more) {
+  :root, [data-ground], [data-hour], .site-header, .bottom-bar { --ink-2: var(--ink); --hair: var(--line); }
+}
+@media (forced-colors: active) {
+  .stabilo { background: none; text-decoration: underline 2px; }
+  .ribbon-horizon, .house-lights > .hl-sheet::before, .day-dial, [data-decor] { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+                           transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .day-dial--progress::after { animation: none !important; }   /* scroll-driven sun dot is static */
+}
+/* Mode teks · "Lihat halaman ini seperti AI membacanya". 0 KB JS: the footer
+   holds the one <input id="mode-teks">; Bab III uses <label for="mode-teks">.
+   A pre-paint inline script adds .mode-teks when the choice was saved. */
+:root:is(.mode-teks, :has(#mode-teks:checked)) {
+  --ff-text: var(--ff-mono); --ff-title: var(--ff-mono); --ff-mid: var(--ff-mono); --ff-h3: var(--ff-mono);
+  --ff-exp: var(--ff-mono); --ff-wide: var(--ff-mono);
+}
+:root:is(.mode-teks, :has(#mode-teks:checked)) :is([data-ground], [data-hour], .site-header, .bottom-bar) {
+  color-scheme: light; --surface: var(--c-kertas); --ink: var(--c-aspal); --ink-2: var(--c-aspal-70); --link: var(--c-magenta);
+  --key-ink: var(--c-aspal); --key-num: var(--c-aspal); --focus: var(--c-aspal); --btn: var(--c-aspal); --btn-ink: var(--c-putih);
+}
+:root:is(.mode-teks, :has(#mode-teks:checked)) :is(img, picture, video, canvas, iframe, [data-decor], .ribbon-horizon, .day-dial, .cursor-layer) {
+  display: none !important;
+}
+:root:is(.mode-teks, :has(#mode-teks:checked)) :is(.t-title, .t-wide, .t-h1svc, .t-h2, .t-clock, .t-stat, .t-kicker, .t-h3) {
+  font-size: 1.125rem !important; font-stretch: 100% !important; font-weight: 700 !important; line-height: 1.5 !important;
+  letter-spacing: 0 !important; text-transform: none !important;
+}
+:root:is(.mode-teks, :has(#mode-teks:checked)) .ln { display: inline; white-space: normal; }
+:root:is(.mode-teks, :has(#mode-teks:checked)) :is(h1, h2, h3)::before { color: var(--c-aspal-70); }
+:root:is(.mode-teks, :has(#mode-teks:checked)) h1::before { content: "# "; }
+:root:is(.mode-teks, :has(#mode-teks:checked)) h2::before { content: "## "; }
+:root:is(.mode-teks, :has(#mode-teks:checked)) h3::before { content: "### "; }
+:root:is(.mode-teks, :has(#mode-teks:checked)) *, :root:is(.mode-teks, :has(#mode-teks:checked)) *::before {
+  animation: none !important; transition: none !important;
+}

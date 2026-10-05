@@ -1,0 +1,21 @@
+// Time-travel page cuts (0 KB): template.tsx re-mounts on every navigation, so this one
+// <ViewTransition> gives each page an exit (150 ms fade) and an enter (240 ms, 12 px rise, 90 ms
+// delay), and the snapshot crossfade carries the destination page's light (paper -> Senja -> Malam).
+// Verified in the repo: Next 16.2.6 vendors react 19.3.0-canary-3f0b9e61-20260317, whose STABLE build exports
+// ViewTransition (next/dist/compiled/react/cjs/react.production.js:395) and whose react-dom calls
+// document.startViewTransition; App Router navigations are transitions, so this works as is.
+// experimental.viewTransition is only declared (config-shared.d.ts:687, zod schema); nothing in next/dist
+// 16.2.6 reads it. Set it to true anyway (documented switch, may gate a later version). Types come from
+// src/types/react-canary.d.ts (@types/react 19.2.14 declares ViewTransition only in react/canary).
+// default="none": no animation on first load or on
+// unrelated transitions; unsupported browsers simply navigate. Copy to en/(v2)/template.tsx.
+// Shared morph (case card -> case hero): <ViewTransition name={`case-${slug}`} share="lk-morph"> on both.
+import { ViewTransition } from 'react'
+
+export default function Template({ children }: { children: React.ReactNode }) {
+  return (
+    <ViewTransition enter="lk-page" exit="lk-page" default="none">
+      {children}
+    </ViewTransition>
+  )
+}

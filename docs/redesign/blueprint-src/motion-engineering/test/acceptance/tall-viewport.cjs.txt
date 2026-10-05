@@ -1,0 +1,48 @@
+// Renderer-shaped viewports: BASE=... node tall-viewport.cjs [/path ...]
+// 412x732 vs 412x12140 (Google's measured WRS phone viewport) and 1440x12140 desktop:
+// 0 hidden text anywhere, no horizontal overflow, doc height ratio <= 1.5, no video and no canvas frames fetched in a tall
+// viewport (only the 4 step keyframes), and no rich chunk on the tall desktop.
+const { chromium, BUDGET, PHONE, DESKTOP, recordScripts, markersIn, hiddenTextInPage, report } = require('./lib.cjs')
+const BASE = process.env.BASE || 'http://localhost:3000'
+const PATHS = process.argv.slice(2).length ? process.argv.slice(2) : ['/', '/layanan/jasa-seo-profesional', '/layanan/local-seo']
+const FRAME = /\/seq\/[^?]*\/f\d{4}\.webp/
+
+;(async () => {
+  const browser = await chromium.launch()
+  const rows = []
+  const failures = []
+  for (const p of PATHS) {
+    const heights = {}
+    for (const [name, opts] of [['412x732', { ...PHONE, viewport: { width: 412, height: 732 } }], ['412x12140', { ...PHONE, viewport: { width: 412, height: 12140 } }], ['1440x12140', { ...DESKTOP, viewport: { width: 1440, height: 12140 } }]]) {
+      const ctx = await browser.newContext(opts)
+      const page = await ctx.newPage()
+      const media = []
+      page.on('request', (r) => { if (/\.webm(\?|$)/.test(r.url()) || FRAME.test(r.url())) media.push(r.url()) })
+      const scripts = recordScripts(page)
+      await page.goto(BASE + p, { waitUntil: 'load' })
+      await page.waitForTimeout(4000)
+      const hid = await page.evaluate(hiddenTextInPage)
+      // Content height, not scrollHeight: scrollHeight floors at the viewport, so any page shorter than
+      // 12,140 / 1.5 px would fail the ratio spuriously.
+      heights[name] = await page.evaluate(() => Math.ceil(document.body.getBoundingClientRect().height))
+      const wide = await page.evaluate(() => ({ iw: innerWidth, sw: document.documentElement.scrollWidth }))
+      if (wide.iw > opts.viewport.width + 1 || wide.sw > opts.viewport.width + 1) failures.push(`${p} ${name}: horizontal overflow (layout ${wide.iw} px, scroll ${wide.sw} px > ${opts.viewport.width})`)
+      const frames = media.filter((u) => FRAME.test(u))
+      const videos = media.filter((u) => /\.webm/.test(u))
+      const row = { path: p, viewport: name, height: heights[name], checked: hid.checked, hidden: hid.hidden.length, notRendered: hid.notRendered, frames: frames.length, videos: videos.length }
+      rows.push(row)
+      if (hid.hidden.length) failures.push(`${p} ${name}: ${hid.hidden.length} hidden text, e.g. ${JSON.stringify(hid.hidden.slice(0, 3))}`)
+      if (name.endsWith('12140')) {
+        if (videos.length) failures.push(`${p} ${name}: fetched video ${videos[0]}`)
+        if (frames.length > 4) failures.push(`${p} ${name}: fetched ${frames.length} canvas frames (only the 4 keyframes allowed)`)
+      }
+      if (name === '1440x12140' && markersIn(scripts).rich.length) failures.push(`${p} ${name}: rich layer loaded in a never-scrolling renderer`)
+      await ctx.close()
+    }
+    const ratio = heights['412x12140'] / heights['412x732']
+    rows.push({ path: p, heightRatio: +ratio.toFixed(2) })
+    if (ratio > BUDGET.heightRatio) failures.push(`${p}: doc height ratio ${ratio.toFixed(2)} > ${BUDGET.heightRatio} (a vh-sized section grows with the renderer)`)
+  }
+  await browser.close()
+  report('tall-viewport', rows, failures)
+})()

@@ -1,0 +1,45 @@
+// → src/styles/fonts.ts, imported by both v2 root layouts.
+// Budget: one preloaded file. Archivo latin woff2, wdth 62–125 × wght 100–900 = 90,096 B
+// (fvar default wght 600). Martian Mono 400 = 10,376 B, lazy. Total 100,472 B.
+import { Archivo, Martian_Mono } from 'next/font/google'
+
+export const archivo = Archivo({
+  subsets: ['latin'],
+  axes: ['wdth'], // weight omitted = variable wght; CSS uses font-stretch 62%–125% (maps to wdth)
+  display: 'swap',
+  preload: true,
+  adjustFontFallback: false, // replaced by the measured 'LK *' faces in tokens.css (one per cut)
+  variable: '--font-archivo', // = "'__Archivo_<hash>'" only; stacks live in tokens.css (--ff-*)
+})
+
+export const martian = Martian_Mono({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  preload: false, // instruments + captions only
+  adjustFontFallback: false, // 'LK Mono C' / 'LK Mono A' in tokens.css
+  variable: '--font-martian',
+})
+
+// NEVER `variable: '--font-sans'`: Logo.tsx draws its wordmark with
+// var(--font-sans, -apple-system, system-ui). Verified in Chromium: defining it
+// changes the wordmark width (94.1 → 91.7 px at 30px).
+//
+// Escape hatch if display CLS > 0.05 on throttled 4G: a second call with the SAME
+// preload/adjustFontFallback flags (same emitted file name `[hash].p.woff2`, so one
+// download; check the Network panel) and display: 'optional', variable
+// '--font-archivo-display'. Then point --ff-title / --ff-mid / --ff-wide at it.
+
+// Root layout (v2-id; v2-en is identical with lang="en"):
+//
+// import '@/styles/tokens.css'
+// import { archivo, martian } from '@/styles/fonts'
+// const PRE_PAINT = "(function(d){d.classList.add('js');try{if(localStorage.getItem('lk-mode-teks')==='1')d.classList.add('mode-teks')}catch(e){}})(document.documentElement)"
+// export default function RootLayout({ children }: { children: React.ReactNode }) {
+//   return (
+//     <html lang="id" className={`${archivo.variable} ${martian.variable}`} suppressHydrationWarning>
+//       <head><script dangerouslySetInnerHTML={{ __html: PRE_PAINT }} /></head>
+//       <body>{children}</body>
+//     </html>
+//   )
+// }

@@ -1,0 +1,78 @@
+// Desktop behaviour for <ProofLoupe>: a 200px circle that reveals the aria-hidden annotation layer
+// (layer 2) over the clean instrument (layer 1). Compositor-only: the lens (overflow: hidden, round)
+// moves by transform and the cloned annotation layer inside it is counter-translated by the same
+// amount, so the notes stay registered to the instrument and nothing repaints a clip-path or mask.
+// Touch, keyboard and reduced motion use the 'Tampilkan anotasi' checkbox instead (CSS sibling selector).
+import { follow2d, SPRING, type Follower } from './follow'
+import type { Effect } from './index'
+
+const R = 100 // lens radius, px (keep in sync with .lk-loupe in motion.css)
+
+export function loupe(): Effect {
+  const lenses = new Map<HTMLElement, { lens: HTMLElement; layer: HTMLElement; f: Follower }>()
+  let zone: HTMLElement | null = null
+  let lastX = 0
+  let lastY = 0
+
+  // z = the lens host: the annotation layer's positioned parent (.lk-proof__zone), not the [data-loupe]
+  // root, which also holds the 'Tampilkan anotasi' switch above the instrument.
+  const ensure = (z: HTMLElement) => {
+    const hit = lenses.get(z)
+    if (hit) return hit
+    const annot = z.querySelector<HTMLElement>(':scope > .lk-annot')
+    if (!annot) return undefined
+    const lens = document.createElement('div')
+    lens.className = 'lk-loupe'
+    lens.setAttribute('aria-hidden', 'true')
+    const layer = annot.cloneNode(true) as HTMLElement
+    layer.removeAttribute('id')
+    layer.classList.add('lk-loupe__layer')
+    lens.append(layer)
+    z.append(lens)
+    const f = follow2d(SPRING.dot, (x, y) => {
+      lens.style.transform = `translate3d(${x - R}px,${y - R}px,0)`
+      layer.style.transform = `translate3d(${R - x}px,${R - y}px,0)`
+    })
+    const entry = { lens, layer, f }
+    lenses.set(z, entry)
+    return entry
+  }
+
+  return {
+    over(t) {
+      const z = t.closest<HTMLElement>('[data-loupe] .lk-proof__zone')
+      if (z === zone) return
+      zone = z
+      if (!z) return
+      const e = ensure(z)
+      if (!e) return
+      // The clone must match the zone padding box exactly (contract: the zone itself has no border).
+      e.layer.style.width = `${z.clientWidth}px`
+      e.layer.style.height = `${z.clientHeight}px`
+      const r = z.getBoundingClientRect()
+      e.f.jump(lastX - r.left, lastY - r.top)
+    },
+
+    move(x, y) {
+      lastX = x
+      lastY = y
+      if (!zone) return
+      const r = zone.getBoundingClientRect()
+      lenses.get(zone)?.f.set(x - r.left, y - r.top)
+    },
+
+    route() {
+      lenses.forEach((e) => e.f.destroy())
+      lenses.clear()
+      zone = null
+    },
+
+    stop() {
+      lenses.forEach((e) => {
+        e.f.destroy()
+        e.lens.remove()
+      })
+      lenses.clear()
+    },
+  }
+}

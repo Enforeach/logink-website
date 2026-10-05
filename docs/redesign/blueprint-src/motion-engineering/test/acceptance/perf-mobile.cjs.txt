@@ -1,0 +1,53 @@
+// Mobile lab gate: BASE=https://<preview> node perf-mobile.cjs [/path ...]   (RUNS=3, median per metric)
+// 412x915 DPR 2.625, 4x CPU, 1.6 Mbps / 150 ms RTT, no input (so LCP is not cut short).
+const { chromium, BUDGET, PHONE, throttle, recordScripts, markersIn, report } = require('./lib.cjs')
+const BASE = process.env.BASE || 'http://localhost:3000'
+const PATHS = process.argv.slice(2).length ? process.argv.slice(2) : ['/', '/layanan/jasa-seo-profesional', '/layanan/local-seo']
+const RUNS = Number(process.env.RUNS || 3)
+const median = (a) => [...a].sort((x, y) => x - y)[Math.floor(a.length / 2)]
+
+;(async () => {
+  const browser = await chromium.launch()
+  const rows = []
+  const failures = []
+  for (const p of PATHS) {
+    const runs = []
+    for (let i = 0; i < RUNS; i++) {
+      const ctx = await browser.newContext(PHONE)
+      await ctx.addInitScript(() => {
+        const w = window
+        w.__lt = []; w.__cls = 0; w.__lcp = 0; w.__lcpEl = ''
+        new PerformanceObserver((l) => l.getEntries().forEach((e) => w.__lt.push(e.duration))).observe({ type: 'longtask', buffered: true })
+        new PerformanceObserver((l) => l.getEntries().forEach((e) => { w.__lcp = e.startTime; w.__lcpEl = e.element ? e.element.tagName + (e.element.closest('h1') ? ' in h1' : '') : '' })).observe({ type: 'largest-contentful-paint', buffered: true })
+        new PerformanceObserver((l) => l.getEntries().forEach((e) => { if (!e.hadRecentInput) w.__cls += e.value })).observe({ type: 'layout-shift', buffered: true })
+      })
+      const page = await ctx.newPage()
+      await throttle(page)
+      const scripts = recordScripts(page)
+      let fonts = 0
+      page.on('response', async (r) => { if (r.request().resourceType() === 'font') fonts += (await r.request().sizes().catch(() => ({}))).responseBodySize || 0 })
+      await page.goto(BASE + p, { waitUntil: 'load', timeout: 120000 })
+      await page.waitForTimeout(6000)
+      const m = await page.evaluate(() => ({
+        lcp: Math.round(window.__lcp), lcpEl: window.__lcpEl,
+        fcp: Math.round(performance.getEntriesByName('first-contentful-paint')[0]?.startTime || 0),
+        tbt: Math.round(window.__lt.reduce((a, d) => a + Math.max(0, d - 50), 0)), cls: +window.__cls.toFixed(3),
+      }))
+      const jsKB = Math.round(scripts.filter((s) => !s.afterLoad).reduce((a, s) => a + s.bytes, 0) / 1024)
+      runs.push({ ...m, jsKB, fonts, markers: markersIn(scripts) })
+      await ctx.close()
+    }
+    const r = { path: p, lcp: median(runs.map((x) => x.lcp)), fcp: median(runs.map((x) => x.fcp)), lcpEl: runs[0].lcpEl, tbt: median(runs.map((x) => x.tbt)), cls: Math.max(...runs.map((x) => x.cls)), jsKB: median(runs.map((x) => x.jsKB)), fonts: Math.max(...runs.map((x) => x.fonts)), markers: runs[0].markers }
+    rows.push(r)
+    const jsBudget = p === '/' || p === '/en' ? BUDGET.initialJsKB.home : BUDGET.initialJsKB.service
+    if (r.lcp > BUDGET.lcpMs) failures.push(`${p} LCP ${r.lcp} ms > ${BUDGET.lcpMs}`)
+    if (/in h1/.test(r.lcpEl) && r.lcp - r.fcp > BUDGET.lcpMinusFcpMs) failures.push(`${p} H1 LCP ${r.lcp} is ${r.lcp - r.fcp} ms after FCP (text hidden at first paint?)`)
+    if (r.tbt > BUDGET.tbtMs) failures.push(`${p} TBT ${r.tbt} ms > ${BUDGET.tbtMs}`)
+    if (r.cls > BUDGET.cls) failures.push(`${p} CLS ${r.cls} > ${BUDGET.cls}`)
+    if (r.jsKB > jsBudget) failures.push(`${p} initial JS ${r.jsKB} KB > ${jsBudget}`)
+    if (r.fonts > BUDGET.fontsBytes * 1.02) failures.push(`${p} fonts ${r.fonts} B > ${BUDGET.fontsBytes}`)
+    for (const [k, files] of Object.entries(r.markers)) if (files.length) failures.push(`${p} phone downloaded ${k} code: ${files.join(', ')}`)
+  }
+  await browser.close()
+  report('perf-mobile', rows, failures)
+})()

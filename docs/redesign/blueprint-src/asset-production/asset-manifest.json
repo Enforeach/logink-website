@@ -1,0 +1,1055 @@
+{
+ "version": 1,
+ "disclosure": {
+  "footer_id": "Ilustrasi dibuat dengan bantuan AI; klien, testimoni, tim dan hasil adalah nyata.",
+  "footer_en": "Illustrations are made with AI assistance; clients, testimonials, team and results are real.",
+  "mock_id": "Ilustrasi · data contoh",
+  "mock_en": "Illustration · sample data"
+ },
+ "run_schema": {
+  "selected": "bool",
+  "date": "YYYY-MM-DD",
+  "tool": "Figma Weave | Canva | Claude Design",
+  "model": "exact model id + version as weave_find_model returns it",
+  "prompt": "exact submitted text",
+  "refs": [
+   "asset ids / uploaded asset urls"
+  ],
+  "seed": "if exposed",
+  "credits": "as quoted",
+  "original": "archive path of the untouched file (C2PA intact)",
+  "edits": [
+   "crop box",
+   "grade preset",
+   "inpaint"
+  ]
+ },
+ "assets": [
+  {
+   "id": "buka-still",
+   "kind": "still",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "home hero (film source + no-video fallback)"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P4a",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/film/kedai-tebet-fajar-still.webp"
+   ],
+   "original": "archive:logink-assets-originals/buka-still/",
+   "caption_id": "Foto: ilustrasi AI · Jalan ruko, Tebet, Jakarta Selatan, 05.30 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Ruko street, Tebet, South Jakarta, 05.30 WIB · not a Logink client",
+   "alt_id": "Pemilik kedai menata toples kerupuk saat fajar di jalan ruko Tebet",
+   "alt_en": "A kedai owner arranging kerupuk jars at dawn on a ruko street in Tebet",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "buka-film",
+   "kind": "film",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "home hero, desktop only"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P4b",
+   "disclosure": "ai-illustration",
+   "files": [
+    "public/media/buka-<sha8>/"
+   ],
+   "edits": [
+    "LUT logink-day.cube",
+    "xfade 0.6 s",
+    "crop 21:9 band CY 0.5"
+   ],
+   "caption_id": "Foto/film: ilustrasi AI · Jalan ruko, Tebet, Jakarta Selatan, 05.30 WIB · bukan klien Logink",
+   "caption_en": "Photo/film: AI illustration · Ruko street, Tebet, South Jakarta, 05.30 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "buka-poster-d",
+   "kind": "poster",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "home hero desktop (LCP candidate)"
+   ],
+   "tool": "encode-webm.sh",
+   "prompt_ref": "P4b",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/film/kedai-tebet-fajar-21x9.webp"
+   ],
+   "caption_id": "Foto/film: ilustrasi AI · Jalan ruko, Tebet, Jakarta Selatan, 05.30 WIB · bukan klien Logink",
+   "caption_en": "Photo/film: AI illustration · Ruko street, Tebet, South Jakarta, 05.30 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "buka-poster-m",
+   "kind": "poster",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "home hero phones (CSS push-in)"
+   ],
+   "tool": "encode-webm.sh",
+   "prompt_ref": "P4a",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/film/kedai-tebet-fajar-4x3.webp"
+   ],
+   "caption_id": "Foto/film: ilustrasi AI · Jalan ruko, Tebet, Jakarta Selatan, 05.30 WIB · bukan klien Logink",
+   "caption_en": "Photo/film: AI illustration · Ruko street, Tebet, South Jakarta, 05.30 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-day",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only (not served)"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P1",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "original": "archive:logink-assets-originals/atap-day/",
+   "note": "07.00 day base",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-noon",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only (not served)"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P2a",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "original": "archive:logink-assets-originals/atap-noon/",
+   "note": "12.40 relight",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-dusk",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only (not served)"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P2b",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "original": "archive:logink-assets-originals/atap-dusk/",
+   "note": "18.05 relight",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-night",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only (not served)"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P2c",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "original": "archive:logink-assets-originals/atap-night/",
+   "note": "21.30 relight",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "langit-0700",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P2d",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "langit-1240",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P2d",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "langit-1805",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P2d",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "langit-2130",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P2d",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-sky-mask",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only"
+   ],
+   "tool": "plates.mjs sky-mask + manual cleanup",
+   "disclosure": "derived",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-windows",
+   "kind": "plate",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only"
+   ],
+   "tool": "plates.mjs windows",
+   "disclosure": "derived",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-scene",
+   "kind": "instrument",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "render input only (scene HTML)"
+   ],
+   "tool": "Claude Design",
+   "prompt_ref": "P3",
+   "disclosure": "derived",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-frames",
+   "kind": "frame-set",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "home 05 Overture, desktop canvas tier; tablets use frames 1/9/17/25; phones key-m"
+   ],
+   "tool": "render-html-frames.cjs + frames.sh",
+   "prompt_ref": "P3",
+   "disclosure": "ai-illustration",
+   "files": [
+    "public/media/atap-tebet-<sha8>/"
+   ],
+   "caption_id": "Foto: ilustrasi AI · Atap ruko Tebet, Jakarta Selatan, 07.00–21.30 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Ruko rooftops, Tebet, South Jakarta, 07.00–21.30 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-poster",
+   "kind": "poster",
+   "phase": "launch · build phase 2 (home)",
+   "where": [
+    "home 05 SSR <img> (static tier, Googlebot)"
+   ],
+   "tool": "frames.sh + optimize-images.mjs",
+   "prompt_ref": "P3",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/atap/atap-ruko-tebet-pagi.webp"
+   ],
+   "alt_id": "Atap ruko Tebet, Jakarta Selatan, pukul 07.00",
+   "alt_en": "Ruko rooftops in Tebet, South Jakarta, at 07.00",
+   "caption_id": "Foto: ilustrasi AI · Atap ruko Tebet, Jakarta Selatan, 07.00 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Ruko rooftops, Tebet, South Jakarta, 07.00 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "atap-loop",
+   "kind": "film",
+   "phase": "optional (recommend cut)",
+   "where": [
+    "home 05, fine pointer + deviceMemory < 4"
+   ],
+   "tool": "frames.sh LOOP=1",
+   "prompt_ref": "P3",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "jam-0700-seo",
+   "kind": "still",
+   "phase": "pilot (build phase 1) + home Bab I",
+   "where": [
+    "service hero + hover-reveal (next/image) + chapter opener"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P7",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/jam/pendiri-brand-diskusi-cowork-kemang-pagi.webp"
+   ],
+   "alt_id": "Dua pendiri brand lokal meninjau laptop di ruang kerja bersama Kemang pada pagi hari",
+   "alt_en": "Two local brand founders reviewing a laptop in a Kemang coworking space in the morning",
+   "caption_id": "Foto: ilustrasi AI · Ruang kerja bersama, Kemang, 07.00 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Coworking space, Kemang, 07.00 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "jam-0830-local",
+   "kind": "still",
+   "phase": "launch · build phase 2",
+   "where": [
+    "service hero + hover-reveal (next/image) + chapter opener"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P8",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/jam/pemilik-kedai-membuka-rolling-door-tebet.webp"
+   ],
+   "alt_id": "Pemilik kedai membuka rolling door di pagi hari, Tebet",
+   "alt_en": "A kedai owner raising her shutter in the morning, Tebet",
+   "caption_id": "Foto: ilustrasi AI · Kedai di Tebet, Jakarta Selatan, 08.30 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Kedai in Tebet, South Jakarta, 08.30 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "jam-1240-sosial",
+   "kind": "still",
+   "phase": "launch · build phase 2 (+ home Bab II)",
+   "where": [
+    "service hero + hover-reveal (next/image) + chapter opener"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P5",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/jam/pemilik-butik-batik-memotret-produk-solo.webp"
+   ],
+   "alt_id": "Pemilik butik batik di Solo memotret kemeja batik dengan tripod ponsel",
+   "alt_en": "A batik boutique owner in Solo photographing a batik shirt on a phone tripod",
+   "caption_id": "Foto: ilustrasi AI · Butik batik, Solo, 12.40 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Batik boutique, Solo, 12.40 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "jam-1510-kreatif",
+   "kind": "still",
+   "phase": "launch · build phase 2 (+ home Bab II)",
+   "where": [
+    "service hero + hover-reveal (next/image) + chapter opener"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P9",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/jam/pemotretan-produk-kopi-botol-studio.webp"
+   ],
+   "alt_id": "Fotografer menyiapkan pemotretan produk kopi botol di atas latar kertas koral",
+   "alt_en": "A photographer setting up a bottled-coffee product shoot on a coral paper sweep",
+   "caption_id": "Foto: ilustrasi AI · Pemotretan produk, Jakarta, 15.10 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Product shoot, Jakarta, 15.10 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "jam-1630-website",
+   "kind": "still",
+   "phase": "launch · build phase 2",
+   "where": [
+    "service hero + hover-reveal (next/image) + chapter opener"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P10",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/jam/resepsionis-klinik-gigi-tablet-jakarta.webp"
+   ],
+   "alt_id": "Resepsionis klinik gigi memeriksa jadwal di tablet",
+   "alt_en": "A dental clinic receptionist checking bookings on a tablet",
+   "caption_id": "Foto: ilustrasi AI · Klinik gigi, Jakarta Selatan, 16.30 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Dental clinic, South Jakarta, 16.30 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "jam-1805-seo-ai",
+   "kind": "still",
+   "phase": "launch · build phase 2 (home Bab III)",
+   "where": [
+    "service hero + hover-reveal (next/image) + chapter opener"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P11",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/jam/pemilik-kedai-di-atap-tebet-senja.webp"
+   ],
+   "alt_id": "Pemilik kedai di atap ruko Tebet saat senja, membelakangi kamera",
+   "alt_en": "A kedai owner on a Tebet rooftop at dusk, back to the camera",
+   "caption_id": "Foto: ilustrasi AI · Atap ruko Tebet, 18.05 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Ruko rooftop, Tebet, 18.05 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "jam-2030-iklan",
+   "kind": "still",
+   "phase": "launch · build phase 2 (home Bab IV)",
+   "where": [
+    "service hero + hover-reveal (next/image) + chapter opener"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "P12",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/jam/penjual-online-mengemas-paket-surabaya-malam.webp"
+   ],
+   "alt_id": "Penjual online di Surabaya mengemas paket di malam hari",
+   "alt_en": "An online seller in Surabaya packing parcels at night",
+   "caption_id": "Foto: ilustrasi AI · Penjual online, Surabaya, 20.30 WIB · bukan klien Logink",
+   "caption_en": "Photo: AI illustration · Online seller, Surabaya, 20.30 WIB · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "ig-tiles",
+   "kind": "still",
+   "phase": "launch · build phase 2",
+   "where": [
+    "E2 grid, E11 ad, E12 calendar"
+   ],
+   "tool": "optimize-images.mjs crops of unused P5/P9 variants (P13 only if short)",
+   "prompt_ref": "P13",
+   "disclosure": "ai-illustration",
+   "files": [
+    "src/assets/brand/instrumen/ig-contoh-1.webp",
+    "src/assets/brand/instrumen/ig-contoh-2.webp",
+    "src/assets/brand/instrumen/ig-contoh-3.webp",
+    "src/assets/brand/instrumen/ig-contoh-4.webp",
+    "src/assets/brand/instrumen/ig-contoh-5.webp",
+    "src/assets/brand/instrumen/ig-contoh-6.webp",
+    "src/assets/brand/instrumen/landing-kedai-contoh.webp"
+   ],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e1",
+   "kind": "instrument",
+   "phase": "pilot",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E1",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e2",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E2",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e3",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E3",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e4",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E4",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e5",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E5",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e6",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E6",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e7",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E7",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e8",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E8",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e9",
+   "kind": "instrument",
+   "phase": "pilot",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E9",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e10",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E10",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e11",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E11",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-e12",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "E12",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "instrument-case",
+   "kind": "instrument",
+   "phase": "launch · build phase 2",
+   "where": [
+    "live HTML component"
+   ],
+   "tool": "Claude Design -> code",
+   "prompt_ref": "CASE",
+   "disclosure": "typographic",
+   "files": [],
+   "caption_id": "Ilustrasi · data contoh",
+   "caption_en": "Illustration · sample data",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "og-static-and-cms",
+   "kind": "og",
+   "phase": "launch · build phase 0",
+   "where": [
+    "og:image / twitter:image per page"
+   ],
+   "tool": "Claude Design template + render-og.mjs",
+   "disclosure": "typographic",
+   "status": "draft-rendered",
+   "files": [
+    "public/og/en-about.jpg",
+    "public/og/en-ads.jpg",
+    "public/og/en-ai-search.jpg",
+    "public/og/en-blog-category-branding.jpg",
+    "public/og/en-blog-category-paid-ads.jpg",
+    "public/og/en-blog-category-seo.jpg",
+    "public/og/en-blog-category-social-media.jpg",
+    "public/og/en-blog-category-web-dev.jpg",
+    "public/og/en-blog-how-to-fix-core-web-vitals.jpg",
+    "public/og/en-blog-robots-txt-guide.jpg",
+    "public/og/en-blog-technical-seo.jpg",
+    "public/og/en-blog.jpg",
+    "public/og/en-contact.jpg",
+    "public/og/en-creative.jpg",
+    "public/og/en-home.jpg",
+    "public/og/en-local-seo.jpg",
+    "public/og/en-portfolio.jpg",
+    "public/og/en-privacy.jpg",
+    "public/og/en-seo.jpg",
+    "public/og/en-services.jpg",
+    "public/og/en-social.jpg",
+    "public/og/en-terms.jpg",
+    "public/og/en-website.jpg",
+    "public/og/id-about.jpg",
+    "public/og/id-ads.jpg",
+    "public/og/id-blog-apa-itu-robots-txt.jpg",
+    "public/og/id-blog-apa-itu-social-media-engagement.jpg",
+    "public/og/id-blog-cara-memperbaiki-core-web-vitals.jpg",
+    "public/og/id-blog-category-branding.jpg",
+    "public/og/id-blog-category-paid-ads.jpg",
+    "public/og/id-blog-category-seo.jpg",
+    "public/og/id-blog-category-social-media.jpg",
+    "public/og/id-blog-category-web-dev.jpg",
+    "public/og/id-blog-panduan-technical-seo.jpg",
+    "public/og/id-blog.jpg",
+    "public/og/id-contact.jpg",
+    "public/og/id-home.jpg",
+    "public/og/id-kreatif.jpg",
+    "public/og/id-layanan.jpg",
+    "public/og/id-local-seo.jpg",
+    "public/og/id-portfolio.jpg",
+    "public/og/id-privacy.jpg",
+    "public/og/id-seo-ai.jpg",
+    "public/og/id-seo.jpg",
+    "public/og/id-social.jpg",
+    "public/og/id-terms.jpg",
+    "public/og/id-website.jpg",
+    "public/images/og-default.jpg",
+    "public/og/index.json"
+   ],
+   "note": "Typographic drafts rendered 2026-09-27; re-render with photo variant once stills ship (photo OGs inherit the still's AI disclosure).",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "og-cases",
+   "kind": "og",
+   "phase": "blocked (case data)",
+   "where": [
+    "/portfolio/* and /en/portfolio/*"
+   ],
+   "tool": "render-og.mjs --cases",
+   "disclosure": "typographic",
+   "files": [],
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "logo-light",
+   "kind": "texture",
+   "phase": "launch · build phase 0",
+   "where": [
+    "Organization schema logo (fixes 404)"
+   ],
+   "tool": "export of Logo.tsx LogoFull theme=light",
+   "disclosure": "real",
+   "status": "draft-rendered",
+   "files": [
+    "public/images/logo-light.svg"
+   ],
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "noise-128",
+   "kind": "texture",
+   "phase": "launch · build phase 2",
+   "where": [
+    "Senja horizon band only, 2% opacity"
+   ],
+   "tool": "sharp gaussian noise",
+   "disclosure": "derived",
+   "status": "draft-rendered",
+   "files": [
+    "src/assets/brand/tekstur/noise-128.webp"
+   ],
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "icons",
+   "kind": "texture",
+   "phase": "unchanged",
+   "where": [
+    "src/app/favicon.ico",
+    "src/app/icon.svg"
+   ],
+   "tool": "none",
+   "disclosure": "real",
+   "status": "unchanged",
+   "files": [],
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  },
+  {
+   "id": "sehari-di-jakarta",
+   "kind": "film",
+   "phase": "phase 2 (post-launch; direction build phase 3)",
+   "where": [
+    "home dialog 'Putar film (0:45)'"
+   ],
+   "tool": "Figma Weave",
+   "prompt_ref": "F1",
+   "disclosure": "ai-illustration",
+   "files": [],
+   "caption_id": "Foto/film: ilustrasi AI · Jakarta, Solo, Surabaya · bukan klien Logink",
+   "caption_en": "Photo/film: AI illustration · Jakarta, Solo, Surabaya · not a Logink client",
+   "status": "planned",
+   "runs": [],
+   "qa": {
+    "by": null,
+    "date": null,
+    "checks": []
+   }
+  }
+ ]
+}

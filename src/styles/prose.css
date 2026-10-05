@@ -1,0 +1,25 @@
+/* CMS article bodies (blog posts, case-study rich text). Imported only by the article and case-body
+   components (BUILD §1.4, DESIGN §2). Roles only: every colour is a ground-resolved token. Links are
+   styled in tokens.css (.prose a). Descendant selectors, so bodies split around CTA widgets still match. */
+.prose { font-family: var(--ff-text); font-size: var(--fs-body); line-height: 1.7; color: var(--ink); max-width: var(--measure); overflow-wrap: break-word; }
+.prose :where(p, ul, ol, blockquote, pre, table, figure, hr, dl) { margin-block: 0 1.15em; }
+.prose :where(h2, h3, h4) { scroll-margin-top: calc(var(--nav-h) + var(--dial-h) + 24px); color: var(--ink); }
+.prose h2 { font-family: var(--ff-mid); font-stretch: 74%; font-weight: 760; font-size: clamp(1.625rem, 1.2rem + 1.4vw, 2.25rem); line-height: 1.08; letter-spacing: -.01em; margin: 2.2em 0 .6em; }
+.prose h3 { font-family: var(--ff-h3); font-stretch: 88%; font-weight: 650; font-size: var(--fs-h3); line-height: 1.2; margin: 1.8em 0 .5em; }
+.prose h4 { font-weight: 650; margin: 1.5em 0 .4em; }
+.prose :where(h2, h3, h4):first-child { margin-top: 0; }
+.prose strong { font-weight: 650; }
+.prose :where(ul, ol) { padding-left: 1.4em; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li { margin-block: .35em; }
+.prose li::marker { color: var(--ink-2); }
+.prose blockquote { border-left: 3px solid var(--key); padding: .25em 0 .25em 1.1em; color: var(--ink-2); }
+.prose hr { border: 0; border-top: 1px solid var(--hair); margin-block: 2.5em; }
+.prose code { font-family: var(--ff-mono); font-size: .86em; background: var(--surface-alt); padding: .1em .35em; border-radius: var(--r-ui); }
+.prose pre { font-family: var(--ff-mono); font-size: var(--fs-mono); line-height: 1.6; background: var(--surface-alt); border: 1px solid var(--hair); border-radius: var(--r-ui); padding: 1em 1.1em; overflow-x: auto; max-width: 100%; }
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose :where(img, video) { max-width: 100%; height: auto; border-radius: var(--r-ui); }
+.prose table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-size: var(--fs-small); }
+.prose :where(th, td) { border-bottom: 1px solid var(--hair); padding: .55em .8em .55em 0; text-align: left; vertical-align: top; }
+.prose th { border-bottom-color: var(--line); font-weight: 650; }

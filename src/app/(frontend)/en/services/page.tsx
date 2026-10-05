@@ -1,15 +1,5 @@
-import { Metadata } from 'next'
-import { buildMetadata } from '@/lib/seo'
-import { ServicesPageContent } from '@/components/public/ServicesPageContent'
+import { staticMeta } from '@/lib/meta'
+import { HubPage } from '@/components/sections/hub/HubPage'
 
-export const metadata: Metadata = buildMetadata({
-  title: 'Our Services',
-  description: 'SEO, Social Media Management, Paid Advertising, Creative Services, and Website development, all integrated and optimized to maximize your digital marketing ROI.',
-  path: '/en/services',
-})
-
-export const revalidate = 3600
-
-export default function ServicesEnPage() {
-  return <ServicesPageContent locale="en" />
-}
+export const metadata = staticMeta('hub', 'en')
+export default function Page() { return <HubPage locale="en" /> }

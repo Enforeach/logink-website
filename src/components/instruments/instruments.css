@@ -1,0 +1,129 @@
+/* Instruments (BUILD §2.5d). Imported by MockFrame and CrawlerLog only, so it ships on pages that show a mock.
+   Roles only (the WhatsApp and jingga primitives are the documented exceptions). Sizes are em, so the same
+   markup scales inside the Overture phone (container units). Motion: [data-reveal='inst'] (SiteObserver),
+   transform/opacity on non-text decoration, every animation inside (prefers-reduced-motion: no-preference). */
+figure.mock { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 12px; min-width: 0; margin: 0;
+  padding: 16px; border: var(--hair-w) solid var(--hair); border-radius: var(--r-card); background: var(--surface); box-shadow: var(--shadow-md); font-size: 14px; line-height: 1.45; --hl: var(--key-ink); }
+figure.mock[data-ground$='dalam'] { --hl: var(--c-jingga); border-color: var(--hair); }   /* jingga on Senja/Malam Dalam: 6.20 / 6.38 */
+:root:is(.mode-teks, :has(#mode-teks:checked)) figure.mock { --hl: var(--ink); }
+/* tokens' Mode teks rule resets --surface but not --surface-alt: keep inner panels light under Aspal ink */
+:root:is(.mode-teks, :has(#mode-teks:checked)) :is(figure.mock, figure.mock [data-ground], .cmap) { --surface-alt: var(--c-putih); }
+@media (min-width: 640px) { figure.mock { padding: 20px; } }
+figure.mock > [data-nosnippet] { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-content: start; }
+.m-hl { color: var(--hl); }
+.m-s { font-size: .857em; } .m-xs { font-size: .75em; } .m-l { font-size: 1.15em; }
+.m-mono { font-family: var(--ff-mono); letter-spacing: 0; }
+.m-cap { font-family: var(--ff-text); font-weight: 600; font-size: .8em; letter-spacing: 0; color: var(--ink-2); }
+.m-chip { display: inline-flex; align-items: center; gap: .35em; min-height: 2em; padding: 0 .75em; border: var(--hair-w) solid var(--line);
+  border-radius: var(--r-chip); font-size: .75em; line-height: 1.1; color: var(--ink-2); white-space: nowrap; }
+.m-btn { display: inline-flex; align-items: center; justify-content: center; gap: .4em; min-height: 2.6em; padding: 0 1em;
+  border-radius: var(--r-ui); font-weight: 650; font-size: .857em; line-height: 1.1; white-space: nowrap; }
+.m-wa { background: var(--c-wa); color: var(--c-wa-label); box-shadow: var(--wa-edge); }
+.m-btn.m-pill { border-radius: var(--r-chip); }
+.m-h { font-family: var(--ff-mid); font-stretch: 74%; font-weight: 760; font-size: 1.6em; line-height: 1; }
+.m-box { border: var(--hair-w) solid var(--hair); border-radius: var(--r-ui); padding: .75em; min-width: 0; }
+.m-box.m-strong { border-color: var(--line); } .m-chip.m-ink { color: var(--ink); }
+.m-ln { display: block; height: .5em; border-radius: 2px; background: var(--hair); }
+.m-dot { display: inline-block; flex: none; width: .6em; height: .6em; border-radius: 50%; background: var(--key); }
+
+/* E1 search field, rank chip, map */
+.m-field { display: flex; align-items: center; gap: .6em; min-height: 2.6em; padding: 0 .9em; border: var(--hair-w) solid var(--line); border-radius: var(--r-ui); }
+.m-rank b { display: inline-block; height: 1.2em; line-height: 1.2em; overflow: clip; font-weight: 650; }
+.m-rank b > i { display: flex; flex-direction: column; font-style: normal; translate: 0 -2.4em; }
+.m-map { display: block; width: 100%; height: auto; background: var(--surface-alt); border-radius: var(--r-ui); }
+.m-map .rd { fill: none; stroke: var(--surface); stroke-width: 7; }
+.m-map .rd2 { fill: none; stroke: var(--surface); stroke-width: 12; }
+.m-map .pk { fill: var(--hair); }
+.m-map .pin { fill: var(--ink-2); }
+.m-map .lk-pin path { fill: var(--key); stroke: var(--ink); stroke-width: 1.5; }
+
+/* E2 grid + review, E3 site frame */
+.m-ig { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; }
+.m-ig > * { aspect-ratio: 1; overflow: clip; background: var(--surface-alt); }
+.m-ig img { width: 100%; height: 100%; object-fit: cover; }
+.m-tile { font-family: var(--ff-title); font-stretch: 62%; font-weight: 850; font-size: 1.6em; line-height: .9; text-transform: uppercase; color: var(--ink); }
+.m-av { display: grid; place-items: center; flex: none; width: 2.6em; height: 2.6em; border-radius: 50%; background: var(--key); color: var(--key-on); font-weight: 700; font-size: .857em; }
+.m-site { border: var(--hair-w) solid var(--line); border-radius: var(--r-ui); overflow: clip; min-width: 0; }
+.m-ring { position: relative; display: grid; place-items: center; width: 3.4em; height: 3.4em; }
+.m-ring svg { position: absolute; inset: 0; width: 100%; height: 100%; rotate: -90deg; }
+.m-ring circle { fill: none; stroke-width: 4; }
+.m-ring .tr { stroke: var(--hair); } .m-ring .arc { stroke: var(--ink); transform-box: fill-box; transform-origin: center; }
+
+/* E4 funnel, E6 share of voice */
+.m-bars .lk-bar { height: 12px; }
+.m-bars .lk-bar.m-mute, .m-dot.m-mute { background: var(--line); }
+.m-bars .trk { min-width: 0; }
+
+/* E5 AI answer: citation chips rise in their own mask; the ring (lk-cite--hit) needs 3px of room */
+.m-ai p { font-size: 1em; line-height: 1.55; }
+.lk-cite.m-cite { padding: 3px; margin: -3px 0; }
+.m-cite > span { display: inline-flex; align-items: center; min-height: 2em; padding: 0 .75em; border: var(--hair-w) solid var(--hair);
+  border-radius: var(--r-chip); font-family: var(--ff-mono); font-size: .75em; color: var(--ink); white-space: nowrap; }
+.m-note { position: absolute; max-width: min(15rem, 46%); padding: 6px 8px; background: var(--surface); color: var(--ink);
+  border: var(--hair-w) solid var(--c-jingga); font: 400 12px/1.35 var(--ff-text); }
+.m-leads { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.m-leads path { fill: none; stroke: var(--c-jingga); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.m-leads circle { fill: var(--c-jingga); }
+
+/* E6 prompt table: real columns from 640px, labelled rows below (a mock is inert, so it never scrolls sideways) */
+.m-tbl { width: 100%; border-collapse: collapse; font-size: .857em; }
+.m-tbl caption { text-align: left; padding-bottom: .6em; }
+.m-tbl :is(th, td) { text-align: left; vertical-align: top; padding: .55em .8em .55em 0; border-bottom: var(--hair-w) solid var(--hair); }
+.m-tbl td { font-family: var(--ff-mono); font-size: .9em; }
+@media (max-width: 639px) {
+  .m-tbl thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .m-tbl tbody tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .2em 1em; padding: .6em 0; border-bottom: var(--hair-w) solid var(--hair); }
+  .m-tbl tbody td { display: flex; flex-wrap: wrap; gap: 0 .4em; padding: 0; border: 0; }
+  .m-tbl tbody td:first-child { grid-column: 1 / -1; }
+  /* ::after + order: -1, because ::before belongs to motion.css's lk-lit wash */
+  .m-tbl tbody td:not(:first-child)::after { content: attr(data-label); order: -1; color: var(--ink-2); }
+}
+
+/* E6 crawler log (ticker contract in motion.css), E7 fan-out, E8 code */
+figure.mock.m-log { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; }
+.m-log > figcaption, .m-log > .lk-ticker { flex-basis: 100%; }
+.m-log > .m-cap { flex: 1; }
+.m-log .lk-ticker { font: 400 var(--fs-mono) / 1.6 var(--ff-mono); }
+.m-log li { white-space: nowrap; overflow: clip; text-overflow: ellipsis; }
+.m-fan { position: relative; display: grid; gap: .6em; padding-left: 1.4em; }
+.m-fan::before { content: ''; position: absolute; left: .5em; top: 0; bottom: 1.1em; width: 1px; background: var(--line); transform-origin: 50% 0; }
+.m-fan > li { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: .4em .6em; }
+.m-fan > li::before { content: ''; position: absolute; left: -.9em; top: 1em; width: .7em; height: 1px; background: var(--line); }
+.m-code { margin: 0; font: 400 .857em / 1.6 var(--ff-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.m-code code > span { display: block; padding-left: 8px; }
+.m-code .on { box-shadow: inset 2px 0 var(--hl); background: var(--surface-alt); }
+.m-code .k { color: var(--ink-2); }
+
+/* E10 phone: the figure is the handset; screens scale with its width (container units) */
+figure.mock.m-phone { container-type: inline-size; width: 100%; max-width: 300px; aspect-ratio: 9 / 19.5; gap: 6px; grid-template-rows: auto 1fr;
+  padding: 12px 10px; border: 1.5px solid var(--ink); border-radius: 28px; background: var(--surface); overflow: clip; }
+figure.mock.m-phone > figcaption { justify-self: center; font-size: max(8px, 2.6cqw); }
+figure.mock.m-phone > [data-nosnippet] { position: relative; display: block; overflow: clip; font-size: max(9px, 5cqw); border-radius: 0 0 18px 18px; }
+.m-phone [data-step-panel] { position: absolute; inset: 0; display: grid; gap: .8em; align-content: start; }
+.m-phone .m-scr { display: grid; gap: .8em; align-content: start; }
+
+/* E11 chat */
+.m-chat { display: grid; gap: .5em; margin: 0; padding: 0; list-style: none; }
+.m-chat > li { display: flex; }
+.m-chat > li > span { max-width: 85%; padding: .5em .8em; border-radius: var(--r-ui); line-height: 1.4; }
+.m-chat .out { margin-left: auto; background: var(--btn); color: var(--btn-ink); }
+.m-chat .in { background: var(--surface-alt); color: var(--ink); }
+
+/* E12 calendar */
+.m-cal { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5em, 1fr)); align-items: start; gap: 6px; }
+.m-cal > li { display: grid; gap: .4em; align-content: start; min-width: 0; }
+
+/* Once, on data-in (T1). Text only ever moves; decoration may fade. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal='inst'] :is(.m-rise, .m-rank b > i, .m-ring .arc, .m-tick, .m-fan::before) {
+    transition: translate var(--dur-reveal) var(--ease-out), rotate var(--dur-reveal) var(--ease-out), scale 400ms var(--ease-out), opacity 400ms var(--ease-out);
+    transition-delay: calc(min(var(--i, 0), 5) * 60ms); }
+  [data-reveal='inst'] .m-rank b > i { transition-delay: 300ms; }
+  .js [data-reveal='inst']:not([data-in]) .m-rise { translate: 0 12px; transition: none; }
+  .js [data-reveal='inst']:not([data-in]) .m-rank b > i { translate: 0 0; transition: none; }
+  .js [data-reveal='inst']:not([data-in]) .m-ring .arc { rotate: -50deg; opacity: 0; transition: none; }
+  .js [data-reveal='inst']:not([data-in]) .m-tick { scale: 0; transition: none; }
+  .js [data-reveal='inst']:not([data-in]) .m-fan::before { scale: 1 0; transition: none; }
+  [data-reveal='inst'][data-in] .m-press { animation: m-press 360ms var(--ease-ui) 500ms both; }
+}
+@keyframes m-press { 50% { scale: .97; } }

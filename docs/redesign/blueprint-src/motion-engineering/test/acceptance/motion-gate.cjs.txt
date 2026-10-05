@@ -1,0 +1,55 @@
+// The bundle gate, measured where it matters (every byte the device actually downloads):
+// BASE=... node motion-gate.cjs [/path ...]
+// Phone (touch): scroll the whole page; NO script may contain Lenis, the rich layer, the canvas player,
+//   a motion spring engine or framer-motion components. Desktop (fine pointer): the initial scripts
+//   (before load) contain none of them either; after load the rich chunk (with Lenis) arrives, html
+//   gets .rich and .lenis, and on pages with a [data-steps] canvas the player chunk arrives too.
+const { chromium, PHONE, DESKTOP, recordScripts, markersIn, report } = require('./lib.cjs')
+const BASE = process.env.BASE || 'http://localhost:3000'
+const PATHS = process.argv.slice(2).length ? process.argv.slice(2) : ['/', '/layanan/jasa-seo-profesional']
+
+async function scrollThrough(page) {
+  const h = await page.evaluate(() => document.documentElement.scrollHeight)
+  for (let y = 0; y < h; y += 600) {
+    await page.evaluate((y) => scrollTo(0, y), y)
+    await page.waitForTimeout(120)
+  }
+}
+
+;(async () => {
+  const browser = await chromium.launch()
+  const rows = []
+  const failures = []
+  for (const p of PATHS) {
+    const phone = await browser.newContext(PHONE)
+    const pp = await phone.newPage()
+    const ps = recordScripts(pp)
+    await pp.goto(BASE + p, { waitUntil: 'load' })
+    await pp.waitForTimeout(3000)
+    await scrollThrough(pp)
+    await pp.waitForTimeout(1500)
+    const pm = markersIn(ps)
+    rows.push({ path: p, device: 'phone', scripts: ps.length, markers: pm })
+    for (const [k, f] of Object.entries(pm)) if (f.length) failures.push(`${p} phone: ${k} code in ${f.join(', ')}`)
+    await phone.close()
+
+    const desk = await browser.newContext(DESKTOP)
+    const dp = await desk.newPage()
+    const ds = recordScripts(dp)
+    await dp.goto(BASE + p, { waitUntil: 'load' })
+    await dp.waitForTimeout(3000)
+    const initial = markersIn(ds.filter((s) => !s.afterLoad))
+    for (const [k, f] of Object.entries(initial)) if (f.length) failures.push(`${p} desktop initial chunk has ${k} code: ${f.join(', ')}`)
+    await dp.mouse.move(700, 400)
+    await scrollThrough(dp)
+    await dp.waitForTimeout(1500)
+    const all = markersIn(ds)
+    const cls = await dp.evaluate(() => ({ rich: document.documentElement.classList.contains('rich'), lenis: document.documentElement.classList.contains('lenis'), steps: !!document.querySelector('[data-steps] canvas'), drawn: !!document.querySelector('canvas[data-drawn]') }))
+    rows.push({ path: p, device: 'desktop', initial, afterLoad: all, ...cls })
+    if (!cls.rich || !cls.lenis || !all.rich.length || !all.lenis.length) failures.push(`${p} desktop: rich layer / Lenis not active`)
+    if (cls.steps && (!all.player.length || !cls.drawn)) failures.push(`${p} desktop: canvas player did not load or draw`)
+    await desk.close()
+  }
+  await browser.close()
+  report('motion-gate', rows, failures)
+})()

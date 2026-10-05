@@ -1,27 +1,24 @@
-import { BlogDetailPage, generateBlogDetailMetadata } from '@/components/public/blog/BlogDetailPage'
-import { getPayloadClient } from '@/payload/client'
+import { permanentRedirect } from 'next/navigation'
+import { ArticlePage, postMeta } from '@/components/sections/blog/ArticlePage'
+import { slugRedirect } from '@/lib/slug-redirect'
+import { getSitemapEntries } from '@/payload/queries'
 
 export const revalidate = 300
 
 export async function generateStaticParams() {
-  const payload = await getPayloadClient()
-  const posts = await payload.find({
-    collection: 'posts',
-    where: { status: { equals: 'PUBLISHED' } },
-    limit: 1000,
-    depth: 0,
-  })
-  return posts.docs.map(p => ({ slug: p.slug as string }))
+  const { posts } = await getSitemapEntries()
+  return posts.map((p) => ({ slug: p.slug }))
 }
 
-interface Props { params: Promise<{ slug: string }> }
+type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props) {
-  const { slug } = await params
-  return generateBlogDetailMetadata(slug, 'id')
+  return postMeta((await params).slug, 'id')
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params
-  return <BlogDetailPage slug={slug} locale="id" />
+  const to = await slugRedirect('post', slug, 'id') // an EN slug on the ID route → 308 to the ID slug (BUILD §1.10)
+  if (to) permanentRedirect(to)
+  return <ArticlePage slug={slug} locale="id" />
 }

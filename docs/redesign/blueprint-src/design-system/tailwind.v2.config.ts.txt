@@ -1,0 +1,17 @@
+// → repo root: tailwind.v2.config.ts (becomes tailwind.config.ts when (legacy) is deleted)
+import type { Config } from 'tailwindcss'
+import { theme } from './src/styles/tailwind.tokens'
+
+export default {
+  // Route-group parentheses: use [(]…[)]. Backslash escapes are silently dropped by
+  // Tailwind 3.4's path normalisation (verified: 0 classes found) and bare (…) is a glob group.
+  // Legacy files are NOT scanned: their utilities would bloat the inlined CSS.
+  content: [
+    './src/components/ds/**/*.{ts,tsx}',
+    './src/components/sections/**/*.{ts,tsx}',
+    './src/app/[(]frontend[)]/[(]v2-id[)]/**/*.{ts,tsx}',
+    './src/app/[(]frontend[)]/[(]v2-en[)]/**/*.{ts,tsx}',
+  ],
+  theme,
+  corePlugins: { container: false }, // .wrap in tokens.css
+} satisfies Config

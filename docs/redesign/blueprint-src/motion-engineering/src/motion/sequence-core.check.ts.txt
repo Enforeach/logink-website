@@ -1,0 +1,99 @@
+// Run: node src/motion/sequence-core.check.ts   (Node >= 23 strips TS types natively)
+import assert from 'node:assert/strict'
+import { canvasEligible } from './gates.ts'
+import {
+  cacheCapacity,
+  stepStops,
+  frameAt,
+  runwayProgress,
+  loadOrder,
+  wantedFrames,
+  nearestCached,
+  coverCrop,
+  effectiveDpr,
+  frameUrl,
+  BITMAP_BUDGET,
+} from './sequence-core.ts'
+
+// gate
+const desk = { richPointer: true, wide: true, reducedMotion: false, teks: false, viewportHeight: 900 }
+assert.equal(canvasEligible(desk), true) // Safari / Firefox desktop: no hints = capable
+assert.equal(canvasEligible({ ...desk, deviceMemory: 8 }), true)
+assert.equal(canvasEligible({ ...desk, deviceMemory: 4 }), true)
+assert.equal(canvasEligible({ ...desk, deviceMemory: 2 }), false)
+assert.equal(canvasEligible({ ...desk, saveData: true }), false)
+assert.equal(canvasEligible({ ...desk, reducedMotion: true }), false)
+assert.equal(canvasEligible({ ...desk, teks: true }), false)
+assert.equal(canvasEligible({ ...desk, wide: false }), false) // tablets and phones: never
+assert.equal(canvasEligible({ ...desk, richPointer: false }), false) // touch laptops in tablet mode
+assert.equal(canvasEligible({ ...desk, viewportHeight: 9307 }), false) // WRS-like desktop render
+
+// byte budget: 128 MiB of 1280x720 RGBA = 36 frames; small frames fit entirely
+assert.equal(cacheCapacity(BITMAP_BUDGET, 1280, 720, 120), 36)
+assert.equal(cacheCapacity(BITMAP_BUDGET, 1120, 630, 96), 47)
+assert.equal(cacheCapacity(BITMAP_BUDGET, 320, 180, 120), 120)
+assert.equal(cacheCapacity(1, 1280, 720, 120), 2) // never below 2 (current + next)
+
+// step stops land on the keyframes: 120 -> 0/40/80/119, 96 -> 0/32/64/95
+assert.deepEqual(stepStops(120, 4), [0, 40, 80, 119])
+assert.deepEqual(stepStops(96, 4), [0, 32, 64, 95])
+const s = stepStops(120, 4)
+assert.equal(frameAt(0, s), 0)
+assert.equal(frameAt(1 / 3, s), 40)
+assert.equal(frameAt(2 / 3, s), 80)
+assert.equal(frameAt(1, s), 119)
+assert.equal(frameAt(1.4, s), 119)
+assert.equal(frameAt(-1, s), 0)
+assert.equal(frameAt(1 / 6, s), 20)
+for (let p = 0; p <= 1; p += 0.01) assert.ok(frameAt(p, s) <= frameAt(Math.min(1, p + 0.01), s)) // monotonic
+
+// runway: 4 steps x 900 = 3600 px runway, 900 px stage => 2700 px of scrub
+assert.equal(runwayProgress(0, 3600, 0, 900), 0)
+assert.equal(runwayProgress(-900, 3600, 0, 900), 1 / 3) // step 2 fills the stage -> frame 40
+assert.equal(runwayProgress(-2700, 3600, 0, 900), 1)
+assert.equal(runwayProgress(500, 3600, 0, 900), 0) // before the runway
+assert.equal(runwayProgress(0, 800, 0, 900), 0) // degenerate: runway shorter than stage
+assert.equal(runwayProgress(-850, 3600, 50, 900), 1 / 3) // centred stage on a tall screen (sticky top 50px)
+
+// load order: permutation, stops first, then coarse to fine
+for (const n of [1, 2, 7, 96, 120, 121]) {
+  const o = loadOrder(n, stepStops(n, 4))
+  assert.equal(o.length, n)
+  assert.deepEqual([...o].sort((a, b) => a - b), Array.from({ length: n }, (_, i) => i))
+}
+assert.deepEqual(loadOrder(120, s).slice(0, 6), [0, 40, 80, 119, 64, 32])
+
+// wanted: bounded, playhead first, stops reserved
+{
+  const w = wantedFrames(120, 50, 36, s)
+  assert.ok(w.length <= 36)
+  assert.equal(w[0], 50)
+  assert.equal(new Set(w).size, w.length)
+  for (const k of s) assert.ok(w.includes(k))
+  assert.deepEqual(wantedFrames(10, 0, 10).slice(0, 3), [0, 1, 2])
+  assert.equal(wantedFrames(120, 119, 2, s).length, 2)
+}
+
+// nearest cached frame
+{
+  const have = new Set([0, 40, 44])
+  assert.equal(nearestCached(42, 120, (i) => have.has(i)), 40) // ties go backwards (the frame already passed)
+  assert.equal(nearestCached(43, 120, (i) => have.has(i)), 44)
+  assert.equal(nearestCached(5, 120, () => false), -1)
+}
+
+// cover crop + dpr
+{
+  const c = coverCrop(1280, 720, 790, 900) // 7/12 column stage on a 1440x900 desktop
+  assert.equal(Math.round(c.sh), 720)
+  assert.equal(Math.round(c.sx), Math.round((1280 - c.sw) / 2))
+  assert.deepEqual(coverCrop(1280, 720, 1280, 720), { sx: 0, sy: 0, sw: 1280, sh: 720 })
+  assert.equal(coverCrop(1280, 720, 790, 900, 0, 0.5).sx, 0)
+}
+assert.equal(effectiveDpr(2, 1440, 900, 1280, 720), 1) // frame smaller than the stage: 1x backing store
+assert.equal(+effectiveDpr(2, 790, 900, 1280, 720).toFixed(2), 1) // 720/900 < 1 -> clamps to 1
+assert.equal(effectiveDpr(3, 200, 100, 1280, 720), 2)
+
+assert.equal(frameUrl('/seq/rooftop-v1/d1280', 0), '/seq/rooftop-v1/d1280/f0001.webp')
+assert.equal(frameUrl('/seq/rooftop-v1/d1280', 119), '/seq/rooftop-v1/d1280/f0120.webp')
+console.log('sequence-core: all checks passed')

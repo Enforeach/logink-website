@@ -1,0 +1,750 @@
+// Social Media Management (BUILD §3.4). The X / X_EN exports are the vetted legacy copy, kept verbatim; the
+// default export maps them into ServiceContent ('modules' pricing + the QuoteBuilder copy).
+import type { Locale } from '@/lib/services'
+import type { BuilderGroup, ServiceContent } from './types'
+
+export const SOCIAL_MODULES = [
+  {
+    id: 'organic-social',
+    title: 'Organic Social Management',
+    platforms: ['Instagram', 'TikTok', 'Facebook'],
+    tagline: 'Kehadiran harian Anda di platform yang paling penting di Indonesia.',
+    description:
+      'Kami tangani semuanya: dari perencanaan konten bulanan hingga posting harian, desain visual, penulisan caption dalam Bahasa Indonesia, hingga community management. Anda cukup review dan setujui; sisanya kami yang kerjakan.',
+    features: [
+      {
+        name: 'Monthly Content Plan',
+        description:
+          'Kalender strategis yang selaras dengan tujuan brand, tren musiman, dan event industri. Ditinjau dan disetujui sebelum apa pun tayang.',
+      },
+      {
+        name: 'Jumlah post per bulan (kustom)',
+        description:
+          'Volume disesuaikan dengan kebutuhan Anda. Kami rekomendasikan 12–20 post per platform untuk visibilitas yang konsisten.',
+      },
+      {
+        name: 'Desain Visual & Penulisan Caption',
+        description:
+          'Setiap post didesain kustom sesuai brand guideline Anda. Caption berbahasa Indonesia yang natural dengan hashtag strategis dan CTA.',
+      },
+      {
+        name: 'Community Management (reply & DM)',
+        description:
+          'Kami pantau dan balas komentar serta DM di jam kerja. Audiens Anda tidak pernah merasa diabaikan.',
+      },
+      {
+        name: 'Laporan Performa Bulanan',
+        description:
+          'Reach, engagement, pertumbuhan follower, konten terbaik, dan rekomendasi bulan depan.',
+      },
+    ],
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
+    icon: 'Smartphone',
+    priceNote: 'Harga kustom berdasarkan jumlah platform dan volume post',
+  },
+  {
+    id: 'tiktok-strategy',
+    title: 'TikTok Strategy & Production',
+    platforms: ['TikTok'],
+    tagline: 'Manfaatkan tren lokal sebelum mencapai puncaknya. Konten TikTok-native yang membuat algoritma berpihak ke Anda.',
+    description:
+      'TikTok butuh playbook yang benar-benar berbeda. Kami riset audio, format, dan hashtag yang sedang trending di pasar Indonesia, lalu memproduksi video scroll-stopping yang dioptimasi untuk algoritma FYP.',
+    features: [
+      {
+        name: 'Riset Tren & Audio Lokal',
+        description:
+          'Kami pantau audio trending, format, dan challenge di ekosistem TikTok Indonesia setiap hari, bukan setelah trennya berlalu.',
+      },
+      {
+        name: 'Video per bulan (kustom)',
+        description:
+          'Produksi video short-form. Struktur hook-first yang dirancang untuk 3 detik pertama.',
+      },
+      {
+        name: 'Optimasi Hook & CTA',
+        description:
+          'Setiap video dibuka dengan pattern interrupt dan ditutup dengan langkah selanjutnya yang jelas. Kami A/B test hook untuk memaksimalkan completion rate.',
+      },
+      {
+        name: 'Strategi Hashtag',
+        description:
+          'Perpaduan strategis hashtag trending, niche, dan branded untuk memaksimalkan discoverability tanpa terlihat spam.',
+      },
+      {
+        name: 'Laporan Analitik TikTok',
+        description:
+          'Views, completion rate, shares, pertumbuhan follower, dan performa FYP: metrik yang benar-benar penting.',
+      },
+    ],
+    accentColor: '#EE3D5E',
+    accentRgb: '238,61,94',
+    icon: 'Film',
+    priceNote: 'Harga kustom berdasarkan volume video',
+  },
+  {
+    id: 'linkedin-b2b',
+    title: 'LinkedIn Management (Fokus B2B)',
+    platforms: ['LinkedIn'],
+    tagline: 'Posisikan founder dan perusahaan Anda sebagai thought leader di industri.',
+    description:
+      'LinkedIn adalah tempat keputusan B2B dibuat. Kami optimalkan company page dan profil utama Anda, publikasikan konten thought leadership, dan jalankan strategi engagement yang menempatkan brand Anda di hadapan para pengambil keputusan.',
+    features: [
+      {
+        name: 'Optimasi Profil & Company Page',
+        description:
+          'Overhaul menyeluruh pada kehadiran LinkedIn Anda: headline, about, featured content, dan visual branding yang mengomunikasikan otoritas.',
+      },
+      {
+        name: 'Post per bulan (kustom)',
+        description:
+          'Perpaduan text post, carousel, artikel, dan polling yang dioptimasi untuk algoritma LinkedIn yang menghargai percakapan.',
+      },
+      {
+        name: 'Artikel Thought Leadership',
+        description:
+          'Konten long-form di bawah profil eksekutif Anda. Insight industri, opini, dan studi kasus yang membangun kredibilitas.',
+      },
+      {
+        name: 'Strategi Koneksi & Engagement',
+        description:
+          'Koneksi tertarget, komentar strategis di post industri, dan engagement dengan prospek. Networking organik dalam skala besar.',
+      },
+    ],
+    accentColor: '#0A66C2',
+    accentRgb: '10,102,194',
+    icon: 'Briefcase',
+    priceNote: 'Harga kustom berdasarkan jumlah profil dan volume post',
+  },
+] as const
+
+export const SOCIAL_ADDONS = [
+  {
+    id: 'influencer-marketing',
+    name: 'Influencer Marketing / KOL-KOC',
+    description:
+      'Berkolaborasi dengan kreator Indonesia dan Key Opinion Leader untuk memperluas jangkauan brand. Kami tangani pencarian talent, briefing, dan performance tracking.',
+    badge: 'Add-on opsional',
+  },
+  {
+    id: 'social-audit',
+    name: 'Social Media Audit',
+    description:
+      'Analisis komprehensif kehadiran social media Anda saat ini: performa konten, demografi audiens, benchmarking kompetitor, dan rekomendasi yang bisa langsung dieksekusi.',
+    badge: 'Layanan sekali jalan',
+  },
+] as const
+
+export const SOCIAL_CONTENT_PILLARS = [
+  {
+    name: 'Edukasi',
+    percentage: 40,
+    subtitle: 'Bangun otoritas & kepercayaan',
+    description:
+      'Tips, how-to, insight industri, dan thought leadership yang memposisikan brand Anda sebagai ahli. Audiens belajar sesuatu, dan ingat siapa yang mengajari mereka.',
+    examples: 'Infografik carousel, reel tips, statistik industri, video penjelasan',
+    accentColor: '#A855F7',
+    accentRgb: '168,85,247',
+    icon: 'BookOpen',
+  },
+  {
+    name: 'Hiburan',
+    percentage: 40,
+    subtitle: 'Curi perhatian di feed',
+    description:
+      'Trend-jacking, humor, behind-the-scenes, dan konten relatable yang menuai shares dan saves. Inilah yang membuat brand Anda terasa manusiawi dan membuat algoritma bekerja untuk Anda.',
+    examples: 'Reel audio trending, meme, konten BTS, challenges, video POV',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
+    icon: 'Sparkles',
+  },
+  {
+    name: 'Konversi',
+    percentage: 20,
+    subtitle: 'Ubah follower menjadi pelanggan',
+    description:
+      'Penawaran langsung, testimoni, showcase produk, dan CTA yang mendorong aksi. Strategis, tidak pernah terkesan spam. Tayang tepat saat audiens Anda sudah siap membeli.',
+    examples: 'Peluncuran produk, pengumuman promo, testimoni klien, penawaran terbatas',
+    accentColor: '#F88438',
+    accentRgb: '248,132,56',
+    icon: 'ShoppingCart',
+  },
+] as const
+
+export const SOCIAL_PROCESS = [
+  {
+    step: 1,
+    title: 'Brand Onboarding',
+    timeline: 'Minggu 1',
+    description:
+      'Kami pelajari brand Anda secara menyeluruh: tone of voice, visual identity, persona audiens, kompetitor, dan dos & don\'ts konten. Kami audit kehadiran social media Anda saat ini dan identifikasi quick wins.',
+    deliverable: 'Dokumen brand brief + analisis kompetitor',
+    accentColor: '#A855F7',
+    icon: 'ClipboardList',
+  },
+  {
+    step: 2,
+    title: 'Strategi & Pilar',
+    timeline: 'Minggu 1–2',
+    description:
+      'Kami tentukan pilar konten Anda (Edukasi, Hiburan, Konversi), fokus platform, jadwal posting, dan kalender konten bulan pertama. Semuanya dipetakan ke tujuan bisnis Anda.',
+    deliverable: 'Deck strategi konten + kalender Bulan 1',
+    accentColor: '#D81C5C',
+    icon: 'Compass',
+  },
+  {
+    step: 3,
+    title: 'Produksi Konten',
+    timeline: 'Minggu 2–3',
+    description:
+      'Desainer membuat visual, copywriter menulis caption dalam Bahasa Indonesia, dan video editor memproduksi reels dan TikTok. Semuanya dibuat sesuai brand guideline Anda, bukan template pasaran.',
+    deliverable: 'Konten satu bulan penuh siap untuk review',
+    accentColor: '#F88438',
+    icon: 'PenLine',
+  },
+  {
+    step: 4,
+    title: 'Persetujuan & Penjadwalan',
+    timeline: 'Minggu 3–4',
+    description:
+      'Anda cukup review kalender konten dan setujui setiap item. Kami tangani penjadwalan, riset hashtag, dan waktu posting optimal. Setelah disetujui, semuanya dijadwalkan dan tayang otomatis.',
+    deliverable: 'Kalender disetujui + community management aktif',
+    accentColor: '#EE3D5E',
+    icon: 'CalendarCheck',
+  },
+] as const
+
+export const SOCIAL_FAQS = [
+  {
+    question: 'Platform apa saja yang Logink kelola?',
+    answer:
+      'Kami kelola Instagram, TikTok, Facebook, dan LinkedIn. Setiap platform mendapat strategi tersendiri, karena apa yang berhasil di TikTok belum tentu berlaku di LinkedIn. Kami sarankan mulai dari 2–3 platform tempat audiens Anda paling aktif, lalu berkembang dari sana. Kami tidak memaksakan kehadiran di platform yang tidak relevan untuk brand Anda.',
+  },
+  {
+    question: 'Apakah community management sudah termasuk?',
+    answer:
+      'Ya: kami pantau dan balas komentar serta DM di jam kerja (Sen–Jum, 09.00–18.00 WIB). Untuk brand yang butuh coverage 24/7 atau akhir pekan, kami menawarkan extended community management sebagai add-on. Setiap interaksi mengikuti panduan tone of voice brand Anda.',
+  },
+  {
+    question: 'Siapa yang membuat konten visual?',
+    answer:
+      'Tim desain internal kami membuat semua konten visual: feed post, stories, cover reel, grafik carousel, dan thumbnail TikTok. Semuanya didesain kustom sesuai brand guideline Anda. Kami tidak menggunakan template Canva atau grafik stok. Jika brand Anda butuh produksi video (syuting), itu ditangani tim Creative Services kami.',
+  },
+  {
+    question: 'Berapa banyak post per bulan?',
+    answer:
+      'Volume post disesuaikan dengan kebutuhan dan budget Anda. Untuk sebagian besar brand, kami rekomendasikan 12–20 post per platform per bulan untuk visibilitas yang konsisten. Ini biasanya setara 3–5 post per minggu. Kami bisa scale up untuk peluncuran produk, kampanye, atau momen musiman.',
+  },
+  {
+    question: 'Apakah Logink membuat video TikTok?',
+    answer:
+      'Ya: modul TikTok Strategy & Production kami mencakup pembuatan video secara penuh. Kami tangani pengembangan konsep, scripting, syuting (area Jakarta), editing, dan penulisan caption. Setiap video dioptimasi untuk algoritma FYP dengan struktur hook-first dan audio trending. Untuk brand di luar Jakarta, kami bisa bekerja dengan kreator lokal atau memberikan brief detail untuk tim Anda.',
+  },
+  {
+    question: 'Apakah kami bisa menyetujui konten sebelum tayang?',
+    answer:
+      'Tentu saja, tidak ada yang tayang tanpa persetujuan Anda. Kami siapkan kalender konten satu bulan penuh di awal, lengkap dengan visual dan caption. Anda dapat review semuanya di dokumen bersama atau tool content approval. Setelah disetujui, kami tangani penjadwalan dan posting. Ronde revisi sudah termasuk.',
+  },
+  {
+    question: 'Bagaimana Logink mengukur keberhasilan?',
+    answer:
+      'Kami lacak reach, engagement rate, pertumbuhan follower, saves, shares, kunjungan profil, dan klik link: metrik yang menunjukkan pertumbuhan brand nyata, bukan sekadar vanity metrics. Laporan bulanan kami mencakup analisis konten terbaik, insight demografi audiens, dan rekomendasi strategis untuk bulan depan. Kami kaitkan performa social dengan tujuan bisnis Anda sebisa mungkin.',
+  },
+] as const
+
+export const SOCIAL_STATS = [
+  {
+    value: 4,
+    suffix: '',
+    label: 'Platform Dikelola',
+    context: 'Instagram, TikTok, Facebook, LinkedIn: dikelola sebagai satu strategi terintegrasi.',
+    isCounter: true,
+    decimals: 0,
+  },
+  {
+    value: 30,
+    suffix: '+',
+    label: 'Post / Bulan',
+    context: 'Kehadiran konsisten, tidak ada hari yang terlewat. Konten diproduksi dan disetujui sebelum tayang.',
+    isCounter: true,
+    decimals: 0,
+  },
+  {
+    value: 100,
+    suffix: '%',
+    label: 'Konten Original',
+    context: 'Didesain kustom untuk brand Anda. Tidak ada template pasaran, tidak ada grafik daur ulang.',
+    isCounter: true,
+    decimals: 0,
+  },
+] as const
+
+// ─── English exports ─────────────────────────────────────────────────────────
+
+export const SOCIAL_MODULES_EN = [
+  {
+    id: 'organic-social',
+    title: 'Organic Social Management',
+    platforms: ['Instagram', 'TikTok', 'Facebook'],
+    tagline: 'Your daily presence across the platforms that matter most in Indonesia.',
+    description:
+      'We handle everything: from monthly content planning to daily posting, visual design, caption writing in Bahasa Indonesia, and community management. You review and approve; we do the rest.',
+    features: [
+      {
+        name: 'Monthly Content Plan',
+        description:
+          'A strategic calendar aligned with your brand goals, seasonal trends, and industry events. Reviewed and approved before anything goes live.',
+      },
+      {
+        name: 'Posts per month (customized)',
+        description:
+          'Volume tailored to your needs. We recommend 12–20 posts per platform for consistent visibility.',
+      },
+      {
+        name: 'Visual Design & Caption Writing',
+        description:
+          'Every post custom-designed to your brand guidelines. Captions in natural Bahasa Indonesia with strategic hashtags and CTAs.',
+      },
+      {
+        name: 'Community Management (replies & DMs)',
+        description:
+          'We monitor and respond to comments and DMs during business hours. Your audience never feels ignored.',
+      },
+      {
+        name: 'Monthly Performance Report',
+        description:
+          "Reach, engagement, follower growth, top content, and next month's recommendations.",
+      },
+    ],
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
+    icon: 'Smartphone',
+    priceNote: 'Custom pricing based on platform count and post volume',
+  },
+  {
+    id: 'tiktok-strategy',
+    title: 'TikTok Strategy & Production',
+    platforms: ['TikTok'],
+    tagline: 'Ride local trends before they peak. TikTok-native content that gets the algorithm on your side.',
+    description:
+      'TikTok requires a completely different playbook. We research trending sounds, formats, and hashtags in the Indonesian market, then produce scroll-stopping videos optimized for the FYP algorithm.',
+    features: [
+      {
+        name: 'Local Trend & Sound Research',
+        description:
+          "We monitor trending audio, formats, and challenges in the Indonesian TikTok ecosystem daily, not after they've peaked.",
+      },
+      {
+        name: 'Videos per month (customized)',
+        description:
+          'Short-form video production. Hook-first structure designed for the first 3 seconds.',
+      },
+      {
+        name: 'Hook & CTA Optimization',
+        description:
+          'Every video opens with a pattern interrupt and closes with a clear next step. We A/B test hooks to maximize completion rate.',
+      },
+      {
+        name: 'Hashtag Strategy',
+        description:
+          'Strategic mix of trending, niche, and branded hashtags to maximize discoverability without looking spammy.',
+      },
+      {
+        name: 'TikTok Analytics Report',
+        description:
+          'Views, completion rate, shares, follower growth, and FYP performance: the metrics that actually matter.',
+      },
+    ],
+    accentColor: '#EE3D5E',
+    accentRgb: '238,61,94',
+    icon: 'Film',
+    priceNote: 'Custom pricing based on video volume',
+  },
+  {
+    id: 'linkedin-b2b',
+    title: 'LinkedIn Management (B2B Focus)',
+    platforms: ['LinkedIn'],
+    tagline: 'Position your founders and company as industry thought leaders.',
+    description:
+      'LinkedIn is where B2B decisions are made. We optimize your company page and key profiles, publish thought leadership content, and run engagement strategies that put your brand in front of decision-makers.',
+    features: [
+      {
+        name: 'Profile & Company Page Optimization',
+        description:
+          'Complete overhaul of your LinkedIn presence: headline, about, featured content, and visual branding that communicates authority.',
+      },
+      {
+        name: 'Posts per month (customized)',
+        description:
+          "Mix of text posts, carousels, articles, and polls optimized for LinkedIn's algorithm which rewards conversations.",
+      },
+      {
+        name: 'Thought Leadership Articles',
+        description:
+          "Long-form content under your executives' profiles. Industry insights, opinion pieces, and case studies that build credibility.",
+      },
+      {
+        name: 'Connection & Engagement Strategy',
+        description:
+          'Targeted connections, strategic commenting on industry posts, and engagement with potential leads. Organic networking at scale.',
+      },
+    ],
+    accentColor: '#0A66C2',
+    accentRgb: '10,102,194',
+    icon: 'Briefcase',
+    priceNote: 'Custom pricing based on profile count and post volume',
+  },
+] as const
+
+export const SOCIAL_ADDONS_EN = [
+  {
+    id: 'influencer-marketing',
+    name: 'Influencer Marketing / KOL-KOC',
+    description:
+      'Partner with Indonesian creators and Key Opinion Leaders to amplify your brand reach. We handle talent sourcing, briefing, and performance tracking.',
+    badge: 'Optional add-on',
+  },
+  {
+    id: 'social-audit',
+    name: 'Social Media Audit',
+    description:
+      'Comprehensive analysis of your current social presence: content performance, audience demographics, competitor benchmarking, and actionable recommendations.',
+    badge: 'One-time service',
+  },
+] as const
+
+export const SOCIAL_CONTENT_PILLARS_EN = [
+  {
+    name: 'Educate',
+    percentage: 40,
+    subtitle: 'Build authority & trust',
+    description:
+      'Tips, how-tos, industry insights, and thought leadership that position your brand as the expert. Your audience learns something, and remembers who taught them.',
+    examples: 'Carousel infographics, tips reels, industry stats, explainer videos',
+    accentColor: '#A855F7',
+    accentRgb: '168,85,247',
+    icon: 'BookOpen',
+  },
+  {
+    name: 'Entertain',
+    percentage: 40,
+    subtitle: 'Stop the scroll',
+    description:
+      'Trend-jacking, humor, behind-the-scenes, and relatable content that earns shares and saves. This is what makes your brand feel human and gets the algorithm working for you.',
+    examples: 'Trending audio reels, memes, BTS content, challenges, POV videos',
+    accentColor: '#D81C5C',
+    accentRgb: '216,28,92',
+    icon: 'Sparkles',
+  },
+  {
+    name: 'Convert',
+    percentage: 20,
+    subtitle: 'Turn followers into customers',
+    description:
+      'Direct offers, testimonials, product showcases, and CTAs that drive action. Strategic, never spammy. Timed to land when your audience is already warmed up.',
+    examples: 'Product launches, promo announcements, client testimonials, limited offers',
+    accentColor: '#F88438',
+    accentRgb: '248,132,56',
+    icon: 'ShoppingCart',
+  },
+] as const
+
+export const SOCIAL_PROCESS_EN = [
+  {
+    step: 1,
+    title: 'Brand Onboarding',
+    timeline: 'Week 1',
+    description:
+      "We learn your brand thoroughly: tone of voice, visual identity, audience personas, competitors, and content dos and don'ts. We audit your current social presence and identify quick wins.",
+    deliverable: 'Brand brief document + competitor analysis',
+    accentColor: '#A855F7',
+    icon: 'ClipboardList',
+  },
+  {
+    step: 2,
+    title: 'Strategy & Pillars',
+    timeline: 'Week 1–2',
+    description:
+      "We define your content pillars (Educate, Entertain, Convert), platform focus, posting cadence, and the first month's content calendar. Everything is mapped to your business goals.",
+    deliverable: 'Content strategy deck + Month 1 calendar',
+    accentColor: '#D81C5C',
+    icon: 'Compass',
+  },
+  {
+    step: 3,
+    title: 'Content Production',
+    timeline: 'Week 2–3',
+    description:
+      'Designers create visuals, copywriters craft captions in Bahasa Indonesia, and video editors produce reels and TikToks. Everything built to your brand guidelines, no templates.',
+    deliverable: 'Full month of content ready for review',
+    accentColor: '#F88438',
+    icon: 'PenLine',
+  },
+  {
+    step: 4,
+    title: 'Approval & Scheduling',
+    timeline: 'Week 3–4',
+    description:
+      'You review the content calendar and approve each piece. We handle scheduling, hashtag research, and optimal posting times. Once approved, everything is queued and goes live automatically.',
+    deliverable: 'Approved calendar live + community management active',
+    accentColor: '#EE3D5E',
+    icon: 'CalendarCheck',
+  },
+] as const
+
+export const SOCIAL_FAQS_EN = [
+  {
+    question: 'Which platforms do you manage?',
+    answer:
+      "We manage Instagram, TikTok, Facebook, and LinkedIn. Each platform gets a tailored strategy, because what works on TikTok doesn't work on LinkedIn. We recommend starting with 2–3 platforms where your audience is most active, then expanding. We don't spread thin across platforms that don't matter for your brand.",
+  },
+  {
+    question: 'Is community management included?',
+    answer:
+      "Yes: we monitor and respond to comments and DMs during business hours (Mon–Fri, 9am–6pm WIB). For brands that need 24/7 or weekend coverage, we offer extended community management as an add-on. Every interaction follows your brand's tone of voice guidelines.",
+  },
+  {
+    question: 'Who creates the visual content?',
+    answer:
+      "Our in-house design team creates all visual content: feed posts, stories, reels covers, carousel graphics, and TikTok thumbnails. Everything is custom-designed to your brand guidelines. We don't use Canva templates or stock graphics. If your brand needs video production (shooting), that's handled by our Creative Services team.",
+  },
+  {
+    question: 'How many posts per month?',
+    answer:
+      'Post volume is customized to your needs and budget. For most brands, we recommend 12–20 posts per platform per month for consistent visibility. This typically breaks down into 3–5 posts per week. We can scale up for product launches, campaigns, or seasonal pushes.',
+  },
+  {
+    question: 'Do you create TikTok videos?',
+    answer:
+      'Yes: our TikTok Strategy & Production module includes full video creation. We handle concept development, scripting, shooting (Jakarta area), editing, and caption writing. Each video is optimized for the FYP algorithm with hook-first structure and trending audio. For brands outside Jakarta, we can work with local creators or provide detailed briefs for your team to execute.',
+  },
+  {
+    question: 'Can we approve content before it goes live?',
+    answer:
+      "Absolutely, nothing goes live without your approval. We prepare the full month's content calendar in advance, including visuals and captions. You review everything in a shared document or content approval tool. Once approved, we handle scheduling and posting. Revision rounds are included.",
+  },
+  {
+    question: 'How do you measure success?',
+    answer:
+      "We track reach, engagement rate, follower growth, saves, shares, profile visits, and link clicks: the metrics that indicate real brand growth, not just vanity numbers. Our monthly report includes top-performing content analysis, audience demographic insights, and strategic recommendations for the next month. We tie social performance back to your business goals wherever possible.",
+  },
+] as const
+
+export const SOCIAL_STATS_EN = [
+  {
+    value: 4,
+    suffix: '',
+    label: 'Platforms Covered',
+    context: 'Instagram, TikTok, Facebook, LinkedIn: managed as one integrated strategy.',
+    isCounter: true,
+    decimals: 0,
+  },
+  {
+    value: 30,
+    suffix: '+',
+    label: 'Posts / Month',
+    context: 'Consistent presence, zero missed days. Content produced and approved before it goes live.',
+    isCounter: true,
+    decimals: 0,
+  },
+  {
+    value: 100,
+    suffix: '%',
+    label: 'Original Content',
+    context: 'Custom-designed for your brand. No stock templates, no recycled graphics.',
+    isCounter: true,
+    decimals: 0,
+  },
+] as const
+
+// ─── ServiceContent (redesign) ───────────────────────────────────────────────
+// Dropped from the legacy copy (unsourced counters or §11 rules): "30+ post/bulan", "100% konten original",
+// "Viral", and "every shoot is handled by Creative Services" (the TikTok module shoots its own video).
+// No module price exists, so every module shows its custom-price line and the builder shows no total.
+
+const vol = (vals: string[], custom: string) => [...vals.map((v) => ({ v, label: v })), { v: 'custom', label: custom }]
+const groups = (l: Locale): BuilderGroup[] => {
+  const id = l === 'id'
+  const pick = id ? 'Pilih modul ini' : 'Add this module'
+  const c = id ? 'Kustom' : 'Custom'
+  return [
+    { id: 'organic-social', label: 'Organic Social Management', toggle: pick,
+      items: [{ id: 'instagram', label: 'Instagram', on: true }, { id: 'tiktok', label: 'TikTok', on: true }, { id: 'facebook', label: 'Facebook' }],
+      selects: [{ id: 'orgPosts', label: id ? 'Post per bulan (per platform)' : 'Posts per month (per platform)', v: '12', options: vol(['8', '12', '16', '20'], c) }] },
+    { id: 'tiktok-strategy', label: 'TikTok Strategy & Production', toggle: pick,
+      selects: [{ id: 'videos', label: id ? 'Video per bulan' : 'Videos per month', v: '8', options: vol(['4', '8', '12'], c) }] },
+    { id: 'linkedin-b2b', label: id ? 'LinkedIn Management (B2B)' : 'LinkedIn Management (B2B)', toggle: pick,
+      selects: [
+        { id: 'liPosts', label: id ? 'Post per bulan' : 'Posts per month', v: '8', options: vol(['4', '8', '12'], c) },
+        { id: 'liProfiles', label: id ? 'Profil yang dikelola' : 'Profiles managed', v: '1', options: vol(['1', '2', '3'], c) },
+      ] },
+  ]
+}
+const ID_ITEM: Record<string, string> = { 'Monthly Content Plan': 'Rencana konten bulanan', 'Community Management (reply & DM)': 'Community management (balas komentar & DM)' }
+
+// Rich page (owner 2026-10-04, benchmarked on the live page; the SEO page's pattern): the 40/40/20 pillars as the USP,
+// the three modules as tabs (vetted legacy feature copy), no comparison panel, the homepage process. The dropped
+// counters above stay out: the stats band uses the FAQ's own numbers.
+const tabsOf = (mods: typeof SOCIAL_MODULES | typeof SOCIAL_MODULES_EN, label: (id: string) => string, name: (n: string) => string) =>
+  mods.map((m) => ({ label: label(m.id), items: m.features.map((f) => ({ title: name(f.name), text: f.description })) }))
+
+const id: ServiceContent = {
+  answer: 'Jasa social media management Logink merencanakan, membuat, dan menjadwalkan konten Instagram, TikTok, Facebook, dan LinkedIn, lalu membalas komentar dan DM. Kalender disusun di awal bulan, dan tidak ada yang tayang tanpa persetujuan Anda.',
+  campaign: {
+    fedBy: [
+      { k: 'creative', text: 'Dalam Kampanye 360°, sesi foto dan video tim kreatif bisa dipotong untuk feed, Reels, dan TikTok.' },
+      { k: 'strategy', text: 'Kalender konten bulanan berangkat dari ide kampanye yang sama dengan iklan dan website.' },
+    ],
+    feeds: [
+      { k: 'seo', text: 'Pertanyaan yang muncul di komentar dan DM menjadi ide konten untuk artikel SEO.' },
+      { k: 'ai', text: 'Sebutan brand yang konsisten di Instagram, TikTok, dan Facebook ikut menjadi sinyal bagi mesin AI.' },
+      { k: 'ads', gate: 'K6', text: 'Audiens yang sudah berinteraksi bisa disapa lagi lewat iklan Meta.' },
+    ],
+  },
+  work: [
+    { title: 'Jasa Kelola Instagram, TikTok & Facebook', text: 'Konten, desain, dan caption bulanan, tayang setelah Anda setujui.' },
+    { title: 'Konten & Produksi Video TikTok', text: 'Riset tren lokal dan video pendek dengan hook kuat.' },
+    { title: 'LinkedIn Management untuk B2B', text: 'Profil, post rutin, dan artikel thought leadership.' },
+    { title: 'Community Management: Komentar & DM', text: 'Komentar dan DM dibalas dengan suara brand Anda.' },
+    { title: 'Kalender Konten & Pilar', text: 'Pilar Edukasi, Hiburan, Konversi (40/40/20) dalam satu kalender.', card: 'ContentCalendar' },
+  ],
+  pricing: {
+    kind: 'modules',
+    builder: 'social',
+    modules: SOCIAL_MODULES.map((m) => ({ id: m.id, title: m.title, text: m.tagline, items: m.features.map((f) => ID_ITEM[f.name] ?? f.name), price: m.priceNote })),
+    addons: SOCIAL_ADDONS.map((a) => ({ name: a.name, text: a.description, price: a.badge })),
+    copy: {
+      heading: 'Rancang paket social media Anda',
+      intro: 'Centang modul, atur volumenya, lalu kirim ringkasannya lewat WhatsApp.',
+      empty: 'Pilih minimal satu modul untuk menyusun pesan Anda.',
+      summary: 'Pesan yang akan terkirim',
+      price: 'Tanpa komitmen. Tidak ada total di sini: harga dihitung dari pilihan Anda.',
+      groups: groups('id'),
+    },
+  },
+  compare: null,
+  trust: ['Caption native Bahasa Indonesia', 'Kalender konten bulanan', 'Tidak ada yang tayang tanpa persetujuan Anda'],
+  highlights: {
+    items: [
+      { value: '4', label: 'platform: Instagram, TikTok, Facebook, LinkedIn' },
+      { value: '12–20', label: 'post per platform per bulan yang kami sarankan' },
+      { value: '3', label: 'modul, bisa dipilih sendiri atau digabung' },
+    ],
+    note: 'Volume akhir disesuaikan dengan kebutuhan dan budget Anda.',
+  },
+  usp: {
+    heading: 'Setiap post punya tujuan',
+    lead: 'Strategi konten kami bertumpu pada tiga pilar yang membawa followers dari kenal, percaya, sampai beraksi. Campuran ini titik awal yang kami sarankan, lalu disesuaikan per brand.',
+    pop: 2,
+    cards: [
+      { value: '40%', title: 'Edukasi', text: 'Tips, how-to, dan insight industri yang membangun otoritas dan kepercayaan.', points: ['Infografik carousel', 'Reel tips', 'Video penjelasan'] },
+      { value: '40%', title: 'Hiburan', text: 'Tren, behind-the-scenes, dan konten relatable yang dibagikan dan disimpan.', points: ['Reel dengan audio trending', 'Konten behind-the-scenes', 'Video POV'] },
+      { value: '20%', title: 'Konversi', text: 'Penawaran, testimoni, dan showcase produk dengan CTA yang jelas, tanpa terkesan spam.', points: ['Peluncuran produk', 'Pengumuman promo', 'Testimoni klien'] },
+    ],
+  },
+  included: {
+    heading: 'Tiga modul, satu strategi social media',
+    lead: 'Pilih satu, dua, atau ketiganya. Setiap modul bisa berdiri sendiri maupun digabung.',
+    tabs: tabsOf(SOCIAL_MODULES, (id) => ({ 'organic-social': 'Organic Social', 'tiktok-strategy': 'TikTok', 'linkedin-b2b': 'LinkedIn (B2B)' }[id] ?? id), (n) => ID_ITEM[n] ?? n),
+  },
+  process: true,
+  stats: [
+    'apjii-ai',
+    { text: 'Sebutan di YouTube adalah sinyal terkuat visibilitas brand di AI (korelasi 0,737; 75.000 brand)', src: 'Ahrefs via BusinessWire', year: 2026, url: 'https://www.businesswire.com/news/home/20260526119691/en/Across-75000-Brands-YouTube-Mentions-Are-the-Strongest-Signal-of-AI-Visibility-New-Ahrefs-Report-Reveals' },
+    { text: 'Meta AI hadir di WhatsApp, Instagram, dan Facebook dalam Bahasa Indonesia', src: 'Campaign Asia', year: 2024, url: 'https://www.campaignasia.com/article/meta-ai-and-ai-studio-officially-launched-in-indonesia/501619' },
+  ],
+  ai: 'Konten yang konsisten membuat brand Anda lebih sering disebut, dan sebutan seperti itu ikut dibaca Google AI Overview, ChatGPT, dan Meta AI. Kami tidak menjamin kutipan.',
+  faq: [
+    { q: 'Apa itu jasa manajemen media sosial?', a: 'Jasa manajemen media sosial adalah layanan yang merencanakan, membuat, menjadwalkan, dan memantau konten akun bisnis Anda. Di Logink, pekerjaannya mencakup kalender konten, desain visual, caption Bahasa Indonesia, balasan komentar dan DM di jam kerja, serta laporan performa bulanan.' },
+    { q: 'Platform apa saja yang Logink kelola?', a: 'Instagram, TikTok, Facebook, dan LinkedIn. Setiap platform mendapat strategi tersendiri, karena yang berhasil di TikTok belum tentu berlaku di LinkedIn. Kami sarankan mulai dari 2 sampai 3 platform tempat audiens Anda paling aktif, lalu berkembang dari sana.' },
+    { q: 'Berapa banyak post per bulan?', a: 'Volumenya disesuaikan dengan kebutuhan dan budget Anda. Untuk sebagian besar brand, kami menyarankan 12 sampai 20 post per platform per bulan, atau sekitar 3 sampai 5 post per minggu. Volume bisa dinaikkan untuk peluncuran produk, kampanye, atau momen musiman.' },
+    { q: 'Apakah community management sudah termasuk?', a: 'Ya, di modul Organic Social. Kami memantau dan membalas komentar serta DM di jam kerja, Senin sampai Jumat, dengan tone of voice brand Anda. Untuk coverage akhir pekan atau di luar jam kerja, tersedia extended community management sebagai add-on.' },
+    { q: 'Apakah Logink membuat video TikTok?', a: 'Ya. Modul TikTok Strategy & Production mencakup konsep, script, syuting di area Jakarta, editing, dan caption. Setiap video memakai struktur hook di awal dan audio yang sedang tren. Untuk brand di luar Jakarta, kami bisa bekerja dengan kreator lokal atau memberi brief detail untuk tim Anda.' },
+    { q: 'Apakah kami bisa menyetujui konten sebelum tayang?', a: 'Bisa, dan tidak ada yang tayang tanpa persetujuan Anda. Kalender konten satu bulan penuh, lengkap dengan visual dan caption, kami siapkan di awal untuk Anda review. Setelah disetujui, kami yang menjadwalkan dan memposting. Ronde revisi sudah termasuk.' },
+  ],
+  sources: [
+    { label: 'Ahrefs: Faktor visibilitas brand di AI Overview', url: 'https://ahrefs.com/blog/ai-overview-brand-correlation/' },
+  ],
+}
+
+const en: ServiceContent = {
+  answer: "Logink's social media management plans, creates and schedules content for Instagram, TikTok, Facebook and LinkedIn, and answers comments and DMs. The calendar is set at the start of each month, and nothing goes live without your approval.",
+  campaign: {
+    fedBy: [
+      { k: 'creative', text: "In a 360° campaign, the creative team's photo and video sessions can be cut for feed, Reels and TikTok." },
+      { k: 'strategy', text: 'The monthly content calendar starts from the same campaign idea as the ads and website.' },
+    ],
+    feeds: [
+      { k: 'seo', text: 'Questions that come up in comments and DMs become content ideas for SEO articles.' },
+      { k: 'ai', text: 'Consistent brand mentions on Instagram, TikTok and Facebook are signals AI engines pick up.' },
+      { k: 'ads', gate: 'K6', text: 'People who already engaged can be reached again with Meta ads.' },
+    ],
+  },
+  work: [
+    { title: 'Instagram, TikTok & Facebook Management', text: 'Monthly content, design and captions, live once you approve.' },
+    { title: 'TikTok Content & Video Production', text: 'Local trend research and short videos with a strong hook.' },
+    { title: 'LinkedIn Management for B2B', text: 'Profiles, regular posts and thought leadership articles.' },
+    { title: 'Community Management: Comments & DMs', text: "Comments and DMs answered in your brand's voice." },
+    { title: 'Content Calendar & Pillars', text: 'Educate, Entertain, Convert pillars (40/40/20) in one calendar.', card: 'ContentCalendar' },
+  ],
+  pricing: {
+    kind: 'modules',
+    builder: 'social',
+    modules: SOCIAL_MODULES_EN.map((m) => ({ id: m.id, title: m.title, text: m.tagline, items: m.features.map((f) => f.name), price: m.priceNote })),
+    addons: SOCIAL_ADDONS_EN.map((a) => ({ name: a.name, text: a.description, price: a.badge })),
+    copy: {
+      heading: 'Build your social media package',
+      intro: 'Tick the modules, set the volume, then send the summary on WhatsApp.',
+      empty: 'Pick at least one module to build your message.',
+      summary: 'The message you will send',
+      price: 'No commitment. There is no total here: the price is worked out from your choices.',
+      groups: groups('en'),
+    },
+  },
+  compare: null,
+  trust: ['Native Bahasa Indonesia captions', 'A monthly content calendar', 'Nothing goes live without your approval'],
+  highlights: {
+    items: [
+      { value: '4', label: 'platforms: Instagram, TikTok, Facebook, LinkedIn' },
+      { value: '12–20', label: 'posts per platform a month, our recommendation' },
+      { value: '3', label: 'modules, on their own or combined' },
+    ],
+    note: 'Final volume is set to your needs and budget.',
+  },
+  usp: {
+    heading: 'Every post has a purpose',
+    lead: 'Our content strategy rests on three pillars that take followers from awareness to trust to action. This mix is our recommended starting point, then tuned to each brand.',
+    pop: 2,
+    cards: [
+      { value: '40%', title: 'Educate', text: 'Tips, how-tos and industry insight that build authority and trust.', points: ['Carousel infographics', 'Tip reels', 'Explainer videos'] },
+      { value: '40%', title: 'Entertain', text: 'Trends, behind-the-scenes and relatable content that gets shared and saved.', points: ['Reels with trending audio', 'Behind-the-scenes content', 'POV videos'] },
+      { value: '20%', title: 'Convert', text: 'Offers, testimonials and product showcases with a clear CTA, never spammy.', points: ['Product launches', 'Promo announcements', 'Client testimonials'] },
+    ],
+  },
+  included: {
+    heading: 'Three modules, one social media strategy',
+    lead: 'Pick one, two or all three. Each module works on its own or combined.',
+    tabs: tabsOf(SOCIAL_MODULES_EN, (id) => ({ 'organic-social': 'Organic Social', 'tiktok-strategy': 'TikTok', 'linkedin-b2b': 'LinkedIn (B2B)' }[id] ?? id), (n) => n),
+  },
+  process: true,
+  stats: [
+    'apjii-ai',
+    { text: 'YouTube mentions are the strongest signal of brand visibility in AI (correlation 0.737; 75,000 brands)', src: 'Ahrefs via BusinessWire', year: 2026, url: 'https://www.businesswire.com/news/home/20260526119691/en/Across-75000-Brands-YouTube-Mentions-Are-the-Strongest-Signal-of-AI-Visibility-New-Ahrefs-Report-Reveals' },
+    { text: 'Meta AI is available in WhatsApp, Instagram and Facebook in Bahasa Indonesia', src: 'Campaign Asia', year: 2024, url: 'https://www.campaignasia.com/article/meta-ai-and-ai-studio-officially-launched-in-indonesia/501619' },
+  ],
+  ai: 'Consistent content gets your brand mentioned more often, and those mentions are read by Google AI Overviews, ChatGPT and Meta AI. We do not guarantee citations.',
+  faq: [
+    { q: 'What is a social media management service?', a: "A social media management service plans, creates, schedules and monitors content for your business accounts. At Logink the work covers a content calendar, visual design, Bahasa Indonesia captions, replies to comments and DMs during office hours, and a monthly performance report." },
+    { q: 'Which platforms does Logink manage?', a: "Instagram, TikTok, Facebook and LinkedIn. Each platform gets its own strategy, because what works on TikTok doesn't necessarily work on LinkedIn. We recommend starting with the 2 to 3 platforms where your audience is most active, then expanding from there." },
+    { q: 'How many posts per month?', a: 'Volume is tailored to your needs and budget. For most brands we recommend 12 to 20 posts per platform per month, roughly 3 to 5 posts a week. We can scale up for product launches, campaigns or seasonal moments.' },
+    { q: 'Is community management included?', a: "Yes, in the Organic Social module. We monitor and reply to comments and DMs during office hours, Monday to Friday, in your brand's tone of voice. For weekend or out-of-hours coverage, extended community management is available as an add-on." },
+    { q: 'Does Logink create TikTok videos?', a: 'Yes. The TikTok Strategy & Production module covers concept, script, filming in the Jakarta area, editing and captions. Every video uses a hook-first structure and trending audio. For brands outside Jakarta we can work with local creators or give your team a detailed brief.' },
+    { q: 'Can we approve content before it goes live?', a: 'Yes, and nothing goes live without your approval. We prepare a full month of content, with visuals and captions, up front for your review. Once it is approved, we handle the scheduling and posting. Revision rounds are included.' },
+  ],
+  sources: [
+    { label: 'Ahrefs: AI Overview brand visibility factors', url: 'https://ahrefs.com/blog/ai-overview-brand-correlation/' },
+  ],
+}
+
+const content: Record<Locale, ServiceContent> = { id, en }
+export default content

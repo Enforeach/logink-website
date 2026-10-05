@@ -14,9 +14,28 @@ const schema = z.object({
   source: z.string().optional().default('contact_form'),
 })
 
+// ponytail: in-memory per-instance Map; a Vercel WAF rate-limit rule is the upgrade
+const LIMIT = 5
+const WINDOW_MS = 10 * 60 * 1000
+const hits = new Map<string, number[]>()
+function limited(ip: string) {
+  const now = Date.now()
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS)
+  recent.push(now)
+  hits.set(ip, recent)
+  if (hits.size > 5000) for (const [k, v] of hits) if (now - v[v.length - 1] >= WINDOW_MS) hits.delete(k)
+  return recent.length > LIMIT
+}
+
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || req.headers.get('x-real-ip') || 'local'
+    if (limited(ip)) return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
     const body = await req.json()
+    // Honeypot (BUILD §3.9): bots fill the hidden `website` field; answer as if saved, save nothing.
+    if (body && typeof body === 'object' && typeof body.website === 'string' && body.website.trim() !== '') {
+      return NextResponse.json({ success: true })
+    }
     const data = schema.parse(body)
     const payload = await getPayloadClient()
 
@@ -38,8 +57,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, id: submission.id })
   } catch (err) {
-    if (err instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Validation failed', details: err.issues }, { status: 400 })
+    if (err instanceof z.ZodError || err instanceof SyntaxError) {
+      return NextResponse.json({ error: 'Validation failed', details: err instanceof z.ZodError ? err.issues : [] }, { status: 400 })
     }
     console.error('Contact submission error:', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

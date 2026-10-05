@@ -1,0 +1,84 @@
+/* Peta kampanye 360° (§11 5). CSS only, 0 KB JS: lighting via :has() on the root, one block per node (8 written
+   out below; keep them in step with NODES). Roles only; WhatsApp from --c-wa / --c-wa-label / --wa-edge-w. */
+.cmap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-content: start; min-width: 0; padding: 16px; border-radius: var(--r-card-lg); background: var(--surface-alt); }
+@media (min-width: 640px) { .cmap { padding: 24px; } }
+@media (min-width: 1024px) {
+  .cmap--open { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 40px; }
+  .cmap--open > .cm-chips { align-self: start; }
+  .cmap--open > .tbl { grid-column: 2; grid-row: 1 / span 2; }
+  .cmap--open > .mock { grid-column: 1 / -1; }
+}
+.cm-fig { display: grid; align-content: start; gap: 10px; margin: 0; min-width: 0; }
+.cm-frame { position: relative; container-type: inline-size; width: min(100%, 340px); aspect-ratio: 1; }
+.cm-frame svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.cm-seg { fill: none; stroke: var(--key); stroke-width: 6; }
+.cm-seg--night { stroke: var(--c-malam); }
+.cm-sp { fill: none; stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.cm-b { fill: none; stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.cm-l { fill: none; stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; opacity: 0; }
+.cm-sp, .cm-b, .cm-l { transition: opacity var(--dur-hover) var(--ease-ui); }
+.cm-ab { fill: var(--line); } .cm-al { fill: var(--ink); }
+.cm-nd { fill: var(--key); stroke: var(--ink); stroke-width: 2; transform-box: fill-box; transform-origin: center; transition: scale var(--dur-hover) var(--ease-ui); }
+.cm-nd[data-k='wa'] { fill: var(--c-wa); stroke: var(--c-wa-label); stroke-width: var(--wa-edge-w); }
+.cm-lb { position: absolute; translate: -50% -100%; font: 600 clamp(11px, 3.82cqw, 13px) / 1.1 var(--ff-text); color: var(--ink); white-space: nowrap; }
+.cm-lb[data-side='l'] { translate: 0 -50%; } .cm-lb[data-side='r'] { translate: -100% -50%; } .cm-lb[data-side='b'] { translate: -50% 0; }
+.cm-c { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: grid; place-content: center; gap: 2px; width: 28%; aspect-ratio: 1;
+  padding: 4px; border: var(--hair-w) solid var(--line); border-radius: 50%; background: var(--surface); text-align: center; }
+.cm-c b { font-weight: 650; font-size: clamp(10px, 3.4cqw, 11.5px); line-height: 1.15; }
+.cm-c span { font-size: clamp(9px, 2.95cqw, 10px); line-height: 1.2; color: var(--ink-2); }
+.cm-cap { display: grid; gap: 4px; max-width: 340px; font-size: var(--fs-small); line-height: 1.45; color: var(--ink-2); }
+.cm-night { display: flex; gap: 8px; align-items: baseline; }
+.cm-night::before { content: ''; flex: none; width: 16px; height: 3px; background: var(--c-malam); translate: 0 -3px; }
+.cm-chips { min-width: 0; margin: 0; padding: 0; border: 0; }
+.cm-chips legend { padding: 0; margin-bottom: 10px; }
+.cm-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.cm-row label { display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 16px; border: var(--hair-w) solid var(--line);
+  border-radius: var(--r-chip); background: var(--surface); color: var(--ink); font-weight: 650; font-size: .9375rem; line-height: 1; cursor: pointer; }
+.cm-row input:checked + label { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.cm-row input:focus-visible + label { outline: var(--focus-w) solid var(--focus); outline-offset: var(--focus-offset); }
+.cm-ex .m-dot.m-wa { background: var(--c-wa); }
+.cmap .tbl :is(th, td) { padding-left: 10px; } /* room for the linked row's 2px rule; every column aligned */
+.cmap details summary { display: flex; align-items: center; min-height: var(--tap); cursor: pointer; font-weight: 650; }
+/* service pages: static, only the focused node's chords, already lit */
+.cmap--focus .cm-l { opacity: 1; } .cmap--focus .cm-l.in { stroke-dasharray: 4 3; }
+.cmap--focus .cm-sp:not(.on) { opacity: .2; } .cmap--focus .cm-nd.on { scale: 1.25; }
+/* lighting: outgoing chords 2px Aspal, incoming dashed 4 3, everything else .2, the dot 1.25, the linked table row */
+.cmap:has([value='seo']:checked) :is([data-from='seo'], [data-to='seo']).cm-l { opacity: 1; } .cmap:has([value='seo']:checked) [data-to='seo'].cm-l { stroke-dasharray: 4 3; }
+.cmap:has([value='seo']:checked) :is(.cm-b:not([data-from='seo'], [data-to='seo']), .cm-sp:not([data-k='seo'])) { opacity: .2; } .cmap:has([value='seo']:checked) .cm-nd[data-k='seo'] { scale: 1.25; }
+.cmap:has([value='seo']:checked) tr[data-node='seo'] > * { background: var(--surface-alt); } .cmap:has([value='seo']:checked) tr[data-node='seo'] > :first-child { box-shadow: inset 2px 0 var(--ink); }
+.cmap:has([value='localseo']:checked) :is([data-from='localseo'], [data-to='localseo']).cm-l { opacity: 1; } .cmap:has([value='localseo']:checked) [data-to='localseo'].cm-l { stroke-dasharray: 4 3; }
+.cmap:has([value='localseo']:checked) :is(.cm-b:not([data-from='localseo'], [data-to='localseo']), .cm-sp:not([data-k='localseo'])) { opacity: .2; } .cmap:has([value='localseo']:checked) .cm-nd[data-k='localseo'] { scale: 1.25; }
+.cmap:has([value='localseo']:checked) tr[data-node='localseo'] > * { background: var(--surface-alt); } .cmap:has([value='localseo']:checked) tr[data-node='localseo'] > :first-child { box-shadow: inset 2px 0 var(--ink); }
+.cmap:has([value='social']:checked) :is([data-from='social'], [data-to='social']).cm-l { opacity: 1; } .cmap:has([value='social']:checked) [data-to='social'].cm-l { stroke-dasharray: 4 3; }
+.cmap:has([value='social']:checked) :is(.cm-b:not([data-from='social'], [data-to='social']), .cm-sp:not([data-k='social'])) { opacity: .2; } .cmap:has([value='social']:checked) .cm-nd[data-k='social'] { scale: 1.25; }
+.cmap:has([value='social']:checked) tr[data-node='social'] > * { background: var(--surface-alt); } .cmap:has([value='social']:checked) tr[data-node='social'] > :first-child { box-shadow: inset 2px 0 var(--ink); }
+.cmap:has([value='creative']:checked) :is([data-from='creative'], [data-to='creative']).cm-l { opacity: 1; } .cmap:has([value='creative']:checked) [data-to='creative'].cm-l { stroke-dasharray: 4 3; }
+.cmap:has([value='creative']:checked) :is(.cm-b:not([data-from='creative'], [data-to='creative']), .cm-sp:not([data-k='creative'])) { opacity: .2; } .cmap:has([value='creative']:checked) .cm-nd[data-k='creative'] { scale: 1.25; }
+.cmap:has([value='creative']:checked) tr[data-node='creative'] > * { background: var(--surface-alt); } .cmap:has([value='creative']:checked) tr[data-node='creative'] > :first-child { box-shadow: inset 2px 0 var(--ink); }
+.cmap:has([value='website']:checked) :is([data-from='website'], [data-to='website']).cm-l { opacity: 1; } .cmap:has([value='website']:checked) [data-to='website'].cm-l { stroke-dasharray: 4 3; }
+.cmap:has([value='website']:checked) :is(.cm-b:not([data-from='website'], [data-to='website']), .cm-sp:not([data-k='website'])) { opacity: .2; } .cmap:has([value='website']:checked) .cm-nd[data-k='website'] { scale: 1.25; }
+.cmap:has([value='website']:checked) tr[data-node='website'] > * { background: var(--surface-alt); } .cmap:has([value='website']:checked) tr[data-node='website'] > :first-child { box-shadow: inset 2px 0 var(--ink); }
+.cmap:has([value='ai']:checked) :is([data-from='ai'], [data-to='ai']).cm-l { opacity: 1; } .cmap:has([value='ai']:checked) [data-to='ai'].cm-l { stroke-dasharray: 4 3; }
+.cmap:has([value='ai']:checked) :is(.cm-b:not([data-from='ai'], [data-to='ai']), .cm-sp:not([data-k='ai'])) { opacity: .2; } .cmap:has([value='ai']:checked) .cm-nd[data-k='ai'] { scale: 1.25; }
+.cmap:has([value='ai']:checked) tr[data-node='ai'] > * { background: var(--surface-alt); } .cmap:has([value='ai']:checked) tr[data-node='ai'] > :first-child { box-shadow: inset 2px 0 var(--ink); }
+.cmap:has([value='ads']:checked) :is([data-from='ads'], [data-to='ads']).cm-l { opacity: 1; } .cmap:has([value='ads']:checked) [data-to='ads'].cm-l { stroke-dasharray: 4 3; }
+.cmap:has([value='ads']:checked) :is(.cm-b:not([data-from='ads'], [data-to='ads']), .cm-sp:not([data-k='ads'])) { opacity: .2; } .cmap:has([value='ads']:checked) .cm-nd[data-k='ads'] { scale: 1.25; }
+.cmap:has([value='ads']:checked) tr[data-node='ads'] > * { background: var(--surface-alt); } .cmap:has([value='ads']:checked) tr[data-node='ads'] > :first-child { box-shadow: inset 2px 0 var(--ink); }
+.cmap:has([value='wa']:checked) :is([data-from='wa'], [data-to='wa']).cm-l { opacity: 1; } .cmap:has([value='wa']:checked) [data-to='wa'].cm-l { stroke-dasharray: 4 3; }
+.cmap:has([value='wa']:checked) :is(.cm-b:not([data-from='wa'], [data-to='wa']), .cm-sp:not([data-k='wa'])) { opacity: .2; } .cmap:has([value='wa']:checked) .cm-nd[data-k='wa'] { scale: 1.25; }
+.cmap:has([value='wa']:checked) tr[data-node='wa'] > * { background: var(--surface-alt); } .cmap:has([value='wa']:checked) tr[data-node='wa'] > :first-child { box-shadow: inset 2px 0 var(--ink); }
+/* once on data-in (T1): segments fade in clockwise from 06.30, then the dots scale .6 → 1; ≤900ms in all.
+   Animations (fill backwards), so the 150ms highlight transitions stay instant-feeling afterwards. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .cmap[data-reveal]:not([data-in]) .cm-seg { opacity: 0; }
+  .js .cmap[data-reveal]:not([data-in]) .cm-nd { scale: .6; }
+  .cmap[data-reveal][data-in] .cm-seg { animation: cm-fade 300ms var(--ease-ui) calc(var(--i, 0) * 60ms) backwards; }
+  .cmap[data-reveal][data-in] .cm-nd { animation: cm-pop 240ms var(--ease-out) calc(240ms + var(--i, 0) * 60ms) backwards; }
+}
+@keyframes cm-fade { from { opacity: 0; } }
+@keyframes cm-pop { from { scale: .6; } }
+:root:is(.mode-teks, :has(#mode-teks:checked)) :is(.cm-frame, .cm-chips) { display: none; }
+@media (forced-colors: active) {
+  .cm-b, .cm-sp, .cm-l { stroke: CanvasText; } .cm-ab, .cm-al { fill: CanvasText; } .cm-l { stroke-width: 3; }
+  .cm-row input:checked + label { forced-color-adjust: none; background: Highlight; color: HighlightText; }
+}

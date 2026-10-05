@@ -1,0 +1,384 @@
+/* ==========================================================================
+   Logink 'Sehari Semalam' motion layer (T0). Imported right AFTER '@/styles/tokens.css' by the two
+   frontend root layouts only (never by (payload) or global-not-found). It consumes the tokens and never
+   redefines them; colours are token references (color-mix for washes), never raw values: colours --c-*, grounds --surface/--ink/--sky, key light --key/--cursor-dot/--cursor-disc/
+   --lamp, layout --nav-h/--bar-h/--dial-h/--stage-h/--horizon-h, z --z-*, motion --ease-* and --dur-*.
+   The design system owns (not repeated here): .day-dial--progress + lk-dial-sun (T0 scroll(root)),
+   .ribbon-horizon, .house-lights, .faq details, .btn:active scale, the Mode teks base
+   (:root.mode-teks / #mode-teks:checked) and the global reduced-motion clamp.
+   Rules of this file:
+   - Every animation sits in (prefers-reduced-motion: no-preference); every scroll-driven one also in
+     @supports (animation-timeline: view()|scroll()). Unsupported = static, fully visible.
+   - Pre-reveal states exist only under html.js (set by SiteObserver AFTER its first scan).
+   - Only transform / translate / scale / opacity / clip-path animate. No background-color, gradient,
+     filter or @property animation anywhere. will-change only on the <= 4 pointer-driven layers.
+   - Text never starts at opacity 0: text reveals are transform-in-a-mask; opacity is for decoration.
+   - No smooth scroll-behavior on html (Lenis anchors on desktop, native jumps elsewhere).
+   ========================================================================== */
+
+/* ---------- 1. Lenis (lenis/dist/lenis.css 1.3.23) ------------------------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent], .lenis [data-lenis-prevent-horizontal] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+html:has(dialog:modal) { overflow: hidden; } /* page behind a modal; Lenis leaves dialog wheels native */
+
+/* ---------- 2. Front-page rise (T0, home H1 only, LCP-safe) -------------- */
+/* <h1 class="t-title lk-rise"><span class="t-kicker">…</span> <span class="ln" style="--i:0">…</span> … */
+@media (prefers-reduced-motion: no-preference) {
+  .lk-rise > .ln { animation: lk-rise var(--dur-rise) var(--ease-out) both; animation-delay: calc(var(--i, 0) * var(--stagger-line)); }
+}
+@keyframes lk-rise { from { transform: translateY(0.35em); } } /* opacity stays 1: LCP = FCP */
+
+/* ---------- 3. Reveals (T1 SiteObserver: [data-reveal] -> [data-in]) ----- */
+[data-reveal='lift'], [data-reveal='fade'] {
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal='lift']:not([data-in]) { transform: translateY(24px); } /* text blocks: lift only */
+  .js [data-reveal='fade']:not([data-in]) { opacity: 0; transform: translateY(24px); } /* decoration only (lint) */
+}
+/* Split-line H2 + AI-answer words + citation chips: each word in its own mask. */
+.lk-w {
+  display: inline-block; overflow: clip; vertical-align: top;
+  padding-block: 0.08em 0.14em; margin-block: -0.08em -0.14em; /* descenders inside the mask */
+}
+.lk-w > span { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal='split'] .lk-w > span { transition: transform var(--dur-reveal) var(--ease-out); transition-delay: calc(var(--line, 0) * var(--stagger-line)); }
+  .js [data-reveal='split']:not([data-in]) .lk-w > span { transform: translateY(110%); transition: none; }
+  [data-reveal='words'] .lk-w > span { transition: transform 400ms var(--ease-out); transition-delay: min(calc(var(--i, 0) * var(--stagger-word)), var(--stagger-max)); }
+  .js [data-reveal='words']:not([data-in]) .lk-w > span { transform: translateY(110%); transition: none; }
+}
+
+/* ---------- 4. Horizon wipe (T0 view(); T1 fallback; decorative layer only) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .lk-wipe { animation: lk-wipe var(--ease-in-out) both; animation-timeline: view(); animation-range: entry 5% cover 40%; }
+  }
+  @supports not (animation-timeline: view()) {
+    .lk-wipe { transition: clip-path var(--dur-image) var(--ease-in-out); }
+    .js .lk-wipe:not([data-in]) { clip-path: inset(100% 0 0 0); }
+  }
+}
+@keyframes lk-wipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+
+/* ---------- 5. Chrome: header pill, WhatsApp pill, bottom bar, menus ------ */
+/* html[data-nav] = top | pill (SiteObserver). Owner 2026-10-04: the header stays visible on every page (no
+   hide-on-scroll) and is always light; motion only condenses it to the pill. */
+.site-header {
+  position: fixed; inset: var(--dial-h) 0 auto; z-index: var(--z-header); height: var(--nav-h);
+  view-transition-name: site-header;
+  clip-path: inset(0 round 0);
+  transition: translate var(--dur-ui) var(--ease-drawer), clip-path var(--dur-ui) var(--ease-drawer);
+}
+html:not([data-nav='top']) .site-header { clip-path: inset(6px max(8px, calc(var(--gutter) - 12px)) round var(--r-ui)); } /* condensed pill */
+.day-dial--progress { view-transition-name: day-dial; }
+.wa-pill { position: fixed; right: var(--gutter); bottom: 24px; z-index: var(--z-wa-pill); view-transition-name: wa-pill; } /* desktop: never hides */
+.bottom-bar {
+  position: fixed; inset: auto 0 0; z-index: var(--z-bar); padding-bottom: env(safe-area-inset-bottom);
+  view-transition-name: bottom-bar; transition: translate var(--dur-ui) var(--ease-drawer);
+}
+body:has(:is(input, textarea, select):focus) .bottom-bar { translate: 0 110%; } /* soft keyboard open: 0 JS */
+@media (min-width: 1024px) { .bottom-bar { display: none; } }
+@media (max-width: 1023px) { .wa-pill, .wa-pill[data-magnetic] { display: none; } } /* beats the later [data-magnetic] rule */
+/* Menus: <dialog id="menu"> (phones, opened by <button commandfor="menu" command="show-modal">) and the
+   [popover] mega-menu (desktop). 240 ms drawer ease, 0 JS, framer-motion-free. */
+.lk-menu, .lk-mega {
+  transition: opacity var(--dur-ui) var(--ease-drawer), translate var(--dur-ui) var(--ease-drawer),
+    display var(--dur-ui) allow-discrete, overlay var(--dur-ui) allow-discrete;
+  opacity: 0; translate: 0 -12px;
+}
+/* SEPARATE rules and never one selector list. The popover-open pseudo-class is unknown in Safari 16.4-16.x and Firefox
+   111-124, and one unknown selector drops the whole list (the <dialog> would open at opacity 0). */
+.lk-menu[open] { opacity: 1; translate: 0 0; }
+.lk-mega:popover-open { opacity: 1; translate: 0 0; }
+@starting-style { .lk-menu[open] { opacity: 0; translate: 0 -12px; } }
+@starting-style { .lk-mega:popover-open { opacity: 0; translate: 0 -12px; } }
+.lk-menu::backdrop { background: color-mix(in oklab, var(--c-malam) 40%, transparent); }
+/* No popover support: [popover] would render in flow. Hide it and its trigger; the header's
+   .nav-mega-link (a plain link to the services hub) takes over. */
+@supports not selector(:popover-open) { .lk-mega, .nav-mega-btn { display: none; } }
+@supports selector(:popover-open) { .nav-mega-link { display: none; } }
+/* Phones: the bottom bar never covers content (last footer link, Mode teks, legal line). */
+@media (max-width: 1023px) {
+  body { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom)); }
+  html { scroll-padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom) + 8px); }
+}
+
+/* ---------- 6. Hero film 'Buka' ------------------------------------------ */
+.lk-film { --lamp: var(--c-semburat); } /* the lamp is the rising sun here (paper grounds set --lamp: transparent) */
+.lk-film__frame { position: relative; overflow: clip; isolation: isolate; aspect-ratio: 4 / 3; border-radius: var(--r-ui); }
+.lk-film__frame img, .lk-film__frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.lk-film__frame video { display: none; opacity: 0; transition: opacity 400ms var(--ease-out); }
+.lk-film__frame video[data-playing] { opacity: 1; }
+@media (min-width: 1024px) {
+  .lk-film__frame { aspect-ratio: var(--ar, 1680 / 720); } /* --ar = the desktop poster's w / h (FilmHero) */
+  .lk-film__frame video { display: block; }
+}
+/* Caption line on Putih under the film; the pause control sits at its end (WCAG 2.2.2). Shipped
+   [hidden]; only the desktop film code (rich/index.ts films()) reveals it. */
+.lk-film__cap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.lk-film__pause {
+  min-height: 44px; min-width: 44px; padding: 0 14px; border: var(--hair-w) solid var(--line); border-radius: var(--r-ui);
+  background: transparent; color: var(--ink); font: 600 var(--fs-small) / 1.2 var(--ff-text); cursor: pointer;
+}
+.lk-film__pause[hidden] { display: none; }
+.lk-film__pause:focus-visible { outline: var(--focus-w) solid var(--focus); outline-offset: var(--focus-offset); }
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  .lk-film__frame img { animation: lk-push 12s var(--ease-out) both; } /* phones: poster push-in, transform only */
+}
+@keyframes lk-push { from { scale: 1; } to { scale: 1.04; } }
+
+/* ---------- 7. Lamp (T2; rich/cursor.ts moves it by transform) ----------- */
+/* <div data-lamp> … <i class="lk-lamp" aria-hidden></i></div>: ONLY media frames that hold no text (film
+   frame; hour-lit photos on AI, Ads, home Bab III/IV). The frame clips the pool, so the lamp can never
+   sit under a text row; there is no ground-level lamp. Colour = --lamp (transparent on paper). */
+[data-lamp] { position: relative; overflow: clip; isolation: isolate; }
+[data-lamp] > .lk-lamp {
+  display: none; position: absolute; left: 0; top: 0; width: 560px; height: 560px; translate: -50% -50%;
+  pointer-events: none; z-index: var(--z-lamp); mix-blend-mode: screen; opacity: 0;
+  transition: opacity 400ms var(--ease-out); will-change: transform;
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--lamp) 40%, transparent), color-mix(in oklab, var(--lamp) 12%, transparent) 55%, transparent); /* pre-blurred */
+}
+.rich [data-lamp] > .lk-lamp { display: block; }
+.rich [data-lamp]:hover > .lk-lamp { opacity: 1; }
+
+/* ---------- 8. Cursor label disc (T2; rich/cursor.ts). Owner 2026-10-04: no always-on dot. ---------- */
+/* Root gets data-sky (the hovered element's computed --sky); the disc shows only over [data-cursor] links. */
+/* owner 2026-10-04: no in/out animation, the disc appears and disappears at the pointer (a scale transition also
+   scaled the JS translate, so the disc flew in from the top-left corner) */
+.lk-cur { position: fixed; inset: 0; z-index: var(--z-cursor); pointer-events: none; contain: strict; opacity: 0; }
+.lk-cur[data-on] { opacity: 1; }
+.lk-cur__disc {
+  position: absolute; left: 0; top: 0; translate: -50% -50%; will-change: transform; /* transform = position (JS) */
+  width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; padding: 12px; box-sizing: border-box;
+  background: var(--c-aspal); color: var(--c-putih); text-align: center;
+  font: 650 12px/1.15 var(--ff-text); letter-spacing: 0.02em;
+  visibility: hidden;
+}
+.lk-cur[data-sky='dark'] .lk-cur__disc { background: var(--c-cahaya); color: var(--c-malam); }
+.lk-cur[data-mode='label'] .lk-cur__disc { visibility: visible; }
+.rich [data-cursor]:not([data-cursor='hide']) { cursor: none; } /* hidden only inside labelled zones */
+/* Keyboard parity: the same label on :focus-visible (not on WhatsApp buttons, which say it already). */
+a[data-cursor]:not([data-cursor='hide'], [data-cursor-tone]):focus-visible { position: relative; }
+a[data-cursor]:not([data-cursor='hide'], [data-cursor-tone]):focus-visible::after {
+  content: attr(data-cursor); position: absolute; right: 8px; top: 50%; translate: 0 -50%;
+  padding: 4px 10px; border-radius: var(--r-chip); background: var(--btn); color: var(--btn-ink); font: 600 12px/1.2 var(--ff-text);
+}
+
+/* ---------- 9. Magnetic CTAs (T2 translate; the design system's .btn:active scale is the T0 fallback) */
+[data-magnetic] { display: inline-block; }
+[data-magnetic] > * { will-change: translate; }
+
+/* ---------- 10. Hover-reveal services table ------------------------------ */
+.lk-svc { position: relative; }
+.lk-svc__name { display: inline-block; transition: translate var(--dur-hover) var(--ease-ui); }
+.lk-svc tbody tr:hover > * { background: var(--surface-alt); } /* instant tint; only the name nudge animates */
+.lk-svc tbody tr:hover .lk-svc__name { translate: 12px 0; }
+.lk-svc tbody tr:hover .chip[data-stage]::before { box-shadow: 0 0 0 3px color-mix(in oklab, var(--key) 25%, transparent); } /* stage dot fills */
+.lk-svc__thumb { display: block; width: 96px; height: 72px; object-fit: cover; border-radius: var(--r-ui); }
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .lk-svc__thumb { display: none; } /* lazy + display:none = never fetched on rich desktops */
+  .lk-svc tr:focus-within .lk-svc__thumb { display: block; } /* keyboard gets the inline still */
+}
+.lk-still {
+  position: absolute; left: 0; top: 0; width: 240px; aspect-ratio: 4 / 5; translate: -50% -50%;
+  pointer-events: none; z-index: var(--z-loupe); overflow: clip; border-radius: var(--r-ui);
+  opacity: 0; scale: 0.9; transition: opacity var(--dur-ui) var(--ease-out), scale var(--dur-ui) var(--ease-out); will-change: transform;
+}
+.lk-still[data-on] { opacity: 1; scale: 1; }
+.lk-still img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--dur-ui) var(--ease-ui); }
+.lk-still img[data-on] { opacity: 1; }
+@media (max-width: 767px) {
+  .lk-svc__table, .lk-svc__table :is(thead, tbody, tr, th, td, caption) { display: block; } /* explicit ARIA roles keep table semantics */
+  .lk-svc__table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  /* Home pkg (§11 4.10 length gate): one compact block per service instead of four bordered cells.
+     Name + thumb on one line, the answer, then stage chip and price on one line. Same DOM, no text hidden. */
+  .lk-svc__table tbody tr { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; row-gap: 6px; padding: 14px 0; border-bottom: var(--hair-w) solid var(--hair); }
+  .lk-svc__table tbody :is(th, td) { padding: 0; border-bottom: 0; }
+  .lk-svc__table tbody th { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .lk-svc__table tbody td:nth-child(3) { grid-column: 1 / -1; grid-row: 2; }
+  .lk-svc__table tbody td:nth-child(2) { grid-row: 3; align-self: center; }
+  .lk-svc__table tbody td.lk-svc__price { grid-row: 3; align-self: center; text-align: right; }
+  .lk-svc__table .lk-svc__thumb { width: 64px; height: 48px; flex: none; }
+}
+
+/* ---------- 11. 'Geser' rows (Bab I case files) -------------------------- */
+[data-drag-x] { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; }
+[data-drag-x] > * { scroll-snap-align: start; flex: none; }
+.rich [data-drag-x] { user-select: none; }
+.rich [data-drag-x] :is(a, img) { -webkit-user-drag: none; }
+
+/* ---------- 12. Overture / ScrollSequence -------------------------------- */
+.lk-seq { position: relative; display: flex; flex-direction: column; }
+/* Phones and tablets: a min(40svh, 360px) sticky band; phones (<768) show the 800x720 key-m keyframes,
+   tablets the d1280 stop frames (<picture media>). SiteObserver's data-step swaps them (T1, 0 extra KB). */
+.lk-seq__stage { order: -1; position: sticky; top: var(--nav-h); z-index: var(--z-sticky); height: min(40svh, 360px); background: var(--surface); }
+.lk-seq__frames { position: absolute; inset: 0; overflow: clip; }
+.lk-seq__frames > picture, .lk-seq__frames img, .lk-seq__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.lk-seq__frames img { object-fit: cover; }
+.lk-seq__canvas { display: none; opacity: 0; transition: opacity 300ms var(--ease-out); }
+.lk-seq__canvas[data-drawn] { opacity: 1; }
+.lk-seq__phone { display: none; }
+@media (max-width: 767px) { .lk-seq[data-keys='none'] .lk-seq__stage { display: none; } } /* no phone keys installed: text + inline screens only */
+@media (min-width: 1024px) {
+  .lk-seq { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--col-gap); }
+  .lk-seq__copy { grid-column: 1; grid-row: 1; }
+  .lk-seq__stage { grid-column: 2; grid-row: 1; align-self: start; order: 0; top: max(0px, calc((100svh - var(--stage-h)) / 2)); height: var(--stage-h); }
+  .lk-seq [data-step-item] { min-height: var(--stage-h); display: flex; flex-direction: column; justify-content: center; } /* runway = steps × --stage-h */
+  .lk-seq__canvas { display: block; }
+  .lk-seq__phone { display: block; position: absolute; right: 6%; bottom: 6%; width: min(34%, 300px); aspect-ratio: 9 / 19; }
+  .lk-seq__inline { display: none; } /* the inline phone screens inside each step are for phones */
+}
+/* Step panels (keyframes + phone screens). No JS: panel 0 only. JS: SiteObserver's data-on. Crossfade
+   without a dip: the incoming panel fades in at once, the outgoing one waits one --dur-ui, then fades. */
+/* Panels hold only aria-hidden media or mock screens, never unique text (the step text is the <li>). */
+[data-step-panel] { opacity: 0; transition: opacity var(--dur-ui) var(--ease-ui) var(--dur-ui); }
+[data-step-panel][data-k='0'] { opacity: 1; }
+[data-steps][data-step] [data-step-panel] { opacity: 0; }
+[data-steps][data-step] [data-step-panel][data-on] { opacity: 1; transition-delay: 0s; }
+[data-step-item] { border-top: var(--rule-w) solid var(--hair); } /* colour swaps instantly */
+[data-step-item][aria-current='step'] { border-top-color: var(--key); } /* active step's key-light rule (hairline colour, not a surface) */
+
+/* ---------- 13. Noon layered parallax (T0 view(), desktop only) ---------- */
+/* <div class="lk-plx"><figure data-depth="1">…back stills… <div data-depth="2">IG grid + review</div> <div data-depth="3">website frame</div> */
+.lk-plx { position: relative; view-timeline: --plx block; }
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .lk-plx [data-depth] { animation: lk-plx linear both; animation-timeline: --plx; animation-range: cover; }
+    .lk-plx [data-depth='1'] { --d: 4%; }
+    .lk-plx [data-depth='2'] { --d: 6%; }
+    .lk-plx [data-depth='3'] { --d: 8%; }
+  }
+}
+@keyframes lk-plx { from { translate: 0 var(--d); } to { translate: 0 calc(var(--d) * -1); } }
+
+/* ---------- 14. Coral glow over Senja (the ribbon horizon itself is .ribbon-horizon, static) */
+/* Height capped at the section's top padding: the glow ends above Bab III's first text row (CRITIC M8). */
+.lk-glow {
+  position: absolute; inset: 0 0 auto; height: var(--section-y); pointer-events: none; z-index: 0;
+  background: radial-gradient(60% 100% at 50% 0%, color-mix(in oklab, var(--c-coral) 22%, transparent), transparent 70%); /* pre-tinted, never animated */
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .lk-glow { animation: lk-glow linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+  }
+}
+@keyframes lk-glow { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- 15. Instruments come alive once (T1 [data-reveal='inst']) ---- */
+/* chip = <span class="lk-cite lk-w" style="--i:1"><span>(2) contohkedai.id</span></span> (text rises in its mask);
+   prompt row = <tr class="lk-lit" style="--i:2"> (a pre-tinted ::before light fades in behind the text);
+   bar = <i class="lk-bar" style="--i:0; --v:.62"> (decorative, the value is text beside it);
+   pin = <svg class="lk-pin" aria-hidden> (decorative). */
+[data-reveal='inst'] :is(.lk-cite > span, .lk-bar, .lk-draw, .lk-lit::before, .lk-pin) {
+  transition: opacity 400ms var(--ease-out), transform var(--dur-reveal) var(--ease-out), scale var(--dur-reveal) var(--ease-out);
+  transition-delay: calc(min(var(--i, 0), 5) * 60ms); /* stagger capped at six */
+}
+[data-reveal='inst'] .lk-cite > span { transition-delay: calc(650ms + min(var(--i, 0), 5) * 80ms); } /* after the answer words */
+.lk-bar { display: block; height: 8px; background: var(--key); transform-origin: 0 50%; scale: var(--v, 1) 1; }
+.lk-draw { display: block; height: var(--hair-w); background: var(--hair); transform-origin: 0 50%; } /* proof-strip hairline */
+.lk-lit { position: relative; }
+.lk-lit::before { content: ''; position: absolute; inset: 0; z-index: -1; background: color-mix(in oklab, var(--c-jingga) 12%, transparent); } /* Jingga wash on Senja Dalam, text-free */
+.lk-cite--hit > span { outline: 1px solid var(--c-jingga); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal='inst']:not([data-in]) .lk-cite > span { transform: translateY(110%); transition: none; }
+  .js [data-reveal='inst']:not([data-in]) :is(.lk-bar, .lk-draw) { scale: 0 1; }
+  .js [data-reveal='inst']:not([data-in]) .lk-lit::before { opacity: 0; }
+  .js [data-reveal='inst']:not([data-in]) .lk-pin { opacity: 0; transform: translateY(-6px); }
+}
+/* Chat bubbles. Bab IV ad -> chat: <ol class="lk-chat"> inside [data-reveal='inst'], bubbles rise in their own
+   mask once in view, 450 ms apart (<= 6). Lead Profiler (T1 island): bubbles the island appends go in
+   <ol class="lk-chat lk-chat--live"> and rise 12 px on insertion (CSS animation, 0 JS). The typing
+   indicator is finite (3 cycles), so the page never has more than two infinite animations. */
+.lk-chat > li { overflow: clip; }
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal='inst'] .lk-chat > li > * { transition: transform var(--dur-ui) var(--ease-out); transition-delay: calc(min(var(--i, 0), 5) * 450ms); }
+  .js [data-reveal='inst']:not([data-in]) .lk-chat > li > * { transform: translateY(110%); transition: none; }
+  .lk-chat--live > li > * { animation: lk-bubble var(--dur-ui) var(--ease-out) both; }
+  .lk-typing > i { animation: lk-typing 600ms var(--ease-ui) 3 alternate both; animation-delay: calc(var(--i, 0) * 120ms); }
+}
+@keyframes lk-bubble { from { transform: translateY(12px); } }
+@keyframes lk-typing { to { translate: 0 -3px; } }
+
+/* Crawler-log ticker: one of at most two infinite animations on screen (the other is the hero film).
+   <input type="checkbox" id="jeda-log" class="lk-ticker-toggle"><label for="jeda-log">Jeda log</label>
+   <div class="lk-ticker" tabindex="0"><ol class="lk-ticker__track">6 lines + the same 6 aria-hidden="true"</ol></div>
+   Only the animated desktop window clips; phones, reduced motion and Mode teks show every line once,
+   so the 'Jeda log' control is shown only where the track actually moves (WCAG 2.2.2). */
+.lk-ticker [aria-hidden='true'] { display: none; }
+.lk-ticker-toggle, .lk-ticker-toggle + label { display: none; }
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  :root:not(.mode-teks):not(:has(#mode-teks:checked)) .lk-ticker { overflow: clip; height: calc(3 * 1.6em); }
+  :root:not(.mode-teks):not(:has(#mode-teks:checked)) .lk-ticker [aria-hidden='true'] { display: revert; }
+  :root:not(.mode-teks):not(:has(#mode-teks:checked)) .lk-ticker-toggle { display: inline-block; width: 20px; height: 20px; margin: 0 8px 0 0; vertical-align: middle; accent-color: var(--ink); }
+  :root:not(.mode-teks):not(:has(#mode-teks:checked)) .lk-ticker-toggle + label { display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; }
+  /* same guard as the clip: a browser without :has() gets the static list, never an unclipped moving track */
+  :root:not(.mode-teks):not(:has(#mode-teks:checked)) .lk-ticker__track { animation: lk-tick 24s linear infinite; }
+  /* pause: hover, keyboard focus inside, or the 'Jeda log' checkbox (same prefix, so it outranks the shorthand) */
+  :root:not(.mode-teks):not(:has(#mode-teks:checked)) :is(.lk-ticker:hover, .lk-ticker:focus-within, .lk-ticker-toggle:checked ~ .lk-ticker) .lk-ticker__track { animation-play-state: paused; }
+}
+.lk-ticker:focus-visible { outline: var(--focus-w) solid var(--focus); outline-offset: var(--focus-offset); }
+@keyframes lk-tick { to { transform: translateY(-50%); } }
+
+/* ---------- 16. Proof Loupe ---------------------------------------------- */
+.lk-proof__zone { position: relative; } /* no border on the zone: the lens math uses its padding box */
+.lk-annot-toggle { width: 20px; height: 20px; margin: 0 8px 0 0; vertical-align: middle; accent-color: var(--ink); }
+.lk-annot-switch { display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; }
+.lk-annot { display: none; position: absolute; inset: 0; pointer-events: none; }
+.lk-annot-toggle:checked ~ .lk-proof__zone > .lk-annot { display: block; } /* touch, keyboard, RM: 0 JS */
+.lk-loupe {
+  position: absolute; left: 0; top: 0; width: 200px; height: 200px; border-radius: 50%; overflow: hidden;
+  pointer-events: none; z-index: var(--z-loupe); opacity: 0; transition: opacity var(--dur-hover) var(--ease-ui);
+  box-shadow: inset 0 0 0 1px var(--c-jingga); will-change: transform;
+}
+.lk-loupe .lk-annot { display: block; inset: auto; left: 0; top: 0; will-change: transform; }
+.rich .lk-proof__zone:hover > .lk-loupe { opacity: 1; }
+.lk-annot-toggle:checked ~ .lk-proof__zone > .lk-loupe { display: none; }
+
+/* ---------- 17. Sticky stacking process cards ---------------------------- */
+/* <ol class="lk-stack" style="--n:4"><li style="--i:0"><article class="lk-stack__card">… (CSS sticky, every device) */
+.lk-stack { view-timeline: --stack block; }
+.lk-stack > li { position: sticky; top: calc(var(--nav-h) + 16px + var(--i, 0) * 18px); }
+.lk-stack > li + li { margin-top: min(12svh, 96px); }
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .lk-stack__card {
+      transform-origin: 50% 0;
+      animation: lk-stack linear both;
+      animation-timeline: --stack;
+      animation-range: contain calc(var(--i, 0) / var(--n, 4) * 100%) contain 100%;
+    }
+  }
+}
+@keyframes lk-stack { to { scale: calc(1 - (var(--n, 4) - 1 - var(--i, 0)) * 0.04); } } /* back cards .96 / .92 / .88 */
+
+/* ---------- 18. House lights guard (design system owns .house-lights) ----- */
+/* A sticky band taller than the viewport hides its own bottom (the CTAs and anti-scam line) under the
+   sheet. Stick only where the band fits: >= 640 px tall (the band is budgeted at <= 100svh - 56px). */
+@media (max-height: 639px) { .house-lights > .hl-night { position: relative; } }
+:root:is(.mode-teks, :has(#mode-teks:checked)) .house-lights > .hl-night { position: relative; }
+
+/* ---------- 19. Time-travel page cuts (React <ViewTransition>) ----------- */
+::view-transition-old(.lk-page) { animation: var(--dur-page-out) var(--ease-in) both lk-vt-out; }
+::view-transition-new(.lk-page) { animation: var(--dur-ui) var(--ease-out) 90ms both lk-vt-in; }
+@keyframes lk-vt-out { to { opacity: 0; } }
+@keyframes lk-vt-in { from { opacity: 0; translate: 0 12px; } }
+::view-transition-group(.lk-morph) { animation-duration: 400ms; animation-timing-function: var(--ease-out); }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; } /* chrome stays put */
+::view-transition-group(site-header), ::view-transition-group(day-dial), ::view-transition-group(wa-pill), ::view-transition-group(bottom-bar) { animation: none; z-index: 100; }
+::view-transition-old(site-header), ::view-transition-old(day-dial), ::view-transition-old(wa-pill), ::view-transition-old(bottom-bar) { display: none; }
+::view-transition-new(site-header), ::view-transition-new(day-dial), ::view-transition-new(wa-pill), ::view-transition-new(bottom-bar) { animation: none; }
+
+/* ---------- 20. Mode teks extras (base rules live in the design system) --- */
+:root:is(.mode-teks, :has(#mode-teks:checked)) :is(.lk-lamp, .lk-still, .lk-loupe, .lk-glow, .lk-seq__stage, .lk-seq__inline, .lk-film__frame, .lk-film__pause) { display: none !important; }
+
+/* ---------- 21. Reduced motion, print, forced colours -------------------- */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+@media print {
+  .lk-cur, .lk-lamp, .lk-seq__canvas, .lk-film__frame video, .lk-film__pause, .site-header, .bottom-bar, .wa-pill { display: none !important; }
+}
+@media (forced-colors: active) { .lk-cur, .lk-lamp, .lk-glow, .lk-still { display: none !important; } }

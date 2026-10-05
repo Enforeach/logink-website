@@ -1,0 +1,585 @@
+{
+  "version": 1,
+  "generated": "2026-10-05",
+  "assets": {
+    "buka": {
+      "dir": "/media/buka-e58f3b5a",
+      "rendered": true,
+      "alt": {
+        "id": "Jalan ruko di Tebet saat fajar: pemilik kedai menata toples kerupuk di bawah tenda koral, uap ketel naik, lampu jalan padam",
+        "en": "A ruko street in Tebet at dawn: a kedai owner arranges kerupuk jars under a coral awning, the kettle steams, a street lamp switches off"
+      },
+      "caption": {
+        "id": "Ilustrasi AI, animasi · bukan klien Logink",
+        "en": "AI illustration, animated · not a Logink client"
+      },
+      "files": {
+        "film": {
+          "src": "/media/buka-e58f3b5a/film.webm",
+          "w": 1680,
+          "h": 720,
+          "bytes": 1055445
+        },
+        "poster-21x9": {
+          "src": "/media/buka-e58f3b5a/poster-21x9.webp",
+          "w": 1280,
+          "h": 548,
+          "bytes": 55788
+        },
+        "poster-4x3": {
+          "src": "/media/buka-e58f3b5a/poster-4x3.webp",
+          "w": 800,
+          "h": 600,
+          "bytes": 37250
+        }
+      }
+    },
+    "atap": {
+      "dir": "/media/atap-cf9ade7d",
+      "rendered": true,
+      "alt": {
+        "id": "Atap ruko Tebet, Jakarta Selatan, sekitar pukul 07.00",
+        "en": "Ruko rooftops in Tebet, South Jakarta, around 07:00"
+      },
+      "caption": {
+        "id": "Ilustrasi AI, animasi · bukan klien Logink",
+        "en": "AI illustration, animated · not a Logink client"
+      },
+      "frames": {
+        "dir": "/media/atap-cf9ade7d/d1280",
+        "count": 25,
+        "width": 1280,
+        "height": 720
+      },
+      "files": {
+        "key-1": {
+          "src": "/media/atap-cf9ade7d/key-m/k1.webp",
+          "w": 800,
+          "h": 720,
+          "bytes": 34332
+        },
+        "key-2": {
+          "src": "/media/atap-cf9ade7d/key-m/k2.webp",
+          "w": 800,
+          "h": 720,
+          "bytes": 35986
+        },
+        "key-3": {
+          "src": "/media/atap-cf9ade7d/key-m/k3.webp",
+          "w": 800,
+          "h": 720,
+          "bytes": 21342
+        },
+        "key-4": {
+          "src": "/media/atap-cf9ade7d/key-m/k4.webp",
+          "w": 800,
+          "h": 720,
+          "bytes": 28974
+        }
+      }
+    },
+    "jam-0700-seo": {
+      "dir": "/media/jam-0700-seo-5c528ad0",
+      "rendered": false,
+      "alt": {
+        "id": "Dua pendiri brand lokal meninjau laptop di ruang kerja bersama Kemang pada pagi hari",
+        "en": "Two local brand founders reviewing a laptop in a Kemang coworking space in the morning"
+      },
+      "caption": {
+        "id": "Ilustrasi AI · bukan klien Logink",
+        "en": "AI illustration · not a Logink client"
+      },
+      "files": {
+        "still": {
+          "src": "/media/jam-0700-seo-5c528ad0/still.webp",
+          "w": 1088,
+          "h": 1360,
+          "bytes": 72018
+        },
+        "thumb": {
+          "src": "/media/jam-0700-seo-5c528ad0/thumb.webp",
+          "w": 96,
+          "h": 72,
+          "bytes": 1102
+        }
+      }
+    },
+    "jam-0830-local": {
+      "dir": "/media/jam-0830-local-e910d7e4",
+      "rendered": false,
+      "alt": {
+        "id": "Pemilik kedai berhijab hijau sage menaikkan rolling door di bawah tenda koral pada pagi hari, Tebet",
+        "en": "A kedai owner in a sage hijab raising her shutter under a coral awning in the morning, Tebet"
+      },
+      "caption": {
+        "id": "Ilustrasi AI · bukan klien Logink",
+        "en": "AI illustration · not a Logink client"
+      },
+      "files": {
+        "still": {
+          "src": "/media/jam-0830-local-e910d7e4/still.webp",
+          "w": 1088,
+          "h": 1360,
+          "bytes": 130068
+        },
+        "thumb": {
+          "src": "/media/jam-0830-local-e910d7e4/thumb.webp",
+          "w": 96,
+          "h": 72,
+          "bytes": 1846
+        }
+      }
+    },
+    "jam-1240-sosial": {
+      "dir": "/media/jam-1240-sosial-2ec854c7",
+      "rendered": false,
+      "alt": {
+        "id": "Pemilik butik batik di Solo memotret kemeja batik dengan tripod ponsel",
+        "en": "A batik boutique owner in Solo photographing a batik shirt on a phone tripod"
+      },
+      "caption": {
+        "id": "Ilustrasi AI · bukan klien Logink",
+        "en": "AI illustration · not a Logink client"
+      },
+      "files": {
+        "still": {
+          "src": "/media/jam-1240-sosial-2ec854c7/still.webp",
+          "w": 1088,
+          "h": 1360,
+          "bytes": 83964
+        },
+        "thumb": {
+          "src": "/media/jam-1240-sosial-2ec854c7/thumb.webp",
+          "w": 96,
+          "h": 72,
+          "bytes": 1796
+        }
+      }
+    },
+    "jam-1510-kreatif": {
+      "dir": "/media/jam-1510-kreatif-e4c66a32",
+      "rendered": false,
+      "alt": {
+        "id": "Fotografer menyiapkan lampu untuk pemotretan produk kopi botol di atas latar kertas koral",
+        "en": "A photographer setting up a light for a bottled-coffee product shoot on a coral paper sweep"
+      },
+      "caption": {
+        "id": "Ilustrasi AI · bukan klien Logink",
+        "en": "AI illustration · not a Logink client"
+      },
+      "files": {
+        "still": {
+          "src": "/media/jam-1510-kreatif-e4c66a32/still.webp",
+          "w": 1088,
+          "h": 1360,
+          "bytes": 50514
+        },
+        "thumb": {
+          "src": "/media/jam-1510-kreatif-e4c66a32/thumb.webp",
+          "w": 96,
+          "h": 72,
+          "bytes": 1194
+        }
+      }
+    },
+    "jam-1630-website": {
+      "dir": "/media/jam-1630-website-311e8714",
+      "rendered": false,
+      "alt": {
+        "id": "Resepsionis klinik gigi memeriksa jadwal di tablet sementara pasien menunggu",
+        "en": "A dental clinic receptionist checking bookings on a tablet while a patient waits"
+      },
+      "caption": {
+        "id": "Ilustrasi AI · bukan klien Logink",
+        "en": "AI illustration · not a Logink client"
+      },
+      "files": {
+        "still": {
+          "src": "/media/jam-1630-website-311e8714/still.webp",
+          "w": 1088,
+          "h": 1360,
+          "bytes": 30098
+        },
+        "thumb": {
+          "src": "/media/jam-1630-website-311e8714/thumb.webp",
+          "w": 96,
+          "h": 72,
+          "bytes": 1332
+        }
+      }
+    },
+    "jam-1805-seo-ai": {
+      "dir": "/media/jam-1805-seo-ai-847b9726",
+      "rendered": false,
+      "alt": {
+        "id": "Pemilik kedai memegang ponsel di atap ruko Tebet saat senja, membelakangi kamera",
+        "en": "A kedai owner holding her phone on a Tebet rooftop at dusk, back to the camera"
+      },
+      "caption": {
+        "id": "Ilustrasi AI · bukan klien Logink",
+        "en": "AI illustration · not a Logink client"
+      },
+      "files": {
+        "still": {
+          "src": "/media/jam-1805-seo-ai-847b9726/still.webp",
+          "w": 1088,
+          "h": 1360,
+          "bytes": 46724
+        },
+        "thumb": {
+          "src": "/media/jam-1805-seo-ai-847b9726/thumb.webp",
+          "w": 96,
+          "h": 72,
+          "bytes": 1070
+        }
+      }
+    },
+    "jam-2030-iklan": {
+      "dir": "/media/jam-2030-iklan-7b63e115",
+      "rendered": false,
+      "alt": {
+        "id": "Penjual online di Surabaya mengemas paket di bawah lampu meja pada malam hari",
+        "en": "An online seller in Surabaya packing parcels under a desk lamp at night"
+      },
+      "caption": {
+        "id": "Ilustrasi AI · bukan klien Logink",
+        "en": "AI illustration · not a Logink client"
+      },
+      "files": {
+        "still": {
+          "src": "/media/jam-2030-iklan-7b63e115/still.webp",
+          "w": 1088,
+          "h": 1360,
+          "bytes": 57970
+        },
+        "thumb": {
+          "src": "/media/jam-2030-iklan-7b63e115/thumb.webp",
+          "w": 96,
+          "h": 72,
+          "bytes": 1764
+        }
+      }
+    },
+    "motion360": {
+      "dir": "/media/motion360-4bb3c1a0",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis Logink 360°: satu kampanye yang menghubungkan media sosial, konten, SEO, iklan, dan analitik, ditutup logo Logink dan ajakan konsultasi gratis",
+        "en": "Logink 360° motion graphic: one campaign connecting social media, content, SEO, ads and analytics, ending on the Logink logo and a free-consultation call"
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/motion360-4bb3c1a0/film-720.webm",
+          "w": 1280,
+          "h": 720,
+          "bytes": 1684821
+        },
+        "film-480": {
+          "src": "/media/motion360-4bb3c1a0/film-480.webm",
+          "w": 854,
+          "h": 480,
+          "bytes": 913602
+        },
+        "poster": {
+          "src": "/media/motion360-4bb3c1a0/poster-1280.webp",
+          "w": 1280,
+          "h": 720,
+          "bytes": 14474
+        },
+        "poster-854": {
+          "src": "/media/motion360-4bb3c1a0/poster-854.webp",
+          "w": 854,
+          "h": 480,
+          "bytes": 7504
+        }
+      }
+    },
+    "hero": {
+      "dir": "/media/hero-84dd0d3a",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis Logink Digital Activation: pencarian, media sosial, jawaban AI, dan website, ditutup logo Logink dan Found. Trusted. Cited. Contacted.",
+        "en": "Logink Digital Activation motion graphic: search, social media, AI answers and the website, ending on the Logink logo and Found. Trusted. Cited. Contacted."
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/hero-84dd0d3a/film-1600.webm",
+          "w": 1600,
+          "h": 900,
+          "bytes": 2278254
+        },
+        "film-sm": {
+          "src": "/media/hero-84dd0d3a/film-960.webm",
+          "w": 960,
+          "h": 540,
+          "bytes": 1086692
+        },
+        "poster": {
+          "src": "/media/hero-84dd0d3a/poster-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 20302
+        },
+        "poster-sm": {
+          "src": "/media/hero-84dd0d3a/poster-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 11686
+        }
+      }
+    },
+    "film-seo": {
+      "dir": "/media/film-seo-429e1b23",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis SEO Logink: konsultasi dulu, roadmap dan KPI, tanda tangan kontrak, eksekusi, data ranking, studi kasus, ditutup ajakan konsultasi gratis",
+        "en": "Logink SEO motion graphic: consult first, roadmap and KPIs, sign the contract, execution, ranking data, a case study, ending on a free-consultation call"
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/film-seo-429e1b23/film-1600.webm",
+          "w": 1600,
+          "h": 900,
+          "bytes": 2167169
+        },
+        "film-sm": {
+          "src": "/media/film-seo-429e1b23/film-960.webm",
+          "w": 960,
+          "h": 540,
+          "bytes": 1007045
+        },
+        "poster": {
+          "src": "/media/film-seo-429e1b23/poster-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 18232
+        },
+        "poster-sm": {
+          "src": "/media/film-seo-429e1b23/poster-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 10416
+        }
+      }
+    },
+    "film-localseo": {
+      "dir": "/media/film-localseo-983d1bea",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis Local SEO Logink: permintaan, relevansi, jarak, dan reputasi di Google Maps, contoh ilustratif peringkat map pack, ditutup ajakan konsultasi gratis",
+        "en": "Logink Local SEO motion graphic: demand, relevance, distance and prominence on Google Maps, an illustrative map-pack ranking example, ending on a free-consultation call"
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/film-localseo-983d1bea/film-1600.webm",
+          "w": 1600,
+          "h": 900,
+          "bytes": 2344321
+        },
+        "film-sm": {
+          "src": "/media/film-localseo-983d1bea/film-960.webm",
+          "w": 960,
+          "h": 540,
+          "bytes": 1136804
+        },
+        "poster": {
+          "src": "/media/film-localseo-983d1bea/poster-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 18190
+        },
+        "poster-sm": {
+          "src": "/media/film-localseo-983d1bea/poster-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 10340
+        }
+      }
+    },
+    "film-social": {
+      "dir": "/media/film-social-136c6733",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis social media Logink: brand listening, analisis insight, strategi konten, dan laporan bulanan, metode berbasis data, ditutup ajakan konsultasi gratis",
+        "en": "Logink social media motion graphic: brand listening, insight analysis, content strategy and a monthly report, a data-driven method, ending on a free-consultation call"
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/film-social-136c6733/film-1600.webm",
+          "w": 1600,
+          "h": 900,
+          "bytes": 2189940
+        },
+        "film-sm": {
+          "src": "/media/film-social-136c6733/film-960.webm",
+          "w": 960,
+          "h": 540,
+          "bytes": 1051301
+        },
+        "poster": {
+          "src": "/media/film-social-136c6733/poster-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 17886
+        },
+        "poster-sm": {
+          "src": "/media/film-social-136c6733/poster-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 9982
+        }
+      }
+    },
+    "film-geo": {
+      "dir": "/media/film-geo-d0926faa",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis SEO AI Logink: audit visibilitas AI, entitas, konten siap dikutip, dan laporan, metode berbasis data, ditutup ajakan konsultasi gratis",
+        "en": "Logink AI search motion graphic: AI visibility audit, entity, citation-ready content and reporting, a data-driven method, ending on a free-consultation call"
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/film-geo-d0926faa/film-1600.webm",
+          "w": 1600,
+          "h": 900,
+          "bytes": 2106109
+        },
+        "film-sm": {
+          "src": "/media/film-geo-d0926faa/film-960.webm",
+          "w": 960,
+          "h": 540,
+          "bytes": 982572
+        },
+        "poster": {
+          "src": "/media/film-geo-d0926faa/poster-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 18826
+        },
+        "poster-sm": {
+          "src": "/media/film-geo-d0926faa/poster-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 10348
+        }
+      }
+    },
+    "film-ads": {
+      "dir": "/media/film-ads-0d9ba072",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis iklan digital Logink: strategi dan audit, iklan, kreatif dan landing page, tracking, metode plan dan test, ditutup ajakan konsultasi gratis",
+        "en": "Logink paid ads motion graphic: strategy and audit, ads, creative and landing pages, tracking, a plan-and-test method, ending on a free-consultation call"
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/film-ads-0d9ba072/film-1600.webm",
+          "w": 1600,
+          "h": 900,
+          "bytes": 2172087
+        },
+        "film-sm": {
+          "src": "/media/film-ads-0d9ba072/film-960.webm",
+          "w": 960,
+          "h": 540,
+          "bytes": 1034019
+        },
+        "poster": {
+          "src": "/media/film-ads-0d9ba072/poster-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 19512
+        },
+        "poster-sm": {
+          "src": "/media/film-ads-0d9ba072/poster-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 10910
+        }
+      }
+    },
+    "film-web": {
+      "dir": "/media/film-web-3a2497e7",
+      "rendered": false,
+      "alt": {
+        "id": "Motion grafis pembuatan website Logink: blueprint SEO dan arsitektur, desain, development di stack apa pun, launch, ditutup ajakan konsultasi gratis",
+        "en": "Logink website development motion graphic: SEO blueprint and architecture, design, development on any stack, launch, ending on a free-consultation call"
+      },
+      "caption": null,
+      "files": {
+        "film": {
+          "src": "/media/film-web-3a2497e7/film-1600.webm",
+          "w": 1600,
+          "h": 900,
+          "bytes": 2302303
+        },
+        "film-sm": {
+          "src": "/media/film-web-3a2497e7/film-960.webm",
+          "w": 960,
+          "h": 540,
+          "bytes": 1123970
+        },
+        "poster": {
+          "src": "/media/film-web-3a2497e7/poster-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 18986
+        },
+        "poster-sm": {
+          "src": "/media/film-web-3a2497e7/poster-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 10576
+        }
+      }
+    },
+    "ig": {
+      "dir": "/media/ig-100cea92",
+      "rendered": false,
+      "alt": {
+        "id": "Kemeja batik parang terlipat di atas kain linen putih",
+        "en": "A folded parang batik shirt on white linen"
+      },
+      "caption": null,
+      "files": {
+        "tile-1": {
+          "src": "/media/ig-100cea92/tile-1.webp",
+          "w": 480,
+          "h": 480,
+          "bytes": 23260,
+          "alt": {
+            "id": "Kemeja batik parang terlipat di atas kain linen putih",
+            "en": "A folded parang batik shirt on white linen"
+          }
+        },
+        "tile-2": {
+          "src": "/media/ig-100cea92/tile-2.webp",
+          "w": 480,
+          "h": 480,
+          "bytes": 23714,
+          "alt": {
+            "id": "Detail kain batik bermotif bunga dan sebuah kancing kayu",
+            "en": "Close-up of floral batik cloth and a wooden button"
+          }
+        },
+        "tile-3": {
+          "src": "/media/ig-100cea92/tile-3.webp",
+          "w": 480,
+          "h": 480,
+          "bytes": 19300,
+          "alt": {
+            "id": "Dua gelas es kopi susu di atas nampan kayu",
+            "en": "Two iced kopi susu cups on a wooden tray"
+          }
+        }
+      }
+    }
+  }
+}

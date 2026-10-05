@@ -1,8 +1,8 @@
-import { BlogListPage, generateBlogListMetadata } from '@/components/public/blog/BlogListPage'
+import { BlogIndex, blogMeta } from '@/components/sections/blog/BlogIndex'
 
 export const revalidate = 3600
-export const metadata = generateBlogListMetadata('id')
+export const metadata = blogMeta('id')
 
 export default function Page() {
-  return <BlogListPage locale="id" />
+  return <BlogIndex locale="id" />
 }

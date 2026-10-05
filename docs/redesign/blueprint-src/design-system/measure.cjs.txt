@@ -1,0 +1,36 @@
+// ponytail: measure Archivo cuts vs local fallbacks to tune size-adjust (one-off)
+const { chromium } = require('/Users/mm/logink/logink_website/logink-website/node_modules/@playwright/test');
+const html = `<style>
+@font-face{font-family:A;src:url(archivo-full.woff2) format('woff2');font-weight:100 900;font-stretch:62% 125%}
+span{white-space:nowrap;font-size:100px;position:absolute}
+</style><body></body>`;
+const S = {
+  title: ['DITEMUKAN.', 'DIPERCAYA.', 'DIHUBUNGI.', '07.00', 'SEHARI, SATU PELANGGAN'],
+  svc: ['Jasa Pembuatan', 'Website & Landing', 'Jasa SEO Profesional', 'Jasa Local SEO &'],
+  wide: ['DIKUTIP AI.', 'SATU PESAN CUKUP'],
+  body: ['Logink adalah agensi digital marketing 360° di Jakarta yang membantu bisnis ditemukan di Google, dipercaya di media sosial, dikutip oleh AI dan dihubungi lewat WhatsApp.'],
+};
+S.num = ['07.00 12.40 18.05 21.30 575% 1 JUTA'];
+S.exp = ['JAKARTA, 12.40 WIB — SIANG · DIPERCAYA', 'AGENSI DIGITAL MARKETING 360° DI JAKARTA:', 'ILUSTRASI · DATA CONTOH'];
+S.h3 = ['Jasa Google Ads', 'Jasa Meta Ads (Facebook & Instagram)', 'Company Profile', 'Apakah Logink bisa menjamin brand muncul di ChatGPT?'];
+S.ui = ['Chat WhatsApp', 'Minta Penawaran', 'Buka layanan', 'Mulai Rp 1 Juta/bulan, ditagih tahunan'];
+const cuts = { title: [62, 850], svc: [74, 780], wide: [125, 300], body: [100, 400], num: [62, 300], exp: [125, 620], h3: [88, 650], ui: [100, 650] };
+(async () => {
+  const b = await chromium.launch(); const p = await b.newPage();
+  require('fs').writeFileSync(__dirname + '/m.html', html);
+  await p.goto('file://' + __dirname + '/m.html');
+  await p.evaluate(() => document.fonts.load('850 100px A'));
+  const out = await p.evaluate(({ S, cuts }) => {
+    const w = (fam, txt, wght, st) => { const s = document.createElement('span'); s.textContent = txt; s.style.fontFamily = fam; s.style.fontWeight = wght; s.style.fontStretch = st + '%'; document.body.append(s); const r = s.getBoundingClientRect().width; s.remove(); return r };
+    const res = {};
+    for (const [k, arr] of Object.entries(S)) {
+      const [wd, wg] = cuts[k]; const t = arr.join(' ');
+      const a = w('A', t, wg, wd);
+      const fb = wg >= 600 ? { narrowBold: w("'Arial Narrow'", t, 700, 100), arialBold: w('Arial', t, 700, 100) } : { narrow: w("'Arial Narrow'", t, 400, 100), arial: w('Arial', t, 400, 100) };
+      res[k] = { archivo: +a.toFixed(1), ...Object.fromEntries(Object.entries(fb).map(([n, v]) => [n, { w: +v.toFixed(1), sizeAdjust: +(100 * a / v).toFixed(1) }])) };
+    }
+    return res;
+  }, { S, cuts });
+  for (const [k,v] of Object.entries(out)) console.log(k.padEnd(6), JSON.stringify(v));
+  await b.close();
+})().catch(e => { console.error(e); process.exit(1) });

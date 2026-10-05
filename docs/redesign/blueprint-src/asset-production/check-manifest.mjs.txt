@@ -1,0 +1,68 @@
+#!/usr/bin/env node
+// CI gate for the asset manifest (final.md: "an asset manifest (prompt, model, date, file) covers every generated file").
+//
+//   node check-manifest.mjs [asset-manifest.json] [--root=.] [--dirs=src/assets/brand,public/media,public/og,public/images]
+//   node check-manifest.mjs --selftest
+// Fails (exit 1) when
+//   - a served file under --dirs is not listed in any entry's files[] (a listed folder 'x/' covers everything under it)
+//   - a listed file is missing on disk (status 'shipped' only)
+//   - a shipped 'ai-illustration' entry lacks a run with {date, tool, model, prompt}, captions (ID+EN), or QA sign-off
+import fs from 'node:fs'
+import path from 'node:path'
+import { pathToFileURL } from 'node:url'
+
+export function check(manifest, root, dirs) {
+  const errs = [], listed = []
+  for (const a of manifest.assets) {
+    const where = `asset '${a.id}'`
+    if (a.status !== 'shipped') continue
+    for (const f of a.files || []) { listed.push(f); if (!fs.existsSync(path.join(root, f))) errs.push(`${where}: missing file ${f}`) }
+    if (!(a.files || []).length) errs.push(`${where}: shipped without files`)
+    if (a.disclosure === 'ai-illustration') {
+      const run = (a.runs || []).find((r) => r.selected)
+      if (!run || !run.date || !run.tool || !run.model || !run.prompt) errs.push(`${where}: selected run needs date, tool, model and the exact prompt`)
+      if (!a.caption_id || !a.caption_en) errs.push(`${where}: AI illustration needs caption_id and caption_en`)
+      if (!a.qa?.by || !a.qa?.date) errs.push(`${where}: QA sign-off (qa.by, qa.date) missing`)
+    }
+  }
+  const walk = (d) => (fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)])) : [])
+  for (const d of dirs) for (const abs of walk(path.join(root, d))) {
+    const f = path.relative(root, abs)
+    if (path.basename(f).startsWith('.')) continue
+    if (!listed.some((l) => l === f || (l.endsWith('/') && f.startsWith(l)))) errs.push(`unlisted served file: ${f}`)
+  }
+  return errs
+}
+
+function selftest() {
+  const assert = (c, m) => { if (!c) throw new Error('SELFTEST FAIL: ' + m) }
+  const root = fs.mkdtempSync('/tmp/manifest-')
+  fs.mkdirSync(path.join(root, 'public/media/seq-abc/d1280'), { recursive: true })
+  fs.writeFileSync(path.join(root, 'public/media/seq-abc/d1280/f0001.webp'), 'x')
+  fs.mkdirSync(path.join(root, 'public/og'), { recursive: true })
+  fs.writeFileSync(path.join(root, 'public/og/id-home.jpg'), 'x')
+  const good = { assets: [
+    { id: 'seq', status: 'shipped', disclosure: 'ai-illustration', files: ['public/media/seq-abc/'], caption_id: 'Foto: ilustrasi AI', caption_en: 'Photo: AI illustration',
+      runs: [{ selected: true, date: '2026-10-01', tool: 'Figma Weave', model: 'nano-banana-pro', prompt: 'P1 …' }], qa: { by: 'owner', date: '2026-10-02' } },
+    { id: 'og', status: 'shipped', disclosure: 'typographic', files: ['public/og/id-home.jpg'] },
+  ] }
+  assert(check(good, root, ['public/media', 'public/og']).length === 0, 'complete manifest passes')
+  const bad = structuredClone(good); delete bad.assets[0].runs[0].prompt; bad.assets[1].files = []
+  const e = check(bad, root, ['public/media', 'public/og'])
+  assert(e.some((x) => x.includes('exact prompt')) && e.some((x) => x.includes('unlisted served file: public/og/id-home.jpg')), 'missing prompt + unlisted file caught')
+  console.log('SELFTEST OK')
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const argv = process.argv.slice(2)
+  if (argv.includes('--selftest')) selftest()
+  else {
+    const opt = Object.fromEntries(argv.filter((a) => a.startsWith('--')).map((a) => { const [k, v] = a.slice(2).split('='); return [k, v ?? true] }))
+    const file = argv.find((a) => !a.startsWith('--')) || 'asset-manifest.json'
+    const dirs = String(opt.dirs || 'src/assets/brand,public/media,public/og,public/images').split(',')
+    const errs = check(JSON.parse(fs.readFileSync(file, 'utf8')), opt.root || '.', dirs)
+    errs.forEach((e) => console.error('✗ ' + e))
+    console.log(errs.length ? `${errs.length} problem(s)` : 'manifest OK')
+    process.exit(errs.length ? 1 : 0)
+  }
+}

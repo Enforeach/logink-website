@@ -13,7 +13,7 @@ export type CtaWidgetRow = {
   cssClass: string | null
   gaEventCategory: string | null
   gaEventLabel: string | null
-  dataAttributes: any
+  dataAttributes: unknown
   placement: string
   paragraphIndex: number | null
   targetingType: string
@@ -89,3 +89,56 @@ export function injectHeadingIds(html: string): string {
     return `<h${level}${hasId ? attrs : ` id="${id}"${attrs}`}>${content}</h${level}>`
   })
 }
+
+/** CMS bodies never carry a second H1: <h1> becomes <h2> (BUILD §3.9 post). */
+export const demoteH1 = (html: string) => html.replace(/<(\/?)h1(\s|>)/gi, '<$1h2$2')
+
+function paragraphEnds(html: string): number[] {
+  const cuts: number[] = []
+  let depth = 0
+  for (const m of html.matchAll(/<(\/?)(blockquote|ul|ol|table|div|figure|details|pre)\b[^>]*>|<\/p>/gi)) {
+    if (m[2]) depth += m[1] ? -1 : 1
+    else if (depth === 0) cuts.push(m.index! + m[0].length)
+  }
+  return cuts
+}
+
+/** Number of top-level paragraphs (the default INLINE position is the middle one). */
+export const paragraphCount = (html: string) => paragraphEnds(html).length
+
+/**
+ * Splits a body after top-level paragraph N (1-based) for each insert, so a CTA never lands inside a list,
+ * quote or table. Returns HTML strings interleaved with the inserted items, in order.
+ * ponytail: regex depth tracking over block containers; a real HTML parser if bodies ever nest divs deeply.
+ */
+export function splitAfterParagraphs<T>(html: string, inserts: { after: number; item: T }[]): (string | T)[] {
+  if (!inserts.length) return [html]
+  const cuts = paragraphEnds(html)
+  const out: (string | T)[] = []
+  let from = 0
+  for (const ins of [...inserts].sort((a, b) => a.after - b.after)) {
+    const at = cuts[Math.min(Math.max(ins.after, 1), cuts.length) - 1] ?? html.length
+    if (at > from) out.push(html.slice(from, at))
+    from = Math.max(from, at)
+    out.push(ins.item)
+  }
+  if (from < html.length) out.push(html.slice(from))
+  return out
+}
+
+/** Outbound sources cited in a body: external links, deduped by URL, own domain excluded. */
+export function extractSources(html: string, ownHost = 'logink.co'): { url: string; label: string; host: string; where: string }[] {
+  const seen = new Map<string, { url: string; label: string; host: string; where: string }>()
+  for (const m of html.matchAll(/<a\s[^>]*href="(https?:\/\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)) {
+    const url = m[1].replace(/&amp;/g, '&')
+    let host = '', where = ''
+    try { const u = new URL(url); host = u.hostname.replace(/^www\./, ''); where = (host + u.pathname).replace(/\/$/, '') } catch { continue }
+    if (host === ownHost || host.endsWith(`.${ownHost}`) || seen.has(url)) continue
+    const label = m[2].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim()
+    seen.set(url, { url, label: label && !/^https?:/.test(label) ? label : host, host, where })
+  }
+  return [...seen.values()]
+}
+
+/** True when the body already ends in its own sources section (then no second 'Sumber' list renders). */
+export const hasSourcesHeading = (html: string) => /<h[2-4][^>]*>\s*(sumber|referensi|sources|references)\b/i.test(html)

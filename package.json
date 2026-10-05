@@ -11,7 +11,19 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "check:registry": "tsx src/lib/services.check.ts",
+    "check:tokens": "tailwindcss -i src/styles/tokens.css -o /tmp/lk-tokens.css && TOKENS_DIR=src/styles ARCHIVO_WOFF2=scripts/fixtures/archivo-latin.woff2 node scripts/check-tokens.mjs --browser /tmp/lk-tokens.css",
+    "check:seq": "tsx src/motion/sequence-core.check.ts",
+    "check:media": "node scripts/install-media.mjs --check",
+    "qa:greps": "node scripts/qa/greps.mjs",
+    "qa:urls": "node scripts/qa/urls.mjs",
+    "qa:states": "node scripts/qa/states.cjs",
+    "qa:tall": "node scripts/qa/tall-viewport.cjs",
+    "qa:motion": "node scripts/qa/motion-gate.cjs",
+    "qa:dom": "node scripts/qa/dom.cjs",
+    "qa:perf": "node scripts/qa/perf-mobile.cjs",
+    "qa": "pnpm check:registry && pnpm check:tokens && pnpm check:seq && pnpm check:media && pnpm qa:greps && pnpm qa:urls"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

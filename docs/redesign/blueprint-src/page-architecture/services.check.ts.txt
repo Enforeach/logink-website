@@ -1,0 +1,58 @@
+// Run: node services.check.ts   (Node >= 23.6 strips types). In the repo: tsx src/lib/services.check.ts in CI.
+import assert from 'node:assert/strict'
+import {
+  SERVICES, PAGES, STAGES, REDIRECTS, STATIC_PAIRS, FACT_STRIP, CATEGORIES,
+  alternateOf, svcHref, crossLinks, servicesInStage, waLink, AI_PAGE_LIVE,
+  type Locale, type StageKey,
+} from './services.ts'
+
+const LOC: Locale[] = ['id', 'en']
+const all = [...SERVICES, ...PAGES]
+
+for (const x of all) for (const l of LOC) {
+  assert.ok(x.title[l].length <= 60, `title > 60: ${x.title[l]} (${x.title[l].length})`)
+  assert.ok(x.h1[l].trim() && x.wa[l].trim(), `empty h1/wa: ${x.path[l]}`)
+}
+for (const s of all) for (const l of LOC) {
+  const n = s.desc[l].length
+  assert.ok(n >= 120 && n <= 160, `desc ${n} chars: ${s.path[l]}`)
+}
+for (const s of SERVICES) assert.ok(s.h1.id.startsWith('Jasa '), `ID service H1 must lead with the "Jasa" head term: ${s.h1.id}`)
+
+// "Mulai Rp 1 Juta" must always say "ditagih tahunan" (final.md conversion must-fix)
+const strings = JSON.stringify([SERVICES, PAGES, FACT_STRIP])
+for (const m of strings.matchAll(/Rp 1 (·|Juta)[^"]*/g)) assert.ok(m[0].includes('ditagih tahunan'), `Rp 1 Juta without "ditagih tahunan": ${m[0]}`)
+
+// paths unique; pairs round-trip
+const paths = all.flatMap((x) => LOC.map((l) => x.path[l]))
+assert.equal(new Set(paths).size, paths.length, 'duplicate path')
+for (const [id, en] of STATIC_PAIRS()) { assert.equal(alternateOf(id), en); assert.equal(alternateOf(en), id) }
+
+// redirects: unique sources, no source is a live page, every destination is live, no chains
+const live = new Set(STATIC_PAIRS().flatMap(([id, en]) => [id, en]))
+const sources = REDIRECTS.map((r) => r.source)
+assert.equal(new Set(sources).size, sources.length, 'duplicate redirect source')
+for (const r of REDIRECTS) {
+  assert.ok(!live.has(r.source), `redirect shadows a live page: ${r.source}`)
+  assert.ok(live.has(r.destination), `redirect to a non-live URL: ${r.source} -> ${r.destination}`)
+  assert.ok(!sources.includes(r.destination), `redirect chain: ${r.source} -> ${r.destination}`)
+}
+for (const must of ['/index', '/en/index', '/services/local-seo', '/layanan/seo-content-marketing', '/en/layanan/local-seo'])
+  assert.ok(sources.includes(must), `missing redirect ${must}`)
+assert.ok(!sources.includes('/layanan/local-seo') && !sources.includes('/en/services/local-seo'), 'local-seo must not redirect')
+
+// AI page fallback + cross-links
+if (!AI_PAGE_LIVE) {
+  assert.equal(svcHref('ai', 'id'), '/layanan/jasa-seo-profesional#ai-search')
+  assert.ok(!live.has('/layanan/jasa-seo-ai'), 'AI page in sitemap before it ships')
+}
+for (const s of SERVICES) {
+  const c = crossLinks(s.key)
+  assert.ok(!c.includes(s.key) && c.length >= 2, `crossLinks(${s.key})`)
+  if (s.key !== 'ai') assert.equal(c.at(-1), 'ai')
+}
+for (const st of Object.keys(STAGES) as StageKey[]) assert.ok(servicesInStage(st).length >= 1, `empty stage ${st}`)
+for (const c of Object.values(CATEGORIES)) assert.ok(SERVICES.some((s) => s.key === c.svc))
+assert.equal(waLink('Halo & ya?'), 'https://wa.me/628139453933?text=Halo%20%26%20ya%3F')
+
+console.log(`ok: ${SERVICES.length} services, ${PAGES.length} pages, ${STATIC_PAIRS().length} pairs, ${REDIRECTS.length} redirects`)

@@ -1,21 +1,25 @@
-import { BlogDetailPage, generateBlogDetailMetadata } from '@/components/public/blog/BlogDetailPage'
+import { permanentRedirect } from 'next/navigation'
+import { ArticlePage, postMeta } from '@/components/sections/blog/ArticlePage'
+import { slugRedirect } from '@/lib/slug-redirect'
 import { getSitemapEntries } from '@/payload/queries'
 
 export const revalidate = 300
 
 export async function generateStaticParams() {
   const { posts } = await getSitemapEntries()
-  return posts.filter(p => p.slugEn).map(p => ({ slug: p.slugEn! }))
+  return posts.filter((p) => p.slugEn).map((p) => ({ slug: p.slugEn! }))
 }
 
-interface Props { params: Promise<{ slug: string }> }
+type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props) {
-  const { slug } = await params
-  return generateBlogDetailMetadata(slug, 'en')
+  return postMeta((await params).slug, 'en')
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params
-  return <BlogDetailPage slug={slug} locale="en" />
+  // BUILD §1.10 page-code 308: ID slug with an EN twin → /en/blog/{slugEn}; ID-only post → /blog/{slug}
+  const to = await slugRedirect('post', slug, 'en')
+  if (to) permanentRedirect(to)
+  return <ArticlePage slug={slug} locale="en" />
 }

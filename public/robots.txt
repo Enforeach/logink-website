@@ -1,3 +1,14 @@
+# Logink · logink.co
+#
+# aeo-geo: AI crawlers stay allowed on purpose, so answer engines can read and cite our pages.
+# They fall under the "*" group below; named here for the record:
+#   OpenAI: GPTBot, OAI-SearchBot, ChatGPT-User
+#   Anthropic: ClaudeBot, Claude-SearchBot, Claude-User
+#   Perplexity: PerplexityBot, Perplexity-User
+#   Google: Google-Extended (Gemini / AI Overviews use Googlebot)
+#   Apple: Applebot-Extended · Common Crawl: CCBot · Meta: Meta-ExternalAgent
+# /llms.txt summarises the site for language models.
+
 User-agent: *
 Allow: /
 Disallow: /admin/

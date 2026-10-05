@@ -1,0 +1,169 @@
+// Shared by every acceptance script (and by the fixture runtime test, which proves them).
+// Copy test/acceptance/ to the repo as scripts/acceptance/ (Playwright comes from @playwright/test).
+const path = require('path')
+const fs = require('fs')
+
+let pw
+try {
+  pw = require('@playwright/test')
+} catch {
+  pw = require('/Users/mm/logink/logink_website/logink-website/node_modules/@playwright/test')
+}
+const { chromium } = pw
+
+// Strings that survive minification (verified with esbuild 0.27 -minify on framer-motion 12.38 / lenis 1.3.23):
+const MARKERS = {
+  lenis: 'lenis-smooth', // Lenis core
+  rich: 'lk-cur__dot', // our T2 rich layer (cursor, magnetic, lamp, hover still, loupe, film)
+  player: 'createImageBitmap', // our T2 canvas player (with 'data-drawn')
+  springs: 'restDelta', // any motion spring/animation engine (springValue, animate, motion.*, m.*)
+  components: 'framerAppearId', // framer-motion React components (motion.* or m.* + LazyMotion)
+}
+
+// Budgets (lab: 412x915 DPR 2.625, 4x CPU, 1.6 Mbps down / 750 kbps up, 150 ms RTT).
+const BUDGET = {
+  lcpMs: 2000,
+  lcpMinusFcpMs: 150, // LCP = FCP for the text H1 (maskless rise)
+  tbtMs: 200,
+  cls: 0.05,
+  initialJsKB: { home: 170, service: 150 }, // transferred, before the load event
+  fontsBytes: 100472, // Archivo 90,096 + Martian Mono 10,376
+  heightRatio: 1.5, // doc height at 412x12140 / at 412x732
+}
+
+// Protected Vercel previews: VERCEL_BYPASS=<automation bypass secret> adds the bypass header everywhere.
+const HEADERS = process.env.VERCEL_BYPASS ? { 'x-vercel-protection-bypass': process.env.VERCEL_BYPASS } : {}
+
+const PHONE = {
+  extraHTTPHeaders: HEADERS,
+  viewport: { width: 412, height: 915 },
+  deviceScaleFactor: 2.625,
+  isMobile: true,
+  hasTouch: true,
+  userAgent: 'Mozilla/5.0 (Linux; Android 14; SM-A155F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36',
+}
+const DESKTOP = { viewport: { width: 1440, height: 900 }, extraHTTPHeaders: HEADERS }
+
+async function throttle(page, { cpu = 4, down = 1.6, up = 0.75, rtt = 150 } = {}) {
+  const cdp = await page.context().newCDPSession(page)
+  await cdp.send('Network.enable')
+  await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: rtt, downloadThroughput: (down * 1024 * 1024) / 8, uploadThroughput: (up * 1024 * 1024) / 8 })
+  await cdp.send('Emulation.setCPUThrottlingRate', { rate: cpu })
+  return cdp
+}
+
+/** Records every script response: url, transfer bytes, body (for the marker scan), before/after load. */
+function recordScripts(page) {
+  const list = []
+  let loaded = false
+  page.on('load', () => (loaded = true))
+  page.on('response', async (r) => {
+    if (r.request().resourceType() !== 'script') return
+    const entry = { url: r.url(), afterLoad: loaded, bytes: 0, body: '' }
+    list.push(entry)
+    try {
+      const b = await r.body()
+      entry.body = b.toString('utf8')
+      entry.bytes = Number(r.headers()['content-length']) || (await r.request().sizes()).responseBodySize || b.length
+    } catch {}
+  })
+  return list
+}
+const markersIn = (scripts) => Object.fromEntries(Object.entries(MARKERS).map(([k, m]) => [k, scripts.filter((s) => s.body.includes(m)).map((s) => path.basename(new URL(s.url).pathname))]))
+
+/**
+ * In-page: text that is rendered but invisible. Checks every element with its own text whose box
+ * intersects the viewport: effective opacity < 0.1, visibility hidden, or < 50% of the text box inside
+ * its nearest clipping ancestor (catches translated-out masks; scroll containers do not count, their
+ * content is reachable). display:none text is counted apart.
+ * Skipped: data-nosnippet mocks, aria-hidden decoration (except .lk-w word masks), sr-only
+ * (clip-path inset(50%) / 1px boxes), <option>, <script>, <style>, <template>, <noscript>.
+ */
+function hiddenTextInPage() {
+  const vh = innerHeight
+  const out = { hidden: [], notRendered: 0, checked: 0 }
+  const seen = new Set()
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
+  const skip = (el) =>
+    el.closest('script,style,template,noscript,option,[data-nosnippet]') ||
+    (el.closest('[aria-hidden="true"]') && !el.closest('.lk-w'))
+  const srOnly = (el) => {
+    for (let a = el; a; a = a.parentElement) {
+      const cs = getComputedStyle(a)
+      const r = a.getBoundingClientRect()
+      if (cs.clipPath.includes('inset(50%') || (r.width <= 1 && r.height <= 1 && cs.overflow !== 'visible')) return true
+    }
+    return false
+  }
+  while (w.nextNode()) {
+    const t = w.currentNode
+    if (!t.nodeValue.trim()) continue
+    const el = t.parentElement
+    if (!el || seen.has(el) || skip(el)) continue
+    seen.add(el)
+    const range = document.createRange()
+    range.selectNodeContents(t)
+    const tr = range.getBoundingClientRect()
+    if (!el.getClientRects().length || (tr.width === 0 && tr.height === 0)) {
+      out.notRendered++
+      continue
+    }
+    if (tr.bottom <= 0 || tr.top >= vh) continue // outside the viewport: judged in the tall run
+    if (srOnly(el)) continue
+    out.checked++
+    let opacity = 1
+    let why = ''
+    for (let a = el; a; a = a.parentElement) {
+      const cs = getComputedStyle(a)
+      opacity *= Number(cs.opacity)
+      if (cs.visibility === 'hidden') why = 'visibility'
+    }
+    if (opacity < 0.1) why = `opacity ${opacity.toFixed(2)}`
+    if (!why) {
+      for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+        const cs = getComputedStyle(a)
+        if (cs.overflow === 'visible' && cs.clipPath === 'none') continue
+        if (/auto|scroll/.test(cs.overflow) && cs.clipPath === 'none') continue // reachable by scrolling (carousels, table wrappers)
+        const c = a.getBoundingClientRect()
+        const ix = Math.max(0, Math.min(tr.right, c.right) - Math.max(tr.left, c.left))
+        const iy = Math.max(0, Math.min(tr.bottom, c.bottom) - Math.max(tr.top, c.top))
+        if (tr.width * tr.height > 0 && (ix * iy) / (tr.width * tr.height) < 0.5) {
+          why = `clipped by <${a.tagName.toLowerCase()} class="${a.className}">`
+          break
+        }
+      }
+    }
+    if (why) out.hidden.push({ text: t.nodeValue.trim().slice(0, 60), tag: el.tagName, why })
+  }
+  return out
+}
+
+/** Every string in JSON-LD with >= 20 chars must be visible text (final.md SEO safeguard). */
+function jsonLdVisibleInPage() {
+  const text = document.body.innerText.replace(/\s+/g, ' ')
+  const miss = []
+  const walk = (v) => {
+    if (typeof v === 'string') {
+      if (v.length >= 20 && !/^https?:|^\/|^#|@|^\d{4}-\d{2}/.test(v) && !text.includes(v)) miss.push(v.slice(0, 80))
+    } else if (v && typeof v === 'object') Object.values(v).forEach(walk)
+  }
+  document.querySelectorAll('script[type="application/ld+json"]').forEach((s) => {
+    try {
+      walk(JSON.parse(s.textContent))
+    } catch {}
+  })
+  return miss
+}
+
+function report(name, rows, failures) {
+  const dir = path.join(process.cwd(), 'acceptance-out')
+  fs.mkdirSync(dir, { recursive: true })
+  fs.writeFileSync(path.join(dir, `${name}.json`), JSON.stringify({ rows, failures }, null, 2))
+  for (const r of rows) console.log(name, JSON.stringify(r))
+  if (failures.length) {
+    console.error(`${name}: FAIL\n  - ` + failures.join('\n  - '))
+    process.exitCode = 1
+  } else console.log(`${name}: PASS`)
+}
+
+module.exports = { chromium, MARKERS, BUDGET, PHONE, DESKTOP, HEADERS, throttle, recordScripts, markersIn, hiddenTextInPage, jsonLdVisibleInPage, report }
