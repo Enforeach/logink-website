@@ -61,6 +61,7 @@ export function SiteFooter({ locale: l, text, svc }: { locale: Locale; text: str
             <span>© {new Date().getFullYear()} Logink</span>
             <Link href={page('privacy').path[l]} className={item}>{page('privacy').h1[l]}</Link>
             <Link href={page('terms').path[l]} className={item}>{page('terms').h1[l]}</Link>
+            <Link href={page('disclaimer').path[l]} className={item}>{page('disclaimer').h1[l]}</Link>
           </p>
         </div>
       </div>

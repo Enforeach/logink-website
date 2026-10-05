@@ -204,7 +204,7 @@ export const SERVICES: Service[] = [
   },
 ]
 
-export type PageKey = 'home' | 'hub' | 'about' | 'portfolio' | 'blog' | 'contact' | 'privacy' | 'terms'
+export type PageKey = 'home' | 'hub' | 'about' | 'portfolio' | 'blog' | 'contact' | 'privacy' | 'terms' | 'disclaimer'
 export type Page = {
   key: PageKey; path: L; light: Light; hour: string | null
   h1: L; title: L; desc: L; wa: L; og: L; priority: number; freq: 'weekly' | 'monthly' | 'yearly' | 'daily'; updated: string
@@ -251,6 +251,12 @@ export const PAGES: Page[] = [
     title: { id: 'Syarat & Ketentuan | Logink', en: 'Terms of Service | Logink' },
     desc: { id: 'Syarat dan Ketentuan layanan Logink mengatur hak dan kewajiban antara klien dan Logink, termasuk ketentuan pembayaran, pengiriman, dan penyelesaian sengketa.', en: 'Logink Terms of Service outlines the rights and obligations of clients and Logink, covering payment terms, service deliverables, and dispute resolution.' },
     wa: { id: 'Halo Logink! Saya punya pertanyaan tentang syarat & ketentuan.', en: 'Hi Logink! I have a question about the terms of service.' } },
+  // owner 2026-10-05: new page (benchmarked on duomark.id); copy in content/legal/disclaimer.ts
+  { key: 'disclaimer', og: { id: 'id-disclaimer', en: 'en-disclaimer' }, path: { id: '/disclaimer', en: '/en/disclaimer' }, light: 'kertas', hour: null, priority: 0.3, freq: 'yearly', updated: '2026-10-05',
+    h1: { id: 'Disclaimer', en: 'Disclaimer' },
+    title: { id: 'Disclaimer | Logink', en: 'Disclaimer | Logink' },
+    desc: { id: 'Disclaimer Logink menjelaskan cara membaca isi situs ini: informasi bersifat umum, tanpa jaminan hasil, ilustrasi diberi label, dan merek pihak ketiga.', en: 'How to read the Logink site: the information is general, results are never guaranteed, illustrations are labelled, and third-party brands stay theirs.' },
+    wa: { id: 'Halo Logink! Saya punya pertanyaan tentang disclaimer.', en: 'Hi Logink! I have a question about the disclaimer.' } },
 ]
 
 // Launch fact strip (home §02). Offer facts only, until APPROVED_CASE_SLUGS has an entry.

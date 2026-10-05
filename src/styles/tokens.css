@@ -546,6 +546,36 @@
                color: var(--key-ink, var(--ink)); background: color-mix(in oklab, var(--key) 9%, transparent);
                box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--key) 22%, transparent); white-space: nowrap; }
   .svc-tick { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; flex: none; background: var(--grad-cta); color: var(--c-putih); }
+  /* document pages (owner 2026-10-05, benchmarked on duomark.id): About + legal share one reading layout */
+  .doc-prose { font-size: var(--fs-body); line-height: 1.75; color: var(--ink-2); max-width: 68ch; }
+  .doc-prose > * + * { margin-top: 1.25rem; }
+  .doc-prose > section { margin-top: 2.75rem; }
+  .doc-prose section > * + * { margin-top: 1rem; }
+  .doc-prose h2 { font-family: var(--ff-h3); font-size: clamp(1.375rem, 1.15rem + .7vw, 1.75rem); font-weight: 650; line-height: 1.25;
+                  letter-spacing: -.02em; color: var(--ink); }
+  .doc-prose h3 { font-weight: 650; color: var(--ink); }
+  .doc-prose h3 + p { margin-top: .25rem; }
+  .doc-prose strong { font-weight: 650; color: var(--ink); }
+  .doc-prose :is(ul, ol) { padding-left: 1.25rem; }
+  .doc-prose ul { list-style: disc; }
+  .doc-prose ol { list-style: decimal; }
+  .doc-prose li + li { margin-top: .6rem; }
+  .doc-prose li::marker { color: var(--key, var(--c-crimson)); font-weight: 650; }
+  .doc-prose a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .doc-lead { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink); }
+  .doc-card { padding: 20px 22px; border-radius: var(--r-card); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line), var(--shadow-md); }
+  .doc-card--tint { background: var(--c-peach); box-shadow: inset 0 0 0 1px var(--line); }
+  .doc-card__label { font-size: .75rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+  .toc-rail summary { font-size: .75rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
+  .toc-rail details { border: 0; }
+  .toc-rail :is(ul, ol) { border-left: 1px solid var(--line); }
+  .toc-rail li a { display: block; padding: 4px 0 4px 14px; margin-left: -1px; border-left: 2px solid transparent; text-decoration: none; }
+  .toc-rail li a[aria-current="true"] { border-left-color: var(--key, var(--c-crimson)); color: var(--ink); font-weight: 650; }
+  @media (max-width: 1023px) {
+    .toc-rail details { padding: 4px 16px; border-radius: var(--r-card); background: var(--surface-alt); }
+    .toc-rail summary::after { content: "+"; margin-left: auto; font-size: 1.25rem; font-weight: 500; letter-spacing: 0; color: var(--ink); }
+    .toc-rail details[open] summary::after { content: "\2212"; }
+  }
   .brand-tile { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border-radius: 14px;
                 background: var(--c-putih); box-shadow: inset 0 0 0 1px var(--c-line-soft), var(--shadow-md); }
   .tier-pop { border: 1.5px solid transparent;

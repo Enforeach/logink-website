@@ -3,13 +3,14 @@ import { TocSpy } from './TocSpy'
 import { T } from './strings'
 import { cn } from '@/lib/utils'
 
-/** One list: a closed <details> on phones, always open and sticky from 1024px (::details-content). */
-export function Toc({ items, locale: l, numbered }: { items: { id: string; text: string; level: number }[]; locale: Locale; numbered?: boolean }) {
+/** One list: a closed <details> on phones, always open and sticky from 1024px (::details-content).
+ *  `rail` (document pages, owner 2026-10-05): a left rule with the current section marked in the key colour. */
+export function Toc({ items, locale: l, numbered, label, rail }: { items: { id: string; text: string; level: number }[]; locale: Locale; numbered?: boolean; label?: string; rail?: boolean }) {
   const List = numbered ? 'ol' : 'ul'
   return (
-    <nav aria-label={T.toc[l]} className="lg:sticky lg:top-[calc(var(--nav-h)+var(--dial-h)+24px)]" data-toc="">
+    <nav aria-label={label ?? T.toc[l]} className={cn('lg:sticky lg:top-[calc(var(--nav-h)+var(--dial-h)+24px)]', rail && 'toc-rail')} data-toc="">
       <details className="border-y border-hair lg:[&::details-content]:[content-visibility:visible] lg:[&::details-content]:block">
-        <summary className="t-dateline flex min-h-tap cursor-pointer list-none items-center text-ink-2 lg:pointer-events-none">{T.toc[l]}</summary>
+        <summary className="t-dateline flex min-h-tap cursor-pointer list-none items-center text-ink-2 lg:pointer-events-none">{label ?? T.toc[l]}</summary>
         <List className={cn('t-small space-y-2 pb-4', numbered && 'list-decimal pl-5')}>
           {items.map((it) => (
             <li key={it.id} className={cn(it.level > 2 && 'pl-4')}>
