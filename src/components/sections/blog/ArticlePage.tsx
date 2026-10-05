@@ -16,14 +16,14 @@ import { Breadcrumbs } from '@/components/ds/Breadcrumbs'
 import { Dateline } from '@/components/ds/Dateline'
 import { H1Svc } from '@/components/ds/H1Svc'
 import { Stabilo } from '@/components/ds/Stabilo'
-import { CrossSell } from '@/components/ds/CrossSell'
 import { JsonLd } from '@/components/ds/JsonLd'
 import { T, fmtDate } from '@/components/ds/strings'
 import { BLOG, minRead } from '@/content/blog'
 import { NF } from '@/content/notfound'
 import { CtaRenderer } from './cta/CtaRenderer'
 import { PostRow } from './PostRow'
-import { ArticleBody } from './ArticleBody'
+import { ArticleBody, SVC_CTA, type Widget } from './ArticleBody'
+import { AuthorCard, FeatureCard, InlineServiceCta, ServiceCard } from './ArticleCards'
 import { blogPostingNode } from './schema'
 import { BLOG_PATH, catHref, catName, catSvc, iso, minutesOf, postExcerpt, postFacts, postHref, postTitle, type FullPost } from './data'
 
@@ -44,7 +44,9 @@ export async function postMeta(slug: string, l: Locale): Promise<Metadata> {
   return { ...m, openGraph: { ...m.openGraph, type: 'article', publishedTime: iso(p.publishedAt), modifiedTime: iso(p.updatedAt) } }
 }
 
-/** Post (BUILD §3.9): Kertas reading page in the F-pattern. Body left (8 cols), sticky TOC + CMS rail right. */
+/** Post (owner 2026-10-05: the About/Privacy document layout, F-pattern). Hero: title, summary and byline left, the
+ *  featured image right as a card with the related service attached. Body: 'On this page' rail left, the article
+ *  (with a mid-article service CTA), and the aside (author + sticky related service + CMS rail). Then related posts. */
 export async function ArticlePage({ slug, locale: l }: { slug: string; locale: Locale }) {
   const [post, ctas] = await Promise.all([getPostBySlug(slug, l), getActiveCtas().catch(() => [] as CtaWidgetRow[])])
   if (!post) notFound()
@@ -80,10 +82,13 @@ export async function ArticlePage({ slug, locale: l }: { slug: string; locale: L
   const author = /^(system|admin|administrator)$/i.test(post.author.name.trim()) ? { name: '', image: null } : post.author
   const sources = hasSourcesHeading(html) ? [] : extractSources(html)
   const half = Math.max(1, Math.ceil(paragraphCount(html) / 2))
-  const parts = splitAfterParagraphs(html, [
+  // the built-in service CTA sits mid-article unless the CMS already places an INLINE widget there
+  const parts = splitAfterParagraphs<Widget>(html, [
     ...at('BETWEEN_PARAGRAPHS').map((w) => ({ after: w.paragraphIndex ?? 3, item: w })),
     ...at('INLINE').map((w) => ({ after: w.paragraphIndex ?? half, item: w })),
+    ...(at('INLINE').length ? [] : [{ after: half, item: SVC_CTA }]),
   ])
+  const render = (p: Widget, i: number) => ('kind' in p ? <InlineServiceCta key={`svc-${i}`} locale={l} k={k} wa={wa} /> : cta(p))
   const graph = [
     orgNode(l),
     webPageNode({ url, name: title, locale: l, dateModified: modified || undefined }),
@@ -94,45 +99,49 @@ export async function ArticlePage({ slug, locale: l }: { slug: string; locale: L
   return (
     <PageShell locale={l} alt={altOf(post)} wa={wa} sky="light">
       <JsonLd graph={graph} />
-      <Section hour="0600" labelledBy="post-h1">
-        <Wrap>
-          <Breadcrumbs locale={l} items={crumbs} />
-          <Dateline locale={l} date={published || undefined} word={catLabel ?? T.blog[l]} className="mt-6" />
-          <header className="mt-8 max-w-[52rem]">
+      <Section ground="kertas" pad="sm" labelledBy="post-h1">
+        <div className="wrap grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
+          <div className="grid content-start gap-5 lg:col-span-7">
+            <Breadcrumbs locale={l} items={crumbs} />
+            <Dateline locale={l} date={published || undefined} word={catLabel ?? T.blog[l]} />
             <H1Svc text={title} variant="reading" id="post-h1" />
-            <p className="t-small mt-5 flex flex-wrap gap-x-3 gap-y-1 text-ink-2">
+            {excerpt ? <p className="t-lead max-w-[60ch]"><Stabilo>{excerpt}</Stabilo></p> : null}
+            <p className="t-small flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-2">
               {author.name ? <span>{BLOG.by[l]} <span className="font-650 text-ink">{author.name}</span></span> : null}
               {author.name && modified ? <span aria-hidden="true">·</span> : null}
               {modified ? <span>{T.updated[l]} <time dateTime={modified}>{fmtDate(modified, l)}</time></span> : null}
               <span aria-hidden="true">·</span>
               <span>{minRead(minutes, l)}</span>
             </p>
-          </header>
-          {excerpt ? (
-            <div data-ground="putih" className="mt-8 max-w-[70ch] border-l-4 border-key p-5 sm:p-6">
-              <p className="t-dateline text-ink-2">{BLOG.summary[l]}</p>
-              <p className="t-lead mt-3"><Stabilo>{excerpt}</Stabilo></p>
-            </div>
-          ) : null}
-          {at('ABOVE_FOLD').length ? <div className="max-w-[70ch]">{at('ABOVE_FOLD').map(cta)}</div> : null}
-          <ArticleBody locale={l} toc={toc} parts={parts} rail={[...at('AFTER_TOC'), ...at('SIDEBAR')].map(cta)}
-            below={at('BELOW_ARTICLE').map(cta)} sticky={at('STICKY_BOTTOM').map(cta)} cta={cta}
-            sources={sources} author={author} title={title} url={url} />
-        </Wrap>
+          </div>
+          <div className="lg:col-span-5">
+            <FeatureCard locale={l} k={k} wa={wa} image={post.featuredImage ?? null} alt={post.featuredImageAlt ?? ''} />
+          </div>
+        </div>
       </Section>
-      <Section hour="0600" pad="sm" className="border-t border-hair">
-        <Wrap>
-          <CrossSell locale={l} keys={[k]} heading={BLOG.crossHeading[l]} id="layanan-terkait" />
-          {related.length ? (
-            <div className="mt-section-sm">
-              <h2 className="t-h2" id="artikel-terkait">{BLOG.related[l]}</h2>
-              <div className="mt-6 max-w-[56rem]">
-                {related.map((r) => <PostRow key={r.id} locale={l} post={r} minutes={relFacts[r.id]?.minutes} />)}
-              </div>
+      <Section ground="putih" pad="sm">
+        {at('ABOVE_FOLD').length ? <Wrap><div className="mb-8 max-w-[70ch]">{at('ABOVE_FOLD').map(cta)}</div></Wrap> : null}
+        <ArticleBody locale={l} toc={toc} parts={parts} render={render}
+          aside={<>
+            {author.name ? <AuthorCard locale={l} name={author.name} image={author.image} updated={modified} minutes={minRead(minutes, l)} /> : null}
+            <div className="grid gap-4 lg:sticky lg:top-[calc(var(--nav-h)+var(--dial-h)+24px)]">
+              <ServiceCard locale={l} k={k} wa={wa} />
+              {[...at('AFTER_TOC'), ...at('SIDEBAR')].map(cta)}
             </div>
-          ) : null}
-        </Wrap>
+          </>}
+          below={at('BELOW_ARTICLE').map(cta)} sticky={at('STICKY_BOTTOM').map(cta)}
+          sources={sources} title={title} url={url} />
       </Section>
+      {related.length ? (
+        <Section ground="kertas" pad="sm">
+          <Wrap>
+            <h2 className="t-h2" id="artikel-terkait">{BLOG.related[l]}</h2>
+            <div className="mt-6 max-w-[56rem]">
+              {related.map((r) => <PostRow key={r.id} locale={l} post={r} minutes={relFacts[r.id]?.minutes} />)}
+            </div>
+          </Wrap>
+        </Section>
+      ) : null}
     </PageShell>
   )
 }

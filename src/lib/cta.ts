@@ -103,8 +103,24 @@ function paragraphEnds(html: string): number[] {
   return cuts
 }
 
+/**
+ * A body wrapped in ONE outer <div> (Payload's Lexical HTML: <div class="payload-richtext">, unstyled) is unwrapped, so
+ * its paragraphs count as top level. Without this, rich-text posts had zero top-level paragraphs and every
+ * BETWEEN_PARAGRAPHS / INLINE widget fell to the end of the article.
+ */
+export function unwrapBody(html: string): string {
+  const open = /^\s*<div\b[^>]*>/i.exec(html)
+  if (!open) return html
+  let depth = 0
+  for (const t of html.matchAll(/<(\/?)div\b[^>]*>/gi)) {
+    depth += t[1] ? -1 : 1
+    if (depth === 0) return t.index! + t[0].length >= html.trimEnd().length ? html.slice(open[0].length, t.index) : html
+  }
+  return html
+}
+
 /** Number of top-level paragraphs (the default INLINE position is the middle one). */
-export const paragraphCount = (html: string) => paragraphEnds(html).length
+export const paragraphCount = (html: string) => paragraphEnds(unwrapBody(html)).length
 
 /**
  * Splits a body after top-level paragraph N (1-based) for each insert, so a CTA never lands inside a list,
@@ -113,6 +129,7 @@ export const paragraphCount = (html: string) => paragraphEnds(html).length
  */
 export function splitAfterParagraphs<T>(html: string, inserts: { after: number; item: T }[]): (string | T)[] {
   if (!inserts.length) return [html]
+  html = unwrapBody(html)
   const cuts = paragraphEnds(html)
   const out: (string | T)[] = []
   let from = 0

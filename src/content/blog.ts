@@ -30,7 +30,15 @@ export const BLOG = {
   crossHeading: { id: 'Layanan di balik artikel ini', en: 'The service behind this article' },
   catNav: { id: 'Kategori blog', en: 'Blog categories' },
   catService: { id: 'Layanan terkait:', en: 'Related service:' },
+  // post conversion pieces (owner 2026-10-05)
+  featureEyebrow: { id: 'Butuh bantuan menerapkannya? Tim kami bisa mengerjakannya.', en: 'Need help putting this into practice? Our team can do it.' },
+  inlineP: { id: 'Ceritakan kondisi bisnis Anda lewat WhatsApp. Kami balas dengan langkah pertama yang jelas.', en: "Tell us about your business on WhatsApp. We'll reply with a clear first step." },
+  readTime: { id: 'Waktu baca', en: 'Reading time' },
+  authorMore: { id: 'Baca artikel lainnya', en: 'Read more articles' },
 } satisfies Record<string, L>
+
+/** Mid-article CTA line with the related service's name. */
+export const inlineH = (svcName: string, l: Locale) => (l === 'id' ? `Mau ${svcName} dikerjakan tim Logink?` : `Want the Logink team to handle ${svcName}?`)
 
 export const minRead = (n: number, l: Locale) => (l === 'id' ? `${n} menit baca` : `${n} min read`)
 export const countLabel = (n: number, l: Locale) => (l === 'id' ? `${n} artikel` : `${n} ${n === 1 ? 'article' : 'articles'}`)
