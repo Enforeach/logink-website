@@ -14,6 +14,13 @@ const nextConfig: NextConfig = {
       // public/media/<key>-<sha8>/: the folder name changes whenever the bytes change
       { source: '/media/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] },
       { source: '/og/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }] },
+      // Staging (owner 2026-10-05): staging.logink.co and every *.vercel.app URL are never indexed. Only these hosts
+      // match, so logink.co is untouched. A header, not a robots.txt Disallow: Google must crawl to see the noindex.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: '(staging\\.logink\\.co|.*\\.vercel\\.app)' }],
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
     ]
   },
   images: {
