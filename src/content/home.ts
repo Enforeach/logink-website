@@ -104,8 +104,8 @@ export const FAQ: { q: L; a: L }[] = [
   {
     q: { id: 'Berapa biaya jasa digital marketing?', en: 'How much does digital marketing cost?' },
     a: {
-      id: 'Biayanya tergantung layanan: SEO mulai Rp 6 Juta/bulan, Local SEO & Google Maps mulai Rp 1 Juta/bulan (ditagih tahunan), iklan Google & Meta mulai Rp 6 Juta/bulan management fee di luar budget iklan, dan website mulai Rp 10 Juta per proyek. Social media, desain grafis & video, dan SEO AI lewat proposal kustom dalam 24 jam. Rincian paket ada di halaman setiap layanan. Kampanye 360° dihargai lewat proposal kustom.',
-      en: 'It depends on the service: SEO from IDR 6M/month, Local SEO & Google Maps from IDR 1M/month (billed annually), Google & Meta ads from IDR 6M/month management fee with ad spend excluded, and websites from IDR 10M per project. Social media, graphic design & video and AI search are quoted within 24 hours. Package details are on each service page. A 360° campaign is priced by custom proposal.',
+      id: 'Biayanya tergantung layanan: SEO mulai Rp 8 Juta/bulan, Local SEO & Google Maps mulai Rp 1 Juta/bulan (ditagih tahunan), iklan Google & Meta mulai Rp 6 Juta/bulan management fee di luar budget iklan, dan website mulai Rp 10 Juta per proyek. Social media, desain grafis & video, dan SEO AI lewat proposal kustom dalam 24 jam. Rincian paket ada di halaman setiap layanan. Kampanye 360° dihargai lewat proposal kustom.',
+      en: 'It depends on the service: SEO from IDR 8M/month, Local SEO & Google Maps from IDR 1M/month (billed annually), Google & Meta ads from IDR 6M/month management fee with ad spend excluded, and websites from IDR 10M per project. Social media, graphic design & video and AI search are quoted within 24 hours. Package details are on each service page. A 360° campaign is priced by custom proposal.',
     },
   },
   {

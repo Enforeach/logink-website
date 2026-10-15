@@ -88,12 +88,12 @@ export const SERVICES: Service[] = [
     line: { id: 'Riset keyword, konten SEO Bahasa Indonesia, SEO teknikal, dan laporan bulanan.', en: 'Keyword research, Indonesian SEO content, technical SEO and monthly reporting.' },
     group: 'organik', stage: 'ditemukan', alsoStages: ['dikutip'], hour: '07.00', light: 'kertas',
     h1: { id: 'Jasa SEO Profesional Jakarta: Traffic Organik yang Tumbuh dan Terukur', en: 'Professional SEO Services Jakarta: Organic Traffic That Grows, Measured Monthly' },
-    title: { id: 'Jasa SEO Profesional Jakarta, Mulai Rp 6 Juta | Logink', en: 'SEO & Content Marketing Services Jakarta | Logink' },
+    title: { id: 'Jasa SEO Profesional Jakarta, Mulai Rp 8 Juta | Logink', en: 'SEO & Content Marketing Services Jakarta | Logink' },
     desc: {
-      id: 'Jasa SEO profesional di Jakarta: riset keyword, konten SEO Bahasa Indonesia, SEO teknikal, dan laporan bulanan. Mulai Rp 6 Juta/bulan. Konsultasi via WhatsApp.',
-      en: 'SEO for Indonesian brands: keyword research, Bahasa Indonesia content, technical SEO and transparent monthly reports. From IDR 6M/month. Chat on WhatsApp.',
+      id: 'Jasa SEO profesional di Jakarta: riset keyword, konten SEO Bahasa Indonesia, SEO teknikal, dan laporan bulanan. Mulai Rp 8 Juta/bulan. Konsultasi via WhatsApp.',
+      en: 'SEO for Indonesian brands: keyword research, Bahasa Indonesia content, technical SEO and transparent monthly reports. From IDR 8M/month. Chat on WhatsApp.',
     },
-    price: { id: 'Rp 6 · 8 · 15 Juta/bulan', en: 'IDR 6 · 8 · 15M/month' },
+    price: { id: 'Rp 8 · 10 · 15 Juta/bulan', en: 'IDR 8 · 10 · 15M/month' }, // owner 2026-10-15
     wa: { id: 'Halo Logink! Saya tertarik dengan layanan SEO & Content Marketing.', en: 'Hi Logink! I am interested in your SEO & Content Marketing service.' },
     og: { id: 'id-seo', en: 'en-seo' },
     pairs: ['ads', 'website', 'localseo'], updated: '2026-07-16',

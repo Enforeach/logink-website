@@ -15,7 +15,7 @@ export type ServiceRow = {
   name: string // 'Jasa SEO Profesional' (service-name anchor text)
   stage: { label: string; key: StageKey } // 'Ditemukan', 'ditemukan' (row key light + cursor dot colour)
   answer: string // one-line answer
-  price: string // 'Rp 6 · 8 · 15 Juta/bulan'
+  price: string // 'Rp 8 · 10 · 15 Juta/bulan'
   still?: string // 384w float URL, getImageProps({ src, width: 384, quality: 60 }).props.src; omit when no media
   thumb?: string // media thumb.webp src (96x72, pre-cropped); omit when no media
 }

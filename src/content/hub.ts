@@ -59,8 +59,8 @@ export const HUB_FAQ: { q: L; a: L }[] = [
   {
     q: { id: 'Berapa biaya jasa digital marketing di Logink?', en: 'How much does digital marketing cost at Logink?' },
     a: {
-      id: 'Biayanya tergantung layanan: SEO mulai Rp 6 Juta/bulan, Local SEO & Google Maps mulai Rp 1 Juta/bulan (ditagih tahunan), iklan Google & Meta mulai Rp 6 Juta/bulan management fee di luar budget iklan, SEO AI mulai Rp 5 Juta/bulan, dan website mulai Rp 10 Juta dengan harga final lewat diskusi. Social media serta desain grafis & video dihargai lewat proposal kustom dalam 24 jam. Semuanya ada di tabel layanan dan harga di halaman ini.',
-      en: 'It depends on the service: SEO from IDR 6M/month, Local SEO & Google Maps from IDR 1M/month (billed annually), Google & Meta ads from IDR 6M/month management fee with ad spend excluded, AI search from IDR 5M/month, and websites from IDR 10M with the final price agreed after a discussion. Social media and graphic design & video are priced by custom proposal within 24 hours. All of it is in the services and prices table on this page.',
+      id: 'Biayanya tergantung layanan: SEO mulai Rp 8 Juta/bulan, Local SEO & Google Maps mulai Rp 1 Juta/bulan (ditagih tahunan), iklan Google & Meta mulai Rp 6 Juta/bulan management fee di luar budget iklan, SEO AI mulai Rp 5 Juta/bulan, dan website mulai Rp 10 Juta dengan harga final lewat diskusi. Social media serta desain grafis & video dihargai lewat proposal kustom dalam 24 jam. Semuanya ada di tabel layanan dan harga di halaman ini.',
+      en: 'It depends on the service: SEO from IDR 8M/month, Local SEO & Google Maps from IDR 1M/month (billed annually), Google & Meta ads from IDR 6M/month management fee with ad spend excluded, AI search from IDR 5M/month, and websites from IDR 10M with the final price agreed after a discussion. Social media and graphic design & video are priced by custom proposal within 24 hours. All of it is in the services and prices table on this page.',
     },
   },
   {

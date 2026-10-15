@@ -7,8 +7,8 @@ export const SEO_PRICING_TIERS = [
   {
     id: 'entry',
     name: 'Entry',
-    price: 'Rp 6 Juta',
-    priceValue: 6000000,
+    price: 'Rp 8 Juta',
+    priceValue: 8000000,
     period: '/bulan',
     bestFor: 'Website baru yang mulai membangun traffic organic',
     isPopular: false,
@@ -28,8 +28,8 @@ export const SEO_PRICING_TIERS = [
   {
     id: 'growth',
     name: 'Growth',
-    price: 'Rp 8 Juta',
-    priceValue: 8000000,
+    price: 'Rp 10 Juta',
+    priceValue: 10000000,
     period: '/bulan',
     bestFor: 'Scaling traffic & leads',
     isPopular: true,
@@ -175,8 +175,8 @@ export const SEO_PRICING_TIERS_EN = [
   {
     id: 'entry',
     name: 'Entry',
-    price: 'IDR 6 Mio',
-    priceValue: 6000000,
+    price: 'IDR 8 Mio',
+    priceValue: 8000000,
     period: '/month',
     bestFor: 'New websites starting organic',
     isPopular: false,
@@ -196,8 +196,8 @@ export const SEO_PRICING_TIERS_EN = [
   {
     id: 'growth',
     name: 'Growth',
-    price: 'IDR 8 Mio',
-    priceValue: 8000000,
+    price: 'IDR 10 Mio',
+    priceValue: 10000000,
     period: '/month',
     bestFor: 'Scaling traffic & leads',
     isPopular: true,
