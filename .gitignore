@@ -48,3 +48,6 @@ scripts/*
 !scripts/payload.sh
 !scripts/cms.ts
 !scripts/check-cms-entries.mjs
+
+# agent worktrees
+.claude/worktrees/
