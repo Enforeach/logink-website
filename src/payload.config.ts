@@ -84,7 +84,8 @@ export default buildConfig({
         const l = locale === 'en' ? 'en' : 'id'
         const g = globalConfig?.custom?.path as { id: string; en: string } | undefined
         const k = (collectionConfig?.custom?.keys as { key: string; path: { id: string; en: string } }[] | undefined)?.find((x) => x.key === (doc as { key?: string })?.key)
-        const p = g?.[l] ?? k?.path[l] ?? '/'
+        const post = collectionConfig?.slug === 'posts' ? (doc as { slug?: string; slugEn?: string }) : undefined
+        const p = g?.[l] ?? k?.path[l] ?? (post && (l === 'en' ? post.slugEn && `/en/blog/${post.slugEn}` : post.slug && `/blog/${post.slug}`)) ?? '/'
         return `${SITE_URL}${p === '/' ? '' : p}`
       },
       fields: ({ defaultFields }) => [

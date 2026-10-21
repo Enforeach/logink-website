@@ -146,7 +146,7 @@ export function splitAfterParagraphs<T>(html: string, inserts: { after: number; 
 /** Outbound sources cited in a body: external links, deduped by URL, own domain excluded. */
 export function extractSources(html: string, ownHost = 'logink.co'): { url: string; label: string; host: string; where: string }[] {
   const seen = new Map<string, { url: string; label: string; host: string; where: string }>()
-  for (const m of html.matchAll(/<a\s[^>]*href="(https?:\/\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)) {
+  for (const m of html.matchAll(/<a\s(?![^>]*data-cta=)[^>]*href="(https?:\/\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)) {
     const url = m[1].replace(/&amp;/g, '&')
     let host = '', where = ''
     try { const u = new URL(url); host = u.hostname.replace(/^www\./, ''); where = (host + u.pathname).replace(/\/$/, '') } catch { continue }

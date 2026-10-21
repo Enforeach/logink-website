@@ -45,7 +45,7 @@ export async function GET() {
 
   const entries: Entry[] = [
     ...STATIC_PAIRS().flatMap(([id, en, priority, freq, updated]) => pair(id, en, updated, freq, priority)),
-    ...posts.flatMap((p) => pair(`/blog/${p.slug}`, p.slugEn ? `/en/blog/${p.slugEn}` : null, day(p.updatedAt)!, 'weekly', 0.7)),
+    ...posts.filter((p) => !p.noIndex).flatMap((p) => pair(`/blog/${p.slug}`, p.slugEn ? `/en/blog/${p.slugEn}` : null, day(p.updatedAt)!, 'weekly', 0.7)),
     ...caseStudies.flatMap((c) => pair(`/portfolio/${c.slug}`, c.slugEn ? `/en/portfolio/${c.slugEn}` : null, day(c.updatedAt)!, 'monthly', 0.7)),
     ...cats.flatMap((c) => {
       const idOk = c.id.length >= CATEGORY_MIN_POSTS

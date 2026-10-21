@@ -1,6 +1,7 @@
 // Pages → Blog page (src/content/blog.ts): the blog home, the category pages and the labels around articles.
 // The articles themselves are in Blog → Posts.
 import '@/content/blog'
+import '@/content/article'
 import { page } from '@/lib/services'
 import { pageGlobal, pageTab, seoOf } from '../define'
 
@@ -67,6 +68,23 @@ export const BlogPage = pageGlobal({
         featureEyebrow: { label: 'Line above the service card' },
         inlineHTpl: { label: 'Mid-article call to action: heading', description: '{service} = the name of the related service.' },
         inlineP: { label: 'Mid-article call to action: text' },
+      },
+    },
+    {
+      name: 'article',
+      label: 'Article blocks',
+      description: 'Labels on the blocks editors can add inside an article (Blog → Posts → body editor).',
+      ov: {
+        faqHeading: { label: 'Heading above the article FAQ' },
+        takeaways: { label: 'Key takeaways block: heading' },
+        tipLabel: { label: 'Callout block: "Tip" label' },
+        infoLabel: { label: 'Callout block: "Note" label' },
+        warningLabel: { label: 'Callout block: "Heads up" label' },
+        serviceEyebrow: { label: 'Service block: small label' },
+        serviceOpen: { label: 'Service block: link text' },
+        waLabel: { label: 'WhatsApp block: default button text', description: 'Used when the block has no button label of its own.' },
+        videoConsent: { label: 'YouTube block: privacy note' },
+        videoWatch: { label: 'YouTube block: "Watch on YouTube" link' },
       },
     },
   ],
