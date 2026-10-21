@@ -3,6 +3,7 @@
 // include a simple local landing page + Google Business Profile setup.
 
 import type { Locale } from '@/lib/services'
+import { liveDoc } from '@/cms/store'
 import type { ServiceContent } from './types'
 
 export const LOCALSEO_ACCENT = '#0D9488'
@@ -443,5 +444,4 @@ const en: ServiceContent = {
   ],
 }
 
-const content: Record<Locale, ServiceContent> = { id, en }
-export default content
+export default liveDoc('service-pages', 'localseo', 'content', { id, en } satisfies Record<Locale, ServiceContent>)

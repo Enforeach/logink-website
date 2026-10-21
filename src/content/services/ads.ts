@@ -1,6 +1,7 @@
 // Iklan Google & Meta Ads (BUILD §3.4). The X / X_EN exports are the vetted legacy copy, kept verbatim; the
 // default export maps them into ServiceContent.
 import type { Locale } from '@/lib/services'
+import { liveDoc } from '@/cms/store'
 import type { ServiceContent } from './types'
 
 export const ADS_PRICING_TIERS = [
@@ -722,5 +723,4 @@ const en: ServiceContent = {
   sources: [],
 }
 
-const content: Record<Locale, ServiceContent> = { id, en }
-export default content
+export default liveDoc('service-pages', 'ads', 'content', { id, en } satisfies Record<Locale, ServiceContent>)

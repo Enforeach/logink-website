@@ -719,6 +719,431 @@ export interface ServicePage {
      */
     wa?: string | null;
   };
+  /**
+   * The whole page body, written per language: switch the language with the picker at the top. Sections follow the order of the page.
+   */
+  content?: {
+    /**
+     * About 40 words under the page heading. Answer first. Also used as the service description in Google structured data and on the home page.
+     */
+    answer?: string | null;
+    /**
+     * Three short ticks under the hero buttons.
+     */
+    trust?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * The facts strip under the hero. Offer facts only, never results.
+     */
+    highlights?: {
+      items?:
+        | {
+            /**
+             * For example "30" or "24 jam".
+             */
+            value?: string | null;
+            label?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+      note?: string | null;
+    };
+    /**
+     * The heading with cards right after the highlights.
+     */
+    usp?: {
+      heading?: string | null;
+      lead?: string | null;
+      cards?:
+        | {
+            title?: string | null;
+            text?: string | null;
+            points?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            sub?: string | null;
+            /**
+             * Shows that platform mark on the card.
+             */
+            logo?: ('google' | 'meta' | 'tiktok' | 'shopee') | null;
+            /**
+             * For example the plans that include this card.
+             */
+            tag?: string | null;
+            /**
+             * Replaces the 01/02 number on the card, e.g. "40%".
+             */
+            value?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+      /**
+       * How many words at the END of the heading are shown in the brand gradient colour.
+       */
+      accent?: number | null;
+      /**
+       * Which card is highlighted, counting from 0 (0 = first, 1 = second). -1 = none. Empty = the second card.
+       */
+      pop?: number | null;
+    };
+    /**
+     * Tabs of items shown after the USP cards.
+     */
+    included?: {
+      heading?: string | null;
+      lead?: string | null;
+      tabs?:
+        | {
+            label?: string | null;
+            items?:
+              | {
+                  title?: string | null;
+                  text?: string | null;
+                  /**
+                   * A small tag next to the title, e.g. "Add-on".
+                   */
+                  badge?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    /**
+     * Optional lead sentence for the section after the hero (Ads page).
+     */
+    showcase?: string | null;
+    aiPage?: {
+      behind?: {
+        heading?: string | null;
+        lead?: string | null;
+      };
+      engines?: {
+        caption?: string | null;
+        head?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        rows?:
+          | {
+              cells?:
+                | {
+                    text?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+      };
+      /**
+       * Explains that the answer above is written to be quotable.
+       */
+      note?: string | null;
+    };
+    /**
+     * The "what we do" list: one heading and one line each.
+     */
+    work?:
+      | {
+          title?: string | null;
+          text?: string | null;
+          /**
+           * The live illustration shown beside this step.
+           */
+          card?:
+            | (
+                | 'SerpToMaps'
+                | 'IgGrid'
+                | 'ReviewCard'
+                | 'SiteFrame'
+                | 'Funnel'
+                | 'AiAnswer'
+                | 'PromptTable'
+                | 'SovBars'
+                | 'CrawlerLog'
+                | 'QueryFanout'
+                | 'JsonLdFragment'
+                | 'ReportFrame'
+                | 'AdToChat'
+                | 'ContentCalendar'
+              )
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    pricing?: {
+      /**
+       * How this page shows prices. Set in code.
+       */
+      kind?: ('tiers' | 'quote' | 'modules' | 'projects') | null;
+      tiers?:
+        | {
+            name?: string | null;
+            /**
+             * Exactly as visitors see it, e.g. "Rp 8 Juta". Update the price value too.
+             */
+            price?: string | null;
+            /**
+             * Number in IDR for Google structured data (Offer). It must match the visible price: "Rp 8 Juta" = 8000000.
+             */
+            priceValue?: number | null;
+            /**
+             * For example "/bulan" or "/month". Empty for a one-off price.
+             */
+            period?: string | null;
+            bestFor?: string | null;
+            isPopular?: boolean | null;
+            /**
+             * Set in code.
+             */
+            color?: string | null;
+            features?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            billing?: string | null;
+            note?: string | null;
+            platformCoverage?: string | null;
+            addOnNote?: string | null;
+            recommendedAdSpend?: string | null;
+            /**
+             * Used for links and tracking. Set in code.
+             */
+            rowKey?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+      addons?:
+        | {
+            name?: string | null;
+            text?: string | null;
+            /**
+             * Where the add-on links to. Set in code.
+             */
+            href?: string | null;
+            linkText?: string | null;
+            price?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+      note?: string | null;
+      /**
+       * Set in code.
+       */
+      builder?: ('social' | 'creative') | null;
+      modules?:
+        | {
+            title?: string | null;
+            text?: string | null;
+            items?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            price?: string | null;
+            /**
+             * Set in code.
+             */
+            rowKey?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+      /**
+       * The words of the "build your quote" form.
+       */
+      copy?: {
+        heading?: string | null;
+        intro?: string | null;
+        empty?: string | null;
+        summary?: string | null;
+        price?: string | null;
+        /**
+         * Edit the words only. The quote message depends on the group, choice and drop-down IDs, which are set in code.
+         */
+        groups?:
+          | {
+              label?: string | null;
+              /**
+               * The tick box that adds this module.
+               */
+              toggle?: string | null;
+              items?:
+                | {
+                    label?: string | null;
+                    on?: boolean | null;
+                    /**
+                     * Set in code.
+                     */
+                    rowKey?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              selects?:
+                | {
+                    label?: string | null;
+                    /**
+                     * Set in code.
+                     */
+                    v?: string | null;
+                    options?:
+                      | {
+                          /**
+                           * Set in code.
+                           */
+                          v?: string | null;
+                          label?: string | null;
+                          id?: string | null;
+                        }[]
+                      | null;
+                    /**
+                     * Set in code.
+                     */
+                    rowKey?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              /**
+               * Set in code.
+               */
+              multi?: boolean | null;
+              /**
+               * Set in code.
+               */
+              rowKey?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+      };
+      /**
+       * Number in IDR for Google structured data (Offer). It must match the visible price: "Rp 8 Juta" = 8000000.
+       */
+      priceValue?: number | null;
+      projects?:
+        | {
+            name?: string | null;
+            text?: string | null;
+            bestFor?: string | null;
+            timeline?: string | null;
+            /**
+             * Set in code.
+             */
+            rowKey?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+      discovery?: {
+        label?: string | null;
+        wa?: string | null;
+      };
+    };
+    /**
+     * The "before you sign, your decision, after approval" steps after the prices. The steps themselves are edited on the Home page.
+     */
+    process?: boolean | null;
+    /**
+     * Each row is either a source key or a custom stat. Text: a source key such as aio-id (the site shows its built-in sourced stat), or fill Text, Source, Year and Link for a custom stat.
+     */
+    stats?:
+      | {
+          /**
+           * A source key (e.g. aio-id), or the stat sentence for a custom stat.
+           */
+          text?: string | null;
+          /**
+           * Custom stat only.
+           */
+          src?: string | null;
+          /**
+           * Custom stat only.
+           */
+          year?: number | null;
+          /**
+           * Custom stat only. A full https:// address.
+           */
+          url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * 7 to 10 questions. The first sentence of each answer answers the question; do not restate the price.
+     */
+    faq?:
+      | {
+          q?: string | null;
+          a?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Sources listed at the bottom of the data section.
+     */
+    sources?:
+      | {
+          label?: string | null;
+          /**
+           * A full https:// address.
+           */
+          url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * The "run it alone or in a 360 campaign" section. Edit the text only; each row is tied to a service.
+     */
+    campaign?: {
+      /**
+       * What other services give this one. Do not reorder or delete rows.
+       */
+      fedBy?:
+        | {
+            k?:
+              | ('seo' | 'localseo' | 'ads' | 'social' | 'creative' | 'website' | 'ai' | 'wa' | 'strategy' | 'report')
+              | null;
+            text?: string | null;
+            /**
+             * The row shows only when the owner confirmed it. Set in code.
+             */
+            gate?: ('K1' | 'K5' | 'K6' | 'K11') | null;
+            id?: string | null;
+          }[]
+        | null;
+      /**
+       * What this service gives other services. Do not reorder or delete rows.
+       */
+      feeds?:
+        | {
+            k?:
+              | ('seo' | 'localseo' | 'ads' | 'social' | 'creative' | 'website' | 'ai' | 'wa' | 'strategy' | 'report')
+              | null;
+            text?: string | null;
+            /**
+             * The row shows only when the owner confirmed it. Set in code.
+             */
+            gate?: ('K1' | 'K5' | 'K6' | 'K11') | null;
+            fallback?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    /**
+     * One or two sentences. Shown in the campaign block and on the home page.
+     */
+    ai?: string | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1314,6 +1739,276 @@ export interface ServicePagesSelect<T extends boolean = true> {
         price?: T;
         quote?: T;
         wa?: T;
+      };
+  content?:
+    | T
+    | {
+        answer?: T;
+        trust?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        highlights?:
+          | T
+          | {
+              items?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              note?: T;
+            };
+        usp?:
+          | T
+          | {
+              heading?: T;
+              lead?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    text?: T;
+                    points?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    sub?: T;
+                    logo?: T;
+                    tag?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              accent?: T;
+              pop?: T;
+            };
+        included?:
+          | T
+          | {
+              heading?: T;
+              lead?: T;
+              tabs?:
+                | T
+                | {
+                    label?: T;
+                    items?:
+                      | T
+                      | {
+                          title?: T;
+                          text?: T;
+                          badge?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        showcase?: T;
+        aiPage?:
+          | T
+          | {
+              behind?:
+                | T
+                | {
+                    heading?: T;
+                    lead?: T;
+                  };
+              engines?:
+                | T
+                | {
+                    caption?: T;
+                    head?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    rows?:
+                      | T
+                      | {
+                          cells?:
+                            | T
+                            | {
+                                text?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              note?: T;
+            };
+        work?:
+          | T
+          | {
+              title?: T;
+              text?: T;
+              card?: T;
+              id?: T;
+            };
+        pricing?:
+          | T
+          | {
+              kind?: T;
+              tiers?:
+                | T
+                | {
+                    name?: T;
+                    price?: T;
+                    priceValue?: T;
+                    period?: T;
+                    bestFor?: T;
+                    isPopular?: T;
+                    color?: T;
+                    features?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    billing?: T;
+                    note?: T;
+                    platformCoverage?: T;
+                    addOnNote?: T;
+                    recommendedAdSpend?: T;
+                    rowKey?: T;
+                    id?: T;
+                  };
+              addons?:
+                | T
+                | {
+                    name?: T;
+                    text?: T;
+                    href?: T;
+                    linkText?: T;
+                    price?: T;
+                    id?: T;
+                  };
+              note?: T;
+              builder?: T;
+              modules?:
+                | T
+                | {
+                    title?: T;
+                    text?: T;
+                    items?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    price?: T;
+                    rowKey?: T;
+                    id?: T;
+                  };
+              copy?:
+                | T
+                | {
+                    heading?: T;
+                    intro?: T;
+                    empty?: T;
+                    summary?: T;
+                    price?: T;
+                    groups?:
+                      | T
+                      | {
+                          label?: T;
+                          toggle?: T;
+                          items?:
+                            | T
+                            | {
+                                label?: T;
+                                on?: T;
+                                rowKey?: T;
+                                id?: T;
+                              };
+                          selects?:
+                            | T
+                            | {
+                                label?: T;
+                                v?: T;
+                                options?:
+                                  | T
+                                  | {
+                                      v?: T;
+                                      label?: T;
+                                      id?: T;
+                                    };
+                                rowKey?: T;
+                                id?: T;
+                              };
+                          multi?: T;
+                          rowKey?: T;
+                          id?: T;
+                        };
+                  };
+              priceValue?: T;
+              projects?:
+                | T
+                | {
+                    name?: T;
+                    text?: T;
+                    bestFor?: T;
+                    timeline?: T;
+                    rowKey?: T;
+                    id?: T;
+                  };
+              discovery?:
+                | T
+                | {
+                    label?: T;
+                    wa?: T;
+                  };
+            };
+        process?: T;
+        stats?:
+          | T
+          | {
+              text?: T;
+              src?: T;
+              year?: T;
+              url?: T;
+              id?: T;
+            };
+        faq?:
+          | T
+          | {
+              q?: T;
+              a?: T;
+              id?: T;
+            };
+        sources?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              id?: T;
+            };
+        campaign?:
+          | T
+          | {
+              fedBy?:
+                | T
+                | {
+                    k?: T;
+                    text?: T;
+                    gate?: T;
+                    id?: T;
+                  };
+              feeds?:
+                | T
+                | {
+                    k?: T;
+                    text?: T;
+                    gate?: T;
+                    fallback?: T;
+                    id?: T;
+                  };
+            };
+        ai?: T;
       };
   meta?:
     | T

@@ -1,6 +1,7 @@
 // Desain Grafis & Video (BUILD §3.4). The X / X_EN exports are the vetted legacy copy, kept verbatim; the
 // default export maps them into ServiceContent ('modules' pricing + the QuoteBuilder copy).
 import type { Locale } from '@/lib/services'
+import { liveDoc } from '@/cms/store'
 import type { BuilderGroup, ServiceContent } from './types'
 
 export const CREATIVE_DELIVERABLES = {
@@ -618,5 +619,4 @@ const en: ServiceContent = {
   ],
 }
 
-const content: Record<Locale, ServiceContent> = { id, en }
-export default content
+export default liveDoc('service-pages', 'creative', 'content', { id, en } satisfies Record<Locale, ServiceContent>)

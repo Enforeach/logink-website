@@ -1,6 +1,7 @@
 // Website & Landing Page (BUILD §3.4). The X / X_EN exports are the vetted legacy copy, kept verbatim; the
 // default export maps them into ServiceContent ('projects' pricing: one registry price for every project).
 import type { Locale } from '@/lib/services'
+import { liveDoc } from '@/cms/store'
 import type { ServiceContent } from './types'
 
 export const WEBSITE_PROJECT_TYPES = [
@@ -720,5 +721,4 @@ const en: ServiceContent = {
   ],
 }
 
-const content: Record<Locale, ServiceContent> = { id, en }
-export default content
+export default liveDoc('service-pages', 'website', 'content', { id, en } satisfies Record<Locale, ServiceContent>)
