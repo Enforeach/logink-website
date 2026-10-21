@@ -7,7 +7,7 @@ import {
   demoteH1, extractHeadings, extractSources, filterCtasForPost, hasSourcesHeading, injectHeadingIds,
   paragraphCount, splitAfterParagraphs, type CtaWidgetRow,
 } from '@/lib/cta'
-import { breadcrumbNode, orgNode, pageMeta, webPageNode } from '@/lib/meta'
+import { breadcrumbNode, faqNode, orgNode, pageMeta, webPageNode } from '@/lib/meta'
 import { WA_PATTERNS, page, svc, type Locale } from '@/lib/services'
 import { PageShell } from '@/components/ds/chrome/PageShell'
 import { Section } from '@/components/ds/Section'
@@ -19,6 +19,8 @@ import { Stabilo } from '@/components/ds/Stabilo'
 import { JsonLd } from '@/components/ds/JsonLd'
 import { T, fmtDate } from '@/components/ds/strings'
 import { BLOG, minRead } from '@/content/blog'
+import { ARTICLE } from '@/content/article'
+import { Faq } from '@/components/ds/Faq'
 import { NF } from '@/content/notfound'
 import { CtaRenderer } from './cta/CtaRenderer'
 import { PostRow } from './PostRow'
@@ -35,13 +37,14 @@ const altOf = (p: FullPost) => ({ id: `/blog/${p.slug}`, en: p.slugEn ? `/en/blo
 export async function postMeta(slug: string, l: Locale): Promise<Metadata> {
   const p = await getPostBySlug(slug, l)
   if (!p) return { title: { absolute: NF.title[l] }, robots: { index: false, follow: true } }
+  const noindex = p.noIndex ? { robots: { index: false, follow: true } } : {}
   const title = (l === 'en' ? p.metaTitleEn : p.metaTitle) || postTitle(p, l)
   const desc = (l === 'en' ? p.metaDescriptionEn || p.excerptEn : p.metaDescription || p.excerptId) || ''
   const m = pageMeta({
     locale: l, title: brand(title), desc, path: altOf(p),
     og: ogKey(`${l}-blog-${l === 'en' ? p.slugEn ?? p.slug : p.slug}`, l), ogImage: p.ogImage ?? p.featuredImage ?? undefined,
   })
-  return { ...m, openGraph: { ...m.openGraph, type: 'article', publishedTime: iso(p.publishedAt), modifiedTime: iso(p.updatedAt) } }
+  return { ...m, ...noindex, openGraph: { ...m.openGraph, type: 'article', publishedTime: iso(p.publishedAt), modifiedTime: iso(p.updatedAt) } }
 }
 
 /** Post (owner 2026-10-05: the About/Privacy document layout, F-pattern). Hero: title, summary and byline left, the
@@ -64,7 +67,8 @@ export async function ArticlePage({ slug, locale: l }: { slug: string; locale: L
   const related = await getRelatedPosts(post.id, categoryId, l).catch(() => [])
   const relFacts = await postFacts(related.map((r) => r.id), l)
 
-  const k = catSvc(post.category?.slug) ?? 'seo'
+  const k = post.relatedService ?? catSvc(post.category?.slug) ?? 'seo'
+  const faq = (l === 'en' ? post.faqEn : post.faqId) ?? []
   const wa = WA_PATTERNS.post(title, svc(k).name[l])[l]
   const url = postHref(post, l)
   const cat = post.category
@@ -79,21 +83,26 @@ export async function ArticlePage({ slug, locale: l }: { slug: string; locale: L
   const modified = iso(post.updatedAt)
   const excerpt = postExcerpt(post, l)
   // A CMS service account ("System") is not a person: no byline, no Person node (owner sets a real author).
-  const author = /^(system|admin|administrator)$/i.test(post.author.name.trim()) ? { name: '', image: null } : post.author
+  const author = /^(system|admin|administrator)$/i.test(post.author.name.trim()) ? { ...post.author, name: '' } : post.author
+  const job = (l === 'en' ? author.jobTitleEn : author.jobTitleId) || null
+  const bio = (l === 'en' ? author.bioEn : author.bioId) || null
+  const profile = /^https?:\/\//i.test(author.profileUrl ?? '') ? author.profileUrl : null
   const sources = hasSourcesHeading(html) ? [] : extractSources(html)
-  const half = Math.max(1, Math.ceil(paragraphCount(html) / 2))
+  const pos = post.midCta.position
+  const half = pos === 'end' ? 9999 : /^p\d$/.test(pos) ? Number(pos.slice(1)) : Math.max(1, Math.ceil(paragraphCount(html) / 2))
   // the built-in service CTA sits mid-article unless the CMS already places an INLINE widget there
   const parts = splitAfterParagraphs<Widget>(html, [
     ...at('BETWEEN_PARAGRAPHS').map((w) => ({ after: w.paragraphIndex ?? 3, item: w })),
     ...at('INLINE').map((w) => ({ after: w.paragraphIndex ?? half, item: w })),
-    ...(at('INLINE').length ? [] : [{ after: half, item: SVC_CTA }]),
+    ...(at('INLINE').length || !post.midCta.show ? [] : [{ after: half, item: SVC_CTA }]),
   ])
   const render = (p: Widget, i: number) => ('kind' in p ? <InlineServiceCta key={`svc-${i}`} locale={l} k={k} wa={wa} /> : cta(p))
   const graph = [
     orgNode(l),
     webPageNode({ url, name: title, locale: l, dateModified: modified || undefined }),
-    blogPostingNode({ url, headline: title, description: excerpt, published, modified, author: author.name, image: post.featuredImage, locale: l, section: catLabel ?? undefined }),
+    blogPostingNode({ url, headline: title, description: excerpt, published, modified, author: author.name, authorInfo: { job, bio, url: profile, image: author.image }, image: post.featuredImage, locale: l, section: catLabel ?? undefined }),
     breadcrumbNode(url, crumbs),
+    ...(faq.length ? [faqNode(url, faq)] : []),
   ]
 
   return (
@@ -115,7 +124,7 @@ export async function ArticlePage({ slug, locale: l }: { slug: string; locale: L
             </p>
           </div>
           <div className="lg:col-span-5">
-            <FeatureCard locale={l} k={k} wa={wa} image={post.featuredImage ?? null} alt={post.featuredImageAlt ?? ''} />
+            {post.showFeatureCard ? <FeatureCard locale={l} k={k} wa={wa} image={post.featuredImage ?? null} alt={post.featuredImageAlt ?? ''} /> : null}
           </div>
         </div>
       </Section>
@@ -123,13 +132,21 @@ export async function ArticlePage({ slug, locale: l }: { slug: string; locale: L
         {at('ABOVE_FOLD').length ? <Wrap><div className="mb-8 max-w-[70ch]">{at('ABOVE_FOLD').map(cta)}</div></Wrap> : null}
         <ArticleBody locale={l} toc={toc} parts={parts} render={render}
           aside={<>
-            {author.name ? <AuthorCard locale={l} name={author.name} image={author.image} updated={modified} minutes={minRead(minutes, l)} /> : null}
+            {author.name ? <AuthorCard locale={l} name={author.name} image={author.image} job={job} bio={bio} profileUrl={profile} updated={modified} minutes={minRead(minutes, l)} /> : null}
             <div className="grid gap-4 lg:sticky lg:top-[calc(var(--nav-h)+var(--dial-h)+24px)]">
               <ServiceCard locale={l} k={k} wa={wa} />
               {[...at('AFTER_TOC'), ...at('SIDEBAR')].map(cta)}
             </div>
           </>}
-          below={at('BELOW_ARTICLE').map(cta)} sticky={at('STICKY_BOTTOM').map(cta)}
+          below={[
+            ...(faq.length ? [(
+              <section key="faq" aria-labelledby="faq-h" className="mt-12 border-t border-hair pt-6">
+                <h2 id="faq-h" className="t-h2 mb-4">{ARTICLE.faqHeading[l]}</h2>
+                <Faq items={faq} />
+              </section>
+            )] : []),
+            ...at('BELOW_ARTICLE').map(cta),
+          ]} sticky={at('STICKY_BOTTOM').map(cta)}
           sources={sources} title={title} url={url} />
       </Section>
       {related.length ? (

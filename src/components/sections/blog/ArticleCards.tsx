@@ -68,7 +68,9 @@ export function ServiceCard({ locale: l, k, wa }: { locale: Locale; k: SvcKey; w
 }
 
 /** Aside: who wrote it, when it was updated, and the way to more of their articles. */
-export function AuthorCard({ locale: l, name, image, updated, minutes }: { locale: Locale; name: string; image: string | null; updated: string; minutes: string }) {
+export function AuthorCard({ locale: l, name, image, job, bio, profileUrl, updated, minutes }: {
+  locale: Locale; name: string; image: string | null; job?: string | null; bio?: string | null; profileUrl?: string | null; updated: string; minutes: string
+}) {
   const initials = name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase()
   return (
     <div className="doc-card doc-card--tint">
@@ -80,10 +82,11 @@ export function AuthorCard({ locale: l, name, image, updated, minutes }: { local
           <span className="author-initials" aria-hidden="true">{initials}</span>
         )}
         <div className="min-w-0">
-          <p className="font-650 text-ink">{name}</p>
-          <p className="t-small text-ink-2">{BLOG.authorLine[l]}</p>
+          <p className="font-650 text-ink">{profileUrl ? <a href={profileUrl} target="_blank" rel="noopener me" className="link">{name}</a> : name}</p>
+          <p className="t-small text-ink-2">{job || BLOG.authorLine[l]}</p>
         </div>
       </div>
+      {bio ? <p className="t-small mt-3 text-ink-2">{bio}</p> : null}
       <dl className="t-small mt-4 grid grid-cols-2 gap-3 border-t border-[var(--line)] pt-3">
         {updated ? <div><dt className="text-ink-2">{T.updated[l]}</dt><dd className="font-650 text-ink"><time dateTime={updated}>{fmtDate(updated, l)}</time></dd></div> : null}
         <div><dt className="text-ink-2">{BLOG.readTime[l]}</dt><dd className="font-650 text-ink">{minutes}</dd></div>

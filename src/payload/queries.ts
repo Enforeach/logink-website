@@ -1,7 +1,7 @@
 import 'server-only'
-import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 import { marked } from 'marked'
 import { getPayloadClient } from './client'
+import { articleToHtml } from './articleHtml'
 
 /**
  * Payload data-access layer. Every function returns the SAME shape the public
@@ -11,6 +11,7 @@ import { getPayloadClient } from './client'
  */
 
 type Locale = 'id' | 'en'
+type SvcKey = import('@/lib/services').SvcKey
 type AnyDoc = Record<string, any>
 
 // ─── primitives ───
@@ -22,10 +23,10 @@ const mediaUrl = (v: unknown): string | null => {
   return null
 }
 
-const richToHtml = (v: unknown): string => {
+const richToHtml = (v: unknown, lang: Locale): string => {
   if (!v || typeof v !== 'object') return ''
   try {
-    return convertLexicalToHTML({ data: v as any }) || ''
+    return articleToHtml(v, lang) || ''
   } catch {
     return ''
   }
@@ -46,7 +47,7 @@ const mdToHtml = (v: unknown): string => {
 const bodyToHtml = (doc: AnyDoc, lang: 'id' | 'en'): string =>
   doc.bodyFormat === 'markdown'
     ? mdToHtml(lang === 'id' ? doc.bodyMarkdownId : doc.bodyMarkdownEn)
-    : richToHtml(lang === 'id' ? doc.bodyId : doc.bodyEn)
+    : richToHtml(lang === 'id' ? doc.bodyId : doc.bodyEn, lang)
 
 const relId = (v: unknown): string | null => {
   if (v == null) return null
@@ -55,10 +56,18 @@ const relId = (v: unknown): string | null => {
 }
 
 // ─── mappers ───
-function mapAuthor(a: unknown): { name: string; image: string | null } {
-  if (!a || typeof a !== 'object') return { name: '', image: null }
+function mapAuthor(a: unknown) {
+  if (!a || typeof a !== 'object') return { name: '', image: null as string | null, jobTitleId: null as string | null, jobTitleEn: null as string | null, bioId: null as string | null, bioEn: null as string | null, profileUrl: null as string | null }
   const d = a as AnyDoc
-  return { name: d.name ?? '', image: mediaUrl(d.avatar) }
+  return {
+    name: d.name ?? '',
+    image: mediaUrl(d.avatar),
+    jobTitleId: (d.jobTitleId as string) || null,
+    jobTitleEn: (d.jobTitleEn as string) || null,
+    bioId: (d.bioId as string) || null,
+    bioEn: (d.bioEn as string) || null,
+    profileUrl: (d.profileUrl as string) || null,
+  }
 }
 
 function mapCategory(c: unknown): { nameId: string; nameEn: string | null; slug: string } | null {
@@ -73,6 +82,9 @@ function mapTags(tags: unknown): { tag: { id: string; name: string; slug: string
     .filter((t) => t && typeof t === 'object')
     .map((t: AnyDoc) => ({ tag: { id: String(t.id), name: t.name ?? '', slug: t.slug ?? '' } }))
 }
+
+const mapFaq = (v: unknown): { q: string; a: string }[] =>
+  (Array.isArray(v) ? v : []).filter((r: AnyDoc) => r?.question && r?.answer).map((r: AnyDoc) => ({ q: String(r.question), a: String(r.answer) }))
 
 export function mapPost(doc: AnyDoc, opts: { withBody?: boolean } = {}) {
   return {
@@ -94,6 +106,12 @@ export function mapPost(doc: AnyDoc, opts: { withBody?: boolean } = {}) {
     metaDescriptionEn: doc.metaDescriptionEn ?? null,
     ogImage: mediaUrl(doc.ogImage),
     focusKeyword: doc.focusKeyword ?? null,
+    noIndex: !!doc.noIndex,
+    relatedService: (doc.relatedService as SvcKey | null) || null,
+    showFeatureCard: doc.showFeatureCard !== false,
+    midCta: { show: doc.midCta?.show !== false, position: (doc.midCta?.position as string) || 'middle' },
+    faqId: mapFaq(doc.faqId),
+    faqEn: mapFaq(doc.faqEn),
     readingTime: doc.readingTime ?? null,
     wordCount: doc.wordCount ?? null,
     status: doc.status ?? 'DRAFT',
@@ -433,7 +451,7 @@ export async function getSitemapEntries() {
     payload.find({ collection: 'case-studies', where: { status: { equals: 'PUBLISHED' } }, sort: '-updatedAt', limit: 1000, depth: 0 }),
   ])
   return {
-    posts: posts.docs.map((d: AnyDoc) => ({ slug: d.slug, slugEn: d.slugEn ?? null, updatedAt: toDate(d.updatedAt) })),
+    posts: posts.docs.map((d: AnyDoc) => ({ slug: d.slug, slugEn: d.slugEn ?? null, noIndex: !!d.noIndex, updatedAt: toDate(d.updatedAt) })),
     caseStudies: cases.docs.map((d: AnyDoc) => ({ slug: d.slug, slugEn: d.slugEn ?? null, updatedAt: toDate(d.updatedAt) })),
   }
 }

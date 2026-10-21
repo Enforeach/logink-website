@@ -10,7 +10,8 @@ export const personId = (name: string) => `${SITE_URL}/#person-${slugify(name)}`
 /** BlogPosting (BUILD §3.9): headline = H1, real CMS dates, author Person, publisher = the org. */
 export function blogPostingNode(o: {
   url: string; headline: string; description: string | null; published: string; modified: string
-  author: string; image: string | null; locale: Locale; section?: string
+  author: string; authorInfo?: { job: string | null; bio: string | null; url: string | null; image: string | null }
+  image: string | null; locale: Locale; section?: string
 }) {
   const url = abs(o.url)
   return {
@@ -22,7 +23,13 @@ export function blogPostingNode(o: {
     ...(o.description && { description: o.description }),
     ...(o.published && { datePublished: o.published }),
     ...(o.modified && { dateModified: o.modified }),
-    ...(o.author && { author: { '@type': 'Person', '@id': personId(o.author), name: o.author } }),
+    ...(o.author && { author: {
+      '@type': 'Person', '@id': personId(o.author), name: o.author,
+      ...(o.authorInfo?.job && { jobTitle: o.authorInfo.job }),
+      ...(o.authorInfo?.bio && { description: o.authorInfo.bio }),
+      ...(o.authorInfo?.url && { url: o.authorInfo.url, sameAs: [o.authorInfo.url] }),
+      ...(o.authorInfo?.image && { image: abs(o.authorInfo.image) }),
+    } }),
     publisher: { '@id': ORG_ID },
     ...(o.image && { image: abs(o.image) }),
     ...(o.section && { articleSection: o.section }),

@@ -166,37 +166,12 @@ export interface UserAuthOperations {
 export interface Post {
   id: number;
   titleId: string;
-  titleEn?: string | null;
-  /**
-   * URL path. Auto-generated from the title if left blank.
-   */
-  slug?: string | null;
-  /**
-   * English URL slug
-   */
-  slugEn?: string | null;
   excerptId?: string | null;
-  excerptEn?: string | null;
   /**
-   * How you author the article body. "Rich text" uses the visual editor; "Markdown" lets you write/paste raw Markdown. The published article uses whichever is selected here.
+   * How you author the article body (both languages). "Rich text" uses the visual editor; "Markdown" lets you write/paste raw Markdown. The published article uses whichever is selected here.
    */
   bodyFormat?: ('richtext' | 'markdown') | null;
   bodyId?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  bodyEn?: {
     root: {
       type: string;
       children: {
@@ -215,18 +190,76 @@ export interface Post {
    * Markdown source: headings (## / ###), lists, links, bold/italic, blockquotes, images, code.
    */
   bodyMarkdownId?: string | null;
+  titleEn?: string | null;
+  excerptEn?: string | null;
+  bodyEn?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   /**
    * Optional English translation, in Markdown.
    */
   bodyMarkdownEn?: string | null;
   featuredImage?: (number | null) | Media;
   featuredImageAlt?: string | null;
+  /**
+   * Service promoted in the image card, mid-article CTA and sidebar. Blank = the one that matches the category.
+   */
+  relatedService?: ('seo' | 'localseo' | 'ads' | 'social' | 'creative' | 'website' | 'ai') | null;
+  showFeatureCard?: boolean | null;
+  midCta?: {
+    show?: boolean | null;
+    position?: ('middle' | 'p2' | 'p3' | 'p4' | 'p5' | 'end') | null;
+  };
+  /**
+   * Shown under the article and added to Google as FAQ structured data.
+   */
+  faqId?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  faqEn?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
   metaTitle?: string | null;
   metaDescription?: string | null;
   metaTitleEn?: string | null;
   metaDescriptionEn?: string | null;
+  /**
+   * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+   */
   ogImage?: (number | null) | Media;
   focusKeyword?: string | null;
+  /**
+   * Only for articles that should not appear in search results. Also leaves it out of the sitemap.
+   */
+  noIndex?: boolean | null;
+  /**
+   * URL path. Auto-generated from the title if left blank.
+   */
+  slug?: string | null;
+  /**
+   * English URL slug
+   */
+  slugEn?: string | null;
   /**
    * auto-calculated
    */
@@ -309,6 +342,20 @@ export interface User {
    * Author avatar shown on blog posts.
    */
   avatar?: (number | null) | Media;
+  /**
+   * Shown in the article author widget, e.g. "Kepala SEO".
+   */
+  jobTitleId?: string | null;
+  jobTitleEn?: string | null;
+  /**
+   * One or two sentences, shown in the author widget.
+   */
+  bioId?: string | null;
+  bioEn?: string | null;
+  /**
+   * LinkedIn or personal page (https://...). Used as the author link and in structured data.
+   */
+  profileUrl?: string | null;
   role?: ('ADMIN' | 'EDITOR' | 'VIEWER') | null;
   updatedAt: string;
   createdAt: string;
@@ -898,24 +945,47 @@ export interface PayloadMigration {
  */
 export interface PostsSelect<T extends boolean = true> {
   titleId?: T;
-  titleEn?: T;
-  slug?: T;
-  slugEn?: T;
   excerptId?: T;
-  excerptEn?: T;
   bodyFormat?: T;
   bodyId?: T;
-  bodyEn?: T;
   bodyMarkdownId?: T;
+  titleEn?: T;
+  excerptEn?: T;
+  bodyEn?: T;
   bodyMarkdownEn?: T;
   featuredImage?: T;
   featuredImageAlt?: T;
+  relatedService?: T;
+  showFeatureCard?: T;
+  midCta?:
+    | T
+    | {
+        show?: T;
+        position?: T;
+      };
+  faqId?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  faqEn?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
   metaTitle?: T;
   metaDescription?: T;
   metaTitleEn?: T;
   metaDescriptionEn?: T;
   ogImage?: T;
   focusKeyword?: T;
+  noIndex?: T;
+  slug?: T;
+  slugEn?: T;
   readingTime?: T;
   wordCount?: T;
   status?: T;
@@ -1222,6 +1292,11 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   avatar?: T;
+  jobTitleId?: T;
+  jobTitleEn?: T;
+  bioId?: T;
+  bioEn?: T;
+  profileUrl?: T;
   role?: T;
   updatedAt?: T;
   createdAt?: T;
