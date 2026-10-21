@@ -59,6 +59,7 @@ function build(name: string, samples: unknown[], path: string, ovs: Overrides, i
     loc = !inLoc
   } else if (xs.length && xs.every(Array.isArray)) {
     const els = present(xs.flat())
+    if (els.some(isL)) throw new Error(`CMS fields: "${path}" is an array of { id, en } values; use rows like { text: { id, en } }`)
     let fields: Field[]
     if (els.length && els.every((e) => typeof e === 'string' || typeof e === 'number')) {
       fields = [leaf('text', els, ovs[`${path}.text`] ?? {})!]
