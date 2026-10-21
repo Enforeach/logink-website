@@ -1,13 +1,115 @@
-// Pages → Contact. Phase 1B adds the content tabs (docs/cms/PLAN.md).
+// Pages → Contact (src/content/contact.ts). Tabs follow the page from top to bottom.
+import '@/content/contact'
 import { page } from '@/lib/services'
 import { pageGlobal, pageTab, seoOf } from '../define'
+
+const KEEP = 'Keep the option codes as they are: the contact form and the reports depend on them. Only the visible text can change.'
 
 export const ContactPage = pageGlobal({
   slug: 'contact-page',
   label: 'Contact',
   group: 'Pages',
-  description: 'The contact page and its form.',
+  description: 'The contact page: how to reach Logink, the short form and what happens after a message. Switch the language at the top right to edit Bahasa Indonesia or English.',
   path: page('contact').path,
   seo: seoOf(page('contact')),
-  tabs: [pageTab(page('contact'))],
+  tabs: [
+    pageTab(page('contact')),
+    {
+      name: 'contact',
+      label: 'Top & contact options',
+      description: 'The opening line and the four ways to reach us: WhatsApp (one service or 360° campaign), the form and email. The official WhatsApp number and the email address are fixed in the site settings.',
+      ov: {
+        lede: { label: 'Opening line', description: 'The large sentence under the heading.' },
+        official: { label: 'Label above the WhatsApp number' },
+        channelsH: { label: 'Heading of the contact options' },
+        waName: { label: 'WhatsApp card: title' },
+        waNote: { label: 'WhatsApp card: response time', description: 'Keep it true: this is a promise to visitors.' },
+        waAsk: { label: 'WhatsApp card: question above the two choices' },
+        oneEyebrow: { label: 'Choice 1: small label' },
+        oneText: { label: 'Choice 1: text' },
+        oneCta: { label: 'Choice 1: button text' },
+        c360Eyebrow: { label: 'Choice 2 (360° campaign): small label' },
+        c360Text: { label: 'Choice 2 (360° campaign): text' },
+        c360Cta: { label: 'Choice 2 (360° campaign): button text' },
+        formName: { label: 'Form card: title' },
+        formNote: { label: 'Form card: note', description: 'Keep the response time true.' },
+        formCta: { label: 'Form card: link text', description: 'Scrolls down to the form.' },
+        emailName: { label: 'Email card: title' },
+        emailNote: { label: 'Email card: response time', description: 'Keep it true: this is a promise to visitors.' },
+      },
+    },
+    {
+      name: 'formIntro',
+      label: 'Form heading',
+      description: 'The heading and short intro above the form.',
+      ov: {
+        formH: { label: 'Heading' },
+        formLede: { label: 'Intro text' },
+      },
+    },
+    {
+      name: 'form',
+      label: 'Form labels & messages',
+      description: 'Every label, hint and message inside the form. This tab is written per language: switch the language at the top right to edit the other one.',
+      rootLocalized: true,
+      ov: {
+        name: { label: 'Name field: label' },
+        phone: { label: 'WhatsApp field: label' },
+        email: { label: 'Email field: label' },
+        message: { label: 'Message field: label' },
+        req: { label: 'Word for "required"', description: 'Shown next to the required fields.' },
+        phoneHint: { label: 'WhatsApp field: example' },
+        messagePh: { label: 'Message field: placeholder', description: 'The grey text inside the empty box.' },
+        services: { label: 'Services: title' },
+        more: { label: 'Extra details: title' },
+        company: { label: 'Company field: label' },
+        budget: { label: 'Budget field: label' },
+        timeline: { label: 'Start time field: label' },
+        choose: { label: 'Drop-down: "Choose" text' },
+        submit: { label: 'Send button' },
+        sending: { label: 'Send button while sending' },
+        eName: { label: 'Error: name too short' },
+        ePhone: { label: 'Error: WhatsApp number empty' },
+        eEmail: { label: 'Error: email not valid' },
+        eMessage: { label: 'Error: message too short' },
+        fail: { label: 'Message when sending failed' },
+        tooMany: { label: 'Message when too many attempts' },
+        okH: { label: 'After sending: heading' },
+        okP: { label: 'After sending: text' },
+        okWa: { label: 'After sending: WhatsApp button' },
+        noscript: { label: 'Message when JavaScript is off' },
+      },
+    },
+    {
+      name: 'budget',
+      label: 'Budget choices',
+      description: 'The drop-down for the monthly budget. ' + KEEP,
+      ov: {
+        options: { label: 'Choices', description: 'Do not add or remove rows unless a developer has agreed it.' },
+        'options.value': { label: 'Code (do not change)', readOnly: true },
+        'options.label': { label: 'Visible text' },
+      },
+    },
+    {
+      name: 'timeline',
+      label: 'Start time choices',
+      description: 'The drop-down for when to start. ' + KEEP,
+      ov: {
+        options: { label: 'Choices', description: 'Do not add or remove rows unless a developer has agreed it.' },
+        'options.value': { label: 'Code (do not change)', readOnly: true },
+        'options.label': { label: 'Visible text' },
+      },
+    },
+    {
+      name: 'next',
+      label: 'What happens next',
+      description: 'The numbered steps beside the form.',
+      ov: {
+        stepsH: { label: 'Heading' },
+        stepsLede: { label: 'Intro text' },
+        steps: { label: 'The steps', description: 'One row per step; they are numbered automatically.' },
+        'steps.text': { label: 'Step' },
+      },
+    },
+  ],
 })

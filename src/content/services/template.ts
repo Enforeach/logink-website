@@ -1,8 +1,9 @@
 // Fixed labels of the service template (BUILD §3.8 headings, §11 6.1). `{name}` = the registry name.
 // Chrome labels (Diperbarui, Minta Penawaran, Beranda…) stay in components/ds/strings.ts.
 import type { L, Locale } from '@/lib/services'
+import { live } from '@/cms/store'
 
-export const TPL = {
+export const TPL = live('ui-labels', 'serviceTemplate', {
   answer: { id: 'Jawaban singkat', en: 'Short answer' },
   facts: { id: 'Ringkasan fakta', en: 'Key facts' },
   priceRow: { id: 'Harga', en: 'Price' },
@@ -23,7 +24,7 @@ export const TPL = {
   faq: { id: 'Tanya jawab seputar {name}', en: '{name}: questions and answers' },
   sources: { id: 'Sumber', en: 'Sources' },
   pairs: { id: 'Cocok dikombinasikan dengan', en: 'Pairs well with' },
-} satisfies Record<string, L>
+} satisfies Record<string, L>)
 
 /** TPL string with {name}/{tier} filled. */
 export const tpl = (k: keyof typeof TPL, l: Locale, v: Record<string, string> = {}) =>

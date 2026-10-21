@@ -1,24 +1,29 @@
 // Portfolio hub + case page UI copy (BUILD §3.9 portfolio, case). Case titles, bodies and numbers are
 // CMS-owned (Payload); this file holds only the frame around them.
 import type { L } from '@/lib/services'
+import { live } from '@/cms/store'
+import { fmt } from '@/cms/merge'
+import { view } from '@/cms/view'
 
-export const PORTFOLIO = {
+const LIST = live('portfolio-page', 'list', {
   crumb: { id: 'Portofolio', en: 'Portfolio' } as L,
   word: { id: 'Portofolio', en: 'Portfolio' } as L,
   // soft-modern pass: one line (the 'services without a case' section was cut as a duplicate of the footer/hub)
-  lede: (n: number): L => ({
-    id: `${n} studi kasus SEO publik, masing-masing dengan periode dan data Google Search Console.`,
-    en: `${n} public SEO case studies, each with its period and Google Search Console data.`,
-  }),
+  // template: {n} = number of case studies
+  ledeTpl: {
+    id: '{n} studi kasus SEO publik, masing-masing dengan periode dan data Google Search Console.',
+    en: '{n} public SEO case studies, each with its period and Google Search Console data.',
+  } as L,
   casesH: { id: 'Studi kasus', en: 'Case studies' } as L,
   emptyH: { id: 'Studi kasus sedang diperbarui', en: 'Case studies are being updated' } as L,
   empty: {
     id: 'Belum ada studi kasus yang bisa kami tampilkan dengan data yang lengkap. Sementara itu, inilah cara kami mengukur hasil untuk setiap klien.',
     en: 'There is no case study we can show with complete data right now. Meanwhile, here is how we measure results for every client.',
   } as L,
-}
+})
+export const PORTFOLIO = view(LIST, { lede: (n: number): L => ({ id: fmt(LIST.ledeTpl.id, { n }), en: fmt(LIST.ledeTpl.en, { n }) }) })
 
-export const CASE = {
+const CASE_LIVE = live('portfolio-page', 'case', {
   sections: {
     ringkasan: { id: 'Ringkasan', en: 'Summary' },
     tantangan: { id: 'Tantangan', en: 'The challenge' },
@@ -32,7 +37,9 @@ export const CASE = {
   timeline: { id: 'Perjalanan proyek', en: 'Project timeline' } as L,
   period: { id: 'Periode', en: 'Period' } as L,
   source: { id: 'Sumber: Google Search Console', en: 'Source: Google Search Console' } as L,
-  months: (n: number): L => ({ id: `${n} bulan`, en: `${n} month${n === 1 ? '' : 's'}` }),
+  // templates: {n} = number of months
+  monthOne: { id: '{n} bulan', en: '{n} month' } as L,
+  monthMany: { id: '{n} bulan', en: '{n} months' } as L,
   within: { id: 'dalam', en: 'in' } as L,
   related: { id: 'Studi kasus lain', en: 'More case studies' } as L,
   pairs: { id: 'Layanan terkait', en: 'Related services' } as L,
@@ -46,7 +53,13 @@ export const CASE = {
     id: 'Ceritakan bisnis Anda lewat WhatsApp. Kami jelaskan apa yang realistis untuk bisnis Anda dan bagaimana kami mengukurnya.',
     en: 'Tell us about your business on WhatsApp. We will explain what is realistic for your business and how we measure it.',
   } as L,
-}
+})
+export const CASE = view(CASE_LIVE, {
+  months: (n: number): L => {
+    const t = n === 1 ? CASE_LIVE.monthOne : CASE_LIVE.monthMany
+    return { id: fmt(t.id, { n }), en: fmt(t.en, { n }) }
+  },
+})
 
 // Known CMS metric labels (often English in the ID fields) → locale labels. Unknown labels pass through.
 export const METRIC_LABELS: [RegExp, L][] = [

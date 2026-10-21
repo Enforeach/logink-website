@@ -2,13 +2,30 @@
 // Kedai Contoh, contohkedai.id, @kedaicontoh, Brand A/B/C. No dates, clock stamps, "Live" badges or brand chrome.
 // Customer utterances (the search query, chat lines, the review, prompts) stay Indonesian in both locales;
 // UI labels, captions and annotations are translated (03a §3.6).
+// CMS: Illustrations (sample data), one live() object per illustration. The fictional shop name, domain, handle and
+// the example query/question stay in code: other illustrations and the HTML references share them.
 import type { L, Locale } from '@/lib/services'
+import { live } from '@/cms/store'
+import { byLocale } from '@/cms/view'
 
 type LL = Record<Locale, string[]>
 
-export const MOCK_LABEL: L = { id: 'Ilustrasi · data contoh', en: 'Illustration · sample data' }
-export const MOCK_LABEL_PHOTO: L = { id: 'Ilustrasi · data contoh · foto: ilustrasi AI', en: 'Illustration · sample data · photos: AI illustration' }
-export const SAMPLE: L = { id: 'contoh', en: 'sample' }
+const COMMON = live('instruments-content', 'common', {
+  mockLabel: { id: 'Ilustrasi · data contoh', en: 'Illustration · sample data' } as L,
+  mockLabelPhoto: { id: 'Ilustrasi · data contoh · foto: ilustrasi AI', en: 'Illustration · sample data · photos: AI illustration' } as L,
+  sample: { id: 'contoh', en: 'sample' } as L,
+  annotToggle: { id: 'Tampilkan anotasi', en: 'Show annotations' } as L,
+  // E5 annotation layer (ProofLoupe): three notes, in this order
+  annot: {
+    id: ['sumber: halaman website · paragraf jawaban 52 kata · diperbarui', 'entitas: Google Business Profile', 'sebutan: artikel lokal'],
+    en: ['source: website page · 52-word answer paragraph · updated', 'entity: Google Business Profile', 'mention: local article'],
+  } as LL,
+})
+export const MOCK_LABEL: L = byLocale((l) => COMMON.mockLabel[l])
+export const MOCK_LABEL_PHOTO: L = byLocale((l) => COMMON.mockLabelPhoto[l])
+export const SAMPLE: L = byLocale((l) => COMMON.sample[l])
+export const ANNOT_TOGGLE: L = byLocale((l) => COMMON.annotToggle[l])
+export const ANNOT: LL = byLocale((l) => COMMON.annot[l])
 
 export const KEDAI = 'Kedai Contoh'
 export const DOMAIN = 'contohkedai.id'
@@ -17,7 +34,7 @@ export const QUERY = 'kopi susu gula aren dekat Tebet'
 export const AI_QUESTION = 'Kopi susu enak di Tebet yang buka sampai malam?'
 
 // E1 SERP -> Maps
-export const SERP = {
+export const SERP = live('instruments-content', 'serp', {
   url: 'contohkedai.id › menu',
   title: 'Kedai Contoh · Tebet',
   text: { id: 'Kopi susu gula aren dan roti bakar. Pesan antar se-Tebet lewat WhatsApp.', en: 'Palm-sugar iced coffee and toast. Delivery across Tebet via WhatsApp.' } as L,
@@ -29,22 +46,22 @@ export const SERP = {
     { name: 'Brand A', note: { id: 'Kedai kopi', en: 'Coffee shop' } as L },
     { name: 'Brand B', note: { id: 'Kafe', en: 'Café' } as L },
   ],
-}
+})
 
 // E2 Instagram grid + review
-export const IG = {
+export const IG = live('instruments-content', 'instagram', {
   bio: { id: 'Kedai kopi di Tebet · antar se-Tebet', en: 'Coffee shop in Tebet · delivery across Tebet' } as L,
   follow: { id: 'Ikuti', en: 'Follow' } as L,
-  tiles: [{ id: 'Promo', en: 'Promo' }, { id: 'Menu baru', en: 'New menu' }, { id: 'Ulasan', en: 'Reviews' }] as L[],
-}
-export const REVIEW = {
+  tiles: { id: ['Promo', 'Menu baru', 'Ulasan'], en: ['Promo', 'New menu', 'Reviews'] } as LL,
+})
+export const REVIEW = live('instruments-content', 'review', {
   who: 'R.',
   text: 'Kopinya enak, tempatnya bersih.',
   kind: { id: 'Ulasan pelanggan', en: 'Customer review' } as L,
-}
+})
 
 // E3 website frame + PageSpeed-style rings
-export const SITE = {
+export const SITE = live('instruments-content', 'site', {
   nav: { id: ['Menu', 'Lokasi', 'Tentang'], en: ['Menu', 'Location', 'About'] } as LL,
   sub: { id: 'Kopi susu gula aren, antar se-Tebet.', en: 'Palm-sugar iced coffee, delivered across Tebet.' } as L,
   cta: { id: 'Pesan via WhatsApp', en: 'Order on WhatsApp' } as L,
@@ -55,10 +72,10 @@ export const SITE = {
     { k: { id: 'SEO', en: 'SEO' } as L, v: 100 },
   ],
   gaugeTag: { id: 'Skor contoh', en: 'Sample scores' } as L,
-}
+})
 
 // E4 campaign funnel (relative bars, no absolute numbers)
-export const FUNNEL = {
+export const FUNNEL = live('instruments-content', 'funnel', {
   title: { id: 'Corong kampanye · tanpa angka absolut', en: 'Campaign funnel · no absolute numbers' } as L,
   steps: [
     { k: { id: 'Tayangan', en: 'Impressions' } as L, v: 1 },
@@ -68,11 +85,11 @@ export const FUNNEL = {
   ],
   chips: ['Google Ads', 'Meta Ads'],
   pill: { id: 'Chat WhatsApp', en: 'WhatsApp chat' } as L,
-}
+})
 
 // E5 AI answer + annotation layer (ProofLoupe)
 export const ENGINES = ['ChatGPT', 'Gemini', 'AI Mode', 'Perplexity']
-export const AI = {
+export const AI = live('instruments-content', 'aiAnswer', {
   answer: {
     id: 'Kedai Contoh di Tebet sering direkomendasikan untuk kopi susu gula aren dan buka sampai malam. Ulasan menyebut kopinya enak dan tempatnya bersih. Pesanan antar bisa lewat WhatsApp.',
     en: 'Kedai Contoh in Tebet is often recommended for palm-sugar iced coffee and stays open into the evening. Reviews say the coffee is good and the place is clean. Delivery orders go through WhatsApp.',
@@ -83,16 +100,10 @@ export const AI = {
     { n: 2, t: { id: DOMAIN, en: DOMAIN } as L, hit: true },
     { n: 3, t: { id: 'profil bisnis', en: 'business profile' } as L },
   ],
-}
-export const ANNOT = [
-  { id: 'sumber: halaman website · paragraf jawaban 52 kata · diperbarui', en: 'source: website page · 52-word answer paragraph · updated' },
-  { id: 'entitas: Google Business Profile', en: 'entity: Google Business Profile' },
-  { id: 'sebutan: artikel lokal', en: 'mention: local article' },
-] as L[]
-export const ANNOT_TOGGLE: L = { id: 'Tampilkan anotasi', en: 'Show annotations' }
+})
 
 // E6 prompt tracking, share of voice, crawler log
-export const PROMPTS = {
+export const PROMPTS = live('instruments-content', 'prompts', {
   caption: { id: 'Pelacakan prompt · tiap prompt dijalankan 3×', en: 'Prompt tracking · each prompt run 3×' } as L,
   head: { id: ['Prompt', 'Mesin', 'Disebut?', 'URL dikutip', 'Posisi'], en: ['Prompt', 'Engine', 'Mentioned?', 'Cited URL', 'Position'] } as LL,
   yes: { id: 'Ya', en: 'Yes' } as L,
@@ -104,13 +115,13 @@ export const PROMPTS = {
     { q: 'kopi Tebet yang bisa antar', e: 'Perplexity', hit: true, url: 'contohkedai.id/antar', pos: '3–4' },
     { q: 'rekomendasi kopi gula aren Tebet', e: 'ChatGPT', hit: true, url: 'contohkedai.id/faq', pos: '2–4' },
   ],
-}
-export const SOV = {
+})
+export const SOV = live('instruments-content', 'shareOfVoice', {
   title: { id: 'Pangsa sebutan di jawaban AI', en: 'Share of voice in AI answers' } as L,
   note: { id: 'Persentase sebutan per bulan · contoh', en: 'Share of mentions per month · sample' } as L,
   rows: [['Kedai Contoh', 38], ['Brand A', 27], ['Brand B', 21], ['Brand C', 14]] as [string, number][],
-}
-export const CRAWLER = {
+})
+export const CRAWLER = live('instruments-content', 'crawler', {
   title: { id: 'Log crawler AI', en: 'AI crawler log' } as L,
   pause: { id: 'Jeda log', en: 'Pause log' } as L,
   region: { id: 'Log crawler, bergulir', en: 'Crawler log, scrolling' } as L,
@@ -122,10 +133,10 @@ export const CRAWLER = {
     'Bingbot GET /menu/es-kopi-susu 200',
     'GPTBot GET /tentang 200',
   ],
-}
+})
 
 // E7 query fan-out
-export const FANOUT = {
+export const FANOUT = live('instruments-content', 'fanout', {
   title: { id: 'Satu pertanyaan, empat sub-kueri', en: 'One question, four sub-queries' } as L,
   subs: [
     { q: 'kedai kopi Tebet jam buka', src: { id: 'website', en: 'website' } as L },
@@ -133,10 +144,10 @@ export const FANOUT = {
     { q: 'ulasan kedai kopi Tebet', src: { id: 'ulasan', en: 'reviews' } as L },
     { q: 'kedai kopi dekat stasiun Tebet', src: { id: 'artikel lokal', en: 'local article' } as L },
   ],
-}
+})
 
 // E8 JSON-LD fragment: [indent, key, value, trailing, highlighted]
-export const JSONLD = {
+export const JSONLD = live('instruments-content', 'structuredData', {
   title: { id: 'Data terstruktur · LocalBusiness', en: 'Structured data · LocalBusiness' } as L,
   lines: [
     [0, '', '{', '', false],
@@ -153,10 +164,10 @@ export const JSONLD = {
     [1, 'sameAs', 'https://example.com', '', false],
     [0, '', '}', '', false],
   ] as [number, string, string, string, boolean][],
-}
+})
 
 // E9 report frame + MeasureBlock
-export const REPORT = {
+export const REPORT = live('instruments-content', 'report', {
   title: { id: 'Laporan bulanan · contoh', en: 'Monthly report · sample' } as L,
   panels: [
     { src: 'Google Search Console', k: { id: 'impresi AI generatif', en: 'generative AI impressions' } as L, v: { id: '1.200–1.500', en: '1,200–1,500' } as L },
@@ -165,42 +176,43 @@ export const REPORT = {
   ],
   goal: { k: { id: 'Klik WhatsApp', en: 'WhatsApp clicks' } as L, v: '12–18' },
   foot: { id: 'Laporan contoh. Angka ilustrasi.', en: 'Sample report. Illustrative numbers.' } as L,
-}
-export const MEASURE = {
+})
+export const MEASURE = live('instruments-content', 'measure', {
   heading: { id: 'Cara kami mengukur', en: 'How we measure' } as L,
   text: {
     id: 'Kami mengukur dari data Anda sendiri: Google Analytics 4, Google Search Console, dan statistik Google Business Profile atau akun social media sesuai layanannya. Setiap layanan bulanan punya laporan bulanan. Setiap angka ditulis bersama periode dan sumbernya, lalu dibandingkan dengan periode yang sama panjangnya.',
     en: 'We measure from your own data: Google Analytics 4, Google Search Console and the Google Business Profile or social media insights that fit the service. Every monthly service comes with a monthly report. Each number is written with its period and source, then compared with a period of the same length.',
   } as L,
-}
+})
 
 // E10 phone + E11 ad -> chat (chat lines are customer/kedai utterances: Indonesian in both locales)
-export const CHAT = {
+export const CHAT = live('instruments-content', 'chat', {
   out: 'Halo, masih buka? Mau pesan 2 kopi susu.',
   reply: 'Masih, Kak! Diantar 20 menit ya.',
   out2: 'Siap, saya tunggu.',
-}
-export const ADCHAT = {
+})
+export const ADCHAT = live('instruments-content', 'adChat', {
   sponsored: { id: 'Bersponsor', en: 'Sponsored' } as L,
   headline: { id: 'Kopi susu 2 gelas, antar ke Tebet', en: 'Two iced coffees, delivered in Tebet' } as L,
   cta: { id: 'Kirim pesan WhatsApp', en: 'Send a WhatsApp message' } as L,
-}
+})
 
 // E12 content calendar
-export const CALENDAR = {
+export const CALENDAR = live('instruments-content', 'calendar', {
   title: { id: 'Kalender konten · minggu contoh', en: 'Content calendar · sample week' } as L,
   days: { id: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'], en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] } as LL,
-  items: [
-    { id: 'Reels', en: 'Reels' }, { id: 'Story', en: 'Story' }, { id: 'Carousel', en: 'Carousel' }, { id: 'Foto produk', en: 'Product photo' },
-    { id: 'Reels', en: 'Reels' }, { id: 'Story', en: 'Story' }, { id: 'Carousel', en: 'Carousel' },
-  ] as L[],
+  // one entry per day, Monday first
+  items: {
+    id: ['Reels', 'Story', 'Carousel', 'Foto produk', 'Reels', 'Story', 'Carousel'],
+    en: ['Reels', 'Story', 'Carousel', 'Product photo', 'Reels', 'Story', 'Carousel'],
+  } as LL,
   open: 3, // the expanded day (Kam / Thu)
   draft: { id: 'Draf caption · contoh', en: 'Draft caption · sample' } as L,
   caption: { id: 'Es kopi susu gula aren, antar se-Tebet.', en: 'Iced palm-sugar coffee, delivered across Tebet.' } as L,
-}
+})
 
 // Peta kampanye 360° UI strings (data: content/campaign.ts, owner Service)
-export const CMAP = {
+export const CMAP = live('instruments-content', 'campaignMap', {
   legend: { id: 'Sorot satu kanal', en: 'Highlight one channel' } as L,
   all: { id: 'Semua', en: 'All' } as L,
   caption: { id: 'Posisi di cincin = tahap utama setiap layanan.', en: "Position on the ring = each service's main stage." } as L,
@@ -209,4 +221,4 @@ export const CMAP = {
     yes: { id: 'Data kembali ke laporan, lalu ke rencana berikutnya', en: 'Data returns to the report, then to the next plan' } as L,
     no: { id: 'Data kembali ke review bulanan, lalu ke rencana berikutnya', en: 'Data returns to the monthly review, then to the next plan' } as L,
   },
-}
+})

@@ -1,4 +1,244 @@
-// Illustrations (shared). Phase 1B builds it (docs/cms/PLAN.md); null = not in the CMS yet.
-import type { GlobalConfig } from 'payload'
+// Shared → Illustrations (sample data): the texts drawn inside the small illustrations on service pages
+// (src/content/instruments.ts). Fictional on purpose: the coffee shop "Kedai Contoh" and its numbers are samples.
+import '@/content/instruments'
+import { pageGlobal } from '../define'
 
-export const InstrumentsContent: GlobalConfig | null = null
+const SAMPLE = 'Sample text inside an illustration. '
+const ROWS = 'Do not add or remove rows: the illustration is drawn for this exact number.'
+
+export const InstrumentsContent = pageGlobal({
+  slug: 'instruments-content',
+  label: 'Illustrations (sample data)',
+  group: 'Shared',
+  description: 'The made-up sample texts and numbers drawn inside the illustrations on the service pages (a search result, a chat, a report…). They show how Logink works with a fictional coffee shop. The shop name, web address and Instagram handle are fixed. Switch the language at the top right to edit Bahasa Indonesia or English.',
+  path: null,
+  tabs: [
+    {
+      name: 'common',
+      label: 'Shared labels',
+      description: 'Labels that appear on many illustrations.',
+      ov: {
+        mockLabel: { label: 'Caption: "sample data"', description: 'Small label that tells visitors the illustration is made up.' },
+        mockLabelPhoto: { label: 'Caption: "sample data, AI photos"', description: 'The same caption for illustrations that show AI-made photos.' },
+        sample: { label: 'Word "sample"' },
+        annotToggle: { label: 'Button: show annotations' },
+        annot: { label: 'Annotation notes', description: 'Three notes drawn on the AI answer, in this order. ' + ROWS },
+        'annot.text': { label: 'Note' },
+      },
+    },
+    {
+      name: 'serp',
+      label: 'Search result & map',
+      description: SAMPLE + 'A Google result and map listing.',
+      ov: {
+        url: { label: 'Result: web address line' },
+        title: { label: 'Result: title' },
+        text: { label: 'Result: description' },
+        rank: { label: 'Label: position' },
+        map: { label: 'Label: map' },
+        open: { label: 'Label: open' },
+        places: { label: 'Map listings', description: ROWS },
+        'places.name': { label: 'Business name' },
+        'places.note': { label: 'Business type' },
+        'places.hit': { skip: true },
+      },
+    },
+    {
+      name: 'instagram',
+      label: 'Instagram grid',
+      description: SAMPLE + 'An Instagram profile.',
+      ov: {
+        bio: { label: 'Profile bio' },
+        follow: { label: 'Follow button' },
+        tiles: { label: 'Text on the three picture tiles', description: ROWS },
+        'tiles.text': { label: 'Tile text' },
+      },
+    },
+    {
+      name: 'review',
+      label: 'Customer review',
+      description: SAMPLE + 'A Google review.',
+      ov: {
+        who: { label: 'Reviewer initial' },
+        text: { label: 'Review text', description: 'Written by a customer, so it stays in Indonesian in both languages.' },
+        kind: { label: 'Label above the review' },
+      },
+    },
+    {
+      name: 'site',
+      label: 'Website & speed score',
+      description: SAMPLE + 'A shop website with speed scores.',
+      ov: {
+        nav: { label: 'Website menu', description: ROWS },
+        'nav.text': { label: 'Menu item' },
+        sub: { label: 'Website tagline' },
+        cta: { label: 'Website button' },
+        menu: { label: 'Website menu items', description: ROWS },
+        'menu.text': { label: 'Item' },
+        gauges: { label: 'Score circles', description: ROWS },
+        'gauges.k': { label: 'Score name' },
+        'gauges.v': { label: 'Score (0 to 100)' },
+        gaugeTag: { label: 'Label under the scores' },
+      },
+    },
+    {
+      name: 'funnel',
+      label: 'Campaign funnel',
+      description: SAMPLE + 'Impressions down to orders. The bar lengths are fixed in code.',
+      ov: {
+        title: { label: 'Title' },
+        steps: { label: 'Funnel steps', description: ROWS },
+        'steps.k': { label: 'Step name' },
+        'steps.v': { skip: true },
+        chips: { skip: true },
+        pill: { label: 'Chat bubble text' },
+      },
+    },
+    {
+      name: 'aiAnswer',
+      label: 'AI answer',
+      description: SAMPLE + 'An AI assistant answering a question about the coffee shop.',
+      ov: {
+        answer: { label: 'AI answer text' },
+        sources: { label: 'Heading of the sources' },
+        cites: { label: 'Cited sources', description: ROWS },
+        'cites.n': { skip: true },
+        'cites.hit': { skip: true },
+        'cites.t': { label: 'Source name' },
+      },
+    },
+    {
+      name: 'prompts',
+      label: 'Prompt tracking',
+      description: SAMPLE + 'A table of questions asked to AI engines.',
+      ov: {
+        caption: { label: 'Table caption' },
+        head: { label: 'Column headings', description: 'Five headings, in this order. ' + ROWS },
+        'head.text': { label: 'Heading' },
+        yes: { label: 'Word "yes"' },
+        no: { label: 'Word "no"' },
+        rows: { label: 'Table rows', description: ROWS },
+        'rows.q': { label: 'Question', description: 'Written by a customer, so it stays in Indonesian in both languages.' },
+        'rows.e': { skip: true },
+        'rows.hit': { skip: true },
+        'rows.url': { label: 'Cited address' },
+        'rows.pos': { label: 'Position' },
+      },
+    },
+    {
+      name: 'shareOfVoice',
+      label: 'Share of voice',
+      description: SAMPLE + 'Bars comparing how often brands are mentioned. The brands and percentages are fixed in code.',
+      ov: {
+        title: { label: 'Title' },
+        note: { label: 'Note under the bars' },
+        rows: { skip: true },
+      },
+    },
+    {
+      name: 'crawler',
+      label: 'AI crawler log',
+      description: SAMPLE + 'A scrolling log of AI robots visiting the site. The log lines are fixed in code.',
+      ov: {
+        title: { label: 'Title' },
+        pause: { label: 'Pause button' },
+        region: { label: 'Log: name for screen readers' },
+        lines: { skip: true },
+      },
+    },
+    {
+      name: 'fanout',
+      label: 'Question to sub-queries',
+      description: SAMPLE + 'One question split into four searches.',
+      ov: {
+        title: { label: 'Title' },
+        subs: { label: 'The four searches', description: ROWS },
+        'subs.q': { label: 'Search', description: 'Written by a customer, so it stays in Indonesian in both languages.' },
+        'subs.src': { label: 'Where it looks' },
+      },
+    },
+    {
+      name: 'structuredData',
+      label: 'Structured data',
+      description: SAMPLE + 'A code snippet. Only the title is editable; the code is fixed.',
+      ov: {
+        title: { label: 'Title' },
+        lines: { skip: true },
+      },
+    },
+    {
+      name: 'report',
+      label: 'Monthly report',
+      description: SAMPLE + 'A monthly report with made-up ranges.',
+      ov: {
+        title: { label: 'Title' },
+        panels: { label: 'Report panels', description: ROWS },
+        'panels.src': { label: 'Data source' },
+        'panels.k': { label: 'What is measured' },
+        'panels.v': { label: 'Sample range' },
+        goal: { label: 'Goal line' },
+        'goal.k': { label: 'What is measured' },
+        'goal.v': { label: 'Sample range' },
+        foot: { label: 'Footnote' },
+      },
+    },
+    {
+      name: 'measure',
+      label: 'How we measure',
+      description: 'The paragraph "How we measure" shown on service pages.',
+      ov: {
+        heading: { label: 'Heading' },
+        text: { label: 'Paragraph' },
+      },
+    },
+    {
+      name: 'chat',
+      label: 'WhatsApp chat',
+      description: SAMPLE + 'A WhatsApp conversation. Written by the customer and the shop, so it stays in Indonesian in both languages.',
+      ov: {
+        out: { label: 'Customer message' },
+        reply: { label: 'Shop reply' },
+        out2: { label: 'Customer answer' },
+      },
+    },
+    {
+      name: 'adChat',
+      label: 'Ad to chat',
+      description: SAMPLE + 'An ad that leads to a WhatsApp chat.',
+      ov: {
+        sponsored: { label: 'Label "Sponsored"' },
+        headline: { label: 'Ad headline' },
+        cta: { label: 'Ad button' },
+      },
+    },
+    {
+      name: 'calendar',
+      label: 'Content calendar',
+      description: SAMPLE + 'A week of social media posts.',
+      ov: {
+        title: { label: 'Title' },
+        days: { label: 'Day names', description: 'Seven names, Monday first. ' + ROWS },
+        'days.text': { label: 'Day' },
+        items: { label: 'Post type per day', description: 'Seven entries, Monday first. ' + ROWS },
+        'items.text': { label: 'Post type' },
+        open: { skip: true },
+        draft: { label: 'Label above the draft caption' },
+        caption: { label: 'Draft caption' },
+      },
+    },
+    {
+      name: 'campaignMap',
+      label: '360° campaign map',
+      description: 'Labels of the interactive 360° campaign map.',
+      ov: {
+        legend: { label: 'Legend title' },
+        all: { label: 'Button: all channels' },
+        caption: { label: 'Caption' },
+        centreSub: { label: 'Text in the centre' },
+        night: { label: 'Closing line of the cycle' },
+        'night.yes': { label: 'For services with a monthly report' },
+        'night.no': { label: 'For other services' },
+      },
+    },
+  ],
+})

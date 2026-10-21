@@ -19,8 +19,8 @@ export function AnnotationLayer({ locale: l }: { locale: Locale }) {
       <svg className="m-leads" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         {AT.map(({ d: [x1, y1, x2, y2] }, i) => <path key={i} d={`M${x1} ${y1}L${x2} ${y2}`} />)}
       </svg>
-      {ANNOT.map((n, i) => (
-        <p key={n.en} className="m-note" style={AT[i].box}>{n[l]}</p>
+      {ANNOT[l].slice(0, AT.length).map((n, i) => (
+        <p key={i} className="m-note" style={AT[i].box}>{n}</p>
       ))}
     </>
   )
