@@ -39,5 +39,5 @@ export const SiteSettings = pageGlobal({
       },
     },
   ],
-  extraFields: [legacy('siteName'), legacy('tagline'), legacy('contactEmail'), legacy('whatsappNumber'), legacy('instagram'), legacy('address'), legacy('defaultOgImage', 'upload')],
+  extraFields: [{ ...legacy('siteName'), defaultValue: 'Logink' } as never, legacy('tagline'), legacy('contactEmail'), legacy('whatsappNumber'), legacy('instagram'), legacy('address'), legacy('defaultOgImage', 'upload')],
 })

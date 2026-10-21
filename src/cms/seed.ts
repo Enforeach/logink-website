@@ -10,11 +10,9 @@ import type { SeoDefaults } from './define'
 
 type Obj = Record<string, unknown>
 const isObj = (v: unknown): v is Obj => typeof v === 'object' && v !== null && !Array.isArray(v)
-const META = new Set(['id', 'createdAt', 'updatedAt', 'globalType', '_status', 'title', 'key'])
-
-/** null, '', [], or an object of blanks: never edited. */
+/** null, '', [], or an object of blanks: never edited. (A field value, so every key counts except Payload's row id.) */
 export const blank = (v: unknown): boolean =>
-  v === null || v === undefined || v === '' || (Array.isArray(v) ? v.length === 0 : isObj(v) && Object.entries(v).every(([k, x]) => META.has(k) || blank(x)))
+  v === null || v === undefined || v === '' || (Array.isArray(v) ? v.length === 0 : isObj(v) && Object.entries(v).every(([k, x]) => k === 'id' || blank(x)))
 
 function keepRows(fields: Field[], data: Obj, saved: Obj, inLoc: boolean) {
   for (const f of fields) {
