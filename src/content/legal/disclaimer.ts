@@ -3,6 +3,7 @@
 // marks on the service pages, starting prices, no guaranteed results). Have it reviewed by counsel before launch.
 import type { LegalDoc } from './types'
 import type { Locale } from '@/lib/services'
+import { liveDoc } from '@/cms/store'
 
 const doc: Record<Locale, LegalDoc> = {
   id: {
@@ -181,4 +182,4 @@ const doc: Record<Locale, LegalDoc> = {
   },
 }
 
-export default doc
+export default liveDoc('legal-pages', 'disclaimer', 'content', doc)
