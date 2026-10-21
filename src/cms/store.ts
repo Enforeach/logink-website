@@ -17,7 +17,19 @@ type Post = (v: never) => unknown
 export type Entry = ({ kind: 'global'; slug: string; key?: undefined } | { kind: 'doc'; slug: string; key: string }) & { field: string; def: unknown; post?: Post }
 
 export const registry: Entry[] = []
-const scope = cache((): { snap: Snapshot | null; memo: Map<Entry, unknown> } => ({ snap: null, memo: new Map() }))
+type Scope = { snap: Snapshot | null; memo: Map<Entry, unknown> }
+const renderScope = cache((): Scope => ({ snap: null, memo: new Map() }))
+// Route handlers (llms.txt, sitemap) have no React render, so cache() does not scope there. Next exposes
+// AsyncLocalStorage globally on the server; enterScope() gives such a request its own scope. Client bundles and
+// plain scripts have neither, and read the defaults.
+type Als = { getStore(): Scope | undefined; enterWith(s: Scope): void }
+const AlsCtor = (globalThis as { AsyncLocalStorage?: new () => Als }).AsyncLocalStorage
+const als = AlsCtor ? new AlsCtor() : undefined
+const scope = (): Scope => als?.getStore() ?? renderScope()
+/** Called synchronously at the start of loadCms(): outside a React render, open a request scope. */
+export function enterScope() {
+  if (als && !als.getStore() && renderScope() !== renderScope()) als.enterWith({ snap: null, memo: new Map() })
+}
 
 /** The request's snapshot (null before loadCms or outside a request). */
 export const currentSnapshot = () => scope().snap

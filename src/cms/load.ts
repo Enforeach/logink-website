@@ -9,7 +9,7 @@ import { unstable_cache } from 'next/cache'
 import type { Payload } from 'payload'
 import { getPayloadClient } from '@/payload/client'
 import { CMS_GLOBALS, CMS_KEYED } from './docs'
-import { setSnapshot, type Snapshot } from './store'
+import { enterScope, setSnapshot, type Snapshot } from './store'
 import type { Locale } from './merge'
 
 const LOCALES: Locale[] = ['id', 'en']
@@ -30,6 +30,7 @@ const published = unstable_cache(
 
 /** Fill the store for this request. Throws when the DB is unreachable: Next then keeps serving the last good page. */
 export const loadCms = cache(async (): Promise<void> => {
+  enterScope() // before any await: it must land in the caller's async context
   const draft = (await draftMode()).isEnabled
   const payload = draft ? await getPayloadClient() : null
   const get = (kind: 'global' | 'keyed', slug: string, l: Locale) => (payload ? read(payload, kind, slug, l, true) : published(kind, slug, l))

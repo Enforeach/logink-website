@@ -19,7 +19,7 @@ export type Ov = {
   readOnly?: boolean
   /** shorter table name when Payload reports "Exceeded max identifier length" */
   dbName?: string
-  /** anything else, merged last */
+  /** anything else, merged last (`admin` is merged into the generated admin options) */
   extra?: Record<string, unknown>
 }
 export type Overrides = Record<string, Ov>
@@ -80,13 +80,14 @@ function build(name: string, samples: unknown[], path: string, ovs: Overrides, i
     f = leaf(name, xs, ov)
   }
   if (!f) return null
-  const admin = { ...('admin' in f ? f.admin : {}), ...(ov.description && { description: ov.description }), ...(ov.readOnly && { readOnly: true }) }
+  const { admin: exAdmin, ...extra } = (ov.extra ?? {}) as { admin?: object }
+  const admin = { ...('admin' in f ? f.admin : {}), ...(ov.description && { description: ov.description }), ...(ov.readOnly && { readOnly: true }), ...exAdmin }
   return {
     ...f,
     label: ov.label ?? humanize(name),
     ...(loc && { localized: true }),
     ...(Object.keys(admin).length && { admin }),
-    ...ov.extra,
+    ...extra,
   } as Field
 }
 
