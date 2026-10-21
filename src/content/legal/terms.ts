@@ -2,6 +2,7 @@
 // Generated once from git HEAD by the Blog package; the last-updated date is data (old: '1 Mei 2025' / 'May 1, 2025').
 import type { LegalDoc } from './types'
 import type { Locale } from '@/lib/services'
+import { liveDoc } from '@/cms/store'
 
 const doc: Record<Locale, LegalDoc> = {
   "id": {
@@ -428,4 +429,4 @@ const doc: Record<Locale, LegalDoc> = {
   }
 }
 
-export default doc
+export default liveDoc('legal-pages', 'terms', 'content', doc)

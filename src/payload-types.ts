@@ -754,6 +754,60 @@ export interface LegalPage {
      */
     wa?: string | null;
   };
+  /**
+   * Legal text: have changes reviewed before publishing. Switch the language at the top right; each language has its own text.
+   */
+  content?: {
+    /**
+     * Shown as "Last updated" under the heading. Format: YYYY-MM-DD, e.g. 2025-05-01.
+     */
+    updated?: string | null;
+    lede?: string | null;
+    /**
+     * Exactly 3 parts, in order: the text before the bold word, the bold word (e.g. the website name), the text after it.
+     */
+    intro?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Each section becomes a heading in the "On this page" list.
+     */
+    sections?:
+      | {
+          /**
+           * Used in the section link (#id) and the "On this page" list. Filled in automatically for new sections; leave existing ones unchanged.
+           */
+          rowKey?: string | null;
+          /**
+           * Keep the number at the start (e.g. "1. Information We Collect"); the side list hides it.
+           */
+          title?: string | null;
+          /**
+           * Each paragraph has a small heading and its text.
+           */
+          content?:
+            | {
+                subtitle?: string | null;
+                text?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Row 1: the question. Row 2 (optional): the short line under it.
+     */
+    ask?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1281,6 +1335,38 @@ export interface LegalPagesSelect<T extends boolean = true> {
     | {
         h1?: T;
         wa?: T;
+      };
+  content?:
+    | T
+    | {
+        updated?: T;
+        lede?: T;
+        intro?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sections?:
+          | T
+          | {
+              rowKey?: T;
+              title?: T;
+              content?:
+                | T
+                | {
+                    subtitle?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        ask?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
       };
   meta?:
     | T
