@@ -119,6 +119,7 @@ export interface Config {
     'blog-page': BlogPage;
     'portfolio-page': PortfolioPage;
     'not-found-page': NotFoundPage;
+    'campaign-content': CampaignContent;
     'instruments-content': InstrumentsContent;
     'site-settings': SiteSetting;
     'ui-labels': UiLabel;
@@ -131,6 +132,7 @@ export interface Config {
     'blog-page': BlogPageSelect<false> | BlogPageSelect<true>;
     'portfolio-page': PortfolioPageSelect<false> | PortfolioPageSelect<true>;
     'not-found-page': NotFoundPageSelect<false> | NotFoundPageSelect<true>;
+    'campaign-content': CampaignContentSelect<false> | CampaignContentSelect<true>;
     'instruments-content': InstrumentsContentSelect<false> | InstrumentsContentSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'ui-labels': UiLabelsSelect<false> | UiLabelsSelect<true>;
@@ -2120,7 +2122,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * The homepage.
+ * The homepage. Tabs run in page order, top to bottom. Use the language picker (top right) to edit Bahasa Indonesia and English.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page".
@@ -2136,6 +2138,361 @@ export interface HomePage {
      * Pre-filled text when a visitor taps WhatsApp on this page.
      */
     wa?: string | null;
+  };
+  /**
+   * The first screen: the big lines, the sentence under them and the intro video button labels.
+   */
+  hero?: {
+    kicker?: string | null;
+    /**
+     * Read together they are the page H1 (the Page tab). Keep four lines.
+     */
+    lines?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    sentence?: string | null;
+    /**
+     * Read by screen readers on the pause/play control of the hero video.
+     */
+    filmLabels?: {
+      pause?: string | null;
+      play?: string | null;
+    };
+  };
+  servicesH?: {
+    label?: string | null;
+    h2?: string | null;
+  };
+  /**
+   * Shown on each service card. Also listed on the About page.
+   */
+  outcome?: {
+    seo?: string | null;
+    localseo?: string | null;
+    ads?: string | null;
+    social?: string | null;
+    creative?: string | null;
+    website?: string | null;
+    ai?: string | null;
+  };
+  /**
+   * The "one campaign, every channel" section. The four pillar titles come from Shared → 360° campaign.
+   */
+  c360?: {
+    h2?: string | null;
+    lead1?: string | null;
+    lead4?: string | null;
+    pillarsLabel?: string | null;
+    /**
+     * Four lines, in the order of the pillars (Shared → 360° campaign → Pillars). Keep four.
+     */
+    pillarLine?:
+      | {
+          line?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    one?: string | null;
+    /**
+     * Read by screen readers on the pause/play control.
+     */
+    video?: {
+      pause?: string | null;
+      play?: string | null;
+    };
+  };
+  /**
+   * The "how we work" steps, in three groups. Also used on the About page and the SEO service page.
+   */
+  process?: {
+    label?: string | null;
+    h2?: string | null;
+    lead?: string | null;
+    /**
+     * Three groups: before signing, your decision, after approval. Keep three.
+     */
+    groups?:
+      | {
+          label?: string | null;
+          steps?:
+            | {
+                t?: string | null;
+                d?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * The heading texts around the case study row. The cases themselves are in Blog & Portfolio → Case studies.
+   */
+  proof?: {
+    label?: string | null;
+    h2?: string | null;
+    lede?: string | null;
+    all?: string | null;
+  };
+  faqH?: string | null;
+  faq?:
+    | {
+        q?: string | null;
+        /**
+         * 40 to 80 words; the first sentence should answer the question.
+         */
+        a?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Opens the longer text on pages that collapse it (also on service pages).
+   */
+  more?: string | null;
+  profiler?: {
+    h2?: string | null;
+    first?: string | null;
+    chip360?: string | null;
+    orOne?: string | null;
+    bot?: string | null;
+  };
+  chips?: {
+    seo?: string | null;
+    localseo?: string | null;
+    ads?: string | null;
+    social?: string | null;
+    creative?: string | null;
+    website?: string | null;
+    ai?: string | null;
+  };
+  /**
+   * Keep the {words in braces}: {name} = the visitor’s first name, {n} = number of choices, {i} = question number.
+   */
+  chatUi?: {
+    confirm?: string | null;
+    contact1?: string | null;
+    contact2?: string | null;
+    done1?: string | null;
+    done2?: string | null;
+    seoRedirect?: string | null;
+    lastQ?: string | null;
+    multi?: string | null;
+    sent?: string | null;
+    restart?: string | null;
+    typing?: string | null;
+    step?: string | null;
+    form?: {
+      nama?: string | null;
+      bisnis?: string | null;
+      email?: string | null;
+      wa?: string | null;
+      submit?: string | null;
+      req?: string | null;
+    };
+  };
+  /**
+   * The six questions per service in the guided chat (not shown on the homepage at the moment). Each language has its own questions.
+   */
+  chat?: {
+    campaign?: {
+      /**
+       * Also printed in the WhatsApp brief.
+       */
+      name?: string | null;
+      /**
+       * Optional. Empty = "Baik, {name}…" from the Chat assistant tab.
+       */
+      confirm?: string | null;
+      /**
+       * Keep six questions and their order: the progress counter says "of 6".
+       */
+      qs?:
+        | {
+            key?: string | null;
+            label?: string | null;
+            type?: ('single' | 'multi') | null;
+            text?: string | null;
+            opts?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    seo?: {
+      /**
+       * Also printed in the WhatsApp brief.
+       */
+      name?: string | null;
+      /**
+       * Keep six questions and their order: the progress counter says "of 6".
+       */
+      qs?:
+        | {
+            key?: string | null;
+            label?: string | null;
+            type?: ('single' | 'multi') | null;
+            text?: string | null;
+            opts?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    localseo?: {
+      /**
+       * Also printed in the WhatsApp brief.
+       */
+      name?: string | null;
+      /**
+       * Keep six questions and their order: the progress counter says "of 6".
+       */
+      qs?:
+        | {
+            key?: string | null;
+            label?: string | null;
+            type?: ('single' | 'multi') | null;
+            text?: string | null;
+            opts?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    ads?: {
+      /**
+       * Also printed in the WhatsApp brief.
+       */
+      name?: string | null;
+      /**
+       * Keep six questions and their order: the progress counter says "of 6".
+       */
+      qs?:
+        | {
+            key?: string | null;
+            label?: string | null;
+            type?: ('single' | 'multi') | null;
+            text?: string | null;
+            opts?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    social?: {
+      /**
+       * Also printed in the WhatsApp brief.
+       */
+      name?: string | null;
+      /**
+       * Keep six questions and their order: the progress counter says "of 6".
+       */
+      qs?:
+        | {
+            key?: string | null;
+            label?: string | null;
+            type?: ('single' | 'multi') | null;
+            text?: string | null;
+            opts?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    creative?: {
+      /**
+       * Also printed in the WhatsApp brief.
+       */
+      name?: string | null;
+      /**
+       * Keep six questions and their order: the progress counter says "of 6".
+       */
+      qs?:
+        | {
+            key?: string | null;
+            label?: string | null;
+            type?: ('single' | 'multi') | null;
+            text?: string | null;
+            opts?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    website?: {
+      /**
+       * Also printed in the WhatsApp brief.
+       */
+      name?: string | null;
+      /**
+       * Keep six questions and their order: the progress counter says "of 6".
+       */
+      qs?:
+        | {
+            key?: string | null;
+            label?: string | null;
+            type?: ('single' | 'multi') | null;
+            text?: string | null;
+            opts?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    ai?: {
+      /**
+       * Also printed in the WhatsApp brief.
+       */
+      name?: string | null;
+      /**
+       * Keep six questions and their order: the progress counter says "of 6".
+       */
+      qs?:
+        | {
+            key?: string | null;
+            label?: string | null;
+            type?: ('single' | 'multi') | null;
+            text?: string | null;
+            opts?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
   };
   meta?: {
     title?: string | null;
@@ -2154,7 +2511,7 @@ export interface HomePage {
   createdAt?: string | null;
 }
 /**
- * The services & prices overview (/layanan).
+ * The services & prices overview (/layanan). Tabs run in page order. Use the language picker (top right) to edit both languages.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hub-page".
@@ -2171,6 +2528,44 @@ export interface HubPage {
      */
     wa?: string | null;
   };
+  /**
+   * The sentence under the heading and the heading/note around the services table. Prices themselves come from the services.
+   */
+  hub?: {
+    /**
+     * The page name in the breadcrumb trail and in Google’s breadcrumb markup.
+     */
+    crumb?: string | null;
+    word?: string | null;
+    lede?: string | null;
+    tableH?: string | null;
+    tableNote?: string | null;
+  };
+  /**
+   * The 360° campaign block. The map and the four pillars are in Shared → 360° campaign.
+   */
+  offer?: {
+    h2?: string | null;
+    /**
+     * Also the description in Google’s data for this offer: keep it a full sentence.
+     */
+    lead1?: string | null;
+    lead2?: string | null;
+    lead3?: string | null;
+    pillarsH?: string | null;
+    proposal?: string | null;
+  };
+  faqH?: string | null;
+  faq?:
+    | {
+        q?: string | null;
+        /**
+         * 40 to 80 words; the first sentence should answer the question. Keep prices in step with the services.
+         */
+        a?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -2708,6 +3103,96 @@ export interface NotFoundPage {
   createdAt?: string | null;
 }
 /**
+ * The 360° campaign wording used on the homepage, the services hub and every service page. Use the language picker (top right) to edit both languages.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "campaign-content".
+ */
+export interface CampaignContent {
+  id: number;
+  center?: string | null;
+  /**
+   * The eight channels around the ring. Their order and position are fixed.
+   */
+  nodes?:
+    | {
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Used in the connection table (e.g. "Campaign strategy").
+   */
+  strategy?: string | null;
+  /**
+   * Used in the connection table.
+   */
+  report?: string | null;
+  /**
+   * Which channel feeds which is fixed; edit only the wording. Some connections appear later, when the owner confirms them.
+   */
+  edges?:
+    | {
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Four pillars; keep four.
+   */
+  pillars?:
+    | {
+        dt?: string | null;
+        dd?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * The text table that explains which channel feeds which (readable by search engines and AI).
+   */
+  table?: {
+    caption?: string | null;
+    /**
+     * Three: channel, fed by, feeds.
+     */
+    head?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Shown in brackets after the channel name.
+     */
+    rowNote?: {
+      social?: string | null;
+      ads?: string | null;
+    };
+    summary?: string | null;
+    foot?: string | null;
+  };
+  /**
+   * Fixed list; edit only the wording.
+   */
+  extras?:
+    | {
+        item?: {
+          label?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * On each service page, the box “Position in the 360° campaign”.
+   */
+  note?: {
+    link?: string | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * The made-up sample texts and numbers drawn inside the illustrations on the service pages (a search result, a chat, a report…). They show how Logink works with a fictional coffee shop. The shop name, web address and Instagram handle are fixed. Switch the language at the top right to edit Bahasa Indonesia or English.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3216,6 +3701,310 @@ export interface HomePageSelect<T extends boolean = true> {
         h1?: T;
         wa?: T;
       };
+  hero?:
+    | T
+    | {
+        kicker?: T;
+        lines?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sentence?: T;
+        filmLabels?:
+          | T
+          | {
+              pause?: T;
+              play?: T;
+            };
+      };
+  servicesH?:
+    | T
+    | {
+        label?: T;
+        h2?: T;
+      };
+  outcome?:
+    | T
+    | {
+        seo?: T;
+        localseo?: T;
+        ads?: T;
+        social?: T;
+        creative?: T;
+        website?: T;
+        ai?: T;
+      };
+  c360?:
+    | T
+    | {
+        h2?: T;
+        lead1?: T;
+        lead4?: T;
+        pillarsLabel?: T;
+        pillarLine?:
+          | T
+          | {
+              line?: T;
+              id?: T;
+            };
+        one?: T;
+        video?:
+          | T
+          | {
+              pause?: T;
+              play?: T;
+            };
+      };
+  process?:
+    | T
+    | {
+        label?: T;
+        h2?: T;
+        lead?: T;
+        groups?:
+          | T
+          | {
+              label?: T;
+              steps?:
+                | T
+                | {
+                    t?: T;
+                    d?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  proof?:
+    | T
+    | {
+        label?: T;
+        h2?: T;
+        lede?: T;
+        all?: T;
+      };
+  faqH?: T;
+  faq?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
+      };
+  more?: T;
+  profiler?:
+    | T
+    | {
+        h2?: T;
+        first?: T;
+        chip360?: T;
+        orOne?: T;
+        bot?: T;
+      };
+  chips?:
+    | T
+    | {
+        seo?: T;
+        localseo?: T;
+        ads?: T;
+        social?: T;
+        creative?: T;
+        website?: T;
+        ai?: T;
+      };
+  chatUi?:
+    | T
+    | {
+        confirm?: T;
+        contact1?: T;
+        contact2?: T;
+        done1?: T;
+        done2?: T;
+        seoRedirect?: T;
+        lastQ?: T;
+        multi?: T;
+        sent?: T;
+        restart?: T;
+        typing?: T;
+        step?: T;
+        form?:
+          | T
+          | {
+              nama?: T;
+              bisnis?: T;
+              email?: T;
+              wa?: T;
+              submit?: T;
+              req?: T;
+            };
+      };
+  chat?:
+    | T
+    | {
+        campaign?:
+          | T
+          | {
+              name?: T;
+              confirm?: T;
+              qs?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    type?: T;
+                    text?: T;
+                    opts?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        seo?:
+          | T
+          | {
+              name?: T;
+              qs?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    type?: T;
+                    text?: T;
+                    opts?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        localseo?:
+          | T
+          | {
+              name?: T;
+              qs?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    type?: T;
+                    text?: T;
+                    opts?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        ads?:
+          | T
+          | {
+              name?: T;
+              qs?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    type?: T;
+                    text?: T;
+                    opts?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        social?:
+          | T
+          | {
+              name?: T;
+              qs?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    type?: T;
+                    text?: T;
+                    opts?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        creative?:
+          | T
+          | {
+              name?: T;
+              qs?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    type?: T;
+                    text?: T;
+                    opts?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        website?:
+          | T
+          | {
+              name?: T;
+              qs?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    type?: T;
+                    text?: T;
+                    opts?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        ai?:
+          | T
+          | {
+              name?: T;
+              qs?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    type?: T;
+                    text?: T;
+                    opts?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+            };
+      };
   meta?:
     | T
     | {
@@ -3239,6 +4028,33 @@ export interface HubPageSelect<T extends boolean = true> {
     | {
         h1?: T;
         wa?: T;
+      };
+  hub?:
+    | T
+    | {
+        crumb?: T;
+        word?: T;
+        lede?: T;
+        tableH?: T;
+        tableNote?: T;
+      };
+  offer?:
+    | T
+    | {
+        h2?: T;
+        lead1?: T;
+        lead2?: T;
+        lead3?: T;
+        pillarsH?: T;
+        proposal?: T;
+      };
+  faqH?: T;
+  faq?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
       };
   meta?:
     | T
@@ -3610,6 +4426,72 @@ export interface NotFoundPageSelect<T extends boolean = true> {
         servicesH?: T;
         hub?: T;
         waLead?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "campaign-content_select".
+ */
+export interface CampaignContentSelect<T extends boolean = true> {
+  center?: T;
+  nodes?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  strategy?: T;
+  report?: T;
+  edges?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  pillars?:
+    | T
+    | {
+        dt?: T;
+        dd?: T;
+        id?: T;
+      };
+  table?:
+    | T
+    | {
+        caption?: T;
+        head?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        rowNote?:
+          | T
+          | {
+              social?: T;
+              ads?: T;
+            };
+        summary?: T;
+        foot?: T;
+      };
+  extras?:
+    | T
+    | {
+        item?:
+          | T
+          | {
+              label?: T;
+            };
+        id?: T;
+      };
+  note?:
+    | T
+    | {
+        link?: T;
       };
   _status?: T;
   updatedAt?: T;

@@ -3,12 +3,13 @@
 // the SSR shell (children). Until then, and without JS, every chip is a working wa.me link.
 import { useEffect, useRef, useState, type ComponentType, type ReactNode } from 'react'
 import type { Locale } from '@/lib/services'
+import type { ProfilerData } from './profiler-data' // type only
 
 type Labels = { first: string; chip360: string; orOne: string; bot: string }
 
-export function ProfilerMount({ locale, labels, children }: { locale: Locale; labels: Labels; children: ReactNode }) {
+export function ProfilerMount({ locale, labels, data, children }: { locale: Locale; labels: Labels; data: ProfilerData; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null)
-  const [Island, setIsland] = useState<ComponentType<Labels & { locale: Locale }> | null>(null)
+  const [Island, setIsland] = useState<ComponentType<Labels & { locale: Locale; data: ProfilerData }> | null>(null)
   useEffect(() => {
     const el = ref.current
     if (!el) return
@@ -20,5 +21,5 @@ export function ProfilerMount({ locale, labels, children }: { locale: Locale; la
     io.observe(el)
     return () => io.disconnect()
   }, [])
-  return <div ref={ref}>{Island ? <Island locale={locale} {...labels} /> : children}</div>
+  return <div ref={ref}>{Island ? <Island locale={locale} {...labels} data={data} /> : children}</div>
 }

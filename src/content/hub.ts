@@ -3,8 +3,9 @@
 // (CAMPAIGN_CONFIRMED all false at launch, §11 3.6): no "satu laporan" / "one report" anywhere here.
 import type { L } from '@/lib/services'
 import { CAMPAIGN_CONFIRMED, gated } from './campaign'
+import { live } from '@/cms/store'
 
-export const HUB = {
+export const HUB = live('hub-page', 'hub', {
   crumb: { id: 'Layanan', en: 'Services' } as L,
   word: { id: 'Layanan', en: 'Services' } as L,
   // soft-modern pass: one sentence; prices live in the table right below
@@ -17,10 +18,10 @@ export const HUB = {
     id: 'Harga di tabel adalah harga mulai dari halaman setiap layanan. Budget iklan dibayar langsung ke platform, terpisah dari biaya jasa.',
     en: "Prices in the table are the starting prices from each service's page. Ad spend is paid directly to the platforms, separate from our fee.",
   } as L,
-}
+})
 
 // The 360° offer section (§11 7.2 item 4). Lead ships its K1 fallback middle sentence; no minimum scope (K7).
-export const OFFER = {
+export const OFFER = live('hub-page', 'offer', {
   h2: { id: 'Kampanye 360°: satu kampanye, semua kanal', en: '360° campaign: one campaign, every channel' } as L,
   // first sentence = the 360° Service node description (JSON-LD), so it must stay visible verbatim
   lead1: {
@@ -37,12 +38,12 @@ export const OFFER = {
   pillarsH: { id: 'Empat hal yang menyatukan kampanye', en: 'Four things that join the campaign' } as L,
   proposal: { id: 'Minta proposal 360°', en: 'Request a 360° proposal' } as L,
   mapH: { id: 'Peta kampanye 360°', en: '360° campaign map' } as L,
-}
+})
 
 // Hub FAQ, 8 items (§11 7.2 item 6 / H): §9 Q1 (K1 fallback), Q2, the price question, Q5, Q4 (full
 // fallback), the Local SEO billing question, and two more hub questions. 40–80 words, answer first.
-export const HUB_FAQ_H: L = { id: 'Tanya jawab layanan dan harga', en: 'Questions about services and prices' }
-export const HUB_FAQ: { q: L; a: L }[] = [
+export const HUB_FAQ_H = live('hub-page', 'faqH', { id: 'Tanya jawab layanan dan harga', en: 'Questions about services and prices' } as L)
+export const HUB_FAQ = live<{ q: L; a: L }[]>('hub-page', 'faq', [
   {
     q: { id: 'Apa itu digital marketing 360°?', en: 'What is 360° digital marketing?' },
     a: gated('K1',
@@ -98,4 +99,4 @@ export const HUB_FAQ: { q: L; a: L }[] = [
       en: 'They target different places: SEO the Google search results, AEO (Answer Engine Optimization) direct answers, and GEO (Generative Engine Optimization) the answers of AI engines such as Google AI Overviews, AI Mode and ChatGPT. The three reinforce each other, and Logink runs AEO and GEO through its AI search optimization service. We do not guarantee citations, but we measure progress every month.',
     },
   },
-]
+])

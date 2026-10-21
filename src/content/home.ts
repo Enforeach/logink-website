@@ -3,12 +3,13 @@
 // Gated phrases ship their fallback while CAMPAIGN_CONFIRMED is false (§3.6); `gated()` picks.
 import type { L, SvcKey } from '@/lib/services'
 import { CAMPAIGN_CONFIRMED, gated } from '@/content/campaign'
+import { live } from '@/cms/store'
 
 const K14 = CAMPAIGN_CONFIRMED.K1 && CAMPAIGN_CONFIRMED.K4
 
 // 01 Hero: the registry H1 split into FrontPageTitle lines (textContent === h1), one sentence, 2 CTAs, over the hero loop.
 // ENTITY stays verbatim in the footer and orgNode.
-export const HERO = {
+export const HERO = live('home-page', 'hero', {
   kicker: { id: 'Agensi Digital Marketing 360° di Jakarta:', en: '360° Digital Marketing Agency in Jakarta:' } as L,
   lines: [
     { text: { id: 'Ditemukan.', en: 'Found.' } as L },
@@ -22,17 +23,17 @@ export const HERO = {
   } as L,
   // the hero film's pause control (the whole card), named apart from the 360° video's button
   filmLabels: { id: { pause: 'Jeda video pembuka', play: 'Putar video pembuka' }, en: { pause: 'Pause intro video', play: 'Play intro video' } },
-}
+})
 
 // Collapsed longer copy: stays in the SSR DOM for crawlers, AI and Mode teks
-export const MORE: L = { id: 'Selengkapnya', en: 'Read more' }
+export const MORE = live('home-page', 'more', { id: 'Selengkapnya', en: 'Read more' } as L)
 
 // 02 Services: the one list of the 7 services (name link + one-line outcome + price or quote)
-export const SERVICES_H = {
+export const SERVICES_H = live('home-page', 'servicesH', {
   label: { id: 'Satu layanan', en: 'One service' } as L,
   h2: { id: 'Layanan dan harga', en: 'Services and prices' } as L,
-}
-export const OUTCOME: Record<SvcKey, L> = {
+})
+export const OUTCOME = live<Record<SvcKey, L>>('home-page', 'outcome', {
   seo: { id: 'Traffic organik yang tumbuh dari kata kunci yang benar-benar dicari pelanggan.', en: 'Organic traffic that grows from the words customers actually search.' },
   localseo: { id: 'Muncul di Google Maps saat orang di sekitar mencari bisnis seperti Anda.', en: 'Show up on Google Maps when people nearby look for a business like yours.' },
   ads: { id: 'Iklan Google & Meta yang mengantar pelanggan ke chat WhatsApp Anda.', en: 'Google & Meta ads that bring customers to your WhatsApp chat.' },
@@ -40,10 +41,10 @@ export const OUTCOME: Record<SvcKey, L> = {
   creative: { id: 'Desain dan video yang membuat brand Anda mudah dikenali.', en: 'Design and video that make your brand easy to recognise.' },
   website: { id: 'Website cepat yang mengubah kunjungan menjadi chat.', en: 'A fast website that turns visits into chats.' },
   ai: { id: 'Brand yang layak dikutip Google AI Overview dan ChatGPT, lalu diukur.', en: 'A brand worth citing in Google AI Overviews and ChatGPT, then measured.' },
-}
+})
 
 // 03 'Satu kampanye, semua kanal' (§4.5): the 360° story, told once
-export const C360 = {
+export const C360 = live('home-page', 'c360', {
   h2: { id: 'Satu kampanye, semua kanal', en: 'One campaign, every channel' } as L,
   lead1: {
     id: 'Kampanye 360° berarti semua kanal yang Anda butuhkan dijalankan satu tim sebagai satu kampanye.',
@@ -56,19 +57,19 @@ export const C360 = {
   pillarsLabel: { id: 'Empat pilar Kampanye 360°', en: 'The four pillars of a 360° campaign' } as L,
   // one line per pillar card, in PILLARS order
   pillarLine: [
-    { id: 'Satu ide kampanye, diadaptasi untuk setiap kanal.', en: 'One campaign idea, adapted for every channel.' },
-    { id: 'Kata kunci, visual, dan data mengalir antarkanal.', en: 'Keywords, visuals and data flow between channels.' },
-    { id: 'GA4, Search Console, dan pixel iklan dibaca bersama.', en: 'GA4, Search Console and ad pixels, read together.' },
-    { id: 'Satu sesi review bulanan bersama tim Anda.', en: 'One monthly review with your team.' },
-  ] as L[],
+    { line: { id: 'Satu ide kampanye, diadaptasi untuk setiap kanal.', en: 'One campaign idea, adapted for every channel.' } },
+    { line: { id: 'Kata kunci, visual, dan data mengalir antarkanal.', en: 'Keywords, visuals and data flow between channels.' } },
+    { line: { id: 'GA4, Search Console, dan pixel iklan dibaca bersama.', en: 'GA4, Search Console and ad pixels, read together.' } },
+    { line: { id: 'Satu sesi review bulanan bersama tim Anda.', en: 'One monthly review with your team.' } },
+  ],
   one: { id: 'Mulai dari satu layanan', en: 'Start with one service' } as L,
   video: { id: { pause: 'Jeda video', play: 'Putar video' }, en: { pause: 'Pause video', play: 'Play video' } },
-}
+})
 
 // 04 Proses (owner 2026-10-04, after Kampanye 360°): the five steps, grouped so the reader sees that the
 // opportunity and the plan come BEFORE the contract. Step names are the owner's; one line each.
 type Step = { t: L; d: L; sign?: true }
-export const PROCESS = {
+export const PROCESS = live('home-page', 'process', {
   label: { id: 'Proses kerja', en: 'How we work' } as L,
   h2: { id: 'Tahu peluang dan rencananya sebelum tanda tangan', en: 'See the opportunity and the plan before you sign' } as L,
   lead: {
@@ -88,19 +89,19 @@ export const PROCESS = {
       { t: { id: 'Proyek berjalan', en: 'Project running' }, d: { id: 'Tim menjalankan rencana yang disetujui, lalu kita review hasilnya setiap bulan.', en: 'The team runs the approved plan, and we review the results together every month.' } },
     ] as Step[] },
   ],
-}
+})
 
 // 04 Proof: real case studies only (no metric until a slug is approved) + how we measure, collapsed
-export const PROOF = {
+export const PROOF = live('home-page', 'proof', {
   label: { id: 'Bukti', en: 'Proof' } as L,
   h2: { id: 'Studi kasus', en: 'Case studies' } as L,
   lede: { id: 'Studi kasus nyata dari klien Logink. Angka hanya kami tampilkan bersama periode dan sumbernya.', en: 'Real case studies from Logink clients. We only show numbers together with their period and source.' } as L,
   all: { id: 'Lihat semua studi kasus', en: 'See all case studies' } as L,
-}
+})
 
 // 05 FAQ, 7 items in the §4.9 order (40–80 words each, the first sentence answers). FAQPage mirrors these.
-export const FAQ_H: L = { id: 'Tanya jawab', en: 'Questions and answers' }
-export const FAQ: { q: L; a: L }[] = [
+export const FAQ_H = live('home-page', 'faqH', { id: 'Tanya jawab', en: 'Questions and answers' } as L)
+export const FAQ = live<{ q: L; a: L }[]>('home-page', 'faq', [
   {
     q: { id: 'Berapa biaya jasa digital marketing?', en: 'How much does digital marketing cost?' },
     a: {
@@ -148,10 +149,10 @@ export const FAQ: { q: L; a: L }[] = [
       en: 'Because Local SEO results come from consistency. Reviews, Google Posts and local signals build up over time, and map-pack gains for competitive keywords typically show within 4–8 weeks. Annual billing keeps the work running without gaps and keeps the price at IDR 1M or IDR 2M a month, billed annually (IDR 12M or IDR 24M a year).',
     },
   },
-]
+])
 
 // Lead Profiler, SSR shell (§4.4). Built and kept, not rendered on home since the owner's five-section order. The island's question paths live in sections/home/profiler-data.ts.
-export const PROFILER = {
+export const PROFILER = live('home-page', 'profiler', {
   h2: { id: 'Mulai dari tujuan Anda', en: 'Start from your goal' } as L,
   first: {
     id: 'Halo! Mau mulai dari mana: satu layanan, atau semua kanal sekaligus sebagai Kampanye 360°?',
@@ -160,5 +161,5 @@ export const PROFILER = {
   chip360: { id: 'Semua kanal · Kampanye 360°', en: 'Every channel · 360° campaign' } as L,
   orOne: { id: 'atau satu layanan:', en: 'or one service:' } as L,
   bot: { id: 'Asisten Logink', en: 'Logink assistant' } as L,
-}
+})
 

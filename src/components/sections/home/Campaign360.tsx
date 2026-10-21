@@ -31,7 +31,7 @@ export function Campaign360({ locale: l, noMedia }: { locale: Locale; noMedia?: 
             {PILLARS.map((p, i) => (
               <li key={p.dt.id} className="card flex gap-2 p-4">
                 <Dot />
-                <span className="grid gap-1"><b className="t-ui font-650">{p.dt[l]}</b><span className="t-small">{C360.pillarLine[i][l]}</span></span>
+                <span className="grid gap-1"><b className="t-ui font-650">{p.dt[l]}</b><span className="t-small">{C360.pillarLine[i].line[l]}</span></span>
               </li>
             ))}
           </ul>

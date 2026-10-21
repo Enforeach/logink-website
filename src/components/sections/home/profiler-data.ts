@@ -1,9 +1,14 @@
 // Lead Profiler question paths (moved from components/public/LeadProfiler.tsx, §4.4 + page-architecture §9).
 // Loaded only with the island (client chunk near the viewport), so none of this is in the RSC payload.
 // Path keys are registry keys + '360'; they are what POST /api/contact receives as services: [key].
-import type { Locale, SvcKey } from '@/lib/services'
+// SERVER ONLY (CMS-backed): the island is a client component and gets `profilerData(l)` as props; it imports types from here.
+import { ANTI_SCAM, type L, type Locale, type SvcKey } from '@/lib/services'
+import { isL } from '@/cms/merge'
+import { live } from '@/cms/store'
 
 export type PathKey = '360' | SvcKey
+/** The CMS stores the 360° path as `campaign` (a field name cannot start with a digit). */
+type ChatKey = 'campaign' | SvcKey
 export type Q = { key: string; label: string; type: 'single' | 'multi'; text: string; opts: string[] }
 export type Path = { name: string; confirm?: string; qs: Q[] }
 
@@ -17,8 +22,8 @@ const BUDGET_360 = { id: ['< Rp 15 juta', 'Rp 15–30 juta', 'Rp 30–60 juta', 
 
 const q = (key: string, label: string, type: Q['type'], text: string, opts: string[]): Q => ({ key, label, type, text, opts })
 
-const ID: Record<PathKey, Path> = {
-  '360': {
+const ID: Record<ChatKey, Path> = {
+  campaign: {
     name: 'Kampanye 360°',
     confirm: 'Baik, Kampanye 360°: semua kanal Anda dalam satu kampanye. Enam pertanyaan singkat, lalu brief Anda siap dikirim ke WhatsApp.',
     qs: [
@@ -109,8 +114,8 @@ const ID: Record<PathKey, Path> = {
   },
 }
 
-const EN: Record<PathKey, Path> = {
-  '360': {
+const EN: Record<ChatKey, Path> = {
+  campaign: {
     name: '360° campaign',
     confirm: 'Great, a 360° campaign: all your channels in one campaign. Six quick questions, then your brief is ready to send on WhatsApp.',
     qs: [
@@ -201,45 +206,57 @@ const EN: Record<PathKey, Path> = {
   },
 }
 
-export const PATHS: Record<Locale, Record<PathKey, Path>> = { id: ID, en: EN }
-// The SEO path's "no website" answer hands over to the Website path at its 2nd question (kept from the original).
-export const NO_SITE = { id: 'Belum punya website', en: "Don't have a website yet" }
+/** The chat questions, per language (CMS: Home → Chat assistant questions). */
+const CHAT = live('home-page', 'chat', { id: ID, en: EN })
+// The SEO path's "no website" answer hands over to the Website path at its 2nd question (kept from the original):
+// it is the last option of the SEO path's website-status question.
 // Chip labels (SSR shell + island), in the 03b order.
 export const CHIP_KEYS: SvcKey[] = ['seo', 'localseo', 'ads', 'social', 'creative', 'website', 'ai']
-export const CHIP: Record<Locale, Record<SvcKey, string>> = {
-  id: { seo: 'SEO', localseo: 'Local SEO', ads: 'Iklan', social: 'Sosial media', creative: 'Kreatif', website: 'Website', ai: 'AI search' },
-  en: { seo: 'SEO', localseo: 'Local SEO', ads: 'Ads', social: 'Social media', creative: 'Creative', website: 'Website', ai: 'AI search' },
-}
+export const CHIP = live<Record<SvcKey, L>>('home-page', 'chips', {
+  seo: { id: 'SEO', en: 'SEO' }, localseo: { id: 'Local SEO', en: 'Local SEO' }, ads: { id: 'Iklan', en: 'Ads' },
+  social: { id: 'Sosial media', en: 'Social media' }, creative: { id: 'Kreatif', en: 'Creative' },
+  website: { id: 'Website', en: 'Website' }, ai: { id: 'AI search', en: 'AI search' },
+})
 
-export const UI = {
-  id: {
-    confirm: (name: string) => `Baik, ${name}. Enam pertanyaan singkat, lalu brief Anda siap dikirim ke WhatsApp.`,
-    contact1: 'Terima kasih atas jawaban Anda.',
-    contact2: 'Satu langkah lagi: isi kontak Anda agar tim Logink bisa menghubungi Anda dalam 24 jam.',
-    done1: (name: string) => `Terima kasih, ${name}. Brief Anda sudah kami terima dan WhatsApp terbuka untuk mengirimkannya.`,
-    done2: 'Kami menghubungi Anda dalam 24 jam.',
-    seoRedirect: 'Belum punya website, tidak apa-apa. Saya arahkan ke layanan Website & Landing Page.',
-    lastQ: 'Pertanyaan terakhir. ',
-    multi: (n: number) => `Lanjutkan (${n} dipilih)`,
-    sent: 'Data terkirim',
-    restart: 'Mulai dari awal',
-    typing: 'Logink sedang mengetik',
-    step: (i: number) => `Pertanyaan ${i} dari 6`,
-    form: { nama: 'Nama lengkap', bisnis: 'Website atau nama bisnis', email: 'Email', wa: 'WhatsApp', submit: 'Kirim brief lewat WhatsApp', req: 'wajib' },
+/** Island UI strings; `{name}`, `{n}` and `{i}` are filled by the island. */
+export const UI = live('home-page', 'chatUi', {
+  confirm: { id: 'Baik, {name}. Enam pertanyaan singkat, lalu brief Anda siap dikirim ke WhatsApp.', en: 'Great, {name}. Six quick questions, then your brief is ready to send on WhatsApp.' } as L,
+  contact1: { id: 'Terima kasih atas jawaban Anda.', en: 'Thanks for your answers.' } as L,
+  contact2: { id: 'Satu langkah lagi: isi kontak Anda agar tim Logink bisa menghubungi Anda dalam 24 jam.', en: "One more step: add your contact details so Logink's team can reach you within 24 hours." } as L,
+  done1: { id: 'Terima kasih, {name}. Brief Anda sudah kami terima dan WhatsApp terbuka untuk mengirimkannya.', en: 'Thank you, {name}. We have your brief, and WhatsApp is open to send it.' } as L,
+  done2: { id: 'Kami menghubungi Anda dalam 24 jam.', en: "We'll get back to you within 24 hours." } as L,
+  seoRedirect: { id: 'Belum punya website, tidak apa-apa. Saya arahkan ke layanan Website & Landing Page.', en: "No website yet, that's fine. Let me take you to our Websites & Landing Pages service." } as L,
+  lastQ: { id: 'Pertanyaan terakhir. ', en: 'Last question. ' } as L,
+  multi: { id: 'Lanjutkan ({n} dipilih)', en: 'Continue ({n} selected)' } as L,
+  sent: { id: 'Data terkirim', en: 'Details sent' } as L,
+  restart: { id: 'Mulai dari awal', en: 'Start over' } as L,
+  typing: { id: 'Logink sedang mengetik', en: 'Logink is typing' } as L,
+  step: { id: 'Pertanyaan {i} dari 6', en: 'Question {i} of 6' } as L,
+  form: {
+    nama: { id: 'Nama lengkap', en: 'Full name' } as L,
+    bisnis: { id: 'Website atau nama bisnis', en: 'Website or business name' } as L,
+    email: { id: 'Email', en: 'Email' } as L,
+    wa: { id: 'WhatsApp', en: 'WhatsApp' } as L,
+    submit: { id: 'Kirim brief lewat WhatsApp', en: 'Send the brief on WhatsApp' } as L,
+    req: { id: 'wajib', en: 'required' } as L,
   },
-  en: {
-    confirm: (name: string) => `Great, ${name}. Six quick questions, then your brief is ready to send on WhatsApp.`,
-    contact1: 'Thanks for your answers.',
-    contact2: "One more step: add your contact details so Logink's team can reach you within 24 hours.",
-    done1: (name: string) => `Thank you, ${name}. We have your brief, and WhatsApp is open to send it.`,
-    done2: "We'll get back to you within 24 hours.",
-    seoRedirect: "No website yet, that's fine. Let me take you to our Websites & Landing Pages service.",
-    lastQ: 'Last question. ',
-    multi: (n: number) => `Continue (${n} selected)`,
-    sent: 'Details sent',
-    restart: 'Start over',
-    typing: 'Logink is typing',
-    step: (i: number) => `Question ${i} of 6`,
-    form: { nama: 'Full name', bisnis: 'Website or business name', email: 'Email', wa: 'WhatsApp', submit: 'Send the brief on WhatsApp', req: 'required' },
-  },
+})
+
+type Ui = { [K in Exclude<keyof typeof UI, 'form'>]: string } & { form: { [K in keyof typeof UI.form]: string } }
+/** Everything the island shows, for one language, as plain props (client components cannot read the CMS). */
+export type ProfilerData = { paths: Record<PathKey, Path>; chips: { k: SvcKey; label: string }[]; ui: Ui; noSite: string; anti: string }
+
+const pick = (v: unknown, l: Locale): unknown =>
+  isL(v) ? v[l] : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, pick(x, l)])) : v
+
+export function profilerData(l: Locale): ProfilerData {
+  const { campaign, ...rest } = CHAT[l]
+  const paths = { '360': campaign, ...rest } as Record<PathKey, Path>
+  return {
+    paths,
+    chips: CHIP_KEYS.map((k) => ({ k, label: CHIP[k][l] })),
+    ui: pick(UI, l) as Ui,
+    noSite: paths.seo.qs.find((q) => q.key === 'status_website')?.opts.at(-1) ?? '',
+    anti: ANTI_SCAM[l],
+  }
 }

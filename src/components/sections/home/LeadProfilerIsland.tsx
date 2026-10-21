@@ -5,8 +5,9 @@
 // and POST /api/contact { name, email, company, phone, services: [key], message: brief, source: 'lead_profiler' }
 // with the `website` honeypot. No framer-motion: bubbles rise with motion.css .lk-chat--live (CSS only).
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { ANTI_SCAM, waLink, type Locale } from '@/lib/services'
-import { CHIP, CHIP_KEYS, NO_SITE, PATHS, UI, type PathKey } from './profiler-data'
+import { waLink, type Locale } from '@/lib/services'
+import { fmt } from '@/cms/merge'
+import type { PathKey, ProfilerData } from './profiler-data' // types only: the CMS copy arrives as `data`
 import { ProfilerCard, chipCls } from './ProfilerCard'
 
 type Msg = { id: number; bot: boolean; text: string }
@@ -15,9 +16,8 @@ type Contact = { nama: string; bisnis: string; email: string; wa: string; websit
 const EMPTY: Contact = { nama: '', bisnis: '', email: '', wa: '', website: '' }
 let seq = 0
 
-export function LeadProfilerIsland({ locale: l, first, chip360, orOne, bot }: { locale: Locale; first: string; chip360: string; orOne: string; bot: string }) {
-  const ui = UI[l]
-  const paths = PATHS[l]
+export function LeadProfilerIsland({ first, chip360, orOne, bot, data }: { locale: Locale; first: string; chip360: string; orOne: string; bot: string; data: ProfilerData }) {
+  const { ui, paths, chips } = data
   const [msgs, setMsgs] = useState<Msg[]>([{ id: 0, bot: true, text: first }])
   const [phase, setPhase] = useState<Phase>('gateway')
   const [path, setPath] = useState<PathKey | null>(null)
@@ -46,9 +46,9 @@ export function LeadProfilerIsland({ locale: l, first, chip360, orOne, bot }: { 
 
   async function pick(k: PathKey) {
     setPhase('busy')
-    user(k === '360' ? chip360 : CHIP[l][k])
+    user(k === '360' ? chip360 : chips.find((c) => c.k === k)!.label)
     setPath(k)
-    await say(paths[k].confirm ?? ui.confirm(paths[k].name))
+    await say(paths[k].confirm || fmt(ui.confirm, { name: paths[k].name }))
     await say(paths[k].qs[0].text)
     setQi(0)
     setPhase('questions')
@@ -74,7 +74,7 @@ export function LeadProfilerIsland({ locale: l, first, chip360, orOne, bot }: { 
     user(value)
     setMulti([])
     setAnswers((a) => ({ ...a, [q.key]: value }))
-    if (path === 'seo' && q.key === 'status_website' && value === NO_SITE[l]) {
+    if (path === 'seo' && q.key === 'status_website' && value === data.noSite) {
       await say(ui.seoRedirect) // kept from the original flow: SEO without a site → the Website path, question 2
       setPath('website')
       await next('website', 1)
@@ -115,7 +115,7 @@ export function LeadProfilerIsland({ locale: l, first, chip360, orOne, bot }: { 
     setPhase('busy')
     user(ui.sent)
     const name = contact.nama.trim().split(/\s+/)[0]
-    say(ui.done1(name)).then(() => say(ui.done2)).then(() => say(ANTI_SCAM[l])).then(() => setPhase('done'))
+    say(fmt(ui.done1, { name })).then(() => say(ui.done2)).then(() => say(data.anti)).then(() => setPhase('done'))
   }
 
   function restart() {
@@ -130,7 +130,7 @@ export function LeadProfilerIsland({ locale: l, first, chip360, orOne, bot }: { 
   return (
     <ProfilerCard
       bot={bot}
-      status={q ? ui.step(qi + 1) : undefined}
+      status={q ? fmt(ui.step, { i: qi + 1 }) : undefined}
       logRef={log}
       msgs={msgs}
       typing={typing ? ui.typing : undefined}
@@ -140,8 +140,8 @@ export function LeadProfilerIsland({ locale: l, first, chip360, orOne, bot }: { 
           <button type="button" className={chipCls(true)} onClick={() => pick('360')} data-cta="profiler" data-placement="profiler" data-service="360">{chip360}</button>
           <p className="t-small text-ink-2">{orOne}</p>
           <div className="flex flex-wrap gap-2">
-            {CHIP_KEYS.map((k) => (
-              <button key={k} type="button" className={chipCls()} onClick={() => pick(k)} data-cta="profiler" data-placement="profiler" data-service={k}>{CHIP[l][k]}</button>
+            {chips.map((c) => (
+              <button key={c.k} type="button" className={chipCls()} onClick={() => pick(c.k)} data-cta="profiler" data-placement="profiler" data-service={c.k}>{c.label}</button>
             ))}
           </div>
         </>
@@ -162,17 +162,16 @@ export function LeadProfilerIsland({ locale: l, first, chip360, orOne, bot }: { 
               )
             })}
           </div>
-          {multi.length ? <button type="button" className="btn btn-ink btn-sm justify-self-start" onClick={() => answer(multi.join(', '))}>{ui.multi(multi.length)}</button> : null}
+          {multi.length ? <button type="button" className="btn btn-ink btn-sm justify-self-start" onClick={() => answer(multi.join(', '))}>{fmt(ui.multi, { n: multi.length })}</button> : null}
         </div>
       ) : null}
-      {phase === 'contact' ? <ContactForm l={l} c={contact} set={setContact} onSubmit={submit} /> : null}
+      {phase === 'contact' ? <ContactForm f={ui.form} c={contact} set={setContact} onSubmit={submit} /> : null}
       {phase === 'done' ? <button type="button" className={chipCls()} onClick={restart}>{ui.restart}</button> : null}
     </ProfilerCard>
   )
 }
 
-function ContactForm({ l, c, set, onSubmit }: { l: Locale; c: Contact; set: (f: (c: Contact) => Contact) => void; onSubmit: (e: FormEvent) => void }) {
-  const f = UI[l].form
+function ContactForm({ f, c, set, onSubmit }: { f: ProfilerData['ui']['form']; c: Contact; set: (f: (c: Contact) => Contact) => void; onSubmit: (e: FormEvent) => void }) {
   const fields = [
     { k: 'nama', label: f.nama, type: 'text', req: true, auto: 'name' },
     { k: 'bisnis', label: f.bisnis, type: 'text', req: false, auto: 'organization' },
