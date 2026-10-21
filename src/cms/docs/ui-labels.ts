@@ -1,4 +1,137 @@
-// Labels & buttons (shared). Phase 1B builds it (docs/cms/PLAN.md); null = not in the CMS yet.
-import type { GlobalConfig } from 'payload'
+// Settings → Labels & buttons: the short words used across the whole site (menus, buttons, footer, service page
+// headings). Wraps T and SHORT (components/ds/strings.ts) and TPL (content/services/template.ts).
+import '@/components/ds/strings'
+import '@/content/services/template'
+import { pageGlobal } from '../define'
 
-export const UiLabels: GlobalConfig | null = null
+export const UiLabels = pageGlobal({
+  slug: 'ui-labels',
+  label: 'Labels & buttons',
+  group: 'Settings',
+  description: 'The short words used on every page: menu names, buttons, footer headings and the fixed headings of the service pages. A change goes live on every page after Publish. Switch the language at the top right to edit Bahasa Indonesia or English.',
+  path: null,
+  tabs: [
+    {
+      name: 'nav',
+      label: 'Navigation',
+      description: 'Menu names, the breadcrumb and the screen-reader labels of the header.',
+      ov: {
+        services: { label: 'Menu: Services' },
+        portfolio: { label: 'Menu: Portfolio' },
+        blog: { label: 'Menu: Blog' },
+        about: { label: 'Menu: About' },
+        contact: { label: 'Menu: Contact' },
+        home: { label: 'Home link (breadcrumb start)' },
+        menu: { label: 'Mobile: open-menu button' },
+        close: { label: 'Mobile: close-menu button' },
+        skip: { label: '"Skip to content" link', description: 'Only visible to keyboard and screen-reader users.' },
+        mainNav: { label: 'Main menu: name for screen readers' },
+        quick: { label: 'Quick actions: name for screen readers' },
+        crumbs: { label: 'Breadcrumb: name for screen readers' },
+        langName: { label: 'Name of this language', description: 'Shown in the language switch. Keep "Bahasa Indonesia" in the Indonesian version and "English" in the English one.' },
+      },
+    },
+    {
+      name: 'buttons',
+      label: 'Buttons & links',
+      ov: {
+        quote: { label: 'Request-a-quote button' },
+        quoteShort: { label: 'Request-a-quote button (short, on small screens)' },
+        wa: { label: 'WhatsApp chat button' },
+        openService: { label: 'Link to a service page' },
+        viewCase: { label: 'Link to a case study' },
+        drag: { label: '"Drag" hint on sliders' },
+        allServices: { label: 'Link to all services and prices' },
+      },
+    },
+    {
+      name: 'pageLabels',
+      label: 'Page labels',
+      description: 'Small labels that appear on service pages, articles and other pages.',
+      ov: {
+        updated: { label: '"Updated" (date label)' },
+        reviewedBy: { label: '"Reviewed by"' },
+        from: { label: '"From" (before a starting price)' },
+        toc: { label: 'Table of contents: title' },
+        faq: { label: 'FAQ: heading' },
+        populer: { label: '"Most popular" badge' },
+        contoh: { label: '"Sample" badge' },
+        loop: { label: 'Day-stage strip: name for screen readers' },
+      },
+    },
+    {
+      name: 'closing',
+      label: 'Closing band',
+      description: 'The call to action at the bottom of most pages.',
+      ov: {
+        closingH: { label: 'Heading' },
+        closingLede: { label: 'Text' },
+        ask360: { label: '360° campaign button' },
+      },
+    },
+    {
+      name: 'campaign',
+      label: '360° campaign words',
+      description: 'Words used where a page offers one service or the 360° campaign.',
+      ov: {
+        oneService: { label: '"One service" choice' },
+        every: { label: '"Every channel" label' },
+        c360: { label: '"360° campaign" name' },
+        c360Item: { label: '360° campaign choice in lists and the contact form' },
+        c360Line: { label: '360° campaign one-line pitch' },
+        c360How: { label: 'Link "How it works"' },
+        c360Chat: { label: '360° campaign WhatsApp button' },
+      },
+    },
+    {
+      name: 'footer',
+      label: 'Footer',
+      ov: {
+        pages: { label: 'Heading of the page links' },
+        reach: { label: 'Heading of the contact column' },
+        city: { label: 'City line' },
+      },
+    },
+    {
+      name: 'stageNames',
+      label: 'Short service names',
+      description: 'Short names for the services in the day-stage strip. The full names and prices are in the Service pages.',
+      ov: {
+        seo: { label: 'SEO' },
+        localseo: { label: 'Local SEO' },
+        ads: { label: 'Ads' },
+        social: { label: 'Social media' },
+        creative: { label: 'Creative' },
+        website: { label: 'Website' },
+        ai: { label: 'AI search' },
+      },
+    },
+    {
+      name: 'serviceTemplate',
+      label: 'Service page headings',
+      description: 'The fixed headings and labels every service page uses. Words in {braces} are filled in by the site: keep them.',
+      ov: {
+        answer: { label: 'Short answer: heading' },
+        facts: { label: 'Key facts: heading' },
+        priceRow: { label: 'Key facts: price row label' },
+        campaign: { label: '360° section: heading' },
+        fedBy: { label: '"Fed by" label' },
+        feeds: { label: '"Feeds" label' },
+        wa: { label: 'WhatsApp label' },
+        strategy: { label: 'Campaign strategy: heading' },
+        work: { label: 'What we do: heading' },
+        pricing: { label: 'Plans & pricing: heading', description: '{name} = the service name.' },
+        choose: { label: 'Choose-a-plan button', description: '{tier} = the plan name.' },
+        addons: { label: 'Add-ons: heading' },
+        proof: { label: 'Proof & data: heading' },
+        noCase: { label: 'Message when a service has no public case study' },
+        process: { label: 'Process: heading' },
+        ai: { label: 'AI search readiness: heading' },
+        aiMore: { label: 'AI search: "Going further" label' },
+        faq: { label: 'FAQ: heading', description: '{name} = the service name.' },
+        sources: { label: 'Sources: heading' },
+        pairs: { label: '"Pairs well with" heading' },
+      },
+    },
+  ],
+})

@@ -28,9 +28,9 @@ export function IgGridBody({ locale: l }: { locale: Locale }) {
             {f ? <img src={f.src} width={f.w} height={f.h} alt={f.alt?.[l] ?? ''} loading="lazy" decoding="async" /> : null}
           </li>
         ))}
-        {IG.tiles.map((t, i) => (
-          <li key={t.id} className="m-rise flex items-end p-[.6em]" style={v({ '--i': i + 3 })}>
-            <span className="m-tile">{t[l]}</span>
+        {IG.tiles[l].map((t, i) => (
+          <li key={i} className="m-rise flex items-end p-[.6em]" style={v({ '--i': i + 3 })}>
+            <span className="m-tile">{t}</span>
           </li>
         ))}
       </ul>

@@ -21,7 +21,7 @@ export function ContentCalendar({ locale: l, ground = 'putih', className }: { lo
                 <span className="m-cap">{d}</span>
                 {i < 5 ? <span className="m-tick inline-flex" style={v({ '--i': i })}><Icon name="check" size={14} /></span> : null}
               </span>
-              <span className="m-chip justify-self-start">{CALENDAR.items[i][l]}</span>
+              <span className="m-chip justify-self-start">{CALENDAR.items[l][i]}</span>
               {open ? (
                 <span className="flex items-start gap-2">
                   {/* eslint-disable-next-line @next/next/no-img-element -- pre-encoded 480px ig tile served as-is (BUILD §2.2 rule 9) */}

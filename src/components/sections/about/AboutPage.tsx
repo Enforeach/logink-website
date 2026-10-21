@@ -38,7 +38,7 @@ export function AboutPage({ locale: l }: { locale: Locale }) {
         </>}>
         <p className="doc-lead">{ABOUT.intro[l]}</p>
         <DocSection id="who" title={S.who[l]}>
-          {ABOUT.who.map((x) => <p key={x.id}>{x[l]}</p>)}
+          {ABOUT.who[l].map((x) => <p key={x}>{x}</p>)}
         </DocSection>
         <DocSection id="ways" title={S.ways[l]}>
           <ul>{ABOUT.ways.map((w) => <li key={w.t.id}><strong>{w.t[l]}</strong> {w.d[l]}</li>)}</ul>
@@ -52,7 +52,7 @@ export function AboutPage({ locale: l }: { locale: Locale }) {
           <ul>{ABOUT.why.map((w) => <li key={w.t.id}><strong>{w.t[l]}</strong> {w.d[l]}</li>)}</ul>
         </DocSection>
         <DocSection id="not" title={S.not[l]}>
-          <ul>{ABOUT.not.map((n) => <li key={n.id}>{n[l]}</li>)}</ul>
+          <ul>{ABOUT.not[l].map((n) => <li key={n}>{n}</li>)}</ul>
         </DocSection>
         <DocSection id="services" title={S.services[l]}>
           <ul>{liveServices().map((s) => <li key={s.key}><Link href={svcHref(s.key, l)}>{s.name[l]}</Link>: {OUTCOME[s.key][l]}</li>)}</ul>

@@ -119,7 +119,9 @@ export interface Config {
     'blog-page': BlogPage;
     'portfolio-page': PortfolioPage;
     'not-found-page': NotFoundPage;
+    'instruments-content': InstrumentsContent;
     'site-settings': SiteSetting;
+    'ui-labels': UiLabel;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -129,7 +131,9 @@ export interface Config {
     'blog-page': BlogPageSelect<false> | BlogPageSelect<true>;
     'portfolio-page': PortfolioPageSelect<false> | PortfolioPageSelect<true>;
     'not-found-page': NotFoundPageSelect<false> | NotFoundPageSelect<true>;
+    'instruments-content': InstrumentsContentSelect<false> | InstrumentsContentSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'ui-labels': UiLabelsSelect<false> | UiLabelsSelect<true>;
   };
   locale: 'id' | 'en';
   widgets: {
@@ -1403,7 +1407,7 @@ export interface HubPage {
   createdAt?: string | null;
 }
 /**
- * The About page.
+ * The About page, from the top banner down to the side cards. Switch the language at the top right to edit Bahasa Indonesia or English.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-page".
@@ -1420,6 +1424,113 @@ export interface AboutPage {
      */
     wa?: string | null;
   };
+  /**
+   * The small text above the heading and the opening paragraph. The heading itself is in the Page tab.
+   */
+  top?: {
+    /**
+     * The page name in the trail at the very top (Home / About).
+     */
+    crumb?: string | null;
+    eyebrow?: string | null;
+    /**
+     * The large paragraph under the heading.
+     */
+    intro?: string | null;
+  };
+  /**
+   * The six headings of the page. They also appear in the "On this page" list on the left.
+   */
+  headings?: {
+    sections?: {
+      who?: string | null;
+      ways?: string | null;
+      /**
+       * The steps below this heading come from the Home page process.
+       */
+      how?: string | null;
+      why?: string | null;
+      not?: string | null;
+      /**
+       * The service list below this heading is generated from the service pages.
+       */
+      services?: string | null;
+    };
+  };
+  story?: {
+    /**
+     * Each row is one paragraph in this language. Add or remove rows with the buttons.
+     */
+    who?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Each row is a bold lead-in followed by a sentence.
+     */
+    ways?:
+      | {
+          /**
+           * Ends with a full stop, e.g. "One service."
+           */
+          t?: string | null;
+          d?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * A link "How it works" is added after it automatically.
+     */
+    waysMore?: string | null;
+    /**
+     * Introduces the process steps (which come from the Home page).
+     */
+    howLead?: string | null;
+  };
+  why?: {
+    /**
+     * Each row is a bold lead-in followed by a sentence.
+     */
+    why?:
+      | {
+          t?: string | null;
+          d?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * One line per row. Add or remove rows with the buttons; the order here is the order on the page.
+     */
+    not?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * The two cards beside the text: "Logink at a glance" and the call to action.
+   */
+  aside?: {
+    glance?: string | null;
+    /**
+     * Each row is a label and its value, e.g. City / Jakarta, Indonesia.
+     */
+    facts?:
+      | {
+          k?: string | null;
+          v?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    ask?: string | null;
+    /**
+     * The WhatsApp button below it uses the message from the Page tab.
+     */
+    askSub?: string | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1437,7 +1548,7 @@ export interface AboutPage {
   createdAt?: string | null;
 }
 /**
- * The contact page and its form.
+ * The contact page: how to reach Logink, the short form and what happens after a message. Switch the language at the top right to edit Bahasa Indonesia or English.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-page".
@@ -1454,6 +1565,132 @@ export interface ContactPage {
      */
     wa?: string | null;
   };
+  /**
+   * The opening line and the four ways to reach us: WhatsApp (one service or 360° campaign), the form and email. The official WhatsApp number and the email address are fixed in the site settings.
+   */
+  contact?: {
+    /**
+     * The large sentence under the heading.
+     */
+    lede?: string | null;
+    official?: string | null;
+    channelsH?: string | null;
+    waName?: string | null;
+    /**
+     * Keep it true: this is a promise to visitors.
+     */
+    waNote?: string | null;
+    waAsk?: string | null;
+    oneEyebrow?: string | null;
+    oneText?: string | null;
+    oneCta?: string | null;
+    c360Eyebrow?: string | null;
+    c360Text?: string | null;
+    c360Cta?: string | null;
+    formName?: string | null;
+    /**
+     * Keep the response time true.
+     */
+    formNote?: string | null;
+    /**
+     * Scrolls down to the form.
+     */
+    formCta?: string | null;
+    emailName?: string | null;
+    /**
+     * Keep it true: this is a promise to visitors.
+     */
+    emailNote?: string | null;
+  };
+  /**
+   * The heading and short intro above the form.
+   */
+  formIntro?: {
+    formH?: string | null;
+    formLede?: string | null;
+  };
+  /**
+   * Every label, hint and message inside the form. This tab is written per language: switch the language at the top right to edit the other one.
+   */
+  form?: {
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    message?: string | null;
+    /**
+     * Shown next to the required fields.
+     */
+    req?: string | null;
+    phoneHint?: string | null;
+    /**
+     * The grey text inside the empty box.
+     */
+    messagePh?: string | null;
+    services?: string | null;
+    more?: string | null;
+    company?: string | null;
+    budget?: string | null;
+    timeline?: string | null;
+    choose?: string | null;
+    submit?: string | null;
+    sending?: string | null;
+    eName?: string | null;
+    ePhone?: string | null;
+    eEmail?: string | null;
+    eMessage?: string | null;
+    fail?: string | null;
+    tooMany?: string | null;
+    okH?: string | null;
+    okP?: string | null;
+    okWa?: string | null;
+    noscript?: string | null;
+  };
+  /**
+   * The drop-down for the monthly budget. Keep the option codes as they are: the contact form and the reports depend on them. Only the visible text can change.
+   */
+  budget?: {
+    /**
+     * Do not add or remove rows unless a developer has agreed it.
+     */
+    options?:
+      | {
+          value?: string | null;
+          label?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * The drop-down for when to start. Keep the option codes as they are: the contact form and the reports depend on them. Only the visible text can change.
+   */
+  timeline?: {
+    /**
+     * Do not add or remove rows unless a developer has agreed it.
+     */
+    options?:
+      | {
+          value?: string | null;
+          label?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * The numbered steps beside the form.
+   */
+  next?: {
+    stepsH?: string | null;
+    stepsLede?: string | null;
+    /**
+     * One row per step; they are numbered automatically.
+     */
+    steps?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1471,7 +1708,7 @@ export interface ContactPage {
   createdAt?: string | null;
 }
 /**
- * The blog home and the labels around articles.
+ * The blog home, the category pages and the labels around articles. The articles themselves are in Blog → Posts. Switch the language at the top right to edit Bahasa Indonesia or English.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-page".
@@ -1488,6 +1725,80 @@ export interface BlogPage {
      */
     wa?: string | null;
   };
+  /**
+   * Texts on the main blog page.
+   */
+  home?: {
+    /**
+     * The sentence under the heading.
+     */
+    lede?: string | null;
+    latest?: string | null;
+    more?: string | null;
+    categories?: string | null;
+    allCats?: string | null;
+    empty?: string | null;
+  };
+  /**
+   * Texts on the category pages (one page per blog category). Words in {braces} are filled in by the site: keep them.
+   */
+  categories?: {
+    backToBlog?: string | null;
+    catNav?: string | null;
+    catService?: string | null;
+    /**
+     * {n} = the number of articles. Shown when there is exactly 1.
+     */
+    countOne?: string | null;
+    /**
+     * {n} = the number of articles.
+     */
+    countMany?: string | null;
+    /**
+     * {name} = the category name.
+     */
+    h1Tpl?: string | null;
+    /**
+     * {name} = the category name. The title in Google results.
+     */
+    titleTpl?: string | null;
+    /**
+     * {name} = the category name. Used when the category has no description of its own.
+     */
+    descTpl?: string | null;
+  };
+  /**
+   * Small labels and fixed lines shown around every article. Words in {braces} are filled in by the site: keep them.
+   */
+  labels?: {
+    by?: string | null;
+    published?: string | null;
+    readTime?: string | null;
+    /**
+     * {n} = the number of minutes, e.g. "{n} min read".
+     */
+    minReadTpl?: string | null;
+    summary?: string | null;
+    sources?: string | null;
+    sourcesNote?: string | null;
+    author?: string | null;
+    authorLine?: string | null;
+    authorMore?: string | null;
+    related?: string | null;
+    share?: string | null;
+    copy?: string | null;
+    copied?: string | null;
+    railEyebrow?: string | null;
+    railOpen?: string | null;
+    rail360?: string | null;
+    crossHeading?: string | null;
+    featureEyebrow?: string | null;
+    /**
+     * {service} = the name of the related service.
+     */
+    inlineHTpl?: string | null;
+    inlineP?: string | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1505,7 +1816,7 @@ export interface BlogPage {
   createdAt?: string | null;
 }
 /**
- * The portfolio list and the labels on case studies.
+ * The portfolio list and the labels around case studies. The case studies themselves are in the Portfolio section. Switch the language at the top right to edit Bahasa Indonesia or English.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "portfolio-page".
@@ -1521,6 +1832,62 @@ export interface PortfolioPage {
      * Pre-filled text when a visitor taps WhatsApp on this page.
      */
     wa?: string | null;
+  };
+  /**
+   * Texts on the page that lists all case studies.
+   */
+  list?: {
+    /**
+     * The page name in the trail at the top.
+     */
+    crumb?: string | null;
+    word?: string | null;
+    /**
+     * {n} = the number of case studies, filled in by the site: keep it.
+     */
+    ledeTpl?: string | null;
+    casesH?: string | null;
+    emptyH?: string | null;
+    empty?: string | null;
+  };
+  /**
+   * Fixed labels shown on every case study page. Words in {braces} are filled in by the site: keep them.
+   */
+  case?: {
+    /**
+     * Used in the menu under the heading and as section headings.
+     */
+    sections?: {
+      ringkasan?: string | null;
+      tantangan?: string | null;
+      strategi?: string | null;
+      hasil?: string | null;
+    };
+    subnav?: string | null;
+    start?: string | null;
+    servicesUsed?: string | null;
+    client?: string | null;
+    timeline?: string | null;
+    period?: string | null;
+    source?: string | null;
+    /**
+     * {n} = number of months. Shown when the duration is exactly 1.
+     */
+    monthOne?: string | null;
+    /**
+     * {n} = number of months.
+     */
+    monthMany?: string | null;
+    /**
+     * For example "in" in "+11% in 5 months".
+     */
+    within?: string | null;
+    related?: string | null;
+    pairs?: string | null;
+    emptyH?: string | null;
+    empty?: string | null;
+    ctaH?: string | null;
+    cta?: string | null;
   };
   meta?: {
     title?: string | null;
@@ -1554,6 +1921,313 @@ export interface NotFoundPage {
     servicesH?: string | null;
     hub?: string | null;
     waLead?: string | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * The made-up sample texts and numbers drawn inside the illustrations on the service pages (a search result, a chat, a report…). They show how Logink works with a fictional coffee shop. The shop name, web address and Instagram handle are fixed. Switch the language at the top right to edit Bahasa Indonesia or English.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "instruments-content".
+ */
+export interface InstrumentsContent {
+  id: number;
+  /**
+   * Labels that appear on many illustrations.
+   */
+  common?: {
+    /**
+     * Small label that tells visitors the illustration is made up.
+     */
+    mockLabel?: string | null;
+    /**
+     * The same caption for illustrations that show AI-made photos.
+     */
+    mockLabelPhoto?: string | null;
+    sample?: string | null;
+    annotToggle?: string | null;
+    /**
+     * Three notes drawn on the AI answer, in this order. Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    annot?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Sample text inside an illustration. A Google result and map listing.
+   */
+  serp?: {
+    url?: string | null;
+    title?: string | null;
+    text?: string | null;
+    rank?: string | null;
+    map?: string | null;
+    open?: string | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    places?:
+      | {
+          name?: string | null;
+          note?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Sample text inside an illustration. An Instagram profile.
+   */
+  instagram?: {
+    bio?: string | null;
+    follow?: string | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    tiles?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Sample text inside an illustration. A Google review.
+   */
+  review?: {
+    who?: string | null;
+    /**
+     * Written by a customer, so it stays in Indonesian in both languages.
+     */
+    text?: string | null;
+    kind?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. A shop website with speed scores.
+   */
+  site?: {
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    nav?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    sub?: string | null;
+    cta?: string | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    menu?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    gauges?:
+      | {
+          k?: string | null;
+          v?: number | null;
+          id?: string | null;
+        }[]
+      | null;
+    gaugeTag?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. Impressions down to orders. The bar lengths are fixed in code.
+   */
+  funnel?: {
+    title?: string | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    steps?:
+      | {
+          k?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    pill?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. An AI assistant answering a question about the coffee shop.
+   */
+  aiAnswer?: {
+    answer?: string | null;
+    sources?: string | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    cites?:
+      | {
+          t?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Sample text inside an illustration. A table of questions asked to AI engines.
+   */
+  prompts?: {
+    caption?: string | null;
+    /**
+     * Five headings, in this order. Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    head?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    yes?: string | null;
+    no?: string | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    rows?:
+      | {
+          /**
+           * Written by a customer, so it stays in Indonesian in both languages.
+           */
+          q?: string | null;
+          url?: string | null;
+          pos?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Sample text inside an illustration. Bars comparing how often brands are mentioned. The brands and percentages are fixed in code.
+   */
+  shareOfVoice?: {
+    title?: string | null;
+    note?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. A scrolling log of AI robots visiting the site. The log lines are fixed in code.
+   */
+  crawler?: {
+    title?: string | null;
+    pause?: string | null;
+    region?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. One question split into four searches.
+   */
+  fanout?: {
+    title?: string | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    subs?:
+      | {
+          /**
+           * Written by a customer, so it stays in Indonesian in both languages.
+           */
+          q?: string | null;
+          src?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Sample text inside an illustration. A code snippet. Only the title is editable; the code is fixed.
+   */
+  structuredData?: {
+    title?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. A monthly report with made-up ranges.
+   */
+  report?: {
+    title?: string | null;
+    /**
+     * Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    panels?:
+      | {
+          src?: string | null;
+          k?: string | null;
+          v?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    goal?: {
+      k?: string | null;
+      v?: string | null;
+    };
+    foot?: string | null;
+  };
+  /**
+   * The paragraph "How we measure" shown on service pages.
+   */
+  measure?: {
+    heading?: string | null;
+    text?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. A WhatsApp conversation. Written by the customer and the shop, so it stays in Indonesian in both languages.
+   */
+  chat?: {
+    out?: string | null;
+    reply?: string | null;
+    out2?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. An ad that leads to a WhatsApp chat.
+   */
+  adChat?: {
+    sponsored?: string | null;
+    headline?: string | null;
+    cta?: string | null;
+  };
+  /**
+   * Sample text inside an illustration. A week of social media posts.
+   */
+  calendar?: {
+    title?: string | null;
+    /**
+     * Seven names, Monday first. Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    days?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Seven entries, Monday first. Do not add or remove rows: the illustration is drawn for this exact number.
+     */
+    items?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    draft?: string | null;
+    caption?: string | null;
+  };
+  /**
+   * Labels of the interactive 360° campaign map.
+   */
+  campaignMap?: {
+    legend?: string | null;
+    all?: string | null;
+    caption?: string | null;
+    centreSub?: string | null;
+    night?: {
+      yes?: string | null;
+      no?: string | null;
+    };
   };
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
@@ -1622,6 +2296,135 @@ export interface SiteSetting {
   createdAt?: string | null;
 }
 /**
+ * The short words used on every page: menu names, buttons, footer headings and the fixed headings of the service pages. A change goes live on every page after Publish. Switch the language at the top right to edit Bahasa Indonesia or English.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ui-labels".
+ */
+export interface UiLabel {
+  id: number;
+  /**
+   * Menu names, the breadcrumb and the screen-reader labels of the header.
+   */
+  nav?: {
+    services?: string | null;
+    portfolio?: string | null;
+    blog?: string | null;
+    about?: string | null;
+    contact?: string | null;
+    home?: string | null;
+    menu?: string | null;
+    close?: string | null;
+    /**
+     * Only visible to keyboard and screen-reader users.
+     */
+    skip?: string | null;
+    mainNav?: string | null;
+    quick?: string | null;
+    crumbs?: string | null;
+    /**
+     * Shown in the language switch. Keep "Bahasa Indonesia" in the Indonesian version and "English" in the English one.
+     */
+    langName?: string | null;
+  };
+  buttons?: {
+    quote?: string | null;
+    quoteShort?: string | null;
+    wa?: string | null;
+    openService?: string | null;
+    viewCase?: string | null;
+    drag?: string | null;
+    allServices?: string | null;
+  };
+  /**
+   * Small labels that appear on service pages, articles and other pages.
+   */
+  pageLabels?: {
+    updated?: string | null;
+    reviewedBy?: string | null;
+    from?: string | null;
+    toc?: string | null;
+    faq?: string | null;
+    populer?: string | null;
+    contoh?: string | null;
+    loop?: string | null;
+  };
+  /**
+   * The call to action at the bottom of most pages.
+   */
+  closing?: {
+    closingH?: string | null;
+    closingLede?: string | null;
+    ask360?: string | null;
+  };
+  /**
+   * Words used where a page offers one service or the 360° campaign.
+   */
+  campaign?: {
+    oneService?: string | null;
+    every?: string | null;
+    c360?: string | null;
+    c360Item?: string | null;
+    c360Line?: string | null;
+    c360How?: string | null;
+    c360Chat?: string | null;
+  };
+  footer?: {
+    pages?: string | null;
+    reach?: string | null;
+    city?: string | null;
+  };
+  /**
+   * Short names for the services in the day-stage strip. The full names and prices are in the Service pages.
+   */
+  stageNames?: {
+    seo?: string | null;
+    localseo?: string | null;
+    ads?: string | null;
+    social?: string | null;
+    creative?: string | null;
+    website?: string | null;
+    ai?: string | null;
+  };
+  /**
+   * The fixed headings and labels every service page uses. Words in {braces} are filled in by the site: keep them.
+   */
+  serviceTemplate?: {
+    answer?: string | null;
+    facts?: string | null;
+    priceRow?: string | null;
+    campaign?: string | null;
+    fedBy?: string | null;
+    feeds?: string | null;
+    wa?: string | null;
+    strategy?: string | null;
+    work?: string | null;
+    /**
+     * {name} = the service name.
+     */
+    pricing?: string | null;
+    /**
+     * {tier} = the plan name.
+     */
+    choose?: string | null;
+    addons?: string | null;
+    proof?: string | null;
+    noCase?: string | null;
+    process?: string | null;
+    ai?: string | null;
+    aiMore?: string | null;
+    /**
+     * {name} = the service name.
+     */
+    faq?: string | null;
+    sources?: string | null;
+    pairs?: string | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
@@ -1680,6 +2483,77 @@ export interface AboutPageSelect<T extends boolean = true> {
         h1?: T;
         wa?: T;
       };
+  top?:
+    | T
+    | {
+        crumb?: T;
+        eyebrow?: T;
+        intro?: T;
+      };
+  headings?:
+    | T
+    | {
+        sections?:
+          | T
+          | {
+              who?: T;
+              ways?: T;
+              how?: T;
+              why?: T;
+              not?: T;
+              services?: T;
+            };
+      };
+  story?:
+    | T
+    | {
+        who?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ways?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+        waysMore?: T;
+        howLead?: T;
+      };
+  why?:
+    | T
+    | {
+        why?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+        not?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  aside?:
+    | T
+    | {
+        glance?: T;
+        facts?:
+          | T
+          | {
+              k?: T;
+              v?: T;
+              id?: T;
+            };
+        ask?: T;
+        askSub?: T;
+      };
   meta?:
     | T
     | {
@@ -1703,6 +2577,96 @@ export interface ContactPageSelect<T extends boolean = true> {
     | {
         h1?: T;
         wa?: T;
+      };
+  contact?:
+    | T
+    | {
+        lede?: T;
+        official?: T;
+        channelsH?: T;
+        waName?: T;
+        waNote?: T;
+        waAsk?: T;
+        oneEyebrow?: T;
+        oneText?: T;
+        oneCta?: T;
+        c360Eyebrow?: T;
+        c360Text?: T;
+        c360Cta?: T;
+        formName?: T;
+        formNote?: T;
+        formCta?: T;
+        emailName?: T;
+        emailNote?: T;
+      };
+  formIntro?:
+    | T
+    | {
+        formH?: T;
+        formLede?: T;
+      };
+  form?:
+    | T
+    | {
+        name?: T;
+        phone?: T;
+        email?: T;
+        message?: T;
+        req?: T;
+        phoneHint?: T;
+        messagePh?: T;
+        services?: T;
+        more?: T;
+        company?: T;
+        budget?: T;
+        timeline?: T;
+        choose?: T;
+        submit?: T;
+        sending?: T;
+        eName?: T;
+        ePhone?: T;
+        eEmail?: T;
+        eMessage?: T;
+        fail?: T;
+        tooMany?: T;
+        okH?: T;
+        okP?: T;
+        okWa?: T;
+        noscript?: T;
+      };
+  budget?:
+    | T
+    | {
+        options?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  timeline?:
+    | T
+    | {
+        options?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  next?:
+    | T
+    | {
+        stepsH?: T;
+        stepsLede?: T;
+        steps?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
       };
   meta?:
     | T
@@ -1728,6 +2692,53 @@ export interface BlogPageSelect<T extends boolean = true> {
         h1?: T;
         wa?: T;
       };
+  home?:
+    | T
+    | {
+        lede?: T;
+        latest?: T;
+        more?: T;
+        categories?: T;
+        allCats?: T;
+        empty?: T;
+      };
+  categories?:
+    | T
+    | {
+        backToBlog?: T;
+        catNav?: T;
+        catService?: T;
+        countOne?: T;
+        countMany?: T;
+        h1Tpl?: T;
+        titleTpl?: T;
+        descTpl?: T;
+      };
+  labels?:
+    | T
+    | {
+        by?: T;
+        published?: T;
+        readTime?: T;
+        minReadTpl?: T;
+        summary?: T;
+        sources?: T;
+        sourcesNote?: T;
+        author?: T;
+        authorLine?: T;
+        authorMore?: T;
+        related?: T;
+        share?: T;
+        copy?: T;
+        copied?: T;
+        railEyebrow?: T;
+        railOpen?: T;
+        rail360?: T;
+        crossHeading?: T;
+        featureEyebrow?: T;
+        inlineHTpl?: T;
+        inlineP?: T;
+      };
   meta?:
     | T
     | {
@@ -1751,6 +2762,44 @@ export interface PortfolioPageSelect<T extends boolean = true> {
     | {
         h1?: T;
         wa?: T;
+      };
+  list?:
+    | T
+    | {
+        crumb?: T;
+        word?: T;
+        ledeTpl?: T;
+        casesH?: T;
+        emptyH?: T;
+        empty?: T;
+      };
+  case?:
+    | T
+    | {
+        sections?:
+          | T
+          | {
+              ringkasan?: T;
+              tantangan?: T;
+              strategi?: T;
+              hasil?: T;
+            };
+        subnav?: T;
+        start?: T;
+        servicesUsed?: T;
+        client?: T;
+        timeline?: T;
+        period?: T;
+        source?: T;
+        monthOne?: T;
+        monthMany?: T;
+        within?: T;
+        related?: T;
+        pairs?: T;
+        emptyH?: T;
+        empty?: T;
+        ctaH?: T;
+        cta?: T;
       };
   meta?:
     | T
@@ -1788,6 +2837,240 @@ export interface NotFoundPageSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "instruments-content_select".
+ */
+export interface InstrumentsContentSelect<T extends boolean = true> {
+  common?:
+    | T
+    | {
+        mockLabel?: T;
+        mockLabelPhoto?: T;
+        sample?: T;
+        annotToggle?: T;
+        annot?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  serp?:
+    | T
+    | {
+        url?: T;
+        title?: T;
+        text?: T;
+        rank?: T;
+        map?: T;
+        open?: T;
+        places?:
+          | T
+          | {
+              name?: T;
+              note?: T;
+              id?: T;
+            };
+      };
+  instagram?:
+    | T
+    | {
+        bio?: T;
+        follow?: T;
+        tiles?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  review?:
+    | T
+    | {
+        who?: T;
+        text?: T;
+        kind?: T;
+      };
+  site?:
+    | T
+    | {
+        nav?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        sub?: T;
+        cta?: T;
+        menu?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        gauges?:
+          | T
+          | {
+              k?: T;
+              v?: T;
+              id?: T;
+            };
+        gaugeTag?: T;
+      };
+  funnel?:
+    | T
+    | {
+        title?: T;
+        steps?:
+          | T
+          | {
+              k?: T;
+              id?: T;
+            };
+        pill?: T;
+      };
+  aiAnswer?:
+    | T
+    | {
+        answer?: T;
+        sources?: T;
+        cites?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+      };
+  prompts?:
+    | T
+    | {
+        caption?: T;
+        head?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        yes?: T;
+        no?: T;
+        rows?:
+          | T
+          | {
+              q?: T;
+              url?: T;
+              pos?: T;
+              id?: T;
+            };
+      };
+  shareOfVoice?:
+    | T
+    | {
+        title?: T;
+        note?: T;
+      };
+  crawler?:
+    | T
+    | {
+        title?: T;
+        pause?: T;
+        region?: T;
+      };
+  fanout?:
+    | T
+    | {
+        title?: T;
+        subs?:
+          | T
+          | {
+              q?: T;
+              src?: T;
+              id?: T;
+            };
+      };
+  structuredData?:
+    | T
+    | {
+        title?: T;
+      };
+  report?:
+    | T
+    | {
+        title?: T;
+        panels?:
+          | T
+          | {
+              src?: T;
+              k?: T;
+              v?: T;
+              id?: T;
+            };
+        goal?:
+          | T
+          | {
+              k?: T;
+              v?: T;
+            };
+        foot?: T;
+      };
+  measure?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+      };
+  chat?:
+    | T
+    | {
+        out?: T;
+        reply?: T;
+        out2?: T;
+      };
+  adChat?:
+    | T
+    | {
+        sponsored?: T;
+        headline?: T;
+        cta?: T;
+      };
+  calendar?:
+    | T
+    | {
+        title?: T;
+        days?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        draft?: T;
+        caption?: T;
+      };
+  campaignMap?:
+    | T
+    | {
+        legend?: T;
+        all?: T;
+        caption?: T;
+        centreSub?: T;
+        night?:
+          | T
+          | {
+              yes?: T;
+              no?: T;
+            };
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1813,6 +3096,116 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   instagram?: T;
   address?: T;
   defaultOgImage?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ui-labels_select".
+ */
+export interface UiLabelsSelect<T extends boolean = true> {
+  nav?:
+    | T
+    | {
+        services?: T;
+        portfolio?: T;
+        blog?: T;
+        about?: T;
+        contact?: T;
+        home?: T;
+        menu?: T;
+        close?: T;
+        skip?: T;
+        mainNav?: T;
+        quick?: T;
+        crumbs?: T;
+        langName?: T;
+      };
+  buttons?:
+    | T
+    | {
+        quote?: T;
+        quoteShort?: T;
+        wa?: T;
+        openService?: T;
+        viewCase?: T;
+        drag?: T;
+        allServices?: T;
+      };
+  pageLabels?:
+    | T
+    | {
+        updated?: T;
+        reviewedBy?: T;
+        from?: T;
+        toc?: T;
+        faq?: T;
+        populer?: T;
+        contoh?: T;
+        loop?: T;
+      };
+  closing?:
+    | T
+    | {
+        closingH?: T;
+        closingLede?: T;
+        ask360?: T;
+      };
+  campaign?:
+    | T
+    | {
+        oneService?: T;
+        every?: T;
+        c360?: T;
+        c360Item?: T;
+        c360Line?: T;
+        c360How?: T;
+        c360Chat?: T;
+      };
+  footer?:
+    | T
+    | {
+        pages?: T;
+        reach?: T;
+        city?: T;
+      };
+  stageNames?:
+    | T
+    | {
+        seo?: T;
+        localseo?: T;
+        ads?: T;
+        social?: T;
+        creative?: T;
+        website?: T;
+        ai?: T;
+      };
+  serviceTemplate?:
+    | T
+    | {
+        answer?: T;
+        facts?: T;
+        priceRow?: T;
+        campaign?: T;
+        fedBy?: T;
+        feeds?: T;
+        wa?: T;
+        strategy?: T;
+        work?: T;
+        pricing?: T;
+        choose?: T;
+        addons?: T;
+        proof?: T;
+        noCase?: T;
+        process?: T;
+        ai?: T;
+        aiMore?: T;
+        faq?: T;
+        sources?: T;
+        pairs?: T;
+      };
   _status?: T;
   updatedAt?: T;
   createdAt?: T;

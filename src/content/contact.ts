@@ -1,8 +1,11 @@
-// Contact page copy (BUILD §3.9 Contact + §11 two modes). Plain data. Response-time claims are today's
+// Contact page copy (BUILD §3.9 Contact + §11 two modes). Response-time claims are today's
 // claims only: WhatsApp "hitungan menit", email and form "24 jam", next steps from the old contact page.
+// CMS: Pages → Contact. One live() object per admin tab; CONTACT exposes the text tabs under the old keys.
 import type { L, Locale } from '@/lib/services'
+import { live } from '@/cms/store'
+import { byLocale, view } from '@/cms/view'
 
-export const CONTACT = {
+const HERO = live('contact-page', 'contact', {
   lede: {
     id: 'Satu pesan cukup: chat WhatsApp untuk respons tercepat, atau isi formulir singkat.',
     en: 'One message is enough: chat on WhatsApp for the fastest reply, or fill in the short form.',
@@ -29,25 +32,33 @@ export const CONTACT = {
   formCta: { id: 'Isi formulir', en: 'Fill in the form' },
   emailName: { id: 'Email', en: 'Email' },
   emailNote: { id: 'Respons dalam 24 jam', en: 'Replies within 24 hours' },
+} satisfies Record<string, L>)
+
+const FORM_HEAD = live('contact-page', 'formIntro', {
   formH: { id: 'Formulir singkat', en: 'The short form' },
   formLede: {
     id: 'Empat kolom wajib, sisanya opsional. Belum yakin layanan mana yang cocok? Kosongkan pilihan layanan dan ceritakan tujuan bisnis Anda di kolom pesan; kami bantu memilih antara satu layanan atau Kampanye 360°.',
     en: "Four required fields; the rest is optional. Not sure which service fits? Leave the services unticked and tell us your business goal in the message; we'll help you choose between one service and a 360° campaign.",
   },
+} satisfies Record<string, L>)
+
+const NEXT = live('contact-page', 'next', {
+  stepsH: { id: 'Setelah pesan Anda masuk', en: 'What happens next' },
   stepsLede: {
     id: 'Konsultasi awal gratis. Proposal dikirim setelah sesi discovery, dan keputusan sepenuhnya di tangan Anda.',
     en: 'The first consultation is free. The proposal follows the discovery call, and the decision is entirely yours.',
   },
-  stepsH: { id: 'Setelah pesan Anda masuk', en: 'What happens next' },
-} satisfies Record<string, L>
+  steps: {
+    id: ['Kami tinjau brief Anda dalam 24 jam', 'Jadwalkan sesi discovery gratis selama 30 menit', 'Kami siapkan proposal khusus untuk Anda', 'Onboarding & kickoff dalam 1 minggu'],
+    en: ['We review your brief within 24 hours', 'Schedule a free 30-minute discovery call', 'We prepare a custom proposal', 'Onboarding and kickoff within 1 week'],
+  } as Record<Locale, string[]>,
+})
 
-export const STEPS: Record<Locale, string[]> = {
-  id: ['Kami tinjau brief Anda dalam 24 jam', 'Jadwalkan sesi discovery gratis selama 30 menit', 'Kami siapkan proposal khusus untuk Anda', 'Onboarding & kickoff dalam 1 minggu'],
-  en: ['We review your brief within 24 hours', 'Schedule a free 30-minute discovery call', 'We prepare a custom proposal', 'Onboarding and kickoff within 1 week'],
-}
+export const CONTACT = view(HERO, FORM_HEAD, NEXT)
+export const STEPS: Record<Locale, string[]> = byLocale((l) => NEXT.steps[l])
 
-// Form labels: short strings handed to the client island as props (never paragraphs).
-export const FORM: Record<Locale, Record<string, string>> = {
+// Form labels: short strings handed to the client island as props (never paragraphs). The whole tab is per language.
+const FORM_LIVE = live('contact-page', 'form', {
   id: {
     name: 'Nama', phone: 'WhatsApp', email: 'Email', message: 'Pesan', req: 'wajib',
     phoneHint: 'Contoh: 0812 3456 7890', messagePh: 'Ceritakan bisnis Anda dan apa yang ingin dicapai.',
@@ -74,14 +85,27 @@ export const FORM: Record<Locale, Record<string, string>> = {
     okH: 'Thank you, we have received your message.', okP: 'We reply within 24 hours. Want it faster? Continue on WhatsApp.',
     okWa: 'Continue on WhatsApp', noscript: 'This form needs JavaScript. Chat with us on WhatsApp or email hello@logink.co.',
   },
-}
+} as Record<Locale, Record<string, string>>)
+export const FORM: Record<Locale, Record<string, string>> = byLocale((l) => FORM_LIVE[l])
 
-// Values are the stored contract (unchanged from the old form); labels are localised.
-export const BUDGET: Record<Locale, { value: string; label: string }[]> = {
-  id: [{ value: '<5M', label: '< Rp 5 Juta' }, { value: '5-10M', label: 'Rp 5–10 Juta' }, { value: '10-20M', label: 'Rp 10–20 Juta' }, { value: '20-50M', label: 'Rp 20–50 Juta' }, { value: '50M+', label: '> Rp 50 Juta' }],
-  en: [{ value: '<5M', label: '< IDR 5M' }, { value: '5-10M', label: 'IDR 5–10M' }, { value: '10-20M', label: 'IDR 10–20M' }, { value: '20-50M', label: 'IDR 20–50M' }, { value: '50M+', label: '> IDR 50M' }],
-}
-export const TIMELINE: Record<Locale, { value: string; label: string }[]> = {
-  id: [{ value: 'ASAP', label: 'Secepatnya' }, { value: '1month', label: 'Dalam 1 bulan' }, { value: '2-3months', label: '2–3 bulan' }, { value: '3+months', label: 'Lebih dari 3 bulan' }],
-  en: [{ value: 'ASAP', label: 'As soon as possible' }, { value: '1month', label: 'Within 1 month' }, { value: '2-3months', label: '2–3 months' }, { value: '3+months', label: '3+ months' }],
-}
+// Option values are the stored contract (unchanged from the old form) and never edited; only the labels are.
+const BUDGET_LIVE = live('contact-page', 'budget', {
+  options: [
+    { value: '<5M', label: { id: '< Rp 5 Juta', en: '< IDR 5M' } },
+    { value: '5-10M', label: { id: 'Rp 5–10 Juta', en: 'IDR 5–10M' } },
+    { value: '10-20M', label: { id: 'Rp 10–20 Juta', en: 'IDR 10–20M' } },
+    { value: '20-50M', label: { id: 'Rp 20–50 Juta', en: 'IDR 20–50M' } },
+    { value: '50M+', label: { id: '> Rp 50 Juta', en: '> IDR 50M' } },
+  ] as { value: string; label: L }[],
+})
+const TIMELINE_LIVE = live('contact-page', 'timeline', {
+  options: [
+    { value: 'ASAP', label: { id: 'Secepatnya', en: 'As soon as possible' } },
+    { value: '1month', label: { id: 'Dalam 1 bulan', en: 'Within 1 month' } },
+    { value: '2-3months', label: { id: '2–3 bulan', en: '2–3 months' } },
+    { value: '3+months', label: { id: 'Lebih dari 3 bulan', en: '3+ months' } },
+  ] as { value: string; label: L }[],
+})
+const opts = (o: { value: string; label: L }[], l: Locale) => o.filter((x) => x.value && x.label[l]).map((x) => ({ value: x.value, label: x.label[l] }))
+export const BUDGET: Record<Locale, { value: string; label: string }[]> = byLocale((l) => opts(BUDGET_LIVE.options, l))
+export const TIMELINE: Record<Locale, { value: string; label: string }[]> = byLocale((l) => opts(TIMELINE_LIVE.options, l))
