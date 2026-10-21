@@ -2,6 +2,7 @@
 // below). AI_COMPARE (SEO vs AEO vs GEO + the customs line) is also read by home Bab III.
 // Honesty: no guaranteed citations. Prices (owner 2026-10-04): three plans benchmarked on crawlcompass.com/ai-seo.
 import type { Locale } from '@/lib/services'
+import { liveDoc } from '@/cms/store'
 import type { ServiceContent, Table } from './types'
 
 const GUIDE = 'https://developers.google.com/search/docs/fundamentals/ai-optimization-guide'
@@ -276,5 +277,4 @@ const en: ServiceContent = {
   },
 }
 
-const content: Record<Locale, ServiceContent> = { id, en }
-export default content
+export default liveDoc('service-pages', 'ai', 'content', { id, en } satisfies Record<Locale, ServiceContent>)

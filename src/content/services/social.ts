@@ -1,6 +1,7 @@
 // Social Media Management (BUILD §3.4). The X / X_EN exports are the vetted legacy copy, kept verbatim; the
 // default export maps them into ServiceContent ('modules' pricing + the QuoteBuilder copy).
 import type { Locale } from '@/lib/services'
+import { liveDoc } from '@/cms/store'
 import type { BuilderGroup, ServiceContent } from './types'
 
 export const SOCIAL_MODULES = [
@@ -571,9 +572,9 @@ const groups = (l: Locale): BuilderGroup[] => {
     { id: 'organic-social', label: 'Organic Social Management', toggle: pick,
       items: [{ id: 'instagram', label: 'Instagram', on: true }, { id: 'tiktok', label: 'TikTok', on: true }, { id: 'facebook', label: 'Facebook' }],
       selects: [{ id: 'orgPosts', label: id ? 'Post per bulan (per platform)' : 'Posts per month (per platform)', v: '12', options: vol(['8', '12', '16', '20'], c) }] },
-    { id: 'tiktok-strategy', label: 'TikTok Strategy & Production', toggle: pick,
+    { id: 'tiktok-strategy', label: 'TikTok Strategy & Production', toggle: pick, items: [], // [] = no choices (the CMS returns [] for such a group)
       selects: [{ id: 'videos', label: id ? 'Video per bulan' : 'Videos per month', v: '8', options: vol(['4', '8', '12'], c) }] },
-    { id: 'linkedin-b2b', label: id ? 'LinkedIn Management (B2B)' : 'LinkedIn Management (B2B)', toggle: pick,
+    { id: 'linkedin-b2b', label: id ? 'LinkedIn Management (B2B)' : 'LinkedIn Management (B2B)', toggle: pick, items: [],
       selects: [
         { id: 'liPosts', label: id ? 'Post per bulan' : 'Posts per month', v: '8', options: vol(['4', '8', '12'], c) },
         { id: 'liProfiles', label: id ? 'Profil yang dikelola' : 'Profiles managed', v: '1', options: vol(['1', '2', '3'], c) },
@@ -746,5 +747,4 @@ const en: ServiceContent = {
   ],
 }
 
-const content: Record<Locale, ServiceContent> = { id, en }
-export default content
+export default liveDoc('service-pages', 'social', 'content', { id, en } satisfies Record<Locale, ServiceContent>)
