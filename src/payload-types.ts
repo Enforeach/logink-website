@@ -79,6 +79,8 @@ export interface Config {
     media: Media;
     'contact-submissions': ContactSubmission;
     users: User;
+    'service-pages': ServicePage;
+    'legal-pages': LegalPage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -98,6 +100,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'service-pages': ServicePagesSelect<false> | ServicePagesSelect<true>;
+    'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -106,14 +110,28 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('id' | 'en') | ('id' | 'en')[];
   globals: {
+    'home-page': HomePage;
+    'hub-page': HubPage;
+    'about-page': AboutPage;
+    'contact-page': ContactPage;
+    'blog-page': BlogPage;
+    'portfolio-page': PortfolioPage;
+    'not-found-page': NotFoundPage;
     'site-settings': SiteSetting;
   };
   globalsSelect: {
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'hub-page': HubPageSelect<false> | HubPageSelect<true>;
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+    'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
+    'blog-page': BlogPageSelect<false> | BlogPageSelect<true>;
+    'portfolio-page': PortfolioPageSelect<false> | PortfolioPageSelect<true>;
+    'not-found-page': NotFoundPageSelect<false> | NotFoundPageSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
-  locale: null;
+  locale: 'id' | 'en';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -659,6 +677,100 @@ export interface ContactSubmission {
   createdAt: string;
 }
 /**
+ * One document per service page. Prices, names and texts here update the menu, the services table and the page itself.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-pages".
+ */
+export interface ServicePage {
+  id: number;
+  /**
+   * The page this document edits.
+   */
+  title: string;
+  key: 'seo' | 'localseo' | 'ads' | 'social' | 'creative' | 'website' | 'ai';
+  /**
+   * Name, one-liner and price appear in the menu, the services table and the page hero. Title and description are in the SEO tab.
+   */
+  basics?: {
+    /**
+     * Used as link text everywhere (menu, table, footer).
+     */
+    name?: string | null;
+    /**
+     * Services table and menu.
+     */
+    line?: string | null;
+    h1?: string | null;
+    /**
+     * Exactly as shown, e.g. "Rp 8 · 10 · 15 Juta/bulan". Empty = custom quote (the line below is shown instead).
+     */
+    price?: string | null;
+    /**
+     * Shown when the price line is empty.
+     */
+    quote?: string | null;
+    /**
+     * Pre-filled text when a visitor taps WhatsApp on this page.
+     */
+    wa?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Only for pages that should not appear in search results.
+     */
+    noIndex?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Privacy policy, terms and disclaimer. Changes here are legal text: have them reviewed before publishing.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages".
+ */
+export interface LegalPage {
+  id: number;
+  /**
+   * The page this document edits.
+   */
+  title: string;
+  key: 'privacy' | 'terms' | 'disclaimer';
+  /**
+   * The main heading and the WhatsApp message this page opens. Title and description are in the SEO tab.
+   */
+  basics?: {
+    h1?: string | null;
+    /**
+     * Pre-filled text when a visitor taps WhatsApp on this page.
+     */
+    wa?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Only for pages that should not appear in search results.
+     */
+    noIndex?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -729,6 +841,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'service-pages';
+        value: number | ServicePage;
+      } | null)
+    | ({
+        relationTo: 'legal-pages';
+        value: number | LegalPage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1122,6 +1242,60 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-pages_select".
+ */
+export interface ServicePagesSelect<T extends boolean = true> {
+  title?: T;
+  key?: T;
+  basics?:
+    | T
+    | {
+        name?: T;
+        line?: T;
+        h1?: T;
+        price?: T;
+        quote?: T;
+        wa?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noIndex?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages_select".
+ */
+export interface LegalPagesSelect<T extends boolean = true> {
+  title?: T;
+  key?: T;
+  basics?:
+    | T
+    | {
+        h1?: T;
+        wa?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noIndex?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -1161,11 +1335,281 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * The homepage.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  /**
+   * The main heading and the WhatsApp message this page opens. Title and description are in the SEO tab.
+   */
+  basics?: {
+    h1?: string | null;
+    /**
+     * Pre-filled text when a visitor taps WhatsApp on this page.
+     */
+    wa?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Only for pages that should not appear in search results.
+     */
+    noIndex?: boolean | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * The services & prices overview (/layanan).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hub-page".
+ */
+export interface HubPage {
+  id: number;
+  /**
+   * The main heading and the WhatsApp message this page opens. Title and description are in the SEO tab.
+   */
+  basics?: {
+    h1?: string | null;
+    /**
+     * Pre-filled text when a visitor taps WhatsApp on this page.
+     */
+    wa?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Only for pages that should not appear in search results.
+     */
+    noIndex?: boolean | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * The About page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
+export interface AboutPage {
+  id: number;
+  /**
+   * The main heading and the WhatsApp message this page opens. Title and description are in the SEO tab.
+   */
+  basics?: {
+    h1?: string | null;
+    /**
+     * Pre-filled text when a visitor taps WhatsApp on this page.
+     */
+    wa?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Only for pages that should not appear in search results.
+     */
+    noIndex?: boolean | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * The contact page and its form.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page".
+ */
+export interface ContactPage {
+  id: number;
+  /**
+   * The main heading and the WhatsApp message this page opens. Title and description are in the SEO tab.
+   */
+  basics?: {
+    h1?: string | null;
+    /**
+     * Pre-filled text when a visitor taps WhatsApp on this page.
+     */
+    wa?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Only for pages that should not appear in search results.
+     */
+    noIndex?: boolean | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * The blog home and the labels around articles.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-page".
+ */
+export interface BlogPage {
+  id: number;
+  /**
+   * The main heading and the WhatsApp message this page opens. Title and description are in the SEO tab.
+   */
+  basics?: {
+    h1?: string | null;
+    /**
+     * Pre-filled text when a visitor taps WhatsApp on this page.
+     */
+    wa?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Only for pages that should not appear in search results.
+     */
+    noIndex?: boolean | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * The portfolio list and the labels on case studies.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-page".
+ */
+export interface PortfolioPage {
+  id: number;
+  /**
+   * The main heading and the WhatsApp message this page opens. Title and description are in the SEO tab.
+   */
+  basics?: {
+    h1?: string | null;
+    /**
+     * Pre-filled text when a visitor taps WhatsApp on this page.
+     */
+    wa?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Only for pages that should not appear in search results.
+     */
+    noIndex?: boolean | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * What visitors see on an address that does not exist. The page links come from the site menu.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "not-found-page".
+ */
+export interface NotFoundPage {
+  id: number;
+  content?: {
+    title?: string | null;
+    h1?: string | null;
+    text?: string | null;
+    pagesH?: string | null;
+    servicesH?: string | null;
+    hub?: string | null;
+    waLead?: string | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Text that appears on many pages at once. Changes go live on every page after Publish.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings".
  */
 export interface SiteSetting {
   id: number;
+  /**
+   * One paragraph: the footer, About page, llms.txt and the Organization schema use it.
+   */
+  entity?: string | null;
+  /**
+   * Shown next to WhatsApp buttons. Keep the official number in it.
+   */
+  antiScam?: string | null;
+  /**
+   * Shown where AI-assisted illustrations appear.
+   */
+  aiDisclosure?: string | null;
+  /**
+   * The SEO AI page’s honest current-state line.
+   */
+  aiBaseline?: string | null;
+  /**
+   * Pre-filled WhatsApp messages. Keep the {words in braces}: the site fills them in (e.g. {service} becomes the service name).
+   */
+  waTemplates?: {
+    /**
+     * {title} = the case study title
+     */
+    caseStudy?: string | null;
+    /**
+     * {name} = the category name
+     */
+    category?: string | null;
+    /**
+     * {title} = the article title, {service} = its related service
+     */
+    post?: string | null;
+    /**
+     * {plan} = the plan name, {service} = the service name
+     */
+    tier?: string | null;
+    generic?: string | null;
+    campaign360?: string | null;
+    /**
+     * {service} = the service name
+     */
+    upgrade?: string | null;
+  };
   siteName?: string | null;
   tagline?: string | null;
   contactEmail?: string | null;
@@ -1173,14 +1617,195 @@ export interface SiteSetting {
   instagram?: string | null;
   address?: string | null;
   defaultOgImage?: (number | null) | Media;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  basics?:
+    | T
+    | {
+        h1?: T;
+        wa?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noIndex?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hub-page_select".
+ */
+export interface HubPageSelect<T extends boolean = true> {
+  basics?:
+    | T
+    | {
+        h1?: T;
+        wa?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noIndex?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  basics?:
+    | T
+    | {
+        h1?: T;
+        wa?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noIndex?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page_select".
+ */
+export interface ContactPageSelect<T extends boolean = true> {
+  basics?:
+    | T
+    | {
+        h1?: T;
+        wa?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noIndex?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-page_select".
+ */
+export interface BlogPageSelect<T extends boolean = true> {
+  basics?:
+    | T
+    | {
+        h1?: T;
+        wa?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noIndex?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-page_select".
+ */
+export interface PortfolioPageSelect<T extends boolean = true> {
+  basics?:
+    | T
+    | {
+        h1?: T;
+        wa?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noIndex?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "not-found-page_select".
+ */
+export interface NotFoundPageSelect<T extends boolean = true> {
+  content?:
+    | T
+    | {
+        title?: T;
+        h1?: T;
+        text?: T;
+        pagesH?: T;
+        servicesH?: T;
+        hub?: T;
+        waLead?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
+  entity?: T;
+  antiScam?: T;
+  aiDisclosure?: T;
+  aiBaseline?: T;
+  waTemplates?:
+    | T
+    | {
+        caseStudy?: T;
+        category?: T;
+        post?: T;
+        tier?: T;
+        generic?: T;
+        campaign360?: T;
+        upgrade?: T;
+      };
   siteName?: T;
   tagline?: T;
   contactEmail?: T;
@@ -1188,6 +1813,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   instagram?: T;
   address?: T;
   defaultOgImage?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

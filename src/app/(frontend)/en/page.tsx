@@ -1,6 +1,10 @@
 import { staticMeta } from '@/lib/meta'
 import { HomePage } from '@/components/sections/home/HomePage'
+import { loadCms } from '@/cms/load'
 
-export const metadata = staticMeta('home', 'en')
+export async function generateMetadata() {
+  await loadCms()
+  return staticMeta('home', 'en')
+}
 export const revalidate = 3600 // ClientLogos reads Payload (BUILD §3.5)
-export default function Page() { return <HomePage locale="en" /> }
+export default async function Page() { await loadCms(); return <HomePage locale="en" /> }

@@ -5,13 +5,18 @@ import '@/styles/tokens.css'
 import { outfit, bricolage, martian } from '@/styles/fonts'
 import { NotFoundPage } from '@/components/sections/notfound/NotFoundPage'
 import { NF } from '@/content/notfound'
+import { loadCms } from '@/cms/load'
 
-export const metadata: Metadata = {
-  title: { absolute: NF.title.id },
-  robots: { index: false, follow: true },
+export async function generateMetadata(): Promise<Metadata> {
+  await loadCms()
+  return {
+    title: { absolute: NF.title.id },
+    robots: { index: false, follow: true },
+  }
 }
 
-export default function GlobalNotFound() {
+export default async function GlobalNotFound() {
+  await loadCms()
   return (
     <html lang="id" className={`${outfit.variable} ${bricolage.variable} ${martian.variable}`}>
       <body>

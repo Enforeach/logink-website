@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
@@ -18,7 +19,8 @@ import { Testimonials } from './collections/Testimonials'
 import { CtaWidgets } from './collections/CtaWidgets'
 import { ContactSubmissions } from './collections/ContactSubmissions'
 import { ClientLogos } from './collections/ClientLogos'
-import { SiteSettings } from './globals/SiteSettings'
+import { cmsCollections, cmsGlobals, CMS_KEYED, SEO_GLOBALS } from './cms/docs'
+import { SITE_URL } from './lib/services'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,6 +36,13 @@ export default buildConfig({
       titleSuffix: ' · Logink CMS',
       robots: 'noindex, nofollow',
     },
+    components: { beforeDashboard: ['/cms/admin/Welcome#Welcome'] },
+  },
+  // Page documents are edited per language with the locale switcher (docs/cms/PLAN.md principle 3).
+  localization: {
+    locales: [{ label: 'Bahasa Indonesia', code: 'id' }, { label: 'English', code: 'en' }],
+    defaultLocale: 'id',
+    fallback: false,
   },
   editor: lexicalEditor(),
   collections: [
@@ -49,13 +58,15 @@ export default buildConfig({
     Media,
     ContactSubmissions,
     Users,
+    ...cmsCollections,
   ],
-  globals: [SiteSettings],
+  globals: cmsGlobals,
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL || '' },
     // Coexists with the existing Prisma tables (distinct lowercase table names).
-    // Schema is applied via explicit migrations, never auto-push, to protect prod.
-    push: false,
+    // Schema is applied via explicit migrations, never auto-push, to protect prod. PAYLOAD_PUSH=true only on a
+    // throwaway local database (CMS agents, scripts/cms-roundtrip.ts).
+    push: process.env.PAYLOAD_PUSH === 'true',
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   secret: process.env.PAYLOAD_SECRET || process.env.AUTH_SECRET || '',
@@ -63,6 +74,24 @@ export default buildConfig({
   graphQL: { disable: true },
   sharp,
   plugins: [
+    // SEO tab on every page document: title + description with counters, share image, Google preview, noindex.
+    seoPlugin({
+      globals: SEO_GLOBALS,
+      collections: CMS_KEYED,
+      tabbedUI: true,
+      uploadsCollection: 'media',
+      generateURL: ({ doc, globalConfig, collectionConfig, locale }) => {
+        const l = locale === 'en' ? 'en' : 'id'
+        const g = globalConfig?.custom?.path as { id: string; en: string } | undefined
+        const k = (collectionConfig?.custom?.keys as { key: string; path: { id: string; en: string } }[] | undefined)?.find((x) => x.key === (doc as { key?: string })?.key)
+        const p = g?.[l] ?? k?.path[l] ?? '/'
+        return `${SITE_URL}${p === '/' ? '' : p}`
+      },
+      fields: ({ defaultFields }) => [
+        ...defaultFields,
+        { name: 'noIndex', type: 'checkbox', label: 'Hide from Google (noindex)', admin: { description: 'Only for pages that should not appear in search results.' } },
+      ],
+    }),
     vercelBlobStorage({
       // Serve media directly from the Blob CDN (public marketing site) instead of
       // proxying through /api/media/file, so URLs don't depend on serverURL/deploy.

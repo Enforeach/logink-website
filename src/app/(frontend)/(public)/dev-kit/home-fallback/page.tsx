@@ -3,10 +3,12 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { HomePage } from '@/components/sections/home/HomePage'
+import { loadCms } from '@/cms/load'
 
 export const metadata: Metadata = { title: { absolute: 'Home fallback | Logink' }, robots: { index: false, follow: false } }
 
-export default function HomeFallback() {
+export default async function HomeFallback() {
+  await loadCms()
   if (process.env.NODE_ENV === 'production') notFound()
   return <HomePage locale="id" noMedia />
 }

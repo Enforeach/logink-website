@@ -3,6 +3,7 @@
 // the CMS updatedAt, never the build time. hreflang only where both sides exist.
 import { getBlogList, getSitemapEntries } from '@/payload/queries'
 import { CATEGORIES, CATEGORY_MIN_POSTS, SITE_URL, STATIC_PAIRS } from '@/lib/services'
+import { loadCms } from '@/cms/load'
 
 export const revalidate = 3600
 
@@ -33,6 +34,7 @@ function pair(id: string | null, en: string | null, lastmod: string, freq: strin
 }
 
 export async function GET() {
+  await loadCms()
   const { posts, caseStudies } = await getSitemapEntries()
   const cats = await Promise.all(
     Object.keys(CATEGORIES).map(async (slug) => {

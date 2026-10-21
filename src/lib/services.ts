@@ -4,6 +4,10 @@
 // next.config.ts redirects() (relative import: no '@/' alias in this file). Check: pnpm check:registry.
 // ponytail: price SUMMARY lives here; tier detail lives in src/content/services/<svc>.ts.
 // services.check.ts asserts both agree. Split a facts file out only if this passes ~450 lines.
+// CMS (docs/cms/PLAN.md): the editable text (names, lines, H1s, prices, WhatsApp messages, SEO title/description,
+// entity and notice lines, WhatsApp templates) is served through live() proxies; keys, paths and gates stay here.
+import { live, liveDoc, withSeo } from '../cms/store'
+import { fmt } from '../cms/merge'
 
 export type Locale = 'id' | 'en'
 export type StageKey = 'ditemukan' | 'dipercaya' | 'dikutip' | 'dihubungi'
@@ -30,18 +34,18 @@ export const CASE_SERVICES: Record<string, SvcKey[]> = {
   'franchise-hub-case-studies': ['seo'],
 }
 
-export const ENTITY: L = {
+export const ENTITY: L = live('site-settings', 'entity', {
   id: 'Logink adalah agensi digital marketing 360° di Jakarta untuk UMKM dan brand yang sedang bertumbuh di Indonesia: SEO & konten, Local SEO & Google Maps, social media, iklan berbayar, kreatif, website, dan optimasi AI search (GEO/AEO), yang dijalankan satu per satu atau sebagai satu kampanye terhubung sampai ke WhatsApp.',
   en: 'Logink is a 360° digital marketing agency in Jakarta for Indonesian SMBs and growing brands, running SEO & content, Local SEO & Google Maps, social media, paid ads, creative, websites and AI search optimization (GEO/AEO) one at a time or as one connected campaign that ends in WhatsApp.',
-}
-export const ANTI_SCAM: L = {
+})
+export const ANTI_SCAM: L = live('site-settings', 'antiScam', {
   id: `Nomor WhatsApp resmi Logink hanya ${WA_DISPLAY}.`,
   en: `Logink's only official WhatsApp number is ${WA_DISPLAY}.`,
-}
-export const AI_DISCLOSURE: L = {
+})
+export const AI_DISCLOSURE: L = live('site-settings', 'aiDisclosure', {
   id: 'Ilustrasi dibuat dengan bantuan AI; klien, testimoni, tim dan hasil adalah nyata.',
   en: 'Illustrations are made with AI assistance; clients, testimonials, team and results are real.',
-}
+})
 
 export const STAGES: Record<StageKey, { name: L; hour: string; keyLight: 'magenta' | 'crimson' | 'coral' | 'jingga'; anchor: string }> = {
   ditemukan: { name: { id: 'Ditemukan', en: 'Found' }, hour: '07.00', keyLight: 'magenta', anchor: 'ditemukan' },
@@ -80,7 +84,7 @@ export type Service = {
 }
 
 // Row order = the home/hub services table in final.md (01..07).
-export const SERVICES: Service[] = [
+const SERVICE_DEFS: Service[] = [
   {
     key: 'seo', cmsSlug: 'seo-content-marketing',
     path: { id: '/layanan/jasa-seo-profesional', en: '/en/services/seo-content-marketing' },
@@ -204,13 +208,21 @@ export const SERVICES: Service[] = [
   },
 ]
 
+// CMS: Services → <service> → Page tab (name, line, H1, price, quote, WhatsApp) + SEO tab (title, description).
+// An empty CMS price means 'custom quote' (null), as in the defaults.
+const someL = (v: L | null | undefined) => (v && (v.id || v.en) ? v : undefined)
+export const SERVICES: Service[] = SERVICE_DEFS.map((s) =>
+  liveDoc<Service>('service-pages', s.key, 'basics', { ...s, price: s.price ?? { id: '', en: '' }, quote: s.quote ?? { id: '', en: '' } }, (v) =>
+    withSeo({ ...v, price: someL(v.price) ?? null, quote: someL(v.quote) }, { slug: 'service-pages', key: s.key })),
+)
+
 export type PageKey = 'home' | 'hub' | 'about' | 'portfolio' | 'blog' | 'contact' | 'privacy' | 'terms' | 'disclaimer'
 export type Page = {
   key: PageKey; path: L; light: Light; hour: string | null
   h1: L; title: L; desc: L; wa: L; og: L; priority: number; freq: 'weekly' | 'monthly' | 'yearly' | 'daily'; updated: string
 }
 
-export const PAGES: Page[] = [
+const PAGE_DEFS: Page[] = [
   { key: 'home', og: { id: 'id-home', en: 'en-home' }, path: { id: '/', en: '/en' }, light: 'putih', hour: '05.30', priority: 1, freq: 'weekly', updated: '2026-07-16',
     h1: { id: 'Agensi Digital Marketing 360° di Jakarta: Ditemukan. Dipercaya. Dikutip AI. Dihubungi.', en: '360° Digital Marketing Agency in Jakarta: Found. Trusted. Cited by AI. Contacted.' },
     title: { id: 'Jasa Digital Marketing Jakarta: Agensi 360° | Logink', en: 'Digital Marketing Agency Jakarta: 360° Campaigns | Logink' },
@@ -259,6 +271,15 @@ export const PAGES: Page[] = [
     wa: { id: 'Halo Logink! Saya punya pertanyaan tentang disclaimer.', en: 'Hi Logink! I have a question about the disclaimer.' } },
 ]
 
+// CMS: Pages → <page> (Legal → <doc> for privacy/terms/disclaimer) → Page tab (H1, WhatsApp) + SEO tab.
+export const pageRef = (k: PageKey): { slug: string; key?: string } =>
+  k === 'privacy' || k === 'terms' || k === 'disclaimer' ? { slug: 'legal-pages', key: k } : { slug: `${k}-page` }
+export const PAGES: Page[] = PAGE_DEFS.map((p) => {
+  const ref = pageRef(p.key)
+  const post = (v: Page) => withSeo(v, ref)
+  return ref.key ? liveDoc(ref.slug, ref.key, 'basics', p, post) : live(ref.slug, 'basics', p, post)
+})
+
 // Launch fact strip (home §02). Offer facts only, until APPROVED_CASE_SLUGS has an entry.
 // Every entry is true today and names its source (BUILD §3.2 item 4, §11 4.2).
 export const FACT_STRIP: { id: string; en: string; source: string }[] = [
@@ -279,10 +300,10 @@ export const SOURCES = [
   { k: 'apjii-ai', for: ['home', 'ai', 'social'], text: { id: '27,34% responden di Indonesia memakai AI', en: '27.34% of respondents in Indonesia use AI' }, src: 'APJII via Kompas', year: 2025, url: 'https://www.kompas.id/artikel/pengguna-ai-di-indonesia-meningkat-kebanyakan-gen-z-untuk-belajar' },
 ] as const
 
-export const AI_BASELINE: L = {
+export const AI_BASELINE: L = live('site-settings', 'aiBaseline', {
   id: 'logink.co: 1 kutipan AI (Ahrefs, Sep 2026). Progres dipublikasikan tiap kuartal.',
   en: 'logink.co: 1 AI citation (Ahrefs, Sep 2026). Progress published quarterly.',
-}
+})
 
 // Blog categories (CMS slugs) -> the service they feed. Lede <= 50 words, visible under the category H1.
 export const CATEGORIES: Record<string, { svc: SvcKey; lede: L }> = {
@@ -329,16 +350,28 @@ export function alternateOf(path: string): string | null {
 export const waLink = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`
 
 // WhatsApp prefills for CMS pages and tier CTAs (page-architecture §10). Code-owned pages use their `wa`.
-export const WA_PATTERNS = {
-  caseStudy: (title: string): L => ({ id: `Halo Logink! Saya membaca studi kasus '${title}' dan ingin diskusi untuk bisnis saya.`, en: `Hi Logink! I read the case study '${title}' and want to discuss my business.` }),
-  category: (name: string): L => ({ id: `Halo Logink! Saya membaca artikel ${name} di blog Logink dan ingin konsultasi.`, en: `Hi Logink! I read your ${name} articles and would like a consultation.` }),
-  post: (title: string, serviceName: string): L => ({ id: `Halo Logink! Saya membaca artikel '${title}' dan ingin konsultasi soal ${serviceName}.`, en: `Hi Logink! I read '${title}' and would like to talk about ${serviceName}.` }),
-  tier: (tierName: string, serviceName: string): L => ({ id: `Halo Logink! Saya tertarik dengan paket ${tierName} untuk layanan ${serviceName}.`, en: `Hi Logink! I'm interested in the ${tierName} plan for ${serviceName}.` }),
-  generic: { id: 'Halo Logink! Saya ingin konsultasi digital marketing.', en: "Hi Logink! I'd like a digital marketing consultation." } as L,
+// CMS: Settings → Site settings → WhatsApp templates ({title}, {name}, {service}, {plan} are filled in here).
+const WA_TPL = live('site-settings', 'waTemplates', {
+  caseStudy: { id: "Halo Logink! Saya membaca studi kasus '{title}' dan ingin diskusi untuk bisnis saya.", en: "Hi Logink! I read the case study '{title}' and want to discuss my business." },
+  category: { id: 'Halo Logink! Saya membaca artikel {name} di blog Logink dan ingin konsultasi.', en: 'Hi Logink! I read your {name} articles and would like a consultation.' },
+  post: { id: "Halo Logink! Saya membaca artikel '{title}' dan ingin konsultasi soal {service}.", en: "Hi Logink! I read '{title}' and would like to talk about {service}." },
+  tier: { id: 'Halo Logink! Saya tertarik dengan paket {plan} untuk layanan {service}.', en: "Hi Logink! I'm interested in the {plan} plan for {service}." },
+  generic: { id: 'Halo Logink! Saya ingin konsultasi digital marketing.', en: "Hi Logink! I'd like a digital marketing consultation." },
   // BUILD §11 1.2: the Kampanye 360° mode (ModeChoice, profiler chip, hub section)
-  campaign360: { id: 'Halo Logink! Saya tertarik Kampanye 360° untuk bisnis saya.', en: "Hi Logink! I'm interested in a 360° campaign for my business." } as L,
+  campaign360: { id: 'Halo Logink! Saya tertarik Kampanye 360° untuk bisnis saya.', en: "Hi Logink! I'm interested in a 360° campaign for my business." },
   // BUILD §11 6.1: the service-page note 'Bisa sendiri, lebih kuat terhubung'
-  upgrade: (name: string): L => ({ id: `Halo Logink! Saya tertarik dengan ${name} sebagai bagian dari Kampanye 360°.`, en: `Hi Logink! I'm interested in ${name} as part of a 360° campaign.` }),
+  upgrade: { id: 'Halo Logink! Saya tertarik dengan {service} sebagai bagian dari Kampanye 360°.', en: "Hi Logink! I'm interested in {service} as part of a 360° campaign." },
+})
+const tpl = (t: L, v: Record<string, string>): L => ({ id: fmt(t.id, v), en: fmt(t.en, v) })
+export const WA_PATTERNS = {
+  caseStudy: (title: string) => tpl(WA_TPL.caseStudy, { title }),
+  category: (name: string) => tpl(WA_TPL.category, { name }),
+  post: (title: string, serviceName: string) => tpl(WA_TPL.post, { title, service: serviceName }),
+  tier: (tierName: string, serviceName: string) => tpl(WA_TPL.tier, { plan: tierName, service: serviceName }),
+  // getters: read per request, never once at import
+  get generic(): L { return WA_TPL.generic },
+  get campaign360(): L { return WA_TPL.campaign360 },
+  upgrade: (name: string) => tpl(WA_TPL.upgrade, { service: name }),
 }
 
 // next.config.ts redirects(): all permanent (Next emits 308). www -> apex 308 is a Vercel domain setting.

@@ -8,7 +8,7 @@
 // Rich page (content with `included`, SEO first): hero (film + trust) → stats band → USP → tabs → price → process → CTA → FAQ → 6.
 import type { Metadata } from 'next'
 import { AI_BASELINE, AI_BASELINE_LIVE, page, svc as svcOf, type Locale, type SvcKey } from '@/lib/services'
-import { pageMeta } from '@/lib/meta'
+import { cmsSeo, pageMeta } from '@/lib/meta'
 import type { Ground } from '@/styles/tailwind.tokens'
 import type { ServiceContent } from '@/content/services/types'
 import { tpl } from '@/content/services/template'
@@ -41,7 +41,7 @@ const CONTENT: Partial<Record<SvcKey, Record<Locale, ServiceContent>>> = { seo, 
 
 export const serviceMeta = (k: SvcKey, l: Locale): Metadata => {
   const s = svcOf(k)
-  return pageMeta({ locale: l, title: s.title[l], desc: s.desc[l], path: s.path, og: s.og[l] })
+  return pageMeta({ locale: l, title: s.title[l], desc: s.desc[l], path: s.path, og: s.og[l], ...cmsSeo({ slug: 'service-pages', key: k }, l) })
 }
 
 export function ServicePage({ k, locale: l, noMedia }: { k: SvcKey; locale: Locale; noMedia?: boolean }) {

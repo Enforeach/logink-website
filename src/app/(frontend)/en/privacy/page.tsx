@@ -1,7 +1,12 @@
 import { LegalPage, legalMeta } from '@/components/sections/legal/LegalPage'
+import { loadCms } from '@/cms/load'
 
-export const metadata = legalMeta('privacy', 'en')
+export async function generateMetadata() {
+  await loadCms()
+  return legalMeta('privacy', 'en')
+}
 
-export default function Page() {
+export default async function Page() {
+  await loadCms()
   return <LegalPage doc="privacy" locale="en" />
 }

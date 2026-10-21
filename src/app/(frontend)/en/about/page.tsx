@@ -1,6 +1,10 @@
 import { staticMeta } from '@/lib/meta'
 import { AboutPage } from '@/components/sections/about/AboutPage'
+import { loadCms } from '@/cms/load'
 
 export const revalidate = 3600
-export const metadata = staticMeta('about', 'en')
-export default function Page() { return <AboutPage locale="en" /> }
+export async function generateMetadata() {
+  await loadCms()
+  return staticMeta('about', 'en')
+}
+export default async function Page() { await loadCms(); return <AboutPage locale="en" /> }

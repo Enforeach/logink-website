@@ -1,7 +1,12 @@
 import { LegalPage, legalMeta } from '@/components/sections/legal/LegalPage'
+import { loadCms } from '@/cms/load'
 
-export const metadata = legalMeta('disclaimer', 'id')
+export async function generateMetadata() {
+  await loadCms()
+  return legalMeta('disclaimer', 'id')
+}
 
-export default function Page() {
+export default async function Page() {
+  await loadCms()
   return <LegalPage doc="disclaimer" locale="id" />
 }

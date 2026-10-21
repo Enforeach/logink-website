@@ -10,6 +10,7 @@ import { WebVitals } from '@/lib/web-vitals'
 import { DayDial } from '@/motion/primitives' // (M)
 import { SiteObserver } from '@/motion/SiteObserver' // (M)
 import { RichGate } from '@/motion/RichGate' // (M)
+import { DraftBanner } from '@/cms/DraftBanner'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -36,6 +37,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
         <SiteObserver />
         <RichGate />
         <WebVitals />
+        <DraftBanner />
         <Script id="gtm" strategy="lazyOnload">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { slugRedirect } from '@/lib/slug-redirect'
 import { getSitemapEntries } from '@/payload/queries'
 import { CasePage, caseMeta } from '@/components/sections/case/CasePage'
+import { loadCms } from '@/cms/load'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -15,10 +16,12 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  await loadCms()
   return caseMeta((await params).slug, 'en')
 }
 
 export default async function Page({ params }: Props) {
+  await loadCms()
   const { slug } = await params
   const to = await slugRedirect('case', slug, 'en') // BUILD §1.10: an ID slug whose case has a slugEn → 308
   if (to) permanentRedirect(to)

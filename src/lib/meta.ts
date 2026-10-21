@@ -3,8 +3,9 @@
 // One <script type="application/ld+json"> per page: JsonLd({ graph }) serialises ldJson(graph).
 import type { Metadata } from 'next'
 import { ogUrl } from '@/lib/assets'
+import { rawField } from '@/cms/store'
 import {
-  EMAIL, ENTITY, INSTAGRAM, PAGES, SITE_URL, WA_NUMBER, liveServices,
+  EMAIL, ENTITY, INSTAGRAM, SITE_URL, WA_NUMBER, liveServices, page, pageRef,
   type Locale, type PageKey,
 } from '@/lib/services'
 
@@ -37,9 +38,16 @@ export function pageMeta(o: {
   }
 }
 
+/** The CMS SEO tab's share image and noindex switch (its title/description reach the registry through withSeo). */
+export function cmsSeo(ref: { slug: string; key?: string }, l: Locale): { ogImage?: string; robots?: 'noindex,follow' } {
+  const m = rawField(ref, 'meta', l)
+  const url = (m?.image as { url?: string } | null | undefined)?.url
+  return { ...(url && { ogImage: url }), ...(m?.noIndex === true && { robots: 'noindex,follow' as const }) }
+}
+
 export function staticMeta(k: PageKey, locale: Locale): Metadata {
-  const p = PAGES.find((x) => x.key === k)!
-  return pageMeta({ locale, title: p.title[locale], desc: p.desc[locale], path: p.path, og: p.og[locale] })
+  const p = page(k)
+  return pageMeta({ locale, title: p.title[locale], desc: p.desc[locale], path: p.path, og: p.og[locale], ...cmsSeo(pageRef(k), locale) })
 }
 
 // ── JSON-LD nodes (plain objects) ──

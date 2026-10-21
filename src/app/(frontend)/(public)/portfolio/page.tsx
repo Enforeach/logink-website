@@ -1,6 +1,10 @@
 import { staticMeta } from '@/lib/meta'
 import { PortfolioPage } from '@/components/sections/portfolio/PortfolioPage'
+import { loadCms } from '@/cms/load'
 
 export const revalidate = 3600
-export const metadata = staticMeta('portfolio', 'id')
-export default function Page() { return <PortfolioPage locale="id" /> }
+export async function generateMetadata() {
+  await loadCms()
+  return staticMeta('portfolio', 'id')
+}
+export default async function Page() { await loadCms(); return <PortfolioPage locale="id" /> }

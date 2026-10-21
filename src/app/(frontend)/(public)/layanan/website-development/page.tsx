@@ -1,8 +1,13 @@
 import { ServicePage, serviceMeta } from '@/components/sections/service/ServicePage'
+import { loadCms } from '@/cms/load'
 
-export const metadata = serviceMeta('website', 'id')
+export async function generateMetadata() {
+  await loadCms()
+  return serviceMeta('website', 'id')
+}
 export const revalidate = 3600
 
-export default function Page() {
+export default async function Page() {
+  await loadCms()
   return <ServicePage k="website" locale="id" />
 }
