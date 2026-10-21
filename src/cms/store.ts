@@ -36,10 +36,9 @@ export function nodes(snap: Snapshot | null, e: Entry): [unknown, unknown] {
 
 function resolve(e: Entry): unknown {
   const s = scope()
-  if (!s.snap) return e.def
   if (!s.memo.has(e)) {
-    const [a, b] = nodes(s.snap, e)
-    const v = merge(e.def, a, b)
+    // no snapshot (before loadCms, scripts, next.config): the default, still through `post` so shapes match
+    const v = s.snap ? merge(e.def, ...nodes(s.snap, e)) : e.def
     s.memo.set(e, e.post ? e.post(v as never) : v)
   }
   return s.memo.get(e)
