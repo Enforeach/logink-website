@@ -45,3 +45,6 @@ scripts/*
 !scripts/check-tokens.mjs
 !scripts/install-media.mjs
 !scripts/fixtures/
+!scripts/payload.sh
+!scripts/cms.ts
+!scripts/check-cms-entries.mjs
