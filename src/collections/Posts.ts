@@ -42,8 +42,8 @@ export const Posts: CollectionConfig = {
         {
           label: 'Bahasa Indonesia',
           fields: [
-            { name: 'titleId', type: 'text', required: true },
-            { name: 'excerptId', type: 'textarea' },
+            { name: 'titleId', type: 'text', required: true, label: 'Title' },
+            { name: 'excerptId', type: 'textarea', label: 'Excerpt', admin: { description: 'One or two sentences: shown on the blog list and used when the SEO description is empty.' } },
             {
               name: 'bodyFormat',
               type: 'radio',
@@ -81,8 +81,8 @@ export const Posts: CollectionConfig = {
         {
           label: 'English',
           fields: [
-            { name: 'titleEn', type: 'text' },
-            { name: 'excerptEn', type: 'textarea' },
+            { name: 'titleEn', type: 'text', label: 'Title' },
+            { name: 'excerptEn', type: 'textarea', label: 'Excerpt' },
             {
               name: 'bodyEn',
               type: 'richText',
@@ -106,7 +106,7 @@ export const Posts: CollectionConfig = {
           label: 'Media',
           fields: [
             { name: 'featuredImage', type: 'upload', relationTo: 'media' },
-            { name: 'featuredImageAlt', type: 'text' },
+            { name: 'featuredImageAlt', type: 'text', label: 'Featured image alt text', admin: { description: 'Describe the image for screen readers and Google Images.' } },
           ],
         },
         {
@@ -195,9 +195,10 @@ export const Posts: CollectionConfig = {
     slugField('titleId'),
     {
       name: 'slugEn',
+      label: 'English URL slug',
       type: 'text',
       unique: true,
-      admin: { position: 'sidebar', description: 'English URL slug' },
+      admin: { position: 'sidebar', description: 'The address of the English version: /en/blog/<this>.' },
     },
     {
       name: 'readingTime',

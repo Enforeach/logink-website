@@ -172,6 +172,9 @@ export interface UserAuthOperations {
 export interface Post {
   id: number;
   titleId: string;
+  /**
+   * One or two sentences: shown on the blog list and used when the SEO description is empty.
+   */
   excerptId?: string | null;
   /**
    * How you author the article body (both languages). "Rich text" uses the visual editor; "Markdown" lets you write/paste raw Markdown. The published article uses whichever is selected here.
@@ -218,6 +221,9 @@ export interface Post {
    */
   bodyMarkdownEn?: string | null;
   featuredImage?: (number | null) | Media;
+  /**
+   * Describe the image for screen readers and Google Images.
+   */
   featuredImageAlt?: string | null;
   /**
    * Service promoted in the image card, mid-article CTA and sidebar. Blank = the one that matches the category.
@@ -263,7 +269,7 @@ export interface Post {
    */
   slug?: string | null;
   /**
-   * English URL slug
+   * The address of the English version: /en/blog/<this>.
    */
   slugEn?: string | null;
   /**
@@ -738,11 +744,6 @@ export interface ContactSubmission {
 export interface ServicePage {
   id: number;
   /**
-   * The page this document edits.
-   */
-  title: string;
-  key: 'seo' | 'localseo' | 'ads' | 'social' | 'creative' | 'website' | 'ai';
-  /**
    * Name, one-liner and price appear in the menu, the services table and the page hero. Title and description are in the SEO tab.
    */
   basics?: {
@@ -1205,6 +1206,11 @@ export interface ServicePage {
      */
     noIndex?: boolean | null;
   };
+  /**
+   * The page this document edits.
+   */
+  title: string;
+  key: 'seo' | 'localseo' | 'ads' | 'social' | 'creative' | 'website' | 'ai';
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1217,11 +1223,6 @@ export interface ServicePage {
  */
 export interface LegalPage {
   id: number;
-  /**
-   * The page this document edits.
-   */
-  title: string;
-  key: 'privacy' | 'terms' | 'disclaimer';
   /**
    * The main heading and the WhatsApp message this page opens. Title and description are in the SEO tab.
    */
@@ -1298,6 +1299,11 @@ export interface LegalPage {
      */
     noIndex?: boolean | null;
   };
+  /**
+   * The page this document edits.
+   */
+  title: string;
+  key: 'privacy' | 'terms' | 'disclaimer';
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1805,8 +1811,6 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "service-pages_select".
  */
 export interface ServicePagesSelect<T extends boolean = true> {
-  title?: T;
-  key?: T;
   basics?:
     | T
     | {
@@ -2095,6 +2099,8 @@ export interface ServicePagesSelect<T extends boolean = true> {
         image?: T;
         noIndex?: T;
       };
+  title?: T;
+  key?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -2104,8 +2110,6 @@ export interface ServicePagesSelect<T extends boolean = true> {
  * via the `definition` "legal-pages_select".
  */
 export interface LegalPagesSelect<T extends boolean = true> {
-  title?: T;
-  key?: T;
   basics?:
     | T
     | {
@@ -2152,6 +2156,8 @@ export interface LegalPagesSelect<T extends boolean = true> {
         image?: T;
         noIndex?: T;
       };
+  title?: T;
+  key?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

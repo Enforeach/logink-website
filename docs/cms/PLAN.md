@@ -91,3 +91,14 @@ registry title/description.
 
 Each Sonnet agent works in its own git worktree and its own local database, validates with
 `scripts/cms-roundtrip.ts <slug>` until every leaf is served from the CMS, and never creates migrations.
+
+## Status (2026-10-22)
+
+Phases 0–2 done on `redesign/sehari-semalam` (local only, not deployed). One additive migration
+`20261021_154024_cms_pages` (new tables/columns only). Verified on a migrated + seeded copy of production:
+roundtrip ok for every entry, seed idempotent, 33/34 pages text-identical to live (contact: dev-only form SSR),
+admin edit → Publish → live immediately, Versions → Restore → live immediately, drafts only in Preview.
+
+Ship (Phase 3, owner approval): back up Neon → `DATABASE_URL=<neon> scripts/payload.sh migrate` →
+`scripts/payload.sh run scripts/cms.ts seed --remote` → staging deploy + smoke test → production deploy.
+Order matters: migrate before deploying (the new code reads the new tables). The old code ignores them.
