@@ -5,8 +5,8 @@ import { AI_BASELINE, AI_DISCLOSURE, ANTI_SCAM, ENTITY } from '@/lib/services'
 import { pageGlobal } from '../define'
 import { fieldsFrom } from '../fields'
 
-const legacy = (name: string, type: 'text' | 'upload' = 'text') =>
-  (type === 'upload' ? { name, type, relationTo: 'media', admin: { hidden: true } } : { name, type, admin: { hidden: true } }) as never
+const legacy = (name: string, type: 'text' | 'upload' = 'text', defaultValue?: string) =>
+  (type === 'upload' ? { name, type, relationTo: 'media', admin: { hidden: true } } : { name, type, defaultValue, admin: { hidden: true } }) as never
 
 export const SiteSettings = pageGlobal({
   slug: 'site-settings',
@@ -39,5 +39,5 @@ export const SiteSettings = pageGlobal({
       },
     },
   ],
-  extraFields: [{ ...legacy('siteName'), defaultValue: 'Logink' } as never, legacy('tagline'), legacy('contactEmail'), legacy('whatsappNumber'), legacy('instagram'), legacy('address'), legacy('defaultOgImage', 'upload')],
+  extraFields: [legacy('siteName', 'text', 'Logink'), legacy('tagline'), legacy('contactEmail'), legacy('whatsappNumber'), legacy('instagram'), legacy('address'), legacy('defaultOgImage', 'upload')],
 })
