@@ -3,6 +3,7 @@
 // (tag 'cms', expired by the afterChange hook in define.ts), so a page render costs one cache read per doc, not a
 // DB round trip. Draft mode (the admin Preview button) reads the latest drafts, uncached, for that browser only.
 import 'server-only'
+import { createHash } from 'node:crypto'
 import { cache } from 'react'
 import { draftMode } from 'next/headers'
 import { unstable_cache } from 'next/cache'
@@ -22,10 +23,13 @@ async function read(payload: Payload, kind: 'global' | 'keyed', slug: string, lo
   return Object.fromEntries((docs as Doc[]).map((d) => [String(d.key), d]))
 }
 
+// Keyed by database + deployment: Next's data cache outlives deploys (and a DB switch in dev), so an entry never
+// serves another database's or an older build's doc. The hour cap heals a missed revalidation (pages use 3600 too).
+const KEY = createHash('sha1').update(`${process.env.DATABASE_URL ?? ''}|${process.env.VERCEL_DEPLOYMENT_ID ?? ''}`).digest('hex').slice(0, 12)
 const published = unstable_cache(
   async (kind: 'global' | 'keyed', slug: string, locale: Locale) => read(await getPayloadClient(), kind, slug, locale, false),
-  ['cms-doc-v1'],
-  { tags: ['cms'] },
+  ['cms-doc-v2', KEY],
+  { tags: ['cms'], revalidate: 3600 },
 )
 
 /** Fill the store for this request. Throws when the DB is unreachable: Next then keeps serving the last good page. */
