@@ -23,7 +23,7 @@ const { afterChange, afterDelete } = makeRevalidateHooks(['/blog', '/en/blog', '
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
-    group: 'Content',
+    group: 'Blog',
     useAsTitle: 'titleId',
     defaultColumns: ['titleId', 'status', 'publishedAt'],
   },

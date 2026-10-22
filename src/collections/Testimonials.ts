@@ -9,7 +9,7 @@ export const Testimonials: CollectionConfig = {
   admin: {
     useAsTitle: 'clientName',
     defaultColumns: ['clientName', 'companyName', 'isHighlighted'],
-    group: 'Content',
+    group: 'Old site (not shown on logink.co)',
   },
   access: {
     read: anyone,

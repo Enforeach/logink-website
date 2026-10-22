@@ -3,7 +3,7 @@ import { isAuthenticated, anyone } from '../payload/access'
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  admin: { group: 'Content' },
+  admin: { group: 'Media' },
   access: {
     read: anyone,
     create: isAuthenticated,

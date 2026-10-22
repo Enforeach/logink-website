@@ -60,8 +60,11 @@ async function revalidateSite() {
     // outside a request (seed, CLI)
   }
 }
-const afterChange = ({ doc }: { doc: { _status?: string } }) => {
-  if (doc._status !== 'draft') void revalidateSite()
+// Every save, drafts included: a version restore rewrites the published doc but reports _status 'draft', and a
+// draft save only costs one extra re-render. Awaited: a fire-and-forget call can land after the request ended,
+// when revalidateTag silently does nothing.
+const afterChange = async ({ doc }: { doc: unknown }) => {
+  await revalidateSite()
   return doc
 }
 
@@ -111,10 +114,11 @@ export function keyedCollection(o: {
     versions,
     hooks: { afterChange: [afterChange] },
     custom: { keys: o.keys },
+    // tabs first: plugin-seo then adds its SEO tab to this row instead of wrapping everything in an outer tab row
     fields: [
+      { type: 'tabs', tabs: o.tabs.map((t) => tab(o.slug, t)) },
       { name: 'title', type: 'text', required: true, admin: { readOnly: true, position: 'sidebar', description: 'The page this document edits.' } },
       { name: 'key', type: 'select', required: true, unique: true, options: o.keys.map((k) => ({ label: k.title, value: k.key })), admin: { readOnly: true, position: 'sidebar' } },
-      { type: 'tabs', tabs: o.tabs.map((t) => tab(o.slug, t)) },
     ],
   }
 }

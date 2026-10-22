@@ -10,7 +10,7 @@ export const Industries: CollectionConfig = {
   admin: {
     useAsTitle: 'nameId',
     defaultColumns: ['nameId', 'nameEn', 'slug'],
-    group: 'Content',
+    group: 'Portfolio',
   },
   access: {
     read: anyone,

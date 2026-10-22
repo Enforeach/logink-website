@@ -10,7 +10,7 @@ export const Categories: CollectionConfig = {
   admin: {
     useAsTitle: 'nameId',
     defaultColumns: ['nameId', 'nameEn', 'slug', 'sortOrder'],
-    group: 'Content',
+    group: 'Blog',
   },
   access: {
     read: anyone,

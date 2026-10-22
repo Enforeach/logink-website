@@ -9,7 +9,7 @@ export const CtaWidgets: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'templateType', 'placement', 'isActive'],
-    group: 'Content',
+    group: 'Blog',
   },
   access: {
     read: anyone,

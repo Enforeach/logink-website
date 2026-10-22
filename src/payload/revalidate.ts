@@ -28,13 +28,14 @@ export function makeRevalidateHooks(paths: string[], dynamicPaths?: DynamicPaths
       // revalidate throws outside a request scope (migration/seed/CLI); ignore.
     }
   }
+  // awaited: a fire-and-forget run can land after the request ended, when revalidatePath silently does nothing
   return {
-    afterChange: ({ doc, previousDoc }) => {
-      void run(dynamicPaths ? dynamicPaths(doc as Doc, previousDoc as Doc | undefined) : [])
+    afterChange: async ({ doc, previousDoc }) => {
+      await run(dynamicPaths ? dynamicPaths(doc as Doc, previousDoc as Doc | undefined) : [])
       return doc
     },
-    afterDelete: ({ doc }) => {
-      void run(dynamicPaths ? dynamicPaths(doc as Doc) : [])
+    afterDelete: async ({ doc }) => {
+      await run(dynamicPaths ? dynamicPaths(doc as Doc) : [])
       return doc
     },
   }

@@ -8,7 +8,7 @@ const { afterChange, afterDelete } = makeRevalidateHooks(['/', '/en', '/layanan'
 export const Services: CollectionConfig = {
   slug: 'services',
   admin: {
-    group: 'Content',
+    group: 'Old site (not shown on logink.co)',
     useAsTitle: 'name',
     defaultColumns: ['name', 'funnelPosition', 'sortOrder', 'isActive'],
   },

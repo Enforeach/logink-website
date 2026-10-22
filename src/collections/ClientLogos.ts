@@ -12,7 +12,7 @@ export const ClientLogos: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'isActive', 'sortOrder'],
-    group: 'Content',
+    group: 'Portfolio',
     description: 'Logos shown in the homepage "Trusted by" strip. The strip is hidden while this list is empty.',
   },
   access: {

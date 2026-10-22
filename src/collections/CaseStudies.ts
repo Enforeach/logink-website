@@ -23,7 +23,7 @@ const { afterChange, afterDelete } = makeRevalidateHooks(
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
   admin: {
-    group: 'Content',
+    group: 'Portfolio',
     useAsTitle: 'title',
     defaultColumns: ['title', 'clientName', 'status', 'featured', 'publishedAt'],
   },
