@@ -100,5 +100,5 @@ roundtrip ok for every entry, seed idempotent, 33/34 pages text-identical to liv
 admin edit → Publish → live immediately, Versions → Restore → live immediately, drafts only in Preview.
 
 Ship (Phase 3, owner approval): back up Neon → `DATABASE_URL=<neon> scripts/payload.sh migrate` →
-`scripts/payload.sh run scripts/cms.ts seed --remote` → staging deploy + smoke test → production deploy.
+`scripts/payload.sh run scripts/cms.ts seed remote` → staging deploy + smoke test → production deploy.
 Order matters: migrate before deploying (the new code reads the new tables). The old code ignores them.
