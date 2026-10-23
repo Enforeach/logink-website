@@ -5,12 +5,14 @@ import { SITE, WHATSAPP_URL } from '@/lib/constants'
 import { type Locale, t, localePath } from '@/lib/i18n'
 import { LogoFull } from '@/components/ui/Logo'
 
+// Canonical dedicated service pages per locale (EN lives under /en/services/…, not /en/layanan/…)
 const SERVICE_LINKS = [
-  { href: '/layanan/jasa-seo-profesional', label: 'SEO & Content Marketing' },
-  { href: '/layanan/sosial-media-manajemen', label: 'Social Media Management' },
-  { href: '/layanan/paid-ads', label: 'Paid Advertising' },
-  { href: '/layanan/kreatif', label: 'Creative Services' },
-  { href: '/layanan/website-development', label: 'Website & Landing Page' },
+  { id: '/layanan/jasa-seo-profesional', en: '/en/services/seo-content-marketing', label: 'SEO & Content Marketing' },
+  { id: '/layanan/sosial-media-manajemen', en: '/en/services/social-media-management', label: 'Social Media Management' },
+  { id: '/layanan/paid-ads', en: '/en/services/paid-advertising', label: 'Paid Advertising' },
+  { id: '/layanan/kreatif', en: '/en/services/creative-services', label: 'Creative Services' },
+  { id: '/layanan/website-development', en: '/en/services/website-landing-page', label: 'Website & Landing Page' },
+  { id: '/layanan/local-seo', en: '/en/services/local-seo', label: 'Local SEO & Google Maps' },
 ]
 
 const COMPANY_LINKS = [
@@ -35,20 +37,22 @@ export function Footer({ locale = 'id' }: FooterProps) {
     <footer className="relative bg-[var(--bg-tint-peach)] border-t border-[var(--border-default)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Sign-off */}
+        {/* Sign-off — decorative brand flourish, not a section heading (the CTA
+            band above owns the conversion H2), so it stays a div to avoid a
+            duplicate "grow together" heading on every page. */}
         <div className="pt-16 pb-12 border-b border-[var(--border-default)]">
-          <h2 className="font-display font-bold tracking-[-0.03em] leading-[1.1] text-[var(--text-primary)] text-[clamp(2rem,5vw,3.5rem)]">
+          <div className="font-display font-bold tracking-[-0.03em] leading-[1.1] text-[var(--text-primary)] text-[clamp(2rem,5vw,3.5rem)]">
             {locale === 'en'
               ? <>Let&apos;s <span className="gradient-text">grow</span> together.</>
               : <>Mari <span className="gradient-text">bertumbuh</span> bersama.</>}
-          </h2>
+          </div>
         </div>
 
         {/* Link columns */}
         <div className="py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex mb-4" aria-label="Logink — home">
+            <Link href="/" className="inline-flex mb-4" aria-label="Logink home">
               <LogoFull size={30} theme="light" />
             </Link>
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
@@ -87,8 +91,8 @@ export function Footer({ locale = 'id' }: FooterProps) {
             <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-[0.18em] mb-4">{t(locale, 'footer.servicesTitle')}</h3>
             <ul className="space-y-2.5">
               {SERVICE_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link href={localePath(link.href, locale)} className="text-sm text-[var(--text-secondary)] hover:text-brand-crimson transition-colors">
+                <li key={link.id}>
+                  <Link href={locale === 'en' ? link.en : link.id} className="text-sm text-[var(--text-secondary)] hover:text-brand-crimson transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -143,7 +147,7 @@ export function Footer({ locale = 'id' }: FooterProps) {
               <ul className="space-y-2">
                 {BLOG_CATEGORIES.slice(0, 3).map((cat) => (
                   <li key={cat.href}>
-                    <Link href={cat.href} className="text-xs text-[var(--text-muted)] hover:text-brand-crimson transition-colors">
+                    <Link href={localePath(cat.href, locale)} className="text-xs text-[var(--text-muted)] hover:text-brand-crimson transition-colors">
                       {cat.label}
                     </Link>
                   </li>

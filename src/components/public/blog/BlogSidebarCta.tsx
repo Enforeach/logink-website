@@ -14,7 +14,7 @@ export function BlogSidebarCta({ locale }: { locale: Locale }) {
       </p>
       <p className="relative font-display text-xl font-bold leading-snug tracking-[-0.02em] mt-2">
         {en
-          ? 'Talk to us — free growth consultation with the Logink team.'
+          ? 'Talk to us: free growth consultation with the Logink team.'
           : 'Konsultasi growth gratis bareng tim Logink.'}
       </p>
       <a

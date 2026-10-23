@@ -59,20 +59,39 @@ export function organizationSchema() {
 }
 
 export function localBusinessSchema() {
+  const wa = SITE.whatsapp
   return {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'ProfessionalService',
+    '@id': `${SITE.url}/#business`,
     name: 'Logink',
+    alternateName: 'Logink Digital Marketing Agency',
     description: SITE.description,
     url: SITE.url,
+    logo: `${SITE.url}/icon.svg`,
+    image: `${SITE.url}/images/og-default.jpg`,
     email: SITE.email,
+    telephone: `+${wa}`,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Jakarta',
+      addressRegion: 'DKI Jakarta',
       addressCountry: 'ID',
     },
-    priceRange: 'Rp 6 Juta - Rp 50 Juta+',
-    image: `${SITE.url}/images/og-default.jpg`,
+    areaServed: [
+      { '@type': 'Country', name: 'Indonesia' },
+      { '@type': 'City', name: 'Jakarta' },
+    ],
+    priceRange: 'Rp 1 Juta - Rp 50 Juta+',
+    sameAs: [SITE.instagram, `https://wa.me/${wa}`],
+    serviceType: [
+      'SEO & Content Marketing',
+      'Social Media Management',
+      'Paid Advertising',
+      'Creative Services',
+      'Website & Landing Page',
+      'Local SEO & Google Maps',
+    ],
   }
 }
 

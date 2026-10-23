@@ -45,9 +45,9 @@ function PlatformIcon({ id, color }: { id: string; color: string }) {
 
 const PLATFORM_COPY = {
   id: {
-    eyebrow: 'Tempat Iklanmu Berjalan',
+    eyebrow: 'Di Mana Iklan Anda Tayang',
     heading: 'Lima platform. Satu strategi terpadu.',
-    sub: 'Kami tidak hanya jalankan iklan di satu platform dan berharap. Kami bangun kampanye lintas platform di mana Google menangkap intent, Meta membangun awareness, TikTok mendorong discovery, dan Marketplace mengkonversi pembeli.',
+    sub: 'Kami tidak sekadar menjalankan iklan di satu platform lalu berharap. Kami membangun kampanye lintas platform: Google menangkap intent, Meta membangun awareness, TikTok mendorong discovery, dan Marketplace mengonversi pembeli.',
     availableIn: 'Tersedia di',
     seePricing: 'Lihat harga →',
   },

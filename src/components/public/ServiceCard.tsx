@@ -20,7 +20,7 @@ interface ServiceCardProps {
   size?: 'sm' | 'lg'
 }
 
-/* 2026 "Warm Canvas" service accents — override legacy DB hexes by slug */
+/* 2026 "Warm Canvas" service accents - override legacy DB hexes by slug */
 export const SERVICE_ACCENTS: Record<string, string> = {
   'seo-content-marketing': '#A855F7',
   'social-media-management': '#D81C5C',
@@ -104,12 +104,16 @@ interface ServiceRowProps {
   href: string
   startingFromLabel: string
   learnMoreLabel: string
+  locale?: 'id' | 'en'
 }
 
-export function ServiceRow({ service, deliverables, flip, href, startingFromLabel, learnMoreLabel }: ServiceRowProps) {
+export function ServiceRow({ service, deliverables, flip, href, startingFromLabel, learnMoreLabel, locale = 'id' }: ServiceRowProps) {
   const accent = SERVICE_ACCENTS[service.slug] ?? service.color
   const Icon = SERVICE_ICONS[service.slug] ?? Search
   const startingPrice = service.pricingTiers?.[0]?.priceLabel
+  const desc = locale === 'en'
+    ? (service.shortDescEn || service.descriptionEn || service.shortDescId || service.descriptionId)
+    : (service.shortDescId || service.descriptionId)
 
   return (
     <motion.article
@@ -161,7 +165,7 @@ export function ServiceRow({ service, deliverables, flip, href, startingFromLabe
         </h3>
 
         <p className="mt-3 text-[var(--text-secondary)] leading-relaxed">
-          {service.shortDescId || service.descriptionId}
+          {desc}
         </p>
 
         {deliverables.length > 0 && (

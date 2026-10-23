@@ -43,7 +43,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 }
 
 const FAQ_COPY = {
-  id: { heading: 'Pertanyaan yang sering ditanyakan.', sub: 'Semua yang perlu kamu tahu sebelum mulai.' },
+  id: { heading: 'Pertanyaan yang sering ditanyakan.', sub: 'Semua yang perlu Anda ketahui sebelum memulai.' },
   en: { heading: 'Frequently asked questions.', sub: 'Everything you need to know before getting started.' },
 }
 

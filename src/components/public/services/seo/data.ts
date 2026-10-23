@@ -5,7 +5,7 @@ export const SEO_PRICING_TIERS = [
     price: 'Rp 6 Juta',
     priceValue: 6000000,
     period: '/bulan',
-    bestFor: 'Website baru yang baru mulai organic',
+    bestFor: 'Website baru yang mulai membangun traffic organic',
     isPopular: false,
     color: '#A855F7',
     features: [
@@ -26,7 +26,7 @@ export const SEO_PRICING_TIERS = [
     price: 'Rp 8 Juta',
     priceValue: 8000000,
     period: '/bulan',
-    bestFor: 'Scale traffic & leads',
+    bestFor: 'Scaling traffic & leads',
     isPopular: true,
     color: '#A855F7',
     features: [
@@ -100,7 +100,7 @@ export const SEO_COMPARISON_TABLE = {
 export const SEO_ADDONS = [
   {
     name: 'Local SEO & Google Business Profile',
-    description: "Dominasi pencarian 'dekat saya' dan map pack Google Business di kotamu.",
+    description: "Dominasi pencarian 'dekat saya' dan map pack Google Business di kota Anda.",
     price: 'Mulai dari Rp 2 Juta/lokasi/bulan',
   },
   {
@@ -118,17 +118,17 @@ export const SEO_FEATURES_TABS = [
     features: [
       {
         title: 'Riset Keyword',
-        desc: 'Kami mencari keywords yang sesuai dengan bisnismu kemudian Query long-tail, transaksional, dan informasional akan dipetakan ke funnel kamu.',
+        desc: 'Kami menemukan keyword yang relevan dengan bisnis Anda, lalu memetakan query long-tail, transaksional, dan informasional ke funnel Anda.',
         badge: null,
       },
       {
         title: 'Setup Google Search Console & GA4',
-        desc: 'Setup teknikal lengkap dengan tracking yang tepat. Kamu punya akunnya, kamu lihat setiap angkanya. Tidak ada yang ditutupi.',
+        desc: 'Setup teknikal lengkap dengan tracking yang tepat. Akun sepenuhnya milik Anda, dan Anda bisa melihat setiap angkanya. Tidak ada yang ditutupi.',
         badge: null,
       },
       {
         title: 'Schema Markup Lokal',
-        desc: 'Structured data yang membantu Google memahami bisnismu di pasar Indonesia. LocalBusiness, FAQPage, dan product schema.',
+        desc: 'Structured data yang membantu Google memahami bisnis Anda di pasar Indonesia. LocalBusiness, FAQPage, dan product schema.',
         badge: 'Growth+',
       },
       {
@@ -150,7 +150,7 @@ export const SEO_FEATURES_TABS = [
       },
       {
         title: 'Core Web Vitals & Page Speed',
-        desc: 'Kami audit dan perbaiki LCP, FID, dan CLS. Halamanmu muat cepat di jaringan mobile Indonesia, bukan cuma di fiber.',
+        desc: 'Kami audit dan perbaiki LCP, FID, dan CLS. Halaman Anda tetap cepat di jaringan mobile Indonesia, bukan hanya di fiber.',
         badge: null,
       },
       {
@@ -160,7 +160,7 @@ export const SEO_FEATURES_TABS = [
       },
       {
         title: 'Arsitektur Internal Linking',
-        desc: 'Tautan strategis antar halaman untuk mendistribusikan authority dan memandu perjalanan pengguna. Dipetakan ke funnel konversimu, bukan asal-asalan.',
+        desc: 'Tautan strategis antar halaman untuk mendistribusikan authority dan memandu perjalanan pengguna. Dipetakan ke funnel konversi Anda, bukan sekadar acak.',
         badge: null,
       },
     ],
@@ -178,12 +178,12 @@ export const SEO_FEATURES_TABS = [
       },
       {
         title: 'Keyword Mapping per Artikel',
-        desc: 'Setiap artikel punya keyword utama, 3-5 keyword sekunder, dan kecocokan search intent yang jelas. Tidak ada tebak-tebakan.',
+        desc: 'Setiap artikel memiliki satu keyword utama, 3-5 keyword sekunder, dan kecocokan search intent yang jelas. Tanpa tebak-tebakan.',
         badge: null,
       },
       {
         title: 'Strategi Internal Linking',
-        desc: 'Setiap artikel baru memperkuat halaman yang sudah ada. Kami membangun topic cluster yang berkompon seiring waktu, bukan posting terisolir.',
+        desc: 'Setiap artikel baru memperkuat halaman yang sudah ada. Kami membangun topic cluster yang efeknya terus berlipat seiring waktu, bukan artikel yang berdiri sendiri.',
         badge: null,
       },
     ],
@@ -200,7 +200,7 @@ export const SEO_FEATURES_TABS = [
       },
       {
         title: 'Looker Studio Dashboard',
-        desc: 'Dashboard live yang bisa kamu cek kapan saja. Ranking, tren traffic, halaman teratas, conversion tracking: selalu up to date.',
+        desc: 'Dashboard live yang bisa Anda akses kapan saja. Ranking, tren traffic, halaman teratas, conversion tracking: selalu up to date.',
         badge: 'Growth+',
       },
     ],
@@ -214,7 +214,7 @@ export const SEO_PROCESS_STEPS = [
     duration: 'Minggu 1',
     color: '#A855F7',
     align: 'left' as const,
-    desc: 'Kami memetakan ranking saat ini, menganalisis gap kompetitor, dan mengidentifikasi peluang terbaik. Kamu dapat daftar keyword prioritas yang diurutkan berdasarkan potensi traffic dan tingkat kesulitan dalam 5 hari kerja.',
+    desc: 'Kami memetakan ranking saat ini, menganalisis gap kompetitor, dan mengidentifikasi peluang terbaik. Anda menerima daftar keyword prioritas yang diurutkan berdasarkan potensi traffic dan tingkat kesulitan dalam 5 hari kerja.',
   },
   {
     step: '02',
@@ -222,7 +222,7 @@ export const SEO_PROCESS_STEPS = [
     duration: 'Minggu 1–2',
     color: '#D81C5C',
     align: 'right' as const,
-    desc: 'Kami membangun topical cluster map dan editorial calendar yang disesuaikan dengan funnelmu. Setiap artikel dipetakan ke keyword, search intent, dan tujuan konversi, tidak diterbitkan sembarangan.',
+    desc: 'Kami menyusun topical cluster map dan editorial calendar yang disesuaikan dengan funnel Anda. Setiap artikel dipetakan ke keyword, search intent, dan tujuan konversi, bukan diterbitkan sembarangan.',
   },
   {
     step: '03',
@@ -230,7 +230,7 @@ export const SEO_PROCESS_STEPS = [
     duration: 'Minggu 1–2',
     color: '#F88438',
     align: 'left' as const,
-    desc: 'Engineer menyelesaikan crawl error, memperbaiki bottleneck page speed, mengimplementasikan schema markup, dan menyiapkan structured data. Fondasi teknikal yang membuat kontenmu bisa ranking.',
+    desc: 'Engineer menyelesaikan crawl error, memperbaiki bottleneck page speed, menerapkan schema markup, dan menyiapkan structured data. Fondasi teknikal yang membuat konten Anda mampu ranking.',
   },
   {
     step: '04',
@@ -506,20 +506,20 @@ export const SEO_PROCESS_STEPS_EN = [
 
 export const SEO_FAQS = [
   {
-    question: 'Berapa lama sampai bisa lihat hasil SEO?',
-    answer: 'SEO adalah permainan jangka panjang, dan itulah yang membuatnya powerful. Biasanya, kamu akan melihat pergerakan ranking awal dalam 4-6 minggu. Pertumbuhan traffic yang signifikan mulai terlihat di bulan ke-3, dan hasil yang compounding muncul sekitar bulan ke-6. Berbeda dari iklan berbayar, hasil ini tidak berhenti ketika budget habis.',
+    question: 'Berapa lama hingga hasil SEO mulai terlihat?',
+    answer: 'SEO adalah permainan jangka panjang, dan justru itu yang membuatnya powerful. Umumnya, Anda akan melihat pergerakan ranking awal dalam 4-6 minggu. Pertumbuhan traffic yang signifikan mulai terlihat di bulan ke-3, dan hasil yang terus berlipat muncul sekitar bulan ke-6. Berbeda dari iklan berbayar, hasil ini tidak berhenti saat budget habis.',
   },
   {
     question: 'Artikel ditulis dalam bahasa apa?',
-    answer: 'Semua konten ditulis secara native dalam Bahasa Indonesia oleh penulis spesialis yang memahami perilaku pencarian lokal. Kami tidak menerjemahkan konten Inggris; kami riset dan tulis sesuai cara pengguna Indonesia benar-benar mencari. Konten Inggris tersedia sebagai add-on untuk brand yang menarget audiens internasional.',
+    answer: 'Semua konten ditulis langsung dalam Bahasa Indonesia oleh penulis spesialis yang memahami perilaku pencarian lokal. Kami tidak sekadar menerjemahkan konten Inggris; kami meriset dan menulis sesuai cara pengguna Indonesia benar-benar mencari. Konten Inggris tersedia sebagai add-on untuk brand yang menyasar audiens internasional.',
   },
   {
     question: 'Apakah kami bisa memilih topik artikel?',
-    answer: 'Tentu saja. Kami menyediakan daftar topik rekomendasi berdasarkan riset keyword dan data volume pencarian, tapi kamu selalu punya persetujuan akhir. Jika ada topik tertentu yang perlu dicakup brandmu, kami masukkan ke editorial calendar. Strategi bersifat kolaboratif, bukan dikte.',
+    answer: 'Tentu saja. Kami menyediakan daftar topik rekomendasi berdasarkan riset keyword dan data volume pencarian, tetapi keputusan akhir selalu di tangan Anda. Jika ada topik tertentu yang perlu diangkat brand Anda, kami masukkan ke editorial calendar. Strategi kami bersifat kolaboratif, bukan satu arah.',
   },
   {
     question: 'Bagaimana progress dilaporkan?',
-    answer: 'Kamu mendapat laporan performa bulanan yang mencakup ranking keyword, organic traffic, halaman terbaik, dan data konversi. Paket Growth dan Full juga termasuk live Looker Studio dashboard yang bisa kamu cek kapan saja. Kami review hasilnya bersama dalam strategy call bulanan.',
+    answer: 'Anda mendapat laporan performa bulanan yang mencakup ranking keyword, organic traffic, halaman terbaik, dan data konversi. Paket Growth dan Full juga dilengkapi live Looker Studio dashboard yang bisa Anda akses kapan saja. Kami meninjau hasilnya bersama dalam strategy call bulanan.',
   },
   {
     question: 'Apakah link building sudah termasuk?',
@@ -527,11 +527,11 @@ export const SEO_FAQS = [
   },
   {
     question: 'Bagaimana jika kami ingin berhenti?',
-    answer: 'Tidak ada kontrak lock-in. Kami bekerja per bulan karena kami percaya hasil kami seharusnya memenangkan kepercayaanmu, bukan klausul kontrak. Semua konten, akun, dan data milikmu; kami tidak pernah menahan apapun.',
+    answer: 'Tidak ada kontrak lock-in. Kami bekerja bulanan karena kepercayaan Anda layak dimenangkan lewat hasil, bukan lewat klausul kontrak. Semua konten, akun, dan data adalah milik Anda; kami tidak pernah menahan apa pun.',
   },
   {
-    question: 'Apakah kamu menjamin ranking?',
-    answer: 'Tidak ada agency SEO yang jujur menjamin ranking spesifik, karena algoritma Google tidak bisa dikendalikan siapapun. Yang kami jamin adalah proses sistematis berbasis data yang secara konsisten memberikan pertumbuhan traffic 2-4× bagi klien kami dalam 6 bulan. Kami transparan tentang apa yang berhasil dan apa yang perlu disesuaikan.',
+    question: 'Apakah ranking dijamin?',
+    answer: 'Tidak ada agency SEO jujur yang berani menjamin ranking spesifik, karena algoritma Google tidak bisa dikendalikan siapa pun. Yang kami jamin adalah proses sistematis berbasis data yang secara konsisten menghasilkan pertumbuhan traffic 2-4× bagi klien kami dalam 6 bulan. Kami transparan soal apa yang berhasil dan apa yang perlu disesuaikan.',
   },
 ] as const
 

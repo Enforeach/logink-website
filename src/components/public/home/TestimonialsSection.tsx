@@ -89,7 +89,7 @@ export function TestimonialsSection({ testimonials = [] }: { testimonials?: Test
           &ldquo;
         </div>
 
-        {/* Quote carousel — draggable */}
+        {/* Quote carousel, draggable */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}

@@ -8,7 +8,7 @@ const PROCESS_COPY = {
   id: {
     eyebrow: 'Cara Kami Bekerja',
     heading: 'Dari brief hingga launch.',
-    sub: '5 fase, transparansi penuh. Kamu selalu tahu di mana posisi proyekmu.',
+    sub: '5 fase, transparansi penuh. Anda selalu tahu posisi proyek Anda.',
     day1: 'Hari 1-3',
     week: 'Mgg',
   },

@@ -171,7 +171,7 @@ export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], 
             </Section>
           ))
         ) : (
-          // Legacy header fallback — light "Warm Canvas" hero
+          // Legacy header fallback - light "Warm Canvas" hero
           <section className="relative px-6 py-16 overflow-hidden mesh-gradient">
             {cs.featuredImage && (
               <div className="absolute inset-0">
@@ -385,7 +385,7 @@ export function CaseStudyDetailPage({ caseStudy: cs, locale, relatedCases = [], 
           </Section>
         )}
 
-        {/* Closing CTA — only when the page doesn't already end on a CTA block */}
+        {/* Closing CTA - only when the page doesn't already end on a CTA block */}
         {!blocks.some(b => b.blockType === 'CTA') && (
           <Section>
             <div className="max-w-4xl mx-auto rounded-3xl bg-[var(--bg-ink)] text-[var(--text-on-ink)] p-8 sm:p-14 text-center relative overflow-hidden">

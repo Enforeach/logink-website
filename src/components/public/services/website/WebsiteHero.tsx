@@ -43,15 +43,15 @@ function PageSpeedRing({ score }: { score: number }) {
 
 const HERO_COPY = {
   id: {
-    badge: 'Jasa Website & Landing Page Jakarta — Cepat, Mobile-First, Konversi Tinggi',
+    badge: 'Jasa Pembuatan Website & Landing Page Jakarta: Cepat, Mobile-First, Konversi Tinggi',
     pills: ['Load time di bawah 2 detik', 'Responsif mobile-first', 'GA4 + pixel tracking termasuk'],
     home: 'Beranda',
     services: 'Layanan',
     homeHref: '/',
     servicesHref: '/layanan',
-    title1: 'Ubah Pengunjung Jadi Pelanggan.',
-    title2: 'Dibangun untuk Perform.',
-    desc: 'Kami desain dan bangun website serta landing page berperforma tinggi: cepat, mobile-first, dan dirancang untuk konversi. Dari landing page kampanye hingga toko e-commerce penuh, setiap site dibangun untuk load di bawah 2 detik, ranking di Google, dan mengubah traffic menjadi revenue.',
+    title1: 'Ubah Pengunjung Menjadi Pelanggan.',
+    title2: 'Dibangun untuk Berperforma.',
+    desc: 'Kami mendesain dan membangun website serta landing page berperforma tinggi: cepat, mobile-first, dan dirancang untuk konversi. Dari landing page kampanye hingga toko e-commerce lengkap, setiap site dibangun untuk load di bawah 2 detik, ranking di Google, dan mengubah traffic menjadi revenue.',
     ctaPrimary: 'Mulai Konsultasi Gratis →',
     ctaHref: '/contact?service=website-landing-page',
     ctaWhatsApp: 'Chat di WhatsApp',
@@ -59,7 +59,7 @@ const HERO_COPY = {
     ctaSecondary: 'Lihat Harga',
   },
   en: {
-    badge: 'Website & Landing Page Development Jakarta — Fast, Mobile-First, High Conversion',
+    badge: 'Website & Landing Page Development Jakarta: Fast, Mobile-First, High Conversion',
     pills: ['Load time under 2 seconds', 'Mobile-first responsive', 'GA4 + pixel tracking included'],
     home: 'Home',
     services: 'Services',
@@ -101,7 +101,7 @@ export function WebsiteHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   ]
 
   return (
-    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-24 pb-16 mesh-gradient">
+    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient">
       <div className="absolute inset-0 dot-grid opacity-50" aria-hidden />
       {/* Lilac service-accent orb */}
       <div
@@ -162,7 +162,7 @@ export function WebsiteHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                 {c.ctaPrimary}
               </Link>
               <a
-                href={`https://wa.me/6287782495916?text=${encodeURIComponent(c.waMessage)}`}
+                href={`https://wa.me/628139453933?text=${encodeURIComponent(c.waMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={c.ctaWhatsApp}

@@ -10,7 +10,7 @@ const ACCENT_TEXT = '#C2410C' // AA-safe orange for small text on light bg
 
 const PRICING_COPY = {
   id: {
-    heading: 'Pilih paketmu.',
+    heading: 'Pilih paket iklan Anda.',
     sub: 'Harga transparan, tanpa kejutan. Semua paket mencakup akses akun penuh dan optimasi mingguan.',
     popular: '★ Paling Populer',
     managementFee: '(biaya manajemen)',
@@ -21,8 +21,8 @@ const PRICING_COPY = {
     managementNote: 'Biaya manajemen saja. Budget iklan dibayarkan langsung ke Google, Meta, TikTok, dan platform marketplace.',
     addonsTitle: 'Add-on Tersedia',
     adSpendTitle: 'Tentang Budget Iklan',
-    adSpendDesc: 'Harga di atas adalah biaya manajemen, yaitu yang kamu bayar ke Logink untuk strategi, setup, optimasi, dan pelaporan kampanye. Budget iklan (yang dibayarkan ke Google, Meta, TikTok, dll.) terpisah dan langsung ke platform. Kamu yang kontrol budgetnya. Rekomendasi kami:',
-    adSpendFooter: 'Kamu selalu punya akses penuh ke akun iklanmu dan bisa melihat persis ke mana setiap rupiahmu pergi.',
+    adSpendDesc: 'Harga di atas adalah biaya manajemen, yaitu yang Anda bayar ke Logink untuk strategi, setup, optimasi, dan pelaporan kampanye. Budget iklan (yang dibayarkan ke Google, Meta, TikTok, dll.) terpisah dan langsung ke platform. Anda yang mengendalikan budget-nya. Rekomendasi kami:',
+    adSpendFooter: 'Anda selalu memiliki akses penuh ke akun iklan Anda dan bisa melihat persis ke mana setiap rupiah Anda mengalir.',
     adSpendSuffix: 'budget iklan',
   },
   en: {

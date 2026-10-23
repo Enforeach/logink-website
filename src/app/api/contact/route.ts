@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { prisma } from '@/lib/prisma'
+import { getPayloadClient } from '@/payload/client'
 
 const schema = z.object({
   name: z.string().min(2),
@@ -18,8 +18,10 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const data = schema.parse(body)
+    const payload = await getPayloadClient()
 
-    const submission = await prisma.contactSubmission.create({
+    const submission = await payload.create({
+      collection: 'contact-submissions',
       data: {
         name: data.name,
         email: data.email,
@@ -30,7 +32,8 @@ export async function POST(req: NextRequest) {
         timeline: data.timeline,
         message: data.message,
         source: data.source,
-      },
+      } as never,
+      overrideAccess: true,
     })
 
     return NextResponse.json({ success: true, id: submission.id })
@@ -39,27 +42,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Validation failed', details: err.issues }, { status: 400 })
     }
     console.error('Contact submission error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
-  }
-}
-
-export async function GET(req: NextRequest) {
-  try {
-    const { searchParams } = new URL(req.url)
-    const page = Number(searchParams.get('page') || 1)
-    const limit = Number(searchParams.get('limit') || 20)
-
-    const [submissions, total] = await Promise.all([
-      prisma.contactSubmission.findMany({
-        orderBy: { createdAt: 'desc' },
-        skip: (page - 1) * limit,
-        take: limit,
-      }),
-      prisma.contactSubmission.count(),
-    ])
-
-    return NextResponse.json({ submissions, total, page, limit })
-  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

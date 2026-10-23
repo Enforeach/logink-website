@@ -9,7 +9,7 @@ const CARDS_ID = [
     accent: '#A855F7',
     title: 'SEO & Content Marketing',
     description:
-      'Tangkap traffic organik yang terus berkembang sementara iklanmu mendatangkan hasil cepat. SEO + Ads bersama artinya kamu mendominasi paid dan organic, sehingga kompetitor melihatmu di mana-mana.',
+      'Tangkap traffic organik yang terus tumbuh sementara iklan Anda mendatangkan hasil cepat. SEO + Ads bersama berarti Anda mendominasi paid dan organic, sehingga kompetitor melihat Anda di mana-mana.',
     pricing: 'Mulai dari Rp 6 Juta/bln',
   },
   {
@@ -17,7 +17,7 @@ const CARDS_ID = [
     accent: '#F5A623',
     title: 'Creative Services',
     description:
-      'Iklan yang perform butuh kreativitas yang bikin berhenti scroll. Tim desain dan video kami memproduksi aset iklan yang tidak terlihat seperti iklan: dari Meta carousel hingga video native TikTok.',
+      'Iklan yang berperforma tinggi butuh kreativitas yang mampu mencuri perhatian. Tim desain dan video kami memproduksi aset iklan yang tidak terlihat seperti iklan: dari Meta carousel hingga video native TikTok.',
     pricing: 'Harga per proyek',
   },
 ] as const
@@ -42,7 +42,7 @@ const CARDS_EN = [
 ] as const
 
 const CROSSSELL_COPY = {
-  id: { eyebrow: 'Cocok dikombinasikan dengan', heading: 'Perkuat hasilmu.', learnMore: 'Pelajari lebih lanjut →' },
+  id: { eyebrow: 'Cocok dikombinasikan dengan', heading: 'Perkuat hasil Anda.', learnMore: 'Pelajari lebih lanjut →' },
   en: { eyebrow: 'Pairs well with', heading: 'Amplify your results.', learnMore: 'Learn more →' },
 }
 

@@ -8,7 +8,7 @@ const COPY = {
   id: {
     headline: 'Ayo Berkembang',
     headlineGradient: 'Bersama',
-    subtext: 'Siap bawa brand kamu ke level berikutnya? Yuk bangun sesuatu yang luar biasa bersama Logink.',
+    subtext: 'Siap membawa brand Anda ke level berikutnya? Mari bangun sesuatu yang luar biasa bersama Logink.',
     ctaPrimary: 'Minta Penawaran Gratis',
     ctaWhatsapp: 'Chat di WhatsApp',
   },

@@ -76,19 +76,19 @@ const PILLS = ['IG Feed 1:1','Story 9:16','TikTok 9:16','Banner 16:9','Brand Gui
 
 const HERO_COPY = {
   id: {
-    badge: 'Jasa Desain Kreatif Jakarta — Branding, Konten Visual & Produksi Video',
-    trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi termasuk', '✓ Format multi-platform'],
+    badge: 'Jasa Desain & Video Jakarta: Branding, Creative Content & Copywriting',
+    trustPills: ['✓ Desain 100% kustom', '✓ 2 putaran revisi sudah termasuk', '✓ Format multi-platform'],
     home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/layanan',
     title1: 'Visual yang Berani.',
     title2: 'Cerita yang Jelas.\nBrand yang Tak Terlupakan.',
-    desc: 'Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang menghentikan scroll dan mendorong aksi. Setiap aset dibuat untuk audiensmu, tidak pernah dari library template. Desain yang tidak hanya terlihat bagus, tapi juga perform.',
+    desc: 'Dari brand identity hingga produksi video, tim kreatif kami mengubah ide menjadi visual yang mencuri perhatian dan mendorong audiens untuk bertindak. Setiap aset dibuat khusus untuk audiens Anda, bukan template pasaran. Desain yang tidak hanya indah dipandang, tapi juga terbukti efektif.',
     ctaPrimary: 'Mulai Konsultasi Gratis →',
     ctaHref: '/contact?service=creative-services',
     ctaSecondary: 'Lihat Karya Kami',
     ctaSecondaryHref: '/portfolio',
   },
   en: {
-    badge: 'Creative Design Services Jakarta — Branding, Visual Content & Video Production',
+    badge: 'Design & Video Production Jakarta: Branding, Creative Content & Copywriting',
     trustPills: ['✓ 100% custom design', '✓ 2 revision rounds included', '✓ Multi-platform formats'],
     home: 'Home', services: 'Services', homeHref: '/en', servicesHref: '/en/services',
     title1: 'Bold Visuals.',
@@ -118,7 +118,7 @@ export function CreativeHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   return (
     <section
       ref={ref}
-      className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-28 pb-16 mesh-gradient"
+      className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden />
       {/* Gold + crimson accent orbs */}

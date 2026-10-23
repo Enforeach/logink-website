@@ -10,9 +10,9 @@ const PRICING_COPY = {
     eyebrow: 'Scope & Harga',
     heading: 'Scope transparan. Harga kustom.',
     pricingNote: 'Semua proyek web',
-    pricingDesc: 'Harga final berdasarkan jumlah halaman, kompleksitas, integrasi, dan fungsionalitas kustom. Kami berikan scope dan penawaran detail setelah Discovery call gratis, tanpa komitmen.',
-    scopeLabel: 'Apa yang termasuk di setiap tipe proyek:',
-    addonsTitle: 'Add-on Tersedia',
+    pricingDesc: 'Harga final ditentukan oleh jumlah halaman, kompleksitas, integrasi, dan fungsionalitas kustom. Kami memberikan scope dan penawaran detail setelah Discovery call gratis, tanpa komitmen.',
+    scopeLabel: 'Yang termasuk di setiap tipe proyek:',
+    addonsTitle: 'Add-on yang Tersedia',
     ctaLabel: 'Dapatkan Penawaran Kustom →',
     ctaHref: '/contact?service=website-landing-page',
     waMessage: 'Halo Logink, saya tertarik dengan proyek website. Bisa jadwalkan Discovery call?',
@@ -37,7 +37,7 @@ const PRICING_COPY = {
 export function WebsitePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const copy = PRICING_COPY[locale]
   const addons = locale === 'en' ? WEBSITE_ADDONS_EN : WEBSITE_ADDONS
-  const WA_LINK = `https://wa.me/6287782495916?text=${encodeURIComponent(copy.waMessage)}`
+  const WA_LINK = `https://wa.me/628139453933?text=${encodeURIComponent(copy.waMessage)}`
 
   return (
     <section id="pricing" className="py-20 md:py-28 px-6 bg-[var(--bg-primary)]">
@@ -55,7 +55,7 @@ export function WebsitePricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
           </h2>
         </motion.div>
 
-        {/* Pricing panel — gradient border + CTA shadow */}
+        {/* Pricing panel: gradient border + CTA shadow */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}

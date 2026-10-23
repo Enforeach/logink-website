@@ -6,8 +6,8 @@ import { WEBSITE_TECH_STACK } from './data'
 const TECHSTACK_COPY = {
   id: {
     eyebrow: 'Tech Stack Kami',
-    heading: 'Kami pilih tool terbaik untuk proyekmu.',
-    sub: 'Tidak terpaku pada satu platform; kami rekomendasikan berdasarkan skala, budget, dan tujuan jangka panjangmu.',
+    heading: 'Kami pilih tool terbaik untuk proyek Anda.',
+    sub: 'Tidak terpaku pada satu platform; kami merekomendasikan berdasarkan skala, budget, dan tujuan jangka panjang Anda.',
   },
   en: {
     eyebrow: 'Our Tech Stack',

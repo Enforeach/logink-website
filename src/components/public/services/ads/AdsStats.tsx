@@ -10,7 +10,7 @@ const STAT_ICONS: LucideIcon[] = [TrendingUp, TrendingDown, LayoutGrid]
 
 // ponytail: count-up config keyed by index; move into data.ts if stats ever change shape
 const COUNTERS: ({ target: number; prefix: string; suffix: string } | null)[] = [
-  null, // '2–4×' — a range, shown as-is
+  null, // '2–4×' is a range, shown as-is
   { target: 35, prefix: '~', suffix: '%' },
   { target: 5, prefix: '', suffix: '' },
 ]

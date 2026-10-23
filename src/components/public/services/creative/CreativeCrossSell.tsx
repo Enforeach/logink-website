@@ -18,7 +18,7 @@ const CARDS_ID = [
     href: '/layanan/website-development',
     accent: '#C084FC',
     title: 'Website & Landing Page',
-    description: 'Butuh rumah untuk brandmu? Tim web kami membangun website dan landing page yang dioptimasi untuk konversi dan menampilkan identitas visual yang kami buat.',
+    description: 'Butuh rumah untuk brand Anda? Tim web kami membangun website dan landing page yang dioptimasi untuk konversi sekaligus menampilkan identitas visual yang kami bangun.',
     pricing: 'Mulai dari Rp 10 Juta',
   },
 ] as const
@@ -41,7 +41,7 @@ const CARDS_EN = [
 ] as const
 
 const CROSSSELL_COPY = {
-  id: { eyebrow: 'Cocok dikombinasikan dengan', heading: 'Perkuat kreativitasmu.', learnMore: 'Pelajari lebih lanjut' },
+  id: { eyebrow: 'Cocok dikombinasikan dengan', heading: 'Perkuat kreativitas Anda.', learnMore: 'Pelajari lebih lanjut' },
   en: { eyebrow: 'Pairs well with', heading: 'Amplify your creativity.', learnMore: 'Learn more' },
 }
 

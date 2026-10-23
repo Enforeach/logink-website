@@ -1,58 +1,17 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { unstable_cache } from 'next/cache'
-import { prisma } from '@/lib/prisma'
+import { getCaseStudyBySlug, getRelatedCaseStudies, getAllActiveServicesBrief } from '@/payload/queries'
 import { buildMetadata } from '@/lib/seo'
 import { CaseStudyDetailPage } from './CaseStudyDetailPage'
 import type { CaseStudyFull } from '@/types/case-study'
 
 type Locale = 'id' | 'en'
 
-const getCaseStudy = unstable_cache(
-  async (slug: string, locale: Locale) => {
+// ponytail: dropped unstable_cache wrapper (Payload handles caching); try/catch keeps the null fallback
+async function getCaseStudy(slug: string, locale: Locale) {
   try {
-    return await prisma.caseStudy.findFirst({
-      where: {
-        OR: locale === 'en' ? [{ slugEn: slug }, { slug }] : [{ slug }],
-        status: 'PUBLISHED',
-      },
-      include: {
-        metrics: { orderBy: { sortOrder: 'asc' } },
-        testimonial: true,
-        service: { select: { id: true, name: true, slug: true, color: true, icon: true } },
-        industryRel: { select: { nameId: true, nameEn: true, slug: true, accentColor: true } },
-        blocks: { orderBy: { sortOrder: 'asc' }, where: { isVisible: true } },
-        caseStudyServices: {
-          include: { service: { select: { id: true, name: true, slug: true, color: true, icon: true } } },
-        },
-      },
-    })
+    return await getCaseStudyBySlug(slug, locale)
   } catch { return null }
-  },
-  ['case-study'],
-  { revalidate: 3600, tags: ['case-study'] }
-)
-
-async function getRelated(cs: NonNullable<Awaited<ReturnType<typeof getCaseStudy>>>, limit = 3) {
-  try {
-    return await prisma.caseStudy.findMany({
-      where: {
-        status: 'PUBLISHED',
-        id: { not: cs.id },
-        OR: [
-          { industry: cs.industry },
-          ...(cs.serviceId ? [{ serviceId: cs.serviceId }] : []),
-          ...(cs.industryId ? [{ industryId: cs.industryId }] : []),
-        ],
-      },
-      take: limit,
-      select: {
-        id: true, title: true, titleId: true, titleEn: true,
-        slug: true, slugEn: true, industry: true, thumbnail: true, featuredImage: true,
-        metrics: { orderBy: { sortOrder: 'asc' }, take: 1, select: { metricLabel: true, afterValue: true } },
-      },
-    })
-  } catch { return [] }
 }
 
 export async function generateCaseStudyMetadata(slug: string, locale: Locale): Promise<Metadata> {
@@ -77,11 +36,8 @@ export async function CaseStudyPage({ slug, locale }: { slug: string; locale: Lo
   if (!cs) notFound()
 
   const [relatedCases, allServices] = await Promise.all([
-    getRelated(cs),
-    prisma.service.findMany({
-      where: { isActive: true },
-      select: { id: true, name: true, slug: true, color: true, icon: true },
-    }),
+    getRelatedCaseStudies({ id: cs.id, industry: cs.industry, serviceId: cs.service?.id ?? null, industryId: null }).catch(() => []),
+    getAllActiveServicesBrief(),
   ])
 
   return (

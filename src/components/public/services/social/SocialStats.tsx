@@ -26,14 +26,14 @@ const STATS_ID: StatItem[] = [
     value: 30,
     suffix: '+',
     label: 'Post / Bulan',
-    context: 'Kehadiran konsisten, nol hari terlewat. Konten diproduksi dan disetujui sebelum tayang.',
+    context: 'Kehadiran konsisten, tidak ada hari yang terlewat. Konten diproduksi dan disetujui sebelum tayang.',
   },
   {
     Icon: Star,
     value: 100,
     suffix: '%',
     label: 'Konten Original',
-    context: 'Didesain khusus untuk brandmu. Tidak ada template stock, tidak ada grafis daur ulang.',
+    context: 'Didesain khusus untuk brand Anda. Tidak ada template pasaran, tidak ada grafis daur ulang.',
   },
 ]
 
@@ -86,7 +86,7 @@ const EASE = [0.22, 1, 0.36, 1] as const
 export function SocialStats({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const STATS = locale === 'en' ? STATS_EN : STATS_ID
   return (
-    // Ink band — one of max two inverted moments on this page
+    // Ink band, one of max two inverted moments on this page
     <section className="py-20 md:py-24 px-4 relative overflow-hidden" style={{ background: 'var(--bg-ink)' }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"

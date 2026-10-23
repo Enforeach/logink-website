@@ -30,10 +30,11 @@ function AnimatedStat({ stat, index, locale }: { stat: StatConfig; index: number
         : { opacity: 0 }}
       className="flex-1 text-center px-6 py-8"
     >
-      {/* Number */}
+      {/* Number — real value is in the SSR HTML (crawlers read the true figure);
+          the 0→target count-up runs only once the band scrolls into view. */}
       <div className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em] gradient-text leading-none mb-4">
         {stat.prefix}
-        <span>{count}</span>
+        <span>{inView ? count : stat.target}</span>
         {stat.suffix}
       </div>
 

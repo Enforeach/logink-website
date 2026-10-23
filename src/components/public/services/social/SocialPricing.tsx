@@ -153,16 +153,16 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   )
 
   return (
-    // Rose tint band — the conversion moment on this page
+    // Rose tint band, the conversion moment on this page
     <section id="pricing" className="py-20 md:py-28 px-4" style={{ background: 'var(--bg-tint-rose)' }}>
       <div className="max-w-3xl mx-auto">
         <div className="mb-12">
           <div className="eyebrow mb-3">Pricing</div>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text-primary)]">
-            {locale === 'en' ? 'Build your own social media package.' : 'Bangun paket social media-mu sendiri.'}
+            {locale === 'en' ? 'Build your own social media package.' : 'Rancang paket social media Anda sendiri.'}
           </h2>
           <p className="text-[var(--text-secondary)] mt-4 max-w-xl">
-            {locale === 'en' ? 'Every brand is different. Pick the modules you need, tell us the volume, and we\'ll send a custom proposal within 24 hours.' : 'Setiap brand berbeda. Pilih modul yang kamu butuhkan, kasih tahu volume-nya, dan kami kirim proposal kustom dalam 24 jam.'}
+            {locale === 'en' ? 'Every brand is different. Pick the modules you need, tell us the volume, and we\'ll send a custom proposal within 24 hours.' : 'Setiap brand berbeda. Pilih modul yang Anda butuhkan, beri tahu volumenya, dan kami kirim proposal kustom dalam 24 jam.'}
           </p>
         </div>
 
@@ -418,7 +418,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                           accentColor={LINKEDIN_ACCENT}
                         />
                         <p className="text-[11px] text-[var(--text-muted)] mt-1.5">
-                          Halaman perusahaan + profil eksekutif, masing-masing dapat konten yang disesuaikan
+                          Halaman perusahaan + profil eksekutif, masing-masing mendapat konten yang disesuaikan
                         </p>
                       </div>
                     </div>
@@ -489,14 +489,14 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
             >
               <div className="rounded-[calc(1rem-1.5px)] bg-white p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="font-display text-sm font-bold text-[var(--text-primary)]">📋 Ringkasan paketmu</span>
+                  <span className="font-display text-sm font-bold text-[var(--text-primary)]">📋 Ringkasan paket Anda</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
                   {org.selected && (
                     <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
                       <Check size={14} className="text-brand-crimson flex-shrink-0" />
-                      Organic Social ({selectedPlatforms.length > 0 ? selectedPlatforms.join(' + ') : 'belum ada platform dipilih'},{' '}
+                      Organic Social ({selectedPlatforms.length > 0 ? selectedPlatforms.join(' + ') : 'belum ada platform yang dipilih'},{' '}
                       {org.postsPerMonth} post/bln per platform)
                     </li>
                   )}
@@ -527,7 +527,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                 </ul>
 
                 <div className="text-xs text-[var(--text-muted)] mb-5 leading-relaxed">
-                  <span className="font-semibold text-[var(--text-secondary)]">{locale === 'en' ? 'Price: Custom' : 'Harga: Kustom'}</span>: {locale === 'en' ? 'based on your selections above. We\'ll review your needs and send a full proposal within 24 hours. No commitment.' : 'berdasarkan pilihan di atas. Kami akan review kebutuhanmu dan kirim proposal lengkap dalam 24 jam. Tanpa komitmen.'}
+                  <span className="font-semibold text-[var(--text-secondary)]">{locale === 'en' ? 'Price: Custom' : 'Harga: Kustom'}</span>: {locale === 'en' ? 'based on your selections above. We\'ll review your needs and send a full proposal within 24 hours. No commitment.' : 'berdasarkan pilihan di atas. Kami akan review kebutuhan Anda dan kirim proposal lengkap dalam 24 jam. Tanpa komitmen.'}
                 </div>
 
                 <div className="flex flex-wrap gap-3">
@@ -538,7 +538,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                     {locale === 'en' ? 'Get Custom Quote →' : 'Dapatkan Penawaran Kustom →'}
                   </Link>
                   <a
-                    href={`https://wa.me/6287782495916?text=${waMessage}`}
+                    href={`https://wa.me/628139453933?text=${waMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-white hover:scale-[1.02] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
@@ -557,7 +557,7 @@ export function SocialPricing({ locale = 'id' }: { locale?: 'id' | 'en' }) {
 
         {!anySelected && (
           <div className="mt-5 rounded-2xl border border-dashed border-[var(--border-hover)] bg-white/60 p-5 text-center">
-            <p className="text-sm text-[var(--text-muted)]">Pilih minimal satu modul di atas untuk membangun paketmu.</p>
+            <p className="text-sm text-[var(--text-muted)]">Pilih minimal satu modul di atas untuk mulai menyusun paket Anda.</p>
           </div>
         )}
       </div>

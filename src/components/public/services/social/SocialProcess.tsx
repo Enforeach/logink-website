@@ -61,7 +61,7 @@ function ProcessStep({ step, index }: { step: typeof SOCIAL_PROCESS[number]; ind
 }
 
 const PROC_COPY = {
-  id: { eyebrow: 'Cara Kerjanya', heading: 'Dari kickoff hingga hasil nyata.', sub: 'Proses onboarding yang jelas supaya kamu tahu persis apa yang terjadi dan kapan konten tayang.', repeatNote: 'Lalu siklus bulanan berulang. Setiap bulan membangun bulan sebelumnya: kami analisis apa yang berhasil, sempurnakan strategi, dan produksi konten berikutnya.' },
+  id: { eyebrow: 'Cara Kerjanya', heading: 'Dari kickoff hingga hasil nyata.', sub: 'Proses onboarding yang jelas supaya Anda tahu persis apa yang terjadi dan kapan konten tayang.', repeatNote: 'Setelah itu siklus bulanan berulang. Setiap bulan dibangun dari bulan sebelumnya: kami analisis apa yang berhasil, sempurnakan strategi, dan produksi konten berikutnya.' },
   en: { eyebrow: 'How It Works', heading: 'From kickoff to real results.', sub: 'A clear onboarding process so you know exactly what happens and when content goes live.', repeatNote: 'Then the monthly cycle repeats. Each month builds on the last: we analyze what worked, refine the strategy, and produce the next round of content.' },
 }
 

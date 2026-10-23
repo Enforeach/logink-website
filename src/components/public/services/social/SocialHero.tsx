@@ -5,17 +5,17 @@ import { motion } from 'framer-motion'
 
 const HERO_COPY = {
   id: {
-    badge: 'Jasa Social Media Marketing Jakarta — Konten Viral, Followers & Engagement Bertumbuh',
+    badge: 'Jasa Social Media Marketing Jakarta: Konten Viral, Followers & Engagement Bertumbuh',
     trustPills: ['✓ Konten 100% original', '✓ Native Bahasa Indonesia', '✓ Kalender konten bulanan'],
     home: 'Beranda', services: 'Layanan', homeHref: '/', servicesHref: '/layanan',
-    title1: 'Konten yang Nyambung.', title2: 'Kehadiran yang Konversi.',
-    desc: 'Kami urus semua urusan social media-mu: strategi, pembuatan konten, penjadwalan, community management, dan laporan performa di Instagram, TikTok, Facebook, dan LinkedIn.',
-    descHighlight: 'Kamu fokus bisnis. Kami bikin brandmu nggak bisa di-skip.',
+    title1: 'Konten yang Mengena.', title2: 'Kehadiran yang Mengonversi.',
+    desc: 'Kami urus semua urusan social media Anda: strategi, pembuatan konten, penjadwalan, community management, dan laporan performa di Instagram, TikTok, Facebook, dan LinkedIn.',
+    descHighlight: 'Anda fokus ke bisnis. Kami pastikan brand Anda sulit dilewatkan di feed.',
     ctaPrimary: 'Mulai Konsultasi Gratis', ctaHref: '/contact?service=social-media-management', ctaSecondary: 'Lihat Harga',
     ctaWhatsApp: 'Chat di WhatsApp',
   },
   en: {
-    badge: 'Social Media Management Jakarta — Viral Content, Growing Followers & Engagement',
+    badge: 'Social Media Management Jakarta: Viral Content, Growing Followers & Engagement',
     trustPills: ['✓ 100% original content', '✓ Bahasa Indonesia native', '✓ Monthly content calendar'],
     home: 'Home', services: 'Services', homeHref: '/en', servicesHref: '/en/services',
     title1: 'Content That Connects.', title2: 'Presence That Converts.',
@@ -60,7 +60,7 @@ const EASE = [0.22, 1, 0.36, 1] as const
 export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
   const c = HERO_COPY[locale]
   return (
-    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-28 pb-16 mesh-gradient">
+    <section className="relative min-h-[88vh] flex items-center overflow-hidden px-4 pt-36 md:pt-32 pb-16 mesh-gradient">
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden />
       {/* Floating accent orbs */}
       <div
@@ -134,7 +134,7 @@ export function SocialHero({ locale = 'id' }: { locale?: 'id' | 'en' }) {
                 </svg>
               </Link>
               <a
-                href="https://wa.me/6287782495916"
+                href="https://wa.me/628139453933"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={c.ctaWhatsApp}
