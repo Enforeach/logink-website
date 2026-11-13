@@ -64,6 +64,7 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    'payload-mcp-api-keys': PayloadMcpApiKeyAuthOperations;
   };
   blocks: {};
   collections: {
@@ -81,6 +82,7 @@ export interface Config {
     users: User;
     'service-pages': ServicePage;
     'legal-pages': LegalPage;
+    'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -102,6 +104,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     'service-pages': ServicePagesSelect<false> | ServicePagesSelect<true>;
     'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
+    'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -141,13 +144,31 @@ export interface Config {
   widgets: {
     collections: CollectionsWidget;
   };
-  user: User;
+  user: User | PayloadMcpApiKey;
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface PayloadMcpApiKeyAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -281,7 +302,7 @@ export interface Post {
    */
   wordCount?: number | null;
   status: 'DRAFT' | 'REVIEW' | 'SCHEDULED' | 'PUBLISHED' | 'ARCHIVED';
-  author: number | User;
+  author?: number | User;
   category?: (number | null) | Category;
   tags?: (number | Tag)[] | null;
   publishedAt?: string | null;
@@ -1309,6 +1330,211 @@ export interface LegalPage {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Keys for the AI platform (MCP endpoint https://logink.co/api/mcp). Tick what each key may read or change.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-mcp-api-keys".
+ */
+export interface PayloadMcpApiKey {
+  id: number;
+  /**
+   * The user that the API key is associated with.
+   */
+  user: number | User;
+  /**
+   * A useful label for the API key.
+   */
+  label?: string | null;
+  /**
+   * The purpose of the API key.
+   */
+  description?: string | null;
+  posts?: {
+    /**
+     * Allow clients to find posts.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create posts.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update posts.
+     */
+    update?: boolean | null;
+  };
+  categories?: {
+    /**
+     * Allow clients to find categories.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create categories.
+     */
+    create?: boolean | null;
+  };
+  tags?: {
+    /**
+     * Allow clients to find tags.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create tags.
+     */
+    create?: boolean | null;
+  };
+  media?: {
+    /**
+     * Allow clients to find media.
+     */
+    find?: boolean | null;
+  };
+  contactSubmissions?: {
+    /**
+     * Allow clients to find contact-submissions.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to update contact-submissions.
+     */
+    update?: boolean | null;
+  };
+  caseStudies?: {
+    /**
+     * Allow clients to find case-studies.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create case-studies.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update case-studies.
+     */
+    update?: boolean | null;
+  };
+  ctaWidgets?: {
+    /**
+     * Allow clients to find cta-widgets.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to update cta-widgets.
+     */
+    update?: boolean | null;
+  };
+  servicePages?: {
+    /**
+     * Allow clients to find service-pages.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to update service-pages.
+     */
+    update?: boolean | null;
+  };
+  legalPages?: {
+    /**
+     * Allow clients to find legal-pages.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to update legal-pages.
+     */
+    update?: boolean | null;
+  };
+  homePage?: {
+    /**
+     * Allow clients to find home-page global.
+     */
+    find?: boolean | null;
+  };
+  hubPage?: {
+    /**
+     * Allow clients to find hub-page global.
+     */
+    find?: boolean | null;
+  };
+  aboutPage?: {
+    /**
+     * Allow clients to find about-page global.
+     */
+    find?: boolean | null;
+  };
+  contactPage?: {
+    /**
+     * Allow clients to find contact-page global.
+     */
+    find?: boolean | null;
+  };
+  blogPage?: {
+    /**
+     * Allow clients to find blog-page global.
+     */
+    find?: boolean | null;
+  };
+  portfolioPage?: {
+    /**
+     * Allow clients to find portfolio-page global.
+     */
+    find?: boolean | null;
+  };
+  notFoundPage?: {
+    /**
+     * Allow clients to find not-found-page global.
+     */
+    find?: boolean | null;
+  };
+  campaignContent?: {
+    /**
+     * Allow clients to find campaign-content global.
+     */
+    find?: boolean | null;
+  };
+  instrumentsContent?: {
+    /**
+     * Allow clients to find instruments-content global.
+     */
+    find?: boolean | null;
+  };
+  siteSettings?: {
+    /**
+     * Allow clients to find site-settings global.
+     */
+    find?: boolean | null;
+  };
+  uiLabels?: {
+    /**
+     * Allow clients to find ui-labels global.
+     */
+    find?: boolean | null;
+  };
+  'payload-mcp-tool'?: {
+    /**
+     * Change a page document (home-page, about-page, site-settings, …). Send only the fields to change, in the shape the find tool returns for that page, for one locale. Saved as a draft version for an editor to preview and publish, unless this key may publish.
+     */
+    updatePage?: boolean | null;
+  };
+  /**
+   * Off (recommended): the AI saves articles and page changes as drafts and cannot edit live articles; an editor publishes. On: the AI publishes directly.
+   */
+  allowPublish?: boolean | null;
+  /**
+   * Optional. Every new contact-form lead is POSTed here as JSON, right away.
+   */
+  leadWebhookUrl?: string | null;
+  /**
+   * Give this to the AI platform: it checks the X-Logink-Signature header (HMAC-SHA256 of the body) to know the lead came from logink.co.
+   */
+  webhookSecret?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
+  collection: 'payload-mcp-api-keys';
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -1387,12 +1613,21 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'legal-pages';
         value: number | LegalPage;
+      } | null)
+    | ({
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -1402,10 +1637,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: number;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
+      };
   key?: string | null;
   value?:
     | {
@@ -2161,6 +2401,138 @@ export interface LegalPagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-mcp-api-keys_select".
+ */
+export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
+  user?: T;
+  label?: T;
+  description?: T;
+  posts?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+      };
+  categories?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+      };
+  tags?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+      };
+  media?:
+    | T
+    | {
+        find?: T;
+      };
+  contactSubmissions?:
+    | T
+    | {
+        find?: T;
+        update?: T;
+      };
+  caseStudies?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+      };
+  ctaWidgets?:
+    | T
+    | {
+        find?: T;
+        update?: T;
+      };
+  servicePages?:
+    | T
+    | {
+        find?: T;
+        update?: T;
+      };
+  legalPages?:
+    | T
+    | {
+        find?: T;
+        update?: T;
+      };
+  homePage?:
+    | T
+    | {
+        find?: T;
+      };
+  hubPage?:
+    | T
+    | {
+        find?: T;
+      };
+  aboutPage?:
+    | T
+    | {
+        find?: T;
+      };
+  contactPage?:
+    | T
+    | {
+        find?: T;
+      };
+  blogPage?:
+    | T
+    | {
+        find?: T;
+      };
+  portfolioPage?:
+    | T
+    | {
+        find?: T;
+      };
+  notFoundPage?:
+    | T
+    | {
+        find?: T;
+      };
+  campaignContent?:
+    | T
+    | {
+        find?: T;
+      };
+  instrumentsContent?:
+    | T
+    | {
+        find?: T;
+      };
+  siteSettings?:
+    | T
+    | {
+        find?: T;
+      };
+  uiLabels?:
+    | T
+    | {
+        find?: T;
+      };
+  'payload-mcp-tool'?:
+    | T
+    | {
+        updatePage?: T;
+      };
+  allowPublish?: T;
+  leadWebhookUrl?: T;
+  webhookSecret?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

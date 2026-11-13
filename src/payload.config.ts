@@ -4,6 +4,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { aiPlugin } from './payload/ai'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
@@ -93,6 +94,8 @@ export default buildConfig({
         { name: 'noIndex', type: 'checkbox', label: 'Hide from Google (noindex)', admin: { description: 'Only for pages that should not appear in search results.' } },
       ],
     }),
+    // AI platform: MCP at /api/mcp + AI access keys (Settings) + new-lead webhooks (src/payload/ai.ts)
+    aiPlugin({ globals: cmsGlobals, keyed: CMS_KEYED }),
     vercelBlobStorage({
       // Serve media directly from the Blob CDN (public marketing site) instead of
       // proxying through /api/media/file, so URLs don't depend on serverURL/deploy.

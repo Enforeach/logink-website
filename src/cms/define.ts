@@ -4,6 +4,7 @@
 // in payload.config.ts) seeded from the registry title/description.
 import type { CollectionConfig, Field, GlobalConfig, Tab } from 'payload'
 import { isAuthenticated } from '@/payload/access'
+import { aiDraftForKeyed } from '@/payload/ai'
 import { defaultOf, registry } from './store'
 import { fieldsFrom, type Overrides } from './fields'
 
@@ -91,7 +92,7 @@ export function pageGlobal(o: {
     admin: { group: o.group, description: o.description, ...(o.path && { preview: preview((l) => o.path![l]) }) },
     access: { read: isAuthenticated, update: isAuthenticated },
     versions,
-    hooks: { afterChange: [afterChange] },
+    hooks: { afterChange: [afterChange] }, // AI page edits: the updatePage tool (src/payload/ai.ts)
     custom: { seo: o.seo, path: o.path },
     fields: [{ type: 'tabs', tabs: o.tabs.map((t) => tab(o.slug, t)) }, ...(o.extraFields ?? [])],
   }
@@ -112,7 +113,7 @@ export function keyedCollection(o: {
     },
     access: { read: isAuthenticated, create: () => false, delete: () => false, update: isAuthenticated },
     versions,
-    hooks: { afterChange: [afterChange] },
+    hooks: { beforeOperation: [aiDraftForKeyed], afterChange: [afterChange] },
     custom: { keys: o.keys },
     // tabs first: plugin-seo then adds its SEO tab to this row instead of wrapping everything in an outer tab row
     fields: [

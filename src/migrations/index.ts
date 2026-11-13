@@ -3,6 +3,7 @@ import * as migration_20260705_055637_relax_casestudy_legacy from './20260705_05
 import * as migration_20260715_135759_client_logos from './20260715_135759_client_logos';
 import * as migration_20260716_055212_post_markdown_body from './20260716_055212_post_markdown_body';
 import * as migration_20261021_154024_cms_pages from './20261021_154024_cms_pages';
+import * as migration_20261113_092128_ai_access from './20261113_092128_ai_access';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20261021_154024_cms_pages.up,
     down: migration_20261021_154024_cms_pages.down,
-    name: '20261021_154024_cms_pages'
+    name: '20261021_154024_cms_pages',
+  },
+  {
+    up: migration_20261113_092128_ai_access.up,
+    down: migration_20261113_092128_ai_access.down,
+    name: '20261113_092128_ai_access'
   },
 ];

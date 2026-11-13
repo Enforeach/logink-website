@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { isAuthenticated } from '../payload/access'
+import { notifyLead } from '../payload/ai'
 
 export const ContactSubmissions: CollectionConfig = {
   slug: 'contact-submissions',
@@ -8,6 +9,7 @@ export const ContactSubmissions: CollectionConfig = {
     defaultColumns: ['name', 'email', 'company', 'isRead', 'createdAt'],
     group: 'Leads',
   },
+  hooks: { afterChange: [notifyLead] },
   access: {
     create: isAuthenticated,
     read: isAuthenticated,

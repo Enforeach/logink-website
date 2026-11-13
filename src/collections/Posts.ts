@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields'
 import { isAuthenticated, publishedOrAuthed } from '../payload/access'
 import { slugField, statusField, setPublishedAt } from '../payload/fields'
+import { aiPostGuard } from '../payload/ai'
 import { makeRevalidateHooks } from '../payload/revalidate'
 import { SVC_OPTIONS, articleEditor } from '../payload/articleBlocks'
 
@@ -33,7 +34,7 @@ export const Posts: CollectionConfig = {
     update: isAuthenticated,
     delete: isAuthenticated,
   },
-  hooks: { afterChange: [afterChange], afterDelete: [afterDelete] },
+  hooks: { beforeChange: [aiPostGuard], afterChange: [afterChange], afterDelete: [afterDelete] },
   fields: [
     // Unnamed tabs only: the layout is admin-only, every field keeps its name and DB column.
     {
@@ -216,6 +217,9 @@ export const Posts: CollectionConfig = {
       type: 'relationship',
       relationTo: 'users',
       required: true,
+      // the person (or AI key's user) creating the post; optional in the schema the MCP tools validate against
+      defaultValue: ({ user }) => user?.id,
+      typescriptSchema: [({ jsonSchema }) => ({ ...jsonSchema, required: false })],
       admin: { position: 'sidebar' },
     },
     {
