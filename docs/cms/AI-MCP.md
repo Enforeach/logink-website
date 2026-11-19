@@ -24,7 +24,16 @@ A key stops working the moment you untick *Enable API Key* or delete it.
 - **MCP endpoint:** `https://logink.co/api/mcp` (Streamable HTTP)
 - **Auth header:** `Authorization: Bearer <API key>`
 
-Any MCP client that can send a header works. Claude Code, for example:
+**claude.ai / Claude desktop app (custom connector):** Customize → Connectors → Add custom connector.
+- Name: `Logink CMS`
+- URL: `https://logink.co/api/mcp?key=<API key>` (the "secret link")
+- Authentication: **No sign-in**
+
+With the secret link, no header is needed. Treat the link like a password: anyone who has it gets the key's access.
+To revoke it, untick *Enable API Key* or delete the key. Accounts with the *Request headers* option can instead use the
+plain URL plus a header `Authorization` = `Bearer <API key>`.
+
+**Claude Code** and any other MCP client that can send a header:
 
 ```
 claude mcp add --transport http logink https://logink.co/api/mcp --header "Authorization: Bearer <API key>"

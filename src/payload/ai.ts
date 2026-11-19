@@ -83,6 +83,23 @@ const keyFields: Field[] = [
   },
 ]
 
+/** Secret link for clients that cannot send an Authorization header (claude.ai custom connectors without the
+ *  request-headers beta): https://logink.co/api/mcp?key=<API key>. Same lookup as the plugin's (HMAC index of the
+ *  key; unticking "Enable API Key" clears the index). The link is the credential: treat it like a password. */
+async function keyFromLink(req: PayloadRequest) {
+  const key = req.searchParams?.get('key')
+  if (!key || req.headers.get('authorization')) return null
+  const { docs } = await req.payload.find({
+    collection: KEYS as never, depth: 1, limit: 1, pagination: false, overrideAccess: true,
+    where: { apiKeyIndex: { equals: createHmac('sha256', req.payload.secret).update(key).digest('hex') } },
+  })
+  const doc = docs[0] as (Key & { user: AiUser & { collection?: string } }) | undefined
+  if (!doc?.user || typeof doc.user !== 'object') throw new APIError('Unauthorized, invalid key.', 401)
+  doc.user.collection = 'users'
+  doc.user._strategy = 'mcp-api-key'
+  return doc as never
+}
+
 const page = 'Page document (locale "id" = Bahasa Indonesia, "en" = English). Changes are saved as a draft version for an editor to publish, unless this key may publish.'
 
 /** `pages`: the CMS page documents (src/cms/docs), passed in because they import this file's guard. */
@@ -132,7 +149,7 @@ export const aiPlugin = (pages: { globals: GlobalConfig[]; keyed: string[] }) =>
       }],
     },
     overrideAuth: async (req, getDefault) => {
-      const settings = await getDefault()
+      const settings = (await keyFromLink(req)) ?? (await getDefault())
       ;(settings.user as AiUser).aiAllowPublish = Boolean((settings as Key).allowPublish)
       req.context.aiKey = settings // for the custom tools, which get the request but not the user
       return settings
@@ -140,7 +157,7 @@ export const aiPlugin = (pages: { globals: GlobalConfig[]; keyed: string[] }) =>
     overrideApiKeyCollection: (c) => ({
       ...c,
       labels: { singular: 'AI access key', plural: 'AI access keys' },
-      admin: { ...c.admin, group: 'Settings', description: 'Keys for the AI platform (MCP endpoint https://logink.co/api/mcp). Tick what each key may read or change.' },
+      admin: { ...c.admin, group: 'Settings', description: 'Keys for the AI platform. Claude (custom connector, No sign-in): https://logink.co/api/mcp?key=<API key>. Other MCP clients: https://logink.co/api/mcp with the header Authorization: Bearer <API key>. Tick what each key may read or change.' },
       fields: [...c.fields, ...keyFields],
     }),
   })
