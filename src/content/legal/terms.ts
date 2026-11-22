@@ -206,7 +206,7 @@ const doc: Record<Locale, LegalDoc> = {
         "content": [
           {
             "subtitle": "Pertanyaan Legal",
-            "text": "Jika Anda memiliki pertanyaan tentang Syarat & Ketentuan ini atau memerlukan klarifikasi lebih lanjut, silakan hubungi kami melalui halaman kontak atau email ke hello@logink.co. Tim kami berkomitmen untuk merespons dalam 3 hari kerja."
+            "text": "Jika Anda memiliki pertanyaan tentang Syarat & Ketentuan ini atau memerlukan klarifikasi lebih lanjut, silakan hubungi kami melalui halaman kontak atau email ke marketing@logink.co. Tim kami berkomitmen untuk merespons dalam 3 hari kerja."
           }
         ]
       }
@@ -417,7 +417,7 @@ const doc: Record<Locale, LegalDoc> = {
         "content": [
           {
             "subtitle": "Legal Enquiries",
-            "text": "If you have any questions about these Terms of Service or require further clarification, please contact us via our contact page or email hello@logink.co. Our team is committed to responding within 3 business days."
+            "text": "If you have any questions about these Terms of Service or require further clarification, please contact us via our contact page or email marketing@logink.co. Our team is committed to responding within 3 business days."
           }
         ]
       }

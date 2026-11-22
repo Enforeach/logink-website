@@ -70,7 +70,7 @@ const FORM_LIVE = live('contact-page', 'form', {
     fail: 'Pesan belum terkirim. Coba lagi, atau chat kami lewat WhatsApp.',
     tooMany: 'Terlalu banyak percobaan. Coba lagi dalam beberapa menit, atau chat kami lewat WhatsApp.',
     okH: 'Terima kasih, pesan Anda sudah kami terima.', okP: 'Kami balas dalam 24 jam. Mau lebih cepat? Lanjutkan lewat WhatsApp.',
-    okWa: 'Lanjut di WhatsApp', noscript: 'Formulir ini butuh JavaScript. Chat kami lewat WhatsApp atau kirim email ke hello@logink.co.',
+    okWa: 'Lanjut di WhatsApp', noscript: 'Formulir ini butuh JavaScript. Chat kami lewat WhatsApp atau kirim email ke marketing@logink.co.',
   },
   en: {
     name: 'Name', phone: 'WhatsApp', email: 'Email', message: 'Message', req: 'required',
@@ -83,7 +83,7 @@ const FORM_LIVE = live('contact-page', 'form', {
     fail: 'Your message was not sent. Try again, or chat with us on WhatsApp.',
     tooMany: 'Too many attempts. Try again in a few minutes, or chat with us on WhatsApp.',
     okH: 'Thank you, we have received your message.', okP: 'We reply within 24 hours. Want it faster? Continue on WhatsApp.',
-    okWa: 'Continue on WhatsApp', noscript: 'This form needs JavaScript. Chat with us on WhatsApp or email hello@logink.co.',
+    okWa: 'Continue on WhatsApp', noscript: 'This form needs JavaScript. Chat with us on WhatsApp or email marketing@logink.co.',
   },
 } as Record<Locale, Record<string, string>>)
 export const FORM: Record<Locale, Record<string, string>> = byLocale((l) => FORM_LIVE[l])

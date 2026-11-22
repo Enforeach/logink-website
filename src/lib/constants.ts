@@ -25,7 +25,7 @@ export const SITE = {
   tagline: 'Connected Creativity',
   description: '360° Digital Marketing Agency, Jakarta, Indonesia',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://logink.co',
-  email: 'hello@logink.co',
+  email: 'marketing@logink.co',
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '628139453933',
   instagram: 'https://instagram.com/logink.co',
   address: 'Jakarta, Indonesia',

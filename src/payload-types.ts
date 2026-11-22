@@ -1330,7 +1330,7 @@ export interface LegalPage {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Keys for the AI platform (MCP endpoint https://logink.co/api/mcp). Tick what each key may read or change.
+ * Keys for the AI platform. Claude (custom connector, No sign-in): https://logink.co/api/mcp?key=<API key>. Other MCP clients: https://logink.co/api/mcp with the header Authorization: Bearer <API key>. Tick what each key may read or change.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-mcp-api-keys".

@@ -162,7 +162,7 @@ const doc: Record<Locale, LegalDoc> = {
         "content": [
           {
             "subtitle": "Pertanyaan tentang Privasi",
-            "text": "Jika Anda memiliki pertanyaan, kekhawatiran, atau permintaan terkait Kebijakan Privasi ini atau data pribadi Anda, silakan hubungi kami melalui halaman kontak kami atau kirim email ke hello@logink.co. Kami berkomitmen untuk merespons dalam waktu 5 hari kerja."
+            "text": "Jika Anda memiliki pertanyaan, kekhawatiran, atau permintaan terkait Kebijakan Privasi ini atau data pribadi Anda, silakan hubungi kami melalui halaman kontak kami atau kirim email ke marketing@logink.co. Kami berkomitmen untuk merespons dalam waktu 5 hari kerja."
           }
         ]
       }
@@ -328,7 +328,7 @@ const doc: Record<Locale, LegalDoc> = {
         "content": [
           {
             "subtitle": "Privacy Enquiries",
-            "text": "If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us via our contact page or email us at hello@logink.co. We are committed to responding within 5 business days."
+            "text": "If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us via our contact page or email us at marketing@logink.co. We are committed to responding within 5 business days."
           }
         ]
       }
